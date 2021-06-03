@@ -2,7 +2,7 @@ package bitframe.http
 
 import io.ktor.http.*
 
-class HttpRoute(
+open class HttpRoute(
     val method: HttpMethod,
     val path: String,
     val handler: (HttpRequest) -> HttpResponse

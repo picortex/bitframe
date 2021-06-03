@@ -13,9 +13,10 @@ kotlin {
                 api("io.ktor:ktor-http:${vers.ktor}")
             }
         }
-        
+
         val commonTest by getting {
             dependencies {
+                api(project(":bitframe-server-test"))
                 api(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
