@@ -3,6 +3,7 @@ object vers {
     val ktor = "1.6.0"
 
     object kotlinx {
+        val serialization = "1.2.1"
         val datetime = "0.2.0"
     }
 
