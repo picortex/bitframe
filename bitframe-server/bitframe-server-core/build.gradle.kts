@@ -4,23 +4,12 @@ plugins {
     id("tz.co.asoft.library")
 }
 
-//tasks.withType(JavaCompile::class.java).all {
-//    options.compilerArgs = listOf("--enable-preview")
-//}
-
-tasks.withType(Test::class.java).all {
-    jvmArgs = listOf("--enable-preview")
-}
-
 kotlin {
     jvm {
-        library("15")
+        library()
         withJava()
-        compilations.all {
-            compileJavaTaskProvider?.get()?.apply {
-                options.compilerArgs = listOf("--enable-preview")
-                targetCompatibility = "15"
-            }
+        tasks.withType<Test> {
+            useJUnitPlatform()
         }
     }
     sourceSets {
@@ -34,8 +23,6 @@ kotlin {
             dependencies {
                 implementation(project(":bitframe-server-test"))
                 implementation(kotlinx("serialization-core", vers.kotlinx.serialization))
-                implementation(kotlin("test"))
-//                implementation(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
 

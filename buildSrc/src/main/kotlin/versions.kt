@@ -7,8 +7,11 @@ object vers {
         val datetime = "0.2.0"
     }
 
+    object picortex {
+        val bitframe = "0.0.10"
+    }
+
     object asoft {
-        val shop = "0.0.10"
         val builders = "1.3.24"
         val later = "0.0.60"
         val cart = "0.0.20"
@@ -16,5 +19,6 @@ object vers {
         val kash = "0.0.10"
         val mapper = "0.0.60"
         val expect = "0.0.30"
+        val test = "1.1.32"
     }
 }

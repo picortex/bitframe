@@ -5,13 +5,18 @@ plugins {
 
 kotlin {
     jvm {
-        library("15")
+        library()
+        tasks.withType<Test> {
+            useJUnitPlatform()
+        }
     }
+
     sourceSets {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-server-core"))
-//                api(asoft("expect-coroutines", vers.asoft.expect))
+                api(asoft("test-coroutines",vers.asoft.test))
+                api(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
     }

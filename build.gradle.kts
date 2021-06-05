@@ -5,5 +5,5 @@ plugins {
 
 subprojects {
     group = "com.picortex"
-    version = vers.asoft.shop
+    version = vers.picortex.bitframe
 }

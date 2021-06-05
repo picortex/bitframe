@@ -1,5 +1,8 @@
-import org.junit.Ignore;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-@Ignore
-public record Teacher(String name, String email) {
+public record Teacher(@NotNull String name, @NotNull String email) {
+    Teacher copy(@NotNull final String name) {
+        return new Teacher(name, this.email);
+    }
 }
