@@ -20,7 +20,7 @@ class ApplicationIntegrationTest {
         val box = Sandbox(customersModule)
         val customer = Customer(name = "John Doe", email = "john@doe.com")
         val resp1 = box.post("/customer", mapOf(), Json.encodeToString(customer))
-        expect(resp1.status).toBe(HttpStatusCode.OK)
+        expect(resp1.status).toBe(HttpStatusCode.Created)
         val respMap = Mapper.decodeFromString(resp1.body!!)
         expect(respMap["name"]).toBe(customer.name)
     }
@@ -31,7 +31,7 @@ class ApplicationIntegrationTest {
         val box = Sandbox(customersModule)
         val customer = Customer(name = "John Doe", email = "john@doe.com")
         val resp1 = box.post("/customer", mapOf(), Json.encodeToString(customer))
-        expect(resp1.status).toBe(HttpStatusCode.OK)
+        expect(resp1.status).toBe(HttpStatusCode.Created)
         val resp1Map = Mapper.decodeFromString(resp1.body!!)
         expect(resp1Map["name"]).toBe(customer.name)
 

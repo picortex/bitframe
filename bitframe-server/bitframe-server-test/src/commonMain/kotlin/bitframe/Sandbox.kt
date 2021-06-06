@@ -1,6 +1,6 @@
 package bitframe
 
-import bitframe.actions.RawAction
+import bitframe.actions.Action
 import bitframe.http.HttpRequest
 import bitframe.http.HttpResponse
 import bitframe.http.HttpRoute
@@ -13,7 +13,7 @@ open class Sandbox(val component: UnderTest) {
     constructor(application: BitframeApplication) : this(ApplicationUnderTest(application))
     constructor(module: Module) : this(ModuleUnderTest(module))
     constructor(route: HttpRoute) : this(RouteUnderTest(route))
-    constructor(action: RawAction) : this(ActionUnderTest(action))
+    constructor(action: Action) : this(ActionUnderTest(action))
 
     fun request(request: HttpRequest): HttpResponse {
         val route = when (component) {

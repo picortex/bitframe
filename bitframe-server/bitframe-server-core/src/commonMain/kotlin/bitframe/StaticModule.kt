@@ -35,7 +35,7 @@ open class StaticModule<T>(
         HttpRoute(HttpMethod.Post, "/$singular") {
             val body = it.body ?: return@HttpRoute HttpResponse(HttpStatusCode.BadRequest)
             val map = Mapper.decodeFromString(body)
-            HttpResponse(HttpStatusCode.OK, Mapper.encodeToString(db.create(map)))
+            HttpResponse(HttpStatusCode.Created, Mapper.encodeToString(db.create(map)))
         },
         HttpRoute(HttpMethod.Get, "/$plural") {
             val list = db.all(mapOf<String, Any>())
