@@ -1,10 +1,10 @@
 package bitframe
 
-interface DataSource<I, E> {
-    fun create(params: I): E
-    fun update(entity: E): E
-    fun delete(entry: E): E
-    fun wipe(entity: E): E
-    fun load(uid: String): E
-    fun all(): List<E>
+interface DataSource {
+    fun create(params: Map<String, *>): Map<String, *>
+    fun update(entity: Map<String, *>): Map<String, *>
+    fun delete(uid: String): Map<String, *>
+    fun wipe(uid: String): Map<String, *>
+    fun load(uid: String): Map<String, *>
+    fun all(conditions: Map<String, *>): List<Map<String, *>>
 }

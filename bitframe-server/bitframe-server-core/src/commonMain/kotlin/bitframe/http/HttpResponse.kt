@@ -2,7 +2,7 @@ package bitframe.http
 
 import io.ktor.http.*
 
-class HttpResponse(
+data class HttpResponse(
     val status: HttpStatusCode,
     val body: String? = null
 )

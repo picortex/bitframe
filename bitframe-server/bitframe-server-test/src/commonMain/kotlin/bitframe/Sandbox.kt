@@ -1,15 +1,19 @@
 package bitframe
 
+import bitframe.actions.RawAction
 import bitframe.http.HttpRequest
 import bitframe.http.HttpResponse
 import bitframe.http.HttpRoute
 import io.ktor.http.*
+import io.ktor.http.HttpMethod.Companion.Get
+import io.ktor.http.HttpMethod.Companion.Post
 
 open class Sandbox(val component: UnderTest) {
 
-    constructor(application: Application) : this(ApplicationUnderTest(application))
+    constructor(application: BitframeApplication) : this(ApplicationUnderTest(application))
     constructor(module: Module) : this(ModuleUnderTest(module))
     constructor(route: HttpRoute) : this(RouteUnderTest(route))
+    constructor(action: RawAction) : this(ActionUnderTest(action))
 
     fun request(request: HttpRequest): HttpResponse {
         val route = when (component) {
@@ -21,8 +25,9 @@ open class Sandbox(val component: UnderTest) {
             is ModuleUnderTest<*> -> component.module.routes.find {
                 it.path == request.path && it.method == request.method
             }
+            is ActionUnderTest -> component.action.route
             is RouteUnderTest<*> -> component.route
-        } ?: return HttpResponse(status = HttpStatusCode.NotFound)
+        } ?: return HttpResponse(status = HttpStatusCode.NotFound, "Invalid route ${request.path}")
 
         return try {
             val handler = route.handler
@@ -32,7 +37,11 @@ open class Sandbox(val component: UnderTest) {
         }
     }
 
-    fun get(path: String) = request(HttpRequest(HttpMethod.Get, path, mapOf(), null))
+    fun get(path: String) = request(HttpRequest(Get, path, mapOf(), null))
 
-    fun post(path: String) = request(HttpRequest(HttpMethod.Post, path, mapOf(), null))
+    fun post(
+        path: String,
+        headers: Map<String, String> = mapOf(),
+        body: String = "{}"
+    ) = request(HttpRequest(Post, path, headers, body))
 }

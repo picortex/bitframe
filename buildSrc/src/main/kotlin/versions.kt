@@ -13,6 +13,7 @@ object vers {
 
     object asoft {
         val builders = "1.3.24"
+        val reakt = "0.1.10"
         val later = "0.0.60"
         val cart = "0.0.20"
         val krypto = "0.0.50"
