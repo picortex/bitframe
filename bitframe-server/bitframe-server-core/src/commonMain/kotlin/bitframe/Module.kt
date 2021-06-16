@@ -1,7 +1,9 @@
 package bitframe
 
+import bitframe.actions.Action
 import bitframe.http.HttpRoute
 
 interface Module {
-    val routes: List<HttpRoute>
+    val name: String
+    val actions: List<Action>
 }

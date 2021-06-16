@@ -15,18 +15,18 @@ open class Sandbox(val component: UnderTest) {
     constructor(route: HttpRoute) : this(RouteUnderTest(route))
     constructor(action: Action) : this(ActionUnderTest(action))
 
+    val routes = when (component) {
+        is ApplicationUnderTest<*> -> component.application.modules.flatMap {
+            it.actions.map { a -> a.route }
+        }
+        is ModuleUnderTest<*> -> component.module.actions.map { it.route }
+        is ActionUnderTest -> listOf(component.action.route)
+        is RouteUnderTest<*> -> listOf(component.route)
+    }
+
     fun request(request: HttpRequest): HttpResponse {
-        val route = when (component) {
-            is ApplicationUnderTest<*> -> component.application.modules.flatMap {
-                it.routes
-            }.find {
-                it.path == request.path && it.method == request.method
-            }
-            is ModuleUnderTest<*> -> component.module.routes.find {
-                it.path == request.path && it.method == request.method
-            }
-            is ActionUnderTest -> component.action.route
-            is RouteUnderTest<*> -> component.route
+        val route = routes.find {
+            it.path == request.path && it.method == request.method
         } ?: return HttpResponse(status = HttpStatusCode.NotFound, "Invalid route ${request.path}")
 
         return try {

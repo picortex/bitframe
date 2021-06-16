@@ -4,5 +4,5 @@ import io.ktor.http.*
 
 data class HttpResponse(
     val status: HttpStatusCode,
-    val body: String? = null
+    val body: String = ""
 )
