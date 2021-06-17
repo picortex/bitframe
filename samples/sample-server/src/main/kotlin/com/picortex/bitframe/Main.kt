@@ -36,7 +36,7 @@ fun main() {
         }
     )
 
-    val module = StaticModule("people", create, fetch)
+    val module = StaticModule("People", create, fetch)
     val app = Application(listOf(module))
     app.start()
 }
