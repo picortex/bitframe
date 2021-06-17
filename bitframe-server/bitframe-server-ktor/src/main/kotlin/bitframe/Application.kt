@@ -8,6 +8,7 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
+import kotlinx.serialization.mapper.Mapper
 
 class Application(modules: List<Module>) : BitframeApplication(modules) {
     fun start(port: Int = 8080) = embeddedServer(CIO, port) {
@@ -26,6 +27,11 @@ class Application(modules: List<Module>) : BitframeApplication(modules) {
                     val response = rout.handler(request)
                     call.respondText(response.body, contentType = ContentType.Application.Json)
                 }
+            }
+
+            get("/info") {
+                val text = modules.map { it.info() }
+                call.respondText(Mapper.encodeToString(text))
             }
         }
     }.start(wait = true)

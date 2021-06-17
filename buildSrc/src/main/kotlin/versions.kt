@@ -18,7 +18,7 @@ object vers {
         val cart = "0.0.20"
         val krypto = "0.0.50"
         val kash = "0.0.10"
-        val mapper = "0.0.60"
+        val mapper = "0.0.71"
         val expect = "0.0.30"
         val test = "1.1.32"
     }
