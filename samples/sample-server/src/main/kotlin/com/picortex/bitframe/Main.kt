@@ -36,7 +36,8 @@ fun main() {
         }
     )
 
-    val module = StaticModule("People", create, fetch)
-    val app = Application(listOf(module))
+    val peopleModule = StaticModule("People", create, fetch)
+    val catModule = StaticModule("Cats")
+    val app = Application(listOf(peopleModule, catModule))
     app.start()
 }

@@ -7,6 +7,9 @@ plugins {
 }
 
 applikation {
+    common(
+        "Main-Class" to "com.sample.MainKt"
+    )
     debug()
 }
 
@@ -15,6 +18,11 @@ configure<BitframeExtension> {
     namespace = "com.sample"
 }
 
+afterEvaluate {
+    tasks.getByName("fatJarJvmDebug", Zip::class) {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+}
 kotlin {
     jvm { application() }
 
