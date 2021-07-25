@@ -17,7 +17,7 @@ kotlin {
             dependencies {
                 api(project(":bitframe-server-core"))
                 api(asoft("test-coroutines", vers.asoft.test))
-                api(asoft("expect-coroutines", vers.asoft.expect))
+                api(asoft("expect-core", vers.asoft.expect))
                 api(kotlinx("serialization-json", vers.kotlinx.serialization))
             }
         }

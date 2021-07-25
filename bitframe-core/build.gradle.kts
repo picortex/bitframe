@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("tz.co.asoft.library")
 }
 
@@ -10,7 +11,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-core"))
+                api(kotlinx("serialization-core", vers.kotlinx.serialization))
             }
         }
     }

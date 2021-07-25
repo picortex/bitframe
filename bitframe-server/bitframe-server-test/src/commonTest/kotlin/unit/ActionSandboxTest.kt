@@ -1,3 +1,5 @@
+package unit
+
 import bitframe.Sandbox
 import bitframe.actions.Action
 import bitframe.http.HttpResponse
@@ -19,7 +21,7 @@ class ActionSandboxTest {
         )
 
         val sandbox = Sandbox(action)
-        val res = sandbox.put("/raw", mapOf(), "{}")
+        val res = sandbox.post("/raw", mapOf(), "{}")
         expect(res.status).toBe(HttpStatusCode.OK)
     }
 }

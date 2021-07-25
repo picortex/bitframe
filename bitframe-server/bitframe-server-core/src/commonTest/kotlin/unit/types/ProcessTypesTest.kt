@@ -1,10 +1,7 @@
-package types
+package unit.types
 
 import bitframe.types.processTypes
 import expect.expect
-import expect.toBe
-import expect.toBeNonNull
-import expect.toContainElements
 import kotlin.test.Test
 
 class ProcessTypesTest {
@@ -17,6 +14,7 @@ class ProcessTypesTest {
     @Test
     fun should_process_customer_info() {
         val type = processTypes<Customer>()
+        expect(1).toBe(0 + 1)
         expect(type.singular).toBe("customer")
         expect(type.plural).toBe("customers")
         expect(type.fields).toContainElements()

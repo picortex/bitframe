@@ -1,6 +1,6 @@
 package pimonitor.pages
 
-import pimonitor.authentication.Credentials
+import bitframe.authentication.Credentials
 
 interface LoginPage : Page {
     suspend fun loginWith(credentials: Credentials)

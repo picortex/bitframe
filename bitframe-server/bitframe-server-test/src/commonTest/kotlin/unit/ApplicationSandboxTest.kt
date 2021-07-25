@@ -1,6 +1,9 @@
+package unit
+
 import bitframe.BitframeApplication
 import bitframe.Sandbox
 import bitframe.Module
+import bitframe.actions.Action
 import bitframe.http.HttpResponse
 import bitframe.http.HttpRoute
 import expect.expect
@@ -26,10 +29,14 @@ class ApplicationSandboxTest {
     }
 
     class CustomersModule : Module {
-        override val routes: List<HttpRoute> = listOf(
-            HttpRoute(HttpMethod.Get, "/customers") {
+        override val name: String = "Customer"
+        override val actions: List<Action> = listOf(
+            Action("create", mapOf(), HttpRoute(HttpMethod.Post, "/customers") {
+                HttpResponse(HttpStatusCode.OK)
+            }),
+            Action("fetch", mapOf(), HttpRoute(HttpMethod.Get, "/customers") {
                 HttpResponse(HttpStatusCode.OK, "works")
-            }
+            })
         )
     }
 
@@ -38,6 +45,7 @@ class ApplicationSandboxTest {
         val application = BitframeApplication(listOf(CustomersModule()))
         val sandbox = Sandbox(application)
         val response = sandbox.get("/customers")
+        println(sandbox.routes)
         expect(response.status).toBe(HttpStatusCode.OK)
         expect(response.body).toBe("works")
     }

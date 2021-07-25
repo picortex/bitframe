@@ -17,12 +17,21 @@ pluginManagement {
 
 rootProject.name = "bitframe"
 
+include(":bitframe-core")
+
 include(":bitframe-server-core")
 project(":bitframe-server-core").projectDir = File("bitframe-server/bitframe-server-core")
 include(":bitframe-server-test")
 project(":bitframe-server-test").projectDir = File("bitframe-server/bitframe-server-test")
 include(":bitframe-server-ktor")
 project(":bitframe-server-ktor").projectDir = File("bitframe-server/bitframe-server-ktor")
+
+include(":bitframe-client-sdk-core")
+project(":bitframe-client-sdk-core").projectDir = File("bitframe-client/bitframe-client-sdk/bitframe-client-sdk-core")
+include(":bitframe-client-sdk-test")
+project(":bitframe-client-sdk-test").projectDir = File("bitframe-client/bitframe-client-sdk/bitframe-client-sdk-test")
+include(":bitframe-client-viewmodels")
+project(":bitframe-client-viewmodels").projectDir = File("bitframe-client/bitframe-client-viewmodels")
 
 include(":bitframe-ui-react")
 project(":bitframe-ui-react").projectDir = File("bitframe-client/bitframe-ui/bitframe-ui-react")

@@ -1,13 +1,7 @@
-import bitframe.*
-import bitframe.modules.Customer
-import expect.expect
-import expect.toBe
-import expect.toContainElements
-import io.ktor.http.*
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.mapper.Mapper
-import kotlin.test.Test
+package unit
+
+import bitframe.DataSource
+import bitframe.InMemoryDataSource
 
 class ApplicationIntegrationTest {
 

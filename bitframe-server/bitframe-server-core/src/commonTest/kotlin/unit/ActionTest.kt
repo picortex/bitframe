@@ -1,9 +1,10 @@
+package unit
+
 import bitframe.Sandbox
 import bitframe.actions.Action
 import bitframe.http.HttpResponse
 import bitframe.http.HttpRoute
 import expect.expect
-import expect.toBe
 import io.ktor.http.*
 import kotlin.test.Test
 
@@ -22,7 +23,7 @@ class ActionTest {
     @Test
     fun should_handle_requests_well() {
         val sandbox = Sandbox(action)
-        val res = sandbox.put("/customer")
+        val res = sandbox.post("/customer")
         expect(res.status).toBe(HttpStatusCode.OK)
     }
 }

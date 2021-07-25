@@ -4,22 +4,25 @@ plugins {
 }
 
 kotlin {
-    jvm { library() }
+    jvm {
+        library()
+        tasks.withType<Test> {
+            useJUnitPlatform()
+        }
+    }
     js(IR) { library() }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":pi-monitor-core"))
                 api(project(":bitframe-client-sdk-core"))
-                api(asoft("expect-core", vers.asoft.expect))
-                api(asoft("test-coroutines", vers.asoft.test))
             }
         }
 
-        val jvmMain by getting {
+        val commonTest by getting {
             dependencies {
-                api("com.codeborne:selenide:${vers.selenide}")
+                api(asoft("test-coroutines", vers.asoft.test))
+                api(asoft("expect-core", vers.asoft.expect))
             }
         }
     }

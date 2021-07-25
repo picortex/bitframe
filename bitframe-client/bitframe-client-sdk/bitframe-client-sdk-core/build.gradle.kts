@@ -5,12 +5,13 @@ plugins {
 
 kotlin {
     jvm { library() }
-    js(IR) { browserLib() }
+    js(IR) { library() }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-core"))
+                api(asoft("later-ktx", vers.asoft.later))
             }
         }
     }

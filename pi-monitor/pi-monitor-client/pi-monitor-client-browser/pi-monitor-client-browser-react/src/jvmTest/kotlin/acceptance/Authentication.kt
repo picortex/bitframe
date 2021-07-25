@@ -1,8 +1,8 @@
 package acceptance
 
 import acceptance.utils.URL
+import bitframe.authentication.Credentials
 import org.junit.jupiter.api.Test
-import pimonitor.authentication.Credentials
 import pimonitor.pages.BrowserLoginPage
 import pimonitor.pages.LoginPage
 import pimonitor.pages.test

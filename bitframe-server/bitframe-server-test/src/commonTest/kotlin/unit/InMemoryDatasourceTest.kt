@@ -1,3 +1,5 @@
+package unit
+
 import bitframe.DataSource
 import bitframe.InMemoryDataSource
 import bitframe.modules.Customer
