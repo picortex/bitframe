@@ -11,7 +11,7 @@ class KotlinCodeGenerator(
     private fun File.generateActionParamClass(actionName: String, params: Map<String, *>) {
         appendText("\tclass ${actionName.capitalize()}Params(\n")
         for (param in params) {
-            appendText("\t\tval ${param.key}: String\n")
+            appendText("\t\tval ${param.key}: String,\n")
         }
         appendText("\t)\n")
     }

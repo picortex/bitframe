@@ -1,9 +1,9 @@
-import bitframe.BitframeExtension
+import bitframe.Language
 
 plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.applikation")
-    bitframe
+    bitframe // id("com.picortex.bitfram")
 }
 
 applikation {
@@ -13,10 +13,18 @@ applikation {
     debug()
 }
 
-configure<BitframeExtension> {
+//
+
+bitframe {
     url = "http://localhost:8080"
-    namespace = "com.sample"
+    namespace = "com.picortex.sample"
+    language = Language.Kotlin
 }
+
+//configure<BitframeExtension> {
+//    url = "http://localhost:8080"
+//    namespace = "com.sample"
+//}
 
 afterEvaluate {
     tasks.getByName("fatJarJvmDebug", Zip::class) {

@@ -3,19 +3,17 @@ plugins {
     id("tz.co.asoft.applikation")
 }
 
-applikation {
-    debug()
-}
-
 kotlin {
-    js(IR) { browserApp() }
+    js(IR) { browserLib() }
 
     sourceSets {
         val main by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.206-kotlin-1.5.10")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:17.0.2-pre.206-kotlin-1.5.10")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-styled:5.3.0-pre.206-kotlin-1.5.10")
+                api(asoft("reakt-buttons", vers.asoft.reakt))
+                api(asoft("reakt-text", vers.asoft.reakt))
+                api(asoft("reakt-layouts", vers.asoft.reakt))
+                api(asoft("reakt-navigation", vers.asoft.reakt))
+                api(asoft("reakt-form", vers.asoft.reakt))
             }
         }
     }

@@ -21,7 +21,7 @@ class ApplicationSandboxTest {
 
     @Test
     fun post_request_should_return_a_null_body_on_an_un_configured_route() {
-        val response = sandbox.post("/customer-un_configured", headers = mapOf(), body = "{}")
+        val response = sandbox.put("/customer-un_configured", headers = mapOf(), body = "{}")
         expect(response.status).toBe(HttpStatusCode.NotFound)
     }
 
@@ -46,7 +46,7 @@ class ApplicationSandboxTest {
     fun post_request_to_a_get_route_should_fail() {
         val application = BitframeApplication(listOf(CustomersModule()))
         val sandbox = Sandbox(application)
-        val response = sandbox.post("/customers", mapOf(), "{}")
+        val response = sandbox.put("/customers", mapOf(), "{}")
         expect(response.status).toBe(HttpStatusCode.NotFound)
     }
 }

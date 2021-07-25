@@ -7,6 +7,7 @@ import bitframe.http.HttpRoute
 import io.ktor.http.*
 import io.ktor.http.HttpMethod.Companion.Get
 import io.ktor.http.HttpMethod.Companion.Post
+import io.ktor.http.HttpMethod.Companion.Put
 
 open class Sandbox(val component: UnderTest) {
 
@@ -33,7 +34,7 @@ open class Sandbox(val component: UnderTest) {
             val handler = route.handler
             handler(request)
         } catch (cause: Throwable) {
-            HttpResponse(HttpStatusCode.InternalServerError, cause.message)
+            HttpResponse(HttpStatusCode.InternalServerError, cause.message ?: "Unknown Error")
         }
     }
 
@@ -44,4 +45,10 @@ open class Sandbox(val component: UnderTest) {
         headers: Map<String, String> = mapOf(),
         body: String = "{}"
     ) = request(HttpRequest(Post, path, headers, body))
+
+    fun put(
+        path: String,
+        headers: Map<String, String> = mapOf(),
+        body: String = "{}"
+    ) = request(HttpRequest(Put, path, headers, body))
 }

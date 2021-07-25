@@ -12,12 +12,24 @@ application {
 }
 
 kotlin {
-    target { application() }
+    target {
+        application()
+        tasks.withType<Test> {
+            useJUnitPlatform()
+        }
+    }
 
     sourceSets {
         val main by getting {
             dependencies {
                 implementation(project(":bitframe-server-ktor"))
+            }
+        }
+
+        val test by getting {
+            dependencies {
+                implementation(asoft("expect-coroutines", vers.asoft.expect))
+                implementation(project(":bitframe-server-test"))
             }
         }
     }

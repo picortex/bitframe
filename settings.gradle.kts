@@ -27,7 +27,17 @@ project(":bitframe-server-ktor").projectDir = File("bitframe-server/bitframe-ser
 include(":bitframe-ui-react")
 project(":bitframe-ui-react").projectDir = File("bitframe-client/bitframe-ui/bitframe-ui-react")
 
-include(":sample-server")
-project(":sample-server").projectDir = File("samples/sample-server")
-include(":sample-client")
-project(":sample-client").projectDir = File("samples/sample-client")
+//include(":sample-server")
+//project(":sample-server").projectDir = File("samples/sample-server")
+//include(":sample-client")
+//project(":sample-client").projectDir = File("samples/sample-client")
+
+include(":pi-monitor-core")
+project(":pi-monitor-core").projectDir = File("pi-monitor/pi-monitor-core")
+
+include(":pi-monitor-client-test-dsl")
+project(":pi-monitor-client-test-dsl").projectDir = File("pi-monitor/pi-monitor-client/pi-monitor-client-test-dsl")
+
+include("pi-monitor-client-browser-react")
+project(":pi-monitor-client-browser-react").projectDir =
+    File("pi-monitor/pi-monitor-client/pi-monitor-client-browser/pi-monitor-client-browser-react")

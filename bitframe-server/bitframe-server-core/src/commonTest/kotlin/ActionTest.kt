@@ -22,7 +22,7 @@ class ActionTest {
     @Test
     fun should_handle_requests_well() {
         val sandbox = Sandbox(action)
-        val res = sandbox.post("/customer")
+        val res = sandbox.put("/customer")
         expect(res.status).toBe(HttpStatusCode.OK)
     }
 }

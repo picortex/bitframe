@@ -7,3 +7,7 @@ subprojects {
     group = "com.picortex"
     version = vers.picortex.bitframe
 }
+
+val piMonitorReact by tasks.creating {
+    dependsOn(":pi-monitor-client-browser-react:runJsDebug")
+}

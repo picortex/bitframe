@@ -1,6 +1,5 @@
 import bitframe.*
 import bitframe.modules.Customer
-import bitframe.utils.decodeListFromString
 import expect.expect
 import expect.toBe
 import expect.toContainElements

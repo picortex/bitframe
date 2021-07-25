@@ -8,7 +8,6 @@ import bitframe.http.HttpRoute
 import expect.expect
 import expect.toBe
 import expect.toBeNonNull
-import io.ktor.http.*
 import io.ktor.http.HttpMethod.Companion.Post
 import io.ktor.http.HttpStatusCode.Companion.OK
 import kotlin.test.Test
@@ -52,7 +51,7 @@ class GenericModuleTest {
         )
         val module = StaticModule("Customers", createAction)
         val sandbox = Sandbox(module)
-        val res = sandbox.post("/customers")
+        val res = sandbox.put("/customers")
         expect(res.status).toBe(OK)
     }
 }
