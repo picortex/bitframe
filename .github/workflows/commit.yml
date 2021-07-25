@@ -5,7 +5,7 @@ on:
     branches: [ master-dev-* ]
 
 jobs:
-  build:
+  testing:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,9 +20,17 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+      - name: Cache konan
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.konan/dependencies
+            ~/.konan/kotlin-native-macos*
+          key: ${{ runner.os }}-konan-
+          restore-keys: ${{ runner.os }}-konan-
       - name: Making gradlew executable
         run: chmod +x ./gradlew
         working-directory: .
-      - name: Building
+      - name: Running unit tests
         run: ./gradlew cleanAllTests allTests --tests unit.*
         working-directory: .

@@ -11,7 +11,7 @@ kotlin {
             dependencies {
                 api(project(":bitframe-client-viewmodels"))
 
-                api(asoft("viewmodel-react", vers.asoft.reakt))
+                api(asoft("viewmodel-react", vers.asoft.viewmodel))
                 api(asoft("reakt-buttons", vers.asoft.reakt))
                 api(asoft("reakt-text", vers.asoft.reakt))
                 api(asoft("reakt-layouts", vers.asoft.reakt))

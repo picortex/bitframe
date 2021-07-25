@@ -6,7 +6,7 @@ object vers {
     val selenide = "5.23.0"
 
     object kotlinx {
-        val serialization = "1.2.2"
+        val serialization = "1.2.0"
         val datetime = "0.2.0"
     }
 
