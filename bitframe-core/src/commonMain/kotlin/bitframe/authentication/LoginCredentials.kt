@@ -3,7 +3,7 @@ package bitframe.authentication
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Credentials(
+data class LoginCredentials(
     val username: String,
     val password: String
 )

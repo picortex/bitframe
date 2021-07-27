@@ -1,13 +1,13 @@
 object vers {
-    val kotlin = "1.5.0"
+    val kotlin = "1.5.10"
 
     val ktor = "1.6.0"
 
     val selenide = "5.23.0"
 
     object kotlinx {
-        val serialization = "1.2.0"
-        val datetime = "0.2.0"
+        val serialization = "1.2.1"
+        val datetime = "0.2.1"
     }
 
     object picortex {
@@ -18,8 +18,7 @@ object vers {
         val viewmodel = "0.0.91"
         val builders = "1.3.30"
         val reakt = "0.1.10"
-        val later = "0.0.62"
-        val cart = "0.0.20"
+        val later = "0.0.60" //do not bump until the KJS/IR Error is fixed
         val krypto = "0.0.50"
         val kash = "0.0.10"
         val mapper = "0.0.71"
