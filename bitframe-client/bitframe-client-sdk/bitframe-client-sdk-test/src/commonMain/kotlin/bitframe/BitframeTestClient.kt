@@ -8,7 +8,7 @@ import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 
 @JsExport
-class BitframeTestClient(
+open class BitframeTestClient(
     val configuration: TestClientConfiguration
 ) : BitframeService {
     companion object {

@@ -21,11 +21,6 @@ class LoginPage private constructor(p: Props) : VComponent<Props, Intent, State,
 
     override val viewModel by lazy { LoginViewModel(props.service) }
 
-    override fun componentDidMount() {
-        super.componentDidMount()
-        viewModel.post(Intent.ShowForm(null))
-    }
-
     private fun RBuilder.ShowConundrum() = styledDiv {
         +"Yeeeiy connundrum"
     }

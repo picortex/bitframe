@@ -12,7 +12,7 @@ class Authentication {
 
     @Test
     fun should_give_a_user_with_valid_credentials_access() = login.test {
-        loginWith(LoginCredentials("username", "password"))
+        loginWith(LoginCredentials("user1", "pass1"))
         expectUserToBeLoggedIn()
     }
 
