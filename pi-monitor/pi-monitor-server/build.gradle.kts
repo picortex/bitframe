@@ -52,6 +52,7 @@ val createDockerImage by tasks.creating(DockerBuildImage::class) {
     dependsOn(createDockerfile)
     inputDir.set(file("build/binaries"))
     images.add("pi-monitor-server:${vers.picortex.bitframe}")
+    remove.set(true)
 }
 
 val createDockerContainer by tasks.creating(DockerCreateContainer::class) {
