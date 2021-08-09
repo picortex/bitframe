@@ -6,7 +6,7 @@ import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 
 plugins {
     kotlin("jvm")
-    id("com.bmuschko.docker-java-application") version vers.docker
+    id("com.bmuschko.docker-java-application")
     id("tz.co.asoft.applikation")
 }
 
@@ -52,13 +52,12 @@ val createDockerImage by tasks.creating(DockerBuildImage::class) {
     dependsOn(createDockerfile)
     inputDir.set(file("build/binaries"))
     images.add("pi-monitor-server:${vers.picortex.bitframe}")
-    remove.set(true)
 }
 
 val createDockerContainer by tasks.creating(DockerCreateContainer::class) {
     dependsOn(createDockerImage)
     targetImageId(createDockerImage.imageId)
-    hostConfig.portBindings.set(listOf("8080:8080"))
+    hostConfig.portBindings.set(listOf("9090:8080"))
     hostConfig.autoRemove.set(true)
 }
 
@@ -71,8 +70,13 @@ val stopDockerContainer by tasks.creating(DockerStopContainer::class) {
     targetContainerId(createDockerContainer.containerId)
 }
 
-val acceptanceTests by tasks.creating(Test::class) {
-    dependsOn(startDockerContainer)
+val prepareAcceptanceTestsEnvironment by tasks.creating {
+    dependsOn("clean")
+    finalizedBy(startDockerContainer)
+}
+
+val acceptanceTests by tasks.creating {
+    dependsOn(prepareAcceptanceTestsEnvironment)
     dependsOn("test")
     finalizedBy(stopDockerContainer)
 }
