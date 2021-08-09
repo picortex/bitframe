@@ -11,3 +11,7 @@ subprojects {
 val piMonitorReact by tasks.creating {
     dependsOn(":pi-monitor-client-browser-react:runJsDebug")
 }
+
+val piMonitorServer by tasks.creating {
+    dependsOn(":pi-monitor-server:runDebug")
+}
