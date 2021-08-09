@@ -2,12 +2,11 @@ package unit
 
 import bitframe.BitframeApplication
 import bitframe.Sandbox
-import bitframe.Module
+import bitframe.modules.Module
 import bitframe.actions.Action
 import bitframe.http.HttpResponse
 import bitframe.http.HttpRoute
 import expect.expect
-import expect.toBe
 import io.ktor.http.*
 import kotlin.test.Test
 

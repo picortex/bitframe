@@ -2,6 +2,7 @@ package bitframe
 
 import bitframe.actions.Action
 import bitframe.http.HttpRoute
+import bitframe.modules.Module
 
 sealed class UnderTest
 class ApplicationUnderTest<A : BitframeApplication>(val application: A) : UnderTest()

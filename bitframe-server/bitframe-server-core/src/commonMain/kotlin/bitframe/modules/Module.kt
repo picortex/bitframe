@@ -1,7 +1,6 @@
-package bitframe
+package bitframe.modules
 
 import bitframe.actions.Action
-import bitframe.http.HttpRoute
 
 interface Module {
     val name: String

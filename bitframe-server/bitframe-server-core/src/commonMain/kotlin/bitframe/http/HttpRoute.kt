@@ -11,4 +11,6 @@ data class HttpRoute(
         "method" to method.value,
         "path" to path
     )
+
+    override fun toString() = "${method.value} $path"
 }

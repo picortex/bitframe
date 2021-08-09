@@ -4,17 +4,21 @@ import bitframe.actions.Action
 import bitframe.http.HttpRequest
 import bitframe.http.HttpResponse
 import bitframe.http.HttpRoute
+import bitframe.modules.Module
 import io.ktor.http.*
 import io.ktor.http.HttpMethod.Companion.Get
 import io.ktor.http.HttpMethod.Companion.Post
 import io.ktor.http.HttpMethod.Companion.Put
+import logging.ConsoleAppender
+import logging.error
 
 open class Sandbox(val component: UnderTest) {
-
     constructor(application: BitframeApplication) : this(ApplicationUnderTest(application))
     constructor(module: Module) : this(ModuleUnderTest(module))
     constructor(route: HttpRoute) : this(RouteUnderTest(route))
     constructor(action: Action) : this(ActionUnderTest(action))
+
+    private val console = ConsoleAppender()
 
     val routes = when (component) {
         is ApplicationUnderTest<*> -> component.application.modules.flatMap {
@@ -28,7 +32,11 @@ open class Sandbox(val component: UnderTest) {
     fun request(request: HttpRequest): HttpResponse {
         val route = routes.find {
             it.path == request.path && it.method == request.method
-        } ?: return HttpResponse(status = HttpStatusCode.NotFound, "Invalid route ${request.path}")
+        } ?: return HttpResponse(status = HttpStatusCode.NotFound, "Invalid route ${request.path}").also {
+            console.error("${request.method.value} ${request.path} Not Found")
+            console.error("Configured routes for this sandbox are")
+            routes.forEach { console.error(it.toString()) }
+        }
 
         return try {
             val handler = route.handler

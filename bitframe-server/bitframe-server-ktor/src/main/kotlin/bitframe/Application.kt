@@ -1,6 +1,7 @@
 package bitframe
 
 import bitframe.http.HttpRequest
+import bitframe.modules.Module
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*

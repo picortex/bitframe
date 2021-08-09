@@ -3,7 +3,7 @@ package unit
 import bitframe.DataSource
 import bitframe.InMemoryDataSource
 import bitframe.Sandbox
-import bitframe.StaticModule
+import bitframe.modules.StaticModule
 import bitframe.actions.Action
 import bitframe.http.HttpResponse
 import bitframe.http.HttpRoute

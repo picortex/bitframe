@@ -17,6 +17,7 @@ kotlin {
             dependencies {
                 api("io.ktor:ktor-http:${vers.ktor}")
                 api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
+                api(asoft("logging-console", vers.asoft.logging))
             }
         }
 

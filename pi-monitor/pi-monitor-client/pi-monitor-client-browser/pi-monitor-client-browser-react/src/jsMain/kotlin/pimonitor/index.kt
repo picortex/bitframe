@@ -7,7 +7,7 @@ import kotlinx.browser.document
 import reakt.setContent
 
 fun main() = document.getElementById("root").setContent {
-    val configuration = TestClientConfiguration(appId = "test-client", simulationTime = 3000)
+    val configuration = TestClientConfiguration(appId = "test-client", simulationTime = 2000)
     val client = BitframeTestClient(configuration)
-    Bitframe(client)
+    Bitframe(client = client)
 }
