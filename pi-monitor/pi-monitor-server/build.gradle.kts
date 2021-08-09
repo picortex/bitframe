@@ -70,13 +70,17 @@ val stopDockerContainer by tasks.creating(DockerStopContainer::class) {
     targetContainerId(createDockerContainer.containerId)
 }
 
-val prepareAcceptanceTestsEnvironment by tasks.creating {
+val acceptanceTestSetup by tasks.creating {
     dependsOn("clean")
-    finalizedBy(startDockerContainer)
+    dependsOn(startDockerContainer)
+    finalizedBy("test")
+}
+
+val acceptanceTestTearDown by tasks.creating {
+    finalizedBy(stopDockerContainer)
 }
 
 val acceptanceTests by tasks.creating {
-    dependsOn(prepareAcceptanceTestsEnvironment)
-    dependsOn("test")
-    finalizedBy(stopDockerContainer)
+    dependsOn(acceptanceTestSetup)
+    finalizedBy(acceptanceTestTearDown)
 }

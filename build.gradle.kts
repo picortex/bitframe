@@ -17,16 +17,17 @@ val piMonitorServer by tasks.creating {
     dependsOn(":pi-monitor-server:runDebug")
 }
 
-val piMonitorTearDown by tasks.creating {
-    dependsOn(":pi-monitor-client-browser-react:stopDockerContainer")
-    dependsOn(":pi-monitor-server:stopDockerContainer")
+val piMonitorAcceptanceTestSetup by tasks.creating {
+    dependsOn(":pi-monitor-server:acceptanceTestSetup")
+    finalizedBy(":pi-monitor-client-browser-react:acceptanceTestSetup")
+}
+
+val piMonitorAcceptanceTestTearDown by tasks.creating {
+    dependsOn(":pi-monitor-client-browser-react:acceptanceTestTearDown")
+    finalizedBy(":pi-monitor-server:acceptanceTestTearDown")
 }
 
 val piMonitorAcceptanceTest by tasks.creating {
-    dependsOn(":pi-monitor-server:clean")
-    dependsOn(":pi-monitor-client-browser-react:cleanAllTests")
-    dependsOn(":pi-monitor-server:startDockerContainer")
-    dependsOn(":pi-monitor-client-browser-react:startDockerContainer")
-    dependsOn(":pi-monitor-server:test")
-    finalizedBy(":pi-monitor-client-browser-react:allTests")
+    dependsOn(piMonitorAcceptanceTestSetup)
+    finalizedBy(piMonitorAcceptanceTestTearDown)
 }
