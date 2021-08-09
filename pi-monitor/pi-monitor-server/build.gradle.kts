@@ -1,5 +1,12 @@
+import com.bmuschko.gradle.docker.tasks.container.DockerCreateContainer
+import com.bmuschko.gradle.docker.tasks.container.DockerStartContainer
+import com.bmuschko.gradle.docker.tasks.container.DockerStopContainer
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+
 plugins {
     kotlin("jvm")
+    id("com.bmuschko.docker-java-application") version vers.docker
     id("tz.co.asoft.applikation")
 }
 
@@ -21,5 +28,50 @@ kotlin {
                 api(project(":bitframe-server-ktor"))
             }
         }
+
+        val test by getting {
+            dependencies {
+                implementation(asoft("expect-coroutines", vers.asoft.expect))
+            }
+        }
     }
+}
+
+val createDockerfile by tasks.creating(Dockerfile::class) {
+    dependsOn("installDistRelease")
+    from("openjdk:8-jre")
+    runCommand("mkdir /app")
+    destFile.set(file("build/binaries/Dockerfile"))
+    copyFile("./release", "/app")
+    workingDir("/app")
+    exposePort(8080)
+    defaultCommand("./bin/pi-monitor-server")
+}
+
+val createDockerImage by tasks.creating(DockerBuildImage::class) {
+    dependsOn(createDockerfile)
+    inputDir.set(file("build/binaries"))
+    images.add("pi-monitor-server:${vers.picortex.bitframe}")
+}
+
+val createDockerContainer by tasks.creating(DockerCreateContainer::class) {
+    dependsOn(createDockerImage)
+    targetImageId(createDockerImage.imageId)
+    hostConfig.portBindings.set(listOf("8080:8080"))
+    hostConfig.autoRemove.set(true)
+}
+
+val startDockerContainer by tasks.creating(DockerStartContainer::class) {
+    dependsOn(createDockerContainer)
+    targetContainerId(createDockerContainer.containerId)
+}
+
+val stopDockerContainer by tasks.creating(DockerStopContainer::class) {
+    targetContainerId(createDockerContainer.containerId)
+}
+
+val acceptanceTests by tasks.creating(Test::class) {
+    dependsOn(startDockerContainer)
+    dependsOn("test")
+    finalizedBy(stopDockerContainer)
 }

@@ -5,6 +5,8 @@ object vers {
 
     val selenide = "5.23.0"
 
+    val docker = "7.1.0"
+    
     object kotlinx {
         val serialization = "1.2.1"
         val datetime = "0.2.1"
@@ -20,7 +22,7 @@ object vers {
         val viewmodel = "0.0.91"
         val builders = "1.3.42"
         val reakt = "0.1.10"
-        val later = "0.0.60" //do not bump until the KJS/IR Error is fixed
+        val later = "0.0.60"
         val logging = "0.0.30"
         val krypto = "0.0.50"
         val kash = "0.0.10"
