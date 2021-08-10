@@ -12,6 +12,9 @@ open class DockerComposePlugin : Plugin<Project> {
         target.tasks.create("dockerComposeDown", DockerComposeCommandTask::class.java, createFile, composeDownCommands)
         val composePushCommands = listOf("docker-compose", "push")
         target.tasks.create("dockerComposePush", DockerComposeCommandTask::class.java, createFile, composePushCommands)
+            .apply {
+                dependsOn("dockerComposeBuild")
+            }
         target.tasks.create("dockerStackDeploy", DockerStackDeployTask::class.java, createFile)
     }
 }

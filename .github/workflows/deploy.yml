@@ -34,10 +34,10 @@ jobs:
             ~/.konan/kotlin-native-macos*
           key: ${{ runner.os }}-konan-
           restore-keys: ${{ runner.os }}-konan-
-      - name: Create Pi Monitor Browser React Dockerfile
-        run: ./gradlew :pi-monitor-client-browser-react:createDockerfile
       - name: Create Pi Monitor Server Dockerfile
         run: ./gradlew :pi-monitor-server:createDockerfile
+      - name: Create Pi Monitor Browser React Dockerfile
+        run: ./gradlew :pi-monitor-client-browser-react:createDockerfile
       - name: Create Pi Monitor Docker Compose File
         run: ./gradlew :pi-monitor:createDockerComposeFile
       - name: Push Containers To Registry
