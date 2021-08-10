@@ -1,8 +1,8 @@
 pluginManagement {
     repositories {
+        mavenCentral()
         google()
         gradlePluginPortal()
-        mavenCentral()
     }
 
     resolutionStrategy {
@@ -10,6 +10,10 @@ pluginManagement {
             if (requested.id.namespace == "com.android") {
                 useModule("com.android.tools.build:gradle:${requested.version}")
             }
+
+//            if (requested.id.id.contains("docker-compose")) {
+//                useModule("com.avast.gradle:gradle-docker-compose-plugin:${requested.version}")
+//            }
         }
     }
 }

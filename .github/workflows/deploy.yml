@@ -34,3 +34,26 @@ jobs:
             ~/.konan/kotlin-native-macos*
           key: ${{ runner.os }}-konan-
           restore-keys: ${{ runner.os }}-konan-
+      - name: Create Pi Monitor Browser React Dockerfile
+        run: ./gradlew :pi-monitor-client-browser-react:createDockerfile
+      - name: Create Pi Monitor Server Dockerfile
+        run: ./gradlew :pi-monitor-server:createDockerfile
+      - name: Create Pi Monitor Docker Compose File
+        run: ./gradlew :pi-monitor:createDockerComposeFile
+      - name: Push Containers To Registry
+        run: ./gradlew :pi-monitor:dockerComposePush
+      - name: Copy Pi Monitor Compose File To Server
+        uses: appleboy/scp-action@master
+        with:
+          host: 65.21.254.230
+          username: root
+          password: bitframe
+          source: "pi-monitor/build/docker/docker-compose-deploy.yml"
+          target: "/apps/pi-monitor/0.0.10/docker-compose.yml"
+      - name: Deploy Stack
+        uses: appleboy/ssh-action@master
+        with:
+          host: 65.21.254.230
+          username: root
+          password: bitframe
+          script: "docker-compose pull && docker stack deploy -c docker-compose.yml pi-monitor_0.0.10"
