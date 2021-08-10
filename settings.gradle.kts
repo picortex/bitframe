@@ -57,6 +57,7 @@ project(":access-system-client-test").projectDir =
 //include(":sample-client")
 //project(":sample-client").projectDir = File("samples/sample-client")
 
+include(":pi-monitor")
 include(":pi-monitor-core")
 project(":pi-monitor-core").projectDir = File("pi-monitor/pi-monitor-core")
 include(":pi-monitor-server")
