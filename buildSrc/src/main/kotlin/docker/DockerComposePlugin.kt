@@ -10,6 +10,8 @@ open class DockerComposePlugin : Plugin<Project> {
         target.tasks.create("dockerComposeUp", DockerComposeCommandTask::class.java, createFile, composeUpCommands)
         val composeDownCommands = listOf("docker-compose", "down")
         target.tasks.create("dockerComposeDown", DockerComposeCommandTask::class.java, createFile, composeDownCommands)
+        val composeBuildCommands = listOf("docker-compose", "build")
+        target.tasks.create("dockerComposeBuild", DockerComposeCommandTask::class.java, createFile, composeBuildCommands)
         val composePushCommands = listOf("docker-compose", "push")
         target.tasks.create("dockerComposePush", DockerComposeCommandTask::class.java, createFile, composePushCommands)
             .apply {
