@@ -21,11 +21,8 @@ open class DockerComposeFileTask : DefaultTask() {
         if (!exists()) mkdirs()
     }
 
-    @OutputFile
-    var outputFile: File = File(outputDir, "docker-compose.yml")
-
-    @OutputFile
-    var deployFile: File = File(outputDir, "docker-compose-deploy.yml")
+    @Input
+    var outputFilename: String = "docker-compose.yml"
 
     fun StringBuilder.appendNested(level: Int, obj: Map<String, Any>, excludeBuild: Boolean) {
         for ((key, value) in obj) {
@@ -60,33 +57,17 @@ open class DockerComposeFileTask : DefaultTask() {
         }
     }
 
+    @get:Input
+    var includeBuild: Boolean = false
+
     @TaskAction
     fun createFile() {
+        val outputFile = File(outputDir, outputFilename)
         if (!outputFile.exists()) {
             outputFile.createNewFile()
         }
-        outputFile.writeText(formatted(structure, excludeBuild = false))
-        if (!deployFile.exists()) {
-            deployFile.createNewFile()
-        }
-        deployFile.writeText(formatted(structure, excludeBuild = true))
+        outputFile.writeText(formatted(structure, excludeBuild = !includeBuild))
     }
-
-//    @OptIn(ExperimentalStdlibApi::class)
-//    private fun removeBuild(map: Map<String, Any>): Map<String, Any> {
-//        val services = map["services"] as List<Map<String, Any>>
-//        val newServices = buildList<Map<String, Any>> {
-//            for (service in services) {
-//                val s = service.toMutableMap().entries.fir
-//                println(s)
-//                s.remove("build")
-//                add(s)
-//            }
-//        }
-//        val newMap = map.toMutableMap()
-//        newMap["services"] = newServices
-//        return newMap
-//    }
 
     @get:Internal
     var version: Double
@@ -101,46 +82,11 @@ open class DockerComposeFileTask : DefaultTask() {
 
     fun service(
         name: String,
-        builder: Service.() -> Unit
-    ) = Service(name).also {
+        builder: DockerService.() -> Unit
+    ) = DockerService(name).also {
         it.builder()
         val services = structure.getOrDefault("services", mutableListOf<Any>()) as MutableList<Any>
         services.add(mapOf(it.name to it.structure))
         structure["services"] = services
-    }
-
-    class Service(
-        val name: String
-    ) {
-        internal val structure = mutableMapOf<String, Any>()
-        fun build(context: File) {
-            structure["build"] = mapOf(
-                "context" to context.absolutePath
-            )
-        }
-
-        fun build(value: String) {
-            structure["build"] = value
-        }
-
-        fun ports(vararg ports: Pair<Int, Int>) {
-            structure["ports"] = ports.map { "${it.first}:${it.second}" }
-        }
-
-        fun put(key: String, value: Any) {
-            structure[key] = value
-        }
-
-        operator fun set(key: String, value: Any) {
-            structure[key] = value
-        }
-
-        fun image(value: String) {
-            structure["image"] = value
-        }
-
-        fun container(name: String) {
-            structure["container_name"] = name
-        }
     }
 }

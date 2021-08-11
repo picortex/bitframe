@@ -59,7 +59,7 @@ val createDockerfile by tasks.creating(Dockerfile::class) {
 val createDockerImage by tasks.creating(DockerBuildImage::class) {
     dependsOn(createDockerfile)
     inputDir.set(file("build/websites/js"))
-    images.add("pi-monitor-client-react:${vers.picortex.bitframe}")
+    images.add("pi-monitor-client-react:${vers.bitframe.current}")
 }
 
 val createDockerContainer by tasks.creating(DockerCreateContainer::class) {

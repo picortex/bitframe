@@ -52,6 +52,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ env.GH_TOKEN }}
 
+      - name: Set Version
+        id: versions
+        run: |
+          ./gradlew :pi-monitor:setVersion
+          echo '::set-output name=current::$(cat ./pi-monitor/build/versioning/current.txt)'
+          echo '::set-output name=current_safe::$(cat ./pi-monitor/build/versioning/current_safe.txt)'
+          echo '::set-output name=previous::$(cat ./pi-monitor/build/versioning/previous.txt)'
+          echo '::set-output name=previous_safe::$(cat ./pi-monitor/build/versioning/previous_safe.txt)'
+
       - name: Extract metadata (tags, labels) for Server Docker
         id: metaserver
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
@@ -61,7 +70,7 @@ jobs:
             org.opencontainers.image.title=PiMonitorServer
             org.opencontainers.image.vendor=PiCortex
           tags: |
-            type=raw,value=server-0.0.10
+            type=raw,value=server-${{ steps.versions.outputs.current }}
 
       - name: Extract metadata (tags, labels) for Server Docker
         id: metaclient
@@ -72,7 +81,7 @@ jobs:
             org.opencontainers.image.title=PiMonitorClientBrowserReact
             org.opencontainers.image.vendor=PiCortex
           tags: |
-            type=raw,value=client-browser-react-0.0.10
+            type=raw,value=client-browser-react-${{ steps.versions.outputs.current }}
 
       - name: Create Pi Monitor Server Dockerfile
         run: ./gradlew :pi-monitor-server:createDockerfile
@@ -105,18 +114,20 @@ jobs:
           host: ${{ env.REMOTE_HOST }}
           username: ${{ env.REMOTE_USER }}
           password: ${{ env.REMOTE_PASS }}
-          source: "pi-monitor/build/docker/docker-compose-deploy.yml"
+          source: "pi-monitor/build/docker/docker-compose-staging.yml"
           rm: true
-          target: "/apps/pi-monitor/0.0.10"
+          target: /apps/pi-monitor/${{ steps.versions.outputs.current }}
 
-      - name: Deploy Stack
+      - name: Deploy Staging Stack
         uses: appleboy/ssh-action@master
         with:
           host: ${{ env.REMOTE_HOST }}
           username: ${{ env.REMOTE_USER }}
           password: ${{ env.REMOTE_PASS }}
           script: |
-            mv /apps/pi-monitor/0.0.10/pi-monitor/build/docker/docker-compose-deploy.yml /apps/pi-monitor/0.0.10/docker-compose.yml
-            cd /apps/pi-monitor/0.0.10
+            mv /apps/pi-monitor/${{ steps.versions.outputs.current }}/pi-monitor/build/docker/docker-compose-staging.yml /apps/pi-monitor/${{ steps.versions.outputs.current }}/docker-compose-staging.yml
+            cd /apps/pi-monitor/${{ steps.versions.outputs.current }}
+            rm pi-monitor -rf
             docker-compose pull
-            docker stack deploy -c docker-compose.yml pi-monitor_0_0_10
+            docker stack rm pi-monitor-${{ steps.versions.outputs.previous_safe }}
+            docker stack deploy -c docker-compose-staging.yml pi-monitor-${{ steps.versions.outputs.current_safe }}

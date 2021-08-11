@@ -14,8 +14,9 @@ object vers {
         val datetime = "0.2.1"
     }
 
-    object picortex {
-        val bitframe = "0.0.10"
+    object bitframe {
+        val current = "0.0.11"
+        val previous = "0.0.10"
     }
 
     object asoft {

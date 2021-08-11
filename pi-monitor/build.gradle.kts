@@ -1,5 +1,4 @@
 import docker.DockerComposeFileTask
-import docker.DockerStackDeployTask
 
 plugins {
     `docker-compose`
@@ -28,25 +27,39 @@ val acceptanceTest by tasks.creating {
     finalizedBy(acceptanceTestTearDown)
 }
 
-// ghcr.io/OWNER/IMAGE_NAME
-val remoteIp = "repo"
-val createDockerComposeFile by tasks.getting(DockerComposeFileTask::class) {
+fun DockerComposeFileTask.configure(serverPort: Int, clientPort: Int) {
     version(3.8)
     service("server") {
-        image("ghcr.io/picortex/bitframe:server-${vers.picortex.bitframe}")
-        ports(9090 to 8080)
+        image("ghcr.io/picortex/bitframe:server-${vers.bitframe.current}")
+        ports(serverPort to 8080)
     }
 
     service("client") {
-        image("ghcr.io/picortex/bitframe:client-browser-react-${vers.picortex.bitframe}")
-        ports(8080 to 80)
+        image("ghcr.io/picortex/bitframe:client-browser-react-${vers.bitframe.current}")
+        ports(clientPort to 80)
     }
 }
 
-//val dockerStackDeploy by tasks.getting(DockerStackDeployTask::class) {
-//    username = "root"
-//    password = "bitframe"
-//    remote = remoteIp
-//    version = vers.picortex.bitframe
-//    destinationDir = "/apps/pi-monitor"
-//}
+val setVersions by tasks.creating {
+    fun writeVersion(name: String, value: String) {
+        val dir = file("build/versioning").apply { mkdirs() }
+        val file = File(dir, "$name.txt").apply { if (!exists()) createNewFile() }
+        val safe = File(dir, "${name}_safe.txt").apply { if (!exists()) createNewFile() }
+        file.writeText(value)
+        safe.writeText(value.replace(".", "_"))
+    }
+    doLast {
+        writeVersion("current", vers.bitframe.current)
+        writeVersion("previous", vers.bitframe.previous)
+    }
+}
+
+val createDockerComposeStagingFile by tasks.creating(DockerComposeFileTask::class) {
+    outputFilename = "docker-compose-staging.yml"
+    configure(serverPort = 9090, clientPort = 8080)
+}
+
+val createDockerComposeProductionFile by tasks.creating(DockerComposeFileTask::class) {
+    outputFilename = "docker-compose-production.yml"
+    configure(serverPort = 90, clientPort = 80)
+}

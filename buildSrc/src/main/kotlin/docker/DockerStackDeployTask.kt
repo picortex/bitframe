@@ -3,6 +3,7 @@ package docker
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
+import java.io.File
 import javax.inject.Inject
 
 open class DockerStackDeployTask @Inject constructor(
@@ -35,7 +36,7 @@ open class DockerStackDeployTask @Inject constructor(
             workingDir(composeFileTask.outputDir)
             commandLine(
                 "scp",
-                composeFileTask.deployFile.absolutePath,
+                File(composeFileTask.outputDir, composeFileTask.outputFilename).absolutePath,
                 "$username@$remoteAddress:$destinationDir/${version}/docker-compose.yml"
             )
         }
@@ -45,7 +46,7 @@ open class DockerStackDeployTask @Inject constructor(
         project.exec {
             workingDir(composeFileTask.outputDir)
             commandLine(
-                "docker", "stack", "deploy", "-c", composeFileTask.deployFile.name, stack
+                "docker", "stack", "deploy", "-c", composeFileTask.outputFilename, stack
             )
         }
     }

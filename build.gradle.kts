@@ -7,5 +7,5 @@ plugins {
 
 subprojects {
     group = "com.picortex"
-    version = vers.picortex.bitframe
+    version = vers.bitframe.current
 }
