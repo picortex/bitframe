@@ -6,6 +6,8 @@ on:
 
 env:
   GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   publish:
@@ -34,6 +36,35 @@ jobs:
             ~/.konan/kotlin-native-macos*
           key: ${{ runner.os }}-konan-
           restore-keys: ${{ runner.os }}-konan-
+      - name: Login into github docker registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GH_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Server Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./pi-monitor/pi-monitor-server/build/binaries
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push Client Web Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./pi-monitor/pi-monitor-client/pi-monitor-client-browser/pi-monitor-client-browser-react/build/websites/js
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
       - name: Create Pi Monitor Server Dockerfile
         run: ./gradlew :pi-monitor-server:createDockerfile
       - name: Create Pi Monitor Browser React Dockerfile
@@ -56,4 +87,4 @@ jobs:
           host: 65.21.254.230
           username: root
           password: bitframe
-          script: "docker-compose pull && docker stack deploy -c docker-compose.yml pi-monitor_0.0.10"
+          script: "cd /apps/pi-monitor/0.0.10/docker-compose.yml && docker-compose pull && docker stack deploy -c docker-compose.yml pi-monitor_0.0.10"
