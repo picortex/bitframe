@@ -119,4 +119,4 @@ jobs:
             mv /apps/pi-monitor/0.0.10/pi-monitor/build/docker/docker-compose-deploy.yml /apps/pi-monitor/0.0.10/docker-compose.yml
             cd /apps/pi-monitor/0.0.10
             docker-compose pull
-            docker stack deploy -c docker-compose.yml pi-monitor_0.0.10"
+            docker stack deploy -c docker-compose.yml pi-monitor_0.0.10
