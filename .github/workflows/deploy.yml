@@ -106,7 +106,8 @@ jobs:
           username: ${{ env.REMOTE_USER }}
           password: ${{ env.REMOTE_PASS }}
           source: "pi-monitor/build/docker/docker-compose-deploy.yml"
-          target: "/apps/pi-monitor/0.0.10/docker-compose.yml"
+          rm: true
+          target: "/apps/pi-monitor/0.0.10"
 
       - name: Deploy Stack
         uses: appleboy/ssh-action@master
@@ -114,4 +115,7 @@ jobs:
           host: ${{ env.REMOTE_HOST }}
           username: ${{ env.REMOTE_USER }}
           password: ${{ env.REMOTE_PASS }}
-          script: "cd /apps/pi-monitor/0.0.10 && docker-compose pull && docker stack deploy -c docker-compose.yml pi-monitor_0.0.10"
+          script: |
+            mv /apps/pi-monitor/0.0.10/pi-monitor/build/docker/docker-compose-deploy.yml /apps/pi-monitor/0.0.10/docker-compose.yml
+            docker-compose pull
+            docker stack deploy -c docker-compose.yml pi-monitor_0.0.10"
