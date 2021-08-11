@@ -33,13 +33,13 @@ val remoteIp = "repo"
 val createDockerComposeFile by tasks.getting(DockerComposeFileTask::class) {
     version(3.8)
     service("server") {
-        image("ghcr.io/picortex/bitframe:client-browser-react-${vers.picortex.bitframe}")
-        ports(9090 to 8080)
-    }
-
-    service("client") {
         image("ghcr.io/picortex/bitframe:server-${vers.picortex.bitframe}")
         ports(8080 to 80)
+    }
+    
+    service("client") {
+        image("ghcr.io/picortex/bitframe:client-browser-react-${vers.picortex.bitframe}")
+        ports(9090 to 8080)
     }
 }
 
