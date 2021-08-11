@@ -43,11 +43,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ env.GH_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
+      - name: Extract metadata (tags, labels) for Server Docker
+        id: metaserver
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/pi-monitor-server:0.0.10
+
+      - name: Extract metadata (tags, labels) for Server Docker
+        id: metaclient
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/pi-monitor-browser-client-react:0.0.10
 
       - name: Create Pi Monitor Server Dockerfile
         run: ./gradlew :pi-monitor-server:createDockerfile
@@ -57,8 +63,8 @@ jobs:
         with:
           context: ./pi-monitor/pi-monitor-server/build/binaries
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.metaserver.outputs.tags }}
+          labels: ${{ steps.metaserver.outputs.labels }}
 
       - name: Create Pi Monitor Browser React Dockerfile
         run: ./gradlew :pi-monitor-client-browser-react:createDockerfile
@@ -68,21 +74,12 @@ jobs:
         with:
           context: ./pi-monitor/pi-monitor-client/pi-monitor-client-browser/pi-monitor-client-browser-react/build/websites/js
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.metaclient.outputs.tags }}
+          labels: ${{ steps.metaclient.outputs.labels }}
 
       - name: Create Pi Monitor Docker Compose File
         run: ./gradlew :pi-monitor:createDockerComposeFile
-      - name: Push Containers To Registry
-        run: ./gradlew :pi-monitor:dockerComposePush
-      - name: Copy Pi Monitor Compose File To Server
-        uses: appleboy/scp-action@master
-        with:
-          host: 65.21.254.230
-          username: root
-          password: bitframe
-          source: "pi-monitor/build/docker/docker-compose-deploy.yml"
-          target: "/apps/pi-monitor/0.0.10/docker-compose.yml"
+
       - name: Deploy Stack
         uses: appleboy/ssh-action@master
         with:
