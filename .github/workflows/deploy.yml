@@ -116,7 +116,7 @@ jobs:
           password: ${{ env.REMOTE_PASS }}
           source: "pi-monitor/build/docker/docker-compose-staging.yml"
           rm: true
-          target: /apps/pi-monitor/${{ steps.versions.outputs.current }}
+          target: /apps/pi-monitor/${{ steps.versions.outputs.current }}/staging
 
       - name: Deploy Staging Stack
         uses: appleboy/ssh-action@master
@@ -125,8 +125,9 @@ jobs:
           username: ${{ env.REMOTE_USER }}
           password: ${{ env.REMOTE_PASS }}
           script: |
-            mv /apps/pi-monitor/${{ steps.versions.outputs.current }}/pi-monitor/build/docker/docker-compose-staging.yml /apps/pi-monitor/${{ steps.versions.outputs.current }}/docker-compose-staging.yml
-            cd /apps/pi-monitor/${{ steps.versions.outputs.current }}
+            mkdir /apps/pi-monitor/${{ steps.versions.outputs.current }}/staging -p
+            mv /apps/pi-monitor/${{ steps.versions.outputs.current }}/staging/pi-monitor/build/docker/docker-compose-staging.yml /apps/pi-monitor/${{ steps.versions.outputs.current }}/staging/docker-compose.yml
+            cd /apps/pi-monitor/${{ steps.versions.outputs.current }}/staging
             rm pi-monitor -rf
             docker-compose pull
             docker stack rm pi-monitor-${{ steps.versions.outputs.previous_safe }}
