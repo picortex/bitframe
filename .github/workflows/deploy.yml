@@ -55,11 +55,11 @@ jobs:
       - name: Set Version
         id: versions
         run: |
-          ./gradlew :pi-monitor:setVersion
-          echo '::set-output name=current::$(cat ./pi-monitor/build/versioning/current.txt)'
-          echo '::set-output name=current_safe::$(cat ./pi-monitor/build/versioning/current_safe.txt)'
-          echo '::set-output name=previous::$(cat ./pi-monitor/build/versioning/previous.txt)'
-          echo '::set-output name=previous_safe::$(cat ./pi-monitor/build/versioning/previous_safe.txt)'
+          ./gradlew :pi-monitor:setVersions
+          echo "::set-output name=current::$(cat ./pi-monitor/build/versioning/current.txt)"
+          echo "::set-output name=current_safe::$(cat ./pi-monitor/build/versioning/current_safe.txt)"
+          echo "::set-output name=previous::$(cat ./pi-monitor/build/versioning/previous.txt)"
+          echo "::set-output name=previous_safe::$(cat ./pi-monitor/build/versioning/previous_safe.txt)"
 
       - name: Extract metadata (tags, labels) for Server Docker
         id: metaserver
