@@ -55,16 +55,23 @@ jobs:
         id: metaserver
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/bitframe/pi-monitor-server
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           labels: |
             org.opencontainers.image.title=PiMonitorServer
             org.opencontainers.image.vendor=PiCortex
+          tags: |
+            type=raw,value=server-0.0.10
 
       - name: Extract metadata (tags, labels) for Server Docker
         id: metaclient
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/bitframe/pi-monitor-browser-client-react
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          labels: |
+            org.opencontainers.image.title=PiMonitorClientBrowserReact
+            org.opencontainers.image.vendor=PiCortex
+          tags: |
+            type=raw,value=client-browser-react-0.0.10
 
       - name: Create Pi Monitor Server Dockerfile
         run: ./gradlew :pi-monitor-server:createDockerfile
