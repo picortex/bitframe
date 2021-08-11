@@ -5,6 +5,9 @@ on:
     branches: [ master ]
 
 env:
+  REMOTE_HOST: 65.21.254.230
+  REMOTE_USER: root
+  REMOTE_PASS: bitframe
   GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
@@ -96,10 +99,19 @@ jobs:
       - name: Create Pi Monitor Docker Compose File
         run: ./gradlew :pi-monitor:createDockerComposeFile
 
+      - name: Copy Docker-Compose file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ env.REMOTE_HOST }}
+          username: ${{ env.REMOTE_USER }}
+          password: ${{ env.REMOTE_PASS }}
+          source: "pi-monitor/build/docker/docker-compose-deploy.yml"
+          target: "/apps/pi-monitor/0.0.10/docker-compose.yml"
+
       - name: Deploy Stack
         uses: appleboy/ssh-action@master
         with:
-          host: 65.21.254.230
-          username: root
-          password: bitframe
+          host: ${{ env.REMOTE_HOST }}
+          username: ${{ env.REMOTE_USER }}
+          password: ${{ env.REMOTE_PASS }}
           script: "cd /apps/pi-monitor/0.0.10 && docker-compose pull && docker stack deploy -c docker-compose.yml pi-monitor_0.0.10"

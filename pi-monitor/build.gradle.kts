@@ -28,31 +28,25 @@ val acceptanceTest by tasks.creating {
     finalizedBy(acceptanceTestTearDown)
 }
 
-val remoteIp = "65.21.254.230"
+// ghcr.io/OWNER/IMAGE_NAME
+val remoteIp = "repo"
 val createDockerComposeFile by tasks.getting(DockerComposeFileTask::class) {
     version(3.8)
-    val registry = "$remoteIp:5000"
     service("server") {
-        val name = "pi-monitor-server"
-        image("$registry/$name:${vers.picortex.bitframe}")
-        build(context = file("pi-monitor-server/build/binaries"))
+        image("ghcr.io/picortex/bitframe:client-browser-react-${vers.picortex.bitframe}")
         ports(9090 to 8080)
-        container("$name-${vers.picortex.bitframe}")
     }
 
     service("client") {
-        val name = "pi-monitor-client-browser-react"
-        image("$registry/$name:${vers.picortex.bitframe}")
-        build(context = file("pi-monitor-client/pi-monitor-client-browser/pi-monitor-client-browser-react/build/websites/js"))
+        image("ghcr.io/picortex/bitframe:server-${vers.picortex.bitframe}")
         ports(8080 to 80)
-        container("$name-${vers.picortex.bitframe}")
     }
 }
 
-val dockerStackDeploy by tasks.getting(DockerStackDeployTask::class) {
-    username = "root"
-    password = "bitframe"
-    remote = remoteIp
-    version = vers.picortex.bitframe
-    destinationDir = "/apps/pi-monitor"
-}
+//val dockerStackDeploy by tasks.getting(DockerStackDeployTask::class) {
+//    username = "root"
+//    password = "bitframe"
+//    remote = remoteIp
+//    version = vers.picortex.bitframe
+//    destinationDir = "/apps/pi-monitor"
+//}
