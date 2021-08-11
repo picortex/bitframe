@@ -3,6 +3,7 @@ name: Build & Test
 on:
   push:
     branches: [ master ]
+    tags: [ * ]
 
 env:
   GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -69,7 +70,7 @@ jobs:
         with:
           context: ./pi-monitor/pi-monitor-server/build/binaries
           push: true
-          tags: 0.0.10
+          tags: ${{ steps.metaclient.outputs.tags }}
           labels: ${{ steps.metaserver.outputs.labels }}
 
       - name: Create Pi Monitor Browser React Dockerfile
