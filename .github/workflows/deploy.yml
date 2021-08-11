@@ -3,8 +3,6 @@ name: Build & Test
 on:
   push:
     branches: [ master ]
-    tags:
-      - 'v*'
 
 env:
   GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -81,7 +79,7 @@ jobs:
         with:
           context: ./pi-monitor/pi-monitor-server/build/binaries
           push: true
-          tags: ${{ steps.metaclient.outputs.tags }}
+          tags: ${{ steps.metaserver.outputs.tags }}
           labels: ${{ steps.metaserver.outputs.labels }}
 
       - name: Create Pi Monitor Browser React Dockerfile
@@ -104,4 +102,4 @@ jobs:
           host: 65.21.254.230
           username: root
           password: bitframe
-          script: "cd /apps/pi-monitor/0.0.10/docker-compose.yml && docker-compose pull && docker stack deploy -c docker-compose.yml pi-monitor_0.0.10"
+          script: "cd /apps/pi-monitor/0.0.10 && docker-compose pull && docker stack deploy -c docker-compose.yml pi-monitor_0.0.10"
