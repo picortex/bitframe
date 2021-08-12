@@ -131,4 +131,4 @@ jobs:
             rm pi-monitor -rf
             docker-compose pull
             docker stack rm pi-monitor-${{ steps.versions.outputs.previous_safe }}
-            docker stack deploy -c docker-compose-staging.yml pi-monitor-${{ steps.versions.outputs.current_safe }}
+            docker stack deploy -c docker-compose.yml pi-monitor-${{ steps.versions.outputs.current_safe }}
