@@ -5,6 +5,7 @@ import kotlinx.coroutines.SupervisorJob
 import later.Later
 import later.await
 import later.later
+import users.account.Account
 import users.account.CreateAccountParams
 import users.server.AccountsDao
 import users.server.UsersDao
@@ -24,5 +25,9 @@ class DefaultAuthenticationService(
 
     override fun users(): Later<List<User>> {
         return usersDao.all()
+    }
+
+    override fun accounts(): Later<List<Account>> {
+        return accountsDao.all()
     }
 }

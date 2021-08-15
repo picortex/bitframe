@@ -26,9 +26,9 @@ class Application(
             val allModules = modules + authenticationModule
             for (rout in allModules.flatMap { it.actions.map { a -> a.route } }) route(rout.path, rout.method) {
                 handle {
-                    val headers = call.request.headers.entries().map { (k, v) ->
+                    val headers = call.request.headers.entries().associate { (k, v) ->
                         k to v.joinToString(",")
-                    }.toMap()
+                    }
                     val body = call.receiveText()
                     val request = HttpRequest(rout.method, rout.path, headers, body)
                     val response = rout.handler(request)
@@ -37,8 +37,8 @@ class Application(
             }
 
             get("/info") {
-                val text = modules.map { it.info() }
-                call.respondText(Mapper.encodeToString(text))
+                val text = (modules + authenticationModule).map { it.info() }
+                call.respondText(Mapper { prettyPrint = true }.encodeToString(text))
             }
         }
     }.start(wait = true)

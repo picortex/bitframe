@@ -31,6 +31,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation(project(":bitframe-ui-react"))
+                implementation(asoft("applikation-runtime", vers.asoft.builders))
             }
         }
 

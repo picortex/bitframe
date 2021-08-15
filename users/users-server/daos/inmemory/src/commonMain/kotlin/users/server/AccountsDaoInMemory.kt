@@ -16,4 +16,6 @@ class AccountsDaoInMemory(
             Later.resolve(account)
         } else Later.resolve(existing)
     }
+
+    override fun all(): Later<List<Account>> = Later.resolve(accounts.values.toList())
 }

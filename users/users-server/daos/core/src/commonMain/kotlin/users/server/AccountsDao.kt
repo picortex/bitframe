@@ -6,4 +6,5 @@ import users.account.CreateAccountParams
 
 interface AccountsDao {
     fun createIfNotExist(params: CreateAccountParams): Later<Account>
+    fun all(): Later<List<Account>>
 }

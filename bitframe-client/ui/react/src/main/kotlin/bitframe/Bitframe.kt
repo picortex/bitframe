@@ -13,10 +13,10 @@ import reakt.ModuleRoute
 import reakt.NavigationDrawer
 import styled.styledDiv
 
-fun RBuilder.Bitframe(client: BitframeService) {
+fun RBuilder.Bitframe(client: BitframeService,version: String) {
     val routes = listOf(
         ModuleRoute<RProps>("/", listOf(), "") {
-            LoginPage(client.authentication)
+            LoginPage(client.authentication,version)
         },
         ModuleRoute<RProps>("/dashboard", listOf(), "") {
             Panel(MutableStateFlow(DrawerState.Opened))
