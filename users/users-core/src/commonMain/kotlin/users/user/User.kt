@@ -18,7 +18,7 @@ data class User(
     val photoUrl: String?,
     val status: Status = Status.SignedOut,
     val accounts: List<Account>,
-    val verifiedContacts: Contacts,
+    val verifiedContacts: Contacts = Contacts.None,
     val registeredOn: Long = Clock.System.now().toEpochMilliseconds(),
     val lastSeen: Long = Clock.System.now().toEpochMilliseconds(),
     val deleted: Boolean = false

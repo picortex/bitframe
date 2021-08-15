@@ -42,8 +42,8 @@ sealed class Contacts {
     }
 
     @Serializable
-    data class Emails(val emails: List<ValidEmail>) : Contacts() {
-        constructor(vararg emails: String) : this(emails.map { ValidEmail(it) })
+    data class Emails(val emails: Set<ValidEmail>) : Contacts() {
+        constructor(vararg emails: String) : this(emails.map { ValidEmail(it) }.toSet())
     }
 
     @Serializable
@@ -52,8 +52,8 @@ sealed class Contacts {
     }
 
     @Serializable
-    data class Phones(val phones: List<ValidPhone>) : Contacts() {
-        constructor(vararg phones: String) : this(phones.map { ValidPhone(it) })
+    data class Phones(val phones: Set<ValidPhone>) : Contacts() {
+        constructor(vararg phones: String) : this(phones.map { ValidPhone(it) }.toSet())
     }
 
     @Serializable
@@ -62,54 +62,54 @@ sealed class Contacts {
     }
 
     @Serializable
-    data class Mixed(val emails: List<ValidEmail>, val phones: List<ValidPhone>) : Contacts()
+    data class Mixed(val emails: Set<ValidEmail>, val phones: Set<ValidPhone>) : Contacts()
 
     operator fun plus(other: Contacts): Contacts = when (this) {
         None -> other
         is Email -> when (other) {
             None -> this
             is Email -> Emails(email.toString(), other.email.toString())
-            is Emails -> Emails(emails = listOf(email) + other.emails)
+            is Emails -> Emails(emails = setOf(email) + other.emails)
             is Phone -> EmailPhone(email, other.phone)
-            is Phones -> Mixed(emails = listOf(email), phones = other.phones)
-            is EmailPhone -> Mixed(emails = listOf(email) + other.email, phones = listOf(other.phone))
-            is Mixed -> Mixed(emails = listOf(email) + other.emails, phones = other.phones)
+            is Phones -> Mixed(emails = setOf(email), phones = other.phones)
+            is EmailPhone -> Mixed(emails = setOf(email) + other.email, phones = setOf(other.phone))
+            is Mixed -> Mixed(emails = setOf(email) + other.emails, phones = other.phones)
         }
         is Emails -> when (other) {
             None -> this
             is Email -> Emails(emails + other.email)
             is Emails -> Emails(emails + other.emails)
-            is Phone -> Mixed(emails, phones = listOf(other.phone))
+            is Phone -> Mixed(emails, phones = setOf(other.phone))
             is Phones -> Mixed(emails, phones = other.phones)
-            is EmailPhone -> Mixed(emails + other.email, phones = listOf(other.phone))
+            is EmailPhone -> Mixed(emails + other.email, phones = setOf(other.phone))
             is Mixed -> Mixed(emails + other.emails, phones = other.phones)
         }
         is Phone -> when (other) {
             None -> this
             is Email -> EmailPhone(other.email.toString(), phone.toString())
-            is Emails -> Mixed(emails = other.emails, phones = listOf(phone))
+            is Emails -> Mixed(emails = other.emails, phones = setOf(phone))
             is Phone -> Phones(phone.toString(), other.phone.toString())
-            is Phones -> Phones(phones = listOf(phone) + other.phones)
-            is EmailPhone -> Mixed(emails = listOf(other.email), phones = listOf(phone, other.phone))
-            is Mixed -> Mixed(emails = other.emails, phones = listOf(phone) + other.phones)
+            is Phones -> Phones(phones = setOf(phone) + other.phones)
+            is EmailPhone -> Mixed(emails = setOf(other.email), phones = setOf(phone, other.phone))
+            is Mixed -> Mixed(emails = other.emails, phones = setOf(phone) + other.phones)
         }
         is Phones -> when (other) {
             None -> this
-            is Email -> Mixed(listOf(other.email), phones)
+            is Email -> Mixed(setOf(other.email), phones)
             is Emails -> Mixed(other.emails, phones)
             is Phone -> Phones(phones + other.phone)
             is Phones -> Phones(phones + other.phones)
-            is EmailPhone -> Mixed(emails = listOf(other.email), phones = phones + other.phone)
+            is EmailPhone -> Mixed(emails = setOf(other.email), phones = phones + other.phone)
             is Mixed -> Mixed(emails = other.emails, phones = phones + other.phones)
         }
         is EmailPhone -> when (other) {
             None -> this
-            is Email -> Mixed(listOf(email) + other.email, listOf(phone))
-            is Emails -> Mixed(listOf(email) + other.emails, listOf(phone))
-            is Phone -> Mixed(listOf(email), listOf(phone) + other.phone)
-            is Phones -> Mixed(listOf(email), listOf(phone) + other.phones)
-            is EmailPhone -> Mixed(listOf(other.email) + other.email, listOf(phone) + other.phone)
-            is Mixed -> Mixed(listOf(email) + other.emails, listOf(phone) + other.phones)
+            is Email -> Mixed(setOf(email) + other.email, setOf(phone))
+            is Emails -> Mixed(setOf(email) + other.emails, setOf(phone))
+            is Phone -> Mixed(setOf(email), setOf(phone) + other.phone)
+            is Phones -> Mixed(setOf(email), setOf(phone) + other.phones)
+            is EmailPhone -> Mixed(setOf(other.email) + other.email, setOf(phone) + other.phone)
+            is Mixed -> Mixed(setOf(email) + other.emails, setOf(phone) + other.phones)
         }
         is Mixed -> when (other) {
             None -> this

@@ -5,7 +5,7 @@ import io.ktor.http.*
 data class HttpRoute(
     val method: HttpMethod,
     val path: String,
-    val handler: (HttpRequest) -> HttpResponse
+    val handler: suspend (HttpRequest) -> HttpResponse
 ) {
     fun info() = mapOf(
         "method" to method.value,

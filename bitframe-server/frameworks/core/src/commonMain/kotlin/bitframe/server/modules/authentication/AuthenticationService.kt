@@ -10,4 +10,5 @@ interface AuthenticationService {
     val usersDao: UsersDao
     val accountsDao: AccountsDao
     fun createDefaultUserIfNotExist(params: CreateUserParams): Later<User>
+    fun users(): Later<List<User>>
 }

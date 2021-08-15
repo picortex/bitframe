@@ -5,10 +5,15 @@ import bitframe.server.data.DAOProvider
 import bitframe.server.http.HttpResponse
 import bitframe.server.http.HttpRoute
 import io.ktor.http.*
+import io.ktor.http.HttpMethod.Companion.Get
 import io.ktor.http.HttpMethod.Companion.Post
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.json.Json
+import later.await
 import users.user.Basic
 import users.user.Contacts
 import users.user.CreateUserParams
+import users.user.User
 import kotlin.jvm.JvmOverloads
 
 open class DefaultAuthenticationModule @JvmOverloads constructor(
@@ -36,7 +41,7 @@ open class DefaultAuthenticationModule @JvmOverloads constructor(
         val GENESIS = CreateUserParams(
             name = "Genesis",
             contacts = Contacts.None,
-            credentials = Basic("genesis", "genesis")
+            credentials = Basic("752748674", "genesis")
         )
     }
 
@@ -45,6 +50,13 @@ open class DefaultAuthenticationModule @JvmOverloads constructor(
     override val actions: List<Action> = listOf(
         Action("login", mapOf(), HttpRoute(Post, "/login") {
             HttpResponse(HttpStatusCode.OK)
+        }),
+        Action("users", mapOf(), HttpRoute(Get, "/users") {
+            val users = controller.service.users().await()
+            val json = Json {
+                prettyPrint = true
+            }
+            HttpResponse(HttpStatusCode.OK, json.encodeToString(ListSerializer(User.serializer()), users))
         })
     )
 }
