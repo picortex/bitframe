@@ -18,6 +18,7 @@ kotlin {
                 api("io.ktor:ktor-http:${vers.ktor}")
                 api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
                 api(asoft("logging-console", vers.asoft.logging))
+                api(asoft("later-ktx", vers.asoft.later))
                 api(project(":users-server-dao-core"))
                 api(project(":users-server-services-core"))
             }

@@ -14,6 +14,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(project(":bitframe-server-framework-core"))
                 api(project(":users-server-dao-inmemory"))
             }
         }

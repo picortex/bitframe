@@ -1,4 +1,4 @@
-package bitframe.server
+package bitframe.server.data
 
 interface DataSource {
     fun create(params: Map<String, *>): Map<String, *>

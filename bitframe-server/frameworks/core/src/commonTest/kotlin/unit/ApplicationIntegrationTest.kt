@@ -1,6 +1,6 @@
 package unit
 
-import bitframe.server.DataSource
+import bitframe.server.data.DataSource
 import bitframe.InMemoryDataSource
 
 class ApplicationIntegrationTest {

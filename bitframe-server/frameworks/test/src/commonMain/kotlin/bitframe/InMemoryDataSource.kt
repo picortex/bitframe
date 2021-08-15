@@ -1,6 +1,6 @@
 package bitframe
 
-import bitframe.server.DataSource
+import bitframe.server.data.DataSource
 
 class InMemoryDataSource(
     private val data: MutableMap<String, Map<String, *>> = mutableMapOf()

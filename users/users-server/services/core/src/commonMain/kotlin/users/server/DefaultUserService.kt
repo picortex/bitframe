@@ -6,6 +6,6 @@ import users.user.User
 
 class DefaultUserService : UsersService {
     override fun createDefaultUserIfNotExist(params: CreateUserParams): Later<User> {
-        
+        TODO()
     }
 }
