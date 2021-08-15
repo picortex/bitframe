@@ -100,7 +100,7 @@ jobs:
       - name: Build and push Client Web Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          context: ./pi-monitor/pi-monitor-client/pi-monitor-client-browser/pi-monitor-client-browser-react/build/websites/js
+          context: ./pi-monitor/pi-monitor-client/browser/react/build/websites/js
           push: true
           tags: ${{ steps.metaclient.outputs.tags }}
           labels: ${{ steps.metaclient.outputs.labels }}
