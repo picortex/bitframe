@@ -26,7 +26,7 @@ object vers {
         val viewmodel = "0.0.91"
         val builders = "1.3.42"
         val reakt = "0.1.10"
-        val later = "0.0.64"
+        val later = "0.0.60" // bump to 0.0.64 and revert to 0.0.60 if client doesn't build
         val logging = "0.0.30"
         val krypto = "0.0.50"
         val kash = "0.0.10"

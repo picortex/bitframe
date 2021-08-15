@@ -1,7 +1,5 @@
-package bitframe.types
+package bitframe.server.types
 
-import bitframe.server.types.Field
-import bitframe.server.types.TypeInfo
 import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.full.starProjectedType
 
