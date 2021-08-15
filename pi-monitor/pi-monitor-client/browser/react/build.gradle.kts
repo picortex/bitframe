@@ -5,13 +5,9 @@ import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 
 plugins {
-    kotlin("jvm")
-    id("com.bmuschko.docker-java-application")
+    kotlin("multiplatform")
     id("tz.co.asoft.applikation")
-}
-
-application {
-    mainClass.set("pimonitor.MainKt")
+    id("com.bmuschko.docker-java-application")
 }
 
 applikation {
@@ -20,45 +16,52 @@ applikation {
 }
 
 kotlin {
-    target { application() }
+    jvm { library() }
+
+    js(IR) { browser { application() } }
 
     sourceSets {
-        val main by getting {
+        val commonMain by getting {
             dependencies {
-                api(project(":bitframe-server-framework-ktor"))
-                api(project(":bitframe-server-dao-inmemory"))
+                api(project(":pi-monitor-core"))
+                api(project(":bitframe-client-sdk-test"))
             }
         }
 
-        val test by getting {
+        val jsMain by getting {
             dependencies {
-                implementation(asoft("expect-coroutines", vers.asoft.expect))
+                implementation(project(":bitframe-ui-react"))
+            }
+        }
+
+        val jvmTest by getting {
+            dependencies {
+                api(project(":pi-monitor-client-test-dsl"))
             }
         }
     }
 }
 
+
 val createDockerfile by tasks.creating(Dockerfile::class) {
-    dependsOn("installDistRelease")
-    from("openjdk:8-jre")
-    runCommand("mkdir /app")
-    destFile.set(file("build/binaries/Dockerfile"))
-    copyFile("./release", "/app")
-    workingDir("/app")
-    exposePort(8080)
-    defaultCommand("./bin/pi-monitor-server")
+    dependsOn("webpackJsRelease")
+    from("nginx:stable-alpine")
+    destFile.set(file("build/websites/js/Dockerfile"))
+    copyFile("./release", "/usr/share/nginx/html")
+    exposePort(80)
+    defaultCommand("nginx", "-g", "daemon off;")
 }
 
 val createDockerImage by tasks.creating(DockerBuildImage::class) {
     dependsOn(createDockerfile)
-    inputDir.set(file("build/binaries"))
-    images.add("pi-monitor-server:${vers.bitframe.current}")
+    inputDir.set(file("build/websites/js"))
+    images.add("pi-monitor-client-react:${vers.bitframe.current}")
 }
 
 val createDockerContainer by tasks.creating(DockerCreateContainer::class) {
     dependsOn(createDockerImage)
     targetImageId(createDockerImage.imageId)
-    hostConfig.portBindings.set(listOf("9090:8080"))
+    hostConfig.portBindings.set(listOf("8080:80"))
     hostConfig.autoRemove.set(true)
 }
 
@@ -72,9 +75,9 @@ val stopDockerContainer by tasks.creating(DockerStopContainer::class) {
 }
 
 val acceptanceTestSetup by tasks.creating {
-    dependsOn("clean")
+    dependsOn("cleanAllTests")
     dependsOn(startDockerContainer)
-    finalizedBy("test")
+    finalizedBy("allTests")
 }
 
 val acceptanceTestTearDown by tasks.creating {
