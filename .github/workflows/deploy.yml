@@ -70,6 +70,8 @@ jobs:
           scope: '@picortex'
 
       - name: Publish pi-monitor-client sdk
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: ./gradlew :pi-monitor-client-sdk:publishJsNpmPublicationToGithub
 
       - name: Extract metadata (tags, labels) for Server Docker

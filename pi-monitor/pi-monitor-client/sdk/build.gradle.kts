@@ -43,7 +43,7 @@ npmPublishing {
     publications {
         val js by getting {
             organization = "picortex"
-            version = "${project.version}-rc.8"
+            version = "${project.version}-rc.9"
             moduleName = "pi-monitor-client-sdk"
             readme = file("README.md")
 //            files { from(".npmrc") }
