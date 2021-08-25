@@ -3,6 +3,8 @@ import com.bmuschko.gradle.docker.tasks.container.DockerStartContainer
 import com.bmuschko.gradle.docker.tasks.container.DockerStopContainer
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
 
 plugins {
     kotlin("multiplatform")
@@ -13,6 +15,11 @@ plugins {
 applikation {
     debug()
     release()
+}
+
+rootProject.plugins.withType(NodeJsRootPlugin::class.java) {
+    rootProject.the<NodeJsRootExtension>().versions.webpackDevServer.version =
+        "4.0.0"
 }
 
 kotlin {
@@ -37,7 +44,7 @@ kotlin {
 
         val jvmTest by getting {
             dependencies {
-                api(project(":pi-monitor-client-test-dsl"))
+                api(project(":pi-monitor-client-test"))
             }
         }
     }

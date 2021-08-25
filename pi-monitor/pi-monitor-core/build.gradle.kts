@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("tz.co.asoft.library")
 }
 
@@ -11,6 +12,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-core"))
+                api(asoft("email-core", vers.asoft.contacts))
             }
         }
     }

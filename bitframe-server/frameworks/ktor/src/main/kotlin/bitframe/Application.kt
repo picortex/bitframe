@@ -17,6 +17,7 @@ class Application(
     authenticationModule: AuthenticationModule,
     modules: List<Module>
 ) : BitframeApplication(authenticationModule, modules) {
+    @JvmOverloads
     fun start(port: Int = 8080) = embeddedServer(CIO, port) {
         routing {
             get("/") {

@@ -12,6 +12,7 @@ kotlin {
             useJUnitPlatform()
         }
     }
+    js(IR) { library() }
     sourceSets {
         val commonMain by getting {
             dependencies {

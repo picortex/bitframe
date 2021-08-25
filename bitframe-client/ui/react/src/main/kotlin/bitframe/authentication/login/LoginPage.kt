@@ -9,9 +9,8 @@ import kotlinx.css.*
 import react.RBuilder
 import react.RProps
 import react.dom.span
-import reakt.ErrorBox
-import reakt.LoadingBox
-import reakt.SuccessBox
+import react.router.dom.withRouter
+import reakt.*
 import styled.css
 import styled.styledDiv
 import styled.styledSpan
@@ -26,12 +25,22 @@ class LoginPage private constructor(p: Props) : VComponent<Props, Intent, State,
 
     override val viewModel by lazy { LoginViewModel(props.service) }
 
+    override fun componentDidMount() {
+        super.componentDidMount()
+        viewModel.onUserLoggedIn {
+            props.history.push("/panel")
+        }
+    }
+
     private fun RBuilder.ShowConundrum() = styledDiv {
         +"Yeeeiy connundrum"
     }
 
     override fun RBuilder.render(ui: State) = styledDiv {
-        css { position = Position.relative }
+        css {
+            position = Position.relative
+            height = 100.vh
+        }
         when (ui) {
             is State.Form -> LoginForm(
                 cred = ui.credentials,
@@ -54,4 +63,7 @@ class LoginPage private constructor(p: Props) : VComponent<Props, Intent, State,
     }
 }
 
-fun RBuilder.LoginPage(service: LoginService, version: String) = child(LoginPage::class.js, Props(service, version)) {}
+fun RBuilder.LoginPage(
+    service: LoginService,
+    version: String
+) = child(withRouter(LoginPage::class), Props(service, version)) {}

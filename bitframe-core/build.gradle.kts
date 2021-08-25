@@ -7,6 +7,7 @@ plugins {
 kotlin {
     jvm { library() }
     js(IR) { library() }
+    nativeTargets(true)
 
     sourceSets {
         val commonMain by getting {
