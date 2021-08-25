@@ -1,6 +1,5 @@
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
-import org.jetbrains.kotlin.gradle.targets.js.npm.packageJson
 
 plugins {
     kotlin("multiplatform")
@@ -44,7 +43,13 @@ npmPublishing {
     publications {
         val js by getting {
             scope = "picortex"
-            moduleName = "monitor-client"
+            moduleName = "pi-monitor-client-sdk"
+            packageJson {
+                repository {
+                    type = "git"
+                    url = "https://github.com/picortex/monitor-client.git"
+                }
+            }
         }
     }
 }

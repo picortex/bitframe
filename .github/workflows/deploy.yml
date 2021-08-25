@@ -60,8 +60,16 @@ jobs:
           echo "::set-output name=current_safe::$(cat ./pi-monitor/build/versioning/current_safe.txt)"
           echo "::set-output name=previous::$(cat ./pi-monitor/build/versioning/previous.txt)"
           echo "::set-output name=previous_safe::$(cat ./pi-monitor/build/versioning/previous_safe.txt)"
+
+      - uses: actions/setup-node@v1
+        with:
+          always-auth: true
+          node-version: '14.x'
+          registry-url: https://npm.pkg.github.com
+
       - name: Publish the client sdk
         run: ./gradlew :pi-monitor-client-sdk:publishJsNpmPublicationToGithub
+
       - name: Extract metadata (tags, labels) for Server Docker
         id: metaserver
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
