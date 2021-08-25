@@ -33,18 +33,17 @@ kotlin {
 }
 
 npmPublishing {
-    organization = "picortex"
-    version = "${project.version}-rc.9"
-
     repositories {
         repository("github") {
-            registry = uri("https://npm.pkg.github.com")
+            registry = uri("https://npm.pkg.github.com/")
             authToken = System.getenv("GH_TOKEN")
         }
     }
 
     publications {
         val js by getting {
+            organization = "picortex"
+            version = "${project.version}-rc.10"
             moduleName = "pi-monitor-client-sdk"
             readme = file("README.md")
             packageJson {

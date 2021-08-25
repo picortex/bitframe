@@ -9,7 +9,6 @@ env:
   REMOTE_USER: root
   REMOTE_PASS: bitframe
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
@@ -64,13 +63,6 @@ jobs:
           echo "::set-output name=current_safe::$(cat ./pi-monitor/build/versioning/current_safe.txt)"
           echo "::set-output name=previous::$(cat ./pi-monitor/build/versioning/previous.txt)"
           echo "::set-output name=previous_safe::$(cat ./pi-monitor/build/versioning/previous_safe.txt)"
-
-      - name: Setup per user .npmrc
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14.x'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@picortex'
 
       - name: Publish pi-monitor-client sdk
         env:
