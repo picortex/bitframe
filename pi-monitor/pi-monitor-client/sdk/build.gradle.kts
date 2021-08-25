@@ -45,10 +45,7 @@ npmPublishing {
             scope = "picortex"
             version = "${project.version}-rc.2"
             moduleName = "pi-monitor-client-sdk"
-            files {
-                from("src/jsMain/npm")
-                from(rootProject.file("README.md"))
-            }
+            files { from(".npmrc", "README.md") }
             packageJson {
                 repository {
                     type = "git"

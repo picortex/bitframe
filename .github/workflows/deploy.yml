@@ -8,7 +8,7 @@ env:
   REMOTE_HOST: 65.21.254.230
   REMOTE_USER: root
   REMOTE_PASS: bitframe
-  GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
@@ -61,7 +61,7 @@ jobs:
           echo "::set-output name=previous::$(cat ./pi-monitor/build/versioning/previous.txt)"
           echo "::set-output name=previous_safe::$(cat ./pi-monitor/build/versioning/previous_safe.txt)"
 
-      - name: Publish the client sdk
+      - name: Publish pi-monitor-client sdk
         run: ./gradlew :pi-monitor-client-sdk:publishJsNpmPublicationToGithub
 
       - name: Extract metadata (tags, labels) for Server Docker
