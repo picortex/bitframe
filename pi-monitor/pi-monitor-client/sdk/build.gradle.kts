@@ -43,6 +43,7 @@ npmPublishing {
     publications {
         val js by getting {
             scope = "picortex"
+            version = "${project.version}-rc.2"
             moduleName = "pi-monitor-client-sdk"
             files {
                 from("src/jsMain/npm")
@@ -52,9 +53,6 @@ npmPublishing {
                 repository {
                     type = "git"
                     url = "https://github.com/picortex/monitor-client.git"
-                }
-                publishConfig {
-                    registry = "https://npm.pkg.github.com"
                 }
             }
         }
