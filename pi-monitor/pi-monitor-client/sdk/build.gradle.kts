@@ -44,6 +44,7 @@ npmPublishing {
         val js by getting {
             scope = "picortex"
             moduleName = "pi-monitor-client-sdk"
+            files { from("src/jsMain/npm") }
             packageJson {
                 repository {
                     type = "git"
