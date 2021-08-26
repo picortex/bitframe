@@ -7,11 +7,10 @@ object vers {
 
     val docker = "7.1.0"
 
-    val dockerCompose = "0.14.9"
-
     val npmPublish = "2.0.3"
 
     object kotlinx {
+        val coroutines = "1.4.3"
         val serialization = "1.2.1"
         val datetime = "0.2.1"
     }
@@ -26,6 +25,7 @@ object vers {
         val contacts = "0.0.20"
         val collections = "0.0.10"
         val viewmodel = "0.0.91"
+        val live = "0.0.30"
         val builders = "1.3.42"
         val reakt = "0.1.10"
         val later = "0.0.60" // bump to 0.0.64 and revert to 0.0.60 if client doesn't build

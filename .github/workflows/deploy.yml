@@ -8,7 +8,7 @@ env:
   REMOTE_HOST: 65.21.254.230
   REMOTE_USER: root
   REMOTE_PASS: bitframe
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_TOKEN: ${{ github.token}} # ${{ secrets.GITHUB_TOKEN }}
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 

@@ -12,6 +12,8 @@ An SDK Library that one would use to access the PiMonitor server for different r
 import SDK from '@picortex/pi-monitor-client-sdk"
 
 const service = SDK.service({appId: "<your-app-id>"});
+
+const viewModel = SDK.loginViewModel(service);
 ```
 
 

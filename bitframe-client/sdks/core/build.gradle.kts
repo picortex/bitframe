@@ -14,5 +14,11 @@ kotlin {
                 api(asoft("later-ktx", vers.asoft.later))
             }
         }
+
+        val jsMain by getting {
+            dependencies {
+                api(kotlinx("coroutines-core-js", vers.kotlinx.coroutines))
+            }
+        }
     }
 }

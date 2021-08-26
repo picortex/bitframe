@@ -29,6 +29,18 @@ kotlin {
                 api(project(":bitframe-client-viewmodels"))
             }
         }
+
+        val jsMain by getting {
+            dependencies {
+                api(asoft("live-react", vers.asoft.live))
+            }
+        }
+
+        val commonTest by getting {
+            dependencies {
+                implementation(asoft("expect-core", vers.asoft.expect))
+            }
+        }
     }
 }
 
