@@ -33,6 +33,9 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 api(asoft("live-react", vers.asoft.live))
+                api(kotlinx("coroutines-core", vers.kotlinx.coroutines)) {
+                    version { strictly(vers.kotlinx.coroutines) }
+                }
             }
         }
 

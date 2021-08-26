@@ -10,7 +10,7 @@ object vers {
     val npmPublish = "2.0.3"
 
     object kotlinx {
-        val coroutines = "1.4.3"
+        val coroutines = "1.4.3-native-mt"
         val serialization = "1.2.1"
         val datetime = "0.2.1"
     }
@@ -28,7 +28,7 @@ object vers {
         val live = "0.0.30"
         val builders = "1.3.42"
         val reakt = "0.1.10"
-        val later = "0.0.60" // bump to 0.0.64 and revert to 0.0.60 if client doesn't build
+        val later = "0.0.64"
         val logging = "0.0.30"
         val krypto = "0.0.50"
         val kash = "0.0.10"
