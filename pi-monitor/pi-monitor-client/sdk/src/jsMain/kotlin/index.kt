@@ -4,8 +4,7 @@ import bitframe.authentication.LoginCredentials
 import bitframe.authentication.LoginViewModel
 import bitframe.authentication.TestClientConfiguration
 
-@JsExport
-external class Configuration {
+external interface Configuration {
     val appId: String
 }
 

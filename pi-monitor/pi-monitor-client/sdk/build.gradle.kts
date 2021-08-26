@@ -35,7 +35,7 @@ kotlin {
 npmPublishing {
     repositories {
         repository("github") {
-            registry = uri("https://npm.pkg.github.com/")
+            registry = uri("https://npm.pkg.github.com/") // DO NOT REMOVE THE TRAILING SLASH
             authToken = System.getenv("GH_TOKEN")
         }
     }
@@ -43,7 +43,6 @@ npmPublishing {
     publications {
         val js by getting {
             organization = "picortex"
-            version = "${project.version}-rc.10"
             moduleName = "pi-monitor-client-sdk"
             readme = file("README.md")
             packageJson {
