@@ -17,7 +17,7 @@ kotlin {
 
     js(IR) {
         val main by compilations
-        main.outputModuleName = "pi-monitor-client-sdk"
+        main.outputModuleName = "pi-monitor-client-sdk-full"
         browserLib()
         binaries.library()
     }
@@ -25,8 +25,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":pi-monitor-core"))
-                api(project(":bitframe-client-sdk-test"))
+                api(project(":pi-monitor-client-sdk-core"))
                 api(project(":bitframe-client-viewmodels"))
             }
         }
@@ -60,7 +59,7 @@ npmPublishing {
         val js by getting {
             organization = "picortex"
             version = "${project.version}-rc.0"
-            moduleName = "pi-monitor-client-sdk"
+            moduleName = "pi-monitor-client-sdk-full"
             readme = file("README.md")
             packageJson {
                 repository {

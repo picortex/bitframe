@@ -81,8 +81,11 @@ project(":pi-monitor-core").projectDir = File("pi-monitor/pi-monitor-core")
 include(":pi-monitor-server")
 project(":pi-monitor-server").projectDir = File("pi-monitor/pi-monitor-server")
 
-include(":pi-monitor-client-sdk")
-project(":pi-monitor-client-sdk").projectDir = File("pi-monitor/pi-monitor-client/sdk")
+include(":pi-monitor-client-sdk-core")
+project(":pi-monitor-client-sdk-core").projectDir = File("pi-monitor/pi-monitor-client/sdks/core")
+
+include(":pi-monitor-client-sdk-full")
+project(":pi-monitor-client-sdk-full").projectDir = File("pi-monitor/pi-monitor-client/sdks/full")
 
 include(":pi-monitor-client-test")
 project(":pi-monitor-client-test").projectDir = File("pi-monitor/pi-monitor-client/test")
