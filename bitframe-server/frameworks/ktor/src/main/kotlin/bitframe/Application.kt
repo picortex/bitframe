@@ -6,22 +6,29 @@ import bitframe.server.modules.Module
 import bitframe.server.modules.authentication.AuthenticationModule
 import io.ktor.application.*
 import io.ktor.http.*
+import io.ktor.http.content.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
 import kotlinx.serialization.mapper.Mapper
+import java.io.File
 
 class Application(
+    val client: File,
     authenticationModule: AuthenticationModule,
     modules: List<Module>
 ) : BitframeApplication(authenticationModule, modules) {
     @JvmOverloads
     fun start(port: Int = 8080) = embeddedServer(CIO, port) {
+        println("Serving files from ${client.absolutePath}")
         routing {
-            get("/") {
-                call.respondText("It works")
+            static("/") {
+                staticRootFolder = client.absoluteFile
+                files(".")
+                file("main.bundle.js")
+                default("index.html")
             }
 
             val allModules = modules + authenticationModule

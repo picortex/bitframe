@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  portainer:
+    image: portainer/portainer:1.24.2-alpine
+    restart: always
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  visualizer:
+    restart: always
+    image: dockersamples/visualizer:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 3000:8080
+
+  docker-registry:
+    restart: always
+    image: registry:2
+    ports:
+      - 5000:5000
+    volumes:
+      - ${DEVOPS_ROOT}/devops/docker-registry/data:/var/lib/registry
+      - ${DEVOPS_ROOT}/devops/docker-registry/certs:/certs
+      - ${DEVOPS_ROOT}/devops/docker-registry/auth:/auth
+
+  npm-registry:
+    restart: always
+    image: verdaccio/verdaccio:5.1
+    ports:
+      - 4873:4873
+    volumes:
+      - ${DEVOPS_ROOT}/devops/npm-registry/conf:/verdaccio/conf
+      - ${DEVOPS_ROOT}/devops/npm-registry/plugins:/verdaccio/plugins
+      - ${DEVOPS_ROOT}/devops/npm-registry/storage:/verdaccio/storage
+
+  maven-registry:
+    restart: always
+    image: xetusoss/archiva:v2.2.5
+    ports:
+      - 2000:8080
+    volumes:
+      - ${DEVOPS_ROOT}/devops/maven-registry:/archiva-data
