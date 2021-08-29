@@ -1,11 +1,18 @@
 package pimonitor
 
+import bitframe.annotations.Generated
+import bitframe.annotations.Module
+import bitframe.annotations.Name
 import contacts.Email
 import kotlinx.serialization.Serializable
 
+/**
+ * A [Monitor] is an entity that monitors at least one [Monitored] entity
+ */
 @Serializable
+@Module
 data class Monitor(
-    val uid: String,
+    @Generated val uid: String,
     val business: Business,
     val contacts: List<Person>
 ) {

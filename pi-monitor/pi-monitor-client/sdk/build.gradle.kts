@@ -5,6 +5,7 @@ plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
     id("dev.petuska.npm.publish")
+    id("org.jetbrains.dokka")
 }
 
 rootProject.plugins.withType(NodeJsRootPlugin::class.java) {
@@ -58,6 +59,7 @@ npmPublishing {
     publications {
         val js by getting {
             organization = "picortex"
+            version = "${project.version}-rc.0"
             moduleName = "pi-monitor-client-sdk"
             readme = file("README.md")
             packageJson {

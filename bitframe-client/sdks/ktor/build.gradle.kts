@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
+    id("org.jetbrains.dokka")
 }
 
 repositories {

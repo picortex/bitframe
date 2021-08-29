@@ -27,8 +27,12 @@ jobs:
       - name: Cache Gradle
         uses: actions/cache@v2
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.gradle/yarn
+            ~/.gradle/nodejs
+          key: ${{ runner.os }}-gradle-${{ hashFiles('gradle/gradle-wrapper.*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Making gradlew executable
@@ -99,6 +103,9 @@ jobs:
           push: true
           tags: ${{ steps.metaserver.outputs.tags }}
           labels: ${{ steps.metaserver.outputs.labels }}
+
+      - name: Create Pi Monitor Browser React Dockerfile
+        run: ./gradlew :pi-monitor-client-browser-react:webpackJsRelease
 
       - name: Create Pi Monitor Browser React Dockerfile
         run: ./gradlew :pi-monitor-client-browser-react:createDockerfile

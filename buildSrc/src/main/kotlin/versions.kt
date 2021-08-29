@@ -7,6 +7,8 @@ object vers {
 
     val docker = "7.1.0"
 
+    val dokka = "1.5.0"
+
     val npmPublish = "2.0.3"
 
     object kotlinx {
@@ -16,8 +18,8 @@ object vers {
     }
 
     object bitframe {
-        val current = "0.0.18"
-        val previous = "0.0.17"
+        val current = "0.0.19"
+        val previous = "0.0.18"
     }
 
     object asoft {

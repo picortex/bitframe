@@ -14,7 +14,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
-                api(project(":bitframe-annotations"))
             }
         }
     }
