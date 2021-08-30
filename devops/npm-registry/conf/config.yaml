@@ -6,9 +6,12 @@ uplinks:
   npmjs:
     url: https://registry.npmjs.org/
 packages:
+  "@picortex/*":
+    access: $anonymous
+    publish: $anonymous
   "@*/*":
-    access: $all
-    publish: $all
+    access: $anonymous
+    publish: $anonymous
     proxy: npmjs
   "**":
     proxy: npmjs

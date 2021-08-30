@@ -47,19 +47,38 @@ kotlin {
     }
 }
 
+configurePublishing {
+    repositories {
+        maven {
+            name = "andylamax"
+            url = uri("http://localhost:1050/repository/internal/")
+            isAllowInsecureProtocol = true
+            credentials {
+                username = "admin"
+                password = "admin@123"
+            }
+        }
+    }
+}
+
 npmPublishing {
     repositories {
         repository("github") {
             registry = uri("https://npm.pkg.github.com/") // DO NOT REMOVE THE TRAILING SLASH
             authToken = System.getenv("GH_TOKEN")
         }
+
+        repository("andylamax") {
+            registry = uri("http://localhost:1040")
+            authToken = ""
+        }
     }
 
     publications {
         val js by getting {
             organization = "picortex"
-            version = "${project.version}-rc.0"
-            moduleName = "pi-monitor-client-sdk-full"
+            version = "${project.version}"
+            moduleName = "pi-monitor-client-full"
             readme = file("README.md")
             packageJson {
                 repository {

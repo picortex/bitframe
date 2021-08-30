@@ -64,8 +64,22 @@ val createDockerfile by tasks.creating(Dockerfile::class) {
 val createDockerImage by tasks.creating(DockerBuildImage::class) {
     dependsOn(createDockerfile)
     inputDir.set(file("build/binaries"))
-    images.add("pi-monitor-server:${vers.bitframe.current}")
+    images.addAll("pi-monitor:${vers.bitframe.current}")
 }
+
+fun dockerPushTo(remote: String) = tasks.creating(Exec::class) {
+    dependsOn(createDockerImage)
+    val localName = "pi-monitor:${vers.bitframe.current}"
+    val remoteName = "$remote/pi-monitor:${vers.bitframe.current}"
+    commandLine("docker", "tag", localName, remoteName)
+    doLast {
+        exec { commandLine("docker", "push", remoteName) }
+    }
+}
+
+val dockerPushToAndylamax by dockerPushTo("localhost:1030")
+
+val dockerPushToPiCortex by dockerPushTo("${vars.dev.server.url}:1030")
 
 val createDockerContainer by tasks.creating(DockerCreateContainer::class) {
     dependsOn(createDockerImage)
