@@ -23,7 +23,7 @@ jobs:
 
       - name: Configure & restart docker daemon
         working-directory: ./devops
-        run: sudo ./dockerd.sh
+        run: cd devops && chmod +x ./dockerd.sh && sudo ./dockerd.sh
 
       - name: Set up JDK 16
         uses: actions/setup-java@v1
