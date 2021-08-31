@@ -69,9 +69,9 @@ val createDockerImage by tasks.creating(DockerBuildImage::class) {
 
 fun dockerPushTo(remote: String) = tasks.creating(Exec::class) {
     dependsOn(createDockerImage)
-    val localName = "pi-monitor:${vers.bitframe.current}"
+    val localTag = "pi-monitor:${vers.bitframe.current}"
     val remoteName = "$remote/pi-monitor:${vers.bitframe.current}"
-    commandLine("docker", "tag", localName, remoteName)
+    commandLine("docker", "tag", localTag, remoteName)
     doLast {
         exec { commandLine("docker", "push", remoteName) }
     }
@@ -79,7 +79,7 @@ fun dockerPushTo(remote: String) = tasks.creating(Exec::class) {
 
 val dockerPushToAndylamax by dockerPushTo("localhost:1030")
 
-val dockerPushToPiCortex by dockerPushTo("${vars.dev.server.url}:1030")
+val dockerPushToPiCortex by dockerPushTo("${vars.dev.server.ip}:1030")
 
 val createDockerContainer by tasks.creating(DockerCreateContainer::class) {
     dependsOn(createDockerImage)

@@ -57,6 +57,16 @@ configurePublishing {
                 password = "admin@123"
             }
         }
+
+        maven {
+            name = "piCortex"
+            url = uri("http://${vars.dev.server.ip}:1050/repository/internal/")
+            isAllowInsecureProtocol = true
+            credentials {
+                username = "admin"
+                password = "admin@123"
+            }
+        }
     }
 }
 
@@ -69,6 +79,11 @@ npmPublishing {
 
         repository("andylamax") {
             registry = uri("http://localhost:1040")
+            authToken = ""
+        }
+
+        repository("piCortex") {
+            registry = uri("http://${vars.dev.server.ip}:1040")
             authToken = ""
         }
     }
