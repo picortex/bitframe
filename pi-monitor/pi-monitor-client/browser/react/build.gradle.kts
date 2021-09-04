@@ -18,8 +18,7 @@ applikation {
 }
 
 rootProject.plugins.withType(NodeJsRootPlugin::class.java) {
-    rootProject.the<NodeJsRootExtension>().versions.webpackDevServer.version =
-        "4.0.0"
+    rootProject.the<NodeJsRootExtension>().versions.webpackDevServer.version = "4.1.0"
 }
 
 kotlin {

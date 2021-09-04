@@ -12,8 +12,7 @@ kotlin {
             dependencies {
                 api(project(":pi-monitor-core"))
                 api(project(":bitframe-client-sdk-core"))
-                api(asoft("expect-core", vers.asoft.expect))
-                api(asoft("test-coroutines", vers.asoft.test))
+                api(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
 

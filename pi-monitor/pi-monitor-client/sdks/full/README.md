@@ -9,7 +9,7 @@ An SDK Library that one would use to access the PiMonitor server for different r
 ## Samples
 
 ```javascript
-import SDK from '@picortex/pi-monitor-client-sdk-full"
+import SDK from '@picortex/pi-monitor-client-full"
 
 const service = SDK.service({appId: "<your-app-id>"});
 

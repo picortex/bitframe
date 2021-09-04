@@ -4,10 +4,10 @@ import bitframe.authentication.LoginService
 import bitframe.authentication.LoginViewModel
 import bitframe.authentication.LoginViewModel.Intent
 import bitframe.authentication.LoginViewModel.State
-import bitframe.authentication.login.LoginPage.Props
+import bitframe.authentication.login.LoginPageProps
 import kotlinx.css.*
 import react.RBuilder
-import react.RProps
+import react.Props
 import react.dom.span
 import react.router.dom.withRouter
 import reakt.*
@@ -16,13 +16,13 @@ import styled.styledDiv
 import styled.styledSpan
 import viewmodel.VComponent
 
-@JsExport
-class LoginPage private constructor(p: Props) : VComponent<Props, Intent, State, LoginViewModel>(p) {
-    class Props(
-        val service: LoginService,
-        val version: String
-    ) : RProps
+external interface LoginPageProps : Props {
+    var service: LoginService
+    var version: String
+}
 
+@JsExport
+class LoginPage private constructor(p: LoginPageProps) : VComponent<LoginPageProps, Intent, State, LoginViewModel>(p) {
     override val viewModel by lazy { LoginViewModel(props.service) }
 
     override fun componentDidMount() {
@@ -66,4 +66,7 @@ class LoginPage private constructor(p: Props) : VComponent<Props, Intent, State,
 fun RBuilder.LoginPage(
     service: LoginService,
     version: String
-) = child(withRouter(LoginPage::class), Props(service, version)) {}
+) = child(withRouter(LoginPage::class)) {
+    attrs.service = service
+    attrs.version = version
+}

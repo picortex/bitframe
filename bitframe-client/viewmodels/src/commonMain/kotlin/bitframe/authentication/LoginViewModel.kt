@@ -2,7 +2,6 @@ package bitframe.authentication
 
 import bitframe.authentication.LoginViewModel.Intent
 import bitframe.authentication.LoginViewModel.State
-import bitframe.coroutines.Dispatchers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -14,12 +13,11 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-class LoginViewModel(
-    val service: LoginService
-) : ViewModel<Intent, State>(State.Form(null), CoroutineScope(Dispatchers.Main)) {
+class LoginViewModel(val service: LoginService) : ViewModel<Intent, State>(State.Form(null)) {
 
     private var loginListener: (() -> Unit)? = null
 
+    @Deprecated("Use UI Directly")
     @JsName("state")
     val state
         get() = ui
@@ -46,10 +44,7 @@ class LoginViewModel(
         loginListener = listener
     }
 
-    @JsName("post")
-    fun launch(intent: Intent) = post(intent)
-
-    private fun CoroutineScope.login(i: Intent.Login) = launch(Dispatchers.Main) {
+    private fun CoroutineScope.login(i: Intent.Login) = launch {
         ui.value = State.Loading("Singing you in, please wait . . .")
         flow {
             val conundrum = service.loginWith(i.credentials).await()

@@ -1,7 +1,7 @@
 package bitframe.authentication
 
-import bitframe.coroutines.Dispatchers
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
@@ -20,7 +20,7 @@ class TestClientConfiguration @JvmOverloads private constructor(
         operator fun invoke(
             appId: String,
             simulationTime: Int = 0,
-            scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Universal)
+            scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
         ): TestClientConfiguration = cachedConfigs.getOrPut(appId) {
             TestClientConfiguration(appId, simulationTime, scope)
         }
@@ -30,7 +30,7 @@ class TestClientConfiguration @JvmOverloads private constructor(
         fun of(
             appId: String,
             simulationTime: Int = 0,
-            scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Universal)
+            scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
         ) = invoke(appId, simulationTime, scope)
     }
 }

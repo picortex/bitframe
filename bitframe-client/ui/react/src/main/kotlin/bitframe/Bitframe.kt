@@ -2,29 +2,42 @@ package bitframe
 
 import bitframe.authentication.login.LoginPage
 import bitframe.panel.Panel
-import kotlinx.coroutines.flow.MutableStateFlow
+import react.Props
 import react.RBuilder
-import react.RProps
+import react.ReactElement
+import react.buildElement
+import react.router.dom.RouteResultProps
 import react.router.dom.browserRouter
 import react.router.dom.route
 import react.router.dom.switch
-import reakt.DrawerState
-import reakt.ModuleRoute
-import reakt.NavigationDrawer
 import styled.styledDiv
+
+open class AbstractModuleRoute(
+    val permits: List<String>,
+    val path: String,
+    val scope: String,
+    val render: RBuilder.(props: RouteResultProps) -> Unit
+)
+
+fun ModuleRoute(
+    path: String,
+    permits: List<String>,
+    scope: String,
+    builder: RBuilder.(props: RouteResultProps) -> Unit
+) = AbstractModuleRoute(permits, path, scope, builder)
 
 fun RBuilder.Bitframe(client: BitframeService, version: String) {
     val routes = listOf(
-        ModuleRoute<RProps>("/", listOf(), "") {
+        ModuleRoute("/", listOf(), "") {
             LoginPage(client.authentication, version)
         },
-        ModuleRoute<RProps>("/panel", listOf(), "") {
+        ModuleRoute("/panel", listOf(), "") {
             Panel()
         }
     )
     browserRouter {
         switch {
-            for (r in routes) route(r.path, exact = true, render = r.render)
+            for (r in routes) route(r.path, exact = true, strict = true, render = r.render)
             styledDiv { +"Whoops, Not Found" }
         }
     }

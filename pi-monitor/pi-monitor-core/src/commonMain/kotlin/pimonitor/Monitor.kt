@@ -5,10 +5,12 @@ import bitframe.annotations.Module
 import bitframe.annotations.Name
 import contacts.Email
 import kotlinx.serialization.Serializable
+import kotlin.js.JsExport
 
 /**
  * A [Monitor] is an entity that monitors at least one [Monitored] entity
  */
+@JsExport
 @Serializable
 @Module
 data class Monitor(
