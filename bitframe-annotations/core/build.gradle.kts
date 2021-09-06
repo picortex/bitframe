@@ -6,14 +6,14 @@ plugins {
 }
 
 kotlin {
-    jvm { library() }
-    js(IR) { library() }
+    jvm { library(); }
+    js { library() }
     nativeTargets(true)
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(kotlinx("serialization-core", vers.kotlinx.serialization))
+//                api(kotlinx("serialization-core", vers.kotlinx.serialization))
             }
         }
     }

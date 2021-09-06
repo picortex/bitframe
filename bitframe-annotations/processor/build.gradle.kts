@@ -1,20 +1,19 @@
 plugins {
-    kotlin("jvm")
+    kotlin("multiplatform")
     id("tz.co.asoft.library")
 }
 
-repositories {
-    publicRepos()
-}
-
 kotlin {
+    jvm { library() }
     sourceSets {
-        val main by getting {
+        val jvmMain by getting {
             dependencies {
                 implementation("com.squareup:javapoet:${vers.kotlinpoet}")
                 implementation("com.google.devtools.ksp:symbol-processing-api:${vers.ksp}")
-                implementation(project(":bitframe-annotations"))
+                implementation(project(":bitframe-annotations-core"))
             }
+            kotlin.srcDir("src/main/kotlin")
+            resources.srcDir("src/main/resources")
         }
     }
 }

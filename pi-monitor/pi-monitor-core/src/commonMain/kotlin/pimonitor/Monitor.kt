@@ -2,7 +2,6 @@ package pimonitor
 
 import bitframe.annotations.Generated
 import bitframe.annotations.Module
-import bitframe.annotations.Name
 import contacts.Email
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport

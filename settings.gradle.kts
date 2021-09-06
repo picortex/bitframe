@@ -17,8 +17,10 @@ pluginManagement {
 rootProject.name = "bitframe"
 
 include(":bitframe-core")
-include(":bitframe-annotations")
-include(":bitframe-processor")
+listOf("core", "processor").forEach {
+    include(":bitframe-annotations-$it")
+    project(":bitframe-annotations-$it").projectDir = File("bitframe-annotations/$it")
+}
 
 include(":bitframe-server-framework-core")
 project(":bitframe-server-framework-core").projectDir = File("bitframe-server/frameworks/core")

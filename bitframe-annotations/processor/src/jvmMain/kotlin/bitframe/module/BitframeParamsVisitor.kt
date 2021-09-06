@@ -4,11 +4,13 @@ import bitframe.annotations.Generated
 import bitframe.utils.appendText
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.Dependencies
+import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.symbol.*
 import java.lang.StringBuilder
 
 class BitframeParamsVisitor(
-    private val codeGenerator: CodeGenerator
+    private val codeGenerator: CodeGenerator,
+    private val logger: KSPLogger
 ) : KSVisitorVoid() {
     override fun visitClassDeclaration(classDeclaration: KSClassDeclaration, data: Unit) {
         classDeclaration.primaryConstructor?.accept(this, data)
@@ -30,6 +32,7 @@ class BitframeParamsVisitor(
     }
 
     override fun visitFunctionDeclaration(function: KSFunctionDeclaration, data: Unit) {
+        logger.info("Processing ${function.qualifiedName?.asString()}")
         val parentClass = function.parentDeclaration as KSClassDeclaration
         val ogClassName = parentClass.simpleName.asString()
         val packageName = parentClass.containingFile!!.packageName.asString()
@@ -78,5 +81,6 @@ class BitframeParamsVisitor(
         file.appendText("    )\n")
         file.appendText("}")
         file.close()
+        logger.info("Finished processing ${function.qualifiedName?.asString()}")
     }
 }
