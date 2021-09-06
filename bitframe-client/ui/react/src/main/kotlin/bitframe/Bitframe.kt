@@ -2,10 +2,7 @@ package bitframe
 
 import bitframe.authentication.login.LoginPage
 import bitframe.panel.Panel
-import react.Props
 import react.RBuilder
-import react.ReactElement
-import react.buildElement
 import react.router.dom.RouteResultProps
 import react.router.dom.browserRouter
 import react.router.dom.route

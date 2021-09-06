@@ -18,6 +18,7 @@ rootProject.name = "bitframe"
 
 include(":bitframe-core")
 include(":bitframe-annotations")
+include(":bitframe-processor")
 
 include(":bitframe-server-framework-core")
 project(":bitframe-server-framework-core").projectDir = File("bitframe-server/frameworks/core")

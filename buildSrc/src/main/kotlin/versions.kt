@@ -1,6 +1,10 @@
 object vers {
     val kotlin = "1.5.30"
 
+    val ksp = "1.5.30-1.0.0-beta09"
+
+    val kotlinpoet = "1.12.1"
+
     val ktor = "1.6.2"
 
     val selenide = "5.23.0"
