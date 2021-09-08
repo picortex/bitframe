@@ -13,9 +13,11 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-class LoginViewModel(val service: LoginService) : ViewModel<Intent, State>(State.Form(null)) {
+class LoginViewModel(
+    private val service: LoginService
+) : ViewModel<Intent, State>(State.Form(null)) {
 
-    private var loginListener: (() -> Unit)? = null
+    private var loginListener: ((User, Account) -> Unit)? = null
 
     @Deprecated("Use UI Directly")
     @JsName("state")
@@ -23,7 +25,7 @@ class LoginViewModel(val service: LoginService) : ViewModel<Intent, State>(State
         get() = ui
 
     sealed class State {
-        data class Form(@JsName("credentials") val credentials: LoginCredentials?) : State()
+        data class Form(val credentials: LoginCredentials?) : State()
         data class Conundrum(val user: User, val accounts: List<Account>) : State()
         data class Loading(val message: String) : State()
         data class Error(val throwable: Throwable) : State()
@@ -40,7 +42,7 @@ class LoginViewModel(val service: LoginService) : ViewModel<Intent, State>(State
         is Intent.Login -> login(i)
     }
 
-    fun onUserLoggedIn(listener: () -> Unit) {
+    fun onUserLoggedIn(listener: (User, Account) -> Unit) {
         loginListener = listener
     }
 
@@ -51,8 +53,10 @@ class LoginViewModel(val service: LoginService) : ViewModel<Intent, State>(State
             if (conundrum.accounts.size > 1) {
                 emit(State.Conundrum(conundrum.user, conundrum.accounts))
             } else {
+                val user = conundrum.user
+                val account = conundrum.accounts.first()
                 emit(State.Success("Logged in successfully"))
-                loginListener?.invoke()
+                loginListener?.invoke(user, account)
             }
         }.catch {
             emit(State.Error(it))

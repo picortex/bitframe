@@ -11,7 +11,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
 @JsExport
-open class BitframeTestClient private constructor(configuration: TestClientConfiguration) : BitframeService {
+open class BitframeTestClient private constructor(configuration: TestClientConfiguration) : BitframeService() {
     companion object {
         private val cachedClients = mutableMapOf<String, BitframeTestClient>()
 
@@ -26,8 +26,10 @@ open class BitframeTestClient private constructor(configuration: TestClientConfi
         }
 
         @JvmStatic
-        @JvmOverloads
-        fun with(configuration: TestClientConfiguration = CONFIGURATION) = invoke(configuration)
+        fun with(configuration: TestClientConfiguration) = invoke(configuration)
+
+        @JvmStatic
+        fun getDefault() = invoke(CONFIGURATION)
     }
 
     override val config: ClientConfiguration = configuration

@@ -3,9 +3,11 @@ package bitframe
 import bitframe.authentication.ClientConfiguration
 import bitframe.authentication.LoginService
 import platform.Platform
+import kotlin.js.JsExport
 
-interface BitframeService {
+@JsExport
+abstract class BitframeService {
     val platform: Platform get() = Platform
-    val config: ClientConfiguration
-    val authentication: LoginService
+    abstract val config: ClientConfiguration
+    abstract val authentication: LoginService
 }

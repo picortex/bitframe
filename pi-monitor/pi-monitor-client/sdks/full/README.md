@@ -4,7 +4,7 @@ An SDK Library that one would use to access the PiMonitor server for different r
 
 ## Setup
 1. Add a `.npmrc` file to your project
-1. type `npm install @picortex/pi-monitor-client-sdk-full`
+1. type `npm install @picortex/pi-monitor-client-full`
 
 ## Samples
 

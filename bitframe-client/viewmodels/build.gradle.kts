@@ -4,12 +4,7 @@ plugins {
 }
 
 kotlin {
-    jvm {
-        library()
-        tasks.withType<Test> {
-            useJUnitPlatform()
-        }
-    }
+    jvm { library() }
     js(IR) { library() }
 
     sourceSets {

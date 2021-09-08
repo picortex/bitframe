@@ -10,7 +10,7 @@ import kotlin.jvm.JvmField
 @JsExport
 open class BitframeKtorClient(
     val configuration: KtorClientConfiguration
-) : BitframeService {
+) : BitframeService() {
     override val config: ClientConfiguration = configuration
     override val authentication: LoginService = KtorLoginService(configuration)
 }

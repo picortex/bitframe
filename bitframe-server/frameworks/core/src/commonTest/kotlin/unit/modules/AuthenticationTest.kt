@@ -12,7 +12,7 @@ class AuthenticationTest {
 
     @Test
     fun should_easily_login_a_user() {
-        val res = sandbox.post("/authentication/login")
+        val res = sandbox.post("/acceptance.authentication/login")
         expect(res.status).toBe(HttpStatusCode.OK)
     }
 }

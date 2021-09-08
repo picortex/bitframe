@@ -1,5 +1,5 @@
 plugins {
-    id("com.google.devtools.ksp")
+//    id("com.google.devtools.ksp")
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
@@ -8,35 +8,26 @@ plugins {
 
 kotlin {
     jvm { library() }
-    js { library() }
+    js(IR) { library() }
     nativeTargets(true)
 
     sourceSets {
         val commonMain by getting {
-            val ksp by configurations
             dependencies {
+//                val ksp by configurations
+//                ksp.dependencies.add(project(":bitframe-annotations-processor"))
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
-                ksp.dependencies.add(project(":bitframe-annotations-processor"))
                 api(project(":bitframe-annotations-core"))
             }
         }
 
         val commonTest by getting {
             dependencies {
-//                implementation(asoft("expect-core", vers.asoft.expect))
-            }
-        }
-
-        val jvmMain by getting {
-            val ksp by configurations
-            dependencies {
-                ksp.dependencies.add(project(":bitframe-annotations-processor"))
+                implementation(asoft("expect-core", vers.asoft.expect))
             }
         }
     }
 }
-
-//configurations.get("ksp").dependencies.add(project(":bitframe-annotations-processor"))
 
 //dependencies {
 //    ksp()

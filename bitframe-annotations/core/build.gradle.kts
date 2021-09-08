@@ -7,14 +7,6 @@ plugins {
 
 kotlin {
     jvm { library(); }
-    js { library() }
+    js(BOTH) { library() }
     nativeTargets(true)
-
-    sourceSets {
-        val commonMain by getting {
-            dependencies {
-//                api(kotlinx("serialization-core", vers.kotlinx.serialization))
-            }
-        }
-    }
 }

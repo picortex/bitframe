@@ -1,15 +1,8 @@
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
-
 plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
     id("dev.petuska.npm.publish")
     id("org.jetbrains.dokka")
-}
-
-rootProject.plugins.withType(NodeJsRootPlugin::class.java) {
-    rootProject.the<NodeJsRootExtension>().versions.webpackDevServer.version = "4.0.0"
 }
 
 kotlin {
@@ -25,6 +18,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(asoft("logging-console", vers.asoft.logging))
                 api(project(":pi-monitor-core"))
                 api(project(":bitframe-client-sdk-test"))
             }
@@ -32,9 +26,7 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines)) {
-                    version { strictly(vers.kotlinx.coroutines) }
-                }
+                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
 

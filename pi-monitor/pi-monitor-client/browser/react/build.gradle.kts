@@ -31,9 +31,7 @@ kotlin {
             dependencies {
                 api(project(":pi-monitor-core"))
                 api(project(":bitframe-client-sdk-test"))
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines)) {
-                    version { strictly(vers.kotlinx.coroutines) }
-                }
+                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
 

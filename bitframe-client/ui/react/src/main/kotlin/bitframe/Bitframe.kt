@@ -1,12 +1,12 @@
 package bitframe
 
-import bitframe.authentication.login.LoginPage
+import bitframe.authentication.login.SignInPage
+import bitframe.landing.LandingPage
 import bitframe.panel.Panel
+import react.Props
 import react.RBuilder
-import react.router.dom.RouteResultProps
-import react.router.dom.browserRouter
-import react.router.dom.route
-import react.router.dom.switch
+import react.fc
+import react.router.dom.*
 import styled.styledDiv
 
 open class AbstractModuleRoute(
@@ -23,19 +23,25 @@ fun ModuleRoute(
     builder: RBuilder.(props: RouteResultProps) -> Unit
 ) = AbstractModuleRoute(permits, path, scope, builder)
 
-fun RBuilder.Bitframe(client: BitframeService, version: String) {
-    val routes = listOf(
-        ModuleRoute("/", listOf(), "") {
-            LoginPage(client.authentication, version)
-        },
-        ModuleRoute("/panel", listOf(), "") {
-            Panel()
-        }
-    )
-    browserRouter {
-        switch {
-            for (r in routes) route(r.path, exact = true, strict = true, render = r.render)
-            styledDiv { +"Whoops, Not Found" }
-        }
+internal const val SignInPageRoute = "/authentication/sign-in"
+internal const val SignUpPageRoute = "/authentication/sign-up"
+
+private fun routes(client: BitframeService, version: String) = listOf(
+    ModuleRoute("/", listOf(), "") {
+        LandingPage(version)
+    },
+    ModuleRoute(SignInPageRoute, listOf(), "") {
+        SignInPage(client.authentication, version)
+    },
+    ModuleRoute("/panel", listOf(), "") {
+        Panel()
+    }
+)
+
+fun RBuilder.Bitframe(client: BitframeService, version: String) = browserRouter {
+    val routes = routes(client, version)
+    switch {
+        for (r in routes) route(r.path, exact = true, strict = true, render = r.render)
+        styledDiv { +"Whoops, Not Found" }
     }
 }

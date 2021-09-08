@@ -1,7 +1,7 @@
 object vers {
     val kotlin = "1.5.30"
 
-    val ksp = "1.5.30-1.0.0-beta09"
+    val ksp = "1.5.30-1.0.0"
 
     val kotlinpoet = "1.12.1"
 
@@ -27,7 +27,7 @@ object vers {
     }
 
     object asoft {
-        private val foundation = "1.4.0"
+        val foundation = "1.4.0"
         val platform = foundation
         val access = "0.0.20"
         val contacts = "0.0.20"

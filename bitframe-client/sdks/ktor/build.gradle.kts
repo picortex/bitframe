@@ -10,12 +10,7 @@ repositories {
 }
 
 kotlin {
-    jvm {
-        library()
-        tasks.withType<Test> {
-            useJUnitPlatform()
-        }
-    }
+    jvm { library() }
     js(IR) { library() }
 
     sourceSets {
@@ -28,7 +23,8 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                api(asoft("expect-core", vers.asoft.expect))
+                api(asoft("kotlinx-coroutines-test", vers.asoft.foundation))
+                api(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
 

@@ -27,7 +27,7 @@ class LoginPage private constructor(p: LoginPageProps) : VComponent<LoginPagePro
 
     override fun componentDidMount() {
         super.componentDidMount()
-        viewModel.onUserLoggedIn {
+        viewModel.onUserLoggedIn { _, _ ->
             props.history.push("/panel")
         }
     }
@@ -63,7 +63,7 @@ class LoginPage private constructor(p: LoginPageProps) : VComponent<LoginPagePro
     }
 }
 
-fun RBuilder.LoginPage(
+fun RBuilder.SignInPage(
     service: LoginService,
     version: String
 ) = child(withRouter(LoginPage::class)) {
