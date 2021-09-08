@@ -1,8 +1,7 @@
-package pimonitor.pages
+package pimonitor.screens
 
 import com.codeborne.selenide.Condition.text
 import org.openqa.selenium.By
-import pimonitor.screens.LandingScreen
 import pimonitor.screens.authentication.SignInScreen
 import pimonitor.screens.authentication.SignUpScreen
 import com.codeborne.selenide.Selenide.`$` as S
@@ -21,6 +20,7 @@ class HomeScreen : LandingScreen {
     }
 
     override fun clickSignUpButton(): SignUpScreen {
-        TODO()
+        S(By.xpath("/html/body/div/div/div/div/button[1]")).click()
+        return SignUpScreen()
     }
 }

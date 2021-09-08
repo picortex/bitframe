@@ -1,8 +1,8 @@
 package pimonitor.screens.authentication
 
-import bitframe.authentication.LoginCredentials
+import pimonitor.Monitor
 import pimonitor.screens.api.Screen
 
 interface SignUpScreen : Screen {
-    suspend fun signUpWith(credentials: LoginCredentials)
+    suspend fun signUpAs(person: Monitor.Person, representing: Monitor.Business)
 }

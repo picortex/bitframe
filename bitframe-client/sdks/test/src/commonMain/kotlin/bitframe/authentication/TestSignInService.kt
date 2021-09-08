@@ -7,10 +7,10 @@ import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
 
 @JsExport
-class TestLoginService @JvmOverloads constructor(
+class TestSignInService @JvmOverloads constructor(
     val configuration: TestClientConfiguration = BitframeTestClient.CONFIGURATION,
     val db: UserDatabase = UserDatabase()
-) : LoginService {
+) : SignInService {
     override val config: ClientConfiguration = configuration
     override fun loginWith(credentials: LoginCredentials) = configuration.scope.later {
         delay(configuration.simulationTime.toLong())

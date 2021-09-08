@@ -30,18 +30,17 @@ kotlin {
             }
         }
 
-        val jsMain by getting {
+        val commonTest by getting {
             dependencies {
-                api(asoft("live-react", vers.asoft.live))
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines)) {
-                    version { strictly(vers.kotlinx.coroutines) }
-                }
+                implementation(asoft("viewmodel-test-expect", vers.asoft.viewmodel))
+                implementation(asoft("expect-core", vers.asoft.expect))
             }
         }
 
-        val commonTest by getting {
+        val jsMain by getting {
             dependencies {
-                implementation(asoft("expect-core", vers.asoft.expect))
+                api(asoft("viewmodel-react", vers.asoft.viewmodel))
+                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
     }

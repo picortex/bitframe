@@ -8,7 +8,7 @@ import pimonitor.WebApplication
 import pimonitor.screens.api.toBeVisible
 import pimonitor.test
 
-class Authentication {
+class SignIn {
     private val application = WebApplication(URL_UNDER_TEST)
 
     @Test

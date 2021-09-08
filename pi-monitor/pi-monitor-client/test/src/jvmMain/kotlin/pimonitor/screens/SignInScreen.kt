@@ -1,4 +1,4 @@
-package pimonitor.pages
+package pimonitor.screens
 
 import bitframe.authentication.LoginCredentials
 import com.codeborne.selenide.Condition.text

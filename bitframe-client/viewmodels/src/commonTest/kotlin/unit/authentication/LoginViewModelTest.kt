@@ -5,7 +5,7 @@ import bitframe.authentication.LoginViewModel
 import bitframe.authentication.LoginViewModel.Intent.Login
 import bitframe.authentication.LoginViewModel.Intent.ShowForm
 import bitframe.authentication.LoginViewModel.State
-import bitframe.authentication.TestLoginService
+import bitframe.authentication.TestSignInService
 import expect.expect
 import expect.toBe
 import test.asyncTest
@@ -13,7 +13,7 @@ import viewmodel.test
 import kotlin.test.Test
 
 class LoginViewModelTest {
-    private val service = TestLoginService()
+    private val service = TestSignInService()
     private val vm = LoginViewModel(service)
 
     @Test

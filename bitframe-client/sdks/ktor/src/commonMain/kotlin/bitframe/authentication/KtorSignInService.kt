@@ -7,9 +7,9 @@ import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
 
 @JsExport
-class KtorLoginService @JvmOverloads constructor(
+class KtorSignInService @JvmOverloads constructor(
     val configuration: KtorClientConfiguration
-) : LoginService {
+) : SignInService {
     override val config: ClientConfiguration = configuration
     override fun loginWith(credentials: LoginCredentials): Later<LoginConundrum> = configuration.scope.later {
         val json = configuration.http.get<String>(configuration.url)

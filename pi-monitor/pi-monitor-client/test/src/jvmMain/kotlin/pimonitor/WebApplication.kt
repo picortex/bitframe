@@ -1,11 +1,10 @@
 package pimonitor
 
-import com.codeborne.selenide.Condition.visible
 import com.codeborne.selenide.Selenide.open
 import org.junit.jupiter.api.Assertions
 import org.openqa.selenium.By
-import pimonitor.pages.HomeScreen
-import pimonitor.pages.SignInScreen
+import pimonitor.screens.HomeScreen
+import pimonitor.screens.SignInScreen
 import pimonitor.screens.LandingScreen
 import pimonitor.utils.isVisible
 import com.codeborne.selenide.Selenide.`$` as S

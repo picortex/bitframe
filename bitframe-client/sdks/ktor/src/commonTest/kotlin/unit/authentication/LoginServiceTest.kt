@@ -1,8 +1,8 @@
 package unit.authentication
 
-import bitframe.authentication.KtorLoginService
+import bitframe.authentication.KtorSignInService
 import bitframe.authentication.LoginCredentials
-import bitframe.authentication.LoginService
+import bitframe.authentication.SignInService
 import expect.expect
 import kotlinx.coroutines.runTest
 import later.await
@@ -10,7 +10,7 @@ import unit.utils.CONFIGURATION_UNDER_TEST
 import kotlin.test.Test
 
 class LoginServiceTest {
-    val service: LoginService = KtorLoginService(CONFIGURATION_UNDER_TEST)
+    val service: SignInService = KtorSignInService(CONFIGURATION_UNDER_TEST)
 
     @Test
     fun should_give_a_user_with_valid_credentials_access() = runTest {

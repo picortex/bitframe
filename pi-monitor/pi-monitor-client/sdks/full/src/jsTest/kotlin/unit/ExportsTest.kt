@@ -1,4 +1,8 @@
+package unit
+
+import Configuration
 import expect.expect
+import service
 import kotlin.test.Test
 
 class ExportsTest {

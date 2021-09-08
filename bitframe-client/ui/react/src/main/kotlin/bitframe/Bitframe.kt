@@ -38,10 +38,15 @@ private fun routes(client: BitframeService, version: String) = listOf(
     }
 )
 
-fun RBuilder.Bitframe(client: BitframeService, version: String) = browserRouter {
+fun RBuilder.Bitframe(
+    client: BitframeService,
+    registration: RBuilder.(props: RouteResultProps) -> Unit,
+    version: String
+) = browserRouter {
     val routes = routes(client, version)
     switch {
         for (r in routes) route(r.path, exact = true, strict = true, render = r.render)
+        route(SignUpPageRoute, exact = true, strict = true, render = registration)
         styledDiv { +"Whoops, Not Found" }
     }
 }

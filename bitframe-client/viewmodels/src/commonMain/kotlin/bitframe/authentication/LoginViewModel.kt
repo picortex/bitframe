@@ -14,7 +14,7 @@ import kotlin.js.JsName
 
 @JsExport
 class LoginViewModel(
-    private val service: LoginService
+    private val service: SignInService
 ) : ViewModel<Intent, State>(State.Form(null)) {
 
     private var loginListener: ((User, Account) -> Unit)? = null

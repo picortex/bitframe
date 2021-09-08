@@ -2,7 +2,7 @@ package bitframe.authentication
 
 import later.Later
 
-interface LoginService {
+interface SignInService {
     val config: ClientConfiguration
     fun loginWith(credentials: LoginCredentials): Later<LoginConundrum>
 }

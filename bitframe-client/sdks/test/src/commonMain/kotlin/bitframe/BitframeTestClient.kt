@@ -1,12 +1,11 @@
 package bitframe
 
 import bitframe.authentication.ClientConfiguration
-import bitframe.authentication.LoginService
+import bitframe.authentication.SignInService
 import bitframe.authentication.TestClientConfiguration
-import bitframe.authentication.TestLoginService
+import bitframe.authentication.TestSignInService
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
-import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -33,5 +32,5 @@ open class BitframeTestClient private constructor(configuration: TestClientConfi
     }
 
     override val config: ClientConfiguration = configuration
-    override val authentication: LoginService = TestLoginService(configuration)
+    override val authentication: SignInService = TestSignInService(configuration)
 }

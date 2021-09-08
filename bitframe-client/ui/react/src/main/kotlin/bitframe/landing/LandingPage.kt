@@ -6,6 +6,7 @@ import kotlinx.css.*
 import react.Props
 import react.RBuilder
 import react.fc
+import react.functionComponent
 import react.router.dom.withRouter
 import reakt.*
 import styled.css

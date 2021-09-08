@@ -29,8 +29,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":pi-monitor-core"))
-                api(project(":bitframe-client-sdk-test"))
+                api(project(":pi-monitor-client-sdk-full"))
                 api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
@@ -49,7 +48,6 @@ kotlin {
         }
     }
 }
-
 
 val createDockerfile by tasks.creating(Dockerfile::class) {
     dependsOn("webpackJsRelease")

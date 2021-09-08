@@ -1,14 +1,12 @@
 package bitframe.authentication.login
 
-import bitframe.authentication.LoginService
+import bitframe.authentication.SignInService
 import bitframe.authentication.LoginViewModel
 import bitframe.authentication.LoginViewModel.Intent
 import bitframe.authentication.LoginViewModel.State
-import bitframe.authentication.login.LoginPageProps
 import kotlinx.css.*
 import react.RBuilder
 import react.Props
-import react.dom.span
 import react.router.dom.withRouter
 import reakt.*
 import styled.css
@@ -17,7 +15,7 @@ import styled.styledSpan
 import viewmodel.VComponent
 
 external interface LoginPageProps : Props {
-    var service: LoginService
+    var service: SignInService
     var version: String
 }
 
@@ -64,7 +62,7 @@ class LoginPage private constructor(p: LoginPageProps) : VComponent<LoginPagePro
 }
 
 fun RBuilder.SignInPage(
-    service: LoginService,
+    service: SignInService,
     version: String
 ) = child(withRouter(LoginPage::class)) {
     attrs.service = service
