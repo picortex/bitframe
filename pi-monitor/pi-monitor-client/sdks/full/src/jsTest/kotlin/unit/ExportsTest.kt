@@ -2,6 +2,9 @@ package unit
 
 import Configuration
 import expect.expect
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.promise
 import kotlinx.coroutines.runTest
 import service
 import kotlin.test.Test

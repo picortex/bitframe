@@ -13,6 +13,8 @@ sealed class SignUpState {
 
         val progress = level * 100.0 / 2
     }
+    
+    data class Success(val message: String) : SignUpState()
 
-    data class Error(val cause: Throwable) : SignUpState()
+    data class Failure(val cause: Throwable, val message: String? = cause.message) : SignUpState()
 }

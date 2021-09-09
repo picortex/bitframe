@@ -29,7 +29,7 @@ class SignUpViewModel : ViewModel<SignUpIntent, State>(Form.Stage01(null)) {
         flow<State> {
             emit(State.Loading("Signing you up, Please wait . . ."))
         }.catch {
-            emit(State.Error(it))
+            emit(State.Failure(it))
             delay(recoveryTime.toLong())
             emit(curr)
         }.collect { ui.value = it }
@@ -40,7 +40,7 @@ class SignUpViewModel : ViewModel<SignUpIntent, State>(Form.Stage01(null)) {
         flow<State> {
             emit(Form.Stage02(i.business.toBusiness()))
         }.catch {
-            emit(State.Error(it))
+            emit(State.Failure(it))
             delay(recoveryTime.toLong())
             emit(curr)
         }.collect {

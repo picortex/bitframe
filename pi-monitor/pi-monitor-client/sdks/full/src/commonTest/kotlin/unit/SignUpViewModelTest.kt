@@ -47,11 +47,6 @@ class SignUpViewModelTest {
     }
 
     @Test
-    fun making_sure_things_fail_on_js() = runTest {
-        expect(1 + 1).toBe(3)
-    }
-
-    @Test
     fun should_be_able_to_catch_errors_if_fields_are_not_well_validated() = runTest {
         val vm = SignUpViewModel()
         val intent = Stage02(
@@ -60,10 +55,10 @@ class SignUpViewModelTest {
                 email = "quavo"
             )
         )
-        val throwable = IllegalArgumentException("Invalid email: quavo")
-        vm.expect(intent).toGoThrough(
-            SignUpState.Error(throwable),
-            Form.Stage01(null)
-        )
+
+        val expectVmState = vm.expect(intent)
+        expectVmState.toBeIn(Form.Stage01(null))
+        val error = expectVmState.value.first() as SignUpState.Failure
+        expect(error.cause.message).toBe("Invalid email: quavo")
     }
 }
