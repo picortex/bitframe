@@ -30,7 +30,7 @@ object vers {
         val foundation = "1.4.0"
         val platform = foundation
         val access = "0.0.20"
-        val contacts = "0.0.20"
+        val contacts = "0.0.30"
         val collections = foundation
         val mvivm = "0.1.20"
         val viewmodel = mvivm

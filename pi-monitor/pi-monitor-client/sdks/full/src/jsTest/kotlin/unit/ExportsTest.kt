@@ -2,6 +2,7 @@ package unit
 
 import Configuration
 import expect.expect
+import kotlinx.coroutines.runTest
 import service
 import kotlin.test.Test
 

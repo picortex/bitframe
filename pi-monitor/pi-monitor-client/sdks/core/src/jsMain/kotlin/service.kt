@@ -10,14 +10,14 @@ import logging.Logging
 external interface Configuration {
     var appId: String
     var simulationTime: Int?
-    var enableViewModelLogs: Boolean?
+    var disableViewModelLogs: Boolean?
 }
 
 private var isLoggingEnabled = false
 
 @JsExport
 fun service(config: Configuration): BitframeService {
-    if (config.enableViewModelLogs == true && !isLoggingEnabled) {
+    if (config.disableViewModelLogs == false && !isLoggingEnabled) {
         Logging.init(ConsoleAppender())
         isLoggingEnabled = true
     }
