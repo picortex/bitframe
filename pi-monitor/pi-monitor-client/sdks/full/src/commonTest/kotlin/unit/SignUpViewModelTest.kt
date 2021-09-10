@@ -32,27 +32,23 @@ class SignUpViewModelTest {
     @Test
     fun should_move_to_the_second_stage() = runTest {
         val vm = SignUpViewModel(SERVICE_UNDER_TEST.signUp)
-        vm.expect(Stage02(businessParams)).toGoThrough(Form.Stage02(testBusiness))
+        vm.expect(Stage02(businessParams)).toGoThrough(Form.Stage02(businessParams, null))
     }
 
     @Test
-    fun should_be_able_to_back_to_stage_one_from_stage_two() = runTest {
+    fun should_be_able_to_go_back_to_stage_one_from_stage_two() = runTest {
         val vm = SignUpViewModel(SERVICE_UNDER_TEST.signUp)
         vm.expect(Stage02(businessParams))
-        vm.expect(Stage01).toGoThrough(Form.Stage01(businessParams.toBusiness()))
+        vm.expect(Stage01).toGoThrough(Form.Stage01(businessParams))
     }
 
     @Test
     fun should_be_able_to_catch_errors_if_fields_are_not_well_validated() = runTest {
         val vm = SignUpViewModel(SERVICE_UNDER_TEST.signUp)
-        val intent = Stage02(
-            MonitorParams(
-                name = "Test Business",
-                email = "quavo"
-            )
-        )
+        val params = MonitorParams(name = "Test Business", email = "quavo")
+        val intent = Stage02(params)
         val expectVmState = vm.expect(intent)
-        expectVmState.toBeIn(Form.Stage01(null))
+        expectVmState.toBeIn(Form.Stage01(params))
         val error = expectVmState.value.first() as SignUpState.Failure
         expect(error.cause.message).toBe("Invalid email: quavo")
     }

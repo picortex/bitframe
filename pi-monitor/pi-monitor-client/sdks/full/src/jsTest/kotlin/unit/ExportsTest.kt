@@ -1,11 +1,7 @@
 package unit
 
-import Configuration
+import ServiceConfiguration
 import expect.expect
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.promise
-import kotlinx.coroutines.runTest
 import service
 import kotlin.test.Test
 
@@ -15,7 +11,7 @@ class ExportsTest {
 
     @Test
     fun should_get_a_service() {
-        val cred: Configuration = json {
+        val cred: ServiceConfiguration = json {
             appId = "12345"
         }
         console.log(cred)

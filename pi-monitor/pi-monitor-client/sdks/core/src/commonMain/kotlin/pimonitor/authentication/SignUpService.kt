@@ -5,5 +5,5 @@ import later.Later
 import pimonitor.Monitor
 
 interface SignUpService : MiniService {
-    fun registerWith(business: Monitor.Business, person: Monitor.Person): Later<Monitor>
+    fun register(business: Monitor.Business, representedBy: Monitor.Person): Later<Monitor>
 }

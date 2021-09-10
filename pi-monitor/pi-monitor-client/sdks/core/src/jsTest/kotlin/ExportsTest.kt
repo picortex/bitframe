@@ -7,7 +7,7 @@ class ExportsTest {
 
     @Test
     fun should_get_a_service() {
-        val cred: Configuration = json {
+        val cred: ServiceConfiguration = json {
             appId = "12345"
         }
         console.log(cred)

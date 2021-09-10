@@ -7,6 +7,6 @@ plugins {
 
 kotlin {
     jvm { library(); }
-    js(BOTH) { library() }
+    js(IR) { library() }
     nativeTargets(true)
 }

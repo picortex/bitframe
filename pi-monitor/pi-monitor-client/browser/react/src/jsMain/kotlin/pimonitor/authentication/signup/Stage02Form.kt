@@ -1,50 +1,46 @@
 package pimonitor.authentication.signup
 
-import contacts.Email
-import kotlinx.css.label
 import kotlinx.extensions.text
 import kotlinx.html.InputType
 import pimonitor.Monitor
+import pimonitor.MonitorParams
 import react.RBuilder
-import reakt.ContainedButton
-import reakt.Form
-import reakt.Grid
-import reakt.TextInput
+import reakt.*
 import styled.css
 import styled.styledH2
 import theme.clazz
 
-fun RBuilder.StageOne(
-    business: Monitor.Business?,
-    onNext: (Monitor.Business) -> Unit,
+fun RBuilder.Stage02Form(
+    person: MonitorParams?,
+    onNext: (MonitorParams) -> Unit,
     onCancel: () -> Unit
 ) = Form { theme ->
     styledH2 {
         css { +theme.text.h4.clazz }
-        +"Enter Business Info"
+        +"Enter Your Personal Information"
     }
 
     TextInput(
         name = "name",
-        label = "Business Name",
+        label = "Name",
         hint = "John Doe Inc.",
-        value = business?.name
+        value = person?.name
     )
 
     TextInput(
         name = "email",
         type = InputType.email,
-        label = "Business Email",
+        label = "Email",
         hint = "support@johndoeinc.com",
-        value = business?.email?.toString()
+        value = person?.email
     )
 
     Grid(cols = "1fr 1fr") {
-        ContainedButton("Cancel", onClick = onCancel)
+        OutlinedButton("Cancel", onClick = onCancel)
         ContainedButton("Next")
     }
 } onSubmit {
     val name by text()
     val email by text()
-    onNext(Monitor.Business(name, Email(email), null))
+    onNext(MonitorParams(name, email))
 }

@@ -1,10 +1,10 @@
 package pimonitor.screens
 
-import pimonitor.Monitor
+import pimonitor.MonitorParams
 import pimonitor.screens.authentication.SignUpScreen
 
 class SignUpScreen : SignUpScreen {
-    override suspend fun signUpAs(person: Monitor.Person, representing: Monitor.Business) {
+    override suspend fun signUpAs(person: MonitorParams, representing: MonitorParams) {
         TODO("Not yet implemented")
     }
 

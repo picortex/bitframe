@@ -1,8 +1,8 @@
 package pimonitor.screens.authentication
 
-import pimonitor.Monitor
+import pimonitor.MonitorParams
 import pimonitor.screens.api.Screen
 
 interface SignUpScreen : Screen {
-    suspend fun signUpAs(person: Monitor.Person, representing: Monitor.Business)
+    suspend fun signUpAs(person: MonitorParams, representing: MonitorParams)
 }

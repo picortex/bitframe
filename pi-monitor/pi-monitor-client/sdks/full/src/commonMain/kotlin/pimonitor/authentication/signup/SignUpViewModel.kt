@@ -17,7 +17,9 @@ import kotlin.js.JsExport
 import pimonitor.authentication.signup.SignUpState as State
 
 @JsExport
-class SignUpViewModel(val service: SignUpService) : ViewModel<SignUpIntent, State>(Form.Stage01(null)) {
+class SignUpViewModel(
+    private val service: SignUpService
+) : ViewModel<SignUpIntent, State>(Form.Stage01(null)) {
 
     private val recoveryTime = 3000
 
@@ -28,29 +30,33 @@ class SignUpViewModel(val service: SignUpService) : ViewModel<SignUpIntent, Stat
     }
 
     private fun CoroutineScope.submit(i: Submit) = launch {
-        val curr = ui.value
+        var recover = ui.value
         flow {
-            val stage02 = curr as? Form.Stage02 ?: throw IllegalStateException("Stop trying to register without using the registration form")
-            val business = stage02.business
+            val stage02 = recover as? Form.Stage02 ?: throw IllegalStateException("Stop trying to register without using the registration form")
+            recover = stage02.copy(person = i.person)
+            val business = stage02.business.toBusiness()
             val person = i.person.toPerson()
             emit(State.Loading("Signing you up, Please wait . . ."))
-            service.registerWith(business, person).await()
+            service.register(business, person).await()
             emit(State.Success("Your registration completed successfully"))
         }.catch {
             emit(State.Failure(it))
             delay(recoveryTime.toLong())
-            emit(curr)
+            emit(recover)
         }.collect { ui.value = it }
     }
 
     private fun CoroutineScope.stage02(i: Stage02) = launch {
-        val curr = ui.value
+        var recover = ui.value
         flow<State> {
-            emit(Form.Stage02(i.business.toBusiness()))
+            recover = Form.Stage01(i.business)
+            // Ensure that it is a valid business
+            i.business.toBusiness()
+            emit(Form.Stage02(i.business, null))
         }.catch {
             emit(State.Failure(it))
             delay(recoveryTime.toLong())
-            emit(curr)
+            emit(recover)
         }.collect {
             ui.value = it
         }
