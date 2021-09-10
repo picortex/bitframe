@@ -6,10 +6,12 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import later.await
 import pimonitor.authentication.SignUpService
 import pimonitor.authentication.signup.SignUpIntent.*
 import pimonitor.authentication.signup.SignUpState.Form
 import pimonitor.toBusiness
+import pimonitor.toPerson
 import viewmodel.ViewModel
 import kotlin.js.JsExport
 import pimonitor.authentication.signup.SignUpState as State
@@ -27,8 +29,13 @@ class SignUpViewModel(val service: SignUpService) : ViewModel<SignUpIntent, Stat
 
     private fun CoroutineScope.submit(i: Submit) = launch {
         val curr = ui.value
-        flow<State> {
+        flow {
+            val stage02 = curr as? Form.Stage02 ?: throw IllegalStateException("Stop trying to register without using the registration form")
+            val business = stage02.business
+            val person = i.person.toPerson()
             emit(State.Loading("Signing you up, Please wait . . ."))
+            service.registerWith(business, person).await()
+            emit(State.Success("Your registration completed successfully"))
         }.catch {
             emit(State.Failure(it))
             delay(recoveryTime.toLong())
