@@ -3,9 +3,7 @@ package bitframe
 import bitframe.authentication.login.SignInPage
 import bitframe.landing.LandingPage
 import bitframe.panel.Panel
-import react.Props
 import react.RBuilder
-import react.fc
 import react.router.dom.*
 import styled.styledDiv
 
@@ -31,7 +29,7 @@ private fun routes(client: BitframeService, version: String) = listOf(
         LandingPage(version)
     },
     ModuleRoute(SignInPageRoute, listOf(), "") {
-        SignInPage(client.authentication, version)
+        SignInPage(client.signIn, version)
     },
     ModuleRoute("/panel", listOf(), "") {
         Panel()

@@ -46,7 +46,7 @@ class LoginPage private constructor(p: LoginPageProps) : VComponent<LoginPagePro
             )
             is State.Conundrum -> ShowConundrum()
             is State.Loading -> LoadingBox(ui.message)
-            is State.Error -> ErrorBox(ui.throwable)
+            is State.Failure -> ErrorBox(ui.cause)
             is State.Success -> SuccessBox(ui.message)
         }
 

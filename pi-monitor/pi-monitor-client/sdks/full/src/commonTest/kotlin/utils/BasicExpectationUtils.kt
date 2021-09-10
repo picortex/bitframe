@@ -1,7 +1,6 @@
 package utils
 
 import expect.BasicExpectation
-import expect.toBeEqualTo
 import kotlin.test.assertTrue
 
 fun BasicExpectation<String?>.toContain(msg: String?) = assertTrue(

@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import pimonitor.authentication.SignUpService
 import pimonitor.authentication.signup.SignUpIntent.*
 import pimonitor.authentication.signup.SignUpState.Form
 import pimonitor.toBusiness
@@ -14,7 +15,7 @@ import kotlin.js.JsExport
 import pimonitor.authentication.signup.SignUpState as State
 
 @JsExport
-class SignUpViewModel : ViewModel<SignUpIntent, State>(Form.Stage01(null)) {
+class SignUpViewModel(val service: SignUpService) : ViewModel<SignUpIntent, State>(Form.Stage01(null)) {
 
     private val recoveryTime = 3000
 
@@ -25,7 +26,7 @@ class SignUpViewModel : ViewModel<SignUpIntent, State>(Form.Stage01(null)) {
     }
 
     private fun CoroutineScope.submit(i: Submit) = launch {
-        var curr = ui.value
+        val curr = ui.value
         flow<State> {
             emit(State.Loading("Signing you up, Please wait . . ."))
         }.catch {

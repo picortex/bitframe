@@ -1,18 +1,17 @@
+@file:JsExport
 @file:Suppress("EXPERIMENTAL_API_USAGE")
 
-import bitframe.BitframeService
 import bitframe.authentication.LoginCredentials
 import bitframe.authentication.LoginViewModel
+import pimonitor.PiMonitorService
 
-@JsExport
-fun loginViewModel(service: BitframeService) = LoginViewModel(service.authentication)
+fun loginViewModel(service: PiMonitorService) = LoginViewModel(service.signIn)
 
 external interface Credentials {
     var username: String
     var password: String
 }
 
-@JsExport
 fun loginIntent(credentials: Credentials) = LoginViewModel.Intent.Login(
     LoginCredentials(
         username = credentials.username,

@@ -9,19 +9,17 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-@JsExport
-open class BitframeTestClient private constructor(configuration: TestClientConfiguration) : BitframeService() {
+interface BitframeTestClient : BitframeService {
     companion object {
         private val cachedClients = mutableMapOf<String, BitframeTestClient>()
 
-        @JvmField
-        val CONFIGURATION = TestClientConfiguration("<test-client>")
+        internal val CONFIGURATION = TestClientConfiguration("<test-client>")
 
         @JvmSynthetic
         operator fun invoke(
             configuration: TestClientConfiguration = CONFIGURATION
         ): BitframeTestClient = cachedClients.getOrPut(configuration.appId) {
-            BitframeTestClient(configuration)
+            BitframeTestClientImpl(configuration)
         }
 
         @JvmStatic
@@ -31,6 +29,7 @@ open class BitframeTestClient private constructor(configuration: TestClientConfi
         fun getDefault() = invoke(CONFIGURATION)
     }
 
-    override val config: ClientConfiguration = configuration
-    override val authentication: SignInService = TestSignInService(configuration)
+    val configuration: TestClientConfiguration
+    override val config: ClientConfiguration
+    override val signIn: SignInService
 }

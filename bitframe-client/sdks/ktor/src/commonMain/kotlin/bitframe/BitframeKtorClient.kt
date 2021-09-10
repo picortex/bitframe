@@ -11,5 +11,5 @@ open class BitframeKtorClient(
     val configuration: KtorClientConfiguration
 ) : BitframeService() {
     override val config: ClientConfiguration = configuration
-    override val authentication: SignInService = KtorSignInService(configuration)
+    override val signIn: SignInService = KtorSignInService(configuration)
 }

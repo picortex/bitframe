@@ -28,7 +28,7 @@ class LoginViewModel(
         data class Form(val credentials: LoginCredentials?) : State()
         data class Conundrum(val user: User, val accounts: List<Account>) : State()
         data class Loading(val message: String) : State()
-        data class Error(val throwable: Throwable) : State()
+        data class Failure(val cause: Throwable, val message: String? = cause.message) : State()
         data class Success(val message: String) : State()
     }
 
@@ -47,7 +47,7 @@ class LoginViewModel(
     }
 
     private fun CoroutineScope.login(i: Intent.Login) = launch {
-        ui.value = State.Loading("Singing you in, please wait . . .")
+        ui.value = State.Loading("Signing you in, please wait . . .")
         flow {
             val conundrum = service.loginWith(i.credentials).await()
             if (conundrum.accounts.size > 1) {
@@ -59,7 +59,7 @@ class LoginViewModel(
                 loginListener?.invoke(user, account)
             }
         }.catch {
-            emit(State.Error(it))
+            emit(State.Failure(it))
         }.collect {
             ui.value = it
         }
