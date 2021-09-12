@@ -15,7 +15,7 @@ class WebApplication(
     private val signInScreen: SignInScreen = SignInScreen()
 ) : Application {
 
-    fun openLandingScreen(): LandingScreen {
+    override fun openLandingScreen(): LandingScreen {
         open(url)
         return landingScreen
     }

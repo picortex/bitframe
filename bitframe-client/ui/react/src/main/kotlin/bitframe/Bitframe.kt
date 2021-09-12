@@ -21,8 +21,8 @@ fun ModuleRoute(
     builder: RBuilder.(props: RouteResultProps) -> Unit
 ) = AbstractModuleRoute(permits, path, scope, builder)
 
-internal const val SignInPageRoute = "/authentication/sign-in"
-internal const val SignUpPageRoute = "/authentication/sign-up"
+internal const val SignInPageRoute = "/authentication/sign-in/"
+internal const val SignUpPageRoute = "/authentication/sign-up/"
 
 private fun routes(client: BitframeService, version: String) = listOf(
     ModuleRoute("/", listOf(), "") {

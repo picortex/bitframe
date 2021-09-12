@@ -24,7 +24,9 @@ rootProject.plugins.withType(NodeJsRootPlugin::class.java) {
 kotlin {
     jvm { library() }
 
-    js(IR) { browser { application() } }
+    js(IR) {
+        browser { application() }
+    }
 
     sourceSets {
         val commonMain by getting {
@@ -43,7 +45,10 @@ kotlin {
 
         val jvmTest by getting {
             dependencies {
-                api(project(":pi-monitor-client-test"))
+                implementation(project(":pi-monitor-client-test"))
+                implementation("org.junit.jupiter:junit-jupiter-params:5.7.0")
+                implementation("org.testcontainers:testcontainers:${vers.testContainers}")
+                implementation("org.testcontainers:junit-jupiter:${vers.testContainers}")
             }
         }
     }

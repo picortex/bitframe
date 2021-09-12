@@ -21,5 +21,6 @@ class SignUp {
         val person = MonitorParams(name = "John Doe", email = "john.doe@johndoeinc.com")
         val business = MonitorParams(name = "John Doe Inc.", email = "support@johndoeinc.com")
         signUpScreen.signUpAs(person, representing = business)
+        signUpScreen.expectUserToBeRegistered()
     }
 }

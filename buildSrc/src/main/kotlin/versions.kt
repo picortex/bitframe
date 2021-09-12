@@ -15,6 +15,8 @@ object vers {
 
     val npmPublish = "2.0.3"
 
+    val testContainers = "1.16.0"
+
     object kotlinx {
         val coroutines = "1.5.2-native-mt"
         val serialization = "1.2.2"

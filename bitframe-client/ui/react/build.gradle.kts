@@ -10,7 +10,6 @@ kotlin {
         val main by getting {
             dependencies {
                 api(project(":bitframe-client-viewmodels"))
-
                 api(asoft("viewmodel-react", vers.asoft.viewmodel))
                 api(asoft("reakt-web", vers.asoft.reakt))
             }

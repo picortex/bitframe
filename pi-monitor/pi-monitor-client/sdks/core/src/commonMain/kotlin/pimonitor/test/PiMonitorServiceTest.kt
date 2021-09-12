@@ -8,7 +8,7 @@ import pimonitor.test.authentication.SignUpServiceTestImpl
 import kotlin.js.JsExport
 
 @JsExport
-class PiMonitorServiceTestImpl(
+class PiMonitorServiceTest(
     configuration: TestClientConfiguration
 ) : PiMonitorService(), BitframeTestClient by BitframeTestClient(configuration) {
     override val signUp: SignUpService = SignUpServiceTestImpl(configuration)

@@ -44,4 +44,5 @@ fun RBuilder.Stage01Form(
     val bName by text()
     val bEmail by text()
     onNext(MonitorParams(bName, bEmail))
+    reset()
 }

@@ -6,7 +6,7 @@ import bitframe.authentication.TestClientConfiguration.Companion.DEFAULT_SIMULAT
 import logging.ConsoleAppender
 import logging.Logging
 import pimonitor.PiMonitorService
-import pimonitor.test.PiMonitorServiceTestImpl
+import pimonitor.test.PiMonitorServiceTest
 
 external interface ServiceConfiguration {
     var appId: String
@@ -21,7 +21,7 @@ fun service(config: ServiceConfiguration): PiMonitorService {
         Logging.init(ConsoleAppender())
         isLoggingEnabled = true
     }
-    return PiMonitorServiceTestImpl(
+    return PiMonitorServiceTest(
         TestClientConfiguration(
             appId = config.appId,
             simulationTime = config.simulationTime ?: DEFAULT_SIMULATION_TIME
