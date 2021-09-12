@@ -23,6 +23,8 @@ class SignUpTestContainer {
 
     @Test
     fun print_current_dir() {
+        println(System.getenv("URL_UNDER_TEST"))
+        println(System.getenv())
         expect(container.isRunning).toBe(true)
     }
 }

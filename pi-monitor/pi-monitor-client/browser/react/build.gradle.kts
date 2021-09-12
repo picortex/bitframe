@@ -99,3 +99,12 @@ val acceptanceTests by tasks.creating {
     dependsOn(acceptanceTestSetup)
     finalizedBy(acceptanceTestTearDown)
 }
+
+val jvmTest by tasks.getting(Test::class)
+
+val localhostAcceptanceTests by tasks.creating(Exec::class) {
+    environment(
+        "URL_UNDER_TEST" to "http://localhost:8080"
+    )
+    finalizedBy(jvmTest)
+}

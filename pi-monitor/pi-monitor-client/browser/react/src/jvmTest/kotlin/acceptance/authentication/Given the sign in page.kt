@@ -2,6 +2,7 @@
 
 package acceptance.authentication
 
+import acceptance.utils.AcceptanceTest
 import bitframe.authentication.LoginCredentials
 import expect.expect
 import org.junit.jupiter.api.BeforeAll
@@ -22,17 +23,7 @@ import java.nio.file.Path
 
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class `Given the sign in page` {
-    companion object {
-        private val dockerImage = ImageFromDockerfile()
-            .withDockerfile(Path.of("build/websites/js/Dockerfile"))
-
-        @Container
-        private val container: GenericContainer<*> = GenericContainer<Nothing>(dockerImage).withExposedPorts(80)
-
-        private val urlUnderTest get() = "http://${container.containerIpAddress}:${container.firstMappedPort}"
-        private val application: Application get() = WebApplication(urlUnderTest)
-    }
+class `Given the sign in page` : AcceptanceTest() {
 
     @Test
     fun should_be_able_to_just_open_the_application() = application.test {
@@ -52,7 +43,6 @@ class `Given the sign in page` {
 
     @Nested
     inner class `When users with invalid credentials attempts to login` {
-
         @ParameterizedTest
         @CsvSource("username,password", "user1,password", "user2,password")
         fun they_should_not_succeed(username: String, password: String) = application.test {
