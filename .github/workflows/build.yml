@@ -46,6 +46,6 @@ jobs:
         run: TEST_MODE=CI ./gradlew cleanAllTest jvmTest --tests integration.*
         working-directory: .
 
-      - name: Running integration tests
+      - name: Running acceptance tests
         run: TEST_MODE=CI ./gradlew cleanAllTest jvmTest --tests acceptance.*
         working-directory: .
