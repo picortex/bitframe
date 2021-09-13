@@ -9,7 +9,7 @@ import kotlin.js.JsExport
 @JsExport
 open class BitframeKtorClient(
     val configuration: KtorClientConfiguration
-) : BitframeService() {
+) : BitframeService {
     override val config: ClientConfiguration = configuration
     override val signIn: SignInService = KtorSignInService(configuration)
 }

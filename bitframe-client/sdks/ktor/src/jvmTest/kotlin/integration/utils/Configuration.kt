@@ -1,4 +1,4 @@
-package unit.utils
+package integration.utils
 
 import bitframe.authentication.KtorClientConfiguration
 

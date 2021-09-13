@@ -55,22 +55,22 @@ include(":users-server-dao-inmemory")
 project(":users-server-dao-inmemory").projectDir = File("users/users-server/daos/inmemory")
 
 
-include(":access-core")
-project(":access-core").projectDir = File("access/access-core")
-
-include(":access-system-core")
-project(":access-system-core").projectDir = File("access/access-system/access-system-core")
+//include(":access-core")
+//project(":access-core").projectDir = File("access/access-core")
+//
+//include(":access-system-core")
+//project(":access-system-core").projectDir = File("access/access-system/access-system-core")
 //
 //include(":access-system-server-core")
 //project(":access-system-server-core").projectDir =
 //    File("access/access-system/access-system-server/access-system-server-core")
 
-include(":access-system-client-core")
-project(":access-system-client-core").projectDir =
-    File("access/access-system/access-system-client/access-system-client-core")
-include(":access-system-client-test")
-project(":access-system-client-test").projectDir =
-    File("access/access-system/access-system-client/access-system-client-test")
+//include(":access-system-client-core")
+//project(":access-system-client-core").projectDir =
+//    File("access/access-system/access-system-client/access-system-client-core")
+//include(":access-system-client-test")
+//project(":access-system-client-test").projectDir =
+//    File("access/access-system/access-system-client/access-system-client-test")
 
 
 //include(":sample-server")

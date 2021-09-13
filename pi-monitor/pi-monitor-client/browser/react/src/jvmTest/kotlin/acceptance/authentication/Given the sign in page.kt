@@ -4,22 +4,16 @@ package acceptance.authentication
 
 import acceptance.utils.AcceptanceTest
 import bitframe.authentication.LoginCredentials
+import com.codeborne.selenide.SelenideConfig
 import expect.expect
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import org.testcontainers.containers.GenericContainer
-import org.testcontainers.images.builder.ImageFromDockerfile
-import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
-import pimonitor.Application
-import pimonitor.WebApplication
 import pimonitor.screens.api.toBeVisible
 import pimonitor.test
-import java.nio.file.Path
 
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -34,7 +28,7 @@ class `Given the sign in page` : AcceptanceTest() {
     @Nested
     inner class `When users with valid credentials attempts to login` {
         @Test
-        fun they_should_be_logged_in() = application.test {
+        fun then_users_should_be_logged_in() = application.test {
             val signInScreen = openLandingScreen().clickSignInButton()
             signInScreen.loginWith(LoginCredentials("user1", "pass1"))
             expectUserToBeLoggedIn()

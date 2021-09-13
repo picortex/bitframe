@@ -36,6 +36,12 @@ kotlin {
             }
         }
 
+        val commonTest by getting {
+            dependencies {
+                implementation(asoft("expect-core", vers.asoft.expect))
+            }
+        }
+        
         val jsMain by getting {
             dependencies {
                 implementation(project(":bitframe-ui-react"))
@@ -100,11 +106,8 @@ val acceptanceTests by tasks.creating {
     finalizedBy(acceptanceTestTearDown)
 }
 
-val jvmTest by tasks.getting(Test::class)
-
-val localhostAcceptanceTests by tasks.creating(Exec::class) {
-    environment(
-        "URL_UNDER_TEST" to "http://localhost:8080"
+val jvmTest by tasks.getting(Test::class) {
+    systemProperties(
+        "selenide.headless" to (System.getenv("TEST_MODE") == "CI")
     )
-    finalizedBy(jvmTest)
 }

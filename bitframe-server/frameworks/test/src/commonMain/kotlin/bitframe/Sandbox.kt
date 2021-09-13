@@ -11,7 +11,6 @@ import io.ktor.http.HttpMethod.Companion.Get
 import io.ktor.http.HttpMethod.Companion.Post
 import io.ktor.http.HttpMethod.Companion.Put
 import logging.ConsoleAppender
-import logging.error
 
 open class Sandbox(val component: UnderTest) {
     constructor(application: BitframeApplication) : this(ApplicationUnderTest(application))
@@ -30,7 +29,7 @@ open class Sandbox(val component: UnderTest) {
         is RouteUnderTest<*> -> listOf(component.route)
     }
 
-    fun request(request: HttpRequest): HttpResponse {
+    suspend fun request(request: HttpRequest): HttpResponse {
         val route = routes.find {
             it.path == request.path && it.method == request.method
         } ?: return HttpResponse(status = HttpStatusCode.NotFound, "Invalid route ${request.path}").also {
@@ -47,15 +46,15 @@ open class Sandbox(val component: UnderTest) {
         }
     }
 
-    fun get(path: String) = request(HttpRequest(Get, path, mapOf(), null))
+    suspend fun get(path: String) = request(HttpRequest(Get, path, mapOf(), null))
 
-    fun post(
+    suspend fun post(
         path: String,
         headers: Map<String, String> = mapOf(),
         body: String = "{}"
     ) = request(HttpRequest(Post, path, headers, body))
 
-    fun put(
+    suspend fun put(
         path: String,
         headers: Map<String, String> = mapOf(),
         body: String = "{}"
