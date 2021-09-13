@@ -35,26 +35,26 @@ data class User(
         override val needs: List<String> = listOf(),
     ) : ISystemPermission {
         Read(
-            title = "authentication.users.read",
+            title = "acceptance.authentication.users.read",
             details = "Grants access to view/edit users in the system"
         ),
         Create(
-            title = "authentication.users.create",
+            title = "acceptance.authentication.users.create",
             details = "Grants access to create different users for the system",
             needs = listOf(Read.title)
         ),
         Update(
-            title = "authentication.users.update",
+            title = "acceptance.authentication.users.update",
             details = "Grants access to update user information",
             needs = listOf(Read.title)
         ),
         Delete(
-            title = "authentication.users.delete",
+            title = "acceptance.authentication.users.delete",
             details = "Grants access to delete users from the system",
             needs = listOf(Read.title)
         ),
         Wipe(
-            title = "authentication.users.wipe",
+            title = "acceptance.authentication.users.wipe",
             details = "Grants access to permanently wipe users from the system",
             needs = listOf(Read.title)
         )

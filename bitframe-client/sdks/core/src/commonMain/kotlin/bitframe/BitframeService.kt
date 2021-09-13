@@ -1,10 +1,7 @@
 package bitframe
 
-import bitframe.authentication.ClientConfiguration
-import bitframe.authentication.LoginService
-import kotlin.js.JsExport
+import bitframe.authentication.SignInService
 
-interface BitframeService {
-    val config: ClientConfiguration
-    val authentication: LoginService
+interface BitframeService : MiniService {
+    val signIn: SignInService
 }

@@ -46,7 +46,7 @@ open class DefaultAuthenticationModule @JvmOverloads constructor(
         )
     }
 
-    override val name = "authentication"
+    override val name = "acceptance.authentication"
 
     private val json = Json {
         prettyPrint = true

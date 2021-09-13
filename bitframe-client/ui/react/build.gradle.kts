@@ -1,6 +1,6 @@
 plugins {
     kotlin("js")
-    id("tz.co.asoft.applikation")
+    id("tz.co.asoft.library")
 }
 
 kotlin {
@@ -10,13 +10,8 @@ kotlin {
         val main by getting {
             dependencies {
                 api(project(":bitframe-client-viewmodels"))
-
                 api(asoft("viewmodel-react", vers.asoft.viewmodel))
-                api(asoft("reakt-buttons", vers.asoft.reakt))
-                api(asoft("reakt-text", vers.asoft.reakt))
-                api(asoft("reakt-layouts", vers.asoft.reakt))
-                api(asoft("reakt-navigation", vers.asoft.reakt))
-                api(asoft("reakt-form", vers.asoft.reakt))
+                api(asoft("reakt-web", vers.asoft.reakt))
             }
         }
     }

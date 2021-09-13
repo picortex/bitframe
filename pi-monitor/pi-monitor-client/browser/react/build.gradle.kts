@@ -18,23 +18,30 @@ applikation {
 }
 
 rootProject.plugins.withType(NodeJsRootPlugin::class.java) {
-    rootProject.the<NodeJsRootExtension>().versions.webpackDevServer.version =
-        "4.0.0"
+    rootProject.the<NodeJsRootExtension>().versions.webpackDevServer.version = "4.1.0"
 }
 
 kotlin {
     jvm { library() }
 
-    js(IR) { browser { application() } }
+    js(IR) {
+        browser { application() }
+    }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":pi-monitor-core"))
-                api(project(":bitframe-client-sdk-test"))
+                api(project(":pi-monitor-client-sdk-full"))
+                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
 
+        val commonTest by getting {
+            dependencies {
+                implementation(asoft("expect-core", vers.asoft.expect))
+            }
+        }
+        
         val jsMain by getting {
             dependencies {
                 implementation(project(":bitframe-ui-react"))
@@ -44,12 +51,14 @@ kotlin {
 
         val jvmTest by getting {
             dependencies {
-                api(project(":pi-monitor-client-test"))
+                implementation(project(":pi-monitor-client-test"))
+                implementation("org.junit.jupiter:junit-jupiter-params:5.7.0")
+                implementation("org.testcontainers:testcontainers:${vers.testContainers}")
+                implementation("org.testcontainers:junit-jupiter:${vers.testContainers}")
             }
         }
     }
 }
-
 
 val createDockerfile by tasks.creating(Dockerfile::class) {
     dependsOn("webpackJsRelease")
@@ -95,4 +104,10 @@ val acceptanceTestTearDown by tasks.creating {
 val acceptanceTests by tasks.creating {
     dependsOn(acceptanceTestSetup)
     finalizedBy(acceptanceTestTearDown)
+}
+
+val jvmTest by tasks.getting(Test::class) {
+    systemProperties(
+        "selenide.headless" to (System.getenv("TEST_MODE") == "CI")
+    )
 }

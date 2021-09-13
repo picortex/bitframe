@@ -17,6 +17,10 @@ pluginManagement {
 rootProject.name = "bitframe"
 
 include(":bitframe-core")
+listOf("core", "processor").forEach {
+    include(":bitframe-annotations-$it")
+    project(":bitframe-annotations-$it").projectDir = File("bitframe-annotations/$it")
+}
 
 include(":bitframe-server-framework-core")
 project(":bitframe-server-framework-core").projectDir = File("bitframe-server/frameworks/core")
@@ -51,22 +55,22 @@ include(":users-server-dao-inmemory")
 project(":users-server-dao-inmemory").projectDir = File("users/users-server/daos/inmemory")
 
 
-include(":access-core")
-project(":access-core").projectDir = File("access/access-core")
-
-include(":access-system-core")
-project(":access-system-core").projectDir = File("access/access-system/access-system-core")
+//include(":access-core")
+//project(":access-core").projectDir = File("access/access-core")
+//
+//include(":access-system-core")
+//project(":access-system-core").projectDir = File("access/access-system/access-system-core")
 //
 //include(":access-system-server-core")
 //project(":access-system-server-core").projectDir =
 //    File("access/access-system/access-system-server/access-system-server-core")
 
-include(":access-system-client-core")
-project(":access-system-client-core").projectDir =
-    File("access/access-system/access-system-client/access-system-client-core")
-include(":access-system-client-test")
-project(":access-system-client-test").projectDir =
-    File("access/access-system/access-system-client/access-system-client-test")
+//include(":access-system-client-core")
+//project(":access-system-client-core").projectDir =
+//    File("access/access-system/access-system-client/access-system-client-core")
+//include(":access-system-client-test")
+//project(":access-system-client-test").projectDir =
+//    File("access/access-system/access-system-client/access-system-client-test")
 
 
 //include(":sample-server")
@@ -80,8 +84,11 @@ project(":pi-monitor-core").projectDir = File("pi-monitor/pi-monitor-core")
 include(":pi-monitor-server")
 project(":pi-monitor-server").projectDir = File("pi-monitor/pi-monitor-server")
 
-include(":pi-monitor-client-sdk")
-project(":pi-monitor-client-sdk").projectDir = File("pi-monitor/pi-monitor-client/sdk")
+include(":pi-monitor-client-sdk-core")
+project(":pi-monitor-client-sdk-core").projectDir = File("pi-monitor/pi-monitor-client/sdks/core")
+
+include(":pi-monitor-client-sdk-full")
+project(":pi-monitor-client-sdk-full").projectDir = File("pi-monitor/pi-monitor-client/sdks/full")
 
 include(":pi-monitor-client-test")
 project(":pi-monitor-client-test").projectDir = File("pi-monitor/pi-monitor-client/test")

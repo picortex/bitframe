@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
+    id("org.jetbrains.dokka")
 }
 
 kotlin {
@@ -21,8 +22,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                api(asoft("test-coroutines", vers.asoft.test))
-                api(asoft("expect-core", vers.asoft.expect))
+                api(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
     }

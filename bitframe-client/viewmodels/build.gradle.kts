@@ -4,12 +4,7 @@ plugins {
 }
 
 kotlin {
-    jvm {
-        library()
-        tasks.withType<Test> {
-            useJUnitPlatform()
-        }
-    }
+    jvm { library() }
     js(IR) { library() }
 
     sourceSets {
@@ -22,7 +17,6 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                api(asoft("test-coroutines", vers.asoft.test))
                 api(project(":bitframe-client-sdk-test"))
                 api(asoft("viewmodel-test-expect", vers.asoft.viewmodel))
             }

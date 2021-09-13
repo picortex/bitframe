@@ -6,11 +6,12 @@ import bitframe.server.http.HttpResponse
 import bitframe.server.http.HttpRoute
 import expect.expect
 import io.ktor.http.*
+import kotlinx.coroutines.runTest
 import kotlin.test.Test
 
 class ActionSandboxTest {
     @Test
-    fun can_test_an_individual_sandbox() {
+    fun can_test_an_individual_sandbox() = runTest {
         val action = Action(
             name = "Raw",
             params = mapOf(),

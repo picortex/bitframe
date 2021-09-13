@@ -1,4 +1,4 @@
-name: Build & Test
+name: Deploying
 
 on:
   push:
@@ -8,29 +8,42 @@ env:
   REMOTE_HOST: 65.21.254.230
   REMOTE_USER: root
   REMOTE_PASS: bitframe
-  GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  GH_TOKEN: ${{ github.token}} # ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v2
+
       - name: Set up JDK 16
         uses: actions/setup-java@v1
         with:
           java-version: 16
+
+      - name: Configure & restart docker daemon
+        run: chmod +x ./dockerd.sh && sudo ./dockerd.sh
+        working-directory: ./devops
+
       - name: Cache Gradle
         uses: actions/cache@v2
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.gradle/yarn
+            ~/.gradle/nodejs
+          key: ${{ runner.os }}-gradle-${{ hashFiles('gradle/gradle-wrapper.*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+
       - name: Making gradlew executable
         run: chmod +x ./gradlew
         working-directory: .
+
       - name: Cache konan
         uses: actions/cache@v2
         with:
@@ -39,18 +52,12 @@ jobs:
             ~/.konan/kotlin-native-macos*
           key: ${{ runner.os }}-konan-
           restore-keys: ${{ runner.os }}-konan-
+
       - name: Cache Node Modules
         uses: actions/cache@v2
         with:
           path: 'build/js'
           key: node-modules
-
-      - name: Login into github docker registry
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ env.GH_TOKEN }}
 
       - name: Set Version
         id: versions
@@ -60,54 +67,21 @@ jobs:
           echo "::set-output name=current_safe::$(cat ./pi-monitor/build/versioning/current_safe.txt)"
           echo "::set-output name=previous::$(cat ./pi-monitor/build/versioning/previous.txt)"
           echo "::set-output name=previous_safe::$(cat ./pi-monitor/build/versioning/previous_safe.txt)"
-      - name: Publish the client sdk
-        run: ./gradlew :pi-monitor-client-sdk:publishJsNpmPublicationToGithub
-      - name: Extract metadata (tags, labels) for Server Docker
-        id: metaserver
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          labels: |
-            org.opencontainers.image.title=PiMonitorServer
-            org.opencontainers.image.vendor=PiCortex
-          tags: |
-            type=raw,value=server-${{ steps.versions.outputs.current }}
 
-      - name: Extract metadata (tags, labels) for Server Docker
-        id: metaclient
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          labels: |
-            org.opencontainers.image.title=PiMonitorClientBrowserReact
-            org.opencontainers.image.vendor=PiCortex
-          tags: |
-            type=raw,value=client-browser-react-${{ steps.versions.outputs.current }}
+      - name: Publish pi-monitor-client-sdk to PiCortexNpmRegistry
+        run: ./gradlew publishJsNpmPublicationToPiCortex
 
-      - name: Create Pi Monitor Server Dockerfile
-        run: ./gradlew :pi-monitor-server:createDockerfile
+      - name: Publish pi-monitor-client-sdk to PiCortexMavenRegistry
+        run: ./gradlew publishAllPublicationsToPiCortex
 
-      - name: Build and push Server Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: ./pi-monitor/pi-monitor-server/build/binaries
-          push: true
-          tags: ${{ steps.metaserver.outputs.tags }}
-          labels: ${{ steps.metaserver.outputs.labels }}
-
-      - name: Create Pi Monitor Browser React Dockerfile
-        run: ./gradlew :pi-monitor-client-browser-react:createDockerfile
-
-      - name: Build and push Client Web Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: ./pi-monitor/pi-monitor-client/browser/react/build/websites/js
-          push: true
-          tags: ${{ steps.metaclient.outputs.tags }}
-          labels: ${{ steps.metaclient.outputs.labels }}
+      - name: build pi-monitor-client-browser-react
+        run: ./gradlew :pi-monitor-client-browser-react:webpackJsRelease
 
       - name: Create Pi Monitor Docker Compose Staging File
         run: ./gradlew :pi-monitor:createDockerComposeStagingFile
+
+      - name: dockerPush pi-monitor to picortex
+        run: ./gradlew :pi-monitor-server:dockerPushToPicortex
 
       - name: Copy Docker-Compose file via ssh password
         uses: appleboy/scp-action@master
@@ -117,7 +91,7 @@ jobs:
           password: ${{ env.REMOTE_PASS }}
           source: "pi-monitor/build/docker/docker-compose-staging.yml"
           rm: true
-          target: /apps/pi-monitor/${{ steps.versions.outputs.current }}/staging
+          target: /picortex/apps/pi-monitor/${{ steps.versions.outputs.current }}/staging
 
       - name: Deploy Staging Stack
         uses: appleboy/ssh-action@master
@@ -126,9 +100,9 @@ jobs:
           username: ${{ env.REMOTE_USER }}
           password: ${{ env.REMOTE_PASS }}
           script: |
-            mkdir /apps/pi-monitor/${{ steps.versions.outputs.current }}/staging -p
-            mv /apps/pi-monitor/${{ steps.versions.outputs.current }}/staging/pi-monitor/build/docker/docker-compose-staging.yml /apps/pi-monitor/${{ steps.versions.outputs.current }}/staging/docker-compose.yml
-            cd /apps/pi-monitor/${{ steps.versions.outputs.current }}/staging
+            mkdir /picortex/apps/pi-monitor/${{ steps.versions.outputs.current }}/staging -p
+            mv /picortex/apps/pi-monitor/${{ steps.versions.outputs.current }}/staging/pi-monitor/build/docker/docker-compose-staging.yml /picortex/apps/pi-monitor/${{ steps.versions.outputs.current }}/staging/docker-compose.yml
+            cd /picortex/apps/pi-monitor/${{ steps.versions.outputs.current }}/staging
             rm pi-monitor -rf
             docker-compose pull
             docker stack rm pi-monitor-${{ steps.versions.outputs.previous_safe }}

@@ -1,6 +1,9 @@
+import testing.testing
+
 plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
+    id("org.jetbrains.dokka")
 }
 
 repositories {
@@ -9,13 +12,14 @@ repositories {
 }
 
 kotlin {
-    jvm {
-        library()
-        tasks.withType<Test> {
-            useJUnitPlatform()
+    jvm { library() }
+
+    js(IR) {
+        browser {
+            testing("integration")
         }
+        library()
     }
-    js(IR) { library() }
 
     sourceSets {
         val commonMain by getting {
@@ -27,8 +31,8 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                api(asoft("test-coroutines", vers.asoft.test))
-                api(asoft("expect-core", vers.asoft.expect))
+                api(asoft("kotlinx-coroutines-test", vers.asoft.foundation))
+                api(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
 
@@ -37,6 +41,12 @@ kotlin {
                 api("io.ktor:ktor-client-cio:${vers.ktor}")
             }
         }
+
+//        val jvmTest by getting {
+//            dependencies {
+//                implementation(asoft("expect-coroutines", vers.asoft.expect))
+//            }
+//        }
 
         val jsMain by getting {
             dependencies {

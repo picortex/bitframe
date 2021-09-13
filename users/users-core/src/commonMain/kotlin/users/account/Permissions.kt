@@ -8,26 +8,26 @@ enum class Permissions(
     override val needs: List<String> = listOf(),
 ) : ISystemPermission {
     Read(
-        title = "authentication.accounts.read",
+        title = "acceptance.authentication.accounts.read",
         details = "Grants access to view/edit accounts in the system"
     ),
     Create(
-        title = "authentication.accounts.create",
+        title = "acceptance.authentication.accounts.create",
         details = "Grants access to create different accounts for the system",
         needs = listOf(Read.title)
     ),
     Update(
-        title = "authentication.accounts.update",
+        title = "acceptance.authentication.accounts.update",
         details = "Grants access to update account information",
         needs = listOf(Read.title)
     ),
     Delete(
-        title = "authentication.accounts.delete",
+        title = "acceptance.authentication.accounts.delete",
         details = "Grants access to delete accounts from the system",
         needs = listOf(Read.title)
     ),
     Wipe(
-        title = "authentication.accounts.wipe",
+        title = "acceptance.authentication.accounts.wipe",
         details = "Grants access to permanently wipe accounts from the system",
         needs = listOf(Read.title)
     )

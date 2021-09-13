@@ -1,4 +1,4 @@
-name: Build & Test
+name: Unit, Integration & Acceptance Testing
 
 on:
   pull_request:
@@ -6,13 +6,14 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 16
         uses: actions/setup-java@v1
         with:
           java-version: 16
+
       - name: Cache Gradle
         uses: actions/cache@v2
         with:
@@ -20,6 +21,7 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+
       - name: Cache konan
         uses: actions/cache@v2
         with:
@@ -28,9 +30,26 @@ jobs:
             ~/.konan/kotlin-native-macos*
           key: ${{ runner.os }}-konan-
           restore-keys: ${{ runner.os }}-konan-
+
       - name: Making gradlew executable
         run: chmod +x ./gradlew
         working-directory: .
-      - name: Building
-        run: ./gradlew build
+
+      - name: Download gradle
+        run: ./gradlew --version
+
+      - name: Running unit tests
+        run: ./gradlew cleanAllTest jsTest jvmTest --tests unit.*
+        working-directory: .
+
+      - name: Prepare integration tests
+        run: TEST_MODE=CI ./gradlew createDockerfile
+        working-directory: .
+
+      - name: Running integration tests
+        run: TEST_MODE=CI ./gradlew cleanAllTest jvmTest --tests integration.*
+        working-directory: .
+
+      - name: Running integration tests
+        run: TEST_MODE=CI ./gradlew cleanAllTest jvmTest --tests acceptance.*
         working-directory: .

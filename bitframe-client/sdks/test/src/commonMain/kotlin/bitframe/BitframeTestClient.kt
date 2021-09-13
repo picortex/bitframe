@@ -1,21 +1,35 @@
 package bitframe
 
 import bitframe.authentication.ClientConfiguration
-import bitframe.authentication.LoginService
+import bitframe.authentication.SignInService
 import bitframe.authentication.TestClientConfiguration
-import bitframe.authentication.TestLoginService
+import bitframe.authentication.TestSignInService
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import kotlin.jvm.JvmSynthetic
 
-@JsExport
-open class BitframeTestClient(
-    val configuration: TestClientConfiguration
-) : BitframeService {
+interface BitframeTestClient : BitframeService {
     companion object {
-        @JvmField
-        val CONFIGURATION = TestClientConfiguration("<test-client>")
+        private val cachedClients = mutableMapOf<String, BitframeTestClient>()
+
+        internal val CONFIGURATION = TestClientConfiguration("<test-client>")
+
+        @JvmSynthetic
+        operator fun invoke(
+            configuration: TestClientConfiguration = CONFIGURATION
+        ): BitframeTestClient = cachedClients.getOrPut(configuration.appId) {
+            BitframeTestClientImpl(configuration)
+        }
+
+        @JvmStatic
+        fun with(configuration: TestClientConfiguration) = invoke(configuration)
+
+        @JvmStatic
+        fun getDefault() = invoke(CONFIGURATION)
     }
 
-    override val config: ClientConfiguration = configuration
-    override val authentication: LoginService = TestLoginService(configuration)
+    val configuration: TestClientConfiguration
+    override val config: ClientConfiguration
+    override val signIn: SignInService
 }

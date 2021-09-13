@@ -1,11 +1,21 @@
 package pimonitor
 
+import bitframe.annotations.Generated
+import bitframe.annotations.Module
 import contacts.Email
 import kotlinx.serialization.Serializable
+import kotlin.js.JsExport
+import kotlin.js.JsName
+import kotlin.jvm.JvmOverloads
 
+/**
+ * A [Monitor] is an entity that monitors at least one [Monitored] entity
+ */
+@JsExport
 @Serializable
+@Module
 data class Monitor(
-    val uid: String,
+    @Generated val uid: String,
     val business: Business,
     val contacts: List<Person>
 ) {
@@ -14,11 +24,15 @@ data class Monitor(
     }
 
     @Serializable
-    data class Business(
+    data class Business @JvmOverloads constructor(
         val name: String,
         val email: Email,
-        val logo: String?
-    )
+        val logo: String? = null
+    ) {
+        @JvmOverloads
+        @JsName("from")
+        constructor(name: String, email: String, logo: String?) : this(name, Email(email), logo)
+    }
 
     @Serializable
     data class Person(

@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
+    id("org.jetbrains.dokka")
 }
 
 kotlin {
@@ -11,7 +12,15 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-core"))
+                api(asoft("platform-core", vers.asoft.platform))
                 api(asoft("later-ktx", vers.asoft.later))
+                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+
             }
         }
     }

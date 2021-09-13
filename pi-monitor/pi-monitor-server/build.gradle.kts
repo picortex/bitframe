@@ -29,7 +29,6 @@ kotlin {
             dependencies {
                 api(project(":bitframe-server-framework-ktor"))
                 api(project(":bitframe-server-dao-inmemory"))
-
                 api(project(":pi-monitor-core"))
             }
         }
@@ -44,20 +43,43 @@ kotlin {
 
 val createDockerfile by tasks.creating(Dockerfile::class) {
     dependsOn("installDistRelease")
+    dependsOn(":pi-monitor-client-browser-react:webpackJsDebug")
     from("openjdk:8-jre")
-    runCommand("mkdir /app")
+    runCommand("mkdir /app /app/public")
     destFile.set(file("build/binaries/Dockerfile"))
     copyFile("./release", "/app")
+    copyFile("./public", "/app/public")
     workingDir("/app")
     exposePort(8080)
-    defaultCommand("./bin/pi-monitor-server")
+    defaultCommand("./bin/pi-monitor-server", "/app/public")
+    doLast {
+        copy {
+            from(rootProject.file("pi-monitor/pi-monitor-client/browser/react/build/websites/js/debug"))
+            into(file("build/binaries/public"))
+            exclude("main.bundle.js.*")
+        }
+    }
 }
 
 val createDockerImage by tasks.creating(DockerBuildImage::class) {
     dependsOn(createDockerfile)
     inputDir.set(file("build/binaries"))
-    images.add("pi-monitor-server:${vers.bitframe.current}")
+    images.addAll("pi-monitor:${vers.bitframe.current}")
 }
+
+fun dockerPushTo(remote: String) = tasks.creating(Exec::class) {
+    dependsOn(createDockerImage)
+    val localTag = "pi-monitor:${vers.bitframe.current}"
+    val remoteName = "$remote/pi-monitor:${vers.bitframe.current}"
+    commandLine("docker", "tag", localTag, remoteName)
+    doLast {
+        exec { commandLine("docker", "push", remoteName) }
+    }
+}
+
+val dockerPushToAndylamax by dockerPushTo("localhost:1030")
+
+val dockerPushToPiCortex by dockerPushTo("${vars.dev.server.ip}:1030")
 
 val createDockerContainer by tasks.creating(DockerCreateContainer::class) {
     dependsOn(createDockerImage)
@@ -88,4 +110,9 @@ val acceptanceTestTearDown by tasks.creating {
 val acceptanceTests by tasks.creating {
     dependsOn(acceptanceTestSetup)
     finalizedBy(acceptanceTestTearDown)
+}
+
+val run by tasks.getting(JavaExec::class) {
+    val public = properties.getOrDefault("public", "/default")
+    args = listOf(public.toString())
 }

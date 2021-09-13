@@ -6,6 +6,7 @@ import bitframe.server.http.HttpResponse
 import bitframe.server.http.HttpRoute
 import expect.expect
 import io.ktor.http.*
+import kotlinx.coroutines.runTest
 import kotlin.test.Test
 
 class ActionTest {
@@ -21,7 +22,7 @@ class ActionTest {
     )
 
     @Test
-    fun should_handle_requests_well() {
+    fun should_handle_requests_well() = runTest {
         val sandbox = Sandbox(action)
         val res = sandbox.post("/customer")
         expect(res.status).toBe(HttpStatusCode.OK)

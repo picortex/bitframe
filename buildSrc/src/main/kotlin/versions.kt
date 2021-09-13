@@ -1,5 +1,9 @@
 object vers {
-    val kotlin = "1.5.10"
+    val kotlin = "1.5.30"
+
+    val ksp = "1.5.30-1.0.0"
+
+    val kotlinpoet = "1.12.1"
 
     val ktor = "1.6.2"
 
@@ -7,33 +11,39 @@ object vers {
 
     val docker = "7.1.0"
 
-    val dockerCompose = "0.14.9"
+    val dokka = "1.5.0"
 
     val npmPublish = "2.0.3"
 
+    val testContainers = "1.16.0"
+
     object kotlinx {
-        val serialization = "1.2.1"
+        val coroutines = "1.5.2-native-mt"
+        val serialization = "1.2.2"
         val datetime = "0.2.1"
     }
 
     object bitframe {
-        val current = "0.0.14"
-        val previous = "0.0.13"
+        val current = "0.0.24"
+        val previous = "0.0.23"
     }
 
     object asoft {
+        val foundation = "1.4.0"
+        val platform = foundation
         val access = "0.0.20"
-        val contacts = "0.0.20"
-        val collections = "0.0.10"
-        val viewmodel = "0.0.91"
-        val builders = "1.3.42"
-        val reakt = "0.1.10"
-        val later = "0.0.60" // bump to 0.0.64 and revert to 0.0.60 if client doesn't build
-        val logging = "0.0.30"
+        val contacts = "0.0.30"
+        val collections = foundation
+        val mvivm = "0.1.20"
+        val viewmodel = mvivm
+        val live = mvivm
+        val builders = "1.4.0"
+        val reakt = "0.1.20"
+        val later = foundation
+        val logging = foundation
         val krypto = "0.0.50"
         val kash = "0.0.10"
-        val mapper = "0.0.71"
-        val expect = "0.0.42"
-        val test = "1.1.32"
+        val mapper = foundation
+        val expect = foundation
     }
 }

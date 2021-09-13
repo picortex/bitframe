@@ -27,16 +27,11 @@ val acceptanceTest by tasks.creating {
     finalizedBy(acceptanceTestTearDown)
 }
 
-fun DockerComposeFileTask.configure(serverPort: Int, clientPort: Int) {
+fun DockerComposeFileTask.configure(port: Int) {
     version(3.8)
-    service("server") {
-        image("ghcr.io/picortex/bitframe:server-${vers.bitframe.current}")
-        ports(serverPort to 8080)
-    }
-
-    service("client") {
-        image("ghcr.io/picortex/bitframe:client-browser-react-${vers.bitframe.current}")
-        ports(clientPort to 80)
+    service("server-application") {
+        image("${vars.dev.server.ip}:1030/pi-monitor:${vers.bitframe.current}")
+        ports(port to 8080)
     }
 }
 
@@ -56,10 +51,10 @@ val setVersions by tasks.creating {
 
 val createDockerComposeStagingFile by tasks.creating(DockerComposeFileTask::class) {
     outputFilename = "docker-compose-staging.yml"
-    configure(serverPort = 9090, clientPort = 8080)
+    configure(port = 80)
 }
 
 val createDockerComposeProductionFile by tasks.creating(DockerComposeFileTask::class) {
     outputFilename = "docker-compose-production.yml"
-    configure(serverPort = 90, clientPort = 80)
+    configure(port = 90)
 }

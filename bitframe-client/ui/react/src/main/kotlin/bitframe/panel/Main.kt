@@ -3,14 +3,14 @@ package bitframe.panel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.css.em
 import react.RBuilder
-import react.RProps
-import react.RState
+import react.Props
+import react.State
 import reakt.*
 import styled.styledDiv
 
 
 @JsExport
-class Panel private constructor() : Component<RProps, RState>() {
+class Panel private constructor() : Component<Props, State>() {
     private val controller = MutableStateFlow(DrawerState.Opened)
 
     private fun RBuilder.Drawer() = NavPane(
