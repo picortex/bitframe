@@ -87,6 +87,9 @@ npmPublishing {
             moduleName = "pi-monitor-client-core"
             readme = file("README.md")
             packageJson {
+                dependencies {
+                    "platform" to "1.3.6"
+                }
                 repository {
                     type = "git"
                     url = "https://github.com/picortex/monitor-client.git"

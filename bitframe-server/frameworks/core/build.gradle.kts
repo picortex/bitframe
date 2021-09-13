@@ -8,9 +8,6 @@ kotlin {
     jvm {
         library()
         withJava()
-        tasks.withType<Test> {
-            useJUnitPlatform()
-        }
     }
     js(IR) { library() }
     sourceSets {

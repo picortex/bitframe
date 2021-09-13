@@ -1,12 +1,12 @@
-name: Build & Test
+name: Unit Testing
 
 on:
   push:
-    branches: [ master-dev-paparazi ]
+    branches: [ master-dev-* ]
 
 jobs:
   testing:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 16
@@ -20,6 +20,13 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+      - name: Cache Node Modules
+        uses: actions/cache@v2
+        with:
+          path: build/js
+          key: ${{ runner.os }}-node-modules
+          restore-keys: |
+            ${{ runner.os }}-node-modules
       - name: Cache konan
         uses: actions/cache@v2
         with:
@@ -31,6 +38,10 @@ jobs:
       - name: Making gradlew executable
         run: chmod +x ./gradlew
         working-directory: .
+
+      - name: Download gradle
+        run: ./gradlew --version
+
       - name: Running unit tests
-        run: ./gradlew cleanAllTests allTests --tests unit.*
+        run: ./gradlew cleanAllTest jsTest jvmTest --tests unit.*
         working-directory: .

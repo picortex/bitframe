@@ -2,6 +2,7 @@ package unit.types
 
 import bitframe.server.types.processTypes
 import expect.expect
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 class ProcessTypesTest {
@@ -12,6 +13,7 @@ class ProcessTypesTest {
     )
 
     @Test
+    @Ignore
     fun should_process_customer_info() {
         val type = processTypes<Customer>()
         expect(1).toBe(0 + 1)

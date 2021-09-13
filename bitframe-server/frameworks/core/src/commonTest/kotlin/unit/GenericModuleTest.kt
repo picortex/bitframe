@@ -10,6 +10,7 @@ import bitframe.server.http.HttpRoute
 import expect.expect
 import io.ktor.http.HttpMethod.Companion.Post
 import io.ktor.http.HttpStatusCode.Companion.OK
+import kotlinx.coroutines.runTest
 import kotlin.test.Test
 
 class GenericModuleTest {
@@ -38,7 +39,7 @@ class GenericModuleTest {
     }
 
     @Test
-    fun should_build_a_module_as_a_list_of_actions() {
+    fun should_build_a_module_as_a_list_of_actions() = runTest{
         val createAction = Action(
             name = "create",
             params = mapOf(

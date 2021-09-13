@@ -1,53 +1,54 @@
 package bitframe.authentication.login
 
 import bitframe.authentication.SignInService
-import bitframe.authentication.LoginViewModel
-import bitframe.authentication.LoginViewModel.Intent
-import bitframe.authentication.LoginViewModel.State
+import bitframe.authentication.signIn.SignInIntent
+import bitframe.authentication.signIn.SignInScope
+import bitframe.authentication.signIn.SignInState
+import bitframe.authentication.signIn.SignInViewModel
 import kotlinx.css.*
-import react.RBuilder
 import react.Props
+import react.RBuilder
+import react.fc
 import react.router.dom.withRouter
+import react.useEffectOnce
 import reakt.*
 import styled.css
 import styled.styledDiv
 import styled.styledSpan
-import viewmodel.VComponent
+import useViewModelState
 
-external interface LoginPageProps : Props {
-    var service: SignInService
+private external interface LoginPageProps : Props {
+    var scope: SignInScope
     var version: String
 }
 
-@JsExport
-class LoginPage private constructor(p: LoginPageProps) : VComponent<LoginPageProps, Intent, State, LoginViewModel>(p) {
-    override val viewModel by lazy { LoginViewModel(props.service) }
+private fun RBuilder.ShowConundrum() = styledDiv {
+    +"Yeeeiy connundrum"
+}
 
-    override fun componentDidMount() {
-        super.componentDidMount()
+private val LoginPage = fc<LoginPageProps> { props ->
+    val viewModel = props.scope.viewModel
+    val ui = useViewModelState(viewModel)
+    useEffectOnce {
         viewModel.onUserLoggedIn { _, _ ->
             props.history.push("/panel")
         }
     }
 
-    private fun RBuilder.ShowConundrum() = styledDiv {
-        +"Yeeeiy connundrum"
-    }
-
-    override fun RBuilder.render(ui: State) = styledDiv {
+    styledDiv {
         css {
             position = Position.relative
             height = 100.vh
         }
         when (ui) {
-            is State.Form -> LoginForm(
+            is SignInState.Form -> LoginForm(
                 cred = ui.credentials,
-                onLoginButtonPressed = { viewModel.post(Intent.Login(it)) }
+                onLoginButtonPressed = { viewModel.post(SignInIntent.Submit(it)) }
             )
-            is State.Conundrum -> ShowConundrum()
-            is State.Loading -> LoadingBox(ui.message)
-            is State.Failure -> ErrorBox(ui.cause)
-            is State.Success -> SuccessBox(ui.message)
+            is SignInState.Conundrum -> ShowConundrum()
+            is SignInState.Loading -> LoadingBox(ui.message)
+            is SignInState.Failure -> ErrorBox(ui.cause)
+            is SignInState.Success -> SuccessBox(ui.message)
         }
 
         styledSpan {
@@ -64,7 +65,7 @@ class LoginPage private constructor(p: LoginPageProps) : VComponent<LoginPagePro
 fun RBuilder.SignInPage(
     service: SignInService,
     version: String
-) = child(withRouter(LoginPage::class)) {
-    attrs.service = service
+) = child(withRouter(LoginPage)) {
+    attrs.scope = SignInScope(service)
     attrs.version = version
 }

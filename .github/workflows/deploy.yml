@@ -1,4 +1,4 @@
-name: Build & Test
+name: Deploying
 
 on:
   push:
@@ -73,6 +73,9 @@ jobs:
 
       - name: Publish pi-monitor-client-sdk to PiCortexMavenRegistry
         run: ./gradlew publishAllPublicationsToPiCortex
+
+      - name: build pi-monitor-client-browser-react
+        run: ./gradlew :pi-monitor-client-browser-react:webpackJsRelease
 
       - name: Create Pi Monitor Docker Compose Staging File
         run: ./gradlew :pi-monitor:createDockerComposeStagingFile

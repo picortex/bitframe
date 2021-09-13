@@ -1,15 +1,8 @@
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
-
 plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
     id("dev.petuska.npm.publish")
     id("org.jetbrains.dokka")
-}
-
-rootProject.plugins.withType(NodeJsRootPlugin::class.java) {
-    rootProject.the<NodeJsRootExtension>().versions.webpackDevServer.version = "4.0.0"
 }
 
 kotlin {
@@ -40,7 +33,6 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 api(asoft("viewmodel-react", vers.asoft.viewmodel))
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
     }
@@ -95,6 +87,14 @@ npmPublishing {
             moduleName = "pi-monitor-client-full"
             readme = file("README.md")
             packageJson {
+                dependencies {
+                    "platform" to "1.3.6"
+                }
+
+                peerDependencies {
+                    "react" to "*"
+                }
+
                 repository {
                     type = "git"
                     url = "https://github.com/picortex/monitor-client.git"

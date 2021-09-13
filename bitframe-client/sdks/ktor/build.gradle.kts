@@ -1,3 +1,5 @@
+import testing.testing
+
 plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
@@ -11,7 +13,13 @@ repositories {
 
 kotlin {
     jvm { library() }
-    js(IR) { library() }
+
+    js(IR) {
+        browser {
+            testing("integration")
+        }
+        library()
+    }
 
     sourceSets {
         val commonMain by getting {
@@ -33,6 +41,12 @@ kotlin {
                 api("io.ktor:ktor-client-cio:${vers.ktor}")
             }
         }
+
+//        val jvmTest by getting {
+//            dependencies {
+//                implementation(asoft("expect-coroutines", vers.asoft.expect))
+//            }
+//        }
 
         val jsMain by getting {
             dependencies {
