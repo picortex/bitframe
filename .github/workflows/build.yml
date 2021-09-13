@@ -42,6 +42,10 @@ jobs:
         run: ./gradlew cleanAllTest jsTest jvmTest --tests unit.*
         working-directory: .
 
+      - name: Prepare integration tests
+        run: TEST_MODE=CI ./gradlew createDockerfile
+        working-directory: .
+
       - name: Running integration tests
         run: TEST_MODE=CI ./gradlew cleanAllTest jvmTest --tests integration.*
         working-directory: .
