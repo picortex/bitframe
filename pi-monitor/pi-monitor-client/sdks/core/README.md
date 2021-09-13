@@ -3,7 +3,7 @@
 An SDK Library that one would use to access the PiMonitor server for different resources
 
 ## Setup
-1. Add a `.npmrc` file to your project
+
 1. type `npm install @picortex/pi-monitor-client-core`
 
 ## Samples
@@ -11,7 +11,5 @@ An SDK Library that one would use to access the PiMonitor server for different r
 ```javascript
 import SDK from '@picortex/pi-monitor-client-core"
 
-const service = SDK.service({appId: "<your-app-id>"});
+const service = SDK.service({ appId: "test-123", simulationTime: 3000, disableViewModelLogs: false })
 ```
-
-
