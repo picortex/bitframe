@@ -12,7 +12,6 @@ import org.w3c.dom.HTMLDivElement
 import pimonitor.authentication.signup.SignUp
 import pimonitor.test.PiMonitorServiceTest
 import platform.Platform
-import react.Cleanup
 import reakt.setContent
 
 fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
@@ -22,7 +21,7 @@ fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
     Logging.init(ConsoleAppender())
     Bitframe(
         client = client,
-        registration = { SignUp(client.signUp) },
+        registration = { SignUp(client) },
         version = version
     )
     console.log(Platform)

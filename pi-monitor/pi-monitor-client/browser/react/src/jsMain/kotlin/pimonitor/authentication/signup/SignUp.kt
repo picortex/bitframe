@@ -2,10 +2,11 @@ package pimonitor.authentication.signup
 
 import kotlinx.css.minHeight
 import kotlinx.css.vh
-import pimonitor.authentication.SignUpService
+import pimonitor.PiMonitorService
 import react.Props
 import react.RBuilder
 import react.fc
+import react.router.dom.useHistory
 import react.router.dom.withRouter
 import reakt.ErrorBox
 import reakt.Grid
@@ -15,23 +16,24 @@ import styled.css
 import useViewModelState
 
 private external class SignUpProps : Props {
-    var viewModel: SignUpViewModel
+    var scope: SignUpScope
 }
 
 private val SignUp = fc<SignUpProps> { props ->
-    val state = useViewModelState(props.viewModel)
+    val state = useViewModelState(props.scope.viewModel)
+    val history = useHistory()
     Grid {
         css { minHeight = 100.vh }
 
         when (state) {
             is SignUpState.Loading -> LoadingBox(state.message)
-            is SignUpState.Form -> SignUpForm(props.viewModel, state)
+            is SignUpState.Form -> SignUpForm(props.scope, onCancel = { history.push("/") }, state)
             is SignUpState.Failure -> ErrorBox(state.cause)
             is SignUpState.Success -> SuccessBox(state.message)
         }
     }
 }
 
-fun RBuilder.SignUp(service: SignUpService) = child(withRouter(SignUp)) {
-    attrs.viewModel = SignUpViewModel(service)
+fun RBuilder.SignUp(service: PiMonitorService) = child(withRouter(SignUp)) {
+    attrs.scope = SignUpScope(service)
 }

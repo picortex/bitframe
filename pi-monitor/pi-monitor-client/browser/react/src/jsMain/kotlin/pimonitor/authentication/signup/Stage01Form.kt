@@ -2,12 +2,10 @@ package pimonitor.authentication.signup
 
 import kotlinx.extensions.text
 import kotlinx.html.InputType
-import pimonitor.Monitor
 import pimonitor.MonitorParams
 import react.RBuilder
 import reakt.*
 import styled.css
-import styled.styledDiv
 import styled.styledH2
 import theme.clazz
 

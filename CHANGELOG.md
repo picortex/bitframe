@@ -1,3 +1,15 @@
+# Next
+
+## PiMonitor
+
+### Client core sdk
+
+- [x] Updated sample section in readme to ease readability
+
+### Client full sdk
+
+- [x] Updated sample section in readme to ease readability
+
 # 0.0.24 : 2021.09.13
 
 ## Bitframe

@@ -23,16 +23,17 @@ fun ModuleRoute(
 
 internal const val SignInPageRoute = "/authentication/sign-in/"
 internal const val SignUpPageRoute = "/authentication/sign-up/"
+internal const val PanelPageRoute = "/panel"
 
 private fun routes(client: BitframeService, version: String) = listOf(
-    ModuleRoute("/", listOf(), "") {
-        LandingPage(version)
-    },
     ModuleRoute(SignInPageRoute, listOf(), "") {
         SignInPage(client.signIn, version)
     },
-    ModuleRoute("/panel", listOf(), "") {
+    ModuleRoute(PanelPageRoute, listOf(), "") {
         Panel()
+    },
+    ModuleRoute("/", listOf(), "") {
+        LandingPage(version)
     }
 )
 
@@ -43,8 +44,8 @@ fun RBuilder.Bitframe(
 ) = browserRouter {
     val routes = routes(client, version)
     switch {
-        for (r in routes) route(r.path, exact = true, strict = true, render = r.render)
         route(SignUpPageRoute, exact = true, strict = true, render = registration)
+        for (r in routes) route(r.path, render = r.render)
         styledDiv { +"Whoops, Not Found" }
     }
 }

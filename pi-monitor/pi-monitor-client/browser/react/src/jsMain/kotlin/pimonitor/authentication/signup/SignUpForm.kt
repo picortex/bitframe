@@ -10,7 +10,12 @@ import reakt.FlexBox
 import reakt.centerContent
 import styled.css
 
-fun RBuilder.SignUpForm(viewModel: SignUpViewModel, state: SignUpState.Form) = FlexBox {
+fun RBuilder.SignUpForm(
+    scope: SignUpScope,
+    onCancel: () -> Unit,
+    state: SignUpState.Form
+) = FlexBox {
+    val viewModel = scope.viewModel
     css {
         centerContent()
         onMobile { padding(horizontal = 1.em) }
@@ -19,12 +24,12 @@ fun RBuilder.SignUpForm(viewModel: SignUpViewModel, state: SignUpState.Form) = F
     when (state) {
         is SignUpState.Form.Stage01 -> Stage01Form(
             business = state.business,
-            onCancel = {},
+            onCancel = onCancel,
             onNext = { viewModel.post(SignUpIntent.Stage02(it)) }
         )
         is SignUpState.Form.Stage02 -> Stage02Form(
             person = state.person,
-            onCancel = { viewModel.post(SignUpIntent.Stage01) },
+            onCancel = { scope.goToStage01() },
             onNext = { viewModel.post(SignUpIntent.Submit(it)) }
         )
     }
