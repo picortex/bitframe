@@ -1,3 +1,9 @@
+# Next :
+
+## CI & CD
+
+- Updated workflows for better naming
+
 # 0.0.25 : 2021.09.20
 
 ## PiMonitor

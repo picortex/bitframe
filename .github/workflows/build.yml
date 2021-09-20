@@ -47,5 +47,5 @@ jobs:
         working-directory: .
 
       - name: Running acceptance tests
-        run: TEST_MODE=CI ./gradlew cleanAllTest jvmTest --tests acceptance.*
+        run: TEST_MODE=CI HEADLESS=true ./gradlew cleanAllTest jvmTest --tests acceptance.*
         working-directory: .

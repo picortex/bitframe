@@ -25,8 +25,8 @@ class WebApplication(
     }
 
     override suspend fun openSignUpScreen(): SignUpScreen {
-        open("$url/authentication/sign-up/")
-        return signUpScreen
+//        open("$url/authentication/sign-up/")
+        return openLandingScreen().clickSignUpButton()
     }
 
     override suspend fun expectUserToBeLoggedIn() {

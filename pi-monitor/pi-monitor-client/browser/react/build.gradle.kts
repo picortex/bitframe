@@ -41,7 +41,7 @@ kotlin {
                 implementation(asoft("expect-core", vers.asoft.expect))
             }
         }
-        
+
         val jsMain by getting {
             dependencies {
                 implementation(project(":bitframe-ui-react"))
@@ -108,6 +108,6 @@ val acceptanceTests by tasks.creating {
 
 val jvmTest by tasks.getting(Test::class) {
     systemProperties(
-        "selenide.headless" to (System.getenv("TEST_MODE") == "CI")
+        "selenide.headless" to (System.getenv("HEADLESS") == "true")
     )
 }
