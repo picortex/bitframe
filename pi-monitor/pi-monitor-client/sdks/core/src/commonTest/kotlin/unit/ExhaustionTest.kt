@@ -26,10 +26,10 @@ class ExhaustionTest {
         val client: PiMonitorService = PiMonitorServiceTest(configuration)
         val res = client.signIn.loginWith(
             LoginCredentials(
-                username = "",
-                password = ""
+                username = "user1",
+                password = "pass1"
             )
         )
-        expect(res.await().user.username).toBe("anderson")
+        expect(res.await().user.username).toBe("user1")
     }
 }
