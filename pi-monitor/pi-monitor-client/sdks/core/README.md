@@ -11,5 +11,11 @@ An SDK Library that one would use to access the PiMonitor server for different r
 ```javascript
 import SDK from '@picortex/pi-monitor-client-core"
 
-const service = SDK.service({ appId: "test-123", simulationTime: 3000, disableViewModelLogs: false })
+const config = {
+    appId: "<app-id>",
+    simulationTime: 3000,
+    disableViewModelLogs: false
+}
+
+const service = SDK.service(config)
 ```

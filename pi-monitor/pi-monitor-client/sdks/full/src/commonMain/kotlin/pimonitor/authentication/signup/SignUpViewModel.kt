@@ -7,63 +7,83 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import bitframe.presenters.*
 import pimonitor.authentication.SignUpService
 import pimonitor.authentication.signup.SignUpIntent.*
-import pimonitor.authentication.signup.SignUpState.Form
 import pimonitor.toBusiness
 import pimonitor.toPerson
 import viewmodel.ViewModel
 import kotlin.js.JsExport
+import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
 @JsExport
 class SignUpViewModel(
     private val service: SignUpService
-) : ViewModel<SignUpIntent, State>(Form.Stage01(null)) {
+) : ViewModel<Intent, State>(State.SelectRegistrationType) {
 
     private val recoveryTime = 3000
 
-    override fun CoroutineScope.execute(i: SignUpIntent): Any = when (i) {
-        is Stage01 -> stage01()
-        is Stage02 -> stage02(i)
-        is Submit -> submit(i)
+    override fun CoroutineScope.execute(i: Intent): Any = when (i) {
+        SelectRegistrationType -> ui.value = State.SelectRegistrationType
+        is RegisterAsIndividual -> ui.value = State.IndividualForm(
+            fields = i.fields ?: IndividualFormFields().apply {
+                prevButton.handler = { post(SelectRegistrationType) }
+            },
+            organisationForm = null
+        )
+        is RegisterAsOrganization -> ui.value = State.OrganisationForm(
+            fields = i.fields ?: OrganisationFormFields().apply {
+                prevButton.handler = { post(SelectRegistrationType) }
+            }
+        )
+        is SubmitIndividualForm -> submitPersonalInfo(i, ui.value as State.IndividualForm)
+        is SubmitBusinessForm -> submitBusinessInfo(i, ui.value as State.OrganisationForm)
     }
 
-    private fun CoroutineScope.submit(i: Submit) = launch {
-        var recover = ui.value
+    private fun CoroutineScope.submitPersonalInfo(
+        i: SubmitIndividualForm,
+        state: State.IndividualForm
+    ) = launch {
         flow {
-            val stage02 = recover as? Form.Stage02 ?: throw IllegalStateException("Stop trying to register without using the registration form")
-            recover = stage02.copy(person = i.person)
-            val business = stage02.business.toBusiness()
-            val person = i.person.toPerson()
-            emit(State.Loading("Signing you up, Please wait . . ."))
-            service.register(business, person).await()
-            emit(State.Success("Your registration completed successfully"))
+            emit(State.Loading("Submitting your registration, Please wait . . ."))
+            val person = i.params.toPerson()
+            val organisationFields = state.organisationForm?.fields
+            if (organisationFields != null) {
+                val business = organisationFields.toParams().toBusiness()
+                service.register(business, representedBy = person).await()
+            } else {
+                service.registerIndividuallyAs(person).await()
+            }
+            emit(State.Success("Registration completed successfully"))
         }.catch {
-            emit(State.Failure(it))
+            emit(State.Failure(it, "Registration failed"))
             delay(recoveryTime.toLong())
-            emit(recover)
-        }.collect { ui.value = it }
-    }
-
-    private fun CoroutineScope.stage02(i: Stage02) = launch {
-        var recover = ui.value
-        flow<State> {
-            recover = Form.Stage01(i.business)
-            // Ensure that it is a valid business
-            i.business.toBusiness()
-            emit(Form.Stage02(i.business, null))
-        }.catch {
-            emit(State.Failure(it))
-            delay(recoveryTime.toLong())
-            emit(recover)
+            emit(state.copy(fields = state.fields.copy(i.params)))
         }.collect {
             ui.value = it
         }
     }
 
-    private fun stage01() = when (val state = ui.value) {
-        is Form.Stage02 -> ui.value = Form.Stage01(state.business)
-        else -> ui.value = Form.Stage01(null)
+    private fun CoroutineScope.submitBusinessInfo(
+        i: SubmitBusinessForm,
+        state: State.OrganisationForm
+    ) = launch {
+        flow {
+            emit(State.Loading("Validating business input"))
+            i.params.toBusiness()
+            val params = IndividualFormFields(
+                prevButton = ButtonInputField("Back") {
+                    ui.value = state.copy(fields = state.fields.copy(i.params))
+                }
+            )
+            emit(State.IndividualForm(params, state.copy(fields = state.fields.copy(i.params))))
+        }.catch {
+            emit(State.Failure(it, "Validation Failed"))
+            delay(recoveryTime.toLong())
+            emit(state.copy(fields = state.fields.copy(i.params)))
+        }.collect {
+            ui.value = it
+        }
     }
 }

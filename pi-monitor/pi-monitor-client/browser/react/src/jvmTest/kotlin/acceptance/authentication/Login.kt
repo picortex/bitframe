@@ -17,7 +17,7 @@ import pimonitor.test
 
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class `Given the sign in page` : AcceptanceTest() {
+class Login : AcceptanceTest() {
 
     @Test
     fun should_be_able_to_just_open_the_application() = application.test {

@@ -2,10 +2,13 @@ package pimonitor.authentication.signup
 
 import kotlinx.css.minHeight
 import kotlinx.css.vh
-import pimonitor.authentication.SignUpService
+import pimonitor.PiMonitorService
+import pimonitor.authentication.signup.SignUpState.*
+import pimonitor.authentication.signup.SignUpIntent as Intent
 import react.Props
 import react.RBuilder
 import react.fc
+import react.router.dom.useHistory
 import react.router.dom.withRouter
 import reakt.ErrorBox
 import reakt.Grid
@@ -15,23 +18,37 @@ import styled.css
 import useViewModelState
 
 private external class SignUpProps : Props {
-    var viewModel: SignUpViewModel
+    var scope: SignUpScope
 }
 
 private val SignUp = fc<SignUpProps> { props ->
-    val state = useViewModelState(props.viewModel)
+    val scope = props.scope
+    val viewModel = scope.viewModel
+    val state = useViewModelState(viewModel)
+    val history = useHistory()
     Grid {
         css { minHeight = 100.vh }
 
         when (state) {
-            is SignUpState.Loading -> LoadingBox(state.message)
-            is SignUpState.Form -> SignUpForm(props.viewModel, state)
-            is SignUpState.Failure -> ErrorBox(state.cause)
-            is SignUpState.Success -> SuccessBox(state.message)
+            is Loading -> LoadingBox(state.message)
+            is Failure -> ErrorBox(state.cause)
+            is Success -> SuccessBox(state.message)
+            is OrganisationForm -> OrganisationForm(
+                fields = state.fields,
+                onNext = { viewModel.post(Intent.SubmitBusinessForm(it)) }
+            )
+            is IndividualForm -> IndividualForm(
+                fields = state.fields,
+                onNext = { viewModel.post(Intent.SubmitIndividualForm(it)) }
+            )
+            SelectRegistrationType -> SelectRegistrationType(
+                onIndividualClicked = { scope.registerAsIndividual() },
+                onOrganisationClicked = { scope.registerAsOrganisation() }
+            )
         }
     }
 }
 
-fun RBuilder.SignUp(service: SignUpService) = child(withRouter(SignUp)) {
-    attrs.viewModel = SignUpViewModel(service)
+fun RBuilder.SignUp(service: PiMonitorService) = child(withRouter(SignUp)) {
+    attrs.scope = SignUpScope(service.signUp)
 }
