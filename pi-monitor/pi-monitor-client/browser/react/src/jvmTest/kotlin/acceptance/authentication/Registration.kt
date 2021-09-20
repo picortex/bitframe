@@ -10,8 +10,10 @@ import org.testcontainers.junit.jupiter.Testcontainers
 import pimonitor.MonitorParams
 import pimonitor.screens.api.toBeVisible
 import pimonitor.test
+import kotlin.test.Ignore
 import kotlin.test.Test
 
+@Ignore
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class Registration : AcceptanceTest() {
