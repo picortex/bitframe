@@ -1,25 +1,26 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("tz.co.asoft.library")
+    id("org.jetbrains.dokka")
 }
 
 kotlin {
     jvm { library() }
     js(IR) { library() }
+    nativeTargets(true)
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-client-sdk-core"))
-                api(project(":bitframe-presenters"))
-                api(asoft("viewmodel-core", vers.asoft.viewmodel))
+                api(kotlinx("serialization-core", vers.kotlinx.serialization))
+                api(project(":bitframe-annotations-core"))
             }
         }
 
         val commonTest by getting {
             dependencies {
-                api(project(":bitframe-client-sdk-test"))
-                api(asoft("viewmodel-test-expect", vers.asoft.viewmodel))
+                implementation(asoft("expect-core", vers.asoft.expect))
             }
         }
     }

@@ -1,13 +1,13 @@
 @file:JsExport
 
-package pimonitor.presenters
+package bitframe.presenters
 
+import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-data class ButtonInputField(
-    val text: String,
-) {
+@Serializable
+data class ButtonInputField(val text: String) {
     @JsName("withHandler")
     constructor(text: String, handler: () -> Unit) : this(text) {
         this.handler = handler

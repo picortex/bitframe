@@ -3,6 +3,8 @@ package pimonitor.authentication.signup
 import kotlinx.css.minHeight
 import kotlinx.css.vh
 import pimonitor.PiMonitorService
+import pimonitor.authentication.signup.SignUpState.*
+import pimonitor.authentication.signup.SignUpIntent as Intent
 import react.Props
 import react.RBuilder
 import react.fc
@@ -28,14 +30,18 @@ private val SignUp = fc<SignUpProps> { props ->
         css { minHeight = 100.vh }
 
         when (state) {
-            is SignUpState.Loading -> LoadingBox(state.message)
-            is SignUpState.Failure -> ErrorBox(state.cause)
-            is SignUpState.Success -> SuccessBox(state.message)
-            is SignUpState.NameEmailForm -> NameEmailForm(
-                params = state.params,
-                onNext = { viewModel.post(SignUpIntent.SubmitForm(it)) }
+            is Loading -> LoadingBox(state.message)
+            is Failure -> ErrorBox(state.cause)
+            is Success -> SuccessBox(state.message)
+            is OrganisationForm -> OrganisationForm(
+                fields = state.fields,
+                onNext = { viewModel.post(Intent.SubmitBusinessForm(it)) }
             )
-            SignUpState.SelectRegistrationType -> SelectRegistrationType(
+            is IndividualForm -> IndividualForm(
+                fields = state.fields,
+                onNext = { viewModel.post(Intent.SubmitIndividualForm(it)) }
+            )
+            SelectRegistrationType -> SelectRegistrationType(
                 onIndividualClicked = { scope.registerAsIndividual() },
                 onOrganisationClicked = { scope.registerAsOrganisation() }
             )

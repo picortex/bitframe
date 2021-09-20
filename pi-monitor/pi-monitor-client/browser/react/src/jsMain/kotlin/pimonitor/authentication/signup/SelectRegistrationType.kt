@@ -18,7 +18,8 @@ internal fun RBuilder.SelectRegistrationType(
 ) = styledDiv {
     css {
         centerContent()
-        margin(20.pct, 40.pct)
+        margin(LinearDimension.auto)
+        minWidth = 250.px
     }
 
     Grid { theme ->

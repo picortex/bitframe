@@ -1,11 +1,13 @@
 @file:JsExport
 
-package pimonitor.presenters
+package bitframe.presenters
 
+import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
+@Serializable
 data class TextInputField(
     val label: String,
     val hint: String = label,
-    val value: String? = null
+    var value: String? = null
 )

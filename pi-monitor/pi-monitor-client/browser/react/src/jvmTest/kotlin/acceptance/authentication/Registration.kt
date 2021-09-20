@@ -7,13 +7,12 @@ import expect.expect
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.junit.jupiter.Testcontainers
-import pimonitor.MonitorParams
+import pimonitor.MonitorBusinessParams
+import pimonitor.MonitorPersonParams
 import pimonitor.screens.api.toBeVisible
 import pimonitor.test
-import kotlin.test.Ignore
 import kotlin.test.Test
 
-@Ignore
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class Registration : AcceptanceTest() {
@@ -27,7 +26,11 @@ class Registration : AcceptanceTest() {
     @Nested
     inner class `Individual Registration` {
         // Given a Person with details
-        private val person = MonitorParams(name = "John Doe", email = "john.doe@johndoeinc.com")
+        private val person = MonitorPersonParams(
+            name = "John Doe",
+            email = "john.doe@johndoeinc.com",
+            password = "1234"
+        )
 
         @Test
         fun should_should_be_able_to_sign_individually() = application.test {
@@ -40,8 +43,17 @@ class Registration : AcceptanceTest() {
     @Nested
     inner class `Organisational Registration` {
         // Given
-        private val person = MonitorParams(name = "John Doe", email = "john.doe@johndoeinc.com")
-        private val business = MonitorParams(name = "John Doe Inc.", email = "support@johndoeinc.com")
+        private val person = MonitorPersonParams(
+            name = "John Doe",
+            email = "john.doe@johndoeinc.com",
+            password = "1234"
+        )
+
+        // Given
+        private val business = MonitorBusinessParams(
+            name = "John Doe Inc.",
+            email = "support@johndoeinc.com"
+        )
 
         @Test
         fun should_register_a_new_user() = application.test {

@@ -2,16 +2,20 @@
 
 package pimonitor.authentication.signup
 
-import pimonitor.MonitorParams
-import pimonitor.PiMonitorService
+import pimonitor.MonitorBusinessParams
+import pimonitor.MonitorPersonParams
 import pimonitor.authentication.SignUpService
+import useViewModelState
 import kotlin.reflect.KFunction1
 import pimonitor.authentication.signup.SignUpIntent as Intent
 
-
-external interface Params {
+external interface OrganisationParams {
     var name: String?
     var email: String?
+}
+
+external interface IndividualParams : OrganisationParams {
+    var password: String?
 }
 
 private inline fun <F : KFunction1<*, *>> F.bind(obj: Any): F {
@@ -35,9 +39,14 @@ class SignUpScope(service: SignUpService) {
         viewModel.post(Intent.RegisterAsOrganization(null))
     }
 
-    val submitForm = { params: Params ->
-        viewModel.post(Intent.SubmitForm(params.toMonitorParams()))
+    val submitIndividualForm = { params: IndividualParams ->
+        viewModel.post(Intent.SubmitIndividualForm(params.toMonitorPersonParams()))
     }
 
-    private fun Params.toMonitorParams() = MonitorParams(name, email)
+    val submitOrganisationForm = { params: OrganisationParams ->
+        viewModel.post(Intent.SubmitBusinessForm(params.toMonitorBusinessParams()))
+    }
+
+    private fun IndividualParams.toMonitorPersonParams() = MonitorPersonParams(name, email, password)
+    private fun OrganisationParams.toMonitorBusinessParams() = MonitorBusinessParams(name, email)
 }

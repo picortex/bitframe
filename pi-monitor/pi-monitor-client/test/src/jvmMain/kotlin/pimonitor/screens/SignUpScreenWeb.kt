@@ -1,44 +1,45 @@
 package pimonitor.screens
 
+import com.codeborne.selenide.Selectors.byAttribute
 import com.codeborne.selenide.Selectors.withText
 import kotlinx.coroutines.delay
 import org.openqa.selenium.By
-import pimonitor.MonitorParams
+import pimonitor.MonitorBusinessParams
+import pimonitor.MonitorPersonParams
 import pimonitor.screens.authentication.SignUpScreen
 import pimonitor.utils.isVisible
 import kotlin.test.assertTrue
 import com.codeborne.selenide.Selenide.`$` as S
 
 class SignUpScreenWeb : SignUpScreen {
-    private val nameInput = S(By.xpath("/html/body/div/div/div/form/div[1]/input"))
-    private val emailInput = S(By.xpath("/html/body/div/div/div/form/div[2]/input"))
-    private val nextOrSubmitButton = S(By.xpath("/html/body/div/div/div/form/div[3]/button[2]"))
+    private val nameInput = S(By.name("name"))
+    private val emailInput = S(By.name("email"))
+    private val passwordInput = S(By.name("password"))
+    private val nextOrSubmitButton = S(byAttribute("type", "submit"))
 
-    override suspend fun signUpIndividuallyAs(person: MonitorParams) {
+    override suspend fun signUpIndividuallyAs(person: MonitorPersonParams) {
         S(withText("Individual")).click()
         nameInput.sendKeys(person.name)
         emailInput.sendKeys(person.email)
+        passwordInput.sendKeys(person.password)
+
         nextOrSubmitButton.click()
     }
 
-    override suspend fun signUpAs(person: MonitorParams, representing: MonitorParams) {
-        val nameInput = S(By.xpath("/html/body/div/div/div/form/div[1]/input"))
+    override suspend fun signUpAs(person: MonitorPersonParams, representing: MonitorBusinessParams) {
+        S(withText("Organisation")).click()
         nameInput.sendKeys(representing.name)
         emailInput.sendKeys(representing.email)
         nextOrSubmitButton.click()
         nameInput.sendKeys(person.name)
         emailInput.sendKeys(person.email)
+        passwordInput.sendKeys(person.password)
         nextOrSubmitButton.click()
     }
 
     private suspend fun expectUserToBeRegistered(waitCounts: Int) {
-        val dialog = S(By.xpath("//*[@id=\"root\"]/div/div/div/div/div/div[2]"))
-        if (waitCounts < 5 && dialog.innerText().contains("Please wait")) {
-            delay(1000)
-            expectUserToBeRegistered(waitCounts + 1)
-        }
         assertTrue(
-            dialog.innerText().contains("Your registration completed successfully"),
+            S(withText("Registration completed successfully")).isVisible(),
             "Expected User to be Registered but was not"
         )
     }
