@@ -10,6 +10,10 @@
 
 - [x] Updated sample section in readme to ease readability
 
+### Client mobile & web
+
+- [x] Introduction of renderers
+
 # 0.0.24 : 2021.09.13
 
 ## Bitframe

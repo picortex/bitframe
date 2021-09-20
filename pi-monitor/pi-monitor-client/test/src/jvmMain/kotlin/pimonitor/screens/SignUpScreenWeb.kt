@@ -1,19 +1,30 @@
 package pimonitor.screens
 
+import com.codeborne.selenide.Selectors.withText
 import kotlinx.coroutines.delay
 import org.openqa.selenium.By
 import pimonitor.MonitorParams
 import pimonitor.screens.authentication.SignUpScreen
+import pimonitor.utils.isVisible
 import kotlin.test.assertTrue
 import com.codeborne.selenide.Selenide.`$` as S
 
-class SignUpScreen : SignUpScreen {
+class SignUpScreenWeb : SignUpScreen {
+    private val nameInput = S(By.xpath("/html/body/div/div/div/form/div[1]/input"))
+    private val emailInput = S(By.xpath("/html/body/div/div/div/form/div[2]/input"))
+    private val nextOrSubmitButton = S(By.xpath("/html/body/div/div/div/form/div[3]/button[2]"))
+
+    override suspend fun signUpIndividuallyAs(person: MonitorParams) {
+        S(withText("Individual")).click()
+        nameInput.sendKeys(person.name)
+        emailInput.sendKeys(person.email)
+        nextOrSubmitButton.click()
+    }
+
     override suspend fun signUpAs(person: MonitorParams, representing: MonitorParams) {
         val nameInput = S(By.xpath("/html/body/div/div/div/form/div[1]/input"))
         nameInput.sendKeys(representing.name)
-        val emailInput = S(By.xpath("/html/body/div/div/div/form/div[2]/input"))
         emailInput.sendKeys(representing.email)
-        val nextOrSubmitButton = S(By.xpath("/html/body/div/div/div/form/div[3]/button[2]"))
         nextOrSubmitButton.click()
         nameInput.sendKeys(person.name)
         emailInput.sendKeys(person.email)
@@ -36,8 +47,5 @@ class SignUpScreen : SignUpScreen {
         expectUserToBeRegistered(0)
     }
 
-    override fun isVisible(): Boolean {
-        val heading = S(By.xpath("/html/body/div/div/div/form/h2"))
-        return heading.innerText().contains("Enter Business Info")
-    }
+    override suspend fun isVisible(): Boolean = S(withText("Register As")).isVisible()
 }

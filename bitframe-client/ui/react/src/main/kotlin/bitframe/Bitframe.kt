@@ -3,49 +3,37 @@ package bitframe
 import bitframe.authentication.login.SignInPage
 import bitframe.landing.LandingPage
 import bitframe.panel.Panel
+import bitframe.renderers.Renderer
 import react.RBuilder
 import react.router.dom.*
 import styled.styledDiv
 
-open class AbstractModuleRoute(
-    val permits: List<String>,
-    val path: String,
-    val scope: String,
-    val render: RBuilder.(props: RouteResultProps) -> Unit
-)
-
-fun ModuleRoute(
-    path: String,
-    permits: List<String>,
-    scope: String,
-    builder: RBuilder.(props: RouteResultProps) -> Unit
-) = AbstractModuleRoute(permits, path, scope, builder)
-
 internal const val SignInPageRoute = "/authentication/sign-in/"
 internal const val SignUpPageRoute = "/authentication/sign-up/"
 internal const val PanelPageRoute = "/panel"
+internal const val HomeRoute = "/"
 
-private fun routes(client: BitframeService, version: String) = listOf(
-    ModuleRoute(SignInPageRoute, listOf(), "") {
-        SignInPage(client.signIn, version)
-    },
-    ModuleRoute(PanelPageRoute, listOf(), "") {
-        Panel()
-    },
-    ModuleRoute("/", listOf(), "") {
-        LandingPage(version)
-    }
+private fun defaultRenderers(
+    client: BitframeService,
+    moduleRenderers: Map<String, Renderer>,
+    version: String
+): Map<String, Renderer> = mapOf(
+    SignInPageRoute to { SignInPage(client.signIn, version) },
+    PanelPageRoute to { Panel(moduleRenderers) },
+    HomeRoute to { LandingPage(version) }
 )
 
 fun RBuilder.Bitframe(
     client: BitframeService,
-    registration: RBuilder.(props: RouteResultProps) -> Unit,
+    routeRenderers: Map<String, Renderer> = mapOf(),
+    moduleRenderers: Map<String, Renderer> = mapOf(),
     version: String
 ) = browserRouter {
-    val routes = routes(client, version)
+    val allRouteRenderers = routeRenderers.toMutableMap().apply {
+        putAll(defaultRenderers(client, moduleRenderers, version))
+    }
     switch {
-        route(SignUpPageRoute, exact = true, strict = true, render = registration)
-        for (r in routes) route(r.path, render = r.render)
+        for ((path, renderer) in allRouteRenderers) route(path, render = renderer)
         styledDiv { +"Whoops, Not Found" }
     }
 }

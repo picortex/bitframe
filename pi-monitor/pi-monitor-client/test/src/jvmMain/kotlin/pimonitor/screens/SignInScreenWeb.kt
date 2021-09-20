@@ -8,11 +8,11 @@ import pimonitor.screens.authentication.SignInScreen
 import pimonitor.utils.isVisible
 import com.codeborne.selenide.Selenide.`$` as S
 
-class SignInScreen : SignInScreen {
+class SignInScreenWeb : SignInScreen {
     private val username by lazy { S("#username") }
     private val pass by lazy { S("#pass") }
 
-    override fun isVisible(): Boolean = username.isVisible() && pass.isVisible()
+    override suspend fun isVisible(): Boolean = username.isVisible() && pass.isVisible()
 
     override suspend fun loginWith(credentials: LoginCredentials) {
         username.sendKeys(credentials.username)
@@ -20,7 +20,7 @@ class SignInScreen : SignInScreen {
         pass.pressEnter()
     }
 
-    fun isShowingInvalidCredentials(): Boolean {
+    override suspend fun isShowingInvalidCredentials(): Boolean {
         val el = S(By.xpath("/html/body/div/div/div/div/div/div/div[2]"))
         return try {
             el.shouldHave(text("Invalid Login Credentials"))

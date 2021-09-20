@@ -18,9 +18,12 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(asoft("logging-console", vers.asoft.logging))
                 api(project(":pi-monitor-core"))
                 api(project(":bitframe-client-sdk-test"))
+
+                api(asoft("logging-console", vers.asoft.logging))
+                api(asoft("name-generator", vers.asoft.contacts))
+                api(asoft("email-generator", vers.asoft.contacts))
             }
         }
 
@@ -32,7 +35,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(asoft("expect-core", vers.asoft.expect))
+                implementation(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
     }

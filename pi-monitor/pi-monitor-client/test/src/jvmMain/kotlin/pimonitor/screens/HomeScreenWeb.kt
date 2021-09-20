@@ -6,8 +6,8 @@ import pimonitor.screens.authentication.SignInScreen
 import pimonitor.screens.authentication.SignUpScreen
 import com.codeborne.selenide.Selenide.`$` as S
 
-class HomeScreen : LandingScreen {
-    override fun isVisible(): Boolean = try {
+class HomeScreenWeb : LandingScreen {
+    override suspend fun isVisible(): Boolean = try {
         S(By.xpath("//*[@id=\"root\"]/div")).shouldHave(text("Welcome to bitframe"))
         true
     } catch (err: Throwable) {
@@ -16,11 +16,11 @@ class HomeScreen : LandingScreen {
 
     override fun clickSignInButton(): SignInScreen {
         S(By.xpath("/html/body/div/div/div/div/button[2]")).click()
-        return SignInScreen()
+        return SignInScreenWeb()
     }
 
     override fun clickSignUpButton(): SignUpScreen {
         S(By.xpath("/html/body/div/div/div/div/button[1]")).click()
-        return SignUpScreen()
+        return SignUpScreenWeb()
     }
 }

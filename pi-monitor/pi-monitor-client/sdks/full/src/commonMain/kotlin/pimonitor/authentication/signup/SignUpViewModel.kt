@@ -7,63 +7,119 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import pimonitor.MonitorParams
+import pimonitor.MonitorType
 import pimonitor.authentication.SignUpService
 import pimonitor.authentication.signup.SignUpIntent.*
-import pimonitor.authentication.signup.SignUpState.Form
+import pimonitor.presenters.ButtonInputField
+import pimonitor.presenters.TextInputField
 import pimonitor.toBusiness
 import pimonitor.toPerson
 import viewmodel.ViewModel
 import kotlin.js.JsExport
+import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
 @JsExport
 class SignUpViewModel(
     private val service: SignUpService
-) : ViewModel<SignUpIntent, State>(Form.Stage01(null)) {
+) : ViewModel<Intent, State>(State.SelectRegistrationType) {
 
     private val recoveryTime = 3000
 
-    override fun CoroutineScope.execute(i: SignUpIntent): Any = when (i) {
-        is Stage01 -> stage01()
-        is Stage02 -> stage02(i)
-        is Submit -> submit(i)
+    private val individualFormParams = NameEmailFormParams(
+        title = "Enter your personal information",
+        name = TextInputField("Name", "John Doe"),
+        email = TextInputField("Email", "john@doe.com"),
+        nextButton = ButtonInputField("Submit"),
+        prevButton = ButtonInputField("Back") { post(SelectRegistrationType) }
+    )
+
+    private val organisationFormParams = NameEmailFormParams(
+        title = "Enter your organisation's information",
+        name = TextInputField("Organisation's Name", "John Doe Enterprises"),
+        email = TextInputField("Organisation's Email", "support@enterpries.com"),
+        nextButton = ButtonInputField("Submit"),
+        prevButton = ButtonInputField("Back") { post(SelectRegistrationType) }
+    )
+
+    override fun CoroutineScope.execute(i: Intent): Any = when (i) {
+        SelectRegistrationType -> ui.value = State.SelectRegistrationType
+        is RegisterAsIndividual -> ui.value = State.NameEmailForm(
+            params = i.params ?: individualFormParams,
+            prevParams = null
+        )
+        is RegisterAsOrganization -> ui.value = State.NameEmailForm(
+            params = i.params ?: organisationFormParams,
+            prevParams = null
+        )
+        is SubmitForm -> submitForm(i)
     }
 
-    private fun CoroutineScope.submit(i: Submit) = launch {
-        var recover = ui.value
+    private fun CoroutineScope.submitForm(i: SubmitForm) = launch {
+        val state = ui.value
+        try {
+            val form = state as? State.NameEmailForm ?: throw IllegalStateException("Invalid state")
+            if (form.params.title == organisationFormParams.title) {
+                submitBusinessInfo(i.params, form)
+            } else {
+                submitPersonalInfo(i.params, form)
+            }
+        } catch (cause: Throwable) {
+            ui.value = State.Failure(cause)
+            delay(recoveryTime.toLong())
+            ui.value = state
+        }
+    }
+
+    private fun CoroutineScope.submitPersonalInfo(personInfo: MonitorParams, state: State.NameEmailForm) = launch {
         flow {
-            val stage02 = recover as? Form.Stage02 ?: throw IllegalStateException("Stop trying to register without using the registration form")
-            recover = stage02.copy(person = i.person)
-            val business = stage02.business.toBusiness()
-            val person = i.person.toPerson()
-            emit(State.Loading("Signing you up, Please wait . . ."))
-            service.register(business, person).await()
-            emit(State.Success("Your registration completed successfully"))
+            emit(State.Loading("Submitting your registration, Please wait . . ."))
+            val person = personInfo.toPerson()
+            val prevParams = state.prevParams
+            if (prevParams != null && prevParams.title == organisationFormParams.title) {
+                val business = MonitorParams(prevParams.name.value, prevParams.email.value).toBusiness()
+                service.register(business, representedBy = person).await()
+            } else {
+                service.registerIndividuallyAs(person).await()
+            }
+            emit(State.Success("Registration completed successfully"))
         }.catch {
-            emit(State.Failure(it))
+            emit(State.Failure(it, "Registration failed"))
             delay(recoveryTime.toLong())
-            emit(recover)
-        }.collect { ui.value = it }
-    }
-
-    private fun CoroutineScope.stage02(i: Stage02) = launch {
-        var recover = ui.value
-        flow<State> {
-            recover = Form.Stage01(i.business)
-            // Ensure that it is a valid business
-            i.business.toBusiness()
-            emit(Form.Stage02(i.business, null))
-        }.catch {
-            emit(State.Failure(it))
-            delay(recoveryTime.toLong())
-            emit(recover)
+            emit(state.withValuesOf(personInfo))
         }.collect {
             ui.value = it
         }
     }
 
-    private fun stage01() = when (val state = ui.value) {
-        is Form.Stage02 -> ui.value = Form.Stage01(state.business)
-        else -> ui.value = Form.Stage01(null)
+    private fun CoroutineScope.submitBusinessInfo(
+        businessInfo: MonitorParams,
+        state: State.NameEmailForm
+    ) = launch {
+        flow {
+            emit(State.Loading("Validating business input"))
+            businessInfo.toBusiness()
+            val prevParams = state.params.withValuesOf(businessInfo)
+            val params = individualFormParams.copy().apply {
+                prevButton.handler = { ui.value = State.NameEmailForm(prevParams, null) }
+            }
+            emit(State.NameEmailForm(params, prevParams))
+        }.catch {
+            emit(State.Failure(it, "Validation Failed"))
+            delay(recoveryTime.toLong())
+            emit(state.withValuesOf(businessInfo))
+        }.collect {
+            ui.value = it
+        }
     }
+
+    private fun State.NameEmailForm.withValuesOf(info: MonitorParams) = copy(
+        params = params.withValuesOf(info)
+    )
+
+    private fun NameEmailFormParams.withValuesOf(info: MonitorParams) = copy(
+        name = name.copy(value = info.name),
+        email = email.copy(value = info.email)
+    )
 }

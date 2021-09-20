@@ -1,6 +1,7 @@
 package bitframe.panel
 
 import bitframe.PanelPageRoute
+import bitframe.renderers.Renderer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.css.em
 import react.RBuilder
@@ -11,7 +12,19 @@ import reakt.NavigationAppBar
 import reakt.*
 import styled.styledDiv
 
-fun RBuilder.Body(controller: MutableStateFlow<DrawerState>) = styledDiv {
+private fun defaultRenderers(): Map<String, Renderer> = mapOf(
+    "/dashboard" to { styledDiv { +"Dashboard will show here" } },
+    "/users" to { styledDiv { +"Users will be displayed here" } }
+)
+
+internal fun RBuilder.Body(
+    controller: MutableStateFlow<DrawerState>,
+    moduleRenderers: Map<String, Renderer>
+) = styledDiv {
+    val allRenderers = moduleRenderers.toMutableMap().apply {
+        putAll(defaultRenderers())
+    }
+
     NavigationAppBar(
         drawerController = controller,
         left = {
@@ -21,14 +34,8 @@ fun RBuilder.Body(controller: MutableStateFlow<DrawerState>) = styledDiv {
 
     Surface(margin = 0.5.em) {
         switch {
-            route("${PanelPageRoute}/dashboard") {
-                styledDiv { +"Dashboard will show here" }
-            }
-            route("${PanelPageRoute}/users") {
-                styledDiv { +"Users will be displayed here" }
-            }
-            route("${PanelPageRoute}/businesses") {
-                styledDiv { +"Business will show here" }
+            for ((path, renderer) in allRenderers) {
+                route("${PanelPageRoute}$path", render = renderer)
             }
             styledDiv { +"Excuse me, are you lost?" }
         }

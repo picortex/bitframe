@@ -4,6 +4,9 @@ package pimonitor.authentication.signup
 
 import pimonitor.MonitorParams
 import pimonitor.PiMonitorService
+import pimonitor.authentication.SignUpService
+import kotlin.reflect.KFunction1
+import pimonitor.authentication.signup.SignUpIntent as Intent
 
 
 external interface Params {
@@ -11,18 +14,30 @@ external interface Params {
     var email: String?
 }
 
-class SignUpScope(service: PiMonitorService) {
+private inline fun <F : KFunction1<*, *>> F.bind(obj: Any): F {
+    asDynamic().bind(obj)
+    return this
+}
 
-    val viewModel = SignUpViewModel(service.signUp)
+class SignUpScope(service: SignUpService) {
 
-    fun goToStage1Intent() = SignUpIntent.Stage01
-    val goToStage01 = { viewModel.post(goToStage1Intent()) }
+    val viewModel = SignUpViewModel(service)
 
-    fun goToStage2Intent(business: Params) = SignUpIntent.Stage02(business.toMonitorParams())
-    val goToStage02 = { business: Params -> viewModel.post(goToStage2Intent(business)) }
+    val selectRegistrationType = {
+        viewModel.post(Intent.SelectRegistrationType)
+    }
 
-    fun submitIntent(person: Params) = SignUpIntent.Submit(person.toMonitorParams())
-    val submit = { person: Params -> viewModel.post(submitIntent(person)) }
+    val registerAsIndividual = {
+        viewModel.post(Intent.RegisterAsIndividual(null))
+    }
+
+    val registerAsOrganisation = {
+        viewModel.post(Intent.RegisterAsOrganization(null))
+    }
+
+    val submitForm = { params: Params ->
+        viewModel.post(Intent.SubmitForm(params.toMonitorParams()))
+    }
 
     private fun Params.toMonitorParams() = MonitorParams(name, email)
 }
