@@ -1,10 +1,11 @@
-# Next
+# 0.0.25 : 2021.09.20
 
 ## PiMonitor
 
 ### Client core sdk
 
 - [x] Updated sample section in readme to ease readability
+- [x] Multi signing paths for individuals and organisations
 
 ### Client full sdk
 
@@ -13,6 +14,12 @@
 ### Client mobile & web
 
 - [x] Introduction of renderers
+
+## Bitframe
+
+### Bitframe Presenters
+
+- [x] Introduction of presenters
 
 # 0.0.24 : 2021.09.13
 
