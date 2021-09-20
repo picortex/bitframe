@@ -1,5 +1,5 @@
 package pimonitor.screens.api
 
 interface Screen {
-    fun isVisible(): Boolean
+    suspend fun isVisible(): Boolean
 }

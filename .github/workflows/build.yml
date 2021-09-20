@@ -1,4 +1,4 @@
-name: Unit, Integration & Acceptance Testing
+name: Integration & Acceptance Testing
 
 on:
   pull_request:
@@ -38,10 +38,6 @@ jobs:
       - name: Download gradle
         run: ./gradlew --version
 
-      - name: Running unit tests
-        run: ./gradlew cleanAllTest jsTest jvmTest --tests unit.*
-        working-directory: .
-
       - name: Prepare integration tests
         run: TEST_MODE=CI ./gradlew createDockerfile
         working-directory: .
@@ -50,6 +46,6 @@ jobs:
         run: TEST_MODE=CI ./gradlew cleanAllTest jvmTest --tests integration.*
         working-directory: .
 
-      - name: Running integration tests
-        run: TEST_MODE=CI ./gradlew cleanAllTest jvmTest --tests acceptance.*
+      - name: Running acceptance tests
+        run: TEST_MODE=CI HEADLESS=true ./gradlew cleanAllTest jvmTest --tests acceptance.*
         working-directory: .

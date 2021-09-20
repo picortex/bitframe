@@ -1,3 +1,5 @@
+@file:JsExport
+
 package bitframe.authentication.signIn
 
 import bitframe.authentication.Account
@@ -12,7 +14,6 @@ import later.await
 import viewmodel.ViewModel
 import kotlin.js.JsExport
 
-@JsExport
 class SignInViewModel(
     private val service: SignInService
 ) : ViewModel<SignInIntent, SignInState>(SignInState.Form(null)) {

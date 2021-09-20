@@ -11,6 +11,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-client-sdk-core"))
+                api(project(":bitframe-presenters"))
                 api(asoft("viewmodel-core", vers.asoft.viewmodel))
             }
         }

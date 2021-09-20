@@ -1,3 +1,32 @@
+# Next :
+
+## CI & CD
+
+- Updated workflows for better naming
+
+# 0.0.25 : 2021.09.20
+
+## PiMonitor
+
+### Client core sdk
+
+- [x] Updated sample section in readme to ease readability
+- [x] Multi signing paths for individuals and organisations
+
+### Client full sdk
+
+- [x] Updated sample section in readme to ease readability
+
+### Client mobile & web
+
+- [x] Introduction of renderers
+
+## Bitframe
+
+### Bitframe Presenters
+
+- [x] Introduction of presenters
+
 # 0.0.24 : 2021.09.13
 
 ## Bitframe

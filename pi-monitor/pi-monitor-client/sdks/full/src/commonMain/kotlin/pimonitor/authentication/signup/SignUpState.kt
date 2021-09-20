@@ -1,19 +1,23 @@
 package pimonitor.authentication.signup
 
-import pimonitor.Monitor
-import pimonitor.MonitorParams
+import bitframe.presenters.ButtonInputField
+import bitframe.presenters.TextInputField
+import pimonitor.MonitorBusinessParams
 import kotlin.js.JsExport
 
 @JsExport
 sealed class SignUpState {
+
     data class Loading(val message: String) : SignUpState()
 
-    sealed class Form(val level: Int) : SignUpState() {
-        data class Stage01(val business: MonitorParams?) : Form(0x01)
-        data class Stage02(val business: MonitorParams, val person: MonitorParams?) : Form(0x02)
+    object SelectRegistrationType : SignUpState()
 
-        val progress = level * 100.0 / 2
-    }
+    data class IndividualForm(
+        val fields: IndividualFormFields,
+        val organisationForm: OrganisationForm?
+    ) : SignUpState()
+
+    data class OrganisationForm(val fields: OrganisationFormFields) : SignUpState()
 
     data class Success(val message: String) : SignUpState()
 
