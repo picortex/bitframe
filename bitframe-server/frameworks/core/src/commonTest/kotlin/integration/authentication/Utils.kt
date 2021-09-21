@@ -1,0 +1,14 @@
+package integration.authentication
+
+import bitframe.server.InMemoryDaoProvider
+import bitframe.server.data.DAOProvider
+import bitframe.server.modules.authentication.DefaultAuthenticationController
+import bitframe.server.modules.authentication.DefaultAuthenticationService
+
+private val inMemoryDaoProvider: DAOProvider = InMemoryDaoProvider()
+
+internal val DAO_PROVIDER_UNDER_TEST = inMemoryDaoProvider
+
+internal val AUTHENTICATION_SERVICE_UNDER_TEST = DefaultAuthenticationService(DAO_PROVIDER_UNDER_TEST)
+
+internal val AUTHENTICATION_CONTROLLER_UNDER_TEST = DefaultAuthenticationController(AUTHENTICATION_SERVICE_UNDER_TEST)

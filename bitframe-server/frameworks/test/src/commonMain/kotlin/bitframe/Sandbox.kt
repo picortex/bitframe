@@ -10,9 +10,10 @@ import io.ktor.http.*
 import io.ktor.http.HttpMethod.Companion.Get
 import io.ktor.http.HttpMethod.Companion.Post
 import io.ktor.http.HttpMethod.Companion.Put
+import kotlinx.serialization.mapper.Mapper
 import logging.ConsoleAppender
 
-open class Sandbox(val component: UnderTest) {
+open class Sandbox(val component: ComponentUnderTest) {
     constructor(application: BitframeApplication) : this(ApplicationUnderTest(application))
     constructor(module: Module) : this(ModuleUnderTest(module))
     constructor(route: HttpRoute) : this(RouteUnderTest(route))
@@ -20,13 +21,13 @@ open class Sandbox(val component: UnderTest) {
 
     private val console = ConsoleAppender()
 
-    val routes = when (component) {
+    private val routes = when (component) {
         is ApplicationUnderTest<*> -> component.application.modules.flatMap {
             it.actions.map { a -> a.route }
         }
         is ModuleUnderTest<*> -> component.module.actions.map { it.route }
         is ActionUnderTest -> listOf(component.action.route)
-        is RouteUnderTest<*> -> listOf(component.route)
+        is RouteUnderTest -> listOf(component.route)
     }
 
     suspend fun request(request: HttpRequest): HttpResponse {
@@ -53,6 +54,12 @@ open class Sandbox(val component: UnderTest) {
         headers: Map<String, String> = mapOf(),
         body: String = "{}"
     ) = request(HttpRequest(Post, path, headers, body))
+
+    suspend fun post(
+        path: String,
+        headers: Map<String, String> = mapOf(),
+        body: Map<String, Any?>
+    ) = post(path, headers, Mapper.encodeToString(body))
 
     suspend fun put(
         path: String,

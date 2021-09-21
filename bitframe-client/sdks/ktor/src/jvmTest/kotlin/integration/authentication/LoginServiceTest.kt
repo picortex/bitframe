@@ -4,7 +4,7 @@ import bitframe.authentication.KtorSignInService
 import bitframe.authentication.LoginCredentials
 import bitframe.authentication.SignInService
 import expect.expect
-import integration.utils.CONFIGURATION_UNDER_TEST
+import integration.ktor.utils.CONFIGURATION_UNDER_TEST
 import kotlinx.coroutines.runTest
 import later.await
 import kotlin.test.Ignore

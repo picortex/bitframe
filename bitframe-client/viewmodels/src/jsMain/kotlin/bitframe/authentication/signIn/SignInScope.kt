@@ -18,7 +18,7 @@ class SignInScope(service: SignInService) {
 
     fun submitIntent(credentials: SignInCredentials) = SignInIntent.Submit(
         LoginCredentials(
-            username = credentials.username,
+            alias = credentials.username,
             password = credentials.password
         )
     )

@@ -6,13 +6,13 @@ import later.later
 import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
 
-@JsExport
 class KtorSignInService @JvmOverloads constructor(
-    val configuration: KtorClientConfiguration
+    private val configuration: KtorClientConfiguration
 ) : SignInService {
+    private val path = configuration.url + "/api/authentication/sign-in"
     override val config: ClientConfiguration = configuration
     override fun loginWith(credentials: LoginCredentials): Later<LoginConundrum> = configuration.scope.later {
-        val json = configuration.http.get<String>(configuration.url)
+        val json = configuration.http.post<String>(path)
         TODO()
     }
 }

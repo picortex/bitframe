@@ -9,7 +9,6 @@ import pimonitor.test.authentication.SignUpServiceTestImpl
 import pimonitor.test.evaluation.BusinessServiceTestImpl
 import kotlin.js.JsExport
 
-@JsExport
 class PiMonitorServiceTest(
     configuration: TestClientConfiguration
 ) : PiMonitorService(), BitframeTestClient by BitframeTestClient(configuration) {

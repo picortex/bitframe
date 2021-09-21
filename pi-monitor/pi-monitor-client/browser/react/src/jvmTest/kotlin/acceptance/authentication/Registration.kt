@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.junit.jupiter.Testcontainers
 import pimonitor.MonitorBusinessParams
-import pimonitor.MonitorPersonParams
+import pimonitor.IndividualRegistrationParams
 import pimonitor.screens.api.toBeVisible
 import pimonitor.test
 import kotlin.test.Test
@@ -26,7 +26,7 @@ class Registration : AcceptanceTest() {
     @Nested
     inner class `Individual Registration` {
         // Given a Person with details
-        private val person = MonitorPersonParams(
+        private val person = IndividualRegistrationParams(
             name = "John Doe",
             email = "john.doe@johndoeinc.com",
             password = "1234"
@@ -43,7 +43,7 @@ class Registration : AcceptanceTest() {
     @Nested
     inner class `Organisational Registration` {
         // Given
-        private val person = MonitorPersonParams(
+        private val person = IndividualRegistrationParams(
             name = "John Doe",
             email = "john.doe@johndoeinc.com",
             password = "1234"

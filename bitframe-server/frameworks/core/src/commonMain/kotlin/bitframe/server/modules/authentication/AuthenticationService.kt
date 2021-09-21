@@ -1,5 +1,8 @@
 package bitframe.server.modules.authentication
 
+import bitframe.authentication.LoginConundrum
+import bitframe.authentication.LoginCredentials
+import bitframe.server.http.HttpResponse
 import later.Later
 import users.account.Account
 import users.server.AccountsDao
@@ -13,4 +16,5 @@ interface AuthenticationService {
     fun createDefaultUserIfNotExist(params: CreateUserParams): Later<User>
     fun users(): Later<List<User>>
     fun accounts(): Later<List<Account>>
+    fun signIn(credentials: LoginCredentials): Later<LoginConundrum>
 }

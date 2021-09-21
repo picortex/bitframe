@@ -24,7 +24,7 @@ fun RBuilder.LoginForm(
         styledH1 {
             +"Secure Login"
         }
-        TextInput(name = "username", label = "Username", value = cred?.username)
+        TextInput(name = "username", label = "Username", value = cred?.alias)
         TextInput(name = "pass", label = "Password", type = InputType.password, value = cred?.password)
         ContainedButton(name = "Login")
     } onSubmit {

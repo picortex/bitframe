@@ -3,9 +3,8 @@
 package pimonitor.authentication.signup
 
 import pimonitor.MonitorBusinessParams
-import pimonitor.MonitorPersonParams
+import pimonitor.IndividualRegistrationParams
 import pimonitor.authentication.SignUpService
-import useViewModelState
 import kotlin.reflect.KFunction1
 import pimonitor.authentication.signup.SignUpIntent as Intent
 
@@ -47,6 +46,6 @@ class SignUpScope(service: SignUpService) {
         viewModel.post(Intent.SubmitBusinessForm(params.toMonitorBusinessParams()))
     }
 
-    private fun IndividualParams.toMonitorPersonParams() = MonitorPersonParams(name, email, password)
+    private fun IndividualParams.toMonitorPersonParams() = IndividualRegistrationParams(name, email, password)
     private fun OrganisationParams.toMonitorBusinessParams() = MonitorBusinessParams(name, email)
 }

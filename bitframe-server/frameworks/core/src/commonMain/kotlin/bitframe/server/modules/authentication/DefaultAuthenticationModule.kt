@@ -4,6 +4,7 @@ import bitframe.server.actions.Action
 import bitframe.server.data.DAOProvider
 import bitframe.server.http.HttpResponse
 import bitframe.server.http.HttpRoute
+import bitframe.server.modules.authentication.actions.DefaultSignInAction
 import io.ktor.http.*
 import io.ktor.http.HttpMethod.Companion.Get
 import io.ktor.http.HttpMethod.Companion.Post
@@ -53,9 +54,7 @@ open class DefaultAuthenticationModule @JvmOverloads constructor(
     }
 
     override val actions: List<Action> = listOf(
-        Action("login", mapOf(), HttpRoute(Post, "/login") {
-            HttpResponse(HttpStatusCode.OK)
-        }),
+        DefaultSignInAction(controller),
         Action("users", mapOf(), HttpRoute(Get, "/users") {
             val users = controller.service.users().await()
             HttpResponse(HttpStatusCode.OK, json.encodeToString(ListSerializer(User.serializer()), users))

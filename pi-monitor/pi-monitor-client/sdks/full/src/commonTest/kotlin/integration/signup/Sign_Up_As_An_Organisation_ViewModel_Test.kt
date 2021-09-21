@@ -6,7 +6,7 @@ import expect.expect
 import expect.toBe
 import kotlinx.coroutines.runTest
 import pimonitor.MonitorBusinessParams
-import pimonitor.MonitorPersonParams
+import pimonitor.IndividualRegistrationParams
 import pimonitor.authentication.signup.OrganisationFormFields
 import pimonitor.authentication.signup.SignUpViewModel
 import utils.SERVICE_UNDER_TEST
@@ -37,7 +37,7 @@ class Sign_Up_As_An_Organisation_ViewModel_Test {
         vm.expect(Intent.SubmitBusinessForm(businessInfo)).toBeIn<State.IndividualForm>()
 
         // Enter personal info
-        val personalInfo = MonitorPersonParams(
+        val personalInfo = IndividualRegistrationParams(
             name = "John Doe",
             email = "john@doe.com",
             password = "1234"
