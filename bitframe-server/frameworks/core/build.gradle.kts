@@ -17,10 +17,12 @@ kotlin {
                 api(project(":users-server-dao-core"))
                 api(project(":users-server-services-core"))
 
-                api("io.ktor:ktor-http:${vers.ktor}")
+                api(asoft("result-core", vers.asoft.duality))
                 api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
                 api(asoft("logging-console", vers.asoft.logging))
                 api(asoft("later-ktx", vers.asoft.later))
+
+                api("io.ktor:ktor-http:${vers.ktor}")
             }
         }
 

@@ -32,7 +32,12 @@ class DefaultAuthenticationService(
     }
 
     override fun signIn(credentials: LoginCredentials): Later<LoginConundrum> = later {
-        TODO()
+        LoginConundrum(
+            user = bitframe.authentication.User("test"),
+            accounts = listOf(
+                bitframe.authentication.Account("uid")
+            )
+        )
     }
 
     override fun users(): Later<List<User>> {
