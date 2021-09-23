@@ -14,9 +14,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-//                val ksp by configurations
-//                ksp.dependencies.add(project(":bitframe-annotations-processor"))
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
+                api("io.ktor:ktor-http:${vers.ktor}")
                 api(project(":bitframe-annotations-core"))
             }
         }

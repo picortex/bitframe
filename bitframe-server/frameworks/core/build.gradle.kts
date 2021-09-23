@@ -21,8 +21,6 @@ kotlin {
                 api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
                 api(asoft("logging-console", vers.asoft.logging))
                 api(asoft("later-ktx", vers.asoft.later))
-
-                api("io.ktor:ktor-http:${vers.ktor}")
             }
         }
 
