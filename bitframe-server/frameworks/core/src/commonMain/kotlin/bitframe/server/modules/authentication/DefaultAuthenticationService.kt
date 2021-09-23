@@ -2,8 +2,8 @@ package bitframe.server.modules.authentication
 
 import bitframe.authentication.LoginConundrum
 import bitframe.authentication.LoginCredentials
-import bitframe.server.data.Condition
 import bitframe.server.data.DAOProvider
+import bitframe.server.data.contains
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import later.Later
@@ -31,12 +31,11 @@ class DefaultAuthenticationService(
     }
 
     override fun signIn(credentials: LoginCredentials): Later<LoginConundrum> = later {
-        val condition = Condition(
-            "email", Condition.Operator.Equals, "test.com"
-        )
-        usersDao.all()
+        val matches = usersDao.all(where = "contacts" contains credentials.alias).await()
+        if (matches.isEmpty()) throw RuntimeException("User with alias=${credentials.alias}, not found")
+        val match = matches.first()
         LoginConundrum(
-            user = bitframe.authentication.User("test"),
+            user = bitframe.authentication.User(match.tag),
             accounts = listOf(
                 bitframe.authentication.Account("uid")
             )

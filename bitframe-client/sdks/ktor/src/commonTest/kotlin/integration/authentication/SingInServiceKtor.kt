@@ -13,9 +13,9 @@ class SingInServiceKtor {
 
     @Test
     fun should_be_able_to_connect_to_a_server() = runTest {
-        val credentials = LoginCredentials("test@user.com", "pass1")
+        val credentials = LoginCredentials("user1@test.com", "pass1")
         val res = service.loginWith(credentials).await()
         expect(res.accounts).toBeOfSize(1)
-        expect(res.user.username).toBe("test")
+        expect(res.user.username).toBe("testuser")
     }
 }

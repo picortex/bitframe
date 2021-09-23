@@ -30,7 +30,7 @@ class InMemoryDaoProvider @JvmOverloads constructor(
                 uid = "user-1",
                 name = "Test User",
                 tag = "testuser",
-                contacts = Contacts.of("user1@test.com"),
+                contacts = Contacts("user1@test.com"),
                 photoUrl = null,
                 accounts = listOf(
                     testAccounts()["account-1"]!!
