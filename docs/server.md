@@ -8,4 +8,4 @@ converting anything and everything with in it
 
 - decoding inputs (i.e. request body or query params) to internal models
 - validating those inputs so that they can be passed on to the next layer
-- encode the response to a well json output 
+- encode the response to a well json output

@@ -10,6 +10,6 @@ fun DefaultSignUpAction(
     name: String = "Sign Up",
     path: String = "/api/authentication/sign-up"
 ) = Action(name, mapOf(), HttpRoute(HttpMethod.Post, path) { req ->
-    val res = controller.signIn(req)
+    val res = controller.signUp(req)
     HttpResponse(HttpStatusCode.OK)
 })
