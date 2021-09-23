@@ -26,9 +26,6 @@ class UsersDaoInMemory(
     }
 
     override fun all(where: Condition<String, Any?>?) = if (where == null) Later.resolve(users.values.toList()) else {
-        val matches = users.filterValues {
-            where.apply(Mapper.decodeFromString(Json.encodeToString(User.serializer(), it)))
-        }.values
-        Later.resolve(matches.toList())
+        Later.resolve(users.values.matching(where, User.serializer()))
     }
 }

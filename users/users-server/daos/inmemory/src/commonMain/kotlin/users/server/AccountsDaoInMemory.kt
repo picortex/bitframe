@@ -22,9 +22,6 @@ class AccountsDaoInMemory(
     }
 
     override fun all(where: Condition<String, Any?>?): Later<List<Account>> = if (where == null) Later.resolve(accounts.values.toList()) else {
-        val matches = accounts.filterValues {
-            where.apply(Mapper.decodeFromString(Json.encodeToString(Account.serializer(), it)))
-        }.values
-        Later.resolve(matches.toList())
+        Later.resolve(accounts.values.matching(where, Account.serializer()))
     }
 }

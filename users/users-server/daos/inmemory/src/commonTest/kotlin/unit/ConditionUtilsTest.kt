@@ -16,14 +16,28 @@ class ConditionUtilsTest {
         val contacts: Contacts
     )
 
+    private val people = listOf("john", "juma", "anderson").mapIndexed { i, it ->
+        Person(it, Contacts("email$i@test.com"))
+    }
+
     @Test
-    fun conditions_can_match_easily() {
+    fun conditions_can_match_top_level_properties() {
         val condition = Condition("name", Condition.Operator.Equals, "anderson")
-        val people = listOf("john", "juma", "anderson").mapIndexed { i, it ->
-            Person(it, Contacts("email$i@test.com")).also { p ->
-                println(Json.encodeToString(Person.serializer(), p))
-            }
-        }
-        expect(people.matching(condition, Person.serializer())).toBeOfSize(1)
+        val matches = people.matching(condition, Person.serializer())
+        expect(matches).toBeOfSize(1)
+    }
+
+    @Test
+    fun conditions_can_match_nested_level_properties() {
+        val condition = Condition("contacts", Condition.Operator.Contains, "email1@test.com")
+        val matches = people.matching(condition, Person.serializer())
+        expect(matches).toBeOfSize(1)
+    }
+
+    @Test
+    fun condition_can_match_multiple_levels() {
+        val condition = Condition("contacts", Condition.Operator.Contains, "email")
+        val matches = people.matching(condition, Person.serializer())
+        expect(matches).toBeOfSize(3)
     }
 }
