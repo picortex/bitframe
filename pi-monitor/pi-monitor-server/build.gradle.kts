@@ -35,6 +35,7 @@ kotlin {
 
         val test by getting {
             dependencies {
+                implementation(project(":bitframe-server-framework-test"))
                 implementation(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
