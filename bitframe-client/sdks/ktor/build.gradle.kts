@@ -26,6 +26,7 @@ kotlin {
             dependencies {
                 api(project(":bitframe-client-sdk-core"))
                 api("io.ktor:ktor-client-core:${vers.ktor}")
+                api(asoft("result-core", vers.asoft.duality))
             }
         }
 

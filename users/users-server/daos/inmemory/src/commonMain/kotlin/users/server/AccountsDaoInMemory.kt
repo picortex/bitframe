@@ -1,5 +1,9 @@
 package users.server
 
+import bitframe.server.data.Condition
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.mapper.Mapper
+import kotlinx.serialization.mapper.WrappedMap
 import later.Later
 import users.account.Account
 import users.account.CreateAccountParams
@@ -17,5 +21,10 @@ class AccountsDaoInMemory(
         } else Later.resolve(existing)
     }
 
-    override fun all(): Later<List<Account>> = Later.resolve(accounts.values.toList())
+    override fun all(where: Condition<String, Any?>?): Later<List<Account>> = if (where == null) Later.resolve(accounts.values.toList()) else {
+        val matches = accounts.filterValues {
+            where.apply(Mapper.decodeFromString(Json.encodeToString(Account.serializer(), it)))
+        }.values
+        Later.resolve(matches.toList())
+    }
 }

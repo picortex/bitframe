@@ -19,7 +19,6 @@ class SignUpActionTest {
             "password" to "pass1"
         )
         val res = sandbox.post("/api/authentication/sign-in", body = body)
-        println(res.body)
         expect(res.status).toBe(HttpStatusCode.OK)
     }
 }

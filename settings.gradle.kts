@@ -25,15 +25,18 @@ listOf("core", "processor").forEach {
     project(":bitframe-annotations-$it").projectDir = File("bitframe-annotations/$it")
 }
 
+include(":bitframe-server-dao-inmemory")
+project(":bitframe-server-dao-inmemory").projectDir = File("bitframe-server/daos/inmemory")
+include(":bitframe-server-dao-core")
+project(":bitframe-server-dao-core").projectDir = File("bitframe-server/daos/core")
+
+
 include(":bitframe-server-framework-core")
 project(":bitframe-server-framework-core").projectDir = File("bitframe-server/frameworks/core")
 include(":bitframe-server-framework-test")
 project(":bitframe-server-framework-test").projectDir = File("bitframe-server/frameworks/test")
 include(":bitframe-server-framework-ktor")
 project(":bitframe-server-framework-ktor").projectDir = File("bitframe-server/frameworks/ktor")
-
-include(":bitframe-server-dao-inmemory")
-project(":bitframe-server-dao-inmemory").projectDir = File("bitframe-server/daos/inmemory")
 
 include(":bitframe-client-sdk-core")
 project(":bitframe-client-sdk-core").projectDir = File("bitframe-client/sdks/core")

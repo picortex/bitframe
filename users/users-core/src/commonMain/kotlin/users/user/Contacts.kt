@@ -6,7 +6,7 @@ import kotlin.jvm.JvmSynthetic
 import contacts.Email as ValidEmail
 import contacts.Phone as ValidPhone
 
-@Serializable
+@Serializable(with = ContactsSerializer::class)
 sealed class Contacts {
 
     companion object {

@@ -15,7 +15,11 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":users-core"))
+                api(project(":bitframe-server-dao-core"))
+
                 api(asoft("later-core", vers.asoft.later))
+                api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
+//                api(kotlinx("serialization-json", vers.kotlinx.serialization))
             }
         }
 

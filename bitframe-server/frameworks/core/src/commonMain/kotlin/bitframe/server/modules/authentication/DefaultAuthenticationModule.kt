@@ -7,7 +7,6 @@ import bitframe.server.http.HttpRoute
 import bitframe.server.modules.authentication.actions.DefaultSignInAction
 import io.ktor.http.*
 import io.ktor.http.HttpMethod.Companion.Get
-import io.ktor.http.HttpMethod.Companion.Post
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 import later.await

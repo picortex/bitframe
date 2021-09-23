@@ -1,6 +1,6 @@
 package integration.authentication
 
-import bitframe.authentication.KtorSignInService
+import bitframe.authentication.SignInServiceKtor
 import bitframe.authentication.LoginCredentials
 import bitframe.authentication.SignInService
 import expect.expect
@@ -11,7 +11,7 @@ import kotlin.test.Ignore
 import kotlin.test.Test
 
 class LoginServiceTest {
-    val service: SignInService = KtorSignInService(CONFIGURATION_UNDER_TEST)
+    val service: SignInService = SignInServiceKtor(CONFIGURATION_UNDER_TEST)
 
     @Test
     @Ignore

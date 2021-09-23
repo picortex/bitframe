@@ -2,9 +2,8 @@ package bitframe.server.modules.authentication
 
 import bitframe.authentication.LoginConundrum
 import bitframe.authentication.LoginCredentials
+import bitframe.server.data.Condition
 import bitframe.server.data.DAOProvider
-import bitframe.server.http.HttpResponse
-import io.ktor.http.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import later.Later
@@ -32,6 +31,10 @@ class DefaultAuthenticationService(
     }
 
     override fun signIn(credentials: LoginCredentials): Later<LoginConundrum> = later {
+        val condition = Condition(
+            "email", Condition.Operator.Equals, "test.com"
+        )
+        usersDao.all()
         LoginConundrum(
             user = bitframe.authentication.User("test"),
             accounts = listOf(
