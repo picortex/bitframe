@@ -16,6 +16,7 @@ kotlin {
             dependencies {
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
                 api("io.ktor:ktor-http:${vers.ktor}")
+                api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
                 api(project(":bitframe-annotations-core"))
             }
         }
@@ -27,7 +28,3 @@ kotlin {
         }
     }
 }
-
-//dependencies {
-//    ksp()
-//}

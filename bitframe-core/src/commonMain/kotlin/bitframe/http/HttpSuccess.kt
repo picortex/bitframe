@@ -1,6 +1,6 @@
 package bitframe.http
 
-data class HttpSuccess<out T>(
+data class HttpSuccess<out D>(
     val status: HttpStatus,
-    val payload: HttpPayload<T>
-) : HttpResponse<T>()
+    val payload: HttpPayload<D>
+) : HttpResponse<D>()
