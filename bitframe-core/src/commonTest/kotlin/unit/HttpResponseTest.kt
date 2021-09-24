@@ -1,7 +1,6 @@
 package unit
 
 import bitframe.http.HttpFailure
-import bitframe.http.HttpResponse
 import bitframe.http.HttpSuccess
 import bitframe.http.response.decodeResponseFromString
 import bitframe.http.response.encodeResponseToString
@@ -11,7 +10,6 @@ import expect.toBe
 import io.ktor.http.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import kotlin.math.exp
 import kotlin.test.Test
 import kotlin.test.fail
 
@@ -47,13 +45,30 @@ class HttpResponseTest {
     }
 
     @Test
+    fun should_deserialize_a_response_without_info() {
+        val json = """{"status":{"code":200,"message":"OK"},"payload":{"data":{"type":"Cat"}}}"""
+        val resp = Json.decodeResponseFromString(Specie.serializer(), json)
+        expect(resp).toBe<HttpSuccess<*, *>>()
+        when (resp) {
+            is HttpFailure -> fail()
+            is HttpSuccess -> when (resp) {
+                is HttpSuccess.Informed -> expect(resp.payload.info).toBe(null)
+                is HttpSuccess.Uninformed -> expect(resp.payload.data.type).toBe("Cat")
+            }
+        }
+    }
+
+    @Test
     fun should_deserialize_a_response_with_info() {
         val json = """{"status":{"code":200,"message":"OK"},"payload":{"data":{"type":"Cat"},"info":{"gone":false}}}"""
         val resp = Json.decodeResponseFromString(Specie.serializer(), Info.serializer(), json)
         expect(resp).toBe<HttpSuccess<*, *>>()
         when (resp) {
             is HttpFailure -> fail()
-            is HttpSuccess -> expect(resp.payLoad.data.type).toBe("Cat")
+            is HttpSuccess -> {
+                expect(resp.payload.data.type).toBe("Cat")
+                expect(resp.payload.info.gone).toBe(false)
+            }
         }
     }
 
@@ -71,7 +86,7 @@ class HttpResponseTest {
     }
 
     @Test
-    fun should_return_a_failure_response_on_a_failed_desereialization() {
+    fun should_return_a_failure_response_on_a_failed_deserialization() {
         val resp = Json.decodeResponseFromString(Specie.serializer(), "{}")
         println(resp)
     }

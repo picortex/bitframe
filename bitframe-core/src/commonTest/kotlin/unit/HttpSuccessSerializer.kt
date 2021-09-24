@@ -37,15 +37,15 @@ class HttpSuccessSerializer {
     fun should_deserialize_a_payload_with_info() {
         val input = """{"status":{"code":200,"message":"OK"},"payload":{"data":{"name":"John Doe","age":23},"info":{"registeredOn":1234}}}"""
         val success = json.decodeSuccessFromString(Person.serializer(), input)
-        expect(success.payLoad.data.name).toBe("John Doe")
+        expect(success.payload.data.name).toBe("John Doe")
     }
 
     @Test
     fun should_deserialize_a_payload_without_info() {
         val input = """{"status":{"code":200,"message":"OK"},"payload":{"data":{"name":"John Doe","age":23},"info":{"registeredOn":1234}}}"""
         val success = json.decodeSuccessFromString(Person.serializer(), TestInfo.serializer(), input)
-        val payload = success.payLoad
+        val payload = success.payload
         expect(payload.data.name).toBe("John Doe")
-        expect(payload.meta?.registeredOn).toBe(1234)
+        expect(payload.info.registeredOn).toBe(1234)
     }
 }

@@ -21,7 +21,7 @@ fun <D> Json.encodeSuccessToString(
     val mapper = Mapper(this)
     val map = mapOf(
         HttpSuccess<*, *>::status.name to mapper.decodeFromString(statusJson),
-        payloadKey to mapper.decodeFromString(successJson)
+        HttpSuccess<*, *>::payload.name to mapper.decodeFromString(successJson)
     )
     return mapper.encodeToString(map)
 }
@@ -32,18 +32,14 @@ fun <D, I : Any> Json.encodeSuccessToString(
     success: HttpSuccess<D, I>
 ): String {
     val statusJson = encodeToString(HttpStatus.serializer(), success.status)
-    val payload = when (success) {
-        is HttpSuccess.Informed -> success.payload
-        is HttpSuccess.Uninformed -> success.payload
-    }
-    val successJson = when (payload) {
+    val successJson = when (val payload = success.payload) {
         is HttpPayload.Informed -> encodePayloadToString(dataSerializer, infoSerializer, payload)
         is HttpPayload.Uniformed -> encodePayloadToString(dataSerializer, payload)
     }
     val mapper = Mapper(this)
     val map = mapOf(
         HttpSuccess<*, *>::status.name to mapper.decodeFromString(statusJson),
-        payloadKey to mapper.decodeFromString(successJson)
+        HttpSuccess<*, *>::payload.name to mapper.decodeFromString(successJson)
     )
     return mapper.encodeToString(map)
 }

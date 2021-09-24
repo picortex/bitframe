@@ -12,7 +12,7 @@ internal const val payloadKey = "payload"
 fun <D> Json.decodeSuccessFromString(
     serializer: KSerializer<D>,
     json: String
-): HttpSuccess<D, Nothing> {
+): HttpSuccess.Uninformed<D> {
     val mapper = Mapper(this)
     val map = mapper.decodeFromString(json)
     val statusMap = map[HttpSuccess<*, *>::status.name] as? Map<String, *> ?: throw Throwable(
@@ -30,7 +30,7 @@ fun <D, I : Any> Json.decodeSuccessFromString(
     dataSerializer: KSerializer<D>,
     infoSerializer: KSerializer<I>,
     json: String
-): HttpSuccess<D, I> {
+): HttpSuccess.Informed<D, I> {
     val mapper = Mapper(this)
     val map = mapper.decodeFromString(json)
     val statusMap = map[HttpSuccess<*, *>::status.name] as? Map<String, *> ?: throw Throwable(
