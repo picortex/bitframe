@@ -1,6 +1,7 @@
 package unit
 
-import bitframe.http.HttpPayload
+import bitframe.http.payload.encodePayloadToString
+import bitframe.http.payload.payloadOf
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
@@ -10,10 +11,15 @@ class HttpPayloadSerializerTest {
     data class Person(val name: String)
 
     @Test
-    fun should_serialize_a_payload() {
-        val pl = HttpPayload(Person("Anderson"))
+    fun should_be_able_to_instantiate_payload_with_one_generic_parameter() {
+        val pl = payloadOf(Person(name = "Juma"))
         println(pl)
-        println(Json.encodeToString(HttpPayload.serializer(Person.serializer()), pl))
-        TODO()
+    }
+
+    @Test
+    fun should_be_abel_to_serialize_payload_with_custom_info() {
+        val pl = payloadOf(Person(name = "Juma"), Person(name = "Peter"))
+        println(Json.encodePayloadToString(Person.serializer(), pl))
+        println(Json.encodePayloadToString(Person.serializer(), Person.serializer(), pl))
     }
 }

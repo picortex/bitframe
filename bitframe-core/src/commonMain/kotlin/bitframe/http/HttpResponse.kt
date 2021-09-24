@@ -1,6 +1,4 @@
 package bitframe.http
 
-sealed class HttpResponse<out T> {
-    
-}
+sealed class HttpResponse<out T>
 
