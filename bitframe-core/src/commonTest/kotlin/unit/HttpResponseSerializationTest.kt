@@ -13,7 +13,7 @@ import kotlinx.serialization.json.Json
 import kotlin.test.Test
 import kotlin.test.fail
 
-class HttpResponseTest {
+class HttpResponseSerializationTest {
     @Serializable
     data class Specie(val type: String)
 

@@ -1,14 +1,12 @@
 package pimonitor.authentication.signup
 
-import bitframe.authentication.LoginConundrum
 import bitframe.authentication.LoginCredentials
-import bitframe.http.HttpResponse
 import bitframe.http.response.catching
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.compulsoryBody
 import bitframe.server.modules.authentication.AuthenticationService
-import io.ktor.http.*
 import kotlinx.serialization.json.Json
+import later.Later
 import later.await
 import pimonitor.IndividualRegistrationParams
 
