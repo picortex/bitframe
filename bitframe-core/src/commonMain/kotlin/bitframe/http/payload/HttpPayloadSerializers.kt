@@ -1,5 +1,6 @@
 package bitframe.http.payload
 
+import bitframe.http.HttpPayload
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.nullable
 import kotlinx.serialization.json.Json
@@ -28,7 +29,7 @@ fun <D, I : Any> Json.encodePayloadToString(
     return mapper.encodeToString(
         mapOf(
             HttpPayload<*, *>::data.name to dataMap,
-            HttpPayload<*, *>::meta.name to infoMap
+            HttpPayload.Informed<*, *>::info.name to infoMap
         )
     )
 }

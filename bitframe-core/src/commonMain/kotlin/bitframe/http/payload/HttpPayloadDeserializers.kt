@@ -1,5 +1,6 @@
 package bitframe.http.payload
 
+import bitframe.http.HttpPayload
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.mapper.Mapper

@@ -1,8 +1,4 @@
-@file:JsExport
-
-package bitframe.http.payload
-
-import kotlin.js.JsExport
+package bitframe.http
 
 sealed class HttpPayload<out D, out I>(open val data: D) {
     data class Informed<out D, out I>(
