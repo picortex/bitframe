@@ -51,9 +51,9 @@ class HttpResponseTest {
         expect(resp).toBe<HttpSuccess<*, *>>()
         when (resp) {
             is HttpFailure -> fail()
-            is HttpSuccess -> when (resp) {
-                is HttpSuccess.Informed -> expect(resp.payload.info).toBe(null)
-                is HttpSuccess.Uninformed -> expect(resp.payload.data.type).toBe("Cat")
+            is HttpSuccess -> {
+                expect(resp.payload.info).toBe(null)
+                expect(resp.payload.data.type).toBe("Cat")
             }
         }
     }

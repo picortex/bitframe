@@ -8,7 +8,7 @@ import kotlinx.serialization.mapper.Mapper
 fun <D> Json.decodePayloadFromString(
     serializer: KSerializer<D>,
     json: String
-): HttpPayload.Uniformed<D> {
+): HttpPayload<D, Nothing?> {
     val mapper = Mapper(this)
     val map = mapper.decodeFromString(json)
     val dataJson = map[HttpPayload<*, *>::data.name] as Map<String, Any?>
@@ -20,11 +20,11 @@ fun <D, I : Any> Json.decodePayloadFromString(
     dataSerializer: KSerializer<D>,
     infoSerializer: KSerializer<I>,
     json: String
-): HttpPayload.Informed<D, I> {
+): HttpPayload<D, I> {
     val mapper = Mapper(this)
     val map = mapper.decodeFromString(json)
     val dataJson = map[HttpPayload<*, *>::data.name] as Map<String, Any?>
-    val infoJson = map[HttpPayload.Informed<*, *>::info.name] as Map<String, Any?>
+    val infoJson = map[HttpPayload<*, *>::info.name] as Map<String, Any?>
     val data = decodeFromString(dataSerializer, mapper.encodeToString(dataJson))
     val info = decodeFromString(infoSerializer, mapper.encodeToString(infoJson))
     return payloadOf(data, info)

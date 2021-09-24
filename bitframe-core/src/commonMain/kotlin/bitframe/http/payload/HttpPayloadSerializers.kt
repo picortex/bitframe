@@ -19,7 +19,7 @@ fun <D> Json.encodePayloadToString(
 fun <D, I : Any> Json.encodePayloadToString(
     dataSerializer: KSerializer<D>,
     infoSerializer: KSerializer<I>,
-    payload: HttpPayload.Informed<D, I>
+    payload: HttpPayload<D, I>
 ): String {
     val dataJson = encodeToString(dataSerializer, payload.data)
     val infoJson = encodeToString(infoSerializer.nullable, payload.info)
@@ -29,7 +29,7 @@ fun <D, I : Any> Json.encodePayloadToString(
     return mapper.encodeToString(
         mapOf(
             HttpPayload<*, *>::data.name to dataMap,
-            HttpPayload.Informed<*, *>::info.name to infoMap
+            HttpPayload<*, *>::info.name to infoMap
         )
     )
 }

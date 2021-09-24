@@ -4,4 +4,4 @@ import bitframe.http.HttpPayload
 
 fun <D> payloadOf(data: D) = HttpPayload.of(data)
 
-fun <D, I : Any> payloadOf(data: D, info: I) = HttpPayload.of(data, info)
+fun <D, I> payloadOf(data: D, info: I) = HttpPayload.of(data, info)

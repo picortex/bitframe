@@ -12,7 +12,7 @@ internal const val payloadKey = "payload"
 fun <D> Json.decodeSuccessFromString(
     serializer: KSerializer<D>,
     json: String
-): HttpSuccess.Uninformed<D> {
+): HttpSuccess<D, Nothing?> {
     val mapper = Mapper(this)
     val map = mapper.decodeFromString(json)
     val statusMap = map[HttpSuccess<*, *>::status.name] as? Map<String, *> ?: throw Throwable(
@@ -23,14 +23,14 @@ fun <D> Json.decodeSuccessFromString(
     )
     val status = decodeFromString(HttpStatus.serializer(), mapper.encodeToString(statusMap))
     val payload = decodePayloadFromString(serializer, mapper.encodeToString(payloadMap))
-    return HttpSuccess.Uninformed(status, payload)
+    return HttpSuccess(status, payload)
 }
 
 fun <D, I : Any> Json.decodeSuccessFromString(
     dataSerializer: KSerializer<D>,
     infoSerializer: KSerializer<I>,
     json: String
-): HttpSuccess.Informed<D, I> {
+): HttpSuccess<D, I> {
     val mapper = Mapper(this)
     val map = mapper.decodeFromString(json)
     val statusMap = map[HttpSuccess<*, *>::status.name] as? Map<String, *> ?: throw Throwable(
@@ -41,5 +41,5 @@ fun <D, I : Any> Json.decodeSuccessFromString(
     )
     val status = decodeFromString(HttpStatus.serializer(), mapper.encodeToString(statusMap))
     val payload = decodePayloadFromString(dataSerializer, infoSerializer, mapper.encodeToString(payloadMap))
-    return HttpSuccess.Informed(status, payload)
+    return HttpSuccess(status, payload)
 }
