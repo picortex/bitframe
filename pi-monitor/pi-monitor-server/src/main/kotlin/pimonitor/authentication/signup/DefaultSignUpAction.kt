@@ -1,7 +1,6 @@
 package pimonitor.authentication.signup
 
 import bitframe.server.actions.Action
-import bitframe.server.http.HttpResponse
 import bitframe.server.http.HttpRoute
 import io.ktor.http.*
 

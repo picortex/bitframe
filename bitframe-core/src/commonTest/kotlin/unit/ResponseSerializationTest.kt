@@ -1,10 +1,8 @@
 package unit
 
-import bitframe.http.HttpFailure
-import bitframe.http.HttpSuccess
-import bitframe.http.response.decodeResponseFromString
-import bitframe.http.response.encodeResponseToString
-import bitframe.http.response.responseOf
+import bitframe.response.Failure
+import bitframe.response.Success
+import bitframe.response.response.*
 import expect.expect
 import expect.toBe
 import io.ktor.http.*
@@ -13,7 +11,7 @@ import kotlinx.serialization.json.Json
 import kotlin.test.Test
 import kotlin.test.fail
 
-class HttpResponseSerializationTest {
+class ResponseSerializationTest {
     @Serializable
     data class Specie(val type: String)
 
@@ -23,8 +21,8 @@ class HttpResponseSerializationTest {
     @Test
     fun should_have_an_intuitive_syntax() {
         when (val resp = responseOf(Specie("Human"), Specie("Cat"))) {
-            is HttpFailure -> fail()
-            is HttpSuccess -> expect(resp.status.code).toBe(HttpStatusCode.OK.value)
+            is Failure -> fail()
+            is Success -> expect(resp.status.code).toBe(HttpStatusCode.OK.value)
         }
     }
 
@@ -48,10 +46,10 @@ class HttpResponseSerializationTest {
     fun should_deserialize_a_response_without_info() {
         val json = """{"status":{"code":200,"message":"OK"},"payload":{"data":{"type":"Cat"}}}"""
         val resp = Json.decodeResponseFromString(Specie.serializer(), json)
-        expect(resp).toBe<HttpSuccess<*, *>>()
+        expect(resp).toBe<Success<*, *>>()
         when (resp) {
-            is HttpFailure -> fail()
-            is HttpSuccess -> {
+            is Failure -> fail()
+            is Success -> {
                 expect(resp.payload.info).toBe(null)
                 expect(resp.payload.data.type).toBe("Cat")
             }
@@ -62,10 +60,10 @@ class HttpResponseSerializationTest {
     fun should_deserialize_a_response_with_info() {
         val json = """{"status":{"code":200,"message":"OK"},"payload":{"data":{"type":"Cat"},"info":{"gone":false}}}"""
         val resp = Json.decodeResponseFromString(Specie.serializer(), Info.serializer(), json)
-        expect(resp).toBe<HttpSuccess<*, *>>()
+        expect(resp).toBe<Success<*, *>>()
         when (resp) {
-            is HttpFailure -> fail()
-            is HttpSuccess -> {
+            is Failure -> fail()
+            is Success -> {
                 expect(resp.payload.data.type).toBe("Cat")
                 expect(resp.payload.info.gone).toBe(false)
             }
@@ -89,5 +87,14 @@ class HttpResponseSerializationTest {
     fun should_return_a_failure_response_on_a_failed_deserialization() {
         val resp = Json.decodeResponseFromString(Specie.serializer(), "{}")
         println(resp)
+    }
+
+    @Test
+    fun should_print_their_json_value_without_having_to_pass_a_serializer() {
+        val pl1 = responseOf(Specie("Homo"), Info(gone = false))
+        println(pl1.toJsonWithInfo())
+
+        val pl2 = responseOf(Specie("Homo"))
+        println(pl2.toJson())
     }
 }

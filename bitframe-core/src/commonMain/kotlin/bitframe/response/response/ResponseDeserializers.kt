@@ -1,15 +1,15 @@
-package bitframe.http.response
+package bitframe.response.response
 
-import bitframe.http.HttpResponse
-import bitframe.http.failure.decodeFailureFromString
-import bitframe.http.success.decodeSuccessFromString
+import bitframe.response.Response
+import bitframe.response.failure.decodeFailureFromString
+import bitframe.response.success.decodeSuccessFromString
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 
 fun <D> Json.decodeResponseFromString(
     dataSerializer: KSerializer<D>,
     json: String,
-): HttpResponse<D, *> = try {
+): Response<D, *> = try {
     decodeSuccessFromString(dataSerializer, json)
 } catch (cause: Throwable) {
     try {
@@ -23,7 +23,7 @@ fun <D, I : Any> Json.decodeResponseFromString(
     dataSerializer: KSerializer<D>,
     infoSerializer: KSerializer<I>,
     json: String,
-): HttpResponse<D, I> = try {
+): Response<D, I> = try {
     decodeSuccessFromString(dataSerializer, infoSerializer, json)
 } catch (cause: Throwable) {
     try {

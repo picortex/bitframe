@@ -1,10 +1,10 @@
-package bitframe.http
+package bitframe.response
 
 import kotlinx.serialization.Serializable
 import kotlin.jvm.JvmOverloads
 
 @Serializable
-data class HttpError(
+data class Error(
     val message: String,
     val type: String,
     val cause: String

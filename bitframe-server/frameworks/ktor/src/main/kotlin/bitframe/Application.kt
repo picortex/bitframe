@@ -41,7 +41,7 @@ class Application(
                     val body = call.receiveText()
                     val request = HttpRequest(rout.method, rout.path, headers, body)
                     val response = rout.handler(request)
-                    call.respondText(response.body, contentType = ContentType.Application.Json)
+                    call.respondText(response.body, contentType = ContentType.Application.Json, status = response.status)
                 }
             }
 

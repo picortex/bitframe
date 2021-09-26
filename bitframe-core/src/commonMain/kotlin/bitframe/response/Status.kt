@@ -1,10 +1,10 @@
-package bitframe.http
+package bitframe.response
 
 import io.ktor.http.*
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class HttpStatus(
+data class Status(
     val code: Int,
     val message: String
 ) {

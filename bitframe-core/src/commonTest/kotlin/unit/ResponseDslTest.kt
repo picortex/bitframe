@@ -1,12 +1,12 @@
 package unit
 
-import bitframe.http.response.response
+import bitframe.response.response.response
 import expect.expect
 import io.ktor.http.*
 import kotlinx.serialization.Serializable
 import kotlin.test.Test
 
-class HttpDslTest {
+class ResponseDslTest {
 
     @Serializable
     data class Person(val name: String)
@@ -24,7 +24,7 @@ class HttpDslTest {
 
     @Test
     fun should_have_a_fluid_build() {
-        val int: Int? = null
+        val int: Int? = 5
         val res = response {
             val i = int ?: badRequest("int must not be null")
             if (i < 4) {

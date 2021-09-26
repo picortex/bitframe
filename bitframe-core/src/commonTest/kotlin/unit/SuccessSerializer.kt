@@ -1,14 +1,14 @@
 package unit
 
-import bitframe.http.HttpSuccess
-import bitframe.http.success.decodeSuccessFromString
-import bitframe.http.success.encodeSuccessToString
+import bitframe.response.Success
+import bitframe.response.success.decodeSuccessFromString
+import bitframe.response.success.encodeSuccessToString
 import expect.expect
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
 
-class HttpSuccessSerializer {
+class SuccessSerializer {
     @Serializable
     data class Person(val name: String = "John Doe", val age: Int = 23)
 
@@ -21,14 +21,14 @@ class HttpSuccessSerializer {
 
     @Test
     fun should_serialize_a_basic_success() {
-        val success = HttpSuccess.of(Person())
+        val success = Success.of(Person())
         println(success)
         println(json.encodeSuccessToString(Person.serializer(), success))
     }
 
     @Test
     fun should_serialize_a_success_with_an_informed_payload() {
-        val success = HttpSuccess.of(Person(), TestInfo(registeredOn = 1234))
+        val success = Success.of(Person(), TestInfo(registeredOn = 1234))
         println(success)
         println(json.encodeSuccessToString(Person.serializer(), TestInfo.serializer(), success))
     }

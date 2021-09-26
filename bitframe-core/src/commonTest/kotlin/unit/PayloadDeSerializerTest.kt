@@ -1,12 +1,12 @@
 package unit
 
-import bitframe.http.payload.decodePayloadFromString
+import bitframe.response.payload.decodePayloadFromString
 import expect.expect
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
 
-class HttpPayloadDeSerializerTest {
+class PayloadDeSerializerTest {
     @Serializable
     data class Person(val name: String)
 

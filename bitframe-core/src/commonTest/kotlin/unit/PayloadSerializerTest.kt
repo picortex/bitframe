@@ -1,12 +1,12 @@
 package unit
 
-import bitframe.http.payload.encodePayloadToString
-import bitframe.http.payload.payloadOf
+import bitframe.response.payload.encodePayloadToString
+import bitframe.response.payload.payloadOf
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
 
-class HttpPayloadSerializerTest {
+class PayloadSerializerTest {
     @Serializable
     data class Person(val name: String)
 
