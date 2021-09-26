@@ -42,6 +42,10 @@ jobs:
       - name: Download gradle
         run: ./gradlew --version
 
-      - name: Running unit tests
-        run: ./gradlew cleanAllTest jsTest jvmTest --tests unit.*
+      - name: Running jvm unit tests
+        run: ./gradlew jvmTest --tests unit.*
+        working-directory: .
+
+      - name: Running all unit tests
+        run: ./gradlew jsTest jvmTest --tests unit.*
         working-directory: .
