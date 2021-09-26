@@ -121,4 +121,16 @@ sealed class Contacts {
             is Mixed -> Mixed(emails + other.emails, phones + other.phones)
         }
     }
+
+    fun firstValue() = firstValueOrNull() ?: throw RuntimeException("There are no Contacts inside the contacts container")
+
+    fun firstValueOrNull() = when (this) {
+        None -> null
+        is Email -> email.value
+        is Emails -> emails.firstOrNull()?.value
+        is Phone -> phone.value
+        is Phones -> phones.firstOrNull()?.value
+        is EmailPhone -> email.value
+        is Mixed -> emails.firstOrNull()?.value
+    }
 }

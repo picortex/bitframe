@@ -4,5 +4,5 @@ import bitframe.MiniService
 import later.Later
 
 interface SignInService : MiniService {
-    fun loginWith(credentials: LoginCredentials): Later<LoginConundrum>
+    fun signIn(credentials: LoginCredentials): Later<LoginConundrum>
 }

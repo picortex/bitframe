@@ -15,7 +15,7 @@ fun <D> responseOf(data: D): Response<D, Nothing?> = Success(Status(HttpStatusCo
 fun <D, I : Any> responseOf(data: D, info: I): Response<D, I> = Success(Status(HttpStatusCode.OK), Payload.of(data, info))
 fun <D> responseOf(status: Status, data: D): Response<D, Nothing?> = Success(status, payloadOf(data))
 fun <D> responseOf(code: HttpStatusCode, data: D): Response<D, Nothing?> = Success(Status(code), payloadOf(data))
-fun <D, I : Any> responseOf(code: HttpStatusCode, data: D, info: I): Response<D, I> = Success(Status(code), payloadOf(data, info))
+fun <D, I> responseOf(code: HttpStatusCode, data: D, info: I): Response<D, I> = Success(Status(code), payloadOf(data, info))
 fun <D, I> responseOf(status: Status, data: D, info: I): Response<D, I> = Success(status, Payload(data, info))
 
 // Failures

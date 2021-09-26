@@ -33,7 +33,6 @@ class Application(
 
             val allModules = modules + authenticationModule
             for (rout in allModules.flatMap { it.actions.map { a -> a.route } }) route(rout.path, rout.method) {
-                HttpStatusCode
                 handle {
                     val headers = call.request.headers.entries().associate { (k, v) ->
                         k to v.joinToString(",")

@@ -13,6 +13,7 @@ import users.account.Account
 import users.account.CreateAccountParams
 import users.server.AccountsDao
 import users.server.UsersDao
+import users.user.Basic
 import users.user.CreateUserParams
 import users.user.User
 
@@ -28,6 +29,32 @@ class DefaultAuthenticationService(
         val account = accountsDao.createIfNotExist(accountParams)
         val user = usersDao.createIfNotExist(params)
         account.await(); user.await()
+    }
+
+    override fun registerUser(
+        user: RegisterUserParams,
+        space: RegisterSpaceParams
+    ): Later<LoginConundrum> = later {
+        val userParams = CreateUserParams(
+            name = user.name,
+            contacts = user.contacts,
+            credentials = Basic(
+                identity = user.contacts.firstValue(),
+                password = user.password
+            )
+        )
+        val u = usersDao.create(userParams).await()
+        val accountParams = CreateAccountParams(space.name)
+        val account = accountsDao.createIfNotExist(accountParams).await()
+        LoginConundrum(
+            user = bitframe.authentication.User(u.tag),
+            accounts = listOf(
+                bitframe.authentication.Account(
+                    uid = account.uid,
+                    name = account.name
+                )
+            )
+        )
     }
 
     override fun signIn(credentials: LoginCredentials): Later<LoginConundrum> = later {

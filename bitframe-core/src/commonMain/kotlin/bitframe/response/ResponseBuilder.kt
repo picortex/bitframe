@@ -4,18 +4,21 @@ import bitframe.response.response.responseOf
 import io.ktor.http.*
 
 class ResponseBuilder<D, I> {
+    private var status = HttpStatusCode.OK
     private var data: D? = null
     private var info: I? = null
 
     private var failure: Response<D, I>? = null
 
-    fun resolve(with: D) {
+    fun resolve(with: D, code: HttpStatusCode = HttpStatusCode.OK) {
         data = with
+        status = code
     }
 
-    fun resolve(with: D, info: I) {
+    fun resolve(with: D, info: I, code: HttpStatusCode = HttpStatusCode.OK) {
         data = with
         this.info = info
+        this.status = code
     }
 
     fun badRequest(message: String): Nothing = reject(HttpStatusCode.BadRequest, Throwable(message))
@@ -38,8 +41,8 @@ class ResponseBuilder<D, I> {
                 "looks like resolve was not called, the response builder has no data"
             )
             val res = when (val i = info) {
-                null -> responseOf(d)
-                else -> responseOf(d, i)
+                null -> responseOf<D>(status, d)
+                else -> responseOf<D, I>(status, d, i)
             }
             res as Response<D, I>
         }

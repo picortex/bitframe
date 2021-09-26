@@ -13,7 +13,14 @@ import users.user.User
 interface AuthenticationService {
     val usersDao: UsersDao
     val accountsDao: AccountsDao
+
     fun createDefaultUserIfNotExist(params: CreateUserParams): Later<User>
+
+    fun registerUser(
+        user: RegisterUserParams,
+        space: RegisterSpaceParams = RegisterSpaceParams(user.name)
+    ): Later<LoginConundrum>
+
     fun users(): Later<List<User>>
     fun accounts(): Later<List<Account>>
     fun signIn(credentials: LoginCredentials): Later<LoginConundrum>

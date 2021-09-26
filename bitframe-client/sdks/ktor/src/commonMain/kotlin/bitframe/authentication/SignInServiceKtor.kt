@@ -18,7 +18,7 @@ internal class SignInServiceKtor @JvmOverloads constructor(
     private val path = configuration.url + "/api/authentication/sign-in"
     override val config: ClientConfiguration = configuration
     private val http = configuration.http
-    override fun loginWith(credentials: LoginCredentials): Later<LoginConundrum> = configuration.scope.later {
+    override fun signIn(credentials: LoginCredentials): Later<LoginConundrum> = configuration.scope.later {
         val json = http.post<String>(path) {
             body = TextContent(
                 text = Json.encodeToString(LoginCredentials.serializer(), credentials),

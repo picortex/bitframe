@@ -12,7 +12,7 @@ class TestSignInService @JvmOverloads constructor(
     val db: UserDatabase = UserDatabase()
 ) : SignInService {
     override val config: ClientConfiguration = configuration
-    override fun loginWith(credentials: LoginCredentials) = configuration.scope.later {
+    override fun signIn(credentials: LoginCredentials) = configuration.scope.later {
         delay(configuration.simulationTime.toLong())
         val cred = db.credentialsFor(credentials.alias)
         if (credentials.password == cred?.password) {

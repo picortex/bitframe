@@ -7,8 +7,10 @@ import kotlinx.datetime.Clock
 import later.await
 import pimonitor.IndividualRegistrationParams
 import pimonitor.ktor.PiMonitorServiceKtor
+import kotlin.test.Ignore
 import kotlin.test.Test
 
+@Ignore
 class SignUpServiceKtorServiceTest {
 
     private val service = PiMonitorServiceKtor(CONFIGURATION_UNDER_TEST)
@@ -23,9 +25,10 @@ class SignUpServiceKtorServiceTest {
             password = "1234"
         )
 
-        service.signUp.registerIndividuallyAs(individual).await()
+        val res = service.signUp.registerIndividuallyAs(individual).await()
+        println(res)
 
-        val conundrum = service.signIn.loginWith(individual.credentials()).await()
+        val conundrum = service.signIn.signIn(individual.credentials()).await()
 
         expect(individual.name).toBe(conundrum.user.username)
 

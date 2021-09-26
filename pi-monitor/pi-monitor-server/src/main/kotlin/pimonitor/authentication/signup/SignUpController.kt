@@ -1,14 +1,16 @@
 package pimonitor.authentication.signup
 
-import bitframe.authentication.LoginCredentials
 import bitframe.response.response.response
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
 import bitframe.server.modules.authentication.AuthenticationService
+import bitframe.server.modules.authentication.RegisterUserParams
+import io.ktor.http.HttpStatusCode.Companion.Created
 import kotlinx.serialization.json.Json
 import later.await
 import pimonitor.IndividualRegistrationParams
+import users.user.Contacts
 
 private val json = Json {
     encodeDefaults = true
@@ -23,10 +25,14 @@ class SignUpController(
             IndividualRegistrationParams.serializer(),
             req.compulsoryBody()
         )
-        val credentials = LoginCredentials(
-            alias = params.email ?: throw IllegalArgumentException("Email must not be null"),
-            password = params.password ?: throw IllegalArgumentException("Passwords must not be null")
-        )
-        resolve(signInService.signIn(credentials).await())
+
+        val conundrum = signInService.registerUser(
+            user = RegisterUserParams(
+                name = params.name ?: throw RuntimeException("Name must not be null"),
+                contacts = Contacts.of(params.email ?: throw RuntimeException("Name must not be null")),
+                password = params.password ?: throw RuntimeException("Password must not be null")
+            )
+        ).await()
+        resolve(conundrum, Created)
     }.toHttpResponse()
 }

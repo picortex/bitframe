@@ -4,7 +4,7 @@ import bitframe.server.actions.Action
 import bitframe.server.data.DAOProvider
 import bitframe.server.http.HttpResponse
 import bitframe.server.http.HttpRoute
-import bitframe.server.modules.authentication.actions.DefaultSignInAction
+import bitframe.server.modules.authentication.signin.DefaultSignInAction
 import io.ktor.http.*
 import io.ktor.http.HttpMethod.Companion.Get
 import kotlinx.serialization.builtins.ListSerializer

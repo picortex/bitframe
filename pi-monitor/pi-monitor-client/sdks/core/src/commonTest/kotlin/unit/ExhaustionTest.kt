@@ -21,7 +21,7 @@ class ExhaustionTest {
             appId = "12345"
         )
         val client: PiMonitorService = PiMonitorServiceTest(configuration)
-        val res = client.signIn.loginWith(
+        val res = client.signIn.signIn(
             LoginCredentials(
                 alias = "user1",
                 password = "pass1"

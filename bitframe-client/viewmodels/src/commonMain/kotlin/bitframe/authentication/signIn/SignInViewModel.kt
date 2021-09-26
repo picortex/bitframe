@@ -32,7 +32,7 @@ class SignInViewModel(
     private fun CoroutineScope.signIn(i: SignInIntent.Submit) = launch {
         flow {
             emit(SignInState.Loading("Signing you in, please wait . . ."))
-            val conundrum = service.loginWith(i.credentials).await()
+            val conundrum = service.signIn(i.credentials).await()
             if (conundrum.accounts.size > 1) {
                 emit(SignInState.Conundrum(conundrum.user, conundrum.accounts))
             } else {
