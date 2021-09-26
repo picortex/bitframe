@@ -1,5 +1,10 @@
 package bitframe.server.modules.authentication
 
+import bitframe.authentication.signin.Basic
+import bitframe.authentication.spaces.Space
+import bitframe.authentication.users.Contacts
+import bitframe.authentication.users.CreateUserParams
+import bitframe.authentication.users.User
 import bitframe.server.actions.Action
 import bitframe.server.data.DAOProvider
 import bitframe.server.http.HttpResponse
@@ -10,11 +15,6 @@ import io.ktor.http.HttpMethod.Companion.Get
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 import later.await
-import users.account.Account
-import users.user.Basic
-import users.user.Contacts
-import users.user.CreateUserParams
-import users.user.User
 import kotlin.jvm.JvmOverloads
 
 open class DefaultAuthenticationModule @JvmOverloads constructor(
@@ -32,7 +32,7 @@ open class DefaultAuthenticationModule @JvmOverloads constructor(
     constructor(
         provider: DAOProvider,
         default: CreateUserParams = GENESIS
-    ) : this(DefaultAuthenticationService(provider.users, provider.accounts), default)
+    ) : this(DefaultAuthenticationService(provider.users, provider.spaces), default)
 
     init {
         controller.service.createDefaultUserIfNotExist(default)
@@ -58,9 +58,9 @@ open class DefaultAuthenticationModule @JvmOverloads constructor(
             val users = controller.service.users().await()
             HttpResponse(HttpStatusCode.OK, json.encodeToString(ListSerializer(User.serializer()), users))
         }),
-        Action("accounts", mapOf(), HttpRoute(Get, "/accounts") {
-            val accounts = controller.service.accounts().await()
-            HttpResponse(HttpStatusCode.OK, json.encodeToString(ListSerializer(Account.serializer()), accounts))
+        Action("accounts", mapOf(), HttpRoute(Get, "/spaces") {
+            val accounts = controller.service.spaces().await()
+            HttpResponse(HttpStatusCode.OK, json.encodeToString(ListSerializer(Space.serializer()), accounts))
         })
     )
 }

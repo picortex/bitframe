@@ -1,6 +1,6 @@
 package bitframe.authentication.login
 
-import bitframe.authentication.LoginCredentials
+import bitframe.authentication.signin.LoginCredentials
 import kotlinx.css.height
 import kotlinx.css.pct
 import kotlinx.extensions.text

@@ -13,9 +13,11 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(kotlinx("datetime", vers.kotlinx.datetime))
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
-                api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
                 api(asoft("later-core", vers.asoft.later))
+                api(asoft("phone-core", vers.asoft.contacts))
+                api(asoft("email-core", vers.asoft.contacts))
             }
         }
 

@@ -1,6 +1,5 @@
 package integration.authentication
 
-import bitframe.authentication.LoginCredentials
 import bitframe.authentication.SignInServiceKtor
 import expect.expect
 import integration.CONFIGURATION_UNDER_TEST

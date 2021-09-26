@@ -1,9 +1,7 @@
 package unit
 
-import bitframe.server.data.Condition
 import expect.expect
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import users.server.matching
 import users.user.Contacts
 import kotlin.test.Test

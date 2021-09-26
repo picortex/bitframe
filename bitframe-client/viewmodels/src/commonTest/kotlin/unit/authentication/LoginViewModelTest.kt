@@ -1,16 +1,14 @@
 package unit.authentication
 
-import bitframe.authentication.LoginCredentials
-import bitframe.authentication.signIn.SignInViewModel
-import bitframe.authentication.signIn.SignInIntent.Submit
-import bitframe.authentication.signIn.SignInIntent.ShowForm
-import bitframe.authentication.TestSignInService
+import bitframe.authentication.signin.SignInViewModel
+import bitframe.authentication.signin.SignInIntent.Submit
+import bitframe.authentication.signin.SignInIntent.ShowForm
 import expect.expect
 import expect.toBe
 import kotlinx.coroutines.runTest
 import viewmodel.expect
 import kotlin.test.Test
-import bitframe.authentication.signIn.SignInState as State
+import bitframe.authentication.signin.SignInState as State
 
 class LoginViewModelTest {
     private val service = TestSignInService()

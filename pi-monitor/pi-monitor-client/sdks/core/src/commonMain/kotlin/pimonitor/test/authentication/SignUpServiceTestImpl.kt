@@ -1,8 +1,8 @@
 package pimonitor.test.authentication
 
 import bitframe.authentication.ClientConfiguration
-import bitframe.authentication.LoginConundrum
 import bitframe.authentication.TestClientConfiguration
+import bitframe.authentication.signin.LoginConundrum
 import kotlinx.coroutines.delay
 import later.Later
 import later.later
@@ -16,7 +16,7 @@ class SignUpServiceTestImpl(private val configuration: TestClientConfiguration) 
 
     override fun registerIndividuallyAs(
         person: IndividualRegistrationParams
-    ) : Later<LoginConundrum> = config.scope.later {
+    ): Later<LoginConundrum> = config.scope.later {
         delay(configuration.simulationTime.toLong())
         person.toPerson()
         TODO()

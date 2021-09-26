@@ -1,7 +1,7 @@
 package pimonitor.authentication
 
 import bitframe.MiniService
-import bitframe.authentication.LoginConundrum
+import bitframe.authentication.signin.LoginConundrum
 import later.Later
 import pimonitor.IndividualRegistrationParams
 import pimonitor.Monitor

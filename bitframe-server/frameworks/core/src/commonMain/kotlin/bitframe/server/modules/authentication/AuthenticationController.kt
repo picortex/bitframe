@@ -1,6 +1,6 @@
 package bitframe.server.modules.authentication
 
-import bitframe.authentication.LoginConundrum
+import bitframe.authentication.signin.LoginConundrum
 import duality.Result
 
 interface AuthenticationController {

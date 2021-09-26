@@ -14,8 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-core"))
-                api(project(":users-server-dao-core"))
-                api(project(":users-server-services-core"))
+                api(project(":bitframe-authentication-service-core"))
 
                 api(asoft("result-core", vers.asoft.duality))
                 api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))

@@ -1,8 +1,8 @@
 package bitframe.authentication.login
 
-import bitframe.authentication.signIn.SignInIntent
-import bitframe.authentication.signIn.SignInScope
-import bitframe.authentication.signIn.SignInState
+import bitframe.authentication.signin.SignInIntent
+import bitframe.authentication.signin.SignInScope
+import bitframe.authentication.signin.SignInState
 import bitframe.authentication.signin.SignInService
 import kotlinx.css.*
 import react.Props

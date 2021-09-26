@@ -1,7 +1,7 @@
 package pimonitor.ktor
 
 import bitframe.authentication.KtorClientConfiguration
-import bitframe.authentication.LoginConundrum
+import bitframe.authentication.signin.LoginConundrum
 import bitframe.response.response.decodeResponseFromString
 import io.ktor.client.request.*
 import io.ktor.http.*
@@ -12,7 +12,6 @@ import later.later
 import pimonitor.IndividualRegistrationParams
 import pimonitor.Monitor
 import pimonitor.authentication.SignUpService
-import pimonitor.toPerson
 
 class SignUpServiceKtorImpl(
     override val config: KtorClientConfiguration

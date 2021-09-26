@@ -1,7 +1,7 @@
 @file:JsExport
 @file:Suppress("EXPERIMENTAL_API_USAGE")
 
-import bitframe.authentication.signIn.SignInScope
+import bitframe.authentication.signin.SignInScope
 import pimonitor.PiMonitorService
 import pimonitor.authentication.signup.SignUpScope
 import pimonitor.evaluation.business.BusinessScope

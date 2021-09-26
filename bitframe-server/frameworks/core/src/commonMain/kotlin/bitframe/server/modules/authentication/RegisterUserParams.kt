@@ -1,6 +1,6 @@
 package bitframe.server.modules.authentication
 
-import users.user.Contacts
+import bitframe.authentication.users.Contacts
 
 data class RegisterUserParams(
     val name: String,

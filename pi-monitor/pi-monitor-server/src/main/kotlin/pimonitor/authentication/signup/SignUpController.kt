@@ -1,5 +1,6 @@
 package pimonitor.authentication.signup
 
+import bitframe.authentication.users.Contacts
 import bitframe.response.response.response
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.compulsoryBody
@@ -10,7 +11,6 @@ import io.ktor.http.HttpStatusCode.Companion.Created
 import kotlinx.serialization.json.Json
 import later.await
 import pimonitor.IndividualRegistrationParams
-import users.user.Contacts
 
 private val json = Json {
     encodeDefaults = true

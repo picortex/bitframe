@@ -1,6 +1,5 @@
 package users.server
 
-import bitframe.server.data.Condition
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.mapper.Mapper

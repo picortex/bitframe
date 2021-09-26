@@ -1,9 +1,9 @@
 package bitframe.server.data
 
-import users.server.AccountsDao
-import users.server.UsersDao
+import bitframe.authentication.spaces.SpacesDao
+import bitframe.authentication.users.UsersDao
 
 interface DAOProvider {
     val users: UsersDao
-    val accounts: AccountsDao
+    val spaces: SpacesDao
 }

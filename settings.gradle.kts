@@ -33,7 +33,13 @@ include(":bitframe-presenters")
 
 includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core", "processor")
 
-includeSubs(base = "bitframe-authentication", path = "bitframe-authentication", "core", "test")
+includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core")
+
+includeSubs(base = "bitframe-authentication", path = "bitframe-authentication", "core")
+
+includeSubs(base = "bitframe-authentication-service", path = "bitframe-authentication/services", "core", "test")
+
+includeSubs(base = "bitframe-authentication-dao", path = "bitframe-authentication/daos", "core", "inmemory")
 
 includeSubs(base = "bitframe-server-dao", path = "bitframe-server/daos", "core", "inmemory")
 

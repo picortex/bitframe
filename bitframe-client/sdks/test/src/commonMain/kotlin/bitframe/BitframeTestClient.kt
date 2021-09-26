@@ -1,6 +1,5 @@
 package bitframe
 
-import bitframe.authentication.ClientConfiguration
 import bitframe.authentication.TestClientConfiguration
 import bitframe.authentication.signin.SignInService
 import kotlin.jvm.JvmStatic
@@ -26,7 +25,6 @@ interface BitframeTestClient : BitframeService {
         fun getDefault() = invoke(CONFIGURATION)
     }
 
-    val configuration: TestClientConfiguration
-    override val config: ClientConfiguration
+    override val config: TestClientConfiguration
     override val signIn: SignInService
 }

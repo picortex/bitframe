@@ -1,6 +1,5 @@
 package unit
 
-import bitframe.authentication.LoginCredentials
 import bitframe.authentication.TestClientConfiguration
 import expect.expect
 import kotlinx.coroutines.runTest

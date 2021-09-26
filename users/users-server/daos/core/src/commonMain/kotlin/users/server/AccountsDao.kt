@@ -1,6 +1,5 @@
 package users.server
 
-import bitframe.server.data.Condition
 import later.Later
 import users.account.Account
 import users.account.CreateAccountParams

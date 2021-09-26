@@ -1,7 +1,14 @@
 package bitframe.server.modules.authentication
 
-import bitframe.authentication.LoginConundrum
-import bitframe.authentication.LoginCredentials
+import bitframe.authentication.signin.Basic
+import bitframe.authentication.signin.LoginConundrum
+import bitframe.authentication.signin.LoginCredentials
+import bitframe.authentication.spaces.CreateSpaceParams
+import bitframe.authentication.spaces.Space
+import bitframe.authentication.spaces.SpacesDao
+import bitframe.authentication.users.CreateUserParams
+import bitframe.authentication.users.User
+import bitframe.authentication.users.UsersDao
 import bitframe.server.data.DAOProvider
 import bitframe.server.data.contains
 import kotlinx.coroutines.CoroutineScope
@@ -9,24 +16,17 @@ import kotlinx.coroutines.SupervisorJob
 import later.Later
 import later.await
 import later.later
-import users.account.Account
-import users.account.CreateAccountParams
-import users.server.AccountsDao
-import users.server.UsersDao
-import users.user.Basic
-import users.user.CreateUserParams
-import users.user.User
 
 class DefaultAuthenticationService(
     override val usersDao: UsersDao,
-    override val accountsDao: AccountsDao
+    override val spacesDao: SpacesDao
 ) : AuthenticationService, CoroutineScope by CoroutineScope(SupervisorJob()) {
 
-    constructor(provider: DAOProvider) : this(provider.users, provider.accounts)
+    constructor(provider: DAOProvider) : this(provider.users, provider.spaces)
 
     override fun createDefaultUserIfNotExist(params: CreateUserParams) = later {
-        val accountParams = CreateAccountParams("Genesis")
-        val account = accountsDao.createIfNotExist(accountParams)
+        val accountParams = CreateSpaceParams("Genesis")
+        val account = spacesDao.createIfNotExist(accountParams)
         val user = usersDao.createIfNotExist(params)
         account.await(); user.await()
     }
@@ -44,36 +44,23 @@ class DefaultAuthenticationService(
             )
         )
         val u = usersDao.create(userParams).await()
-        val accountParams = CreateAccountParams(space.name)
-        val account = accountsDao.createIfNotExist(accountParams).await()
-        LoginConundrum(
-            user = bitframe.authentication.User(u.tag),
-            accounts = listOf(
-                bitframe.authentication.Account(
-                    uid = account.uid,
-                    name = account.name
-                )
-            )
-        )
+        val spaceParams = CreateSpaceParams(space.name)
+        val s = spacesDao.createIfNotExist(spaceParams).await()
+        LoginConundrum(u, listOf(s))
     }
 
     override fun signIn(credentials: LoginCredentials): Later<LoginConundrum> = later {
         val matches = usersDao.all(where = "contacts" contains credentials.alias).await()
         if (matches.isEmpty()) throw RuntimeException("User with alias=${credentials.alias}, not found")
         val match = matches.first()
-        LoginConundrum(
-            user = bitframe.authentication.User(match.tag),
-            accounts = listOf(
-                bitframe.authentication.Account("uid")
-            )
-        )
+        LoginConundrum(match,spaces = match.spaces)
     }
 
     override fun users(): Later<List<User>> {
         return usersDao.all()
     }
 
-    override fun accounts(): Later<List<Account>> {
-        return accountsDao.all()
+    override fun spaces(): Later<List<Space>> {
+        return spacesDao.all()
     }
 }

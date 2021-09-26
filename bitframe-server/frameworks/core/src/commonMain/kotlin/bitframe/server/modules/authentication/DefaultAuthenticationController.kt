@@ -1,7 +1,7 @@
 package bitframe.server.modules.authentication
 
-import bitframe.authentication.LoginConundrum
-import bitframe.authentication.LoginCredentials
+import bitframe.authentication.signin.LoginConundrum
+import bitframe.authentication.signin.LoginCredentials
 import duality.Result
 import duality.catching
 import kotlinx.serialization.json.Json
