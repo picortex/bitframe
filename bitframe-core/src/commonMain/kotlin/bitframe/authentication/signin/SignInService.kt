@@ -1,4 +1,4 @@
-package bitframe.server.modules.authentication.signin
+package bitframe.authentication.signin
 
 import bitframe.authentication.LoginConundrum
 import bitframe.authentication.LoginCredentials

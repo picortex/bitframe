@@ -1,14 +1,10 @@
 package bitframe
 
 import bitframe.authentication.ClientConfiguration
-import bitframe.authentication.SignInService
 import bitframe.authentication.TestClientConfiguration
 import bitframe.authentication.TestSignInService
-import kotlinx.coroutines.InternalCoroutinesApi
+import bitframe.authentication.signin.SignInService
 import kotlin.js.JsExport
-import kotlin.jvm.JvmField
-import kotlin.jvm.JvmStatic
-import kotlin.jvm.JvmSynthetic
 
 @JsExport
 open class BitframeTestClientImpl(override val configuration: TestClientConfiguration) : BitframeTestClient {

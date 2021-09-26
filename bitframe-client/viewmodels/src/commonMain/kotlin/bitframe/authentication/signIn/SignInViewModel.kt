@@ -3,8 +3,8 @@
 package bitframe.authentication.signIn
 
 import bitframe.authentication.Account
-import bitframe.authentication.SignInService
 import bitframe.authentication.User
+import bitframe.authentication.signin.SignInService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect

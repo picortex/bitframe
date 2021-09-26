@@ -1,10 +1,9 @@
 package bitframe.authentication.login
 
-import bitframe.authentication.SignInService
 import bitframe.authentication.signIn.SignInIntent
 import bitframe.authentication.signIn.SignInScope
 import bitframe.authentication.signIn.SignInState
-import bitframe.authentication.signIn.SignInViewModel
+import bitframe.authentication.signin.SignInService
 import kotlinx.css.*
 import react.Props
 import react.RBuilder

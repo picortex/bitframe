@@ -1,5 +1,7 @@
 package bitframe.authentication
 
+import bitframe.MiniService
+import bitframe.authentication.signin.SignInService
 import duality.Result
 import duality.parse
 import duality.response
@@ -14,7 +16,7 @@ import kotlin.jvm.JvmOverloads
 
 internal class SignInServiceKtor @JvmOverloads constructor(
     private val configuration: KtorClientConfiguration
-) : SignInService {
+) : SignInService, MiniService {
     private val path = configuration.url + "/api/authentication/sign-in"
     override val config: ClientConfiguration = configuration
     private val http = configuration.http

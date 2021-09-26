@@ -1,6 +1,8 @@
 package bitframe.authentication
 
 import bitframe.BitframeTestClient
+import bitframe.MiniService
+import bitframe.authentication.signin.SignInService
 import kotlinx.coroutines.delay
 import later.later
 import kotlin.js.JsExport
@@ -10,7 +12,7 @@ import kotlin.jvm.JvmOverloads
 class TestSignInService @JvmOverloads constructor(
     val configuration: TestClientConfiguration = BitframeTestClient.CONFIGURATION,
     val db: UserDatabase = UserDatabase()
-) : SignInService {
+) : SignInService, MiniService {
     override val config: ClientConfiguration = configuration
     override fun signIn(credentials: LoginCredentials) = configuration.scope.later {
         delay(configuration.simulationTime.toLong())

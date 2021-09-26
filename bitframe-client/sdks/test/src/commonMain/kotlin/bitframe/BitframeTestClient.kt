@@ -1,11 +1,8 @@
 package bitframe
 
 import bitframe.authentication.ClientConfiguration
-import bitframe.authentication.SignInService
 import bitframe.authentication.TestClientConfiguration
-import bitframe.authentication.TestSignInService
-import kotlin.js.JsExport
-import kotlin.jvm.JvmField
+import bitframe.authentication.signin.SignInService
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 

@@ -1,4 +1,4 @@
-package unit
+package unit.response
 
 import bitframe.response.Failure
 import bitframe.response.Success

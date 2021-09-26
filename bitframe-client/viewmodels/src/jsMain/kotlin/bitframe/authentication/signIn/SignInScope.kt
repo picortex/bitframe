@@ -3,7 +3,7 @@
 package bitframe.authentication.signIn
 
 import bitframe.authentication.LoginCredentials
-import bitframe.authentication.SignInService
+import bitframe.authentication.signin.SignInService
 
 external interface SignInCredentials {
     var username: String
