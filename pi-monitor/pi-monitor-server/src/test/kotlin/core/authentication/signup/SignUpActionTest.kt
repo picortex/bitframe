@@ -21,7 +21,13 @@ open class SignUpActionTest private constructor(val action: Action) {
 
     @Test
     fun should_sign_up_an_individual_properly() = runTest {
-        val res = sandbox.post("/api/authentication/sign-up")
+        val params = mapOf(
+            "name" to "Anderson",
+            "email" to "john@doe.com",
+            "password" to "12345"
+        )
+        val res = sandbox.post("/api/authentication/sign-up", body = params)
+        println(res.body)
         expect(res.status).toBe(HttpStatusCode.OK)
     }
 }
