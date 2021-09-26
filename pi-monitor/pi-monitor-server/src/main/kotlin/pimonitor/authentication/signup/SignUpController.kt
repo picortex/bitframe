@@ -10,11 +10,16 @@ import kotlinx.serialization.json.Json
 import later.await
 import pimonitor.IndividualRegistrationParams
 
+private val json = Json {
+    encodeDefaults = true
+    ignoreUnknownKeys = true
+}
+
 class SignUpController(
     val signInService: AuthenticationService
 ) {
     suspend fun signUp(req: HttpRequest) = response {
-        val params = Json.decodeFromString(
+        val params = json.decodeFromString(
             IndividualRegistrationParams.serializer(),
             req.compulsoryBody()
         )

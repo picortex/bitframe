@@ -1,6 +1,7 @@
 package core.authentication.signup
 
 import bitframe.Sandbox
+import bitframe.printJson
 import bitframe.server.actions.Action
 import bitframe.server.data.DAOProvider
 import bitframe.server.modules.authentication.AuthenticationService
@@ -23,11 +24,11 @@ open class SignUpActionTest private constructor(val action: Action) {
     fun should_sign_up_an_individual_properly() = runTest {
         val params = mapOf(
             "name" to "Anderson",
-            "email" to "john@doe.com",
-            "password" to "12345"
+            "email" to "johndoe.com",
+            "password1" to "12345"
         )
         val res = sandbox.post("/api/authentication/sign-up", body = params)
-        println(res.body)
+        res.body.printJson()
         expect(res.status).toBe(HttpStatusCode.OK)
     }
 }
