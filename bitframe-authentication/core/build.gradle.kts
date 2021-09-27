@@ -23,6 +23,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
+                implementation(kotlinx("serialization-json", vers.kotlinx.serialization))
                 implementation(asoft("expect-core", vers.asoft.expect))
             }
         }

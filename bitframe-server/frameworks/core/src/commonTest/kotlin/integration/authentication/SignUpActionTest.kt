@@ -1,7 +1,7 @@
 package integration.authentication
 
 import bitframe.Sandbox
-import bitframe.server.modules.authentication.signin.DefaultSignInAction
+import bitframe.server.modules.authentication.signin.SignInAction
 import expect.expect
 import io.ktor.http.*
 import kotlinx.coroutines.runTest
@@ -9,7 +9,7 @@ import kotlin.test.Test
 
 class SignUpActionTest {
     private val sandbox = Sandbox(
-        DefaultSignInAction(AUTHENTICATION_CONTROLLER_UNDER_TEST)
+        SignInAction(AUTHENTICATION_CONTROLLER_UNDER_TEST)
     )
 
     @Test

@@ -10,7 +10,7 @@ import pimonitor.ktor.PiMonitorServiceKtor
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-@Ignore
+//@Ignore
 class SignUpServiceKtorServiceTest {
 
     private val service = PiMonitorServiceKtor(CONFIGURATION_UNDER_TEST)
@@ -30,8 +30,8 @@ class SignUpServiceKtorServiceTest {
 
         val conundrum = service.signIn.signIn(individual.credentials()).await()
 
-        expect(individual.name).toBe(conundrum.user.username)
+        expect(individual.name).toBe(conundrum.user.tag)
 
-        expect(conundrum.accounts).toBeOfSize(1)
+        expect(conundrum.spaces).toBeOfSize(1)
     }
 }

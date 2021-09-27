@@ -2,9 +2,8 @@ package pimonitor
 
 import bitframe.Application
 import bitframe.server.modules.Module
-import bitframe.server.modules.authentication.AuthenticationModule
 import bitframe.server.modules.authentication.AuthenticationService
-import bitframe.server.modules.authentication.DefaultAuthenticationModule
+import bitframe.server.modules.authentication.AuthenticationModuleImpl
 import pimonitor.authentication.signup.SignUpController
 import pimonitor.authentication.signup.SignUpModule
 import java.io.File
@@ -14,7 +13,7 @@ fun PiMonitorServer(
     authService: AuthenticationService,
 ) = Application(
     client,
-    DefaultAuthenticationModule(authService),
+    AuthenticationModuleImpl(authService),
     listOf(
         SignUpModule(controller = SignUpController(authService)),
         Module<Monitor>(),

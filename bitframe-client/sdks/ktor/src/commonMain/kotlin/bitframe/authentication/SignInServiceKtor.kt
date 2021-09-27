@@ -4,6 +4,7 @@ import bitframe.MiniService
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.signin.LoginCredentials
 import bitframe.authentication.signin.SignInService
+import bitframe.response.response.decodeResponseFromString
 import duality.Result
 import duality.parse
 import duality.response
@@ -29,6 +30,6 @@ internal class SignInServiceKtor @JvmOverloads constructor(
                 contentType = ContentType.Application.Json
             )
         }
-        Result.parse(LoginConundrum.serializer(), json).response()
+        Json.decodeResponseFromString(LoginConundrum.serializer(), json).response()
     }
 }

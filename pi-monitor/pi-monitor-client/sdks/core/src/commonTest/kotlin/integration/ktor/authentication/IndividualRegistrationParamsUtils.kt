@@ -1,5 +1,6 @@
 package integration.ktor.authentication
 
+import bitframe.authentication.signin.LoginCredentials
 import pimonitor.IndividualRegistrationParams
 
 internal fun IndividualRegistrationParams.credentials() = LoginCredentials(

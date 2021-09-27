@@ -18,7 +18,7 @@ private val json = Json {
 }
 
 class SignUpController(
-    val signInService: AuthenticationService
+    val authenticationService: AuthenticationService
 ) {
     suspend fun signUp(req: HttpRequest) = response {
         val params = json.decodeFromString(
@@ -26,7 +26,7 @@ class SignUpController(
             req.compulsoryBody()
         )
 
-        val conundrum = signInService.registerUser(
+        val conundrum = authenticationService.registerUser(
             user = RegisterUserParams(
                 name = params.name ?: throw RuntimeException("Name must not be null"),
                 contacts = Contacts.of(params.email ?: throw RuntimeException("Name must not be null")),

@@ -1,8 +1,8 @@
 package integration.authentication
 
 import bitframe.authentication.SignInServiceKtor
-import bitframe.authentication.LoginCredentials
-import bitframe.authentication.SignInService
+import bitframe.authentication.signin.LoginCredentials
+import bitframe.authentication.signin.SignInService
 import expect.expect
 import integration.ktor.utils.CONFIGURATION_UNDER_TEST
 import kotlinx.coroutines.runTest
@@ -17,7 +17,7 @@ class LoginServiceTest {
     @Ignore
     fun should_give_a_user_with_valid_credentials_access() = runTest {
         val conundrum = service.signIn(LoginCredentials("user1", "pass1")).await()
-        expect(conundrum.accounts).toBeOfSize(1)
+        expect(conundrum.spaces).toBeOfSize(1)
     }
 
     @Test

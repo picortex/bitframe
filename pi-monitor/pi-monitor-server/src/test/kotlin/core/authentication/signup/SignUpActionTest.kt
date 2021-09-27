@@ -2,22 +2,19 @@ package core.authentication.signup
 
 import bitframe.*
 import bitframe.server.data.DAOProvider
-import bitframe.server.modules.authentication.AuthenticationModule
 import bitframe.server.modules.authentication.AuthenticationService
-import bitframe.server.modules.authentication.DefaultAuthenticationService
+import bitframe.server.modules.authentication.AuthenticationServiceImpl
 import expect.expect
 import io.ktor.http.*
 import kotlinx.coroutines.runTest
-import pimonitor.PiMonitorServer
 import pimonitor.authentication.signup.DefaultSignUpAction
 import pimonitor.authentication.signup.SignUpController
-import java.io.File
 import kotlin.test.Test
 
 open class SignUpActionTest(val component: ComponentUnderTest) {
     constructor(controller: SignUpController) : this(ActionUnderTest(DefaultSignUpAction(controller)))
     constructor(signInService: AuthenticationService) : this(SignUpController(signInService))
-    constructor(daoProvider: DAOProvider) : this(DefaultAuthenticationService(daoProvider))
+    constructor(daoProvider: DAOProvider) : this(AuthenticationServiceImpl(daoProvider))
 
     val sandbox = Sandbox(component)
 

@@ -1,6 +1,7 @@
 package unit
 
 import bitframe.authentication.TestClientConfiguration
+import bitframe.authentication.signin.LoginCredentials
 import expect.expect
 import kotlinx.coroutines.runTest
 import later.await
@@ -26,6 +27,6 @@ class ExhaustionTest {
                 password = "pass1"
             )
         )
-        expect(res.await().user.username).toBe("user1")
+        expect(res.await().user.tag).toBe("user1")
     }
 }

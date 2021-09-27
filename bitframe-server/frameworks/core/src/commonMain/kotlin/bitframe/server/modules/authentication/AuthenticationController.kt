@@ -1,9 +1,8 @@
 package bitframe.server.modules.authentication
 
-import bitframe.authentication.signin.LoginConundrum
-import duality.Result
+import bitframe.server.http.HttpResponse
 
 interface AuthenticationController {
     val service: AuthenticationService
-    suspend fun signIn(body: String?): Result<LoginConundrum>
+    suspend fun signIn(body: String?): HttpResponse
 }
