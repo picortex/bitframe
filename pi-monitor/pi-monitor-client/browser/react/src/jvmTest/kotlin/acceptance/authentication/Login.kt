@@ -3,8 +3,7 @@
 package acceptance.authentication
 
 import acceptance.utils.AcceptanceTest
-import bitframe.authentication.LoginCredentials
-import com.codeborne.selenide.SelenideConfig
+import bitframe.authentication.signin.LoginCredentials
 import expect.expect
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test

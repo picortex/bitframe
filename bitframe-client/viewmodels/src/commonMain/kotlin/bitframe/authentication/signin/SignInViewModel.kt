@@ -15,17 +15,21 @@ import kotlin.js.JsExport
 
 class SignInViewModel(
     private val service: SignInService
-) : ViewModel<SignInIntent, SignInState>(SignInState.Form(null)) {
+) : ViewModel<SignInIntent, SignInState>(SignInState.Form(SignInFormFields())) {
 
     private var loginListener: ((User, Space) -> Unit)? = null
 
     override fun CoroutineScope.execute(i: SignInIntent): Any = when (i) {
-        is SignInIntent.ShowForm -> ui.value = SignInState.Form(i.credentials)
+        is SignInIntent.ShowForm -> showForm(i)
         is SignInIntent.Submit -> signIn(i)
     }
 
     fun onUserLoggedIn(listener: (User, Space) -> Unit) {
         loginListener = listener
+    }
+
+    private fun showForm(i: SignInIntent.ShowForm) {
+        ui.value = SignInState.Form(SignInFormFields.with(i.credentials))
     }
 
     private fun CoroutineScope.signIn(i: SignInIntent.Submit) = launch {

@@ -25,15 +25,16 @@ open class BitframeTestClientImpl(
     spacesDao: SpacesDao = SpacesDaoInMemory(config = daoConfig, spaces = testSpaces(daoConfig))
 ) : BitframeTestClient {
     companion object {
-        private fun testSpaces(config: DaoConfig) = mutableMapOf(
-            "space-01" to Space(
-                uid = "space-01",
-                name = "Space One",
+        private fun testSpaces(config: DaoConfig) = (1..3).associate {
+            val key = "space-$it"
+            key to Space(
+                uid = key,
+                name = "Space Two",
                 photoUrl = null,
                 scope = "",
                 type = ""
             )
-        )
+        }.toMutableMap()
 
         private fun testUsers(config: DaoConfig) = mutableMapOf(
             "user-1" to User(
@@ -42,7 +43,15 @@ open class BitframeTestClientImpl(
                 tag = "user01",
                 contacts = Contacts.of("user01@test.com"),
                 photoUrl = null,
-                spaces = listOf(testSpaces(config)["space-01"]!!)
+                spaces = listOf(testSpaces(config)["space-1"]!!)
+            ),
+            "user-2" to User(
+                uid = "user-2",
+                name = "User Two",
+                tag = "user02",
+                contacts = Contacts.of("user02@test.com"),
+                photoUrl = null,
+                spaces = testSpaces(config).values.toList().slice(1..2)
             )
         )
     }
