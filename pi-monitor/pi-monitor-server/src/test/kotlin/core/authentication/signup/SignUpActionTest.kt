@@ -1,6 +1,8 @@
 package core.authentication.signup
 
 import bitframe.*
+import bitframe.authentication.users.UsersService
+import bitframe.authentication.users.UsersServiceImpl
 import bitframe.server.data.DAOProvider
 import bitframe.server.modules.authentication.AuthenticationService
 import bitframe.server.modules.authentication.AuthenticationServiceImpl
@@ -11,10 +13,10 @@ import pimonitor.authentication.signup.DefaultSignUpAction
 import pimonitor.authentication.signup.SignUpController
 import kotlin.test.Test
 
-open class SignUpActionTest(val component: ComponentUnderTest) {
+open class SignUpActionTest(component: ComponentUnderTest) {
     constructor(controller: SignUpController) : this(ActionUnderTest(DefaultSignUpAction(controller)))
-    constructor(signInService: AuthenticationService) : this(SignUpController(signInService))
-    constructor(daoProvider: DAOProvider) : this(AuthenticationServiceImpl(daoProvider))
+    constructor(service: UsersService) : this(SignUpController(service))
+    constructor(daoProvider: DAOProvider) : this(UsersServiceImpl(daoProvider.users, daoProvider.spaces))
 
     val sandbox = Sandbox(component)
 
