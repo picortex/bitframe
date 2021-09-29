@@ -47,5 +47,5 @@ jobs:
         working-directory: .
 
       - name: Running acceptance tests
-        run: TEST_MODE=CI HEADLESS=true ./gradlew jvmTest --tests acceptance.*
+        run: TEST_MODE=CI HEADLESS=true CHROME_BIN=/usr/bin/google-chrome ./gradlew acceptanceTest --tests acceptance.*
         working-directory: .
