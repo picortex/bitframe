@@ -99,15 +99,15 @@ val stopDockerContainer by tasks.creating(DockerStopContainer::class) {
     targetContainerId(createDockerContainer.containerId)
 }
 
-val acceptanceTestSetup by tasks.creating {
-    dependsOn("clean")
-    dependsOn(startDockerContainer)
-    finalizedBy("test")
-}
-
-val acceptanceTestTearDown by tasks.creating {
-    finalizedBy(stopDockerContainer)
-}
+//val acceptanceTestSetup by tasks.creating {
+//    dependsOn("clean")
+//    dependsOn(startDockerContainer)
+//    finalizedBy("test")
+//}
+//
+//val acceptanceTestTearDown by tasks.creating {
+//    finalizedBy(stopDockerContainer)
+//}
 
 val run by tasks.getting(JavaExec::class) {
     val public = properties.getOrDefault("public", "/default")

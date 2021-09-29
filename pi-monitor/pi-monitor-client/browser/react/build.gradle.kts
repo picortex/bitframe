@@ -89,34 +89,17 @@ val stopDockerContainer by tasks.creating(DockerStopContainer::class) {
     targetContainerId(createDockerContainer.containerId)
 }
 
-val acceptanceTestSetup by tasks.creating {
-    dependsOn("cleanAllTests")
-    dependsOn(startDockerContainer)
-    finalizedBy("allTests")
-}
-
-val acceptanceTestTearDown by tasks.creating {
-    finalizedBy(stopDockerContainer)
-}
-
-val acceptanceTests by tasks.creating {
-    dependsOn(acceptanceTestSetup)
-    finalizedBy(acceptanceTestTearDown)
-}
-
-val jvmTest by tasks.getting(Test::class)
-
-@OptIn(ExperimentalStdlibApi::class)
-val acceptanceTest by tasks.creating(Test::class) {
-    filter { include("acceptance.*") }
-    testClassesDirs = jvmTest.testClassesDirs
-    dependsOn(jvmTest)
-    dependsOn(":pi-monitor-server:createDockerfile")
-    val props = buildMap<String, Any> {
-        put("selenide.headless", System.getenv("HEADLESS") == "true")
-        if (System.getenv("TEST_MODE") == "CI") {
-            put("selenide.browserBinary", "/usr/local/share/chrome_driver")
-        }
+val jvmTest by tasks.getting(Test::class) {
+    val props = mutableMapOf<String, Any>(
+        "selenide.headless" to (System.getenv("HEADLESS") == "true")
+    )
+    if (System.getenv("TEST_MODE") == "CI") {
+        dependsOn(":pi-monitor-server:createDockerfile")
+//        val bin = System.getenv("CHROME_BIN") ?: "/usr/local/share/chrome_driver"
+//        props["selenide.browserBinary"] = "/usr/bin/google-chrome"
     }
     systemProperties(props)
+    testLogging {
+        showStandardStreams = true
+    }
 }
