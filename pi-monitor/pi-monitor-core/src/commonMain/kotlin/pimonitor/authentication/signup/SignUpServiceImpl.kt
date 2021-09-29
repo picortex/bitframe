@@ -1,26 +1,23 @@
-package pimonitor.test.authentication
+package pimonitor.authentication.signup
 
-import bitframe.MiniService
-import bitframe.authentication.ClientConfiguration
-import bitframe.authentication.TestClientConfiguration
 import bitframe.authentication.signin.LoginConundrum
-import bitframe.authentication.users.UsersService
+import bitframe.authentication.users.Contacts
 import kotlinx.coroutines.delay
 import later.Later
-import later.later
-import pimonitor.authentication.signup.IndividualRegistrationParams
 import pimonitor.Monitor
-import pimonitor.authentication.signup.SignUpService
 import pimonitor.toPerson
 
-class SignUpServiceTestImpl(
-    override val config: TestClientConfiguration,
+class SignUpServiceImpl(
     val usersService: UsersService
-) : SignUpService(), MiniService {
-
+) : SignUpService() {
     override fun registerIndividuallyAs(
         person: IndividualRegistrationParams
     ): Later<LoginConundrum> = config.scope.later {
+        val user = RegisterUserParams(
+            name = params.name ?: throw RuntimeException("Name must not be null"),
+            contacts = Contacts.of(params.email ?: throw RuntimeException("Name must not be null")),
+            password = params.password ?: throw RuntimeException("Password must not be null")
+        )
         delay(config.simulationTime.toLong())
         person.toPerson()
         TODO()

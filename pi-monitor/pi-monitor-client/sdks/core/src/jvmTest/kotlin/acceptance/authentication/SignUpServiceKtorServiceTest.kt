@@ -7,7 +7,7 @@ import kotlinx.datetime.Clock
 import later.await
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.junit.jupiter.Testcontainers
-import pimonitor.IndividualRegistrationParams
+import pimonitor.authentication.signup.IndividualRegistrationParams
 import pimonitor.PiMonitorService
 import pimonitor.ktor.PiMonitorServiceKtor
 import kotlin.test.Test

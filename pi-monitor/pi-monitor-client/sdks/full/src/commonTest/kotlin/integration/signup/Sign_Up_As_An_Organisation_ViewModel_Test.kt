@@ -6,7 +6,7 @@ import expect.expect
 import expect.toBe
 import kotlinx.coroutines.runTest
 import pimonitor.MonitorBusinessParams
-import pimonitor.IndividualRegistrationParams
+import pimonitor.authentication.signup.IndividualRegistrationParams
 import pimonitor.authentication.signup.OrganisationFormFields
 import pimonitor.authentication.signup.SignUpViewModel
 import utils.SERVICE_UNDER_TEST

@@ -1,5 +1,6 @@
 package pimonitor.ktor
 
+import bitframe.MiniService
 import bitframe.authentication.KtorClientConfiguration
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.response.response.decodeResponseFromString
@@ -9,13 +10,13 @@ import io.ktor.http.content.*
 import kotlinx.serialization.json.Json
 import later.Later
 import later.later
-import pimonitor.IndividualRegistrationParams
+import pimonitor.authentication.signup.IndividualRegistrationParams
 import pimonitor.Monitor
-import pimonitor.authentication.SignUpService
+import pimonitor.authentication.signup.SignUpService
 
 class SignUpServiceKtorImpl(
     override val config: KtorClientConfiguration
-) : SignUpService {
+) : SignUpService(), MiniService {
     private val client = config.http
     private val scope = config.scope
     override fun registerIndividuallyAs(

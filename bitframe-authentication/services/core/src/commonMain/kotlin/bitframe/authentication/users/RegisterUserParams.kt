@@ -1,6 +1,8 @@
-package bitframe.server.modules.authentication
+@file:JsExport
 
-import bitframe.authentication.users.Contacts
+package bitframe.authentication.users
+
+import kotlin.js.JsExport
 
 data class RegisterUserParams(
     val name: String,

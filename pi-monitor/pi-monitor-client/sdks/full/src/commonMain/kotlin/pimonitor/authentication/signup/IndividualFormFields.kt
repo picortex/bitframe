@@ -2,7 +2,6 @@ package pimonitor.authentication.signup
 
 import bitframe.presenters.ButtonInputField
 import bitframe.presenters.TextInputField
-import pimonitor.IndividualRegistrationParams
 import kotlin.js.JsExport
 
 @JsExport

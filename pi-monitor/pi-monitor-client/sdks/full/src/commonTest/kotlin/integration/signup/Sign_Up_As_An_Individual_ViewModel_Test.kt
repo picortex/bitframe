@@ -5,7 +5,7 @@ package integration.signup
 import expect.expect
 import expect.toBe
 import kotlinx.coroutines.runTest
-import pimonitor.IndividualRegistrationParams
+import pimonitor.authentication.signup.IndividualRegistrationParams
 import pimonitor.authentication.signup.IndividualFormFields
 import pimonitor.authentication.signup.SignUpViewModel
 import utils.SERVICE_UNDER_TEST

@@ -26,7 +26,7 @@ open class AuthenticationModuleImpl @JvmOverloads constructor(
     ) : this(AuthenticationServiceImpl(provider.users, provider.spaces), default)
 
     init {
-        controller.service.createDefaultUserIfNotExist(default)
+        controller.service.users.createDefaultIfNotExist(default)
     }
 
     companion object {

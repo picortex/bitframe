@@ -1,7 +1,6 @@
 package pimonitor.authentication.signup
 
 import pimonitor.MonitorBusinessParams
-import pimonitor.IndividualRegistrationParams
 import kotlin.js.JsExport
 
 @JsExport
