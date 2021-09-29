@@ -22,11 +22,6 @@ val acceptanceTestTearDown by tasks.creating {
     finalizedBy(":pi-monitor-server:acceptanceTestTearDown")
 }
 
-val acceptanceTest by tasks.creating {
-    dependsOn(acceptanceTestSetup)
-    finalizedBy(acceptanceTestTearDown)
-}
-
 fun DockerComposeFileTask.configure(port: Int) {
     version(3.8)
     service("server-application") {

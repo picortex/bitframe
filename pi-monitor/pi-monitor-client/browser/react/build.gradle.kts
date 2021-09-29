@@ -110,12 +110,13 @@ val jvmTest by tasks.getting(Test::class)
 val acceptanceTest by tasks.creating(Test::class) {
     filter { include("acceptance.*") }
     testClassesDirs = jvmTest.testClassesDirs
+    dependsOn(jvmTest)
     dependsOn(":pi-monitor-server:createDockerfile")
     val props = buildMap<String, Any> {
         put("selenide.headless", System.getenv("HEADLESS") == "true")
-//        if (System.getenv("TEST_MODE") == "CI") {
-//            put("selenide.browserBinary", "/usr/local/share/chrome_driver")
-//        }
+        if (System.getenv("TEST_MODE") == "CI") {
+            put("selenide.browserBinary", "/usr/local/share/chrome_driver")
+        }
     }
     systemProperties(props)
 }

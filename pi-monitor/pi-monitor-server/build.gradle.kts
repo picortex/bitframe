@@ -109,11 +109,6 @@ val acceptanceTestTearDown by tasks.creating {
     finalizedBy(stopDockerContainer)
 }
 
-val acceptanceTests by tasks.creating {
-    dependsOn(acceptanceTestSetup)
-    finalizedBy(acceptanceTestTearDown)
-}
-
 val run by tasks.getting(JavaExec::class) {
     val public = properties.getOrDefault("public", "/default")
     args = listOf(public.toString())
