@@ -8,10 +8,7 @@ import bitframe.authentication.signin.SignInServiceImpl
 import bitframe.authentication.spaces.Space
 import bitframe.authentication.spaces.SpacesDao
 import bitframe.authentication.spaces.SpacesDaoInMemory
-import bitframe.authentication.users.Contacts
-import bitframe.authentication.users.User
-import bitframe.authentication.users.UsersDao
-import bitframe.authentication.users.UsersDaoInMemory
+import bitframe.authentication.users.*
 import kotlin.js.JsExport
 
 @JsExport
@@ -57,4 +54,5 @@ open class BitframeTestClientImpl(
     }
 
     override val signIn: SignInService = SignInServiceImpl(usersDao, spacesDao, ServiceConfig(config.scope))
+    override val users: UsersService = UsersServiceImpl(usersDao, spacesDao)
 }

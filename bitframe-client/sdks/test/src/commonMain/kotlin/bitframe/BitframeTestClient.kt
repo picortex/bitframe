@@ -2,6 +2,7 @@ package bitframe
 
 import bitframe.authentication.TestClientConfiguration
 import bitframe.authentication.signin.SignInService
+import bitframe.authentication.users.UsersService
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -27,4 +28,5 @@ interface BitframeTestClient : BitframeService {
 
     override val config: TestClientConfiguration
     override val signIn: SignInService
+    override val users: UsersService
 }

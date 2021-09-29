@@ -23,7 +23,6 @@ class Sign_Up_As_An_Individual_ViewModel_Test {
     }
 
     @Test
-    @Ignore
     fun the_register_should_be_able_to_move_from_selection_screen_to_personal_info_form_screen() = runTest {
         val vm = SignUpViewModel(SERVICE_UNDER_TEST.signUp)
         val expectedState = State.IndividualForm(IndividualFormFields(), null)

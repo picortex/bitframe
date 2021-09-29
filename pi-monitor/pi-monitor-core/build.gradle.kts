@@ -12,6 +12,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(project(":bitframe-annotations-core"))
                 api(project(":bitframe-authentication-service-core"))
             }
         }
