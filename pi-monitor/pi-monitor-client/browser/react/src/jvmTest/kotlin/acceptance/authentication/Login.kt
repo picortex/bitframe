@@ -29,7 +29,7 @@ class Login : AcceptanceTest() {
         @Test
         fun then_users_should_be_logged_in() = application.test {
             val signInScreen = openLandingScreen().clickSignInButton()
-            signInScreen.loginWith(LoginCredentials("user1", "pass1"))
+            signInScreen.loginWith(LoginCredentials("user01@test.com", "pass1"))
             expectUserToBeLoggedIn()
         }
     }

@@ -2,6 +2,7 @@ package pimonitor.screens
 
 import bitframe.authentication.signin.LoginCredentials
 import com.codeborne.selenide.Condition.text
+import com.codeborne.selenide.Selectors.withText
 import org.openqa.selenium.By
 import pimonitor.screens.authentication.SignInScreen
 import pimonitor.utils.isVisible
@@ -20,12 +21,6 @@ class SignInScreenWeb : SignInScreen {
     }
 
     override suspend fun isShowingInvalidCredentials(): Boolean {
-        val el = S(By.xpath("/html/body/div/div/div/div/div/div/div[2]"))
-        return try {
-            el.shouldHave(text("Invalid Login Credentials"))
-            true
-        } catch (err: Throwable) {
-            false
-        }
+        return S(withText("Reason: Unknown")).isVisible()
     }
 }

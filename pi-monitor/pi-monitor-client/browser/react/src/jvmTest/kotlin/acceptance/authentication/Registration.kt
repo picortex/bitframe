@@ -11,6 +11,7 @@ import pimonitor.MonitorBusinessParams
 import pimonitor.IndividualRegistrationParams
 import pimonitor.screens.api.toBeVisible
 import pimonitor.test
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 @Testcontainers
@@ -24,6 +25,7 @@ class Registration : AcceptanceTest() {
     }
 
     @Nested
+    @Ignore("Haven't implemented fully yet") // TODO
     inner class `Individual Registration` {
         // Given a Person with details
         private val person = IndividualRegistrationParams(
@@ -40,6 +42,7 @@ class Registration : AcceptanceTest() {
         }
     }
 
+    @Ignore("Not yet covered") // TODO Implement organisation registration
     @Nested
     inner class `Organisational Registration` {
         // Given
