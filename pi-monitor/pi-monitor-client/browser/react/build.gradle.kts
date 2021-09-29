@@ -52,16 +52,14 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(project(":pi-monitor-client-test"))
-                implementation("org.junit.jupiter:junit-jupiter-params:5.7.0")
-                implementation("org.testcontainers:testcontainers:${vers.testContainers}")
-                implementation("org.testcontainers:junit-jupiter:${vers.testContainers}")
+                implementation(project(":pi-monitor-test-containers"))
             }
         }
     }
 }
 
 val createDockerfile by tasks.creating(Dockerfile::class) {
-    dependsOn("webpackJsRelease")
+    dependsOn("compileProductionExecutableKotlinJs", "webpackJsRelease")
     from("nginx:stable-alpine")
     destFile.set(file("build/websites/js/Dockerfile"))
     copyFile("./release", "/usr/share/nginx/html")
@@ -106,7 +104,12 @@ val acceptanceTests by tasks.creating {
     finalizedBy(acceptanceTestTearDown)
 }
 
-val jvmTest by tasks.getting(Test::class) {
+val jvmTest by tasks.getting(Test::class)
+
+val acceptanceTest by tasks.creating(Test::class) {
+    filter { include("acceptance.*") }
+    testClassesDirs = jvmTest.testClassesDirs
+    dependsOn(":pi-monitor-server:createDockerfile")
     systemProperties(
         "selenide.headless" to (System.getenv("HEADLESS") == "true")
     )

@@ -1,4 +1,4 @@
-package acceptance.utils
+package testing
 
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.images.builder.ImageFromDockerfile
@@ -7,6 +7,7 @@ class GenericDisableableContainer<T : GenericDisableableContainer<T>?>(
     imageFromDockerfile: ImageFromDockerfile
 ) : GenericContainer<T>(imageFromDockerfile) {
     private var isActive = false
+
     override fun start() {
         if (isActive) {
             super.start()

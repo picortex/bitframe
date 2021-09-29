@@ -67,4 +67,6 @@ includeSubs(base = "pi-monitor-client-sdk", path = "pi-monitor/pi-monitor-client
 
 includeSubs(base = "pi-monitor-client", path = "pi-monitor/pi-monitor-client", "test")
 
+includeSubs(base = "pi-monitor-test", path = "pi-monitor/pi-monitor-test", "containers")
+
 includeSubs(base = "pi-monitor-client-browser", path = "pi-monitor/pi-monitor-client/browser", "react")

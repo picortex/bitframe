@@ -44,7 +44,8 @@ kotlin {
 
 val createDockerfile by tasks.creating(Dockerfile::class) {
     dependsOn("installDistRelease")
-    dependsOn(":pi-monitor-client-browser-react:webpackJsDebug")
+    dependsOn(":pi-monitor-client-browser-react:jsBrowserProductionWebpack")
+    dependsOn(":pi-monitor-client-browser-react:webpackJsRelease")
     from("openjdk:8-jre")
     runCommand("mkdir /app /app/public")
     destFile.set(file("build/binaries/Dockerfile"))
@@ -55,9 +56,9 @@ val createDockerfile by tasks.creating(Dockerfile::class) {
     defaultCommand("./bin/pi-monitor-server", "/app/public")
     doLast {
         copy {
-            from(rootProject.file("pi-monitor/pi-monitor-client/browser/react/build/websites/js/debug"))
+            from(rootProject.file("pi-monitor/pi-monitor-client/browser/react/build/websites/js/release"))
             into(file("build/binaries/public"))
-            exclude("main.bundle.js.*")
+            exclude("*.ts", "*.map")
         }
     }
 }

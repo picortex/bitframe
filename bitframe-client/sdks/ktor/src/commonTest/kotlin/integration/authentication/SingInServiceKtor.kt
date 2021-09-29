@@ -9,7 +9,6 @@ import later.await
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-@Ignore
 class SingInServiceKtor {
     private val service = SignInServiceKtor(CONFIGURATION_UNDER_TEST)
 
