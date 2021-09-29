@@ -51,11 +51,11 @@ includeSubs(base = "bitframe-client", path = "bitframe-client", "viewmodels")
 
 includeSubs(base = "bitframe-ui", path = "bitframe-client/ui", "react")
 
-includeRoot(name = "users-core", path = "users/users-core")
+//includeRoot(name = "users-core", path = "users/users-core")
 
-includeSubs(base = "users-server-services", path = "users/users-server/services", "core")
-
-includeSubs(base = "users-server-dao", path = "users/users-server/daos", "core", "inmemory")
+//includeSubs(base = "users-server-services", path = "users/users-server/services", "core")
+//
+//includeSubs(base = "users-server-dao", path = "users/users-server/daos", "core", "inmemory")
 
 include(":pi-monitor")
 

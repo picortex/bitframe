@@ -46,6 +46,10 @@ jobs:
         run: ./gradlew jvmTest --tests unit.*
         working-directory: .
 
+      - name: Running pi-monitor server unit tests
+        run: ./gradlew :pi-monitor-server:test --tests unit.*
+        working-directory: .
+
       - name: Running all unit tests
         run: ./gradlew jsTest jvmTest --tests unit.*
         working-directory: .
