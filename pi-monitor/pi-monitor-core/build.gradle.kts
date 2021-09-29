@@ -16,5 +16,11 @@ kotlin {
                 api(project(":bitframe-authentication-service-core"))
             }
         }
+
+        val commonTest by getting {
+            dependencies {
+                api(asoft("expect-core", vers.asoft.expect))
+            }
+        }
     }
 }

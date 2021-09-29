@@ -16,7 +16,6 @@ import kotlin.js.JsExport
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
-@JsExport
 class SignUpViewModel(
     private val service: SignUpService
 ) : ViewModel<Intent, State>(State.SelectRegistrationType) {

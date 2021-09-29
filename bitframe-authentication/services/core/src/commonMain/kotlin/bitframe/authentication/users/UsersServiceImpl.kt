@@ -16,7 +16,7 @@ class UsersServiceImpl(
     private val spacesDao: SpacesDao
 ) : UsersService(), CoroutineScope by CoroutineScope(SupervisorJob()) {
 
-    override fun createDefaultIfNotExist(params: CreateUserParams) = later {
+    override fun createIfNotExist(params: CreateUserParams) = later {
         val accountParams = CreateSpaceParams("Genesis")
         val account = spacesDao.createIfNotExist(accountParams)
         val user = usersDao.createIfNotExist(params)

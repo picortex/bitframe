@@ -8,7 +8,7 @@ import later.Later
 import kotlin.js.JsExport
 
 abstract class UsersService {
-    abstract fun createDefaultIfNotExist(params: CreateUserParams): Later<User>
+    abstract fun createIfNotExist(params: CreateUserParams): Later<User>
 
     abstract fun register(
         user: RegisterUserParams,
