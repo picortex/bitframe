@@ -10,11 +10,10 @@ plugins {
     id("org.jetbrains.dokka") version vers.dokka
 }
 
-repositories {
-    publicRepos()
-}
-
 subprojects {
+    repositories {
+        publicRepos()
+    }
     group = "com.picortex"
     version = vers.bitframe.current
 }

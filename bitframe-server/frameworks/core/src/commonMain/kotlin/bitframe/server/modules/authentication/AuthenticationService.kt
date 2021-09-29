@@ -1,16 +1,22 @@
 package bitframe.server.modules.authentication
 
+import bitframe.authentication.signin.LoginConundrum
+import bitframe.authentication.signin.LoginCredentials
+import bitframe.authentication.signin.SignInService
+import bitframe.authentication.spaces.Space
+import bitframe.authentication.spaces.SpacesDao
+import bitframe.authentication.users.CreateUserParams
+import bitframe.authentication.users.User
+import bitframe.authentication.users.UsersDao
 import later.Later
-import users.account.Account
-import users.server.AccountsDao
-import users.server.UsersDao
-import users.user.CreateUserParams
-import users.user.User
 
 interface AuthenticationService {
-    val usersDao: UsersDao
-    val accountsDao: AccountsDao
     fun createDefaultUserIfNotExist(params: CreateUserParams): Later<User>
-    fun users(): Later<List<User>>
-    fun accounts(): Later<List<Account>>
+
+    fun registerUser(
+        user: RegisterUserParams,
+        space: RegisterSpaceParams = RegisterSpaceParams(user.name)
+    ): Later<LoginConundrum>
+
+    val signIn: SignInService
 }

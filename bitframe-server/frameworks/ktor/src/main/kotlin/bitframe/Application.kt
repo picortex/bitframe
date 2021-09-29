@@ -16,7 +16,7 @@ import kotlinx.serialization.mapper.Mapper
 import java.io.File
 
 class Application(
-    val client: File,
+    private val client: File,
     authenticationModule: AuthenticationModule,
     modules: List<Module>
 ) : BitframeApplication(authenticationModule, modules) {
@@ -40,11 +40,11 @@ class Application(
                     val body = call.receiveText()
                     val request = HttpRequest(rout.method, rout.path, headers, body)
                     val response = rout.handler(request)
-                    call.respondText(response.body, contentType = ContentType.Application.Json)
+                    call.respondText(response.body, contentType = ContentType.Application.Json, status = response.status)
                 }
             }
 
-            get("/info") {
+            get("/api/info") {
                 val text = (modules + authenticationModule).map { it.info() }
                 call.respondText(Mapper { prettyPrint = true }.encodeToString(text))
             }

@@ -3,7 +3,7 @@
 package acceptance.authentication
 
 import acceptance.utils.AcceptanceTest
-import bitframe.authentication.LoginCredentials
+import bitframe.authentication.signin.LoginCredentials
 import com.codeborne.selenide.SelenideConfig
 import expect.expect
 import org.junit.jupiter.api.Nested
@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.openqa.selenium.chrome.ChromeOptions
 import org.testcontainers.junit.jupiter.Testcontainers
 import pimonitor.screens.api.toBeVisible
 import pimonitor.test
@@ -30,7 +31,7 @@ class Login : AcceptanceTest() {
         @Test
         fun then_users_should_be_logged_in() = application.test {
             val signInScreen = openLandingScreen().clickSignInButton()
-            signInScreen.loginWith(LoginCredentials("user1", "pass1"))
+            signInScreen.loginWith(LoginCredentials("user01@test.com", "pass1"))
             expectUserToBeLoggedIn()
         }
     }

@@ -20,22 +20,29 @@ kotlin {
             dependencies {
                 api(project(":pi-monitor-core"))
                 api(project(":bitframe-client-sdk-test"))
+                api(project(":bitframe-client-sdk-ktor"))
 
+                api(kotlinx("datetime", vers.kotlinx.datetime))
                 api(asoft("logging-console", vers.asoft.logging))
                 api(asoft("name-generator", vers.asoft.contacts))
                 api(asoft("email-generator", vers.asoft.contacts))
             }
         }
 
-        val jsMain by getting {
-            dependencies {
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
-            }
-        }
-
         val commonTest by getting {
             dependencies {
                 implementation(asoft("expect-coroutines", vers.asoft.expect))
+            }
+        }
+
+        val jvmMain by getting {
+            dependencies {
+                implementation(project(":pi-monitor-test-containers"))
+            }
+        }
+        val jsMain by getting {
+            dependencies {
+                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
     }

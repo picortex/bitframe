@@ -8,9 +8,10 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.junit.jupiter.Testcontainers
 import pimonitor.MonitorBusinessParams
-import pimonitor.MonitorPersonParams
+import pimonitor.IndividualRegistrationParams
 import pimonitor.screens.api.toBeVisible
 import pimonitor.test
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 @Testcontainers
@@ -24,9 +25,10 @@ class Registration : AcceptanceTest() {
     }
 
     @Nested
+    @Ignore("Haven't implemented fully yet") // TODO
     inner class `Individual Registration` {
         // Given a Person with details
-        private val person = MonitorPersonParams(
+        private val person = IndividualRegistrationParams(
             name = "John Doe",
             email = "john.doe@johndoeinc.com",
             password = "1234"
@@ -40,10 +42,11 @@ class Registration : AcceptanceTest() {
         }
     }
 
+    @Ignore("Not yet covered") // TODO Implement organisation registration
     @Nested
     inner class `Organisational Registration` {
         // Given
-        private val person = MonitorPersonParams(
+        private val person = IndividualRegistrationParams(
             name = "John Doe",
             email = "john.doe@johndoeinc.com",
             password = "1234"

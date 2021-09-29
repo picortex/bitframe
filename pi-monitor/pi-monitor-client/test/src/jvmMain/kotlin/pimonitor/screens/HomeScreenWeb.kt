@@ -1,18 +1,14 @@
 package pimonitor.screens
 
-import com.codeborne.selenide.Condition.text
+import com.codeborne.selenide.Selectors.withText
 import org.openqa.selenium.By
 import pimonitor.screens.authentication.SignInScreen
 import pimonitor.screens.authentication.SignUpScreen
+import pimonitor.utils.isVisible
 import com.codeborne.selenide.Selenide.`$` as S
 
 class HomeScreenWeb : LandingScreen {
-    override suspend fun isVisible(): Boolean = try {
-        S(By.xpath("//*[@id=\"root\"]/div")).shouldHave(text("Welcome to bitframe"))
-        true
-    } catch (err: Throwable) {
-        false
-    }
+    override suspend fun isVisible() = S(withText("Welcome to Bitframe")).isVisible()
 
     override fun clickSignInButton(): SignInScreen {
         S(By.xpath("/html/body/div/div/div/div/button[2]")).click()

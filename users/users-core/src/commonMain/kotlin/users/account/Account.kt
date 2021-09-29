@@ -1,7 +1,5 @@
 package users.account
 
-import users.ISystemPermission
-import users.SystemPermissionGroup
 import kotlinx.serialization.Serializable
 
 @Serializable

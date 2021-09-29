@@ -32,6 +32,7 @@ fun KotlinJsTargetDsl.testing(vararg names: String) {
         val binary = binaries.executable(compilation).first() as JsIrBinary
 
         project.afterEvaluate {
+
             val defaultTestTask = project.tasks.findByName("jsBrowserTest") as? KotlinJsTest
                 ?: project.tasks.findByName("jsNodeTest") as? KotlinJsTest
                 ?: throw Exception("Can't find default task")

@@ -35,6 +35,7 @@ kotlin {
 
         val test by getting {
             dependencies {
+                implementation(project(":bitframe-server-framework-test"))
                 implementation(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
@@ -43,7 +44,8 @@ kotlin {
 
 val createDockerfile by tasks.creating(Dockerfile::class) {
     dependsOn("installDistRelease")
-    dependsOn(":pi-monitor-client-browser-react:webpackJsDebug")
+    dependsOn(":pi-monitor-client-browser-react:jsBrowserProductionWebpack")
+    dependsOn(":pi-monitor-client-browser-react:webpackJsRelease")
     from("openjdk:8-jre")
     runCommand("mkdir /app /app/public")
     destFile.set(file("build/binaries/Dockerfile"))
@@ -54,9 +56,9 @@ val createDockerfile by tasks.creating(Dockerfile::class) {
     defaultCommand("./bin/pi-monitor-server", "/app/public")
     doLast {
         copy {
-            from(rootProject.file("pi-monitor/pi-monitor-client/browser/react/build/websites/js/debug"))
+            from(rootProject.file("pi-monitor/pi-monitor-client/browser/react/build/websites/js/release"))
             into(file("build/binaries/public"))
-            exclude("main.bundle.js.*")
+            exclude("*.ts", "*.map")
         }
     }
 }
@@ -97,20 +99,15 @@ val stopDockerContainer by tasks.creating(DockerStopContainer::class) {
     targetContainerId(createDockerContainer.containerId)
 }
 
-val acceptanceTestSetup by tasks.creating {
-    dependsOn("clean")
-    dependsOn(startDockerContainer)
-    finalizedBy("test")
-}
-
-val acceptanceTestTearDown by tasks.creating {
-    finalizedBy(stopDockerContainer)
-}
-
-val acceptanceTests by tasks.creating {
-    dependsOn(acceptanceTestSetup)
-    finalizedBy(acceptanceTestTearDown)
-}
+//val acceptanceTestSetup by tasks.creating {
+//    dependsOn("clean")
+//    dependsOn(startDockerContainer)
+//    finalizedBy("test")
+//}
+//
+//val acceptanceTestTearDown by tasks.creating {
+//    finalizedBy(stopDockerContainer)
+//}
 
 val run by tasks.getting(JavaExec::class) {
     val public = properties.getOrDefault("public", "/default")

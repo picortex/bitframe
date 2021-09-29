@@ -6,7 +6,7 @@ import kotlin.jvm.JvmSynthetic
 import contacts.Email as ValidEmail
 import contacts.Phone as ValidPhone
 
-@Serializable
+@Serializable(with = ContactsSerializer::class)
 sealed class Contacts {
 
     companion object {
@@ -120,5 +120,17 @@ sealed class Contacts {
             is EmailPhone -> Mixed(emails + other.email, phones + other.phone)
             is Mixed -> Mixed(emails + other.emails, phones + other.phones)
         }
+    }
+
+    fun firstValue() = firstValueOrNull() ?: throw RuntimeException("There are no Contacts inside the contacts container")
+
+    fun firstValueOrNull() = when (this) {
+        None -> null
+        is Email -> email.value
+        is Emails -> emails.firstOrNull()?.value
+        is Phone -> phone.value
+        is Phones -> phones.firstOrNull()?.value
+        is EmailPhone -> email.value
+        is Mixed -> emails.firstOrNull()?.value
     }
 }

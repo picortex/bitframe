@@ -17,5 +17,7 @@ class AccountsDaoInMemory(
         } else Later.resolve(existing)
     }
 
-    override fun all(): Later<List<Account>> = Later.resolve(accounts.values.toList())
+    override fun all(where: Condition<String, Any?>?): Later<List<Account>> = if (where == null) Later.resolve(accounts.values.toList()) else {
+        Later.resolve(accounts.values.matching(where, Account.serializer()))
+    }
 }

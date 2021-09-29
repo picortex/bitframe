@@ -1,6 +1,6 @@
 package pimonitor.screens.authentication
 
-import bitframe.authentication.LoginCredentials
+import bitframe.authentication.signin.LoginCredentials
 import pimonitor.screens.api.Screen
 
 interface SignInScreen : Screen {

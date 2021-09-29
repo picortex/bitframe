@@ -1,12 +1,5 @@
 package unit.modules
 
-import bitframe.Sandbox
-import bitframe.server.modules.authentication.DefaultAuthenticationModule
-import expect.expect
-import io.ktor.http.*
-import kotlinx.coroutines.runTest
-import kotlin.test.Test
-
 class AuthenticationTest {
 //    val auth = DefaultAuthenticationModule()
 //    val sandbox = Sandbox(auth)

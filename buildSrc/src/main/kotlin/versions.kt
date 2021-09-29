@@ -33,6 +33,7 @@ object vers {
         val platform = foundation
         val access = "0.0.20"
         val contacts = "0.0.30"
+        val duality = "0.0.50"
         val collections = foundation
         val mvivm = "0.1.20"
         val viewmodel = mvivm

@@ -21,5 +21,7 @@ class UsersDaoInMemory(
         return create(params)
     }
 
-    override fun all() = Later.resolve(users.values.toList())
+    override fun all(where: Condition<String, Any?>?) = if (where == null) Later.resolve(users.values.toList()) else {
+        Later.resolve(users.values.matching(where, User.serializer()))
+    }
 }

@@ -17,6 +17,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-client-sdk-core"))
+                api(project(":bitframe-authentication-dao-inmemory"))
             }
         }
 

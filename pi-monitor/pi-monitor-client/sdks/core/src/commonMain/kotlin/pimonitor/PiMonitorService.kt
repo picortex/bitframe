@@ -4,7 +4,7 @@ package pimonitor
 
 import bitframe.BitframeService
 import bitframe.authentication.ClientConfiguration
-import bitframe.authentication.SignInService
+import bitframe.authentication.signin.SignInService
 import pimonitor.authentication.SignUpService
 import pimonitor.evaulation.business.BusinessService
 import platform.ExecutionEnvironment
