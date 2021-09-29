@@ -1,9 +1,5 @@
-package bitframe.authentication.login
+package bitframe.authentication.signin
 
-import bitframe.authentication.signin.SignInIntent
-import bitframe.authentication.signin.SignInScope
-import bitframe.authentication.signin.SignInState
-import bitframe.authentication.signin.SignInService
 import kotlinx.css.*
 import react.Props
 import react.RBuilder
@@ -40,8 +36,8 @@ private val LoginPage = fc<LoginPageProps> { props ->
             height = 100.vh
         }
         when (ui) {
-            is SignInState.Form -> LoginForm(
-                cred = ui.credentials,
+            is SignInState.Form -> SignInForm(
+                fields = ui.fields,
                 onLoginButtonPressed = { viewModel.post(SignInIntent.Submit(it)) }
             )
             is SignInState.Conundrum -> ShowConundrum()
