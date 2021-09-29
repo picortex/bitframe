@@ -23,6 +23,12 @@ class UsersDaoInMemory(
         } else existing
     }
 
+    override fun update(u: User): Later<User> = scope.later {
+        delay(config.simulationTime.toLong())
+        users[u.uid] = u
+        u
+    }
+
     override fun createIfNotExist(params: CreateUserParams) = create(params)
 
     override fun all(where: Condition<String, Any?>?) = scope.later {

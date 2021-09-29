@@ -1,4 +1,4 @@
-package integration.ktor.authentication
+package acceptance.authentication
 
 import bitframe.authentication.signin.LoginCredentials
 import pimonitor.IndividualRegistrationParams

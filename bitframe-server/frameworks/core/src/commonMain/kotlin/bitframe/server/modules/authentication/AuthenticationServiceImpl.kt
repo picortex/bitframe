@@ -45,12 +45,9 @@ class AuthenticationServiceImpl(
             )
         )
         val spaceParams = CreateSpaceParams(space.name)
-        val u = usersDao.create(userParams)
-        val s = spacesDao.createIfNotExist(spaceParams)
-        val spaces = listOf(s.await())
-        val usr = u.await().copy(
-            spaces = spaces
-        )
-        LoginConundrum(usr, spaces)
+        val s = spacesDao.createIfNotExist(spaceParams).await()
+        val u = usersDao.create(userParams).await()
+        val usr = usersDao.update(u.copy(spaces = listOf(s))).await()
+        LoginConundrum(usr, usr.spaces)
     }
 }

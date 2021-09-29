@@ -29,15 +29,20 @@ kotlin {
             }
         }
 
-        val jsMain by getting {
-            dependencies {
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
-            }
-        }
-
         val commonTest by getting {
             dependencies {
                 implementation(asoft("expect-coroutines", vers.asoft.expect))
+            }
+        }
+
+        val jvmMain by getting {
+            dependencies {
+                implementation(project(":pi-monitor-test-containers"))
+            }
+        }
+        val jsMain by getting {
+            dependencies {
+                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
     }

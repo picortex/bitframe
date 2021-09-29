@@ -36,11 +36,12 @@ kotlin {
             }
         }
 
-//        val jvmTest by getting {
-//            dependencies {
-//                implementation(asoft("expect-coroutines", vers.asoft.expect))
-//            }
-//        }
+        val jvmTest by getting {
+            dependencies {
+                implementation(project(":pi-monitor-test-containers"))
+                implementation(asoft("expect-coroutines", vers.asoft.expect))
+            }
+        }
 
         val jsMain by getting {
             dependencies {
