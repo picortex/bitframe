@@ -2,8 +2,8 @@
 
 package bitframe.authentication.signin
 
-import bitframe.presenters.ButtonInputField
-import bitframe.presenters.TextInputField
+import bitframe.presenters.fields.ButtonInputField
+import bitframe.presenters.fields.TextInputField
 import kotlin.js.JsExport
 
 data class SignInFormFields(
@@ -13,7 +13,7 @@ data class SignInFormFields(
     val submit: ButtonInputField = ButtonInputField("Sign In")
 ) {
     companion object {
-        internal fun with(credentials: LoginCredentials?) = SignInFormFields().apply {
+        internal fun with(credentials: SignInCredentials?) = SignInFormFields().apply {
             email.value = credentials?.alias
             password.value = credentials?.password
         }

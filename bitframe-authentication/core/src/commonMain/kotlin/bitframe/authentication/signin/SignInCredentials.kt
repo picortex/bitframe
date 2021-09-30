@@ -11,7 +11,7 @@ import kotlin.js.JsExport
  * @param password the secret phrase to grant the user access
  */
 @Serializable
-data class LoginCredentials(
+data class SignInCredentials(
     /**
      * Can be an email, phone or username
      */

@@ -1,9 +1,7 @@
 package pimonitor.screens
 
-import bitframe.authentication.signin.LoginCredentials
-import com.codeborne.selenide.Condition.text
+import bitframe.authentication.signin.SignInCredentials
 import com.codeborne.selenide.Selectors.withText
-import org.openqa.selenium.By
 import pimonitor.screens.authentication.SignInScreen
 import pimonitor.utils.isVisible
 import com.codeborne.selenide.Selenide.`$` as S
@@ -14,7 +12,7 @@ class SignInScreenWeb : SignInScreen {
 
     override suspend fun isVisible(): Boolean = email.isVisible() && pass.isVisible()
 
-    override suspend fun loginWith(credentials: LoginCredentials) {
+    override suspend fun loginWith(credentials: SignInCredentials) {
         email.sendKeys(credentials.alias)
         pass.sendKeys(credentials.password)
         pass.pressEnter()

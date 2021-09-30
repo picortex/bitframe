@@ -11,5 +11,5 @@ class PiMonitorServiceKtor(
     configuration: KtorClientConfiguration
 ) : PiMonitorService(), BitframeService by BitframeKtorClient(configuration) {
     override val signUp: SignUpService = SignUpServiceKtorImpl(configuration)
-    override val business: BusinessService get() = TODO("Not yet implemented")
+    override val businesses: BusinessService get() = TODO("Not yet implemented")
 }

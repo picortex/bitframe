@@ -4,6 +4,6 @@ package pimonitor.evaluation.business
 
 import kotlin.js.JsExport
 
-sealed class BusinessIntent {
-    object LoadBusinesses : BusinessIntent()
+sealed class BusinessesIntent {
+    object LoadBusinesses : BusinessesIntent()
 }

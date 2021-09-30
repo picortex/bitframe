@@ -14,7 +14,7 @@ class SignInServiceImpl(
     private val config: ServiceConfig
 ) : SignInService() {
     private val scope = config.scope
-    override fun signIn(credentials: LoginCredentials): Later<LoginConundrum> = scope.later {
+    override fun signIn(credentials: SignInCredentials): Later<LoginConundrum> = scope.later {
         val matches = usersDao.all(where = "contacts" contains credentials.alias).await()
         if (matches.isEmpty()) throw RuntimeException("User with loginId=${credentials.alias}, not found")
         val match = matches.first()

@@ -6,5 +6,5 @@ import later.Later
 import kotlin.js.JsExport
 
 abstract class SignInService {
-    abstract fun signIn(credentials: LoginCredentials): Later<LoginConundrum>
+    abstract fun signIn(credentials: SignInCredentials): Later<LoginConundrum>
 }
