@@ -26,7 +26,6 @@ interface BitframeTestClient : BitframeService {
         fun getDefault() = invoke(CONFIGURATION)
     }
 
-    override val config: TestClientConfiguration
     override val signIn: SignInService
     override val users: UsersService
 }

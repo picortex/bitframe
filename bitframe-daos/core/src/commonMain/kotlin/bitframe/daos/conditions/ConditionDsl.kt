@@ -1,6 +1,6 @@
-package bitframe.server.data
+package bitframe.daos.conditions
 
-import bitframe.server.data.Condition.Operator.*
+import bitframe.daos.conditions.Condition.Operator.*
 
 infix fun String.contains(rhs: Any) = Condition(this, Contains, rhs)
 infix fun String.isEqualTo(rhs: Any) = Condition(this, Equals, rhs)

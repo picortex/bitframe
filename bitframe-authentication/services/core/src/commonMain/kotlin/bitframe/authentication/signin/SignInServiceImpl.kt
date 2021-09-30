@@ -3,7 +3,7 @@ package bitframe.authentication.signin
 import bitframe.authentication.config.ServiceConfig
 import bitframe.authentication.spaces.SpacesDao
 import bitframe.authentication.users.UsersDao
-import bitframe.server.data.contains
+import bitframe.daos.conditions.contains
 import later.Later
 import later.await
 import later.later

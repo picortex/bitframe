@@ -11,8 +11,6 @@ import platform.ExecutionEnvironment
 import kotlin.js.JsExport
 
 abstract class PiMonitorService : BitframeService {
-    abstract override val config: ClientConfiguration
-    abstract override val platform: ExecutionEnvironment
     abstract override val signIn: SignInService
     abstract val signUp: SignUpService
     abstract val business: BusinessService

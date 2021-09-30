@@ -1,5 +1,6 @@
 package bitframe.authentication.users
 
+import bitframe.authentication.config.ServiceConfig
 import bitframe.authentication.signin.Basic
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.spaces.CreateSpaceParams
@@ -13,10 +14,11 @@ import later.later
 
 class UsersServiceImpl(
     private val usersDao: UsersDao,
-    private val spacesDao: SpacesDao
-) : UsersService(), CoroutineScope by CoroutineScope(SupervisorJob()) {
-
-    override fun createIfNotExist(params: CreateUserParams) = later {
+    private val spacesDao: SpacesDao,
+    private val config: ServiceConfig = ServiceConfig.DEFAULT
+) : UsersService() {
+    private val scope = config.scope
+    override fun createIfNotExist(params: CreateUserParams) = scope.later {
         val accountParams = CreateSpaceParams("Genesis")
         val account = spacesDao.createIfNotExist(accountParams)
         val user = usersDao.createIfNotExist(params)
@@ -26,7 +28,7 @@ class UsersServiceImpl(
     override fun register(
         user: RegisterUserParams,
         space: RegisterSpaceParams
-    ): Later<LoginConundrum> = later {
+    ): Later<LoginConundrum> = scope.later {
         val userParams = CreateUserParams(
             name = user.name,
             contacts = user.contacts,

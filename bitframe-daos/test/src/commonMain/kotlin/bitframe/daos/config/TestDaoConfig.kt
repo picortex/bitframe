@@ -1,16 +1,16 @@
-package bitframe.authentication.configs
+package bitframe.daos.config
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlin.jvm.JvmField
 
-class DaoConfig(
+open class TestDaoConfig(
     val simulationTime: Int,
-    val scope: CoroutineScope
-) {
+    override val scope: CoroutineScope = CoroutineScope(SupervisorJob())
+) : DaoConfig {
     companion object {
         @JvmField
-        val DEFAULT = DaoConfig(
+        val DEFAULT = TestDaoConfig(
             simulationTime = 0,
             scope = CoroutineScope(SupervisorJob())
         )

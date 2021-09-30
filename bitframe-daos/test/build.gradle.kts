@@ -13,9 +13,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(kotlinx("serialization-core", vers.kotlinx.serialization))
-                api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
+                api(project(":bitframe-dao-core"))
             }
         }
 

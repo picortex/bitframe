@@ -1,4 +1,4 @@
-package bitframe.server.data
+package bitframe.daos.conditions
 
 open class Condition<out K, out V>(
     val lhs: K,

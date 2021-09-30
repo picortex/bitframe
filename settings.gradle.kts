@@ -33,7 +33,7 @@ include(":bitframe-presenters")
 
 includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core", "processor")
 
-includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core")
+includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "test")
 
 includeSubs(base = "bitframe-authentication", path = "bitframe-authentication", "core")
 
@@ -50,12 +50,6 @@ includeSubs(base = "bitframe-client-sdk", path = "bitframe-client/sdks", "core",
 includeSubs(base = "bitframe-client", path = "bitframe-client", "viewmodels")
 
 includeSubs(base = "bitframe-ui", path = "bitframe-client/ui", "react")
-
-//includeRoot(name = "users-core", path = "users/users-core")
-
-//includeSubs(base = "users-server-services", path = "users/users-server/services", "core")
-//
-//includeSubs(base = "users-server-dao", path = "users/users-server/daos", "core", "inmemory")
 
 include(":pi-monitor")
 

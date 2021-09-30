@@ -1,15 +1,15 @@
 package bitframe.authentication.users
 
-import bitframe.authentication.configs.DaoConfig
-import bitframe.authentication.utils.matching
-import bitframe.server.data.Condition
+import bitframe.daos.conditions.Condition
+import bitframe.daos.conditions.matching
+import bitframe.daos.config.TestDaoConfig
 import kotlinx.coroutines.delay
 import later.Later
 import later.later
 
 class UsersDaoInMemory(
     private val users: MutableMap<String, User> = mutableMapOf(),
-    private val config: DaoConfig = DaoConfig.DEFAULT
+    private val config: TestDaoConfig = TestDaoConfig.DEFAULT
 ) : UsersDao {
     private val scope = config.scope
     override fun create(params: CreateUserParams): Later<User> = scope.later {

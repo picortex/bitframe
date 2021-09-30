@@ -8,7 +8,7 @@ import kotlin.js.JsExport
 
 @JsExport
 open class BitframeKtorClient(
-    override val config: KtorClientConfiguration
+    val config: KtorClientConfiguration
 ) : BitframeService {
     override val users: UsersService get() = TODO("Not yet implemented")
     override val signIn: SignInService = SignInServiceKtor(config)
