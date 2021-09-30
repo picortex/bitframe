@@ -2,7 +2,16 @@ package bitframe.authentication.config
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmOverloads
 
-class ServiceConfig(
-    val scope: CoroutineScope = CoroutineScope(SupervisorJob())
-)
+open class ServiceConfig @JvmOverloads constructor(
+    open val scope: CoroutineScope = CoroutineScope(SupervisorJob())
+) {
+    companion object {
+        @JvmField
+        val DEFAULT = ServiceConfig(
+            scope = CoroutineScope(SupervisorJob())
+        )
+    }
+}

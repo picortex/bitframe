@@ -1,6 +1,6 @@
 package bitframe.authentication.users
 
-import bitframe.server.data.Condition
+import bitframe.daos.conditions.Condition
 import later.Later
 
 interface UsersDao {

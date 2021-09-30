@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import bitframe.presenters.*
-import pimonitor.authentication.SignUpService
 import pimonitor.authentication.signup.SignUpIntent.*
 import pimonitor.toBusiness
 import pimonitor.toPerson
@@ -17,7 +16,6 @@ import kotlin.js.JsExport
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
-@JsExport
 class SignUpViewModel(
     private val service: SignUpService
 ) : ViewModel<Intent, State>(State.SelectRegistrationType) {

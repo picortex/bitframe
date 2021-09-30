@@ -14,8 +14,9 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-authentication-dao-core"))
-                api(asoft("later-ktx", vers.asoft.later))
                 api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
+                api(asoft("later-ktx", vers.asoft.later))
+                api(project(":bitframe-dao-test"))
             }
         }
 

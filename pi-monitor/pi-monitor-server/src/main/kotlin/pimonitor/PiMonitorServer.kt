@@ -15,7 +15,7 @@ fun PiMonitorServer(
     client,
     AuthenticationModuleImpl(authService),
     listOf(
-        SignUpModule(controller = SignUpController(authService)),
+        SignUpModule(controller = SignUpController(authService.users)),
         Module<Monitor>(),
         Module<Monitor.Business>("monitor-businesses"),
         Module<Monitored>(),

@@ -3,8 +3,6 @@
 package pimonitor.authentication.signup
 
 import pimonitor.MonitorBusinessParams
-import pimonitor.IndividualRegistrationParams
-import pimonitor.authentication.SignUpService
 import kotlin.reflect.KFunction1
 import pimonitor.authentication.signup.SignUpIntent as Intent
 

@@ -1,5 +1,7 @@
 package bitframe.authentication
 
+import bitframe.authentication.config.ServiceConfig
+import bitframe.daos.config.TestDaoConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -34,4 +36,8 @@ class TestClientConfiguration @JvmOverloads private constructor(
             scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
         ) = invoke(appId, simulationTime, scope)
     }
+
+    fun toDaoConfig() = TestDaoConfig(simulationTime, scope)
+
+    fun toServiceConfig() = ServiceConfig(scope)
 }

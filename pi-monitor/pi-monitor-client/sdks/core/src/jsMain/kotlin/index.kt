@@ -1,4 +1,4 @@
-@file:Suppress("EXPERIMENTAL_API_USAGE")
+@file:Suppress("EXPERIMENTAL_API_USAGE", "NON_EXPORTABLE_TYPE")
 @file:JsExport
 
 import bitframe.authentication.TestClientConfiguration

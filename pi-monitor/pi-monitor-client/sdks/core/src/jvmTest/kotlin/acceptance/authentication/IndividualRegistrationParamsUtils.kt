@@ -1,7 +1,7 @@
 package acceptance.authentication
 
 import bitframe.authentication.signin.LoginCredentials
-import pimonitor.IndividualRegistrationParams
+import pimonitor.authentication.signup.IndividualRegistrationParams
 
 internal fun IndividualRegistrationParams.credentials() = LoginCredentials(
     alias = email.toString(),
