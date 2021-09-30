@@ -12,5 +12,5 @@ class PiMonitorServiceTest(
     private val config: TestClientConfiguration
 ) : PiMonitorService(), BitframeTestClient by BitframeTestClient(config) {
     override val signUp: SignUpService = SignUpServiceImpl(users, config)
-    override val business: BusinessService = BusinessServiceTestImpl(config)
+    override val businesses: BusinessService = BusinessServiceTestImpl(config)
 }

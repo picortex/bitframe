@@ -1,6 +1,6 @@
 @file:JsExport
 
-package bitframe.presenters
+package bitframe.presenters.fields
 
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport

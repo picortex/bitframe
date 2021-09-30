@@ -1,5 +1,8 @@
 package bitframe.authentication.signin
 
+import bitframe.authentication.signin.exports.SignInScopeLegacy as SignInScope
+import bitframe.authentication.signin.legacy.SignInIntent
+import bitframe.authentication.signin.legacy.SignInState
 import kotlinx.css.*
 import react.Props
 import react.RBuilder

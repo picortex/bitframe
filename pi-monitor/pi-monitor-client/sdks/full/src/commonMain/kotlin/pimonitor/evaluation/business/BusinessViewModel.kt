@@ -10,10 +10,10 @@ import kotlinx.coroutines.launch
 import later.await
 import viewmodel.ViewModel
 import kotlin.js.JsExport
-import pimonitor.evaluation.business.BusinessIntent.*
+import pimonitor.evaluation.business.BusinessesIntent.*
 import pimonitor.evaulation.business.BusinessService
-import pimonitor.evaluation.business.BusinessIntent as Intent
-import pimonitor.evaluation.business.BusinessState as State
+import pimonitor.evaluation.business.BusinessesIntent as Intent
+import pimonitor.evaluation.business.BusinessesState as State
 
 class BusinessViewModel(
     val service: BusinessService

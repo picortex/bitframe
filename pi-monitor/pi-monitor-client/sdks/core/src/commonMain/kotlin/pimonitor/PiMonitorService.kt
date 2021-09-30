@@ -13,5 +13,5 @@ import kotlin.js.JsExport
 abstract class PiMonitorService : BitframeService {
     abstract override val signIn: SignInService
     abstract val signUp: SignUpService
-    abstract val business: BusinessService
+    abstract val businesses: BusinessService
 }

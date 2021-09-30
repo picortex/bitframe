@@ -13,7 +13,7 @@ import pimonitor.toPerson
 import kotlin.jvm.JvmOverloads
 
 class SignUpServiceImpl @JvmOverloads constructor(
-    val usersService: UsersService,
+    private val usersService: UsersService,
     val config: ServiceConfig = ServiceConfig.DEFAULT
 ) : SignUpService() {
 
