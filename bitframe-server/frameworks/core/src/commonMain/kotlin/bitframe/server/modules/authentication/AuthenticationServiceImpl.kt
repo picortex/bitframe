@@ -1,20 +1,15 @@
 package bitframe.server.modules.authentication
 
 import bitframe.authentication.config.ServiceConfig
-import bitframe.authentication.signin.*
-import bitframe.authentication.spaces.CreateSpaceParams
-import bitframe.authentication.spaces.RegisterSpaceParams
-import bitframe.authentication.spaces.Space
+import bitframe.authentication.signin.SignInService
+import bitframe.authentication.signin.SignInServiceImpl
 import bitframe.authentication.spaces.SpacesDao
-import bitframe.authentication.users.*
+import bitframe.authentication.users.UsersDao
+import bitframe.authentication.users.UsersService
+import bitframe.authentication.users.UsersServiceImpl
 import bitframe.server.data.DAOProvider
-import bitframe.server.data.contains
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.coroutineScope
-import later.Later
-import later.await
-import later.later
 
 class AuthenticationServiceImpl(
     private val usersDao: UsersDao,

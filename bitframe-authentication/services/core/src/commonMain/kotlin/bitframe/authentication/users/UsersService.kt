@@ -10,8 +10,8 @@ import kotlin.js.JsExport
 abstract class UsersService {
     abstract fun createIfNotExist(params: CreateUserParams): Later<User>
 
-    abstract fun register(
-        user: RegisterUserParams,
-        space: RegisterSpaceParams = RegisterSpaceParams(user.name)
-    ): Later<LoginConundrum>
+    fun register(params: RegisterUserParams) = registerWithSpace(params, params.toRegisterSpaceParams())
+
+    // Duplicated file names because of a kotlin js compiler bug on defaults
+    abstract fun registerWithSpace(user: RegisterUserParams, space: RegisterSpaceParams): Later<LoginConundrum>
 }

@@ -1,7 +1,7 @@
 object vers {
-    val kotlin = "1.6.0-M1"
+    val kotlin = "1.5.30"
 
-    val ksp = "1.5.31-1.0.0"
+    val ksp = "1.5.30-1.0.0"
 
     val kotlinpoet = "1.12.1"
 

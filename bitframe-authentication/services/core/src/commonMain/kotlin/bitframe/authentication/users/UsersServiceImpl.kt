@@ -6,8 +6,6 @@ import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.spaces.CreateSpaceParams
 import bitframe.authentication.spaces.RegisterSpaceParams
 import bitframe.authentication.spaces.SpacesDao
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
 import later.Later
 import later.await
 import later.later
@@ -25,7 +23,7 @@ class UsersServiceImpl(
         account.await(); user.await()
     }
 
-    override fun register(
+    override fun registerWithSpace(
         user: RegisterUserParams,
         space: RegisterSpaceParams
     ): Later<LoginConundrum> = scope.later {
