@@ -7,9 +7,11 @@ import bitframe.presenters.fields.TextInputField
 import kotlin.js.JsExport
 
 data class SignInFormFields(
-    val title: String = "Sign In",
-    val email: TextInputField = TextInputField("email", "john@doe.com"),
-    val password: TextInputField = TextInputField("password", "<secure-password>"),
+    val title: String = "Log in to your space",
+    val email: TextInputField = TextInputField("email", "Enter email address"),
+    val password: TextInputField = TextInputField("password", "Password"),
+    val recoverText: String = "Forgot password?",
+    val signUpPromptText: String = "New to PiMonitor? Sign Up",
     val submit: ButtonInputField = ButtonInputField("Sign In")
 ) {
     companion object {

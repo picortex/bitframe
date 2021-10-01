@@ -6,21 +6,34 @@
 - Setup integration testing to run directly on containers (this pulls our testing environment closer to a production environment)
 - Setup acceptance testing to run directly on docker our docker containers
 
-## Bitframe Authentication
+## Bitframe
+
+### Bitframe Authentication
 
 - Pulled out of bitframe core effectively making bitframe much thinner
 
-## Bitframe Nomenclature
+### Bitframe Nomenclature
 
 - Renamed renderers into pages and modules
 
-## Bitframe Daos
+### Bitframe Dao Core
 
 - Moved the core dao tools out of bitframe core
 
-## Bitframe Core
+### Bitframe Core
 
 - Added a standard bitframe response to all our responses including failures and errors
+
+## Pimonitor
+
+### Pimonitor client full
+
+- [[BF79]](https://github.com/picortex/bitframe/issues/79) Matched content according to the designs
+
+## Cleaned up
+
+- Removed the users module
+- Removed access module
 
 # 0.0.25 : 2021.09.20
 
