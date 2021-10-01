@@ -16,7 +16,7 @@ import kotlin.test.Test
 
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class Registration : AcceptanceTest() {
+class SignUp : AcceptanceTest() {
 
     @Test
     fun should_start_with_the_selection_screen() = application.test {

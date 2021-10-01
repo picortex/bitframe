@@ -12,13 +12,13 @@ class SignInScreenWeb : SignInScreen {
 
     override suspend fun isVisible(): Boolean = email.isVisible() && pass.isVisible()
 
-    override suspend fun loginWith(credentials: SignInCredentials) {
+    override suspend fun signIn(credentials: SignInCredentials) {
         email.sendKeys(credentials.alias)
         pass.sendKeys(credentials.password)
         pass.pressEnter()
     }
 
     override suspend fun isShowingInvalidCredentials(): Boolean {
-        return S(withText("Reason: Unknown")).isVisible()
+        return S(withText("not found")).isVisible()
     }
 }
