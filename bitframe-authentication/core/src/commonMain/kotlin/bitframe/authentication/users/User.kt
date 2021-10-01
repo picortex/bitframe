@@ -1,3 +1,4 @@
+@file:JsExport
 @file:UseSerializers(LongAsStringSerializer::class)
 
 package bitframe.authentication.users
@@ -8,6 +9,8 @@ import kotlinx.datetime.Clock
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import kotlinx.serialization.builtins.LongAsStringSerializer
+import kotlin.js.JsExport
+import kotlin.js.JsName
 
 @Serializable
 data class User(
@@ -23,41 +26,50 @@ data class User(
     val lastSeen: Long = Clock.System.now().toEpochMilliseconds(),
     val deleted: Boolean = false
 ) {
-    enum class Status {
-        Blocked,
-        SignedIn,
-        SignedOut
+    @Serializable
+    sealed class Status {
+        @Serializable
+        object Blocked : Status()
+
+        @Serializable
+        object SignedIn : Status()
+
+        @Serializable
+        object SignedOut : Status()
     }
 
-    enum class Permissions(
+    @Serializable
+    class Permissions(
         override val title: String,
         override val details: String,
         override val needs: List<String> = listOf(),
     ) : ISystemPermission {
-        Read(
-            title = "acceptance.authentication.users.read",
-            details = "Grants access to view/edit users in the system"
-        ),
-        Create(
-            title = "acceptance.authentication.users.create",
-            details = "Grants access to create different users for the system",
-            needs = listOf(Read.title)
-        ),
-        Update(
-            title = "acceptance.authentication.users.update",
-            details = "Grants access to update user information",
-            needs = listOf(Read.title)
-        ),
-        Delete(
-            title = "acceptance.authentication.users.delete",
-            details = "Grants access to delete users from the system",
-            needs = listOf(Read.title)
-        ),
-        Wipe(
-            title = "acceptance.authentication.users.wipe",
-            details = "Grants access to permanently wipe users from the system",
-            needs = listOf(Read.title)
-        )
+        companion object {
+            val Read = Permissions(
+                title = "acceptance.authentication.users.read",
+                details = "Grants access to view/edit users in the system"
+            )
+            val Create = Permissions(
+                title = "acceptance.authentication.users.create",
+                details = "Grants access to create different users for the system",
+                needs = listOf(Read.title)
+            )
+            val Update = Permissions(
+                title = "acceptance.authentication.users.update",
+                details = "Grants access to update user information",
+                needs = listOf(Read.title)
+            )
+            val Delete = Permissions(
+                title = "acceptance.authentication.users.delete",
+                details = "Grants access to delete users from the system",
+                needs = listOf(Read.title)
+            )
+            val Wipe = Permissions(
+                title = "acceptance.authentication.users.wipe",
+                details = "Grants access to permanently wipe users from the system",
+                needs = listOf(Read.title)
+            )
+        }
     }
 
     fun ref() = UserRef(

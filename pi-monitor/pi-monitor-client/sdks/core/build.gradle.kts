@@ -76,6 +76,7 @@ npmPublishing {
             packageJson {
                 dependencies {
                     "platform" to "1.3.6"
+                    "@js-joda/core" to "4.0.0"
                 }
                 repository {
                     type = "git"

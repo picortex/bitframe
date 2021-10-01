@@ -1,11 +1,8 @@
-# 0.0.27
-
-- Removing other targets to make deployment faster
-
-# 0.0.26
+# 0.0.28
 
 ## CI & CD
 
+- Removing other targets to make deployment faster
 - Updated workflows for better naming
 - Setup integration testing to run directly on containers (this pulls our testing environment closer to a production environment)
 - Setup acceptance testing to run directly on docker our docker containers

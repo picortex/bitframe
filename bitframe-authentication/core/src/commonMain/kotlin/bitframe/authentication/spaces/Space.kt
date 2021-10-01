@@ -1,3 +1,5 @@
+@file:JsExport
+
 package bitframe.authentication.spaces
 
 import kotlinx.serialization.Serializable
@@ -11,10 +13,4 @@ data class Space(
     val scope: String,
     val type: String,
     val deleted: Boolean = false
-) {
-    interface Type {
-        object Proprietor : Type
-        object Moderator : Type
-        interface Visitor : Type
-    }
-}
+)
