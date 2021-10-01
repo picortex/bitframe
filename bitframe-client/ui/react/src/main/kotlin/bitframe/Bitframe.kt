@@ -5,7 +5,9 @@ import bitframe.landing.LandingPage
 import bitframe.panel.Panel
 import bitframe.renderers.Renderer
 import react.RBuilder
-import react.router.dom.*
+import react.router.dom.browserRouter
+import react.router.dom.route
+import react.router.dom.switch
 import styled.styledDiv
 
 internal const val SignInPageRoute = "/authentication/sign-in/"
