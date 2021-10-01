@@ -1,3 +1,7 @@
+# 0.0.27
+
+- Removing other targets to make deployment faster
+
 # 0.0.26
 
 ## CI & CD
