@@ -3,6 +3,24 @@
 ## CI & CD
 
 - Updated workflows for better naming
+- Setup integration testing to run directly on containers (this pulls our testing environment closer to a production environment)
+- Setup acceptance testing to run directly on docker our docker containers
+
+## Bitframe Authentication
+
+- Pulled out of bitframe core effectively making bitframe much thinner
+
+## Bitframe Nomenclature
+
+- Renamed renderers into pages and modules
+
+## Bitframe Daos
+
+- Moved the core dao tools out of bitframe core
+
+## Bitframe Core
+
+- Added a standard bitframe response to all our responses including failures and errors
 
 # 0.0.25 : 2021.09.20
 
