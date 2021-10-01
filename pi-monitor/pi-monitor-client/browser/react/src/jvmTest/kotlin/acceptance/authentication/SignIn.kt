@@ -11,6 +11,7 @@ import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.testcontainers.junit.jupiter.Testcontainers
+import pimonitor.screens.SignInScreenWeb
 import pimonitor.screens.api.toBeVisible
 import pimonitor.test
 
