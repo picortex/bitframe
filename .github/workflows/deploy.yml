@@ -68,13 +68,13 @@ jobs:
           echo "::set-output name=previous::$(cat ./pi-monitor/build/versioning/previous.txt)"
           echo "::set-output name=previous_safe::$(cat ./pi-monitor/build/versioning/previous_safe.txt)"
 
-      - name: Publish pi-monitor-client-sdk to PiCortexNpmRegistry
+      - name: Publish pimonitor js artifacts to npm registry
         run: ./gradlew publishJsNpmPublicationToPiCortex
 
-      - name: Publish pi-monitor-client-sdk to PiCortexMavenRegistry
+      - name: Publish bitframe & pimonitor artifacts to maven repository
         run: ./gradlew publishAllPublicationsToPiCortex
 
-      - name: build pi-monitor-client-browser-react
+      - name: build pimonitor-client-browser-react
         run: ./gradlew :pi-monitor-client-browser-react:webpackJsRelease
 
       - name: Create Pi Monitor Docker Compose Staging File
