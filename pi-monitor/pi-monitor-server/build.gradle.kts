@@ -8,6 +8,7 @@ plugins {
     kotlin("jvm")
     id("com.bmuschko.docker-java-application")
     id("tz.co.asoft.applikation")
+    `picortex-publish`
 }
 
 application {

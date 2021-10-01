@@ -1,8 +1,6 @@
 package bitframe.authentication.signin
 
-import bitframe.authentication.signin.exports.SignInScopeLegacy as SignInScope
-import bitframe.authentication.signin.legacy.SignInIntent
-import bitframe.authentication.signin.legacy.SignInState
+import bitframe.authentication.signin.exports.SignInScope
 import kotlinx.css.*
 import react.Props
 import react.RBuilder
@@ -15,16 +13,12 @@ import styled.styledDiv
 import styled.styledSpan
 import useViewModelState
 
-private external interface LoginPageProps : Props {
+private external interface SignInPageProps : Props {
     var scope: SignInScope
     var version: String
 }
 
-private fun RBuilder.ShowConundrum() = styledDiv {
-    +"Yeeeiy connundrum"
-}
-
-private val LoginPage = fc<LoginPageProps> { props ->
+private val SignInPage = fc<SignInPageProps> { props ->
     val viewModel = props.scope.viewModel
     val ui = useViewModelState(viewModel)
     useEffectOnce {
@@ -38,16 +32,11 @@ private val LoginPage = fc<LoginPageProps> { props ->
             position = Position.relative
             height = 100.vh
         }
-        when (ui) {
-            is SignInState.Form -> SignInForm(
-                fields = ui.fields,
-                onLoginButtonPressed = { viewModel.post(SignInIntent.Submit(it)) }
-            )
-            is SignInState.Conundrum -> ShowConundrum()
-            is SignInState.Loading -> LoadingBox(ui.message)
-            is SignInState.Failure -> ErrorBox(ui.cause)
-            is SignInState.Success -> SuccessBox(ui.message)
-        }
+
+        SignInForm(
+            state = ui,
+            onLoginButtonPressed = { viewModel.post(SignInIntent.Submit(it)) }
+        )
 
         styledSpan {
             css {
@@ -63,7 +52,7 @@ private val LoginPage = fc<LoginPageProps> { props ->
 fun RBuilder.SignInPage(
     service: SignInService,
     version: String
-) = child(withRouter(LoginPage)) {
+) = child(withRouter(SignInPage)) {
     attrs.scope = SignInScope(service)
     attrs.version = version
 }

@@ -16,7 +16,7 @@ import pimonitor.test
 
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class Login : AcceptanceTest() {
+class SignIn : AcceptanceTest() {
 
     @Test
     fun should_be_able_to_just_open_the_application() = application.test {
@@ -29,7 +29,7 @@ class Login : AcceptanceTest() {
         @Test
         fun then_users_should_be_logged_in() = application.test {
             val signInScreen = openLandingScreen().clickSignInButton()
-            signInScreen.loginWith(SignInCredentials("user01@test.com", "pass1"))
+            signInScreen.signIn(SignInCredentials("user01@test.com", "pass1"))
             expectUserToBeLoggedIn()
         }
     }
@@ -41,7 +41,7 @@ class Login : AcceptanceTest() {
         fun they_should_not_succeed(username: String, password: String) = application.test {
             val signInScreen = openLandingScreen().clickSignInButton()
             expect(signInScreen).toBeVisible()
-            signInScreen.loginWith(SignInCredentials(username, password))
+            signInScreen.signIn(SignInCredentials(username, password))
             expectUserToNotBeLoggedIn()
         }
     }

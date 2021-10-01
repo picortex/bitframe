@@ -17,5 +17,12 @@ const config = {
     disableViewModelLogs: false
 }
 
-const service = SDK.service(config)
+const client = SDK.client(config)
+
+const { signIn } = SDK.signInService(client)
+
+signIn({
+    email: "john@doe.com",
+    password: "12345"
+})
 ```

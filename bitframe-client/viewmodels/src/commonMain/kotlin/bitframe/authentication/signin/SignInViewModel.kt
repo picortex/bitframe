@@ -52,7 +52,7 @@ class SignInViewModel(
         }.catch {
             emit(state.copy(status = Failure(it)))
             delay(recoveryTime.toLong())
-            emit(state.copy(i))
+            emit(state.copy(i, null))
         }.collect { ui.value = it }
     }
 }

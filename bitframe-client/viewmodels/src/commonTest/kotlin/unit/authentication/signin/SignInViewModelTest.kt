@@ -43,4 +43,13 @@ class SignInViewModelTest {
             state.copy(status = Success("Logged in successfully"))
         )
     }
+
+    @Test
+    fun should_go_back_to_a_valid_form_state_after_an_error_has_occured() = runTest {
+        val credentials = SignInCredentials("user1", "pass1")
+        val state = SignInState(SignInFormFields().copy(credentials), null)
+        val intent = SignInIntent.Submit(credentials)
+        vm.expect(intent)
+        expect(vm).toBeIn(state)
+    }
 }
