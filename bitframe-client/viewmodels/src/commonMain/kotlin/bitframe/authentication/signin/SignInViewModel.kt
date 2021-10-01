@@ -24,7 +24,7 @@ class SignInViewModel(
 
     private val recoveryTime = 3000
 
-    private val logger = logger()
+    val console = logger()
 
     override fun CoroutineScope.execute(i: SignInIntent): Any = when (i) {
         is SignInIntent.Submit -> signIn(i)
@@ -40,7 +40,7 @@ class SignInViewModel(
             emit(state)
             val conundrum = service.signIn(i.credentials).await()
             if (conundrum.spaces.size > 1) {
-                logger.warn("User has more than one Space, ")
+                console.warn("User has more than one Space, ")
                 emit(state.copy(status = Success("Logged in successfully")))
                 loginListener?.invoke(conundrum.user, conundrum.spaces.first())
             } else {
