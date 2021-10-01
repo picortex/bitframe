@@ -49,6 +49,8 @@ includeSubs(base = "bitframe-client-sdk", path = "bitframe-client/sdks", "core",
 
 includeSubs(base = "bitframe-client", path = "bitframe-client", "viewmodels")
 
+includeSubs(base = "bitframe-events", path = "bitframe-events", "core", "inmemory")
+
 includeSubs(base = "bitframe-ui", path = "bitframe-client/ui", "react")
 
 include(":pi-monitor")
