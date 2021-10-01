@@ -9,5 +9,4 @@ plugins {
 kotlin {
     jvm { library(); }
     js(IR) { library() }
-    nativeTargets(true)
 }
