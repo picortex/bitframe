@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
+    `picortex-publish`
 }
 
 kotlin {
@@ -10,6 +11,7 @@ kotlin {
         withJava()
     }
     js(IR) { library() }
+    nativeTargets(true)
     sourceSets {
         val commonMain by getting {
             dependencies {

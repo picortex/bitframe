@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm")
+    `picortex-publish`
 }
 
 kotlin {

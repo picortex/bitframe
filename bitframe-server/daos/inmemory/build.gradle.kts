@@ -3,7 +3,7 @@ plugins {
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
     id("io.codearte.nexus-staging")
-    signing
+    `picortex-publish`
 }
 
 kotlin {
@@ -25,8 +25,3 @@ kotlin {
         }
     }
 }
-
-aSoftOSSLibrary(
-    version = vers.asoft.access,
-    description = "A Kotlin Multiplatform Library with entities required for access to different resources"
-)

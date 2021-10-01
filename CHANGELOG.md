@@ -5,6 +5,7 @@
 - Updated workflows for better naming
 - Setup integration testing to run directly on containers (this pulls our testing environment closer to a production environment)
 - Setup acceptance testing to run directly on docker our docker containers
+- [[BF80]](https://github.com/picortex/bitframe/issues/80) Published all meaning artifacts to be used
 
 ## Bitframe
 
