@@ -11,8 +11,8 @@ class InMemoryEventBus : EventBus() {
         if (live == null) {
             val l = Live(event.data)
             dispatchers[event.id] = l as Live<Any>
-            subscribers[event.id]?.forEach {
-                l.watch { value -> it.invoke(value) }
+            l.watch { value ->
+                subscribers[event.id]?.forEach { it.invoke(value) }
             }
         } else {
             (live as Live<Any>).value = event.data as Any
@@ -21,7 +21,7 @@ class InMemoryEventBus : EventBus() {
 
     override fun <D> subscribe(eventId: String, callback: (D) -> Unit): Subscriber<D> {
         val list = subscribers.getOrPut(eventId) { mutableListOf() }
-        val sub = SubscriberImpl(eventId, callback)
+        val sub = SubscriberImpl(eventId, callback, list)
         list.add(sub as Subscriber<Any>)
         return sub
     }

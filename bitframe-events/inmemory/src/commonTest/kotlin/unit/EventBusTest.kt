@@ -4,7 +4,6 @@ import bitframe.events.Event
 import bitframe.events.EventBus
 import bitframe.events.InMemoryEventBus
 import expect.expect
-import kotlinx.coroutines.runTest
 import kotlin.test.Test
 
 class EventBusTest {
@@ -55,9 +54,31 @@ class EventBusTest {
         expect(called).toBe(person)
     }
 
-    // TODO
+    @Test
     fun should_unsubscribe_a_specific_subscriber() {
+        fun send(int: Int) {
+            bus.dispatch(Event("test-event", int))
+        }
 
+        var receivedData1: Int? = null
+        var receivedData2: Int? = null
+        val subscriber1 = bus.subscribe("test-event") { data: Int ->
+            receivedData1 = data
+        }
+        val subscriber2 = bus.subscribe("test-event") { data: Int ->
+            receivedData2 = data
+        }
+        send(1)
+        expect(receivedData1).toBe(1)
+        expect(receivedData2).toBe(1)
+        send(2)
+        expect(receivedData1).toBe(2)
+        expect(receivedData2).toBe(2)
+        subscriber2.unsubscribe()
+        subscriber2.unsubscribe()
+        send(3)
+        expect(receivedData1).toBe(3)
+        expect(receivedData2).toBe(2)
     }
 
     // TODO

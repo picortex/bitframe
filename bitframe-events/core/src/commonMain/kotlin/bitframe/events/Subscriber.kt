@@ -1,7 +1,10 @@
+@file:JsExport
+
 package bitframe.events
 
-interface Subscriber<D> {
-    val eventId: String
-    fun invoke(data: D)
-    fun unsubscribe()
+import kotlin.js.JsExport
+
+abstract class Subscriber<D>(val eventId: String) {
+    abstract operator fun invoke(data: D)
+    abstract fun unsubscribe()
 }

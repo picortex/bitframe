@@ -25,6 +25,11 @@
 
 - Added a standard bitframe response to all our responses including failures and errors
 
+### Bitframe events
+
+- [x] [[BF82]](https://github.com/picortex/bitframe/issues/82) Created a working event bus
+- [ ] Find out how to propagate errors (i.e., casting errors, serialization errors, e.t.c) down
+
 ## Pimonitor
 
 ### Pimonitor client full

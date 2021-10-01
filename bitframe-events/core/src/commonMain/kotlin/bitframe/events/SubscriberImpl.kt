@@ -1,11 +1,15 @@
 package bitframe.events
 
-class SubscriberImpl<D>(override val eventId: String, val callback: (D) -> Unit) : Subscriber<D> {
+class SubscriberImpl<D>(
+    eventId: String,
+    private val callback: (D) -> Unit,
+    private val container: MutableList<Subscriber<Any>>
+) : Subscriber<D>(eventId) {
     override fun invoke(data: D) {
         callback(data)
     }
 
     override fun unsubscribe() {
-        TODO("Not yet implemented")
+        container.remove(this as Subscriber<Any>)
     }
 }
