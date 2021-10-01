@@ -25,11 +25,11 @@ fun RBuilder.SignInForm(
         css { centerContent() }
         styledH1 { +fields.title }
         TextInput(name = "email", fields.email)
-        TextInput(name = "pass", fields.password, type = InputType.password)
+        TextInput(name = "password", fields.password, type = InputType.password)
         ContainedButton(name = fields.submit.text)
     } onSubmit {
         val email by text()
-        val pass by text()
-        onLoginButtonPressed(SignInCredentials(email, pass))
+        val password by text()
+        onLoginButtonPressed(SignInCredentials(email, password))
     }
 }
