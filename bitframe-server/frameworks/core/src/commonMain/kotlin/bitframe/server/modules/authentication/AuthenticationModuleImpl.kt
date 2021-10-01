@@ -39,7 +39,9 @@ open class AuthenticationModuleImpl @JvmOverloads constructor(
 
     override val name = "authentication"
 
+    override fun signInAction(): Action = SignInAction(controller)
+
     override val actions: List<Action> = listOf(
-        SignInAction(controller),
+        signInAction(),
     )
 }

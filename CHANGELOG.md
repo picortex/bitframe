@@ -11,7 +11,7 @@
 
 ### Bitframe Authentication
 
-- Pulled out of bitframe core effectively making bitframe much thinner
+- [[BF71]](https://github.com/picortex/bitframe/issues/71) Pulled out of bitframe core effectively making bitframe much thinner
 
 ### Bitframe Nomenclature
 
