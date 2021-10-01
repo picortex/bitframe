@@ -7,17 +7,14 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import bitframe.presenters.*
-import pimonitor.authentication.SignUpService
+import bitframe.presenters.fields.ButtonInputField
 import pimonitor.authentication.signup.SignUpIntent.*
 import pimonitor.toBusiness
 import pimonitor.toPerson
 import viewmodel.ViewModel
-import kotlin.js.JsExport
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
-@JsExport
 class SignUpViewModel(
     private val service: SignUpService
 ) : ViewModel<Intent, State>(State.SelectRegistrationType) {
@@ -27,15 +24,15 @@ class SignUpViewModel(
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         SelectRegistrationType -> ui.value = State.SelectRegistrationType
         is RegisterAsIndividual -> ui.value = State.IndividualForm(
-            fields = i.fields ?: IndividualFormFields().apply {
-                prevButton.handler = { post(SelectRegistrationType) }
-            },
+            fields = i.fields ?: IndividualFormFields(
+                prevButton = ButtonInputField("Back") { post(SelectRegistrationType) }
+            ),
             organisationForm = null
         )
         is RegisterAsOrganization -> ui.value = State.OrganisationForm(
-            fields = i.fields ?: OrganisationFormFields().apply {
-                prevButton.handler = { post(SelectRegistrationType) }
-            }
+            fields = i.fields ?: OrganisationFormFields(
+                prevButton = ButtonInputField("Back") { post(SelectRegistrationType) }
+            )
         )
         is SubmitIndividualForm -> submitPersonalInfo(i, ui.value as State.IndividualForm)
         is SubmitBusinessForm -> submitBusinessInfo(i, ui.value as State.OrganisationForm)
@@ -53,7 +50,7 @@ class SignUpViewModel(
                 val business = organisationFields.toParams().toBusiness()
                 service.register(business, representedBy = person).await()
             } else {
-                service.registerIndividuallyAs(person).await()
+                service.registerIndividuallyAs(i.params).await()
             }
             emit(State.Success("Registration completed successfully"))
         }.catch {

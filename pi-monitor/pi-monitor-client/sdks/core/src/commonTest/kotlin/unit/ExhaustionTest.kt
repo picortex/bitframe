@@ -1,13 +1,10 @@
 package unit
 
-import bitframe.authentication.LoginCredentials
 import bitframe.authentication.TestClientConfiguration
-import contacts.Email
+import bitframe.authentication.signin.SignInCredentials
 import expect.expect
 import kotlinx.coroutines.runTest
 import later.await
-import later.then
-import pimonitor.Monitor
 import pimonitor.PiMonitorService
 import pimonitor.test.PiMonitorServiceTest
 import kotlin.test.Test
@@ -24,12 +21,12 @@ class ExhaustionTest {
             appId = "12345"
         )
         val client: PiMonitorService = PiMonitorServiceTest(configuration)
-        val res = client.signIn.loginWith(
-            LoginCredentials(
-                username = "user1",
+        val res = client.signIn.signIn(
+            SignInCredentials(
+                alias = "user01@test.com",
                 password = "pass1"
             )
         )
-        expect(res.await().user.username).toBe("user1")
+        expect(res.await().user.tag).toBe("user01")
     }
 }

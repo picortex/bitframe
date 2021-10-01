@@ -52,16 +52,14 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(project(":pi-monitor-client-test"))
-                implementation("org.junit.jupiter:junit-jupiter-params:5.7.0")
-                implementation("org.testcontainers:testcontainers:${vers.testContainers}")
-                implementation("org.testcontainers:junit-jupiter:${vers.testContainers}")
+                implementation(project(":pi-monitor-test-containers"))
             }
         }
     }
 }
 
 val createDockerfile by tasks.creating(Dockerfile::class) {
-    dependsOn("webpackJsRelease")
+    dependsOn("compileProductionExecutableKotlinJs", "webpackJsRelease")
     from("nginx:stable-alpine")
     destFile.set(file("build/websites/js/Dockerfile"))
     copyFile("./release", "/usr/share/nginx/html")
@@ -91,23 +89,17 @@ val stopDockerContainer by tasks.creating(DockerStopContainer::class) {
     targetContainerId(createDockerContainer.containerId)
 }
 
-val acceptanceTestSetup by tasks.creating {
-    dependsOn("cleanAllTests")
-    dependsOn(startDockerContainer)
-    finalizedBy("allTests")
-}
-
-val acceptanceTestTearDown by tasks.creating {
-    finalizedBy(stopDockerContainer)
-}
-
-val acceptanceTests by tasks.creating {
-    dependsOn(acceptanceTestSetup)
-    finalizedBy(acceptanceTestTearDown)
-}
-
 val jvmTest by tasks.getting(Test::class) {
-    systemProperties(
+    val props = mutableMapOf<String, Any>(
         "selenide.headless" to (System.getenv("HEADLESS") == "true")
     )
+    if (System.getenv("TEST_MODE") == "CI") {
+        dependsOn(":pi-monitor-server:createDockerfile")
+//        val bin = System.getenv("CHROME_BIN") ?: "/usr/local/share/chrome_driver"
+//        props["selenide.browserBinary"] = "/usr/bin/google-chrome"
+    }
+    systemProperties(props)
+    testLogging {
+        showStandardStreams = true
+    }
 }

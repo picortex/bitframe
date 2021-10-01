@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
+    `picortex-publish`
 }
 
 kotlin {
@@ -13,18 +14,20 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api("io.ktor:ktor-http:${vers.ktor}")
+                api(project(":bitframe-core"))
+                api(project(":bitframe-authentication-service-core"))
+
+                api(asoft("result-core", vers.asoft.duality))
                 api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
                 api(asoft("logging-console", vers.asoft.logging))
                 api(asoft("later-ktx", vers.asoft.later))
-                api(project(":users-server-dao-core"))
-                api(project(":users-server-services-core"))
             }
         }
 
         val commonTest by getting {
             dependencies {
                 implementation(project(":bitframe-server-framework-test"))
+                implementation(project(":bitframe-server-dao-inmemory"))
                 implementation(kotlinx("serialization-core", vers.kotlinx.serialization))
             }
         }

@@ -3,6 +3,7 @@ plugins {
     id("tz.co.asoft.library")
     id("dev.petuska.npm.publish")
     id("org.jetbrains.dokka")
+    `picortex-publish`
 }
 
 kotlin {
@@ -20,16 +21,12 @@ kotlin {
             dependencies {
                 api(project(":pi-monitor-core"))
                 api(project(":bitframe-client-sdk-test"))
+                api(project(":bitframe-client-sdk-ktor"))
 
+                api(kotlinx("datetime", vers.kotlinx.datetime))
                 api(asoft("logging-console", vers.asoft.logging))
                 api(asoft("name-generator", vers.asoft.contacts))
                 api(asoft("email-generator", vers.asoft.contacts))
-            }
-        }
-
-        val jsMain by getting {
-            dependencies {
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
 
@@ -38,28 +35,15 @@ kotlin {
                 implementation(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
-    }
-}
 
-configurePublishing {
-    repositories {
-        maven {
-            name = "andylamax"
-            url = uri("http://localhost:1050/repository/internal/")
-            isAllowInsecureProtocol = true
-            credentials {
-                username = "admin"
-                password = "admin@123"
+        val jvmMain by getting {
+            dependencies {
+                implementation(project(":pi-monitor-test-containers"))
             }
         }
-
-        maven {
-            name = "piCortex"
-            url = uri("http://${vars.dev.server.ip}:1050/repository/internal/")
-            isAllowInsecureProtocol = true
-            credentials {
-                username = "admin"
-                password = "admin@123"
+        val jsMain by getting {
+            dependencies {
+                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
     }

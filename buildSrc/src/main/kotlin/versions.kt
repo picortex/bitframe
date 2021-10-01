@@ -24,8 +24,8 @@ object vers {
     }
 
     object bitframe {
-        val current = "0.0.25"
-        val previous = "0.0.24"
+        val current = "0.0.26"
+        val previous = "0.0.25"
     }
 
     object asoft {
@@ -33,6 +33,7 @@ object vers {
         val platform = foundation
         val access = "0.0.20"
         val contacts = "0.0.30"
+        val duality = "0.0.50"
         val collections = foundation
         val mvivm = "0.1.20"
         val viewmodel = mvivm

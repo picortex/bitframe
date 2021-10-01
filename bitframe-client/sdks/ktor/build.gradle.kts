@@ -1,9 +1,8 @@
-import testing.testing
-
 plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
+    `picortex-publish`
 }
 
 repositories {
@@ -14,18 +13,14 @@ repositories {
 kotlin {
     jvm { library() }
 
-    js(IR) {
-        browser {
-            testing("integration")
-        }
-        library()
-    }
+    js(IR) { library() }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-client-sdk-core"))
                 api("io.ktor:ktor-client-core:${vers.ktor}")
+                api(asoft("result-core", vers.asoft.duality))
             }
         }
 
@@ -42,11 +37,12 @@ kotlin {
             }
         }
 
-//        val jvmTest by getting {
-//            dependencies {
-//                implementation(asoft("expect-coroutines", vers.asoft.expect))
-//            }
-//        }
+        val jvmTest by getting {
+            dependencies {
+                implementation(project(":pi-monitor-test-containers"))
+                implementation(asoft("expect-coroutines", vers.asoft.expect))
+            }
+        }
 
         val jsMain by getting {
             dependencies {

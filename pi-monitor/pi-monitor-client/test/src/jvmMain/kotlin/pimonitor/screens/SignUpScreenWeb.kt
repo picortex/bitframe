@@ -2,10 +2,9 @@ package pimonitor.screens
 
 import com.codeborne.selenide.Selectors.byAttribute
 import com.codeborne.selenide.Selectors.withText
-import kotlinx.coroutines.delay
 import org.openqa.selenium.By
 import pimonitor.MonitorBusinessParams
-import pimonitor.MonitorPersonParams
+import pimonitor.authentication.signup.IndividualRegistrationParams
 import pimonitor.screens.authentication.SignUpScreen
 import pimonitor.utils.isVisible
 import kotlin.test.assertTrue
@@ -17,7 +16,7 @@ class SignUpScreenWeb : SignUpScreen {
     private val passwordInput = S(By.name("password"))
     private val nextOrSubmitButton = S(byAttribute("type", "submit"))
 
-    override suspend fun signUpIndividuallyAs(person: MonitorPersonParams) {
+    override suspend fun signUpIndividuallyAs(person: IndividualRegistrationParams) {
         S(withText("Individual")).click()
         nameInput.sendKeys(person.name)
         emailInput.sendKeys(person.email)
@@ -26,7 +25,7 @@ class SignUpScreenWeb : SignUpScreen {
         nextOrSubmitButton.click()
     }
 
-    override suspend fun signUpAs(person: MonitorPersonParams, representing: MonitorBusinessParams) {
+    override suspend fun signUpAs(person: IndividualRegistrationParams, representing: MonitorBusinessParams) {
         S(withText("Organisation")).click()
         nameInput.sendKeys(representing.name)
         emailInput.sendKeys(representing.email)

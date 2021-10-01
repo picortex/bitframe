@@ -4,6 +4,7 @@ plugins {
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
+    `picortex-publish`
 }
 
 kotlin {
@@ -14,10 +15,12 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-//                val ksp by configurations
-//                ksp.dependencies.add(project(":bitframe-annotations-processor"))
-                api(kotlinx("serialization-core", vers.kotlinx.serialization))
                 api(project(":bitframe-annotations-core"))
+
+                api(kotlinx("serialization-core", vers.kotlinx.serialization))
+                api("io.ktor:ktor-http:${vers.ktor}")
+                api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
+                api(asoft("later-core", vers.asoft.later))
             }
         }
 
@@ -28,7 +31,3 @@ kotlin {
         }
     }
 }
-
-//dependencies {
-//    ksp()
-//}

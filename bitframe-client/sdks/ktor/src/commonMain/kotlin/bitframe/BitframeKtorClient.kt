@@ -1,15 +1,15 @@
 package bitframe
 
-import bitframe.authentication.ClientConfiguration
-import bitframe.authentication.SignInService
 import bitframe.authentication.KtorClientConfiguration
-import bitframe.authentication.KtorSignInService
+import bitframe.authentication.SignInServiceKtor
+import bitframe.authentication.signin.SignInService
+import bitframe.authentication.users.UsersService
 import kotlin.js.JsExport
 
 @JsExport
 open class BitframeKtorClient(
-    val configuration: KtorClientConfiguration
+    val config: KtorClientConfiguration
 ) : BitframeService {
-    override val config: ClientConfiguration = configuration
-    override val signIn: SignInService = KtorSignInService(configuration)
+    override val users: UsersService get() = TODO("Not yet implemented")
+    override val signIn: SignInService = SignInServiceKtor(config)
 }

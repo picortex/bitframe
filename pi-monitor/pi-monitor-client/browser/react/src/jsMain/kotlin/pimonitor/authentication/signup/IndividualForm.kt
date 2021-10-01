@@ -8,7 +8,6 @@ import kotlinx.extensions.onDesktop
 import kotlinx.extensions.onMobile
 import kotlinx.extensions.text
 import kotlinx.html.InputType
-import pimonitor.MonitorPersonParams
 import react.RBuilder
 import reakt.*
 import styled.css
@@ -17,7 +16,7 @@ import theme.clazz
 
 internal fun RBuilder.IndividualForm(
     fields: IndividualFormFields,
-    onNext: (MonitorPersonParams) -> Unit,
+    onNext: (IndividualRegistrationParams) -> Unit,
 ) = FlexBox {
     css {
         centerContent()
@@ -45,6 +44,6 @@ internal fun RBuilder.IndividualForm(
         val name by text()
         val email by text()
         val password by text()
-        onNext(MonitorPersonParams(name, email, password))
+        onNext(IndividualRegistrationParams(name, email, password))
     }
 }

@@ -1,8 +1,45 @@
-# Next :
+# 0.0.26
 
 ## CI & CD
 
 - Updated workflows for better naming
+- Setup integration testing to run directly on containers (this pulls our testing environment closer to a production environment)
+- Setup acceptance testing to run directly on docker our docker containers
+- [[BF80]](https://github.com/picortex/bitframe/issues/80) Published all meaning artifacts to be used
+
+## Bitframe
+
+### Bitframe Authentication
+
+- [[BF71]](https://github.com/picortex/bitframe/issues/71) Pulled out of bitframe core effectively making bitframe much thinner
+
+### Bitframe Nomenclature
+
+- Renamed renderers into pages and modules
+
+### Bitframe Dao Core
+
+- Moved the core dao tools out of bitframe core
+
+### Bitframe Core
+
+- Added a standard bitframe response to all our responses including failures and errors
+
+### Bitframe events
+
+- [x] [[BF82]](https://github.com/picortex/bitframe/issues/82) Created a working event bus
+- [ ] Find out how to propagate errors (i.e., casting errors, serialization errors, e.t.c) down
+
+## Pimonitor
+
+### Pimonitor client full
+
+- [[BF79]](https://github.com/picortex/bitframe/issues/79) Matched content according to the designs
+
+## Cleaned up
+
+- Removed the users module
+- Removed access module
 
 # 0.0.25 : 2021.09.20
 

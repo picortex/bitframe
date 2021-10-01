@@ -3,6 +3,7 @@ plugins {
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
+    `picortex-publish`
 }
 
 kotlin {
@@ -12,8 +13,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-core"))
-                api(asoft("email-core", vers.asoft.contacts))
+                api(project(":bitframe-annotations-core"))
+                api(project(":bitframe-authentication-service-core"))
+            }
+        }
+
+        val commonTest by getting {
+            dependencies {
+                api(asoft("expect-core", vers.asoft.expect))
             }
         }
     }

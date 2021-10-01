@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
+    `picortex-publish`
 }
 
 kotlin {
@@ -17,6 +18,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-client-sdk-core"))
+                api(project(":bitframe-authentication-dao-inmemory"))
             }
         }
 
