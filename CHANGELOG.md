@@ -1,5 +1,11 @@
 # 0.0.29
 
+## Bitframe Client Sdk
+
+### Bug Fixes
+
+- [[BF92]](https://github.com/picortex/bitframe/issues/92) Fixed sign in validation bug for empty sign in credentials
+
 # 0.0.28
 
 ## CI & CD

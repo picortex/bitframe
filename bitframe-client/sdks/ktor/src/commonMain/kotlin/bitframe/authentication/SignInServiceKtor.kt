@@ -20,6 +20,7 @@ internal class SignInServiceKtor @JvmOverloads constructor(
     override val config: ClientConfiguration = configuration
     private val http = configuration.http
     override fun signIn(credentials: SignInCredentials): Later<LoginConundrum> = configuration.scope.later {
+        validate(credentials)
         val json = http.post<String>(path) {
             body = TextContent(
                 text = Json.encodeToString(SignInCredentials.serializer(), credentials),
