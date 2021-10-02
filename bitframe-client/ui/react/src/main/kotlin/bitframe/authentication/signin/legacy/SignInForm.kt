@@ -24,7 +24,7 @@ fun RBuilder.SignInForm(
     Form {
         css { centerContent() }
         styledH1 { +fields.title }
-        TextInput(name = "email", fields.email)
+        TextInput(name = "email", fields.email, type = InputType.email)
         TextInput(name = "password", fields.password, type = InputType.password)
         ContainedButton(name = fields.submit.text)
     } onSubmit {
