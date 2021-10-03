@@ -1,7 +1,6 @@
-package testing
+package testing.containers
 
 import kotlin.io.path.Path
-import kotlin.io.path.absolute
 import kotlin.io.path.absolutePathString
 
 class RootProjectDir {

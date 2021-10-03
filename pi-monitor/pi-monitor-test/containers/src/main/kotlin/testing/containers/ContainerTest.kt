@@ -1,12 +1,11 @@
-package testing
+package testing.containers
 
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.images.builder.ImageFromDockerfile
 import org.testcontainers.junit.jupiter.Container
 import java.nio.file.Path
-import kotlin.io.path.absolutePathString
 
-open class ContainerTest {
+interface ContainerTest {
     enum class TestMode {
         DEV, CI, CD
     }

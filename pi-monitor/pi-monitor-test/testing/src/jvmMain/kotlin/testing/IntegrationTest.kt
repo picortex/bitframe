@@ -1,10 +1,13 @@
-package acceptance.utils
+package testing
 
 import bitframe.service.config.KtorClientConfiguration
-import testing.containers.ContainerTest
+import bitframe.service.config.ServiceConfig
 
-open class IntegrationTest : ContainerTest() {
-    val config
+actual open class IntegrationTest : ContainerTest() {
+    actual val config: ServiceConfig
+        get() = configuration
+
+    val configuration
         get() = when (mode) {
             TestMode.DEV -> KtorClientConfiguration(
                 url = "http://localhost:8080",

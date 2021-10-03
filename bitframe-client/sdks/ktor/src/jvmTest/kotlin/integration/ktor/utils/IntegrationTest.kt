@@ -1,7 +1,7 @@
 package integration.ktor.utils
 
 import bitframe.service.config.KtorClientConfiguration
-import testing.ContainerTest
+import testing.containers.ContainerTest
 
 open class IntegrationTest : ContainerTest() {
     val config

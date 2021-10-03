@@ -1,4 +1,4 @@
-package testing
+package testing.containers
 
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.images.builder.ImageFromDockerfile
