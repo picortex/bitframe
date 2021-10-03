@@ -1,11 +1,11 @@
 package unit
 
-import bitframe.authentication.config.ServiceConfig
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.signin.SignInService
 import bitframe.authentication.signin.SignInServiceImpl
 import bitframe.authentication.spaces.SpacesDaoInMemory
 import bitframe.authentication.users.UsersDaoInMemory
+import bitframe.service.config.ServiceConfig
 import expect.expect
 import expect.expectFailure
 import kotlinx.coroutines.runTest

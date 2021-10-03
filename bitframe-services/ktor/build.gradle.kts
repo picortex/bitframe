@@ -13,7 +13,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-authentication-service-core"))
+                api(project(":bitframe-service-core"))
+                api("io.ktor:ktor-client-core:${vers.ktor}")
             }
         }
 

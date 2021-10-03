@@ -1,9 +1,9 @@
 package bitframe
 
-import bitframe.authentication.KtorClientConfiguration
-import bitframe.authentication.SignInServiceKtor
 import bitframe.authentication.signin.SignInService
+import bitframe.authentication.signin.SignInServiceKtor
 import bitframe.authentication.users.UsersService
+import bitframe.service.config.KtorClientConfiguration
 import kotlin.js.JsExport
 
 @JsExport

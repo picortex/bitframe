@@ -2,7 +2,7 @@ package pimonitor.ktor
 
 import bitframe.BitframeKtorClient
 import bitframe.BitframeService
-import bitframe.authentication.KtorClientConfiguration
+import bitframe.service.config.KtorClientConfiguration
 import pimonitor.PiMonitorService
 import pimonitor.authentication.signup.SignUpService
 import pimonitor.evaulation.business.BusinessService

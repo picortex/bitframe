@@ -1,4 +1,4 @@
-package bitframe.authentication
+package bitframe.service.config
 
 import io.ktor.client.*
 import kotlinx.coroutines.CoroutineScope

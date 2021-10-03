@@ -1,9 +1,9 @@
 package bitframe.authentication.signin
 
-import bitframe.authentication.config.ServiceConfig
 import bitframe.authentication.spaces.SpacesDao
 import bitframe.authentication.users.UsersDao
 import bitframe.daos.conditions.contains
+import bitframe.service.config.ServiceConfig
 import later.Later
 import later.await
 import later.later

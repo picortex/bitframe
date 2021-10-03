@@ -1,9 +1,9 @@
 package pimonitor.authentication.signup
 
-import bitframe.authentication.config.ServiceConfig
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.UsersService
+import bitframe.service.config.ServiceConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay

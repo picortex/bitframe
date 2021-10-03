@@ -1,5 +1,9 @@
 # 0.0.29
 
+## Bitframe Authentication Service
+
+- [[BF94]](https://github.com/picortex/bitframe/issues/94) Lifted authentication ktor service away from bitframe client
+
 ## Bitframe Client Sdk
 
 ### Bug Fixes

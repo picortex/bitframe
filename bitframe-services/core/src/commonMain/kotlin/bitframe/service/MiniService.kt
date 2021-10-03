@@ -1,9 +1,8 @@
-package bitframe
+package bitframe.service
 
-import bitframe.authentication.ClientConfiguration
+import bitframe.service.config.ClientConfiguration
 import platform.ExecutionEnvironment
 import platform.Platform
-import kotlin.js.JsExport
 
 interface MiniService {
     val platform: ExecutionEnvironment get() = Platform

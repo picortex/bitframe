@@ -1,8 +1,6 @@
-package bitframe.authentication
+package bitframe.service.config
 
-import bitframe.authentication.config.ServiceConfig
 import kotlinx.coroutines.CoroutineScope
-import kotlin.js.JsExport
 
 open class ClientConfiguration(
     open val appId: String,
