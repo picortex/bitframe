@@ -1,4 +1,4 @@
-package bitframe.authentication.config
+package bitframe.service.config
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob

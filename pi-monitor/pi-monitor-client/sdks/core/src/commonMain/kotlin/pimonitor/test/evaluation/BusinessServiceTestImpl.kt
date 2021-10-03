@@ -1,7 +1,7 @@
 package pimonitor.test.evaluation
 
-import bitframe.authentication.ClientConfiguration
 import bitframe.authentication.TestClientConfiguration
+import bitframe.service.config.ClientConfiguration
 import contacts.EmailGenerator
 import contacts.Name
 import contacts.NameGenerator

@@ -1,7 +1,8 @@
 package bitframe.authentication
 
-import bitframe.authentication.config.ServiceConfig
 import bitframe.daos.config.TestDaoConfig
+import bitframe.service.config.ClientConfiguration
+import bitframe.service.config.ServiceConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

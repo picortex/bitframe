@@ -1,6 +1,6 @@
 package pimonitor.evaulation.business
 
-import bitframe.MiniService
+import bitframe.service.MiniService
 import later.Later
 import pimonitor.Monitor
 

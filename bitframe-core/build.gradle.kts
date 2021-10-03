@@ -15,7 +15,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-annotations-core"))
-
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
                 api("io.ktor:ktor-http:${vers.ktor}")
                 api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))

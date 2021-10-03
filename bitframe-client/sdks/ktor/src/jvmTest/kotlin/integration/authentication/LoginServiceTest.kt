@@ -1,8 +1,8 @@
 package integration.authentication
 
-import bitframe.authentication.SignInServiceKtor
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.signin.SignInService
+import bitframe.authentication.signin.SignInServiceKtor
 import expect.expect
 import integration.ktor.utils.IntegrationTest
 import kotlinx.coroutines.runTest

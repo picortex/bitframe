@@ -1,9 +1,9 @@
 package pimonitor.ktor
 
-import bitframe.MiniService
-import bitframe.authentication.KtorClientConfiguration
+import bitframe.service.config.KtorClientConfiguration
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.response.response.decodeResponseFromString
+import bitframe.service.MiniService
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.http.content.*

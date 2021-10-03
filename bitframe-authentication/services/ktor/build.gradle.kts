@@ -18,16 +18,16 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-client-sdk-core"))
-                api(project(":bitframe-authentication-service-ktor"))
-                api("io.ktor:ktor-client-core:${vers.ktor}")
-                api(asoft("result-core", vers.asoft.duality))
+                api(project(":bitframe-authentication-service-core"))
+                api(project(":bitframe-core"))
+                api(project(":bitframe-service-ktor"))
+                api(kotlinx("serialization-json", vers.kotlinx.serialization))
+                api(asoft("later-ktx", vers.asoft.later))
             }
         }
 
         val commonTest by getting {
             dependencies {
-                api(asoft("kotlinx-coroutines-test", vers.asoft.foundation))
                 api(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
@@ -41,7 +41,6 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(project(":pi-monitor-test-containers"))
-                implementation(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
 

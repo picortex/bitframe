@@ -1,11 +1,11 @@
 package bitframe.authentication.users
 
-import bitframe.authentication.config.ServiceConfig
 import bitframe.authentication.signin.Basic
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.spaces.CreateSpaceParams
 import bitframe.authentication.spaces.RegisterSpaceParams
 import bitframe.authentication.spaces.SpacesDao
+import bitframe.service.config.ServiceConfig
 import later.Later
 import later.await
 import later.later

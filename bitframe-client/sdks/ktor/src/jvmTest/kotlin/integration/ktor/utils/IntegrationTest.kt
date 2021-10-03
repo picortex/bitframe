@@ -1,6 +1,6 @@
 package integration.ktor.utils
 
-import bitframe.authentication.KtorClientConfiguration
+import bitframe.service.config.KtorClientConfiguration
 import testing.ContainerTest
 
 open class IntegrationTest : ContainerTest() {
