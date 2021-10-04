@@ -21,6 +21,10 @@
 
 - [[BF96]](https://github.com/picortex/bitframe/issues/96) Make PiMonitor bitframe containers multiplatform
 
+## CI & CD
+
+- [[BF100]](https://github.com/picortex/bitframe/issues/100) Cache gradle for faster CI builds
+
 # 0.0.28
 
 ## CI & CD
