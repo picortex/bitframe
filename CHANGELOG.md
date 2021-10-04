@@ -2,7 +2,11 @@
 
 ## PiMonitor Client SDK Core
 
-- [[BF103]](https://github.com/picortex/bitframe/issues/103) Moved SignUpTest to commonMain
+- [[PM103]](https://github.com/picortex/bitframe/issues/103) Moved SignUpTest to commonMain
+
+## PiMonitor Client Browser Web
+
+- [[PM105]](https://github.com/picortex/bitframe/issues/105) Fix UI Crash when user goes to businesses tab
 
 ## Bitframe Authentication Service
 
