@@ -36,6 +36,9 @@ class TestClientConfiguration @JvmOverloads private constructor(
             simulationTime: Int = DEFAULT_SIMULATION_TIME,
             scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
         ) = invoke(appId, simulationTime, scope)
+
+        @JvmStatic
+        fun from(config: ServiceConfig, appId: String) = invoke(appId, scope = config.scope)
     }
 
     fun toDaoConfig() = TestDaoConfig(simulationTime, scope)

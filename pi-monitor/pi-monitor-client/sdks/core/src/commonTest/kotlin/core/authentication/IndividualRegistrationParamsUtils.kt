@@ -1,9 +1,9 @@
-package acceptance.authentication
+package core.authentication
 
 import bitframe.authentication.signin.SignInCredentials
 import pimonitor.authentication.signup.IndividualRegistrationParams
 
 internal fun IndividualRegistrationParams.credentials() = SignInCredentials(
-    alias = email.toString(),
-    password = password.toString()
+    alias = email,
+    password = password
 )

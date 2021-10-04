@@ -1,22 +1,22 @@
-package acceptance.authentication
+package core.authentication
 
-import acceptance.utils.IntegrationTest
 import expect.expect
 import kotlinx.coroutines.runTest
 import kotlinx.datetime.Clock
 import later.await
-import org.junit.jupiter.api.TestInstance
-import org.testcontainers.junit.jupiter.Testcontainers
-import pimonitor.authentication.signup.IndividualRegistrationParams
 import pimonitor.PiMonitorService
-import pimonitor.ktor.PiMonitorServiceKtor
+import pimonitor.authentication.signup.IndividualRegistrationParams
+import testing.IntegrationTest
+import testing.annotations.Lifecycle
+import testing.annotations.TestInstance
+import testing.annotations.Testcontainers
 import kotlin.test.Test
 
 @Testcontainers
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class SignUpServiceKtorServiceTest : IntegrationTest() {
+@TestInstance(Lifecycle.PER_CLASS)
+abstract class SignUpServiceTest : IntegrationTest() {
 
-    private val service: PiMonitorService by lazy { PiMonitorServiceKtor(config) }
+    abstract val service: PiMonitorService
 
     @Test
     fun should_register_an_individual() = runTest {

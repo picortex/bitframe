@@ -12,7 +12,7 @@ kotlin {
     js(IR) {
         val main by compilations
         main.outputModuleName = "pi-monitor-client-sdk-core"
-        browserLib()
+        library()
         binaries.library()
     }
 
@@ -32,15 +32,11 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
+                implementation(project(":pi-monitor-test-testing"))
                 implementation(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
 
-        val jvmMain by getting {
-            dependencies {
-                implementation(project(":pi-monitor-test-testing"))
-            }
-        }
         val jsMain by getting {
             dependencies {
                 api(kotlinx("coroutines-core", vers.kotlinx.coroutines))

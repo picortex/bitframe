@@ -1,5 +1,9 @@
 # 0.0.29
 
+## PiMonitor Client SDK Core
+
+- [[BF103]](https://github.com/picortex/bitframe/issues/103) Moved SignUpTest to commonMain
+
 ## Bitframe Authentication Service
 
 ### Bug Fixes
