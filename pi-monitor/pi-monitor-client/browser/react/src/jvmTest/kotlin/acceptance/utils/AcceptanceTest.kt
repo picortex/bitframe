@@ -2,9 +2,9 @@ package acceptance.utils
 
 import pimonitor.Application
 import pimonitor.WebApplication
-import testing.containers.ContainerTest.Companion.urlUnderTest
+import testing.ContainerTest
 
-open class AcceptanceTest : ContainerTest {
+open class AcceptanceTest : ContainerTest() {
     companion object {
         val application: Application get() = WebApplication(urlUnderTest)
     }

@@ -38,7 +38,7 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                implementation(project(":pi-monitor-test-containers"))
+                implementation(project(":pi-monitor-test-testing"))
             }
         }
         val jsMain by getting {
