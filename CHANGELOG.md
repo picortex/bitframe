@@ -1,6 +1,16 @@
 # 0.0.29
 
+## PiMonitor Client SDK Core
+
+- [[BF103]](https://github.com/picortex/bitframe/issues/103) Moved SignUpTest to commonMain
+
 ## Bitframe Authentication Service
+
+### Bug Fixes
+
+- [[BF98]](https://github.com/picortex/bitframe/issues/98) Fixed flakiness in authentication tests
+
+### Enhancements
 
 - [[BF94]](https://github.com/picortex/bitframe/issues/94) Lifted authentication ktor service away from bitframe client
 
@@ -9,6 +19,15 @@
 ### Bug Fixes
 
 - [[BF92]](https://github.com/picortex/bitframe/issues/92) Fixed sign in validation bug for empty sign in credentials
+- [[BF93]](https://github.com/picortex/bitframe/issues/93) Attach Universal testing to cover future bugs
+
+## Bitframe Test Containers
+
+- [[BF96]](https://github.com/picortex/bitframe/issues/96) Make PiMonitor bitframe containers multiplatform
+
+## CI & CD
+
+- [[BF100]](https://github.com/picortex/bitframe/issues/100) Cache gradle for faster CI builds
 
 # 0.0.28
 

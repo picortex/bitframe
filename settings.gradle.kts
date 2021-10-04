@@ -39,7 +39,7 @@ includeSubs(base = "bitframe-service", path = "bitframe-services", "core", "ktor
 
 includeSubs(base = "bitframe-authentication", path = "bitframe-authentication", "core")
 
-includeSubs(base = "bitframe-authentication-service", path = "bitframe-authentication/services", "core", "ktor")
+includeSubs(base = "bitframe-authentication-service", path = "bitframe-authentication/services", "core", "ktor", "test")
 
 includeSubs(base = "bitframe-authentication-dao", path = "bitframe-authentication/daos", "core", "inmemory")
 
@@ -65,6 +65,6 @@ includeSubs(base = "pi-monitor-client-sdk", path = "pi-monitor/pi-monitor-client
 
 includeSubs(base = "pi-monitor-client", path = "pi-monitor/pi-monitor-client", "test")
 
-includeSubs(base = "pi-monitor-test", path = "pi-monitor/pi-monitor-test", "containers")
+includeSubs(base = "pi-monitor-test", path = "pi-monitor/pi-monitor-test", "containers", "testing")
 
 includeSubs(base = "pi-monitor-client-browser", path = "pi-monitor/pi-monitor-client/browser", "react")

@@ -1,6 +1,5 @@
 import expect.expect
-import testing.RootProjectDir
-import kotlin.test.Ignore
+import testing.containers.RootProjectDir
 import kotlin.test.Test
 
 class RootProjectDirTest {

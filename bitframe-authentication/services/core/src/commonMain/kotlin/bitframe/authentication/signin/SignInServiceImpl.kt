@@ -1,5 +1,6 @@
 package bitframe.authentication.signin
 
+import bitframe.authentication.AuthenticationDaoProvider
 import bitframe.authentication.spaces.SpacesDao
 import bitframe.authentication.users.UsersDao
 import bitframe.daos.conditions.contains
@@ -13,6 +14,8 @@ class SignInServiceImpl(
     private val spacesDao: SpacesDao,
     private val config: ServiceConfig
 ) : SignInService() {
+    constructor(provider: AuthenticationDaoProvider, config: ServiceConfig) : this(provider.users, provider.spaces, config)
+
     private val scope = config.scope
     override fun signIn(credentials: SignInCredentials): Later<LoginConundrum> = scope.later {
         validate(credentials)
