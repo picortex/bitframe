@@ -2,6 +2,12 @@
 
 ## Bitframe Authentication Service
 
+### Bug Fixes
+
+- [[BF98]](https://github.com/picortex/bitframe/issues/98) Fixed flakiness in authentication tests
+
+### Enhancements
+
 - [[BF94]](https://github.com/picortex/bitframe/issues/94) Lifted authentication ktor service away from bitframe client
 
 ## Bitframe Client Sdk
