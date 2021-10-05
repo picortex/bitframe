@@ -12,7 +12,8 @@
 
 ### Bug Fixes
 
-- [[BF98]](https://github.com/picortex/bitframe/issues/98) Fixed flakiness in authentication tests
+- [[BF098]](https://github.com/picortex/bitframe/issues/98) Fixed flakiness in authentication tests
+- [[BF122]](https://github.com/picortex/bitframe/issues/122) Can now get the currently signed in User, Space and App
 
 ### Enhancements
 
@@ -36,6 +37,12 @@
 ## CI & CD
 
 - [[BF100]](https://github.com/picortex/bitframe/issues/100) Cache gradle for faster CI builds
+
+## Dependencies
+
+- Bumped kotlin to 1.5.31 from 1.5.30
+- Bumped ksp to 1.5.31-1.0.0 from 1.5.30-1.0.0
+- Bumped asoft foundation from 1.4.0 to 1.4.11
 
 # 0.0.28
 
