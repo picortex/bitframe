@@ -1,6 +1,8 @@
 package bitframe.authentication.signin
 
 import bitframe.authentication.AuthenticationDaoProvider
+import bitframe.authentication.apps.App
+import bitframe.authentication.spaces.Space
 import bitframe.authentication.spaces.SpacesDao
 import bitframe.authentication.users.UsersDao
 import bitframe.daos.conditions.contains
@@ -25,6 +27,28 @@ class SignInServiceImpl(
         LoginConundrum(
             user = match,
             spaces = match.spaces
+        ).also {
+            session.value = if (it.spaces.size > 1) {
+                Session.Conundrum(App(config.appId), it.spaces, it.user)
+            } else {
+                Session.SignedIn(App(config.appId), it.spaces.first(), it.user)
+            }
+        }
+    }
+
+    override fun resolve(space: Space): Later<Session.SignedIn> = scope.later {
+        val error = IllegalStateException(
+            """
+                You are attempting to resolve a non exiting conundrum,
+                
+                Make sure you have tried to signIn and the result obtained was a LoginConundrum with more that one space
+                """.trimIndent()
         )
+        when (val s = session.value) {
+            Session.Unknown -> throw error
+            is Session.SignedIn -> Session.SignedIn(App(config.appId), space, s.user)
+            is Session.Conundrum -> Session.SignedIn(App(config.appId), space, s.user)
+            is Session.SignedOut -> throw error
+        }.also { session.value = it }
     }
 }

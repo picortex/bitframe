@@ -16,7 +16,7 @@ import kotlin.test.Test
 
 open class SignUpActionTest(component: ComponentUnderTest) {
     constructor(controller: SignUpController) : this(ActionUnderTest(DefaultSignUpAction(controller)))
-    constructor(service: UsersService) : this(SignUpController(service))
+    constructor(service: UsersService) : this(SignUpController(ServiceConfig(""), service))
     constructor(daoProvider: DAOProvider) : this(UsersServiceImpl(daoProvider.users, daoProvider.spaces, ServiceConfig("")))
 
     val sandbox = Sandbox(component)
