@@ -5,6 +5,7 @@ import bitframe.authentication.spaces.SpacesDaoInMemory
 import bitframe.authentication.users.UsersDaoInMemory
 import bitframe.service.config.KtorClientConfiguration
 import expect.expect
+import expect.expectFailure
 import kotlinx.coroutines.runTest
 import later.await
 import testing.IntegrationTest
@@ -22,6 +23,24 @@ open class SignInServiceTest : IntegrationTest() {
             is KtorClientConfiguration -> SignInServiceKtor(cfg)
             else -> SignInServiceImpl(provider, cfg)
         }
+    }
+
+    @Test
+    fun should_fail_when_credentials_are_empty() = runTest {
+        val credentials = SignInCredentials("", "")
+        val err = expectFailure {
+            service.signIn(credentials).await()
+        }
+        expect(err.message).toBe("loginId (i.e. email/phone/username), must not be empty")
+    }
+
+    @Test
+    fun should_fail_when_sign_in_alias_password_is_empty() = runTest {
+        val credentials = SignInCredentials("john", "")
+        val err = expectFailure {
+            service.signIn(credentials).await()
+        }
+        expect(err.message).toBe("Password must not be empty")
     }
 
     @Test

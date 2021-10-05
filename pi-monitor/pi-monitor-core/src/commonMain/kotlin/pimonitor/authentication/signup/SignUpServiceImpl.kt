@@ -14,7 +14,7 @@ import kotlin.jvm.JvmOverloads
 
 class SignUpServiceImpl @JvmOverloads constructor(
     private val usersService: UsersService,
-    val config: ServiceConfig = ServiceConfig.DEFAULT
+    val config: ServiceConfig
 ) : SignUpService() {
 
     override fun registerIndividuallyAs(

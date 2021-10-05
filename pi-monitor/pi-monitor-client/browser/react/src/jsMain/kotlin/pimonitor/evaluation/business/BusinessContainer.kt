@@ -1,7 +1,7 @@
 package pimonitor.evaluation.business
 
-import kotlinx.css.Align
-import kotlinx.css.alignItems
+import kotlinx.css.JustifyContent
+import kotlinx.css.justifyContent
 import pimonitor.PiMonitorService
 import react.Props
 import react.RBuilder
@@ -27,7 +27,7 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
         is BusinessesState.Loading -> LoadingBox(state.message)
         is BusinessesState.Businesses -> styledDiv {
             FlexBox {
-                css { alignItems = Align.end }
+                css { justifyContent = JustifyContent.flexEnd }
                 ContainedButton("Create") {}
             }
             if (state.data.isEmpty()) EmptyBusiness()

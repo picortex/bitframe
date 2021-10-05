@@ -29,6 +29,10 @@
 
 - [[BF96]](https://github.com/picortex/bitframe/issues/96) Make PiMonitor bitframe containers multiplatform
 
+## Bitframe Service
+
+- [[BF125]](https://github.com/picortex/bitframe/issues/125) Restructured ServiceConfig and its subclasses
+
 ## CI & CD
 
 - [[BF100]](https://github.com/picortex/bitframe/issues/100) Cache gradle for faster CI builds
