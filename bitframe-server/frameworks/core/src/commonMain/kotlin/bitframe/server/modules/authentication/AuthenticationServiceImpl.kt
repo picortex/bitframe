@@ -12,8 +12,9 @@ import bitframe.service.config.ServiceConfig
 class AuthenticationServiceImpl(
     private val usersDao: UsersDao,
     private val spacesDao: SpacesDao,
-    override val signIn: SignInService = SignInServiceImpl(usersDao, spacesDao, ServiceConfig()),
-    override val users: UsersService = UsersServiceImpl(usersDao, spacesDao)
+    private val config: ServiceConfig,
+    override val signIn: SignInService = SignInServiceImpl(usersDao, spacesDao, config),
+    override val users: UsersService = UsersServiceImpl(usersDao, spacesDao, config)
 ) : AuthenticationService {
-    constructor(provider: DAOProvider) : this(provider.users, provider.spaces)
+    constructor(provider: DAOProvider, config: ServiceConfig) : this(provider.users, provider.spaces, config)
 }

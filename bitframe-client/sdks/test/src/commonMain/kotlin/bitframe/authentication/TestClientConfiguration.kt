@@ -42,6 +42,4 @@ class TestClientConfiguration @JvmOverloads private constructor(
     }
 
     fun toDaoConfig() = TestDaoConfig(simulationTime, scope)
-
-    fun toServiceConfig() = ServiceConfig(scope)
 }

@@ -4,6 +4,7 @@ import bitframe.Application
 import bitframe.server.modules.Module
 import bitframe.server.modules.authentication.AuthenticationService
 import bitframe.server.modules.authentication.AuthenticationModuleImpl
+import bitframe.service.config.ServiceConfig
 import pimonitor.authentication.signup.SignUpController
 import pimonitor.authentication.signup.SignUpModule
 import java.io.File
@@ -15,7 +16,7 @@ fun PiMonitorServer(
     client,
     AuthenticationModuleImpl(authService),
     listOf(
-        SignUpModule(controller = SignUpController(authService.users)),
+        SignUpModule(controller = SignUpController(ServiceConfig(""), authService.users)),
         Module<Monitor>(),
         Module<Monitor.Business>("monitor-businesses"),
         Module<Monitored>(),

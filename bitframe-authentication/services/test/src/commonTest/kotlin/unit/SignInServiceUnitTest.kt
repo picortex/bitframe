@@ -11,11 +11,12 @@ import bitframe.service.config.KtorClientConfiguration
 import bitframe.service.config.ServiceConfig
 import expect.expect
 import expect.toBe
+import testing.pimonitor.APP_ID
 import kotlin.test.Test
 
 class SignInServiceUnitTest : SignInServiceTest() {
     override val service: SignInService by lazy {
-        SignInServiceImpl(InMemoryAuthenticationDaoProvider(), ServiceConfig.DEFAULT)
+        SignInServiceImpl(InMemoryAuthenticationDaoProvider(), ServiceConfig(APP_ID))
     }
 
     @Test

@@ -13,7 +13,7 @@ import later.later
 class UsersServiceImpl(
     private val usersDao: UsersDao,
     private val spacesDao: SpacesDao,
-    private val config: ServiceConfig = ServiceConfig.DEFAULT
+    private val config: ServiceConfig
 ) : UsersService() {
     private val scope = config.scope
     override fun createIfNotExist(params: CreateUserParams) = scope.later {

@@ -1,7 +1,7 @@
 object vers {
-    val kotlin = "1.5.30"
+    val kotlin = "1.5.31" // this
 
-    val ksp = "1.5.30-1.0.0"
+    val ksp = "1.5.31-1.0.0" // this
 
     val kotlinpoet = "1.12.1"
 
@@ -29,7 +29,7 @@ object vers {
     }
 
     object asoft {
-        val foundation = "1.4.0"
+        val foundation = "1.4.11" // this
         val platform = foundation
         val contacts = "0.0.30"
         val duality = "0.0.50"
@@ -37,7 +37,7 @@ object vers {
         val mvivm = "0.1.20"
         val viewmodel = mvivm
         val live = mvivm
-        val builders = "1.4.0"
+        val builders = foundation
         val reakt = "0.1.20"
         val later = foundation
         val logging = foundation

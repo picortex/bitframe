@@ -1,12 +1,18 @@
 package pimonitor.evaluation.business
 
+import kotlinx.css.JustifyContent
+import kotlinx.css.justifyContent
 import pimonitor.PiMonitorService
 import react.Props
 import react.RBuilder
 import react.fc
 import react.useEffectOnce
+import reakt.ContainedButton
+import reakt.FlexBox
 import reakt.LoadingBox
 import reakt.SuccessBox
+import styled.css
+import styled.styledDiv
 import useViewModelState
 
 private external interface BusinessContainerProps : Props {
@@ -19,7 +25,14 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
     useEffectOnce { scope.loadBusiness() }
     when (val state = useViewModelState(viewModel)) {
         is BusinessesState.Loading -> LoadingBox(state.message)
-        is BusinessesState.Businesses -> if (state.data.isNotEmpty()) BusinessList(state.data) else EmptyBusiness()
+        is BusinessesState.Businesses -> styledDiv {
+            FlexBox {
+                css { justifyContent = JustifyContent.flexEnd }
+                ContainedButton("Create") {}
+            }
+            if (state.data.isEmpty()) EmptyBusiness()
+            else BusinessList(state.data)
+        }
         is BusinessesState.Success -> SuccessBox(state.message)
     }
 }

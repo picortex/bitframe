@@ -6,6 +6,7 @@ import bitframe.authentication.users.UsersServiceImpl
 import bitframe.server.data.DAOProvider
 import bitframe.server.modules.authentication.AuthenticationService
 import bitframe.server.modules.authentication.AuthenticationServiceImpl
+import bitframe.service.config.ServiceConfig
 import expect.expect
 import io.ktor.http.*
 import kotlinx.coroutines.runTest
@@ -15,8 +16,8 @@ import kotlin.test.Test
 
 open class SignUpActionTest(component: ComponentUnderTest) {
     constructor(controller: SignUpController) : this(ActionUnderTest(DefaultSignUpAction(controller)))
-    constructor(service: UsersService) : this(SignUpController(service))
-    constructor(daoProvider: DAOProvider) : this(UsersServiceImpl(daoProvider.users, daoProvider.spaces))
+    constructor(service: UsersService) : this(SignUpController(ServiceConfig(""), service))
+    constructor(daoProvider: DAOProvider) : this(UsersServiceImpl(daoProvider.users, daoProvider.spaces, ServiceConfig("")))
 
     val sandbox = Sandbox(component)
 
