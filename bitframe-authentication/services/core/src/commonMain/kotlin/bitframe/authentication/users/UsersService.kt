@@ -12,6 +12,6 @@ abstract class UsersService {
 
     fun register(params: RegisterUserParams) = registerWithSpace(params, params.toRegisterSpaceParams())
 
-    // Duplicated file names because of a kotlin js compiler bug on defaults
+    // Duplicated method names because of a kotlin js compiler bug on defaults
     abstract fun registerWithSpace(user: RegisterUserParams, space: RegisterSpaceParams): Later<LoginConundrum>
 }

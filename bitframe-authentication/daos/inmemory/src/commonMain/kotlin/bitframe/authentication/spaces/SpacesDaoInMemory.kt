@@ -2,14 +2,14 @@ package bitframe.authentication.spaces
 
 import bitframe.daos.conditions.Condition
 import bitframe.daos.conditions.matching
-import bitframe.daos.config.TestDaoConfig
+import bitframe.daos.config.InMemoryDaoConfig
 import kotlinx.coroutines.delay
 import later.Later
 import later.later
 
 class SpacesDaoInMemory(
     private val spaces: MutableMap<String, Space> = mutableMapOf(),
-    private val config: TestDaoConfig = TestDaoConfig.DEFAULT
+    private val config: InMemoryDaoConfig = InMemoryDaoConfig.DEFAULT
 ) : SpacesDao {
     private val scope = config.scope
     override fun createIfNotExist(params: CreateSpaceParams): Later<Space> = scope.later {

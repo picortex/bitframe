@@ -7,10 +7,12 @@ import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.User
 import bitframe.authentication.users.UsersDao
 import bitframe.authentication.users.UsersDaoInMemory
+import bitframe.daos.config.InMemoryDaoConfig
 
 class InMemoryAuthenticationDaoProvider(
-    override val users: UsersDao = UsersDaoInMemory(testUsers()),
-    override val spaces: SpacesDao = SpacesDaoInMemory(testAccounts())
+    val config: InMemoryDaoConfig = InMemoryDaoConfig.DEFAULT,
+    override val users: UsersDao = UsersDaoInMemory(testUsers(), config),
+    override val spaces: SpacesDao = SpacesDaoInMemory(testAccounts(), config)
 ) : AuthenticationDaoProvider {
     companion object {
         fun testAccounts() = mutableMapOf(

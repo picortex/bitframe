@@ -9,8 +9,6 @@ import kotlinx.coroutines.launch
 import later.await
 import bitframe.presenters.fields.ButtonInputField
 import pimonitor.authentication.signup.SignUpIntent.*
-import pimonitor.toBusiness
-import pimonitor.toPerson
 import viewmodel.ViewModel
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State

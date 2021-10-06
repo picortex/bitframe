@@ -2,7 +2,6 @@
 
 package pimonitor.authentication.signup
 
-import pimonitor.MonitorBusinessParams
 import kotlin.js.JsExport
 
 sealed class SignUpIntent {

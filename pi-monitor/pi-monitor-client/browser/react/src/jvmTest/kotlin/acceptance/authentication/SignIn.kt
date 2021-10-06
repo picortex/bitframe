@@ -30,7 +30,7 @@ class SignIn : AcceptanceTest() {
         @Test
         fun then_users_should_be_logged_in() = application.test {
             val signInScreen = openLandingScreen().clickSignInButton()
-            signInScreen.signIn(SignInCredentials("user01@test.com", "pass1"))
+            signInScreen.signIn(SignInCredentials("user1@test.com", "pass1"))
             expectUserToBeLoggedIn()
         }
     }
@@ -38,7 +38,7 @@ class SignIn : AcceptanceTest() {
     @Nested
     inner class `When users with invalid credentials attempts to login` {
         @ParameterizedTest
-        @CsvSource("username,password", "user1,password", "user2,password")
+        @CsvSource("username,password", "user01,password", "user02,password")
         fun they_should_not_succeed(username: String, password: String) = application.test {
             val signInScreen = openLandingScreen().clickSignInButton()
             expect(signInScreen).toBeVisible()
