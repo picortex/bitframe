@@ -3,7 +3,6 @@ package pimonitor.evaluation.business
 import pimonitor.Monitor
 import react.RBuilder
 import reakt.*
-import styled.styledDiv
 
 internal fun RBuilder.BusinessList(
     data: List<Monitor.Business>

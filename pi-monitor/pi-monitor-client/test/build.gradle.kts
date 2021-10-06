@@ -10,8 +10,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":pi-monitor-core"))
-                api(project(":bitframe-client-sdk-core"))
+                api(project(":pi-monitor-client-sdk-core"))
                 api(asoft("expect-coroutines", vers.asoft.expect))
             }
         }

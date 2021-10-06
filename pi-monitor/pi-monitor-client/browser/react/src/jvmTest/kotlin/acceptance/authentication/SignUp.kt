@@ -7,8 +7,8 @@ import expect.expect
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.junit.jupiter.Testcontainers
-import pimonitor.MonitorBusinessParams
 import pimonitor.authentication.signup.IndividualRegistrationParams
+import pimonitor.authentication.signup.MonitorBusinessParams
 import pimonitor.screens.api.toBeVisible
 import pimonitor.test
 import kotlin.test.Ignore

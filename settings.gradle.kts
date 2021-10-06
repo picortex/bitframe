@@ -61,6 +61,8 @@ includeRoot(name = "pi-monitor-core", path = "pi-monitor/pi-monitor-core")
 
 includeRoot(name = "pi-monitor-server", path = "pi-monitor/pi-monitor-server")
 
+includeSubs(base = "pi-monitor-service", path = "pi-monitor/pi-monitor-services", "core", "ktor", "stub", "test")
+
 includeSubs(base = "pi-monitor-client-sdk", path = "pi-monitor/pi-monitor-client/sdks", "core", "full")
 
 includeSubs(base = "pi-monitor-client", path = "pi-monitor/pi-monitor-client", "test")

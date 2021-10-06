@@ -1,15 +1,14 @@
 @file:Suppress("EXPERIMENTAL_API_USAGE", "NON_EXPORTABLE_TYPE")
 @file:JsExport
 
-import bitframe.authentication.TestClientConfiguration
-import bitframe.authentication.TestClientConfiguration.Companion.DEFAULT_SIMULATION_TIME
 import bitframe.authentication.signin.exports.SignInServiceWrapper
 import logging.ConsoleAppender
 import logging.Logging
 import pimonitor.PiMonitorService
+import pimonitor.PiMonitorServiceStub
+import pimonitor.StubServiceConfig
 import pimonitor.authentication.signup.exports.SignUpServiceWrapper
 import pimonitor.evaluation.business.exports.BusinessesServiceWrapper
-import pimonitor.test.PiMonitorServiceTest
 
 external interface ServiceConfiguration {
     var appId: String
@@ -24,10 +23,10 @@ fun client(config: ServiceConfiguration): PiMonitorService {
         Logging.init(ConsoleAppender())
         isLoggingEnabled = true
     }
-    return PiMonitorServiceTest(
-        TestClientConfiguration(
+    return PiMonitorServiceStub(
+        StubServiceConfig(
             appId = config.appId,
-            simulationTime = config.simulationTime ?: DEFAULT_SIMULATION_TIME
+            simulationTime = config.simulationTime?.toLong() ?: 2000L
         )
     )
 }

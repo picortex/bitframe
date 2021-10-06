@@ -1,5 +1,6 @@
 package bitframe.authentication.users
 
+import bitframe.authentication.AuthenticationDaoProvider
 import bitframe.authentication.signin.Basic
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.spaces.CreateSpaceParams
@@ -15,6 +16,11 @@ class UsersServiceImpl(
     private val spacesDao: SpacesDao,
     private val config: ServiceConfig
 ) : UsersService() {
+    constructor(
+        provider: AuthenticationDaoProvider,
+        config: ServiceConfig
+    ) : this(provider.users, provider.spaces, config)
+
     private val scope = config.scope
     override fun createIfNotExist(params: CreateUserParams) = scope.later {
         val accountParams = CreateSpaceParams("Genesis")

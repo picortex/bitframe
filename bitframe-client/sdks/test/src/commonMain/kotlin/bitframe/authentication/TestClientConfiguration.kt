@@ -1,6 +1,6 @@
 package bitframe.authentication
 
-import bitframe.daos.config.TestDaoConfig
+import bitframe.daos.config.InMemoryDaoConfig
 import bitframe.service.config.ClientConfiguration
 import bitframe.service.config.ServiceConfig
 import kotlinx.coroutines.CoroutineScope
@@ -41,5 +41,5 @@ class TestClientConfiguration @JvmOverloads private constructor(
         fun from(config: ServiceConfig, appId: String) = invoke(appId, scope = config.scope)
     }
 
-    fun toDaoConfig() = TestDaoConfig(simulationTime, scope)
+    fun toDaoConfig() = InMemoryDaoConfig(simulationTime, scope)
 }
