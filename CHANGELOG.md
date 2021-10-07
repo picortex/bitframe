@@ -26,6 +26,10 @@
 - [[BF92]](https://github.com/picortex/bitframe/issues/92) Fixed sign in validation bug for empty sign in credentials
 - [[BF93]](https://github.com/picortex/bitframe/issues/93) Attach Universal testing to cover future bugs
 
+## Bitframe Presenters
+
+- [[BF133]](https://github.com/picortex/bitframe/issues/133) Made the FormFeedback States easily reusable. Doesn't have to be consumed directly from the SDK
+
 ## Bitframe Test Containers
 
 - [[BF96]](https://github.com/picortex/bitframe/issues/96) Make PiMonitor bitframe containers multiplatform

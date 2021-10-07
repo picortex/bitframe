@@ -1,8 +1,9 @@
+@file:JsExport
+
 package pimonitor.authentication.signup
 
 import kotlin.js.JsExport
 
-@JsExport
 sealed class SignUpState {
 
     data class Loading(val message: String) : SignUpState()

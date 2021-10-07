@@ -1,10 +1,11 @@
+@file:JsExport
+
 package pimonitor.authentication.signup
 
 import bitframe.presenters.fields.ButtonInputField
 import bitframe.presenters.fields.TextInputField
 import kotlin.js.JsExport
 
-@JsExport
 data class IndividualFormFields(
     val title: String = "Enter your personal information",
     val name: TextInputField = TextInputField(
