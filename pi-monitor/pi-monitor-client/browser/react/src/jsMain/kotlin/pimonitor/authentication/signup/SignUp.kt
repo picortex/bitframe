@@ -3,9 +3,9 @@ package pimonitor.authentication.signup
 import kotlinx.css.minHeight
 import kotlinx.css.vh
 import pimonitor.PiMonitorService
-import pimonitor.authentication.signup.SignUpState.*
+import pimonitor.authentication.signup.legacy.SignUpState.*
 import pimonitor.authentication.signup.exports.SignUpScope
-import pimonitor.authentication.signup.SignUpIntent as Intent
+import pimonitor.authentication.signup.legacy.SignUpIntent as Intent
 import react.Props
 import react.RBuilder
 import react.fc

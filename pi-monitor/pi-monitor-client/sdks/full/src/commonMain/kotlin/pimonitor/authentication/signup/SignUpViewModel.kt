@@ -1,5 +1,6 @@
 package pimonitor.authentication.signup
 
+import bitframe.presenters.feedbacks.FormFeedback.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
@@ -7,78 +8,42 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import bitframe.presenters.fields.ButtonInputField
-import pimonitor.authentication.signup.SignUpIntent.*
 import viewmodel.ViewModel
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
 class SignUpViewModel(
-    private val service: SignUpService
-) : ViewModel<Intent, State>(State.SelectRegistrationType) {
-
-    private val recoveryTime = 3000
+    val service: SignUpService
+) : ViewModel<Intent, State>(State.IndividualForm(IndividualFormFields(), null)) {
+    val recoveryTime = 3000L
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
-        SelectRegistrationType -> ui.value = State.SelectRegistrationType
-        is RegisterAsIndividual -> ui.value = State.IndividualForm(
-            fields = i.fields ?: IndividualFormFields(
-                prevButton = ButtonInputField("Back") { post(SelectRegistrationType) }
-            ),
-            organisationForm = null
-        )
-        is RegisterAsOrganization -> ui.value = State.OrganisationForm(
-            fields = i.fields ?: OrganisationFormFields(
-                prevButton = ButtonInputField("Back") { post(SelectRegistrationType) }
-            )
-        )
-        is SubmitIndividualForm -> submitPersonalInfo(i, ui.value as State.IndividualForm)
-        is SubmitBusinessForm -> submitBusinessInfo(i, ui.value as State.OrganisationForm)
+        is Intent.SelectRegisterAsIndividual -> selectRegisterAsIndividual(i)
+        is Intent.SelectRegisterAsBusiness -> selectRegisterAsBusiness(i)
+        is Intent.Submit.IndividualForm -> submitForm(i)
+        is Intent.Submit.BusinessForm -> submitForm(i)
     }
 
-    private fun CoroutineScope.submitPersonalInfo(
-        i: SubmitIndividualForm,
-        state: State.IndividualForm
-    ) = launch {
+    private fun CoroutineScope.submitForm(i: Intent.Submit) = launch {
+        val state = ui.value
         flow {
-            emit(State.Loading("Submitting your registration, Please wait . . ."))
-            val person = i.params.toPerson()
-            val organisationFields = state.organisationForm?.fields
-            if (organisationFields != null) {
-                val business = organisationFields.toParams().toBusiness()
-                service.register(business, representedBy = person).await()
-            } else {
-                service.registerIndividuallyAs(i.params).await()
-            }
-            emit(State.Success("Registration completed successfully"))
+            emit(state.copy(i, Loading("Creating your account, please wait . . .")))
+            service.signUp(i.params).await()
+            emit(state.copy(i, Success("Your registration completed successfully")))
         }.catch {
-            emit(State.Failure(it, "Registration failed"))
-            delay(recoveryTime.toLong())
-            emit(state.copy(fields = state.fields.copy(i.params)))
+            emit(state.copy(i, Failure(it, "Failed to create your account")))
+            delay(recoveryTime)
+            emit(state.copy(i, null))
         }.collect {
             ui.value = it
         }
     }
 
-    private fun CoroutineScope.submitBusinessInfo(
-        i: SubmitBusinessForm,
-        state: State.OrganisationForm
-    ) = launch {
-        flow {
-            emit(State.Loading("Validating business input"))
-            i.params.toBusiness()
-            val params = IndividualFormFields(
-                prevButton = ButtonInputField("Back") {
-                    ui.value = state.copy(fields = state.fields.copy(i.params))
-                }
-            )
-            emit(State.IndividualForm(params, state.copy(fields = state.fields.copy(i.params))))
-        }.catch {
-            emit(State.Failure(it, "Validation Failed"))
-            delay(recoveryTime.toLong())
-            emit(state.copy(fields = state.fields.copy(i.params)))
-        }.collect {
-            ui.value = it
-        }
+    private fun selectRegisterAsIndividual(i: Intent.SelectRegisterAsIndividual) {
+        ui.value = State.IndividualForm(IndividualFormFields(), null)
+    }
+
+    private fun selectRegisterAsBusiness(i: Intent.SelectRegisterAsBusiness) {
+        ui.value = State.BusinessForm(BusinessFormFields(), null)
     }
 }

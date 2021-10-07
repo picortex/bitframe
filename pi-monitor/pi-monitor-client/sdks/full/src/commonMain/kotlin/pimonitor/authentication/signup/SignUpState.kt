@@ -2,22 +2,16 @@
 
 package pimonitor.authentication.signup
 
+import bitframe.presenters.feedbacks.FormFeedback
 import kotlin.js.JsExport
 
 sealed class SignUpState {
 
-    data class Loading(val message: String) : SignUpState()
-
-    object SelectRegistrationType : SignUpState()
-
     data class IndividualForm(
-        val fields: IndividualFormFields,
-        val organisationForm: OrganisationForm?
+        val fields: IndividualFormFields, val status: FormFeedback?
     ) : SignUpState()
 
-    data class OrganisationForm(val fields: OrganisationFormFields) : SignUpState()
-
-    data class Success(val message: String) : SignUpState()
-
-    data class Failure(val cause: Throwable, val message: String? = cause.message) : SignUpState()
+    data class BusinessForm(
+        val fields: BusinessFormFields, val status: FormFeedback?
+    ) : SignUpState()
 }

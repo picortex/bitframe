@@ -4,10 +4,10 @@
 package pimonitor.authentication.signup.exports
 
 import pimonitor.authentication.signup.SignUpService
-import pimonitor.authentication.signup.SignUpViewModel
+import pimonitor.authentication.signup.legacy.SignUpViewModel
 import viewmodel.ViewModel
-import pimonitor.authentication.signup.SignUpIntent as Intent
-import pimonitor.authentication.signup.SignUpState as State
+import pimonitor.authentication.signup.legacy.SignUpIntent as Intent
+import pimonitor.authentication.signup.legacy.SignUpState as State
 
 class SignUpScope(service: SignUpService) : SignUpServiceWrapper(service) {
 

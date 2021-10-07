@@ -2,6 +2,7 @@
 
 ## PiMonitor Client SDK Core
 
+- [[PM127]](https://github.com/picortex/bitframe/issues/127) Re authored the SignUpService to accommodate the new designs
 - [[PM103]](https://github.com/picortex/bitframe/issues/103) Moved SignUpTest to commonMain
 
 ## PiMonitor Client Browser Web

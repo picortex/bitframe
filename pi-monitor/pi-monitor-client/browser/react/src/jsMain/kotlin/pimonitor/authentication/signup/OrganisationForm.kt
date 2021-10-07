@@ -8,6 +8,7 @@ import kotlinx.extensions.onDesktop
 import kotlinx.extensions.onMobile
 import kotlinx.extensions.text
 import kotlinx.html.InputType
+import pimonitor.authentication.signup.legacy.OrganisationFormFields
 import react.RBuilder
 import reakt.*
 import styled.css

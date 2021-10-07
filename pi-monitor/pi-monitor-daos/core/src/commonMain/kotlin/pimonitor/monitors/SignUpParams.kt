@@ -1,4 +1,4 @@
-package pimonitor.authentication.signup
+package pimonitor.monitors
 
 import kotlinx.serialization.Serializable
 
@@ -12,10 +12,10 @@ sealed class SignUpParams {
     ) : SignUpParams()
 
     @Serializable
-    sealed class Cooperate(
+    data class Business(
         val businessName: String,
-        val personName: String,
-        val personEmail: String,
+        val individualName: String,
+        val individualEmail: String,
         val password: String
     ) : SignUpParams()
 }
