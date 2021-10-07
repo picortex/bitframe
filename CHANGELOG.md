@@ -42,11 +42,13 @@
 
 - [[BF100]](https://github.com/picortex/bitframe/issues/100) Cache gradle for faster CI builds
 
-## Dependencies
+## Libs/Tools Dependency Changes
 
-- Bumped kotlin to 1.5.31 from 1.5.30
-- Bumped ksp to 1.5.31-1.0.0 from 1.5.30-1.0.0
-- Bumped asoft foundation from 1.4.0 to 1.4.11
+| Lib/Tool | Prev version | Current version|
+|----------|--------------|----------------|
+| Kotlin   | 1.5.30       | 1.5.31         |
+| KSP      | 1.5.30-1.0.0 | 1.5.31-1.0.0   |
+| asoft foundation | 1.4.0| 1.4.11         |
 
 # 0.0.28
 
