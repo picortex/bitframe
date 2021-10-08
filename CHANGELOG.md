@@ -1,3 +1,56 @@
+# 0.0.29
+
+## PiMonitor Client SDK Core
+
+- [[PM127]](https://github.com/picortex/bitframe/issues/127) Re authored the SignUpService to accommodate the new designs
+- [[PM103]](https://github.com/picortex/bitframe/issues/103) Moved SignUpTest to commonMain
+
+## PiMonitor Client Browser Web
+
+- [[PM105]](https://github.com/picortex/bitframe/issues/105) Fix UI Crash when user goes to businesses tab
+
+## Bitframe Authentication Service
+
+### Bug Fixes
+
+- [[BF098]](https://github.com/picortex/bitframe/issues/98) Fixed flakiness in authentication tests
+- [[BF122]](https://github.com/picortex/bitframe/issues/122) Can now get the currently signed in User, Space and App
+
+### Enhancements
+
+- [[BF94]](https://github.com/picortex/bitframe/issues/94) Lifted authentication ktor service away from bitframe client
+
+## Bitframe Client Sdk
+
+### Bug Fixes
+
+- [[BF92]](https://github.com/picortex/bitframe/issues/92) Fixed sign in validation bug for empty sign in credentials
+- [[BF93]](https://github.com/picortex/bitframe/issues/93) Attach Universal testing to cover future bugs
+
+## Bitframe Presenters
+
+- [[BF133]](https://github.com/picortex/bitframe/issues/133) Made the FormFeedback States easily reusable. Doesn't have to be consumed directly from the SDK
+
+## Bitframe Test Containers
+
+- [[BF96]](https://github.com/picortex/bitframe/issues/96) Make PiMonitor bitframe containers multiplatform
+
+## Bitframe Service
+
+- [[BF125]](https://github.com/picortex/bitframe/issues/125) Restructured ServiceConfig and its subclasses
+
+## CI & CD
+
+- [[BF100]](https://github.com/picortex/bitframe/issues/100) Cache gradle for faster CI builds
+
+## Libs/Tools Dependency Changes
+
+| Lib/Tool | Prev version | Current version|
+|----------|--------------|----------------|
+| Kotlin   | 1.5.30       | 1.5.31         |
+| KSP      | 1.5.30-1.0.0 | 1.5.31-1.0.0   |
+| asoft foundation | 1.4.0| 1.4.11         |
+
 # 0.0.28
 
 ## CI & CD

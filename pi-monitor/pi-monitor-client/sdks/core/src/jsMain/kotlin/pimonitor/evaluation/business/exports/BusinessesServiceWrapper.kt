@@ -3,7 +3,7 @@
 
 package pimonitor.evaluation.business.exports
 
-import pimonitor.evaulation.business.BusinessService
+import pimonitor.evaluation.businesses.BusinessService
 
 class BusinessesServiceWrapper(service: BusinessService) {
     val loadBusinesses: () -> Unit = { service.all() }

@@ -5,9 +5,11 @@ import bitframe.response.response.response
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
+import bitframe.service.config.ServiceConfig
 import io.ktor.http.HttpStatusCode.Companion.Created
 import kotlinx.serialization.json.Json
 import later.await
+import pimonitor.monitors.MonitorDao
 
 private val json = Json {
     encodeDefaults = true
@@ -17,7 +19,7 @@ private val json = Json {
 class SignUpController(
     private val service: SignUpService
 ) {
-    constructor(service: UsersService) : this(SignUpServiceImpl(service))
+    constructor(config: ServiceConfig, service: UsersService, dao: MonitorDao) : this(SignUpServiceImpl(dao, service, config))
 
     suspend fun signUp(req: HttpRequest) = response {
         val params = json.decodeFromString(

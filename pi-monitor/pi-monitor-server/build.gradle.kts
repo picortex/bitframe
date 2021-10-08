@@ -8,7 +8,6 @@ plugins {
     kotlin("jvm")
     id("com.bmuschko.docker-java-application")
     id("tz.co.asoft.applikation")
-    `picortex-publish`
 }
 
 application {
@@ -30,7 +29,7 @@ kotlin {
             dependencies {
                 api(project(":bitframe-server-framework-ktor"))
                 api(project(":bitframe-server-dao-inmemory"))
-                api(project(":pi-monitor-core"))
+                api(project(":pi-monitor-service-stub"))
             }
         }
 

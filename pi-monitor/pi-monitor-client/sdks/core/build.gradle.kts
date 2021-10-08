@@ -12,7 +12,7 @@ kotlin {
     js(IR) {
         val main by compilations
         main.outputModuleName = "pi-monitor-client-sdk-core"
-        browserLib()
+        library()
         binaries.library()
     }
 
@@ -20,9 +20,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":pi-monitor-core"))
-                api(project(":bitframe-client-sdk-test"))
-                api(project(":bitframe-client-sdk-ktor"))
-
+                api(project(":pi-monitor-service-ktor"))
+                api(project(":pi-monitor-service-stub"))
                 api(kotlinx("datetime", vers.kotlinx.datetime))
                 api(asoft("logging-console", vers.asoft.logging))
                 api(asoft("name-generator", vers.asoft.contacts))
@@ -32,15 +31,11 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
+                implementation(project(":pi-monitor-test-testing"))
                 implementation(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
 
-        val jvmMain by getting {
-            dependencies {
-                implementation(project(":pi-monitor-test-containers"))
-            }
-        }
         val jsMain by getting {
             dependencies {
                 api(kotlinx("coroutines-core", vers.kotlinx.coroutines))

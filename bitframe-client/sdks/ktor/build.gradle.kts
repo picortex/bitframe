@@ -19,6 +19,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-client-sdk-core"))
+                api(project(":bitframe-authentication-service-ktor"))
                 api("io.ktor:ktor-client-core:${vers.ktor}")
                 api(asoft("result-core", vers.asoft.duality))
             }
@@ -39,7 +40,7 @@ kotlin {
 
         val jvmTest by getting {
             dependencies {
-                implementation(project(":pi-monitor-test-containers"))
+                implementation(project(":pi-monitor-test-testing"))
                 implementation(asoft("expect-coroutines", vers.asoft.expect))
             }
         }

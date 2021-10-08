@@ -1,5 +1,7 @@
 package bitframe.panel
 
+import bitframe.authentication.signin.Session
+import bitframe.authentication.signin.SignInService
 import kotlinx.coroutines.flow.MutableStateFlow
 import react.RBuilder
 import reakt.*
@@ -13,7 +15,7 @@ internal fun RBuilder.Drawer(
     header = {
         CompanyHeader(
             logoPath = "https://res.cloudinary.com/dc3mzhqp1/image/upload/v1597218653/PiLogos/logo_2x_eema7k.png",
-            userName = "Test Monitor"
+            userName = (SignInService.current as? Session.SignedIn)?.user?.name ?: "Unknown User"
         )
     }
 )

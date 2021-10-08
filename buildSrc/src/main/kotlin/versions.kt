@@ -1,7 +1,7 @@
 object vers {
-    val kotlin = "1.5.30"
+    val kotlin = "1.5.31" // this
 
-    val ksp = "1.5.30-1.0.0"
+    val ksp = "1.5.31-1.0.0" // this
 
     val kotlinpoet = "1.12.1"
 
@@ -24,21 +24,20 @@ object vers {
     }
 
     object bitframe {
-        val current = "0.0.28"
-        val previous = "0.0.25"
+        val current = "0.0.29"
+        val previous = "0.0.28"
     }
 
     object asoft {
-        val foundation = "1.4.0"
+        val foundation = "1.4.11" // this
         val platform = foundation
-        val access = "0.0.20"
         val contacts = "0.0.30"
         val duality = "0.0.50"
         val collections = foundation
         val mvivm = "0.1.20"
         val viewmodel = mvivm
         val live = mvivm
-        val builders = "1.4.0"
+        val builders = foundation
         val reakt = "0.1.20"
         val later = foundation
         val logging = foundation

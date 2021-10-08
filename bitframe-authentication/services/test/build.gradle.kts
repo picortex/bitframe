@@ -1,25 +1,32 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("plugin.serialization")
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
-    `picortex-publish`
+}
+
+repositories {
+    publicRepos()
+    mavenCentral()
 }
 
 kotlin {
     jvm { library() }
+
     js(IR) { library() }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-authentication-service-core"))
+                api(project(":bitframe-authentication-service-ktor"))
+                api(asoft("expect-coroutines", vers.asoft.expect))
+                api(project(":bitframe-authentication-dao-inmemory"))
+                api(project(":pi-monitor-test-testing"))
             }
         }
 
-        val commonTest by getting {
+        val jvmMain by getting {
             dependencies {
-                implementation(asoft("expect-core", vers.asoft.expect))
+
             }
         }
     }

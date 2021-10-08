@@ -5,8 +5,6 @@ import bitframe.server.http.HttpResponse
 import bitframe.server.http.HttpRoute
 import bitframe.server.modules.Module
 import io.ktor.http.*
-import io.ktor.utils.io.*
-import pimonitor.Monitor
 
 class MonitorModule : Module {
     override val name = "monitors"

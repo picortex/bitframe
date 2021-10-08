@@ -6,6 +6,7 @@ import bitframe.authentication.users.CreateUserParams
 import bitframe.server.actions.Action
 import bitframe.server.data.DAOProvider
 import bitframe.server.modules.authentication.signin.SignInAction
+import bitframe.service.config.ServiceConfig
 import kotlin.jvm.JvmOverloads
 
 open class AuthenticationModuleImpl @JvmOverloads constructor(
@@ -22,8 +23,9 @@ open class AuthenticationModuleImpl @JvmOverloads constructor(
     @JvmOverloads
     constructor(
         provider: DAOProvider,
+        config: ServiceConfig,
         default: CreateUserParams = GENESIS
-    ) : this(AuthenticationServiceImpl(provider.users, provider.spaces), default)
+    ) : this(AuthenticationServiceImpl(provider.users, provider.spaces, config), default)
 
     init {
         controller.service.users.createIfNotExist(default)
