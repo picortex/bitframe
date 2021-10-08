@@ -6,8 +6,10 @@ import pimonitor.PiMonitorService
 import pimonitor.PiMonitorServiceKtor
 import pimonitor.PiMonitorServiceStub
 import pimonitor.StubServiceConfig
+import kotlin.test.Ignore
 import kotlin.test.Test
 
+@Ignore // TODO
 class SignUpViewModelIntegrationTest : SignUpViewModelTest() {
 
     override val service: PiMonitorService by lazy {
@@ -16,7 +18,7 @@ class SignUpViewModelIntegrationTest : SignUpViewModelTest() {
             else -> PiMonitorServiceStub(StubServiceConfig(cfg.appId))
         }
     }
-    
+
     @Test
     fun should_pass() {
     }
