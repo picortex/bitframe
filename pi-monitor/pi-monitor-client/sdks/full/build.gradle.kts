@@ -26,6 +26,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
+                implementation(project(":pi-monitor-test-testing"))
                 implementation(asoft("viewmodel-test-expect", vers.asoft.viewmodel))
                 implementation(asoft("expect-core", vers.asoft.expect))
             }

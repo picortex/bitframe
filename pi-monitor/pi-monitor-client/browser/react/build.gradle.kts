@@ -5,6 +5,7 @@ import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 
 plugins {
     kotlin("multiplatform")
@@ -18,7 +19,10 @@ applikation {
 }
 
 rootProject.plugins.withType(NodeJsRootPlugin::class.java) {
-    rootProject.the<NodeJsRootExtension>().versions.webpackDevServer.version = "4.1.0"
+    rootProject.the<NodeJsRootExtension>().versions.apply {
+        webpackDevServer.version = "4.1.0"
+        webpackCli.version = "4.9.0"
+    }
 }
 
 kotlin {

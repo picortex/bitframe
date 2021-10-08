@@ -1,4 +1,4 @@
-package pimonitor.authentication.signup
+package pimonitor.authentication.signup.legacy
 
 import bitframe.components.*
 import kotlinx.css.em
@@ -8,6 +8,8 @@ import kotlinx.extensions.onDesktop
 import kotlinx.extensions.onMobile
 import kotlinx.extensions.text
 import kotlinx.html.InputType
+import pimonitor.authentication.signup.IndividualRegistrationParams
+import pimonitor.authentication.signup.legacy.IndividualFormFields
 import react.RBuilder
 import reakt.*
 import styled.css

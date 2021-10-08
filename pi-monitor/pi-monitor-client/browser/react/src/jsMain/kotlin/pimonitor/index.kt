@@ -2,7 +2,6 @@ package pimonitor
 
 import applikation.konfig
 import bitframe.Bitframe
-import bitframe.service.config.ClientConfiguration
 import client
 import kotlinext.js.jso
 import kotlinx.browser.document
@@ -12,6 +11,7 @@ import logging.ConsoleAppender
 import logging.Logging
 import org.w3c.dom.HTMLDivElement
 import pimonitor.authentication.signup.SignUp
+import pimonitor.authentication.signup.legacy.SignUpLegacy
 import pimonitor.evaluation.business.BusinessContainer
 import reakt.setContent
 

@@ -1,20 +1,20 @@
 @file:Suppress("ClassName")
 
-package integration.signup
+package integration.signup.legacy
 
 import expect.expect
 import expect.toBe
 import kotlinx.coroutines.runTest
 import pimonitor.authentication.signup.IndividualRegistrationParams
 import pimonitor.authentication.signup.MonitorBusinessParams
-import pimonitor.authentication.signup.OrganisationFormFields
-import pimonitor.authentication.signup.SignUpViewModel
+import pimonitor.authentication.signup.legacy.OrganisationFormFields
+import pimonitor.authentication.signup.legacy.SignUpViewModel
 import utils.SERVICE_UNDER_TEST
 import viewmodel.expect
 import kotlin.test.Ignore
 import kotlin.test.Test
-import pimonitor.authentication.signup.SignUpIntent as Intent
-import pimonitor.authentication.signup.SignUpState as State
+import pimonitor.authentication.signup.legacy.SignUpIntent as Intent
+import pimonitor.authentication.signup.legacy.SignUpState as State
 
 class Sign_Up_As_An_Organisation_ViewModel_Test {
     @Test

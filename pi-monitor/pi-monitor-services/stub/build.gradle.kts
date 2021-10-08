@@ -16,6 +16,7 @@ kotlin {
                 api(project(":bitframe-core"))
                 api(project(":bitframe-service-core"))
                 api(project(":bitframe-authentication-dao-inmemory"))
+                api(project(":pi-monitor-dao-inmemory"))
             }
         }
 
