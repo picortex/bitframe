@@ -40,7 +40,7 @@ kotlin {
 
         val jvmTest by getting {
             dependencies {
-                implementation(project(":pi-monitor-test-containers"))
+                implementation(project(":pi-monitor-test-testing"))
                 implementation(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
