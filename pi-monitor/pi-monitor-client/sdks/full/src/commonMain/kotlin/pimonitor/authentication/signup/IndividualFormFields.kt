@@ -9,7 +9,6 @@ import bitframe.presenters.fields.TextInputField
 import kotlin.js.JsExport
 
 data class IndividualFormFields(
-    val title: String = "Create Your Account",
     val select: DropDownInputField = DropDownInputField(
         Option("Select account type"),
         Option("Register as Business"),

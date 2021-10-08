@@ -3,15 +3,21 @@
 package pimonitor.authentication.signup
 
 import bitframe.presenters.feedbacks.FormFeedback
+import bitframe.presenters.fields.ButtonInputField
+import bitframe.presenters.fields.DropDownInputField
 import kotlin.js.JsExport
 
-sealed class SignUpState {
+sealed class SignUpState(val select: DropDownInputField, open val status: FormFeedback?) {
+
+    val title: String = "Create Your Account"
 
     data class IndividualForm(
-        val fields: IndividualFormFields, val status: FormFeedback?
-    ) : SignUpState()
+        val fields: IndividualFormFields, override val status: FormFeedback?
+    ) : SignUpState(fields.select, status)
 
     data class BusinessForm(
-        val fields: BusinessFormFields, val status: FormFeedback?
-    ) : SignUpState()
+        val fields: BusinessFormFields, override val status: FormFeedback?
+    ) : SignUpState(fields.select, status)
+
+    val submitButton: ButtonInputField = ButtonInputField("Get Started")
 }

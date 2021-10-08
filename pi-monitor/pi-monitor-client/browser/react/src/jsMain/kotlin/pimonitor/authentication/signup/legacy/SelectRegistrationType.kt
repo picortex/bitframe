@@ -1,4 +1,4 @@
-package pimonitor.authentication.signup
+package pimonitor.authentication.signup.legacy
 
 import color.invoke
 import kotlinx.css.*
