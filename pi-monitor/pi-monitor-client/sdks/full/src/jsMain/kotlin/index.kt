@@ -8,8 +8,6 @@ import pimonitor.evaluation.business.BusinessesScope
 
 fun signIn(service: PiMonitorService) = SignInScope(service.signIn)
 
-fun signUpLegacy(service: PiMonitorService) = SignUpScopeLegacy(service.signUp)
-
 fun signUp(service: PiMonitorService) = SignUpScope(service.signUp)
 
 fun business(service: PiMonitorService) = BusinessesScope(service.businesses)

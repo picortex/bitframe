@@ -6,7 +6,9 @@ import bitframe.response.response.decodeResponseFromString
 import bitframe.service.MiniService
 import bitframe.service.config.KtorClientConfiguration
 import bitframe.service.utils.JsonContent
+import io.ktor.client.features.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.content.*
 import io.ktor.http.*
 import kotlinx.serialization.json.Json
@@ -22,10 +24,12 @@ class SignInServiceKtor @JvmOverloads constructor(
     private val scope = config.scope
     override fun signIn(credentials: SignInCredentials): Later<LoginConundrum> = scope.later {
         validate(credentials)
-        val json = http.post<String>(path) {
-            body = JsonContent(credentials, SignInCredentials.serializer())
+        val resp = try {
+            http.post(path) { body = JsonContent(credentials) }
+        } catch (exp: ClientRequestException) {
+            exp.response
         }
-        Json.decodeResponseFromString(LoginConundrum.serializer(), json).response()
+        Json.decodeResponseFromString(LoginConundrum.serializer(), resp.readText()).response()
     }
 
     override fun resolve(space: Space): Later<Session.SignedIn> = scope.later {
