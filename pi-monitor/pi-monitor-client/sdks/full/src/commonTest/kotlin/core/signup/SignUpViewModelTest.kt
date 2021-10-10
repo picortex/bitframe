@@ -6,16 +6,22 @@ import pimonitor.PiMonitorService
 import pimonitor.authentication.signup.*
 import pimonitor.monitors.SignUpParams
 import testing.IntegrationTest
+import testing.annotations.Lifecycle
+import testing.annotations.TestInstance
+import testing.annotations.Testcontainers
 import viewmodel.expect
 import kotlin.test.Test
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
+@Testcontainers
+@TestInstance(Lifecycle.PER_CLASS)
 abstract class SignUpViewModelTest : IntegrationTest() {
 
     abstract val service: PiMonitorService
 
-    val vm by lazy { SignUpViewModel(service.signUp) }
+    val viewModel get() = SignUpViewModel(service.signUp)
+    val vm by lazy { viewModel }
 
     private val testIndividualParams = SignUpParams.Individual(
         name = "John Doe", email = "john@email.com", password = "john@email.com"
@@ -28,7 +34,7 @@ abstract class SignUpViewModelTest : IntegrationTest() {
     @Test
     fun should_start_in_a_register_as_an_individual_state() {
         val initialState = State.IndividualForm(IndividualFormFields(), null)
-        expect(vm).toBeIn(initialState)
+        expect(viewModel).toBeIn(initialState)
     }
 
     @Test

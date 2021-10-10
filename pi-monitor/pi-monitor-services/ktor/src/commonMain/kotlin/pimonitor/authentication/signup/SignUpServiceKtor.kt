@@ -4,7 +4,9 @@ import bitframe.response.response.decodeResponseFromString
 import bitframe.service.MiniService
 import bitframe.service.config.KtorClientConfiguration
 import bitframe.service.utils.JsonContent
+import io.ktor.client.features.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import kotlinx.serialization.json.Json
 import later.Later
 import later.later
@@ -18,10 +20,11 @@ class SignUpServiceKtor(
 
     override fun signUp(params: SignUpParams): Later<SignUpResult> = scope.later {
         validate(params)
-        val json = client.post<String>(config.url + "/api/authentication/sign-up") {
-            body = JsonContent(params)
+        val resp = try {
+            client.post(config.url + "/api/authentication/sign-up") { body = JsonContent(params) }
+        } catch (err: ClientRequestException) {
+            err.response
         }
-        val res = Json.decodeResponseFromString(SignUpResult.serializer(), json)
-        res.response()
+        Json.decodeResponseFromString(SignUpResult.serializer(), resp.readText()).response()
     }
 }
