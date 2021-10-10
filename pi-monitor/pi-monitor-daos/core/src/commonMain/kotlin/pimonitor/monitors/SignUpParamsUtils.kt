@@ -1,5 +1,6 @@
 package pimonitor.monitors
 
+import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.spaces.RegisterSpaceParams
 import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.RegisterUserParams
@@ -17,3 +18,8 @@ fun SignUpParams.Business.toRegisterUserParams() = RegisterUserParams(
 fun SignUpParams.Business.toRegisterSpaceParams() = RegisterSpaceParams(
     name = businessName
 )
+
+fun SignUpParams.toCredentials() = when (this) {
+    is SignUpParams.Individual -> SignInCredentials(email, password)
+    is SignUpParams.Business -> SignInCredentials(individualEmail, password)
+}

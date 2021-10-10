@@ -5,6 +5,7 @@ import bitframe.authentication.spaces.Space
 import bitframe.response.response.decodeResponseFromString
 import bitframe.service.MiniService
 import bitframe.service.config.KtorClientConfiguration
+import bitframe.service.utils.JsonContent
 import io.ktor.client.request.*
 import io.ktor.content.*
 import io.ktor.http.*
@@ -22,10 +23,7 @@ class SignInServiceKtor @JvmOverloads constructor(
     override fun signIn(credentials: SignInCredentials): Later<LoginConundrum> = scope.later {
         validate(credentials)
         val json = http.post<String>(path) {
-            body = TextContent(
-                text = Json.encodeToString(SignInCredentials.serializer(), credentials),
-                contentType = ContentType.Application.Json
-            )
+            body = JsonContent(credentials, SignInCredentials.serializer())
         }
         Json.decodeResponseFromString(LoginConundrum.serializer(), json).response()
     }

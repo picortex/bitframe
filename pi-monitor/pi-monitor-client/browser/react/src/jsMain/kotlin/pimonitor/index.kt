@@ -18,10 +18,9 @@ import reakt.setContent
 fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
     val client = client(jso {
         appId = "test-client"
-        simulationTime = 3000
+        simulationTime = 1500
     })
     val version: String by konfig()
-    Logging.init(ConsoleAppender())
     Bitframe(
         client = client,
         routeRenderers = mapOf(

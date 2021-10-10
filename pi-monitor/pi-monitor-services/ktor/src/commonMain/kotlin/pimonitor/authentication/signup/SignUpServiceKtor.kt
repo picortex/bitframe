@@ -17,21 +17,12 @@ class SignUpServiceKtor(
 ) : SignUpService(), MiniService {
     private val client = config.http
     private val scope = config.scope
-    override fun registerIndividuallyAs(
-        person: IndividualRegistrationParams
-    ): Later<LoginConundrum> = scope.later {
+    
+    override fun signUp(params: SignUpParams): Later<SignUpResult> = scope.later {
         val json = client.post<String>(config.url + "/api/authentication/sign-up") {
-            body = JsonContent(person)
+            body = JsonContent(params)
         }
-        val res = Json.decodeResponseFromString(LoginConundrum.serializer(), json)
+        val res = Json.decodeResponseFromString(SignUpResult.serializer(), json)
         res.response()
-    }
-
-    override fun register(business: Monitor.Business, representedBy: Monitor.Person): Later<LoginConundrum> {
-        TODO("Not yet implemented")
-    }
-
-    override fun signUp(params: SignUpParams): Later<SignUpResult> {
-        TODO("Not yet implemented")
     }
 }

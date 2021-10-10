@@ -5,6 +5,8 @@ import kotlinx.coroutines.runTest
 import kotlinx.datetime.Clock
 import later.await
 import pimonitor.PiMonitorService
+import pimonitor.monitors.SignUpParams
+import pimonitor.monitors.toCredentials
 import testing.IntegrationTest
 import testing.annotations.Lifecycle
 import testing.annotations.TestInstance
@@ -23,24 +25,26 @@ abstract class SignUpServiceTest : IntegrationTest() {
         val stamp = Clock.System.now().epochSeconds
 
         // Given an individual with
-        val individual = IndividualRegistrationParams(
+        val email = "andylamax$stamp@programmer.net"
+        val individual: SignUpParams = SignUpParams.Individual(
             name = "Anderson Lameck - $stamp",
-            email = "andylamax$stamp@programmer.net",
+            email = email,
             password = "1234"
         )
+//        val individual = IndividualRegistrationParams(
+//            name = "Anderson Lameck - $stamp",
+//            email = "andylamax$stamp@programmer.net",
+//            password = "1234"
+//        )
 
         // When they sign up
-        val signUpConundrum = service.signUp.registerIndividuallyAs(individual).await()
-        expect(signUpConundrum.spaces).toBeOfSize(1)
+        val result = service.signUp.signUp(individual).await()
 
         // They should be able to sign in
-        val singInConundrum = service.signIn.signIn(individual.credentials()).await()
+        val singInConundrum = service.signIn.signIn(individual.toCredentials()).await()
         expect(singInConundrum.spaces).toBeOfSize(1)
 
-        // the results return should be the same
-        expect(signUpConundrum).toBe(singInConundrum)
-
         // Their user tag should equal their username
-        expect(individual.name).toBe(signUpConundrum.user.tag)
+        expect(email).toBe(result.user.contacts.firstValue())
     }
 }

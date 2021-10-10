@@ -10,6 +10,7 @@ import io.ktor.http.HttpStatusCode.Companion.Created
 import kotlinx.serialization.json.Json
 import later.await
 import pimonitor.monitors.MonitorDao
+import pimonitor.monitors.SignUpParams
 
 private val json = Json {
     encodeDefaults = true
@@ -23,10 +24,10 @@ class SignUpController(
 
     suspend fun signUp(req: HttpRequest) = response {
         val params = json.decodeFromString(
-            IndividualRegistrationParams.serializer(),
+            SignUpParams.serializer(),
             req.compulsoryBody()
         )
-        val conundrum = service.registerIndividuallyAs(params).await()
+        val conundrum = service.signUp(params).await()
         resolve(conundrum, Created)
     }.toHttpResponse()
 }

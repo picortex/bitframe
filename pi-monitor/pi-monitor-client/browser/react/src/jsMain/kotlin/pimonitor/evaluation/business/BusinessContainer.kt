@@ -28,10 +28,13 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
         is BusinessesState.Businesses -> styledDiv {
             FlexBox {
                 css { justifyContent = JustifyContent.flexEnd }
-                ContainedButton("Create") {}
+                ContainedButton("Create") { viewModel.post(BusinessesIntent.ShowBusinessForm) }
             }
             if (state.data.isEmpty()) EmptyBusiness()
             else BusinessList(state.data)
+        }
+        is BusinessesState.BusinessForm -> styledDiv {
+            +"Creating form, just wait and see"
         }
         is BusinessesState.Success -> SuccessBox(state.message)
     }

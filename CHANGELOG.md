@@ -1,11 +1,15 @@
 # 0.0.30
 
+## PiMonitor Client SDK Core
+
+- [BF142](https://github.com/picortex/bitframe/issues/142) Refactor SignUpService to just use one method for signing up
+
 # 0.0.29
 
 ## PiMonitor Client SDK Core
 
 - [[PM127]](https://github.com/picortex/bitframe/issues/127) Re authored the SignUpService to accommodate the new designs
-    - [[PM103]](https://github.com/picortex/bitframe/issues/103) Moved SignUpTest to commonMain
+- [[PM103]](https://github.com/picortex/bitframe/issues/103) Moved SignUpTest to commonMain
 
 ## PiMonitor Client Browser Web
 
@@ -16,7 +20,7 @@
 ### Bug Fixes
 
 - [[BF098]](https://github.com/picortex/bitframe/issues/98) Fixed flakiness in authentication tests
-    - [[BF122]](https://github.com/picortex/bitframe/issues/122) Can now get the currently signed in User, Space and App
+- [[BF122]](https://github.com/picortex/bitframe/issues/122) Can now get the currently signed in User, Space and App
 
 ### Enhancements
 
@@ -27,7 +31,7 @@
 ### Bug Fixes
 
 - [[BF92]](https://github.com/picortex/bitframe/issues/92) Fixed sign in validation bug for empty sign in credentials
-    - [[BF93]](https://github.com/picortex/bitframe/issues/93) Attach Universal testing to cover future bugs
+- [[BF93]](https://github.com/picortex/bitframe/issues/93) Attach Universal testing to cover future bugs
 
 ## Bitframe Presenters
 
