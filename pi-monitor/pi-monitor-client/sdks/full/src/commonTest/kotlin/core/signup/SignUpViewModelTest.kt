@@ -33,14 +33,14 @@ abstract class SignUpViewModelTest : IntegrationTest() {
 
     @Test
     fun should_change_to_business_form_when_intent_is_initiated() = runTest {
-        vm.expect(Intent.SelectRegisterAsBusiness(null)).toGoThrough(
+        vm.expect(Intent.SelectRegisterAsBusiness).toGoThrough(
             State.BusinessForm(BusinessFormFields(), null)
         )
     }
 
     @Test
     fun should_be_able_to_submit_an_individual_form() = runTest {
-        vm.expect(Intent.SelectRegisterAsIndividual(null))
+        vm.expect(Intent.SelectRegisterAsIndividual)
         val state = State.IndividualForm(IndividualFormFields(), null)
         val intent = Intent.Submit.IndividualForm(testIndividualParams)
         vm.expect(intent).toGoThrough(
@@ -51,7 +51,7 @@ abstract class SignUpViewModelTest : IntegrationTest() {
 
     @Test
     fun should_fail_to_submit_with_invalid_email() = runTest {
-        vm.expect(Intent.SelectRegisterAsIndividual(null))
+        vm.expect(Intent.SelectRegisterAsIndividual)
         val params = testIndividualParams.copy(email = "johnemail.com")
         val intent = Intent.Submit.IndividualForm(params)
         val status = vm.expect(intent).value.firstNotNullOfOrNull {
@@ -64,7 +64,7 @@ abstract class SignUpViewModelTest : IntegrationTest() {
 
     @Test
     fun should_fail_to_submit_with_empty_name() = runTest {
-        vm.expect(Intent.SelectRegisterAsIndividual(null))
+        vm.expect(Intent.SelectRegisterAsIndividual)
         val params = testIndividualParams.copy(name = "")
         val intent = Intent.Submit.IndividualForm(params)
         val status = vm.expect(intent).value.firstNotNullOfOrNull {
@@ -77,7 +77,7 @@ abstract class SignUpViewModelTest : IntegrationTest() {
 
     @Test
     fun should_be_able_to_submit_a_business_form() = runTest {
-        vm.expect(Intent.SelectRegisterAsBusiness(null))
+        vm.expect(Intent.SelectRegisterAsBusiness)
         val state = State.BusinessForm(BusinessFormFields(), null)
         val intent = Intent.Submit.BusinessForm(testBusinessParams)
         vm.expect(intent).toGoThrough(
