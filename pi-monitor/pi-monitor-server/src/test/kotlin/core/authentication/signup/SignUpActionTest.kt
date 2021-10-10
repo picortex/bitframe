@@ -39,7 +39,7 @@ open class SignUpActionTest(component: ComponentUnderTest) {
         )
         val res = sandbox.post("/api/authentication/sign-up", body = params)
         res.body.printJson()
-        expect(res.body.contains("johndoe.com is not a valid email or phone")).toBe(true)
+        expect(res.body.contains("Invalid email: johndoe.com")).toBe(true)
     }
 
     @Test

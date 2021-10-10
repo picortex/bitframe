@@ -31,11 +31,6 @@ abstract class SignUpServiceTest : IntegrationTest() {
             email = email,
             password = "1234"
         )
-//        val individual = IndividualRegistrationParams(
-//            name = "Anderson Lameck - $stamp",
-//            email = "andylamax$stamp@programmer.net",
-//            password = "1234"
-//        )
 
         // When they sign up
         val result = service.signUp.signUp(individual).await()

@@ -2,7 +2,10 @@
 
 ## PiMonitor Client SDK Core
 
-- [BF142](https://github.com/picortex/bitframe/issues/142) Refactor SignUpService to just use one method for signing up
+- [[BF142]](https://github.com/picortex/bitframe/issues/142) Refactor SignUpService to just use one method for signing up
+
+## Bitframe Response
+- [[BF143]](https://github.com/picortex/bitframe/issues/143) Response is not properly returning the cause of an error
 
 # 0.0.29
 
