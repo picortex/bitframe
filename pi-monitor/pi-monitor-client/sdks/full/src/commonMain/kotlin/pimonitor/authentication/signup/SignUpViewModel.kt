@@ -18,10 +18,9 @@ class SignUpViewModel(
     val recoveryTime = 3000L
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
-        is Intent.SelectRegisterAsIndividual -> selectRegisterAsIndividual(i)
-        is Intent.SelectRegisterAsBusiness -> selectRegisterAsBusiness(i)
-        is Intent.Submit.IndividualForm -> submitForm(i)
-        is Intent.Submit.BusinessForm -> submitForm(i)
+        Intent.SelectRegisterAsIndividual -> selectRegisterAsIndividual()
+        Intent.SelectRegisterAsBusiness -> selectRegisterAsBusiness()
+        is Intent.Submit -> submitForm(i)
     }
 
     private fun CoroutineScope.submitForm(i: Intent.Submit) = launch {
@@ -39,11 +38,11 @@ class SignUpViewModel(
         }
     }
 
-    private fun selectRegisterAsIndividual(i: Intent.SelectRegisterAsIndividual) {
+    private fun selectRegisterAsIndividual() {
         ui.value = State.IndividualForm(IndividualFormFields(), null)
     }
 
-    private fun selectRegisterAsBusiness(i: Intent.SelectRegisterAsBusiness) {
+    private fun selectRegisterAsBusiness() {
         ui.value = State.BusinessForm(BusinessFormFields(), null)
     }
 }

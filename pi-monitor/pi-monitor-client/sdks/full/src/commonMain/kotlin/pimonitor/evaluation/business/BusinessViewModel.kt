@@ -18,8 +18,9 @@ import pimonitor.evaluation.business.BusinessesState as State
 class BusinessViewModel(
     val service: BusinessService
 ) : ViewModel<Intent, State>(State.Loading("Loading business")) {
-    override fun CoroutineScope.execute(i: Intent) = when (i) {
+    override fun CoroutineScope.execute(i: Intent) :Any = when (i) {
         LoadBusinesses -> loadBusiness()
+        ShowBusinessForm -> ui.value = State.BusinessForm()
     }
 
     private fun CoroutineScope.loadBusiness() = launch {

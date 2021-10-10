@@ -5,6 +5,7 @@ import bitframe.server.http.HttpRequest
 import bitframe.server.modules.Module
 import bitframe.server.modules.authentication.AuthenticationModule
 import io.ktor.application.*
+import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.http.content.*
 import io.ktor.request.*
@@ -23,6 +24,19 @@ class Application(
     @JvmOverloads
     fun start(port: Int = 8080) = embeddedServer(CIO, port) {
         println("Serving files from ${client.absolutePath}")
+        install(CORS) {
+            method(HttpMethod.Options)
+            method(HttpMethod.Get)
+            method(HttpMethod.Post)
+            method(HttpMethod.Put)
+            method(HttpMethod.Delete)
+            method(HttpMethod.Patch)
+            header(HttpHeaders.AccessControlAllowHeaders)
+            header(HttpHeaders.ContentType)
+            header(HttpHeaders.AccessControlAllowOrigin)
+            anyHost()
+            allowCredentials = true
+        }
         routing {
             static("/") {
                 staticRootFolder = client.absoluteFile

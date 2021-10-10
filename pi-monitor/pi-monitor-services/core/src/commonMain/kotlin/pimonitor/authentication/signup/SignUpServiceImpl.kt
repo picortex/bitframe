@@ -20,14 +20,6 @@ class SignUpServiceImpl(
 ) : SignUpService() {
 
     private val scope = config.scope
-    override fun registerIndividuallyAs(
-        person: IndividualRegistrationParams
-    ) = usersService.register(person.toRegisterUserParamsNew())
-
-    override fun register(business: Monitor.Business, representedBy: Monitor.Person): Later<LoginConundrum> {
-        Monitor("<unset>", business, contacts = listOf(representedBy))
-        TODO()
-    }
 
     override fun signUp(params: SignUpParams): Later<SignUpResult> = scope.later {
         validate(params)

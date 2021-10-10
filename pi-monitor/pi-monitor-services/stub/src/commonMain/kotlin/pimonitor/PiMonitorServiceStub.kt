@@ -9,6 +9,7 @@ import bitframe.daos.config.InMemoryDaoConfig
 import bitframe.service.config.ServiceConfig
 import pimonitor.authentication.signup.SignUpServiceImpl
 import pimonitor.evaluation.businesses.BusinessServiceImpl
+import pimonitor.monitored.MonitoredBusinessDaoInMemory
 import pimonitor.monitors.MonitorDaoInMemory
 
 class PiMonitorServiceStub(
@@ -19,5 +20,5 @@ class PiMonitorServiceStub(
     users = usersService,
     signIn = SignInServiceImpl(provider, config),
     signUp = SignUpServiceImpl(MonitorDaoInMemory(config = config.toInMemoryDaoConfig()), usersService, config),
-    businesses = BusinessServiceImpl()
+    businesses = BusinessServiceImpl(MonitoredBusinessDaoInMemory(config = config.toInMemoryDaoConfig()))
 )

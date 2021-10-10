@@ -1,3 +1,17 @@
+# 0.0.30
+
+## PiMonitor Client SDK Core
+
+- [[BF142]](https://github.com/picortex/bitframe/issues/142) Refactor SignUpService to just use one method for signing up
+
+## Bitframe
+
+- [[BF143]](https://github.com/picortex/bitframe/issues/143) Response is not properly returning the cause of an error
+
+## Bitframe Server
+
+- [[BF144]](https://github.com/picortex/bitframe/issues/144) Fix Cross Origin Resource Sharing Issue
+
 # 0.0.29
 
 ## PiMonitor Client SDK Core

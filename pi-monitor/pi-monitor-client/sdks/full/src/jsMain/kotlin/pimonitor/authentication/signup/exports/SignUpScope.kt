@@ -14,11 +14,11 @@ class SignUpScope(service: SignUpService) : SignUpServiceWrapper(service) {
     val viewModel: ViewModel<Intent, State> = SignUpViewModel(service)
 
     val registerAsIndividual = {
-        viewModel.post(Intent.SelectRegisterAsIndividual(null))
+        viewModel.post(Intent.SelectRegisterAsIndividual)
     }
 
     val registerAsBusiness = {
-        viewModel.post(Intent.SelectRegisterAsBusiness(null))
+        viewModel.post(Intent.SelectRegisterAsBusiness)
     }
 
     val submitIndividualForm = { params: RegisterIndividualParams ->
