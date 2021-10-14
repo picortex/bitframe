@@ -36,7 +36,15 @@ class MonitorDaoInMemory(
         monitor
     }
 
-    override fun all(where: Condition<String, Any>?): Later<List<Monitor>> {
-        TODO("Not yet implemented")
+    override fun all(where: Condition<String, Any>?) = scope.later {
+        if (where?.lhs == "userRef.uid") {
+            val uid = where.rhs.toString()
+            monitors.values.filter {
+                when (it) {
+                    is CooperateMonitor -> it.contacts.any { c -> c.userRef.uid == uid }
+                    is IndividualMonitor -> it.userRef.uid == uid
+                }
+            }
+        } else monitors.values.toList()
     }
 }
