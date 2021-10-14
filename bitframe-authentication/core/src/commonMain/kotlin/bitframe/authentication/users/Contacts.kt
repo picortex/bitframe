@@ -122,15 +122,21 @@ sealed class Contacts {
         }
     }
 
+    fun all() = when (this) {
+        None -> emptySet()
+        is Email -> setOf(email.value)
+        is Emails -> emails.map { it.value }.toSet()
+        is Phone -> setOf(phone.value)
+        is Phones -> phones.map { it.value }.toSet()
+        is EmailPhone -> setOf(email.value, phone.value)
+        is Mixed -> (emails.map { it.value } + phones.map { it.value }).toSet()
+    }
+
+    @Deprecated("In favour of all().first())", replaceWith = ReplaceWith("all().first()"))
     fun firstValue() = firstValueOrNull() ?: throw RuntimeException("There are no Contacts inside the contacts container")
 
-    fun firstValueOrNull() = when (this) {
-        None -> null
-        is Email -> email.value
-        is Emails -> emails.firstOrNull()?.value
-        is Phone -> phone.value
-        is Phones -> phones.firstOrNull()?.value
-        is EmailPhone -> email.value
-        is Mixed -> emails.firstOrNull()?.value
-    }
+    @Deprecated("In favour of all().firstOrNull()", replaceWith = ReplaceWith("all().firstOrNull()"))
+    fun firstValueOrNull() = all().firstOrNull()
+
+    fun contains(value: String) = all().contains(value.lowercase())
 }

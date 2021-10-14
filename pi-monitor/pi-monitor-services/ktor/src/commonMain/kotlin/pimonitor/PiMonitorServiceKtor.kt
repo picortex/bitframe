@@ -5,12 +5,17 @@ import bitframe.authentication.users.UsersServiceKtor
 import bitframe.service.config.KtorClientConfiguration
 import pimonitor.authentication.signup.SignUpServiceKtor
 import pimonitor.evaluation.businesses.BusinessServiceKtor
+import pimonitor.monitors.MonitorsServiceKtor
 
-class PiMonitorServiceKtor(
-    private val configuration: KtorClientConfiguration
-) : PiMonitorService(
-    users = UsersServiceKtor(configuration),
-    signIn = SignInServiceKtor(configuration),
-    signUp = SignUpServiceKtor(configuration),
-    businesses = BusinessServiceKtor((configuration))
-)
+fun PiMonitorServiceKtor(
+    configuration: KtorClientConfiguration
+): PiMonitorService {
+    val signInService = SignInServiceKtor(configuration)
+    return object : PiMonitorService(
+        users = UsersServiceKtor(configuration),
+        signIn = signInService,
+        signUp = SignUpServiceKtor(configuration),
+        monitors = MonitorsServiceKtor(signInService.session, configuration),
+        businesses = BusinessServiceKtor((configuration))
+    ) {}
+}

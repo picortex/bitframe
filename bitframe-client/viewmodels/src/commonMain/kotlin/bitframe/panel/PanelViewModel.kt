@@ -2,6 +2,7 @@
 
 package bitframe.panel
 
+import bitframe.BitframeService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -10,11 +11,14 @@ import kotlin.js.JsExport
 import bitframe.panel.PanelIntent as Intent
 import bitframe.panel.PanelState as State
 
-class PanelViewModel : ViewModel<Intent, State>(State.Loading("Setting up your workspace")) {
+class PanelViewModel(
+    val service: BitframeService
+) : ViewModel<Intent, State>(State.Loading("Setting up your workspace")) {
     init {
         coroutineScope.launch {
             delay(500)
             ui.value = State.Panel(
+                service.signIn.session.value,
                 listOf(
                     UIModuleGroup(
                         "Evaluation", listOf(

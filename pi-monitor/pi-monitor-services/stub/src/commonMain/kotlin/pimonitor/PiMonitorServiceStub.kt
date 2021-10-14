@@ -5,20 +5,26 @@ import bitframe.authentication.InMemoryAuthenticationDaoProvider
 import bitframe.authentication.signin.SignInServiceImpl
 import bitframe.authentication.users.UsersService
 import bitframe.authentication.users.UsersServiceImpl
-import bitframe.daos.config.InMemoryDaoConfig
-import bitframe.service.config.ServiceConfig
 import pimonitor.authentication.signup.SignUpServiceImpl
 import pimonitor.evaluation.businesses.BusinessServiceImpl
 import pimonitor.monitored.MonitoredBusinessDaoInMemory
 import pimonitor.monitors.MonitorDaoInMemory
+import pimonitor.monitors.MonitorsServiceImpl
 
-class PiMonitorServiceStub(
+fun PiMonitorServiceStub(
     config: StubServiceConfig,
     provider: AuthenticationDaoProvider = InMemoryAuthenticationDaoProvider(config.toInMemoryDaoConfig()),
     usersService: UsersService = UsersServiceImpl(provider, config),
-) : PiMonitorService(
-    users = usersService,
-    signIn = SignInServiceImpl(provider, config),
-    signUp = SignUpServiceImpl(MonitorDaoInMemory(config = config.toInMemoryDaoConfig()), usersService, config),
-    businesses = BusinessServiceImpl(MonitoredBusinessDaoInMemory(config = config.toInMemoryDaoConfig()))
-)
+): PiMonitorService {
+    val signInService = SignInServiceImpl(provider, config)
+    val daoConfig = config.toInMemoryDaoConfig()
+    val monitorDao = MonitorDaoInMemory(config = daoConfig)
+
+    return object : PiMonitorService(
+        users = usersService,
+        signIn = signInService,
+        signUp = SignUpServiceImpl(monitorDao, usersService, config),
+        monitors = MonitorsServiceImpl(signInService.session, monitorDao, config),
+        businesses = BusinessServiceImpl(MonitoredBusinessDaoInMemory(config = daoConfig))
+    ) {}
+}

@@ -21,7 +21,7 @@ private fun defaultRenderers(
     version: String
 ): Map<String, Renderer> = mapOf(
     SignInPageRoute to { SignInPage(client.signIn, version) },
-    PanelPageRoute to { Panel(moduleRenderers) },
+    PanelPageRoute to { Panel(client,moduleRenderers) },
     HomeRoute to { LandingPage(version) }
 )
 

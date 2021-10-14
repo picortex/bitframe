@@ -27,13 +27,12 @@ fun client(config: ServiceConfiguration): PiMonitorService {
         isLoggingEnabled = true
     }
     val url = config.url
+    val appId = config.appId
+    val simulationTime = config.simulationTime?.toLong() ?: 2000L
     return if (url == null) PiMonitorServiceStub(
-        StubServiceConfig(
-            appId = config.appId,
-            simulationTime = config.simulationTime?.toLong() ?: 2000L
-        )
+        StubServiceConfig(appId, simulationTime)
     ) else PiMonitorServiceKtor(
-        KtorClientConfiguration(url, appId = config.appId)
+        KtorClientConfiguration(url, appId)
     )
 }
 

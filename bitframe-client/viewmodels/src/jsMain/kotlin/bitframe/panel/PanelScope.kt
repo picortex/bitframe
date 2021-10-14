@@ -2,6 +2,8 @@
 
 package bitframe.panel
 
-class PanelScope {
-    val viewModel = PanelViewModel()
+import bitframe.BitframeService
+
+class PanelScope(val service: BitframeService) {
+    val viewModel = PanelViewModel(service)
 }

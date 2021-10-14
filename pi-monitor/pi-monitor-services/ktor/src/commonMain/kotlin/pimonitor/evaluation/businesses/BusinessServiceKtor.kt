@@ -6,7 +6,7 @@ import pimonitor.monitored.MonitoredBusiness
 
 class BusinessServiceKtor(
     private val config: KtorClientConfiguration
-) : BusinessService() {
+) : BusinessesService() {
     override fun all(): Later<List<MonitoredBusiness>> {
         TODO()
     }

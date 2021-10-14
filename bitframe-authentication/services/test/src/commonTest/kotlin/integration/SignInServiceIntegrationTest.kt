@@ -10,7 +10,7 @@ import expect.expect
 import kotlin.test.Test
 
 class SignInServiceIntegrationTest : SignInServiceTest() {
-    override val service: SignInService by lazy {
+    override val service: SignInService<*> by lazy {
         when (val cfg = config) {
             is KtorClientConfiguration -> SignInServiceKtor(cfg)
             else -> SignInServiceImpl(InMemoryAuthenticationDaoProvider(), cfg)

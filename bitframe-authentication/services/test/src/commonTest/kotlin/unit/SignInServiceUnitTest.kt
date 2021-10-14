@@ -15,7 +15,7 @@ import testing.pimonitor.APP_ID
 import kotlin.test.Test
 
 class SignInServiceUnitTest : SignInServiceTest() {
-    override val service: SignInService by lazy {
+    override val service: SignInService<*> by lazy {
         SignInServiceImpl(InMemoryAuthenticationDaoProvider(), ServiceConfig(APP_ID))
     }
 
