@@ -15,7 +15,7 @@ import later.Later
 import later.later
 import kotlin.jvm.JvmOverloads
 
-open class SignInServiceKtor @JvmOverloads constructor(
+open class SignInServiceKtor(
     override val config: KtorClientConfiguration
 ) : SignInService<Nothing?>(), MiniService {
     protected val path get() = config.url + "/api/authentication/sign-in"

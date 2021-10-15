@@ -5,6 +5,7 @@ import bitframe.authentication.InMemoryAuthenticationDaoProvider
 import bitframe.authentication.signin.SignInServiceImpl
 import bitframe.authentication.users.UsersService
 import bitframe.authentication.users.UsersServiceImpl
+import bitframe.events.InMemoryEventBus
 import pimonitor.authentication.signup.SignUpServiceImpl
 import pimonitor.evaluation.businesses.BusinessServiceImpl
 import pimonitor.monitored.MonitoredBusinessDaoInMemory
@@ -19,12 +20,13 @@ fun PiMonitorServiceStub(
     val signInService = SignInServiceImpl(provider, config)
     val daoConfig = config.toInMemoryDaoConfig()
     val monitorDao = MonitorDaoInMemory(config = daoConfig)
-
+    val bus = InMemoryEventBus()
     return object : PiMonitorService(
         users = usersService,
         signIn = signInService,
-        signUp = SignUpServiceImpl(monitorDao, usersService, config),
+        signUp = SignUpServiceImpl(monitorDao, usersService, bus, config),
         monitors = MonitorsServiceImpl(signInService.session, monitorDao, config),
-        businesses = BusinessServiceImpl(MonitoredBusinessDaoInMemory(config = daoConfig))
+        businesses = BusinessServiceImpl(MonitoredBusinessDaoInMemory(config = daoConfig)),
+        bus = bus
     ) {}
 }

@@ -3,13 +3,16 @@
 
 package pimonitor.authentication.signup.exports
 
+import pimonitor.PiMonitorService
+import pimonitor.authentication.signup.SignUpResult
 import pimonitor.authentication.signup.SignUpService
 import pimonitor.authentication.signup.SignUpViewModel
+import useEventHandler
 import viewmodel.ViewModel
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
-class SignUpScope(service: SignUpService) : SignUpServiceWrapper(service) {
+class SignUpScope(val service: SignUpService) : SignUpServiceWrapper(service) {
 
     val viewModel: ViewModel<Intent, State> = SignUpViewModel(service)
 
@@ -27,5 +30,9 @@ class SignUpScope(service: SignUpService) : SignUpServiceWrapper(service) {
 
     val submitBusinessForm = { params: RegisterBusinessParams ->
         viewModel.post(Intent.Submit.BusinessForm(params.toSignUpParams()))
+    }
+
+    val useSignUpEvent: (callback: (SignUpResult) -> Unit) -> Unit = {
+        useEventHandler(service.bus, SignUpService.SIGN_UP_EVENT_ID, it)
     }
 }

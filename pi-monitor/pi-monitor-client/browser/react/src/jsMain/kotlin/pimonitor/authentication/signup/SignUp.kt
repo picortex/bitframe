@@ -16,6 +16,7 @@ import react.dom.p
 import react.fc
 import react.router.dom.useHistory
 import react.router.dom.withRouter
+import react.useEffectOnce
 import reakt.*
 import styled.css
 import styled.styledH2
@@ -29,8 +30,12 @@ private external class SignUpProps : Props {
 
 private val SignUp = fc<SignUpProps> { props ->
     val scope = props.scope
+    val useSignUpEvent = scope.useSignUpEvent
     val viewModel = scope.viewModel
     val state = useViewModelState(viewModel)
+    useSignUpEvent {
+        println(it)
+    }
     val history = useHistory()
     FlexBox {
         css {

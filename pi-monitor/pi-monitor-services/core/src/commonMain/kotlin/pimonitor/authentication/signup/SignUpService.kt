@@ -2,12 +2,27 @@
 
 package pimonitor.authentication.signup
 
+import bitframe.events.Event
+import bitframe.events.EventBus
+import bitframe.service.config.ServiceConfig
 import contacts.Email
 import later.Later
+import later.await
+import later.later
 import pimonitor.monitors.SignUpParams
 import kotlin.js.JsExport
 
-abstract class SignUpService {
+abstract class SignUpService(
+    open val bus: EventBus,
+    open val config: ServiceConfig
+) {
+    protected val scope get() = config.scope
+
+    companion object {
+        const val SIGN_UP_EVENT_ID = "pimonitor.authentication.signup"
+        fun signUpEvent(data: SignUpResult) = Event(SIGN_UP_EVENT_ID, data)
+    }
+
     fun validate(params: SignUpParams) = when (params) {
         is SignUpParams.Individual -> {
             require(params.name.isNotEmpty()) {
@@ -29,5 +44,12 @@ abstract class SignUpService {
         }
     }
 
-    abstract fun signUp(params: SignUpParams): Later<SignUpResult>
+    abstract fun executeSignUp(params: SignUpParams): Later<SignUpResult>
+
+    fun signUp(params: SignUpParams): Later<SignUpResult> = scope.later {
+        validate(params)
+        val result = executeSignUp(params).await()
+        bus.dispatch(signUpEvent(result))
+        result
+    }
 }
