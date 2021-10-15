@@ -22,7 +22,7 @@ fun PiMonitorServer(
     val bus = InMemoryEventBus()
     return Application(
         client,
-        AuthenticationModuleImpl(authService),
+        AuthenticationModuleImpl(bus, authService),
         listOf(
             SignUpModule(
                 controller = SignUpController(
