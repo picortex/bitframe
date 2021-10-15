@@ -17,11 +17,12 @@ class SignUpServiceKtor(
 ) : SignUpService(), MiniService {
     private val client = config.http
     private val scope = config.scope
+    private val baseUrl = "${config.url}/api/authentication"
 
     override fun signUp(params: SignUpParams): Later<SignUpResult> = scope.later {
         validate(params)
         val resp = try {
-            client.post(config.url + "/api/authentication/sign-up") { body = JsonContent(params) }
+            client.post("$baseUrl/sign-up") { body = JsonContent(params) }
         } catch (err: ClientRequestException) {
             err.response
         }

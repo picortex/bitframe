@@ -11,5 +11,5 @@ open class BitframeKtorClient(
     val config: KtorClientConfiguration
 ) : BitframeService {
     override val users: UsersService get() = TODO("Not yet implemented")
-    override val signIn: SignInService = SignInServiceKtor(config)
+    override val signIn: SignInService<*> = SignInServiceKtor(config)
 }

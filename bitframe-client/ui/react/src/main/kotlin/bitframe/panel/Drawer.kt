@@ -15,7 +15,7 @@ internal fun RBuilder.Drawer(
     header = {
         CompanyHeader(
             logoPath = "https://res.cloudinary.com/dc3mzhqp1/image/upload/v1597218653/PiLogos/logo_2x_eema7k.png",
-            userName = (SignInService.current as? Session.SignedIn)?.user?.name ?: "Unknown User"
+            userName = (state.session as? Session.SignedIn<*>)?.user?.name ?: "Unknown User"
         )
     }
 )

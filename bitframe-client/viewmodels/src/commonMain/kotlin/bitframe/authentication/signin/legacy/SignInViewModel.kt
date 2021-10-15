@@ -16,7 +16,7 @@ import viewmodel.ViewModel
 import kotlin.js.JsExport
 
 class SignInViewModel(
-    private val service: SignInService
+    private val service: SignInService<*>
 ) : ViewModel<SignInIntent, SignInState>(SignInState.Form(SignInFormFields())) {
 
     private var loginListener: ((User, Space) -> Unit)? = null

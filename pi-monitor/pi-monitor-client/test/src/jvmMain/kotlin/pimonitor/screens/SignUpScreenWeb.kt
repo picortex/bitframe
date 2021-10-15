@@ -4,27 +4,24 @@ import com.codeborne.selenide.Selectors.byAttribute
 import com.codeborne.selenide.Selectors.withText
 import com.codeborne.selenide.SelenideElement
 import org.openqa.selenium.By
-import pimonitor.authentication.signup.IndividualRegistrationParams
-import pimonitor.authentication.signup.MonitorBusinessParams
+import pimonitor.monitors.SignUpParams
 import pimonitor.screens.authentication.SignUpScreen
 import pimonitor.utils.isVisible
 import kotlin.properties.ReadOnlyProperty
-import kotlin.reflect.KProperty
-import kotlin.test.assertTrue
 import com.codeborne.selenide.Selenide.`$` as S
 
 class SignUpScreenWeb : SignUpScreen {
     val select = S(By.name("registrationType"))
-    private val passwordInput = S(By.name("password"))
     private val nextOrSubmitButton = S(byAttribute("type", "submit"))
 
-    override suspend fun signUpIndividuallyAs(person: IndividualRegistrationParams) {
-        val nameInput = S(By.name("name"))
-        val emailInput = S(By.name("email"))
+    private fun signUp(params: SignUpParams.Individual) {
+        val name by name()
+        val email by name()
+        val password by name()
 
-        nameInput.sendKeys(person.name)
-        emailInput.sendKeys(person.email)
-        passwordInput.sendKeys(person.password)
+        name.sendKeys(params.name)
+        email.sendKeys(params.email)
+        password.sendKeys(params.password)
 
         nextOrSubmitButton.click()
     }
@@ -33,7 +30,7 @@ class SignUpScreenWeb : SignUpScreen {
         S(By.name(property.name))
     }
 
-    override suspend fun signUpAs(person: IndividualRegistrationParams, representing: MonitorBusinessParams) {
+    private fun signUp(params: SignUpParams.Business) {
         select.selectOption(1)
 
         val businessName by name()
@@ -41,11 +38,16 @@ class SignUpScreenWeb : SignUpScreen {
         val individualEmail by name()
         val password by name()
 
-        businessName.sendKeys(representing.name)
-        individualName.sendKeys(person.name)
-        individualEmail.sendKeys(person.email)
-        password.sendKeys(person.password)
+        businessName.sendKeys(params.businessName)
+        individualName.sendKeys(params.individualName)
+        individualEmail.sendKeys(params.individualEmail)
+        password.sendKeys(params.password)
         nextOrSubmitButton.click()
+    }
+
+    override suspend fun signUp(with: SignUpParams) = when (with) {
+        is SignUpParams.Business -> signUp(with)
+        is SignUpParams.Individual -> signUp(with)
     }
 
     private suspend fun expectUserToBeRegistered(waitCounts: Int) {

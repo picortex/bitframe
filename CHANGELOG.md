@@ -12,6 +12,10 @@
 
 - [[BF144]](https://github.com/picortex/bitframe/issues/144) Fix Cross Origin Resource Sharing Issue
 
+## PiMonitor Client SDK
+
+- [[PM121]](https://github.com/picortex/bitframe/issues/121) Persist the currently logged in Monitor
+
 # 0.0.29
 
 ## PiMonitor Client SDK Core

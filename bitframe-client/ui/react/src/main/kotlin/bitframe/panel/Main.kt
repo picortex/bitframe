@@ -1,5 +1,6 @@
 package bitframe.panel
 
+import bitframe.BitframeService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.css.em
 import react.Props
@@ -21,18 +22,19 @@ private external interface PanelProps : Props {
 
 private val Panel = fc<PanelProps> { props ->
     val controller = props.controller
+    val service = props.scope.service.signIn
     when (val state = useViewModelState(props.scope.viewModel)) {
         is PanelState.Loading -> LoadingBox(state.message, 80)
         is PanelState.Panel -> NavigationDrawer(
             drawerState = controller,
             drawer = { Drawer(controller, state) },
-            content = { Body(controller,props.moduleRenderers) }
+            content = { Body(controller, props.moduleRenderers) }
         )
     }
 }
 
-fun RBuilder.Panel(moduleRenderers: Map<String, Renderer>) = child(Panel) {
+fun RBuilder.Panel(client: BitframeService, moduleRenderers: Map<String, Renderer>) = child(Panel) {
     attrs.controller = MutableStateFlow(DrawerState.Opened)
     attrs.moduleRenderers = moduleRenderers
-    attrs.scope = PanelScope()
+    attrs.scope = PanelScope(client)
 }

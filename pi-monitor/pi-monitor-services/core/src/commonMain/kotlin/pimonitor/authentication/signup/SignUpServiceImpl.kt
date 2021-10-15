@@ -1,13 +1,11 @@
 package pimonitor.authentication.signup
 
 import bitframe.authentication.apps.App
-import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.users.UsersService
 import bitframe.service.config.ServiceConfig
 import later.Later
 import later.await
 import later.later
-import pimonitor.Monitor
 import pimonitor.monitors.MonitorDao
 import pimonitor.monitors.SignUpParams
 import pimonitor.monitors.toRegisterSpaceParams
@@ -28,11 +26,10 @@ class SignUpServiceImpl(
             is SignUpParams.Business -> usersService.registerWithSpace(
                 user = params.toRegisterUserParams(), space = params.toRegisterSpaceParams()
             )
-        }
-        val monitor = dao.create(params).await()
-        val conundrum = register.await()
+        }.await()
+        val monitor = dao.create(params, register.user.ref()).await()
         SignUpResult(
-            app = App(config.appId), space = conundrum.spaces.first(), user = conundrum.user, monitor = monitor
+            app = App(config.appId), space = register.spaces.first(), user = register.user, monitor = monitor
         )
     }
 }

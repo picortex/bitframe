@@ -63,7 +63,7 @@ private val SignInPage = fc<SignInPageProps> { props ->
 }
 
 fun RBuilder.SignInPageLegacy(
-    service: SignInService,
+    service: SignInService<*>,
     version: String
 ) = child(withRouter(SignInPage)) {
     attrs.scope = SignInScopeLegacy(service)

@@ -1,11 +1,9 @@
 package pimonitor.screens.authentication
 
-import pimonitor.authentication.signup.IndividualRegistrationParams
-import pimonitor.authentication.signup.MonitorBusinessParams
+import pimonitor.monitors.SignUpParams
 import pimonitor.screens.api.Screen
 
 interface SignUpScreen : Screen {
-    suspend fun signUpIndividuallyAs(person: IndividualRegistrationParams)
-    suspend fun signUpAs(person: IndividualRegistrationParams, representing: MonitorBusinessParams)
+    suspend fun signUp(with: SignUpParams)
     suspend fun expectUserToBeRegistered()
 }

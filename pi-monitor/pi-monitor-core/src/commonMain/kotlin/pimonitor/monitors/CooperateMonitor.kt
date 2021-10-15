@@ -2,6 +2,7 @@
 
 package pimonitor.monitors
 
+import bitframe.authentication.users.UserRef
 import contacts.Email
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -11,7 +12,7 @@ import kotlin.js.JsName
 data class CooperateMonitor(
     override val uid: String,
     override val name: String,
-    override val email: Email,
+    val email: Email,
     val contacts: List<ContactPerson>
 ) : Monitor() {
     @JsName("with")
@@ -24,7 +25,9 @@ data class CooperateMonitor(
 
     @Serializable
     data class ContactPerson(
+        val uid: String,
         val name: String,
         val email: Email,
+        val userRef: UserRef
     )
 }

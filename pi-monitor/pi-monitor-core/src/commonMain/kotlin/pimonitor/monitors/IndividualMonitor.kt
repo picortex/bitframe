@@ -2,6 +2,7 @@
 
 package pimonitor.monitors
 
+import bitframe.authentication.users.UserRef
 import contacts.Email
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -10,5 +11,6 @@ import kotlin.js.JsExport
 data class IndividualMonitor(
     override val uid: String,
     override val name: String,
-    override val email: Email
+    val email: Email,
+    val userRef: UserRef
 ) : Monitor()

@@ -14,7 +14,7 @@ class AuthenticationControllerImpl(
     override suspend fun signIn(body: String?): HttpResponse = response {
         val credentials = Json.decodeFromString(
             deserializer = SignInCredentials.serializer(),
-            string = body ?: throw IllegalArgumentException("A json body was not provided")
+            string = body ?: reject("A json body was not provided")
         )
         resolve(service.signIn.signIn(credentials).await(), HttpStatusCode.Accepted)
     }.toHttpResponse()
