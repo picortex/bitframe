@@ -4,6 +4,7 @@ import bitframe.*
 import bitframe.authentication.users.UsersService
 import bitframe.authentication.users.UsersServiceImpl
 import bitframe.daos.config.InMemoryDaoConfig
+import bitframe.events.InMemoryEventBus
 import bitframe.server.data.DAOProvider
 import bitframe.server.modules.authentication.AuthenticationService
 import bitframe.server.modules.authentication.AuthenticationServiceImpl
@@ -22,7 +23,8 @@ open class SignUpActionTest(component: ComponentUnderTest) {
         SignUpController(
             dao = MonitorDaoInMemory(config = InMemoryDaoConfig(0)),
             config = ServiceConfig(""),
-            service = service
+            service = service,
+            bus = InMemoryEventBus()
         )
     )
 

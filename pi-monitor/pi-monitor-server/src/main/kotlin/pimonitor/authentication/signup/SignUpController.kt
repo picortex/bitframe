@@ -1,6 +1,7 @@
 package pimonitor.authentication.signup
 
 import bitframe.authentication.users.UsersService
+import bitframe.events.EventBus
 import bitframe.response.response.response
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.compulsoryBody
@@ -24,7 +25,12 @@ private val json = Json {
 class SignUpController(
     private val service: SignUpService
 ) {
-    constructor(config: ServiceConfig, service: UsersService, dao: MonitorDao) : this(SignUpServiceImpl(dao, service, config))
+    constructor(
+        config: ServiceConfig,
+        service: UsersService,
+        dao: MonitorDao,
+        bus: EventBus
+    ) : this(SignUpServiceImpl(dao, service, bus, config))
 
     @OptIn(ExperimentalSerializationApi::class)
     suspend fun signUp(req: HttpRequest) = response {
