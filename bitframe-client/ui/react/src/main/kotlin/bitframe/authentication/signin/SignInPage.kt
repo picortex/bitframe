@@ -50,7 +50,7 @@ private val SignInPage = fc<SignInPageProps> { props ->
 }
 
 fun RBuilder.SignInPage(
-    service: SignInService<*>,
+    service: SignInService,
     version: String
 ) = child(withRouter(SignInPage)) {
     attrs.scope = SignInScope(service)

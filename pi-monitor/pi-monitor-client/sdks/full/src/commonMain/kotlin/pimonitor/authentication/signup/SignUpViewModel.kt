@@ -1,5 +1,6 @@
 package pimonitor.authentication.signup
 
+import bitframe.authentication.signin.SignInService
 import bitframe.presenters.feedbacks.FormFeedback.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -8,12 +9,14 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import pimonitor.monitors.toCredentials
 import viewmodel.ViewModel
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
 class SignUpViewModel(
-    val service: SignUpService
+    val signUpService: SignUpService,
+    val signInService: SignInService
 ) : ViewModel<Intent, State>(State.IndividualForm(IndividualFormFields(), null)) {
     val recoveryTime = 3000L
 
@@ -27,8 +30,10 @@ class SignUpViewModel(
         val state = ui.value
         flow {
             emit(state.copy(i, Loading("Creating your account, please wait . . .")))
-            service.signUp(i.params).await()
-            emit(state.copy(i, Success("Your registration completed successfully")))
+            signUpService.signUp(i.params).await()
+            emit(state.copy(i, Loading("Success. Signing you in, please wait . . .")))
+            signInService.signIn(i.params.toCredentials()).await()
+            emit(state.copy(i, Success("Successfully signed in")))
         }.catch {
             emit(state.copy(i, Failure(it, "Failed to create your account")))
             delay(recoveryTime)

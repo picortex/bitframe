@@ -12,20 +12,6 @@ import react.useEffectOnce
 
 fun signIn(service: PiMonitorService) = SignInScope(service.signIn)
 
-fun signUp(service: PiMonitorService) = SignUpScope(service.signUp)
+fun signUp(service: PiMonitorService) = SignUpScope(service)
 
 fun business(service: PiMonitorService) = BusinessesScope(service.businesses)
-
-internal fun <D> useEventHandler(
-    bus: EventBus,
-    eventId: String,
-    callback: (D) -> Unit
-) = useEffectOnce {
-    val subscriber = bus.subscribe(eventId, callback)
-    cleanup { subscriber.unsubscribe() }
-}
-
-fun useSignUpEvent(
-    service: PiMonitorService,
-    callback: (SignUpResult) -> Unit
-) = useEventHandler(service.bus, SignUpService.SIGN_UP_EVENT_ID, callback)

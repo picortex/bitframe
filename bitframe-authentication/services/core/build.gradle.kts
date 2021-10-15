@@ -14,6 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-service-core"))
+                api(project(":bitframe-events-core"))
                 api(project(":bitframe-authentication-dao-core"))
                 api(asoft("live-core", vers.asoft.live))
                 api(asoft("later-ktx", vers.asoft.later))

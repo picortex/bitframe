@@ -17,10 +17,10 @@ fun PiMonitorServiceStub(
     provider: AuthenticationDaoProvider = InMemoryAuthenticationDaoProvider(config.toInMemoryDaoConfig()),
     usersService: UsersService = UsersServiceImpl(provider, config),
 ): PiMonitorService {
-    val signInService = SignInServiceImpl(provider, config)
+    val bus = InMemoryEventBus()
+    val signInService = SignInServiceImpl(provider, config, bus)
     val daoConfig = config.toInMemoryDaoConfig()
     val monitorDao = MonitorDaoInMemory(config = daoConfig)
-    val bus = InMemoryEventBus()
     return object : PiMonitorService(
         users = usersService,
         signIn = signInService,

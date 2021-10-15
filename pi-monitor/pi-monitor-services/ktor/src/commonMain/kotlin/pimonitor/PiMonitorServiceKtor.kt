@@ -11,8 +11,8 @@ import pimonitor.monitors.MonitorsServiceKtor
 fun PiMonitorServiceKtor(
     configuration: KtorClientConfiguration
 ): PiMonitorService {
-    val signInService = SignInServiceKtor(configuration)
     val bus = InMemoryEventBus()
+    val signInService = SignInServiceKtor(configuration, bus)
     return object : PiMonitorService(
         users = UsersServiceKtor(configuration),
         signIn = signInService,

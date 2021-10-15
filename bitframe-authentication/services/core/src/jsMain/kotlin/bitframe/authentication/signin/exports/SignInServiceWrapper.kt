@@ -5,7 +5,7 @@ package bitframe.authentication.signin.exports
 
 import bitframe.authentication.signin.SignInService
 
-class SignInServiceWrapper(service: SignInService<*>) {
+class SignInServiceWrapper(service: SignInService) {
     val signIn = { credentials: SignInCredentials ->
         service.signIn(credentials.toSignInCredentials())
     }

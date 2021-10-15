@@ -21,12 +21,7 @@ kotlin {
                 api(asoft("expect-coroutines", vers.asoft.expect))
                 api(project(":bitframe-authentication-dao-inmemory"))
                 api(project(":pi-monitor-test-testing"))
-            }
-        }
-
-        val jvmMain by getting {
-            dependencies {
-
+                api(project(":bitframe-events-inmemory"))
             }
         }
     }

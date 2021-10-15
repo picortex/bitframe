@@ -7,6 +7,7 @@ import bitframe.authentication.signin.SignInFormFields
 import bitframe.authentication.signin.legacy.SignInIntent.ShowForm
 import bitframe.authentication.signin.legacy.SignInIntent.Submit
 import bitframe.authentication.signin.legacy.SignInViewModel
+import bitframe.events.InMemoryEventBus
 import expect.expect
 import expect.toBe
 import kotlinx.coroutines.runTest
@@ -15,7 +16,8 @@ import kotlin.test.Test
 import bitframe.authentication.signin.legacy.SignInState as State
 
 class SignInViewModelTest {
-    private val service = BitframeTestClientImpl(TestClientConfiguration.of("app-id"))
+    val bus = InMemoryEventBus()
+    private val service = BitframeTestClientImpl(bus, TestClientConfiguration.of("app-id"))
     private val vm = SignInViewModel(service.signIn)
 
     @Test

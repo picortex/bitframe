@@ -3,6 +3,7 @@ package bitframe
 import bitframe.authentication.TestClientConfiguration
 import bitframe.authentication.signin.SignInService
 import bitframe.authentication.users.UsersService
+import bitframe.events.EventBus
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -14,18 +15,19 @@ interface BitframeTestClient : BitframeService {
 
         @JvmSynthetic
         operator fun invoke(
-            configuration: TestClientConfiguration = CONFIGURATION
+            configuration: TestClientConfiguration = CONFIGURATION,
+            bus: EventBus
         ): BitframeTestClient = cachedClients.getOrPut(configuration.appId) {
-            BitframeTestClientImpl(configuration)
+            BitframeTestClientImpl(bus, configuration)
         }
 
         @JvmStatic
-        fun with(configuration: TestClientConfiguration) = invoke(configuration)
+        fun with(configuration: TestClientConfiguration, bus: EventBus) = invoke(configuration, bus)
 
         @JvmStatic
-        fun getDefault() = invoke(CONFIGURATION)
+        fun getDefault(bus: EventBus) = invoke(CONFIGURATION, bus)
     }
 
-    override val signIn: SignInService<*>
+    override val signIn: SignInService
     override val users: UsersService
 }

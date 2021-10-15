@@ -1,5 +1,6 @@
 package integration.authentication
 
+import bitframe.events.InMemoryEventBus
 import bitframe.server.InMemoryDaoProvider
 import bitframe.server.data.DAOProvider
 import bitframe.server.modules.authentication.AuthenticationControllerImpl
@@ -14,6 +15,8 @@ internal val SERVICE_CONFIG = ServiceConfig(
     "server-app"
 )
 
-internal val AUTHENTICATION_SERVICE_UNDER_TEST = AuthenticationServiceImpl(DAO_PROVIDER_UNDER_TEST, SERVICE_CONFIG)
+internal val BUS = InMemoryEventBus()
+
+internal val AUTHENTICATION_SERVICE_UNDER_TEST = AuthenticationServiceImpl(DAO_PROVIDER_UNDER_TEST, SERVICE_CONFIG, BUS)
 
 internal val AUTHENTICATION_CONTROLLER_UNDER_TEST = AuthenticationControllerImpl(AUTHENTICATION_SERVICE_UNDER_TEST)

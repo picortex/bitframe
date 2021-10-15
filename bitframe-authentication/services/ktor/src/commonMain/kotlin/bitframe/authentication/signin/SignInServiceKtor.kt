@@ -1,8 +1,6 @@
 package bitframe.authentication.signin
 
-import bitframe.authentication.apps.App
-import bitframe.authentication.spaces.Space
-import bitframe.authentication.users.User
+import bitframe.events.EventBus
 import bitframe.response.response.decodeResponseFromString
 import bitframe.service.MiniService
 import bitframe.service.config.KtorClientConfiguration
@@ -13,13 +11,13 @@ import io.ktor.client.statement.*
 import kotlinx.serialization.json.Json
 import later.Later
 import later.later
-import kotlin.jvm.JvmOverloads
 
 open class SignInServiceKtor(
-    override val config: KtorClientConfiguration
-) : SignInService<Nothing?>(), MiniService {
-    protected val path get() = config.url + "/api/authentication/sign-in"
-    protected val http get() = config.http
+    override val config: KtorClientConfiguration,
+    override val bus: EventBus
+) : SignInService(bus, config), MiniService {
+    private val path get() = config.url + "/api/authentication/sign-in"
+    private val http get() = config.http
     override fun executeSignIn(credentials: SignInCredentials): Later<LoginConundrum> = scope.later {
         val resp = try {
             http.post(path) { body = JsonContent(credentials) }
@@ -27,9 +25,5 @@ open class SignInServiceKtor(
             exp.response
         }
         Json.decodeResponseFromString(LoginConundrum.serializer(), resp.readText()).response()
-    }
-
-    override fun makeSession(app: App, space: Space, user: User) = scope.later {
-        Session.SignedIn(app, space, user, null)
     }
 }

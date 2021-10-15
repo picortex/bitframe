@@ -3,6 +3,8 @@
 
 package pimonitor.authentication.signup.exports
 
+import bitframe.authentication.signin.Session
+import bitframe.authentication.signin.SignInService
 import pimonitor.PiMonitorService
 import pimonitor.authentication.signup.SignUpResult
 import pimonitor.authentication.signup.SignUpService
@@ -12,9 +14,11 @@ import viewmodel.ViewModel
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
-class SignUpScope(val service: SignUpService) : SignUpServiceWrapper(service) {
+class SignUpScope(
+    private val service: PiMonitorService
+) : SignUpServiceWrapper(service.signUp) {
 
-    val viewModel: ViewModel<Intent, State> = SignUpViewModel(service)
+    val viewModel: ViewModel<Intent, State> = SignUpViewModel(service.signUp, service.signIn)
 
     val registerAsIndividual = {
         viewModel.post(Intent.SelectRegisterAsIndividual)
@@ -34,5 +38,9 @@ class SignUpScope(val service: SignUpService) : SignUpServiceWrapper(service) {
 
     val useSignUpEvent: (callback: (SignUpResult) -> Unit) -> Unit = {
         useEventHandler(service.bus, SignUpService.SIGN_UP_EVENT_ID, it)
+    }
+
+    val useSignInEvent: (callback: (Session.SignedIn) -> Unit) -> Unit = {
+        useEventHandler(service.bus, SignInService.SIGN_IN_EVENT_ID, it)
     }
 }

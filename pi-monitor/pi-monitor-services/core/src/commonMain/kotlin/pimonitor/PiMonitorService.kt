@@ -14,7 +14,7 @@ import kotlin.js.JsExport
 
 abstract class PiMonitorService(
     override val users: UsersService,
-    override val signIn: SignInService<*>,
+    override val signIn: SignInService,
     val signUp: SignUpService,
     val monitors: MonitorsService,
     val businesses: BusinessesService,

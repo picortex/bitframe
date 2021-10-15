@@ -7,7 +7,7 @@ import bitframe.authentication.signin.SignInService
 import bitframe.authentication.signin.legacy.SignInIntent
 import bitframe.authentication.signin.legacy.SignInViewModel
 
-class SignInScopeLegacy(service: SignInService<*>) {
+class SignInScopeLegacy(service: SignInService) {
 
     val viewModel by lazy { SignInViewModel(service) }
 
