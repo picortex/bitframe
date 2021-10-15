@@ -10,21 +10,21 @@ import kotlin.js.JsExport
 sealed class Session {
     object Unknown : Session()
 
-    class SignedIn(
+    data class SignedIn(
         val app: App,
         val space: Space,
-        val user: User,
+        val user: User
     ) : Session()
 
-    class Conundrum(
+    data class Conundrum(
         val app: App,
         val spaces: List<Space>,
         val user: User
     ) : Session()
 
-    class SignedOut(
+    data class SignedOut(
         val app: App,
         val space: Space?,
-        val user: User?,
+        val user: User?
     ) : Session()
 }

@@ -7,8 +7,10 @@ import bitframe.authentication.spaces.Space
 import bitframe.authentication.spaces.SpacesDao
 import bitframe.authentication.spaces.SpacesDaoInMemory
 import bitframe.authentication.users.*
+import bitframe.events.EventBus
 
 open class BitframeTestClientImpl(
+    private val bus: EventBus,
     private val config: TestClientConfiguration,
     usersDao: UsersDao = UsersDaoInMemory(config = config.toDaoConfig(), users = testUsers()),
     spacesDao: SpacesDao = SpacesDaoInMemory(config = config.toDaoConfig(), spaces = testSpaces())
@@ -45,6 +47,6 @@ open class BitframeTestClientImpl(
         )
     }
 
-    override val signIn: SignInService = SignInServiceImpl(usersDao, spacesDao, config)
+    override val signIn: SignInService = SignInServiceImpl(usersDao, spacesDao, config, bus)
     override val users: UsersService = UsersServiceImpl(usersDao, spacesDao, config)
 }

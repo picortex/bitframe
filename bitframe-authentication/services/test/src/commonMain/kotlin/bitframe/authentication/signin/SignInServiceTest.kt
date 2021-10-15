@@ -1,8 +1,7 @@
 package bitframe.authentication.signin
 
 import bitframe.authentication.InMemoryAuthenticationDaoProvider
-import bitframe.authentication.spaces.SpacesDaoInMemory
-import bitframe.authentication.users.UsersDaoInMemory
+import bitframe.events.InMemoryEventBus
 import bitframe.service.config.KtorClientConfiguration
 import expect.expect
 import expect.expectFailure
@@ -19,9 +18,10 @@ import kotlin.test.Test
 open class SignInServiceTest : IntegrationTest() {
     val provider = InMemoryAuthenticationDaoProvider()
     open val service: SignInService by lazy {
+        val bus = InMemoryEventBus()
         when (val cfg = config) {
-            is KtorClientConfiguration -> SignInServiceKtor(cfg)
-            else -> SignInServiceImpl(provider, cfg)
+            is KtorClientConfiguration -> SignInServiceKtor(cfg, bus)
+            else -> SignInServiceImpl(provider, cfg, bus)
         }
     }
 

@@ -1,3 +1,20 @@
+# 0.0.30
+
+## PiMonitor Client SDK Core
+
+- [[PM121]](https://github.com/picortex/bitframe/issues/121) Persist the currently logged in Monitor
+- [[PM142]](https://github.com/picortex/bitframe/issues/142) Refactor SignUpService to just use one method for signing up
+- [[PM123]](https://github.com/picortex/bitframe/issues/123) Moved the sing in/up event into the event bus
+- [[PM151]](https://github.com/picortex/bitframe/issues/151) Automatically sign in user after registration
+
+## Bitframe
+
+- [[BF143]](https://github.com/picortex/bitframe/issues/143) Response is not properly returning the cause of an error
+
+## Bitframe Server
+
+- [[BF144]](https://github.com/picortex/bitframe/issues/144) Fix Cross Origin Resource Sharing Issue
+
 # 0.0.29
 
 ## PiMonitor Client SDK Core

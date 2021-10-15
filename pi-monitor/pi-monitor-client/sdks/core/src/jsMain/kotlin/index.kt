@@ -2,9 +2,11 @@
 @file:JsExport
 
 import bitframe.authentication.signin.exports.SignInServiceWrapper
+import bitframe.service.config.KtorClientConfiguration
 import logging.ConsoleAppender
 import logging.Logging
 import pimonitor.PiMonitorService
+import pimonitor.PiMonitorServiceKtor
 import pimonitor.PiMonitorServiceStub
 import pimonitor.StubServiceConfig
 import pimonitor.authentication.signup.exports.SignUpServiceWrapper
@@ -12,6 +14,7 @@ import pimonitor.evaluation.business.exports.BusinessesServiceWrapper
 
 external interface ServiceConfiguration {
     var appId: String
+    var url: String?
     var simulationTime: Int?
     var disableViewModelLogs: Boolean?
 }
@@ -23,11 +26,13 @@ fun client(config: ServiceConfiguration): PiMonitorService {
         Logging.init(ConsoleAppender())
         isLoggingEnabled = true
     }
-    return PiMonitorServiceStub(
-        StubServiceConfig(
-            appId = config.appId,
-            simulationTime = config.simulationTime?.toLong() ?: 2000L
-        )
+    val url = config.url
+    val appId = config.appId
+    val simulationTime = config.simulationTime?.toLong() ?: 2000L
+    return if (url == null) PiMonitorServiceStub(
+        StubServiceConfig(appId, simulationTime)
+    ) else PiMonitorServiceKtor(
+        KtorClientConfiguration(url, appId)
     )
 }
 

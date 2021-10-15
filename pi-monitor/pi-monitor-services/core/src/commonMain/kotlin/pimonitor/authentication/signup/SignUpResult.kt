@@ -10,7 +10,7 @@ import pimonitor.monitors.Monitor
 import kotlin.js.JsExport
 
 @Serializable
-class SignUpResult(
+data class SignUpResult(
     val app: App,
     val space: Space,
     val user: User,

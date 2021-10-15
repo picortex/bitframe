@@ -3,6 +3,7 @@ package unit.authentication.signin
 import bitframe.BitframeTestClientImpl
 import bitframe.authentication.TestClientConfiguration
 import bitframe.authentication.signin.*
+import bitframe.events.InMemoryEventBus
 import bitframe.presenters.feedbacks.FormFeedback.Loading
 import bitframe.presenters.feedbacks.FormFeedback.Success
 import expect.expect
@@ -12,7 +13,8 @@ import viewmodel.expect
 import kotlin.test.Test
 
 class SignInViewModelTest {
-    private val service = BitframeTestClientImpl(TestClientConfiguration.of("app-id"))
+    val bus = InMemoryEventBus()
+    private val service = BitframeTestClientImpl(bus, TestClientConfiguration.of("app-id"))
     private val vm = SignInViewModel(service.signIn)
 
     @Test

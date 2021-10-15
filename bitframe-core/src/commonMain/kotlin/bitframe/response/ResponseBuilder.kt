@@ -23,6 +23,8 @@ class ResponseBuilder<D, I> {
 
     fun badRequest(message: String): Nothing = reject(HttpStatusCode.BadRequest, Throwable(message))
 
+    fun reject(message: String): Nothing = badRequest(message)
+
     fun reject(code: HttpStatusCode, message: String): Nothing {
         val throwable = Throwable(message)
         failure = responseOf(Status(code), throwable)

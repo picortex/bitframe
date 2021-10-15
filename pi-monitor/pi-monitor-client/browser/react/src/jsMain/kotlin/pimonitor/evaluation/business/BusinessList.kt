@@ -1,17 +1,17 @@
 package pimonitor.evaluation.business
 
-import pimonitor.Monitor
+import pimonitor.monitored.MonitoredBusiness
 import react.RBuilder
 import reakt.*
 
 internal fun RBuilder.BusinessList(
-    data: List<Monitor.Business>
+    data: List<MonitoredBusiness>
 ) = ReactTable(
     data,
     columns = listOf(
         Column("name") { it.name },
-        Column("email") { it.email.value },
-        Column("contact") { it.name },
+        Column("email") { it.contacts.first().email.value },
+        Column("contact") { it.contacts.first().name },
         RenderColumn("actions") {
             Grid(cols = "1fr 1fr") {
                 ContainedButton("View") {}

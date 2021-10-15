@@ -7,6 +7,7 @@ import bitframe.authentication.signin.SignInServiceKtor
 import bitframe.authentication.signin.SignInServiceTest
 import bitframe.authentication.spaces.SpacesDaoInMemory
 import bitframe.authentication.users.UsersDaoInMemory
+import bitframe.events.InMemoryEventBus
 import bitframe.service.config.KtorClientConfiguration
 import bitframe.service.config.ServiceConfig
 import expect.expect
@@ -16,7 +17,11 @@ import kotlin.test.Test
 
 class SignInServiceUnitTest : SignInServiceTest() {
     override val service: SignInService by lazy {
-        SignInServiceImpl(InMemoryAuthenticationDaoProvider(), ServiceConfig(APP_ID))
+        SignInServiceImpl(
+            provider = InMemoryAuthenticationDaoProvider(),
+            config = ServiceConfig(APP_ID),
+            bus = InMemoryEventBus()
+        )
     }
 
     @Test

@@ -20,7 +20,14 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 api(project(":bitframe-client-sdk-test"))
+                api(project(":bitframe-events-inmemory"))
                 api(asoft("viewmodel-test-expect", vers.asoft.viewmodel))
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+                api(project(":bitframe-events-react"))
             }
         }
     }

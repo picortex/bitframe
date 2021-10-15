@@ -1,5 +1,6 @@
 package pimonitor.authentication.signup
 
+import bitframe.authentication.signin.SignInService
 import bitframe.presenters.feedbacks.FormFeedback.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -8,28 +9,31 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import pimonitor.monitors.toCredentials
 import viewmodel.ViewModel
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
 class SignUpViewModel(
-    val service: SignUpService
+    val signUpService: SignUpService,
+    val signInService: SignInService
 ) : ViewModel<Intent, State>(State.IndividualForm(IndividualFormFields(), null)) {
     val recoveryTime = 3000L
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
-        is Intent.SelectRegisterAsIndividual -> selectRegisterAsIndividual(i)
-        is Intent.SelectRegisterAsBusiness -> selectRegisterAsBusiness(i)
-        is Intent.Submit.IndividualForm -> submitForm(i)
-        is Intent.Submit.BusinessForm -> submitForm(i)
+        Intent.SelectRegisterAsIndividual -> selectRegisterAsIndividual()
+        Intent.SelectRegisterAsBusiness -> selectRegisterAsBusiness()
+        is Intent.Submit -> submitForm(i)
     }
 
     private fun CoroutineScope.submitForm(i: Intent.Submit) = launch {
         val state = ui.value
         flow {
             emit(state.copy(i, Loading("Creating your account, please wait . . .")))
-            service.signUp(i.params).await()
-            emit(state.copy(i, Success("Your registration completed successfully")))
+            signUpService.signUp(i.params).await()
+            emit(state.copy(i, Loading("Success. Signing you in, please wait . . .")))
+            signInService.signIn(i.params.toCredentials()).await()
+            emit(state.copy(i, Success("Successfully signed in")))
         }.catch {
             emit(state.copy(i, Failure(it, "Failed to create your account")))
             delay(recoveryTime)
@@ -39,11 +43,11 @@ class SignUpViewModel(
         }
     }
 
-    private fun selectRegisterAsIndividual(i: Intent.SelectRegisterAsIndividual) {
+    private fun selectRegisterAsIndividual() {
         ui.value = State.IndividualForm(IndividualFormFields(), null)
     }
 
-    private fun selectRegisterAsBusiness(i: Intent.SelectRegisterAsBusiness) {
+    private fun selectRegisterAsBusiness() {
         ui.value = State.BusinessForm(BusinessFormFields(), null)
     }
 }

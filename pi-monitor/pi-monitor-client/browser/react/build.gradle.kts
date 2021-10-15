@@ -99,8 +99,6 @@ val jvmTest by tasks.getting(Test::class) {
     )
     if (System.getenv("TEST_MODE") == "CI") {
         dependsOn(":pi-monitor-server:createDockerfile")
-//        val bin = System.getenv("CHROME_BIN") ?: "/usr/local/share/chrome_driver"
-//        props["selenide.browserBinary"] = "/usr/bin/google-chrome"
     }
     systemProperties(props)
     testLogging {

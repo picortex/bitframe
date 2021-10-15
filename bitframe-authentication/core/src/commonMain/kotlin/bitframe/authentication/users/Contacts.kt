@@ -122,15 +122,24 @@ sealed class Contacts {
         }
     }
 
+    /**
+     * Returns a [Set] of all contacts in their string representation
+     */
+    fun mapEachToString() = when (this) {
+        None -> emptySet()
+        is Email -> setOf(email.value)
+        is Emails -> emails.map { it.value }.toSet()
+        is Phone -> setOf(phone.value)
+        is Phones -> phones.map { it.value }.toSet()
+        is EmailPhone -> setOf(email.value, phone.value)
+        is Mixed -> (emails.map { it.value } + phones.map { it.value }).toSet()
+    }
+
+    @Deprecated("In favour of mapToString().first())", replaceWith = ReplaceWith("mapToString().first()"))
     fun firstValue() = firstValueOrNull() ?: throw RuntimeException("There are no Contacts inside the contacts container")
 
-    fun firstValueOrNull() = when (this) {
-        None -> null
-        is Email -> email.value
-        is Emails -> emails.firstOrNull()?.value
-        is Phone -> phone.value
-        is Phones -> phones.firstOrNull()?.value
-        is EmailPhone -> email.value
-        is Mixed -> emails.firstOrNull()?.value
-    }
+    @Deprecated("In favour of mapToString().firstOrNull()", replaceWith = ReplaceWith("mapToString().firstOrNull()"))
+    fun firstValueOrNull() = mapEachToString().firstOrNull()
+
+    fun contains(value: String) = mapEachToString().contains(value.lowercase())
 }
