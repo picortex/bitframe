@@ -10,10 +10,10 @@ import react.router.dom.route
 import react.router.dom.switch
 import styled.styledDiv
 
-internal const val SignInPageRoute = "/authentication/sign-in/"
-internal const val SignUpPageRoute = "/authentication/sign-up/"
-internal const val PanelPageRoute = "/panel"
-internal const val HomeRoute = "/"
+const val SignInPageRoute = "/authentication/sign-in/"
+const val SignUpPageRoute = "/authentication/sign-up/"
+const val PanelPageRoute = "/panel"
+const val HomeRoute = "/"
 
 private fun defaultRenderers(
     client: BitframeService,

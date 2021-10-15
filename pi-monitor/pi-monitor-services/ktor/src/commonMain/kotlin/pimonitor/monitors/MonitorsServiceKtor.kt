@@ -7,7 +7,7 @@ import later.Later
 import live.Live
 
 class MonitorsServiceKtor(
-    override val signInSession: Live<Session<Nothing?>>,
+    override val signInSession: Live<Session>,
     override val config: ServiceConfig
 ) : MonitorsService(signInSession, config) {
     init {

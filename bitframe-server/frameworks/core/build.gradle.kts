@@ -28,6 +28,7 @@ kotlin {
             dependencies {
                 implementation(project(":bitframe-server-framework-test"))
                 implementation(project(":bitframe-server-dao-inmemory"))
+                implementation(project(":bitframe-events-inmemory"))
                 implementation(kotlinx("serialization-core", vers.kotlinx.serialization))
             }
         }

@@ -2,6 +2,7 @@ package pimonitor.authentication.signup
 
 import bitframe.authentication.apps.App
 import bitframe.authentication.users.UsersService
+import bitframe.events.EventBus
 import bitframe.service.config.ServiceConfig
 import later.Later
 import later.await
@@ -14,13 +15,10 @@ import pimonitor.monitors.toRegisterUserParams
 class SignUpServiceImpl(
     private val dao: MonitorDao,
     private val usersService: UsersService,
-    private val config: ServiceConfig
-) : SignUpService() {
-
-    private val scope = config.scope
-
-    override fun signUp(params: SignUpParams): Later<SignUpResult> = scope.later {
-        validate(params)
+    override val bus: EventBus,
+    override val config: ServiceConfig
+) : SignUpService(bus, config) {
+    override fun executeSignUp(params: SignUpParams): Later<SignUpResult> = scope.later {
         val register = when (params) {
             is SignUpParams.Individual -> usersService.register(params.toRegisterUserParams())
             is SignUpParams.Business -> usersService.registerWithSpace(

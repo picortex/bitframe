@@ -5,15 +5,17 @@ import bitframe.authentication.signin.SignInService
 import bitframe.authentication.signin.SignInServiceImpl
 import bitframe.authentication.signin.SignInServiceKtor
 import bitframe.authentication.signin.SignInServiceTest
+import bitframe.events.InMemoryEventBus
 import bitframe.service.config.KtorClientConfiguration
 import expect.expect
 import kotlin.test.Test
 
 class SignInServiceIntegrationTest : SignInServiceTest() {
-    override val service: SignInService<*> by lazy {
+    override val service: SignInService by lazy {
+        val bus = InMemoryEventBus()
         when (val cfg = config) {
-            is KtorClientConfiguration -> SignInServiceKtor(cfg)
-            else -> SignInServiceImpl(InMemoryAuthenticationDaoProvider(), cfg)
+            is KtorClientConfiguration -> SignInServiceKtor(cfg, bus)
+            else -> SignInServiceImpl(InMemoryAuthenticationDaoProvider(), cfg, bus)
         }
     }
 

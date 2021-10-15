@@ -1,5 +1,6 @@
 package pimonitor.authentication.signup
 
+import bitframe.events.EventBus
 import bitframe.response.response.decodeResponseFromString
 import bitframe.service.MiniService
 import bitframe.service.config.KtorClientConfiguration
@@ -13,14 +14,13 @@ import later.later
 import pimonitor.monitors.SignUpParams
 
 class SignUpServiceKtor(
+    override val bus: EventBus,
     override val config: KtorClientConfiguration
-) : SignUpService(), MiniService {
+) : SignUpService(bus, config), MiniService {
     private val client = config.http
-    private val scope = config.scope
     private val baseUrl = "${config.url}/api/authentication"
 
-    override fun signUp(params: SignUpParams): Later<SignUpResult> = scope.later {
-        validate(params)
+    override fun executeSignUp(params: SignUpParams): Later<SignUpResult> = scope.later {
         val resp = try {
             client.post("$baseUrl/sign-up") { body = JsonContent(params) }
         } catch (err: ClientRequestException) {

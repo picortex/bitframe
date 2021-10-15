@@ -122,7 +122,10 @@ sealed class Contacts {
         }
     }
 
-    fun all() = when (this) {
+    /**
+     * Returns a [Set] of all contacts in their string representation
+     */
+    fun mapEachToString() = when (this) {
         None -> emptySet()
         is Email -> setOf(email.value)
         is Emails -> emails.map { it.value }.toSet()
@@ -132,11 +135,11 @@ sealed class Contacts {
         is Mixed -> (emails.map { it.value } + phones.map { it.value }).toSet()
     }
 
-    @Deprecated("In favour of all().first())", replaceWith = ReplaceWith("all().first()"))
+    @Deprecated("In favour of mapToString().first())", replaceWith = ReplaceWith("mapToString().first()"))
     fun firstValue() = firstValueOrNull() ?: throw RuntimeException("There are no Contacts inside the contacts container")
 
-    @Deprecated("In favour of all().firstOrNull()", replaceWith = ReplaceWith("all().firstOrNull()"))
-    fun firstValueOrNull() = all().firstOrNull()
+    @Deprecated("In favour of mapToString().firstOrNull()", replaceWith = ReplaceWith("mapToString().firstOrNull()"))
+    fun firstValueOrNull() = mapEachToString().firstOrNull()
 
-    fun contains(value: String) = all().contains(value.lowercase())
+    fun contains(value: String) = mapEachToString().contains(value.lowercase())
 }

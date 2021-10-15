@@ -12,7 +12,7 @@ import kotlin.js.JsExport
 import bitframe.authentication.signin.Session as SignInSession
 
 abstract class MonitorsService(
-    open val signInSession: Live<SignInSession<Nothing?>>,
+    open val signInSession: Live<SignInSession>,
     open val config: ServiceConfig
 ) {
     val session: Live<Session> = Live(Session.Unknown)

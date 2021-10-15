@@ -40,6 +40,6 @@ abstract class SignUpServiceTest : IntegrationTest() {
         expect(singInConundrum.spaces).toBeOfSize(1)
 
         // Their user tag should equal their username
-        expect(email).toBe(result.user.contacts.firstValue())
+        expect(email).toBe(result.user.contacts.mapEachToString().first())
     }
 }

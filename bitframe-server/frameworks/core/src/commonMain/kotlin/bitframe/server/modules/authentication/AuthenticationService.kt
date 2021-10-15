@@ -5,5 +5,5 @@ import bitframe.authentication.users.UsersService
 
 interface AuthenticationService {
     val users: UsersService
-    val signIn: SignInService<*>
+    val signIn: SignInService
 }

@@ -7,26 +7,24 @@ import bitframe.authentication.spaces.Space
 import bitframe.authentication.users.User
 import kotlin.js.JsExport
 
-sealed class Session<out T> {
-    object Unknown : Session<Nothing>()
+sealed class Session {
+    object Unknown : Session()
 
-    data class SignedIn<out T>(
+    data class SignedIn(
         val app: App,
         val space: Space,
-        val user: User,
-        val data: T
-    ) : Session<T>()
+        val user: User
+    ) : Session()
 
     data class Conundrum(
         val app: App,
         val spaces: List<Space>,
         val user: User
-    ) : Session<Nothing>()
+    ) : Session()
 
-    data class SignedOut<out T>(
+    data class SignedOut(
         val app: App,
         val space: Space?,
-        val user: User?,
-        val data: T?
-    ) : Session<T>()
+        val user: User?
+    ) : Session()
 }
