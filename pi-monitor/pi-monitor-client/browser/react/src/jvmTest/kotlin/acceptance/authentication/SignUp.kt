@@ -6,7 +6,7 @@ import acceptance.utils.AcceptanceTest
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.junit.jupiter.Testcontainers
-import pimonitor.monitors.SignUpParams
+import pimonitor.authentication.signup.SignUpParams
 import pimonitor.test
 import kotlin.test.Test
 

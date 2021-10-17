@@ -1,6 +1,6 @@
 package pimonitor.screens.authentication
 
-import pimonitor.monitors.SignUpParams
+import pimonitor.authentication.signup.SignUpParams
 import pimonitor.screens.api.Screen
 
 interface SignUpScreen : Screen {
