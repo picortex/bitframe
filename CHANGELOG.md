@@ -1,3 +1,9 @@
+# 0.0.31
+
+## PiMonitor Client SDK Core
+
+- [[PM124]](https://github.com/picortex/bitframe/issues/124) Removed onUserLoggedIn method from SignInViewModel
+
 # 0.0.30
 
 ## PiMonitor Client SDK Core

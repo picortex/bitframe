@@ -1,9 +1,5 @@
-@file:JsExport
-
 package bitframe.authentication.signin
 
-import bitframe.authentication.spaces.Space
-import bitframe.authentication.users.User
 import bitframe.presenters.feedbacks.FormFeedback.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -20,18 +16,12 @@ class SignInViewModel(
     private val service: SignInService
 ) : ViewModel<SignInIntent, SignInState>(SignInState(SignInFormFields(), null)) {
 
-    private var loginListener: ((User, Space) -> Unit)? = null
-
     private val recoveryTime = 3000
 
     val console = logger()
 
     override fun CoroutineScope.execute(i: SignInIntent): Any = when (i) {
         is SignInIntent.Submit -> signIn(i)
-    }
-
-    fun onUserLoggedIn(listener: (User, Space) -> Unit) {
-        loginListener = listener
     }
 
     private fun CoroutineScope.signIn(i: SignInIntent.Submit) = launch {
@@ -42,12 +32,8 @@ class SignInViewModel(
             if (conundrum.spaces.size > 1) {
                 console.warn("User has more than one Space, ")
                 emit(state.copy(status = Success("Logged in successfully")))
-                loginListener?.invoke(conundrum.user, conundrum.spaces.first())
             } else {
-                val user = conundrum.user
-                val account = conundrum.spaces.first()
                 emit(state.copy(status = Success("Logged in successfully")))
-                loginListener?.invoke(user, account)
             }
         }.catch {
             emit(state.copy(status = Failure(it)))
