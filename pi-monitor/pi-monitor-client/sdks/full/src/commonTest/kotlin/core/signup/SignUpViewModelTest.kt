@@ -4,7 +4,6 @@ import bitframe.presenters.feedbacks.FormFeedback.*
 import kotlinx.coroutines.runTest
 import pimonitor.PiMonitorService
 import pimonitor.authentication.signup.*
-import pimonitor.monitors.SignUpParams
 import testing.IntegrationTest
 import testing.annotations.Lifecycle
 import testing.annotations.TestInstance

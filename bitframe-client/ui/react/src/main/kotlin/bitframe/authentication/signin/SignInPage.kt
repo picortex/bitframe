@@ -19,12 +19,12 @@ private external interface SignInPageProps : Props {
 }
 
 private val SignInPage = fc<SignInPageProps> { props ->
-    val viewModel = props.scope.viewModel
+    val scope = props.scope
+    val viewModel = scope.viewModel
+    val useSignInEvent = scope.useSignInEvent
     val ui = useViewModelState(viewModel)
-    useEffectOnce {
-        viewModel.onUserLoggedIn { _, _ ->
-            props.history.push("/panel")
-        }
+    useSignInEvent {
+        props.history.push("/panel")
     }
 
     styledDiv {

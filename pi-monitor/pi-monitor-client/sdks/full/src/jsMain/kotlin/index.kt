@@ -14,4 +14,4 @@ fun signIn(service: PiMonitorService) = SignInScope(service.signIn)
 
 fun signUp(service: PiMonitorService) = SignUpScope(service)
 
-fun business(service: PiMonitorService) = BusinessesScope(service.businesses)
+fun business(service: PiMonitorService) = BusinessesScope(service)

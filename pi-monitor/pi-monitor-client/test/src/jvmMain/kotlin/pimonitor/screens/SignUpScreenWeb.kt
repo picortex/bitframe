@@ -4,7 +4,7 @@ import com.codeborne.selenide.Selectors.byAttribute
 import com.codeborne.selenide.Selectors.withText
 import com.codeborne.selenide.SelenideElement
 import org.openqa.selenium.By
-import pimonitor.monitors.SignUpParams
+import pimonitor.authentication.signup.SignUpParams
 import pimonitor.screens.authentication.SignUpScreen
 import pimonitor.utils.isVisible
 import kotlin.properties.ReadOnlyProperty

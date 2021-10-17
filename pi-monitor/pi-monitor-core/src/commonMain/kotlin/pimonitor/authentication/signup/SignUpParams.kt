@@ -1,4 +1,4 @@
-package pimonitor.monitors
+package pimonitor.authentication.signup
 
 import kotlinx.serialization.Serializable
 

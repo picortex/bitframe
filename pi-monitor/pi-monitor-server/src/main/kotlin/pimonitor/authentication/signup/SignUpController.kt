@@ -9,13 +9,11 @@ import bitframe.server.http.toHttpResponse
 import bitframe.service.config.ServiceConfig
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
 import io.ktor.http.HttpStatusCode.Companion.Created
-import io.ktor.http.HttpStatusCode.Companion.InternalServerError
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import later.await
 import pimonitor.monitors.MonitorDao
-import pimonitor.monitors.SignUpParams
 
 private val json = Json {
     encodeDefaults = true

@@ -5,8 +5,6 @@ import kotlinx.coroutines.runTest
 import kotlinx.datetime.Clock
 import later.await
 import pimonitor.PiMonitorService
-import pimonitor.monitors.SignUpParams
-import pimonitor.monitors.toCredentials
 import testing.IntegrationTest
 import testing.annotations.Lifecycle
 import testing.annotations.TestInstance

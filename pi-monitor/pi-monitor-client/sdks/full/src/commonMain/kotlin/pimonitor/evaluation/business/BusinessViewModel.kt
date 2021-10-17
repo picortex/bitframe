@@ -1,5 +1,3 @@
-@file:JsExport
-
 package pimonitor.evaluation.business
 
 import kotlinx.coroutines.CoroutineScope
@@ -8,17 +6,17 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import viewmodel.ViewModel
-import kotlin.js.JsExport
-import pimonitor.evaluation.business.BusinessesIntent.*
+import pimonitor.evaluation.business.BusinessesIntent.LoadBusinesses
+import pimonitor.evaluation.business.BusinessesIntent.ShowBusinessForm
 import pimonitor.evaluation.businesses.BusinessesService
+import viewmodel.ViewModel
 import pimonitor.evaluation.business.BusinessesIntent as Intent
 import pimonitor.evaluation.business.BusinessesState as State
 
 class BusinessViewModel(
     val service: BusinessesService
 ) : ViewModel<Intent, State>(State.Loading("Loading business")) {
-    override fun CoroutineScope.execute(i: Intent) :Any = when (i) {
+    override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         LoadBusinesses -> loadBusiness()
         ShowBusinessForm -> ui.value = State.BusinessForm()
     }
