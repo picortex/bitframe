@@ -33,13 +33,11 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
             if (state.data.isEmpty()) EmptyBusiness()
             else BusinessList(state.data)
         }
-        is BusinessesState.BusinessForm -> styledDiv {
-            +"Creating form, just wait and see"
-        }
+        is BusinessesState.BusinessForm -> AddBusiness(scope.service)
         is BusinessesState.Success -> SuccessBox(state.message)
     }
 }
 
 fun RBuilder.BusinessContainer(service: PiMonitorService) = child(BusinessContainer) {
-    attrs.scope = BusinessesScope(service.businesses)
+    attrs.scope = BusinessesScope(service)
 }

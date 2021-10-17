@@ -2,12 +2,6 @@
 
 package pimonitor.authentication.signup.exports
 
-@Deprecated("In favour of RegisterBusinessParams")
-external interface RegisterOrganisationParams {
-    var name: String
-    var email: String
-}
-
 external interface RegisterIndividualParams {
     var name: String
     var email: String

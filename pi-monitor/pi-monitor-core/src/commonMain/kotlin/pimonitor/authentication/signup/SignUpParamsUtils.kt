@@ -1,4 +1,4 @@
-package pimonitor.monitors
+package pimonitor.authentication.signup
 
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.spaces.RegisterSpaceParams
