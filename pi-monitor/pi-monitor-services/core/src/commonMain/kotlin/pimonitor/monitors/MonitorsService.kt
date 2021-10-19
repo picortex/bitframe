@@ -26,5 +26,6 @@ abstract class MonitorsService(
         }
     }
 
+    abstract fun load(uid: String): Later<Monitor?>
     abstract fun monitor(with: UserRef): Later<Monitor>
 }

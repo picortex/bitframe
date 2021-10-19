@@ -14,6 +14,10 @@ class MonitorsServiceKtor(
         watchSignInSession()
     }
 
+    override fun load(uid: String): Later<Monitor?> {
+        TODO("Not yet implemented")
+    }
+
     override fun monitor(with: UserRef): Later<Monitor> {
         TODO("Not yet implemented")
     }
