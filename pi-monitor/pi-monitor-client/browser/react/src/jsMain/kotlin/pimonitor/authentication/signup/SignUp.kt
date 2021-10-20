@@ -52,11 +52,12 @@ private val SignUp = fc<SignUpProps> { props ->
 
             DropDown(
                 name = "registrationType",
-                value = state.select.options.first { it.selected }.value,
+                value = state.select.selected?.value,
                 options = state.select.options.map { it.value },
                 onChange = {
+                    console.log(it)
                     when (it) {
-                        "Register as Business" -> scope.registerAsBusiness()
+                        "" -> scope.registerAsBusiness()
                         "Register as Individual" -> scope.registerAsIndividual()
                     }
                 }

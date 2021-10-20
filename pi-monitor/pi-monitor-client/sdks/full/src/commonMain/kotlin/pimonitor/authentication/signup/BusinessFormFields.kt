@@ -11,7 +11,6 @@ import kotlin.js.JsExport
 data class BusinessFormFields(
     val title: String = "Create Your Account",
     val select: DropDownInputField = DropDownInputField(
-        Option("Select account type"),
         Option("Register as Business", selected = true),
         Option("Register as Individual")
     ),

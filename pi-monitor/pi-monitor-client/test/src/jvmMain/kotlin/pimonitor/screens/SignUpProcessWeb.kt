@@ -1,6 +1,5 @@
 package pimonitor.screens
 
-import com.codeborne.selenide.Selectors
 import com.codeborne.selenide.Selectors.withText
 import pimonitor.screens.authentication.SignUpProcess
 import pimonitor.screens.dashboard.DashboardScreen

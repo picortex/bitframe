@@ -19,12 +19,6 @@ import pimonitor.test
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SignIn : AcceptanceTest() {
 
-    @Test
-    fun should_be_able_to_just_open_the_application() = application.test {
-        val landingScreen = openLandingScreen()
-        expect(landingScreen).toBeVisible()
-    }
-
     @Nested
     inner class `When users with valid credentials attempts to login` {
         @Test

@@ -28,7 +28,7 @@ class SignUpScreenWeb : SignUpScreen {
     }
 
     private fun signUp(params: SignUpParams.Business): SignUpProcess {
-        select.selectOption(1)
+        select.selectOption(0)
 
         val businessName by name()
         val individualName by name()
