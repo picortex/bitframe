@@ -10,6 +10,7 @@ import kotlinx.extensions.get
 import org.w3c.dom.HTMLDivElement
 import pimonitor.authentication.signup.SignUp
 import pimonitor.evaluation.business.BusinessContainer
+import pimonitor.evaluation.business.InviteBusiness
 import reakt.setContent
 
 fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
@@ -21,10 +22,11 @@ fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
     val version: String by konfig()
     Bitframe(
         client = client,
-        routeRenderers = mapOf(
-            "/authentication/sign-up" to { SignUp(client) }
+        pages = mapOf(
+            "/authentication/sign-up" to { SignUp(client) },
+            "/invite/:uid" to { InviteBusiness(client, it.match.params["uid"]) }
         ),
-        moduleRenderers = mapOf(
+        modules = mapOf(
             "/evaluation/business" to { BusinessContainer(client) }
         ),
         version = version

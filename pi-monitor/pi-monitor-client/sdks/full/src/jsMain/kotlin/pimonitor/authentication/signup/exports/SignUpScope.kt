@@ -16,9 +16,8 @@ import pimonitor.authentication.signup.SignUpState as State
 
 class SignUpScope(
     private val service: PiMonitorService
-) : SignUpServiceWrapper(service.signUp) {
-
-    val viewModel: ViewModel<Intent, State> = SignUpViewModel(service.signUp, service.signIn)
+) {
+    val viewModel: ViewModel<Intent, State> by lazy { SignUpViewModel(service.signUp, service.signIn) }
 
     val registerAsIndividual = {
         viewModel.post(Intent.SelectRegisterAsIndividual)

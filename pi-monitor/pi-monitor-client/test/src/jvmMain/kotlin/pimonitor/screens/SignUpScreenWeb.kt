@@ -1,20 +1,20 @@
 package pimonitor.screens
 
-import com.codeborne.selenide.Selectors.byAttribute
 import com.codeborne.selenide.Selectors.withText
-import com.codeborne.selenide.SelenideElement
 import org.openqa.selenium.By
 import pimonitor.authentication.signup.SignUpParams
+import pimonitor.screens.authentication.SignUpProcess
 import pimonitor.screens.authentication.SignUpScreen
 import pimonitor.utils.isVisible
-import kotlin.properties.ReadOnlyProperty
+import pimonitor.utils.name
+import pimonitor.utils.submit
 import com.codeborne.selenide.Selenide.`$` as S
 
 class SignUpScreenWeb : SignUpScreen {
     val select = S(By.name("registrationType"))
-    private val nextOrSubmitButton = S(byAttribute("type", "submit"))
+    private val nextOrSubmitButton by submit()
 
-    private fun signUp(params: SignUpParams.Individual) {
+    private fun signUp(params: SignUpParams.Individual): SignUpProcess {
         val name by name()
         val email by name()
         val password by name()
@@ -24,14 +24,11 @@ class SignUpScreenWeb : SignUpScreen {
         password.sendKeys(params.password)
 
         nextOrSubmitButton.click()
+        return SignUpProcessWeb()
     }
 
-    fun name() = ReadOnlyProperty<Any?, SelenideElement> { thisRef, property ->
-        S(By.name(property.name))
-    }
-
-    private fun signUp(params: SignUpParams.Business) {
-        select.selectOption(1)
+    private fun signUp(params: SignUpParams.Business): SignUpProcess {
+        select.selectOption(0)
 
         val businessName by name()
         val individualName by name()
@@ -43,11 +40,17 @@ class SignUpScreenWeb : SignUpScreen {
         individualEmail.sendKeys(params.individualEmail)
         password.sendKeys(params.password)
         nextOrSubmitButton.click()
+        return SignUpProcessWeb()
     }
 
     override suspend fun signUp(with: SignUpParams) = when (with) {
         is SignUpParams.Business -> signUp(with)
         is SignUpParams.Individual -> signUp(with)
+    }
+
+    override suspend fun expectToBeSigningUp() {
+        S(withText("Creating your account, please wait . . .")).isVisible()
+        S(withText("Success. signing you in . . .")).isVisible()
     }
 
     private suspend fun expectUserToBeRegistered(waitCounts: Int) {

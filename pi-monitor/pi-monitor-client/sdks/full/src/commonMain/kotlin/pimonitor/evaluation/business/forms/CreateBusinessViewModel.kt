@@ -1,7 +1,5 @@
 package pimonitor.evaluation.business.forms
 
-import bitframe.authentication.users.Contacts
-import bitframe.authentication.users.UserRef
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -32,9 +30,9 @@ class CreateBusinessViewModel(
     private fun CoroutineScope.showInviteForm(uid: String) = launch {
         flow {
             emit(State.Loading("Fetching invite information, please wait . . ."))
-            val monitor = monitorService.monitor(UserRef(uid = uid, name = "", tag = "", contacts = Contacts.None, null)).await()
+            val monitor = monitorService.load(uid).await() ?: throw RuntimeException("Failed to load inviter(uid=$uid) information")
             val fields = InviteBusinessFormFields(monitor)
-            emit(State.Form(fields,null))
+            emit(State.Form(fields, null))
         }.catch {
             emit(State.Failure(it))
         }.collect { ui.value = it }

@@ -27,12 +27,12 @@ private fun defaultRenderers(
 
 fun RBuilder.Bitframe(
     client: BitframeService,
-    routeRenderers: Map<String, Renderer> = mapOf(),
-    moduleRenderers: Map<String, Renderer> = mapOf(),
+    pages: Map<String, Renderer> = mapOf(),
+    modules: Map<String, Renderer> = mapOf(),
     version: String
 ) = browserRouter {
-    val allRouteRenderers = routeRenderers.toMutableMap().apply {
-        putAll(defaultRenderers(client, moduleRenderers, version))
+    val allRouteRenderers = pages.toMutableMap().apply {
+        putAll(defaultRenderers(client, modules, version))
     }
     switch {
         for ((path, renderer) in allRouteRenderers) route(path, render = renderer)
