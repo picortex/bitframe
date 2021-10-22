@@ -14,7 +14,7 @@ import kotlin.js.JsExport
 
 abstract class SignInService(
     open val bus: EventBus,
-    open val config: ServiceConfig
+    protected open val config: ServiceConfig
 ) {
     val session: Live<Session> = Live(Session.Unknown)
     val currentSession get() = session.value

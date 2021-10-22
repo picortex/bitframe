@@ -5,7 +5,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlin.jvm.JvmField
 
 open class InMemoryDaoConfig(
-    val simulationTime: Int,
+    val simulationTime: Long,
     override val scope: CoroutineScope = CoroutineScope(SupervisorJob())
 ) : DaoConfig {
     companion object {

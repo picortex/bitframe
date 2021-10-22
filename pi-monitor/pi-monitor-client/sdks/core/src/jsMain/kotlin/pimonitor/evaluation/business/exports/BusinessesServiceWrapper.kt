@@ -3,8 +3,10 @@
 
 package pimonitor.evaluation.business.exports
 
+import later.then
 import pimonitor.evaluation.businesses.BusinessesService
 
 class BusinessesServiceWrapper(service: BusinessesService) {
-    val loadBusinesses: () -> Unit = { service.all() }
+    val loadBusinesses = { service.all().then { it.toTypedArray() } }
+    val create = { params: CreateBusinessFormParams -> service.create(params.toParams()) }
 }

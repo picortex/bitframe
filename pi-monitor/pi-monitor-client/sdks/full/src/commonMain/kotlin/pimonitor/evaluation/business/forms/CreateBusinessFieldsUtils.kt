@@ -1,8 +1,10 @@
 package pimonitor.evaluation.business.forms
 
+import bitframe.presenters.fields.BooleanInputField
 import bitframe.presenters.fields.ButtonInputField
 import bitframe.presenters.fields.TextInputField
 import pimonitor.monitors.Monitor
+import pimonitor.evaluation.business.forms.CreateBusinessIntent as Intent
 
 internal fun AddBusinessFormFields() = CreateBusinessFields(
     inviterIntroduction = null,
@@ -18,6 +20,10 @@ internal fun AddBusinessFormFields() = CreateBusinessFields(
     contactEmail = TextInputField(
         label = "Contact Email",
         hint = "john@doe.com"
+    ),
+    sendInvite = BooleanInputField(
+        label = "Ask to share reports",
+        value = true
     ),
     submitButton = ButtonInputField(text = "Submit")
 )
@@ -37,5 +43,13 @@ internal fun InviteBusinessFormFields(inviter: Monitor) = CreateBusinessFields(
         label = "Your Email",
         hint = "john@doe.com"
     ),
+    sendInvite = null,
     submitButton = ButtonInputField(text = "Submit")
+)
+
+internal fun CreateBusinessFields.copy(i: Intent.SubmitForm) = copy(
+    businessName = businessName.copy(value = i.params.businessName),
+    contactName = contactName.copy(value = i.params.contactName),
+    contactEmail = contactEmail.copy(value = i.params.contactEmail),
+    sendInvite = sendInvite?.copy(value = i.params.sendInvite)
 )

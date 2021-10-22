@@ -16,6 +16,20 @@ abstract class MonitorsService(
     open val config: ServiceConfig
 ) {
     val session: Live<Session> = Live(Session.Unknown)
+
+    val currentMonitor: Monitor
+        get() = when (val s = session.value) {
+            Session.Unknown -> error("Can't get a monitor, have you signed in?")
+            is Session.Active -> s.monitor
+        }
+
+    val currentMonitorOrNull: Monitor?
+        get() = try {
+            currentMonitor
+        } catch (c: Throwable) {
+            null
+        }
+
     protected val scope get() = config.scope
 
     protected fun watchSignInSession() = signInSession.watch {

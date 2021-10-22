@@ -4,13 +4,16 @@ package pimonitor.monitored
 
 import contacts.Email
 import kotlinx.serialization.Serializable
+import pimonitor.monitors.Monitor
+import pimonitor.monitors.MonitorRef
 import kotlin.js.JsExport
 
 @Serializable
 data class MonitoredBusiness(
     val uid: String,
     val name: String,
-    val contacts: List<ContactPerson>
+    val contacts: List<ContactPerson>,
+    val monitorRef: MonitorRef
 ) {
     init {
         require(contacts.isNotEmpty()) { "A business must have at least one contact person" }
