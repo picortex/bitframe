@@ -9,12 +9,11 @@ import contacts.Email
 import later.Later
 import later.await
 import later.later
-import pimonitor.monitors.SignUpParams
 import kotlin.js.JsExport
 
 abstract class SignUpService(
-    open val bus: EventBus,
-    open val config: ServiceConfig
+    protected open val bus: EventBus,
+    protected open val config: ServiceConfig
 ) {
     protected val scope get() = config.scope
 
@@ -44,7 +43,7 @@ abstract class SignUpService(
         }
     }
 
-    abstract fun executeSignUp(params: SignUpParams): Later<SignUpResult>
+    protected abstract fun executeSignUp(params: SignUpParams): Later<SignUpResult>
 
     fun signUp(params: SignUpParams): Later<SignUpResult> = scope.later {
         validate(params)

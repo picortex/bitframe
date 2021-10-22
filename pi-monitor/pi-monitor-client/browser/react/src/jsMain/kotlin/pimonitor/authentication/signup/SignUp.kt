@@ -8,17 +8,14 @@ import kotlinx.extensions.onDesktop
 import kotlinx.extensions.onMobile
 import kotlinx.extensions.text
 import kotlinx.html.InputType
-import logging.logger
 import pimonitor.PiMonitorService
 import pimonitor.authentication.signup.exports.SignUpScope
-import pimonitor.monitors.SignUpParams
 import react.Props
 import react.RBuilder
 import react.dom.p
 import react.fc
 import react.router.dom.useHistory
 import react.router.dom.withRouter
-import react.useEffectOnce
 import reakt.*
 import styled.css
 import styled.styledH2
@@ -55,11 +52,12 @@ private val SignUp = fc<SignUpProps> { props ->
 
             DropDown(
                 name = "registrationType",
-                value = state.select.options.first { it.selected }.value,
+                value = state.select.selected?.value,
                 options = state.select.options.map { it.value },
                 onChange = {
+                    console.log(it)
                     when (it) {
-                        "Register as Business" -> scope.registerAsBusiness()
+                        "" -> scope.registerAsBusiness()
                         "Register as Individual" -> scope.registerAsIndividual()
                     }
                 }

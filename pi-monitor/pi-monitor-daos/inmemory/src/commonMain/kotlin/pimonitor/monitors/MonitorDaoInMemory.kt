@@ -5,8 +5,8 @@ import bitframe.daos.conditions.Condition
 import bitframe.daos.config.InMemoryDaoConfig
 import contacts.Email
 import kotlinx.coroutines.delay
-import later.Later
 import later.later
+import pimonitor.authentication.signup.SignUpParams
 
 class MonitorDaoInMemory(
     private val monitors: MutableMap<String, Monitor> = mutableMapOf(),
@@ -14,7 +14,7 @@ class MonitorDaoInMemory(
 ) : MonitorDao {
     private val scope = config.scope
     override fun create(params: SignUpParams, ref: UserRef) = scope.later {
-        delay(config.simulationTime.toLong())
+        delay(config.simulationTime)
         val uid = "monitor-${monitors.size + 1}"
         val monitor = when (params) {
             is SignUpParams.Individual -> IndividualMonitor(uid, params.name, Email(params.email), ref)

@@ -1,6 +1,6 @@
 package pimonitor.authentication.signup.exports
 
-import pimonitor.monitors.SignUpParams
+import pimonitor.authentication.signup.SignUpParams
 
 fun RegisterIndividualParams.toSignUpParams() = SignUpParams.Individual(name, email, password)
 

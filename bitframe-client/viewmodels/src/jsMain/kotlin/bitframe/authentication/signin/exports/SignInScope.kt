@@ -3,15 +3,13 @@
 
 package bitframe.authentication.signin.exports
 
-import bitframe.authentication.signin.Session
-import bitframe.authentication.signin.SignInIntent
-import bitframe.authentication.signin.SignInService
-import bitframe.authentication.signin.SignInViewModel
+import bitframe.authentication.signin.*
 import useEventHandler
+import viewmodel.ViewModel
 
 class SignInScope(service: SignInService) {
 
-    val viewModel by lazy { SignInViewModel(service) }
+    val viewModel: ViewModel<SignInIntent, SignInState> by lazy { SignInViewModel(service) }
 
     val submit = { cred: SignInCredentials ->
         viewModel.post(SignInIntent.Submit(cred.toSignInCredentials()))

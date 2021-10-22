@@ -5,6 +5,7 @@ import bitframe.authentication.users.User
 import contacts.Email
 import kotlinx.serialization.json.Json
 import pimonitor.monitors.CooperateMonitor
+import pimonitor.monitors.CooperateMonitor.ContactPerson
 import pimonitor.monitors.IndividualMonitor
 import pimonitor.monitors.Monitor
 import kotlin.test.Test
@@ -14,25 +15,25 @@ class MonitorsSerializationTest {
 
     @Test
     fun should_serialize_an_individual_monitor() {
-        val monitor: Monitor = IndividualMonitor(
+        val monitor = IndividualMonitor(
             uid = "none",
             name = "John Doe",
             email = Email("john@doe.com"),
             userRef = userRef
         )
-        val json = Json.encodeToString(Monitor.serializer(), monitor)
+        val json = Json.encodeToString(IndividualMonitor.serializer(), monitor)
         println(json)
     }
 
     @Test
     fun should_de_serialize_a_cooperate_monitor() {
-        val monitor: Monitor = CooperateMonitor(
+        val monitor = CooperateMonitor(
             uid = "none",
             name = "John Doe",
             email = Email("john@doe.com"),
-            person = CooperateMonitor.ContactPerson("", "Anderson", Email("anderson@test.com"), userRef)
+            person = ContactPerson("", "Anderson", Email("anderson@test.com"), userRef)
         )
-        val json = Json.encodeToString(Monitor.serializer(), monitor)
+        val json = Json.encodeToString(CooperateMonitor.serializer(), monitor)
         println(json)
     }
 }

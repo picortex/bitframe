@@ -1,3 +1,13 @@
+# 0.0.31
+
+## PiMonitor Client SDK Core
+
+- [[PM124]](https://github.com/picortex/bitframe/issues/124) Removed onUserLoggedIn method from SignInViewModel
+- [[PM141]](https://github.com/picortex/bitframe/issues/141) Created a Register business form
+- [[PM140]](https://github.com/picortex/bitframe/issues/140) Make the register business form be invitational
+- [[PM023]](https://github.com/picortex/bitframe/issues/23) Register a business
+- [[PM017]](https://github.com/picortex/bitframe/issues/17) A Monitor can create a business, in his scope
+
 # 0.0.30
 
 ## PiMonitor Client SDK Core

@@ -13,12 +13,13 @@ fun PiMonitorServiceKtor(
 ): PiMonitorService {
     val bus = InMemoryEventBus()
     val signInService = SignInServiceKtor(configuration, bus)
+    val monitorService = MonitorsServiceKtor(signInService.session, configuration)
     return object : PiMonitorService(
         users = UsersServiceKtor(configuration),
         signIn = signInService,
         signUp = SignUpServiceKtor(bus, configuration),
-        monitors = MonitorsServiceKtor(signInService.session, configuration),
-        businesses = BusinessServiceKtor((configuration)),
+        monitors = monitorService,
+        businesses = BusinessServiceKtor(bus, monitorService, configuration),
         bus = bus
     ) {}
 }
