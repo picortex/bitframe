@@ -21,12 +21,14 @@ fun PiMonitorServiceStub(
     val signInService = SignInServiceImpl(provider, config, bus)
     val daoConfig = config.toInMemoryDaoConfig()
     val monitorDao = MonitorDaoInMemory(config = daoConfig)
+    val monitoredBusinessDao = MonitoredBusinessDaoInMemory(config = daoConfig)
+    val monitorsService = MonitorsServiceImpl(signInService.session, monitorDao, config)
     return object : PiMonitorService(
         users = usersService,
         signIn = signInService,
         signUp = SignUpServiceImpl(monitorDao, usersService, bus, config),
-        monitors = MonitorsServiceImpl(signInService.session, monitorDao, config),
-        businesses = BusinessServiceImpl(MonitoredBusinessDaoInMemory(config = daoConfig)),
+        monitors = monitorsService,
+        businesses = BusinessServiceImpl(bus, monitoredBusinessDao, monitorsService, config),
         bus = bus
     ) {}
 }

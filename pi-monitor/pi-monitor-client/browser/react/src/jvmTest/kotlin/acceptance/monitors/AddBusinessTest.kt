@@ -18,15 +18,18 @@ class AddBusinessTest : AcceptanceTest() {
             name = "Jane Doe", email = "jane@doe.com", password = "janedoe"
         )
         val dashboard = openSignUpScreen().signUp(params).expectToBeSigningUp()
-        val details = CreateMonitoredBusinessParams(
-            businessName = "PiCortex",
-            contactName = "Mohammed Majapa",
-            contactEmail = "mmajapa@gmail.com"
-        )
         val businesses = dashboard.selectBusinesses()
-        businesses.clickCreateButton().apply {
-            enter(details)
-            submitByPressingEnter()
+        for (i in 1..5) {
+            val details = CreateMonitoredBusinessParams(
+                businessName = "PiCortex - $i",
+                contactName = "Mohammed Majapa - $i",
+                contactEmail = "mmajapa$i@gmail.com"
+            )
+            businesses.clickCreateButton().apply {
+                enter(details)
+                submitByPressingEnter()
+            }
+            businesses.expectToHaveBusinessWithName(details.businessName)
         }
     }
 }

@@ -10,5 +10,5 @@ class StubServiceConfig(
     val simulationTime: Long = 0L,
     override val scope: CoroutineScope = CoroutineScope(SupervisorJob())
 ) : ServiceConfig(appId, scope) {
-    fun toInMemoryDaoConfig() = InMemoryDaoConfig(simulationTime.toInt(), scope)
+    fun toInMemoryDaoConfig() = InMemoryDaoConfig(simulationTime, scope)
 }

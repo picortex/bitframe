@@ -10,8 +10,8 @@ internal fun RBuilder.BusinessList(
     data,
     columns = listOf(
         Column("name") { it.name },
-        Column("email") { it.contacts.first().email.value },
         Column("contact") { it.contacts.first().name },
+        Column("email") { it.contacts.first().email.value },
         RenderColumn("actions") {
             Grid(cols = "1fr 1fr") {
                 ContainedButton("View") {}

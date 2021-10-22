@@ -1,6 +1,7 @@
 package pimonitor.evaluation.business.forms
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -8,19 +9,35 @@ import kotlinx.coroutines.launch
 import later.await
 import pimonitor.evaluation.businesses.BusinessesService
 import pimonitor.monitors.MonitorsService
+import pimonitor.monitors.Session
 import viewmodel.ViewModel
 import pimonitor.evaluation.business.forms.CreateBusinessIntent as Intent
 import pimonitor.evaluation.business.forms.CreateBusinessState as State
 
 class CreateBusinessViewModel(
-    val monitorService: MonitorsService,
-    val businessService: BusinessesService
+    private val monitorService: MonitorsService,
+    private val businessService: BusinessesService
 ) : ViewModel<Intent, State>(State.Loading("Preparing form, please wait . . .")) {
+    private val recoverTime = 3000L
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         is Intent.ShowForm -> when (val uid = i.inviteId) {
             null -> showAddBusinessForm()
             else -> showInviteForm(uid)
         }
+        is Intent.SubmitForm -> submitForm(i)
+    }
+
+    private fun CoroutineScope.submitForm(i: Intent.SubmitForm) = launch {
+        val state = ui.value
+        flow {
+            emit(State.Loading("Adding business, please wait . . ."))
+            businessService.create(i.params).await()
+            emit(State.Success("Business Added"))
+        }.catch {
+            emit(State.Failure(it))
+            delay(recoverTime)
+            emit(state.copy(i))
+        }.collect { ui.value = it }
     }
 
     private fun showAddBusinessForm() {

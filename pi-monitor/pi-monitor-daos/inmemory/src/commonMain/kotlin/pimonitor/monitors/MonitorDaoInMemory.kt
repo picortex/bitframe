@@ -14,7 +14,7 @@ class MonitorDaoInMemory(
 ) : MonitorDao {
     private val scope = config.scope
     override fun create(params: SignUpParams, ref: UserRef) = scope.later {
-        delay(config.simulationTime.toLong())
+        delay(config.simulationTime)
         val uid = "monitor-${monitors.size + 1}"
         val monitor = when (params) {
             is SignUpParams.Individual -> IndividualMonitor(uid, params.name, Email(params.email), ref)

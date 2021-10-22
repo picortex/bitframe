@@ -12,7 +12,7 @@ kotlin {
     js(IR) {
         val main by compilations
         main.outputModuleName = "pi-monitor-client-sdk-full"
-        browserLib()
+        library()
         binaries.library()
     }
 
