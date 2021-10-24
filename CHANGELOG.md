@@ -1,3 +1,7 @@
+# 0.0.32
+## Bitframe Authentication
+- [[BF163]](https://github.com/picortex/bitframe/issues/163) Optimize SignIn Flow
+
 # 0.0.31
 
 ## PiMonitor Client SDK Core
