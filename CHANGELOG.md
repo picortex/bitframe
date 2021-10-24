@@ -1,4 +1,7 @@
 # 0.0.32
+## PiMonitor Authentication
+- [[PM164]](https://github.com/picortex/bitframe/issues/164) Fix SingUp Dropdown feature
+
 ## Bitframe Authentication
 - [[BF163]](https://github.com/picortex/bitframe/issues/163) Optimize SignIn Flow
 

@@ -32,7 +32,6 @@ class SignUp : AcceptanceTest() {
     }
 
     @Nested
-    @Ignore // TODO until the drop down is fixed, this test should not be runed
     inner class `Organisational Registration` {
         private val params = SignUpParams.Business(
             businessName = "John Doe Inc.",

@@ -6,12 +6,14 @@ import bitframe.presenters.fields.ButtonInputField
 import bitframe.presenters.fields.DropDownInputField
 import bitframe.presenters.fields.DropDownInputField.Option
 import bitframe.presenters.fields.TextInputField
+import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_BUSINESS
+import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_INDIVIDUAL
 import kotlin.js.JsExport
 
 data class IndividualFormFields(
     val select: DropDownInputField = DropDownInputField(
-        Option("Register as Business"),
-        Option("Register as Individual", selected = true)
+        REGISTER_AS_BUSINESS,
+        REGISTER_AS_INDIVIDUAL.copy(selected = true)
     ),
     val name: TextInputField = TextInputField(
         label = "Name", hint = "Full Name"
