@@ -17,6 +17,7 @@ import react.fc
 import react.router.dom.useHistory
 import react.router.dom.withRouter
 import reakt.*
+import pimonitor.reakt.DropDown
 import styled.css
 import styled.styledH2
 import theme.clazz
@@ -53,14 +54,8 @@ private val SignUp = fc<SignUpProps> { props ->
             DropDown(
                 name = "registrationType",
                 value = state.select.selected?.value,
-                options = state.select.options.map { it.value },
-                onChange = {
-                    console.log(it)
-                    when (it) {
-                        "" -> scope.registerAsBusiness()
-                        "Register as Individual" -> scope.registerAsIndividual()
-                    }
-                }
+                options = state.select.options,
+                onChange = scope.changeRegistrationType
             )
 
             when (state) {

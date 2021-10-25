@@ -21,19 +21,17 @@ private fun defaultRenderers(
     version: String
 ): Map<String, Renderer> = mapOf(
     SignInPageRoute to { SignInPage(client.signIn, version) },
-    PanelPageRoute to { Panel(client,moduleRenderers) },
+    PanelPageRoute to { Panel(client, moduleRenderers) },
     HomeRoute to { LandingPage(version) }
 )
 
 fun RBuilder.Bitframe(
     client: BitframeService,
     pages: Map<String, Renderer> = mapOf(),
-    modules: Map<String, Renderer> = mapOf(),
+    sections: Map<String, Renderer> = mapOf(),
     version: String
 ) = browserRouter {
-    val allRouteRenderers = pages.toMutableMap().apply {
-        putAll(defaultRenderers(client, modules, version))
-    }
+    val allRouteRenderers = pages.toMutableMap() + defaultRenderers(client, sections, version)
     switch {
         for ((path, renderer) in allRouteRenderers) route(path, render = renderer)
         styledDiv { +"Whoops, Not Found" }

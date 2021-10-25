@@ -1,6 +1,7 @@
 package pimonitor.authentication.signup
 
 import bitframe.authentication.signin.SignInCredentials
+import bitframe.authentication.spaces.CreateSpaceParams
 import bitframe.authentication.spaces.RegisterSpaceParams
 import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.RegisterUserParams
@@ -15,7 +16,7 @@ fun SignUpParams.Business.toRegisterUserParams() = RegisterUserParams(
     password = password
 )
 
-fun SignUpParams.Business.toRegisterSpaceParams() = RegisterSpaceParams(
+fun SignUpParams.Business.toCreateSpaceParams() = CreateSpaceParams(
     name = businessName
 )
 

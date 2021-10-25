@@ -2,10 +2,19 @@
 
 package bitframe.authentication.signin
 
+import bitframe.authentication.spaces.Space
+import bitframe.authentication.users.User
 import bitframe.presenters.feedbacks.FormFeedback
 import kotlin.js.JsExport
 
-data class SignInState(
-    val fields: SignInFormFields,
-    val status: FormFeedback?
-)
+sealed class SignInState {
+    data class Form(
+        val fields: SignInFormFields,
+        val status: FormFeedback?
+    ) : SignInState()
+
+    data class Conundrum(
+        val user: User,
+        val spaces: List<Space>
+    ) : SignInState()
+}

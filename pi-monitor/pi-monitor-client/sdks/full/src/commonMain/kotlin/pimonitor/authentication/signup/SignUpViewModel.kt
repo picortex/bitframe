@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import logging.logger
+import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_BUSINESS
+import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_INDIVIDUAL
 import viewmodel.ViewModel
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
@@ -18,11 +21,24 @@ class SignUpViewModel(
     val signInService: SignInService
 ) : ViewModel<Intent, State>(State.IndividualForm(IndividualFormFields(), null)) {
     val recoveryTime = 3000L
+    val timber = logger()
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         Intent.SelectRegisterAsIndividual -> selectRegisterAsIndividual()
         Intent.SelectRegisterAsBusiness -> selectRegisterAsBusiness()
+        is Intent.ChangeRegistrationType -> updateRegistrationType(i)
         is Intent.Submit -> submitForm(i)
+    }
+
+    private fun updateRegistrationType(i: Intent.ChangeRegistrationType) {
+        ui.value = when (i.type) {
+            REGISTER_AS_BUSINESS.value -> State.BusinessForm(BusinessFormFields(), null)
+            REGISTER_AS_INDIVIDUAL.value -> State.IndividualForm(IndividualFormFields(), null)
+            else -> {
+                timber.warn("Registering as ${i.type} is not supported. Defaulting to Registering as ${REGISTER_AS_INDIVIDUAL.value}")
+                State.IndividualForm(IndividualFormFields(), null)
+            }
+        }
     }
 
     private fun CoroutineScope.submitForm(i: Intent.Submit) = launch {

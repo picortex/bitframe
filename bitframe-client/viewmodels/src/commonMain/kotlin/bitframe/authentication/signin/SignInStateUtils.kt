@@ -2,7 +2,7 @@ package bitframe.authentication.signin
 
 import bitframe.presenters.feedbacks.FormFeedback
 
-internal fun SignInState.copy(
+internal fun SignInState.Form.copy(
     i: SignInIntent.Submit,
     status: FormFeedback? = this.status
 ) = copy(

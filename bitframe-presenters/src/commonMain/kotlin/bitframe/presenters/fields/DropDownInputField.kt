@@ -13,6 +13,9 @@ data class DropDownInputField(
 
     val items get() = options.toTypedArray()
 
+    val itemLabels get() = options.map { it.label }
+    val itemValues get() = options.map { it.value }
+
     val selected get() = options.firstOrNull { it.selected }
 
     data class Option(

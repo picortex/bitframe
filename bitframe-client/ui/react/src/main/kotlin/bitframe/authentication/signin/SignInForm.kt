@@ -15,7 +15,7 @@ import styled.styledDiv
 import styled.styledH1
 
 fun RBuilder.SignInForm(
-    state: SignInState,
+    state: SignInState.Form,
     onLoginButtonPressed: (SignInCredentials) -> Unit
 ) = Grid {
     css {

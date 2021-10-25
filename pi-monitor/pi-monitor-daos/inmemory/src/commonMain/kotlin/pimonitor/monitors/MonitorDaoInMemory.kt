@@ -37,6 +37,7 @@ class MonitorDaoInMemory(
     }
 
     override fun all(where: Condition<String, Any>?) = scope.later {
+        delay(config.simulationTime)
         if (where?.lhs == "userRef.uid") {
             val uid = where.rhs.toString()
             monitors.values.filter {
