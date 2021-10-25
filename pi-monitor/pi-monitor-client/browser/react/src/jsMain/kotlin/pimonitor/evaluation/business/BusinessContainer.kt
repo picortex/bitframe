@@ -35,8 +35,8 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
                 val link = "/invite/${monitor?.uid}"
                 routeLink(to = link) { +link }
             }
-            if (state.data.isEmpty()) EmptyBusiness()
-            else BusinessList(state.data)
+            if (state.businesses.isEmpty()) EmptyBusiness()
+            else BusinessList(state.businesses)
         }
         is BusinessesState.BusinessForm -> AddBusiness(scope.service)
         is BusinessesState.Success -> SuccessBox(state.message)
