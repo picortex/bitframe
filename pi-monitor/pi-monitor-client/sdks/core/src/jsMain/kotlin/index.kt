@@ -1,6 +1,7 @@
 @file:Suppress("EXPERIMENTAL_API_USAGE", "NON_EXPORTABLE_TYPE")
 @file:JsExport
 
+import bitframe.BitframeService
 import bitframe.authentication.signin.exports.SignInServiceWrapper
 import bitframe.service.config.KtorClientConfiguration
 import logging.ConsoleAppender
@@ -38,7 +39,7 @@ fun client(config: ServiceConfiguration): PiMonitorService {
 
 fun service(config: ServiceConfiguration): PiMonitorService = client(config)
 
-fun signInService(client: PiMonitorService) = SignInServiceWrapper(client.signIn)
+fun signInService(client: BitframeService) = SignInServiceWrapper(client.signIn)
 
 fun signUpService(client: PiMonitorService) = SignUpServiceWrapper(client.signUp)
 
