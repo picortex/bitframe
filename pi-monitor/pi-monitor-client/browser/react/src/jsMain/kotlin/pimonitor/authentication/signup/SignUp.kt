@@ -47,9 +47,7 @@ private val SignUp = fc<SignUpProps> { props ->
 
         Form { theme ->
             styledH2 {
-                css { +theme.text.h4.clazz
-                onMobile {  }
-                }
+                css { +theme.text.h4.clazz }
                 +state.title
             }
 
