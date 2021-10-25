@@ -26,7 +26,7 @@ fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
             "/authentication/sign-up" to { SignUp(client) },
             "/invite/:uid" to { InviteBusiness(client, it.match.params["uid"]) }
         ),
-        modules = mapOf(
+        sections = mapOf(
             "/evaluation/business" to { BusinessContainer(client) }
         ),
         version = version

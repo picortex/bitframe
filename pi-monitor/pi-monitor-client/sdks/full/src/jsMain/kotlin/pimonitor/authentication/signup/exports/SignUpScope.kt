@@ -27,6 +27,10 @@ class SignUpScope(
         viewModel.post(Intent.SelectRegisterAsBusiness)
     }
 
+    val changeRegistrationType = { type: String ->
+        viewModel.post(Intent.ChangeRegistrationType(type))
+    }
+
     val submitIndividualForm = { params: RegisterIndividualParams ->
         viewModel.post(Intent.Submit.IndividualForm(params.toSignUpParams()))
     }

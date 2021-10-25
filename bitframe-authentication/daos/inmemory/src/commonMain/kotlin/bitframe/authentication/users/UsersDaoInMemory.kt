@@ -13,7 +13,7 @@ class UsersDaoInMemory(
 ) : UsersDao {
     private val scope = config.scope
     override fun create(params: CreateUserParams): Later<User> = scope.later {
-        delay(config.simulationTime.toLong())
+        delay(config.simulationTime)
         val existing = users.values.find { it.name == params.name }
         if (existing == null) {
             val uid = "user-${users.size + 1}"
@@ -24,7 +24,7 @@ class UsersDaoInMemory(
     }
 
     override fun update(u: User): Later<User> = scope.later {
-        delay(config.simulationTime.toLong())
+        delay(config.simulationTime)
         users[u.uid] = u
         u
     }
@@ -32,7 +32,7 @@ class UsersDaoInMemory(
     override fun createIfNotExist(params: CreateUserParams) = create(params)
 
     override fun all(where: Condition<String, Any?>?) = scope.later {
-        delay(config.simulationTime.toLong())
+        delay(config.simulationTime)
         if (where == null) {
             users.values.toList()
         } else {

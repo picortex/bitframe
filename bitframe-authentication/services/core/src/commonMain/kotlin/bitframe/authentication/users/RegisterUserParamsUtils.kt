@@ -1,7 +1,5 @@
 package bitframe.authentication.users
 
-import bitframe.authentication.spaces.RegisterSpaceParams
-import kotlinx.serialization.Serializable
-import kotlin.js.JsExport
+import bitframe.authentication.spaces.CreateSpaceParams
 
-fun RegisterUserParams.toRegisterSpaceParams() = RegisterSpaceParams(name)
+fun RegisterUserParams.toCreateSpaceParams() = CreateSpaceParams(name)

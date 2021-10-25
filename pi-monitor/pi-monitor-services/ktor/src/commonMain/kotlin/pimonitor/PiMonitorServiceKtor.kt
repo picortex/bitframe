@@ -1,6 +1,8 @@
 package pimonitor
 
 import bitframe.authentication.signin.SignInServiceKtor
+import bitframe.authentication.spaces.SpacesService
+import bitframe.authentication.spaces.SpacesServiceKtor
 import bitframe.authentication.users.UsersServiceKtor
 import bitframe.events.InMemoryEventBus
 import bitframe.service.config.KtorClientConfiguration
@@ -15,6 +17,7 @@ fun PiMonitorServiceKtor(
     val signInService = SignInServiceKtor(configuration, bus)
     val monitorService = MonitorsServiceKtor(signInService.session, configuration)
     return object : PiMonitorService(
+        spaces = SpacesServiceKtor(configuration),
         users = UsersServiceKtor(configuration),
         signIn = signInService,
         signUp = SignUpServiceKtor(bus, configuration),
