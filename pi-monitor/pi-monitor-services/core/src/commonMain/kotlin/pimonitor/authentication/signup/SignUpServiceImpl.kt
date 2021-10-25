@@ -19,7 +19,7 @@ class SignUpServiceImpl(
         val register = when (params) {
             is SignUpParams.Individual -> usersService.register(params.toRegisterUserParams())
             is SignUpParams.Business -> usersService.registerWithSpace(
-                user = params.toRegisterUserParams(), space = params.toRegisterSpaceParams()
+                user = params.toRegisterUserParams(), space = params.toCreateSpaceParams()
             )
         }.await()
         val monitor = dao.create(params, register.user.ref()).await()

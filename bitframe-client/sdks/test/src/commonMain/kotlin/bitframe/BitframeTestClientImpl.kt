@@ -1,52 +1,28 @@
 package bitframe
 
+import bitframe.authentication.AuthenticationDaoProvider
+import bitframe.authentication.InMemoryAuthenticationDaoProvider
 import bitframe.authentication.TestClientConfiguration
 import bitframe.authentication.signin.SignInService
 import bitframe.authentication.signin.SignInServiceImpl
-import bitframe.authentication.spaces.Space
-import bitframe.authentication.spaces.SpacesDao
-import bitframe.authentication.spaces.SpacesDaoInMemory
+import bitframe.authentication.spaces.*
 import bitframe.authentication.users.*
 import bitframe.events.EventBus
 
 open class BitframeTestClientImpl(
     private val bus: EventBus,
     private val config: TestClientConfiguration,
-    usersDao: UsersDao = UsersDaoInMemory(config = config.toDaoConfig(), users = testUsers()),
-    spacesDao: SpacesDao = SpacesDaoInMemory(config = config.toDaoConfig(), spaces = testSpaces())
-) : BitframeTestClient {
-    companion object {
-        private fun testSpaces() = (1..3).associate {
-            val key = "space-$it"
-            key to Space(
-                uid = key,
-                name = "Space Two",
-                photoUrl = null,
-                scope = "",
-                type = ""
-            )
-        }.toMutableMap()
+    usersDao: UsersDao,
+    spacesDao: SpacesDao
+) : BitframeTestClient() {
 
-        private fun testUsers() = mutableMapOf(
-            "user-1" to User(
-                uid = "user-1",
-                name = "User One",
-                tag = "user01",
-                contacts = Contacts.of("user01@test.com"),
-                photoUrl = null,
-                spaces = listOf(testSpaces()["space-1"]!!)
-            ),
-            "user-2" to User(
-                uid = "user-2",
-                name = "User Two",
-                tag = "user02",
-                contacts = Contacts.of("user02@test.com"),
-                photoUrl = null,
-                spaces = testSpaces().values.toList().slice(1..2)
-            )
-        )
-    }
+    constructor(
+        bus: EventBus,
+        config: TestClientConfiguration,
+        provider: AuthenticationDaoProvider = InMemoryAuthenticationDaoProvider()
+    ) : this(bus, config, provider.users, provider.spaces)
 
-    override val signIn: SignInService = SignInServiceImpl(usersDao, spacesDao, config, bus)
+    override val spaces: SpacesService = SpacesServiceImpl(config, spacesDao, usersDao)
     override val users: UsersService = UsersServiceImpl(usersDao, spacesDao, config)
+    override val signIn: SignInService = SignInServiceImpl(usersDao, spacesDao, config, bus)
 }

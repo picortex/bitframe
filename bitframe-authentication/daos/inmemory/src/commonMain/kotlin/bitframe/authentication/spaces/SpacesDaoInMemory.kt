@@ -13,7 +13,7 @@ class SpacesDaoInMemory(
 ) : SpacesDao {
     private val scope = config.scope
     override fun createIfNotExist(params: CreateSpaceParams): Later<Space> = scope.later {
-        delay(config.simulationTime.toLong())
+        delay(config.simulationTime)
         val existing = spaces.values.find { it.name.contentEquals(params.name) }
         if (existing == null) {
             val uid = "space-${spaces.size + 1}"
@@ -24,7 +24,7 @@ class SpacesDaoInMemory(
     }
 
     override fun all(where: Condition<String, Any?>?): Later<List<Space>> = scope.later {
-        delay(config.simulationTime.toLong())
+        delay(config.simulationTime)
         if (where == null) {
             spaces.values.toList()
         } else {

@@ -31,7 +31,7 @@ class UsersServiceImpl(
 
     override fun registerWithSpace(
         user: RegisterUserParams,
-        space: RegisterSpaceParams
+        space: CreateSpaceParams
     ): Later<LoginConundrum> = scope.later {
         val userParams = CreateUserParams(
             name = user.name,

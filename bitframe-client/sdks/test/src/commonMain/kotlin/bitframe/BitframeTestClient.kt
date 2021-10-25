@@ -7,7 +7,7 @@ import bitframe.events.EventBus
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface BitframeTestClient : BitframeService {
+abstract class BitframeTestClient : BitframeService() {
     companion object {
         private val cachedClients = mutableMapOf<String, BitframeTestClient>()
 
@@ -28,6 +28,6 @@ interface BitframeTestClient : BitframeService {
         fun getDefault(bus: EventBus) = invoke(CONFIGURATION, bus)
     }
 
-    override val signIn: SignInService
-    override val users: UsersService
+    abstract override val signIn: SignInService
+    abstract override val users: UsersService
 }
