@@ -1,7 +1,7 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.evaluation.business.exports
+package pimonitor.evaluation.businesses.exports
 
 import pimonitor.PiMonitorService
 import pimonitor.evaluation.business.BusinessViewModel
@@ -16,6 +16,8 @@ class BusinessesScope(val service: PiMonitorService) {
     val viewModel: ViewModel<Intent, State> by lazy { BusinessViewModel(service.businesses) }
 
     val loadBusinesses: () -> Unit = { viewModel.post(Intent.LoadBusinesses) }
+
+    val showCreateBusinessForm: () -> Unit = { viewModel.post(Intent.ShowBusinessForm) }
 
     val useBusinessAddedEvent: (callback: (MonitoredBusiness) -> Unit) -> Unit = { callback ->
         useEventHandler(service.bus, BusinessesService.CREATE_BUSINESS_EVENT_ID, callback)
