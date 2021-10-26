@@ -12,6 +12,7 @@ kotlin {
     js(IR) {
         val main by compilations
         main.outputModuleName = "pi-monitor-client-sdk-core"
+        main.compileKotlinTask.kotlinOptions.freeCompilerArgs += listOf("-Xir-per-module")
         library()
         binaries.library()
     }
