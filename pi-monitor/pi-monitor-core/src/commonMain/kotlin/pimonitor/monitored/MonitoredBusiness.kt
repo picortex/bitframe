@@ -19,6 +19,8 @@ data class MonitoredBusiness(
         require(contacts.isNotEmpty()) { "A business must have at least one contact person" }
     }
 
+    val contactsArray get() = contacts.toTypedArray()
+
     @Serializable
     data class ContactPerson(
         val uid: String,
