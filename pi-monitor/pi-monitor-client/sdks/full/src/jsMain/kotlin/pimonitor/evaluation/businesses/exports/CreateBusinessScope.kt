@@ -1,9 +1,11 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.evaluation.business.exports
+package pimonitor.evaluation.businesses.exports
 
 import pimonitor.PiMonitorService
+import pimonitor.evaluation.business.exports.CreateBusinessFormParams
+import pimonitor.evaluation.business.exports.toParams
 import pimonitor.evaluation.business.forms.CreateBusinessViewModel
 import viewmodel.ViewModel
 import pimonitor.evaluation.business.forms.CreateBusinessIntent as Intent

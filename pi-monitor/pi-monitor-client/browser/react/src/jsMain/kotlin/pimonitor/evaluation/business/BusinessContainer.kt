@@ -3,7 +3,7 @@ package pimonitor.evaluation.business
 import kotlinx.css.JustifyContent
 import kotlinx.css.justifyContent
 import pimonitor.PiMonitorService
-import pimonitor.evaluation.business.exports.BusinessesScope
+import pimonitor.evaluation.businesses.exports.BusinessesScope
 import react.Props
 import react.RBuilder
 import react.fc
