@@ -1,13 +1,14 @@
 package pimonitor.evaluation.business
 
+import bitframe.presenters.collections.Table
 import pimonitor.monitored.MonitoredBusiness
 import react.RBuilder
 import reakt.*
 
-internal fun RBuilder.BusinessList(
-    data: List<MonitoredBusiness>
+internal fun RBuilder.BusinessTable(
+    table: Table<MonitoredBusiness>
 ) = ReactTable(
-    data,
+    table.data,
     columns = listOf(
         Column("name") { it.name },
         Column("contact") { it.contacts.first().name },

@@ -8,7 +8,9 @@ import kotlin.js.JsExport
 sealed class BusinessesState {
     data class Loading(val message: String) : BusinessesState()
     data class Businesses(val businesses: List<MonitoredBusiness>) : BusinessesState() {
+        val table get() = businessTable(businesses)
         val data get() = businesses.toTypedArray()
+        val businessesArray get() = businesses.toTypedArray()
     }
 
     data class BusinessForm(val form: Boolean = true) : BusinessesState()
