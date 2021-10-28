@@ -29,6 +29,7 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
 rootProject.name = "bitframe"
 
 include(":bitframe-core")
+include(":bitframe-utils")
 include(":bitframe-presenters")
 
 includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core", "processor")

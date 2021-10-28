@@ -35,9 +35,8 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
                 ContainedButton("Create") { viewModel.post(BusinessesIntent.ShowBusinessForm) }
                 val link = "/invite/${monitor?.uid}"
                 routeLink(to = link) { +link }
-                (ArrayList<MonitoredBusiness>() as AbstractCollection<MonitoredBusiness>)
             }
-            if (state.businesses.isEmpty()) EmptyBusiness()
+            if (state.table.isEmpty) EmptyBusiness()
             else BusinessTable(state.table)
         }
         is BusinessesState.BusinessForm -> AddBusiness(scope.service)

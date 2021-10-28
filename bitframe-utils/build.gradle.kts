@@ -14,13 +14,12 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
-                api(asoft("live-core", vers.asoft.live))
-                api(project(":bitframe-annotations-core"))
             }
         }
 
         val commonTest by getting {
             dependencies {
+                api(kotlinx("serialization-json", vers.kotlinx.serialization))
                 implementation(asoft("expect-core", vers.asoft.expect))
             }
         }
