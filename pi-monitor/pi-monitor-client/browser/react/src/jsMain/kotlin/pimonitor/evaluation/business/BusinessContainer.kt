@@ -4,6 +4,7 @@ import kotlinx.css.JustifyContent
 import kotlinx.css.justifyContent
 import pimonitor.PiMonitorService
 import pimonitor.evaluation.businesses.exports.BusinessesScope
+import pimonitor.monitored.MonitoredBusiness
 import react.Props
 import react.RBuilder
 import react.fc
@@ -35,8 +36,8 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
                 val link = "/invite/${monitor?.uid}"
                 routeLink(to = link) { +link }
             }
-            if (state.businesses.isEmpty()) EmptyBusiness()
-            else BusinessList(state.businesses)
+            if (state.table.isEmpty) EmptyBusiness()
+            else BusinessTable(state.table)
         }
         is BusinessesState.BusinessForm -> AddBusiness(scope.service)
         is BusinessesState.Success -> SuccessBox(state.message)

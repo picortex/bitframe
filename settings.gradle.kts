@@ -31,6 +31,8 @@ rootProject.name = "bitframe"
 include(":bitframe-core")
 include(":bitframe-presenters")
 
+includeRoot(name = "kotlinx-collections-interoperable", path = "bitframe-utils/kotlinx-collections-interoperable")
+
 includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core", "processor")
 
 includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "test")

@@ -14,16 +14,25 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
-                api(asoft("viewmodel-core", vers.asoft.viewmodel))
-                api(project(":bitframe-annotations-core"))
-                api(project(":kotlinx-collections-interoperable"))
             }
         }
 
         val commonTest by getting {
             dependencies {
+                api(kotlinx("serialization-json", vers.kotlinx.serialization))
                 implementation(asoft("expect-core", vers.asoft.expect))
             }
+        }
+
+        val nonJsMain by creating {
+            dependsOn(commonMain)
+            dependencies {
+
+            }
+        }
+
+        val jvmMain by getting {
+            dependsOn(nonJsMain)
         }
     }
 }

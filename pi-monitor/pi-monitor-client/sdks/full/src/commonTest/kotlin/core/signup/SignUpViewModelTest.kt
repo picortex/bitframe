@@ -33,7 +33,7 @@ abstract class SignUpViewModelTest : IntegrationTest() {
 
     @Test
     fun should_change_to_business_form_when_intent_is_initiated() = runTest {
-        vm.expect(Intent.SelectRegisterAsBusiness).toGoThrough(
+        vm.expect(Intent.ChangeRegistrationType(State.REGISTER_AS_BUSINESS.value)).toGoThrough(
             State.BusinessForm(BusinessFormFields(), null)
         )
     }
@@ -41,7 +41,7 @@ abstract class SignUpViewModelTest : IntegrationTest() {
     @Test
     @Ignore // TODO fix in memory dao query, write its tests for god's sake
     fun should_be_able_to_submit_an_individual_form() = runTest {
-        vm.expect(Intent.SelectRegisterAsIndividual)
+        vm.expect(Intent.ChangeRegistrationType(State.REGISTER_AS_INDIVIDUAL.value))
         val state = State.IndividualForm(IndividualFormFields(), null)
         val intent = Intent.Submit.IndividualForm(testIndividualParams)
         vm.expect(intent).toGoThrough(
@@ -53,7 +53,7 @@ abstract class SignUpViewModelTest : IntegrationTest() {
 
     @Test
     fun should_fail_to_submit_with_invalid_email() = runTest {
-        vm.expect(Intent.SelectRegisterAsIndividual)
+        vm.expect(Intent.ChangeRegistrationType(State.REGISTER_AS_INDIVIDUAL.value))
         val params = testIndividualParams.copy(email = "johnemail.com")
         val intent = Intent.Submit.IndividualForm(params)
         val status = vm.expect(intent).value.firstNotNullOfOrNull {
@@ -66,7 +66,7 @@ abstract class SignUpViewModelTest : IntegrationTest() {
 
     @Test
     fun should_fail_to_submit_with_empty_name() = runTest {
-        vm.expect(Intent.SelectRegisterAsIndividual)
+        vm.expect(Intent.ChangeRegistrationType(State.REGISTER_AS_INDIVIDUAL.value))
         val params = testIndividualParams.copy(name = "")
         val intent = Intent.Submit.IndividualForm(params)
         val status = vm.expect(intent).value.firstNotNullOfOrNull {
@@ -79,7 +79,7 @@ abstract class SignUpViewModelTest : IntegrationTest() {
 
     @Test
     fun should_be_able_to_submit_a_business_form() = runTest {
-        vm.expect(Intent.SelectRegisterAsBusiness)
+        vm.expect(Intent.ChangeRegistrationType(State.REGISTER_AS_BUSINESS.value))
         val state = State.BusinessForm(BusinessFormFields(), null)
         val intent = Intent.Submit.BusinessForm(testBusinessParams)
         vm.expect(intent).toGoThrough(

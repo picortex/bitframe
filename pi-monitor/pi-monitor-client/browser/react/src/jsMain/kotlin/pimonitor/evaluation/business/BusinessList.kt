@@ -1,22 +1,26 @@
 package pimonitor.evaluation.business
 
+import bitframe.presenters.collections.Table
 import pimonitor.monitored.MonitoredBusiness
+import pimonitor.reakt.BitframeTable
+import react.Props
 import react.RBuilder
-import reakt.*
+import react.functionComponent
+import useLive
 
-internal fun RBuilder.BusinessList(
-    data: List<MonitoredBusiness>
-) = ReactTable(
-    data,
-    columns = listOf(
-        Column("name") { it.name },
-        Column("contact") { it.contacts.first().name },
-        Column("email") { it.contacts.first().email.value },
-        RenderColumn("actions") {
-            Grid(cols = "1fr 1fr") {
-                ContainedButton("View") {}
-                ContainedButton("Test") {}
-            }
-        }
-    )
-)
+fun <D> useTable(table: Table<D>) = useLive(table.live)
+
+external interface BusinessTableProps : Props {
+    var table: Table<MonitoredBusiness>
+}
+
+val BusinessTable = functionComponent<BusinessTableProps> { props ->
+    BitframeTable(props.table)
+//    ReactTable(props.table)
+}
+
+internal fun RBuilder.BusinessTable(
+    table: Table<MonitoredBusiness>
+) = child(BusinessTable) {
+    attrs.table = table
+}

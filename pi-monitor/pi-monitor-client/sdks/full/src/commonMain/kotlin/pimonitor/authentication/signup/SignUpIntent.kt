@@ -5,12 +5,15 @@ package pimonitor.authentication.signup
 import kotlin.js.JsExport
 
 sealed class SignUpIntent {
-    @Deprecated("In favor of UpdateRegistrationType")
+    @Deprecated("In favor of ChangeRegistrationType")
     object SelectRegisterAsIndividual : SignUpIntent()
 
-    @Deprecated("In favor of UpdateRegistrationType")
+    @Deprecated("In favor of ChangeRegistrationType")
     object SelectRegisterAsBusiness : SignUpIntent()
 
+    /**
+     * type = [SignUpState.REGISTER_AS_BUSINESS] | [SignUpState.REGISTER_AS_INDIVIDUAL]
+     */
     data class ChangeRegistrationType(val type: String) : SignUpIntent()
 
     sealed class Submit(open val params: SignUpParams) : SignUpIntent() {

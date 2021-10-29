@@ -4,12 +4,14 @@ package bitframe.presenters.fields
 
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlinx.collections.interoperable.List
+import kotlinx.collections.interoperable.toInteroperableList
 
 data class DropDownInputField(
-    @JsName("_options") val options: List<Option>
+    val options: List<Option>
 ) {
     @JsName("from")
-    constructor(vararg options: Option) : this(options.toList())
+    constructor(vararg options: Option) : this(options.toInteroperableList())
 
     val items get() = options.toTypedArray()
 
