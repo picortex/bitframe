@@ -16,6 +16,7 @@ kotlin {
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
                 api(asoft("live-core", vers.asoft.live))
                 api(project(":bitframe-annotations-core"))
+                api(project(":kotlinx-collections-interoperable"))
             }
         }
 

@@ -4,6 +4,8 @@ package bitframe.presenters.collections
 
 import bitframe.presenters.collections.table.Column
 import bitframe.presenters.collections.table.Row
+import kotlinx.collections.interoperable.List
+import kotlinx.collections.interoperable.toInteroperableList
 import live.Live
 import kotlin.js.JsExport
 
@@ -15,11 +17,6 @@ class Table<D>(
         val columns: List<Column<D>>,
         val rows: List<Row<D>>
     ) {
-        val columnsArray = columns.toTypedArray()
-        val rowsArray = rows.toTypedArray()
-        val data = rows.map { it.data }
-        val dataArray = data.toArray()
-
         val isEmpty = rows.isEmpty()
 
         val areAllRowsSelected = rows.all { it.selected }
@@ -31,19 +28,15 @@ class Table<D>(
         val allSelectedRows = rows.filter { it.selected }
 
         val areSomeRowsSelected = !areNoRowsSelected && rows.size != allSelectedRows.size
-
-        private fun <E> List<E>.toArray(): Array<E> {
-            val array = Array<Any?>(size) { null }
-            forEachIndexed { index, e -> array[index] = e }
-            return array as Array<E>
-        }
     }
 
     val live = Live(State(columns, rows))
 
     fun selectAll() {
         live.value = live.value.copy(
-            rows = live.value.rows.map { it.copy(selected = true) }
+            rows = live.value.rows.map {
+                it.copy(selected = true)
+            }.toInteroperableList()
         )
     }
 
@@ -51,16 +44,12 @@ class Table<D>(
         live.value = live.value.copy(
             rows = live.value.rows.mapIndexed { index, row ->
                 if (rowNumber == index + 1) row.copy(selected = true) else row
-            }
+            }.toInteroperableList()
         )
     }
 
     val columns get() = live.value.columns
     val rows get() = live.value.rows
-    val columnsArray get() = live.value.columnsArray
-    val rowsArray get() = live.value.rowsArray
-    val data get() = live.value.data
-    val dataArray get() = live.value.dataArray
     val isEmpty get() = live.value.isEmpty
 
     val areAllRowsSelected get() = live.value.areAllRowsSelected
@@ -77,7 +66,7 @@ class Table<D>(
         fun <D> of(
             columns: List<Column<D>>,
             data: List<D>
-        ): Table<D> = Table(columns, List(data.size) { Row(it, data[it]) })
+        ): Table<D> = Table(columns, List(data.size) { Row(it, data[it]) }.toInteroperableList())
     }
 
     override fun equals(other: Any?): Boolean = when (other) {
