@@ -12,5 +12,10 @@ class ArrayList<E>(private val list: KArrayList<E>) : MutableList<E>(), KMutable
     @JsName("FromCollection")
     constructor(collection: Collection<E>) : this(KArrayList(collection))
 
+    override fun subList(
+        fromIndex: Int,
+        toIndex: Int
+    ): ArrayList<E> = list.subList(fromIndex, toIndex).toInteroperableArrayList()
+
     override fun toString(): String = list.toString()
 }

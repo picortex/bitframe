@@ -23,5 +23,16 @@ kotlin {
                 implementation(asoft("expect-core", vers.asoft.expect))
             }
         }
+
+        val nonJsMain by creating {
+            dependsOn(commonMain)
+            dependencies {
+
+            }
+        }
+
+        val jvmMain by getting {
+            dependsOn(nonJsMain)
+        }
     }
 }
