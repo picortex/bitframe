@@ -5,8 +5,6 @@ package kotlinx.collections.interoperable
 
 import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.serialization.Serializable
-import kotlin.contracts.ExperimentalContracts
-import kotlin.contracts.contract
 import kotlin.js.JsExport
 import kotlin.collections.List as KList
 
@@ -16,9 +14,9 @@ actual abstract class List<out E> : KList<E> {
         if (array == null) return false
         if (array.size == size) {
             var equals = true
-            forEachIndexed { _, index ->
+            forEachWithIndex { _, index ->
                 equals = this[index] == array[index]
-                if (!equals) return@forEachIndexed
+                if (!equals) return@forEachWithIndex
             }
             return equals
         } else {
@@ -28,7 +26,7 @@ actual abstract class List<out E> : KList<E> {
 
     open fun toArray(): Array<out E> {
         val array: Array<in Any?> = Array(size) { null }
-        forEachIndexed { e, index -> array[index] = e }
+        forEachWithIndex { e, index -> array[index] = e }
         return array as Array<out E>
     }
 
@@ -36,7 +34,7 @@ actual abstract class List<out E> : KList<E> {
         for (item in this) lambda(item)
     }
 
-    fun forEachIndexed(lambda: (item: E, index: Int) -> Unit) {
+    fun forEachWithIndex(lambda: (item: E, index: Int) -> Unit) {
         for (item in this) lambda(item, indexOf(item))
     }
 
@@ -46,7 +44,7 @@ actual abstract class List<out E> : KList<E> {
         return l
     }
 
-    fun <O> mapIndexed(transform: (item: E, index: Int) -> O): List<O> {
+    fun <O> mapWithIndex(transform: (item: E, index: Int) -> O): List<O> {
         val l = mutableListOf<O>()
         for (item in this) l.add(transform(item, indexOf(item)))
         return l

@@ -17,3 +17,5 @@ inline fun <E> KList<E>.toInteroperableArrayList() = ArrayList(this)
 inline fun <E> KList<E>.toInteroperableMutableList(): MutableList<E> = toInteroperableArrayList()
 
 inline fun <E> KList<E>.toInteroperableList(): List<E> = toInteroperableMutableList()
+
+inline fun <E> Array<E>.toInteroperableList(): List<E> = toList().toInteroperableList()

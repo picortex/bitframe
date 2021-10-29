@@ -55,5 +55,5 @@ fun <D> Table<D>.click(actionName: String, rowNumber: Int) {
         )
     }
     val row = rows[rowNumber - 1]
-    action.handler(row.data)
+    action.handler(row)
 }

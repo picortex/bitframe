@@ -6,5 +6,5 @@ import kotlin.js.JsExport
 
 data class Action<in D>(
     val name: String,
-    val handler: (D) -> Unit
+    val handler: (Row<D>) -> Unit
 )

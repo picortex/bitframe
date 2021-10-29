@@ -44,8 +44,8 @@ class BusinessViewModel(
         column("Contact Name") { it.data.contacts.first().name }
         column("Contact Email") { it.data.contacts.first().email.value }
         actions("Actions") {
-            action("Delete") { tree.log("Deleting: ${it.name}") }
-            action("View") { tree.log("Viewing: ${it.name}") }
+            action("Delete") { tree.log("Deleting: ${it.data.name}") }
+            action("View") { tree.log("Viewing: ${it.data.name}") }
         }
     }
 }

@@ -18,4 +18,8 @@ class ArrayList<E>(private val list: KArrayList<E>) : MutableList<E>(), KMutable
     ): ArrayList<E> = list.subList(fromIndex, toIndex).toInteroperableArrayList()
 
     override fun toString(): String = list.toString()
+
+    override fun hashCode(): Int = list.hashCode()
+
+    override fun equals(other: Any?): Boolean = list == other
 }

@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
-                api(asoft("live-core", vers.asoft.live))
+                api(asoft("viewmodel-core", vers.asoft.viewmodel))
                 api(project(":bitframe-annotations-core"))
                 api(project(":kotlinx-collections-interoperable"))
             }
