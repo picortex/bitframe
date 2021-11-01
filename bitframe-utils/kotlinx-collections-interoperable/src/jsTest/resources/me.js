@@ -14,7 +14,7 @@ module.exports = {
         return list.toArray();
     },
     addUnbounded: function(calc,number) {
-        console.log(calc)
+        console.log(Object.assign({},calc))
         const { plus } = calc
         console.log(plus)
         return plus(number)

@@ -1,6 +1,6 @@
 @file:JsExport
 
-package pimonitor.evaluation.business.forms
+package pimonitor.evaluation.businesses.forms
 
 import bitframe.presenters.feedbacks.FormFeedback
 import kotlin.js.JsExport

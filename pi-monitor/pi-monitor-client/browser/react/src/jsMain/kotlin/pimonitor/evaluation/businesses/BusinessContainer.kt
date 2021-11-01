@@ -1,10 +1,9 @@
-package pimonitor.evaluation.business
+package pimonitor.evaluation.businesses
 
 import kotlinx.css.JustifyContent
 import kotlinx.css.justifyContent
 import pimonitor.PiMonitorService
 import pimonitor.evaluation.businesses.exports.BusinessesScope
-import pimonitor.monitored.MonitoredBusiness
 import react.Props
 import react.RBuilder
 import react.fc

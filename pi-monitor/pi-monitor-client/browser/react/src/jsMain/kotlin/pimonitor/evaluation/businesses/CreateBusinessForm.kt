@@ -1,11 +1,11 @@
-package pimonitor.evaluation.business
+package pimonitor.evaluation.businesses
 
 import bitframe.components.TextInput
 import kotlinx.css.*
 import kotlinx.extensions.onDesktop
 import kotlinx.extensions.onMobile
 import kotlinx.extensions.text
-import pimonitor.evaluation.business.forms.CreateBusinessState
+import pimonitor.evaluation.businesses.forms.CreateBusinessState
 import pimonitor.monitored.CreateMonitoredBusinessParams
 import react.RBuilder
 import reakt.ContainedButton

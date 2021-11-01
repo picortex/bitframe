@@ -1,9 +1,9 @@
 @file:JsExport
 
-package pimonitor.evaluation.business.forms
+package pimonitor.evaluation.businesses.forms
 
 import kotlin.js.JsExport
-import pimonitor.evaluation.business.forms.CreateBusinessIntent as Intent
+import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
 
 internal fun CreateBusinessState.copy(i: Intent.SubmitForm) = if (this is CreateBusinessState.Form) {
     CreateBusinessState.Form(fields = fields.copy(i), status)

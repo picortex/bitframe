@@ -1,4 +1,4 @@
-package pimonitor.evaluation.business
+package pimonitor.evaluation.businesses
 
 import bitframe.presenters.collections.tableOf
 import kotlinx.coroutines.CoroutineScope
@@ -8,13 +8,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import logging.logger
-import pimonitor.evaluation.business.BusinessesIntent.LoadBusinesses
-import pimonitor.evaluation.business.BusinessesIntent.ShowBusinessForm
-import pimonitor.evaluation.businesses.BusinessesService
+import pimonitor.evaluation.businesses.BusinessesIntent.LoadBusinesses
+import pimonitor.evaluation.businesses.BusinessesIntent.ShowBusinessForm
 import pimonitor.monitored.MonitoredBusiness
 import viewmodel.ViewModel
-import pimonitor.evaluation.business.BusinessesIntent as Intent
-import pimonitor.evaluation.business.BusinessesState as State
+import pimonitor.evaluation.businesses.BusinessesIntent as Intent
+import pimonitor.evaluation.businesses.BusinessesState as State
 
 class BusinessViewModel(
     val service: BusinessesService

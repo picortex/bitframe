@@ -11,7 +11,7 @@ import pimonitor.PiMonitorServiceKtor
 import pimonitor.PiMonitorServiceStub
 import pimonitor.StubServiceConfig
 import pimonitor.authentication.signup.exports.SignUpServiceWrapper
-import pimonitor.evaluation.business.exports.BusinessesServiceWrapper
+import pimonitor.evaluation.businesses.exports.BusinessesServiceWrapper
 
 external interface ServiceConfiguration {
     var appId: String

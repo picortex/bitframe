@@ -1,6 +1,6 @@
 @file:JsExport
 
-package pimonitor.evaluation.business.forms
+package pimonitor.evaluation.businesses.forms
 
 import bitframe.presenters.fields.BooleanInputField
 import bitframe.presenters.fields.ButtonInputField

@@ -1,6 +1,6 @@
 @file:JsExport
 
-package pimonitor.evaluation.business
+package pimonitor.evaluation.businesses
 
 import bitframe.presenters.collections.Table
 import pimonitor.monitored.MonitoredBusiness

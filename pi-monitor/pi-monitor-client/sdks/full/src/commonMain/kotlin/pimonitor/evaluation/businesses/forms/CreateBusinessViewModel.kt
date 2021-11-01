@@ -1,4 +1,4 @@
-package pimonitor.evaluation.business.forms
+package pimonitor.evaluation.businesses.forms
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -9,10 +9,9 @@ import kotlinx.coroutines.launch
 import later.await
 import pimonitor.evaluation.businesses.BusinessesService
 import pimonitor.monitors.MonitorsService
-import pimonitor.monitors.Session
 import viewmodel.ViewModel
-import pimonitor.evaluation.business.forms.CreateBusinessIntent as Intent
-import pimonitor.evaluation.business.forms.CreateBusinessState as State
+import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
+import pimonitor.evaluation.businesses.forms.CreateBusinessState as State
 
 class CreateBusinessViewModel(
     private val monitorService: MonitorsService,

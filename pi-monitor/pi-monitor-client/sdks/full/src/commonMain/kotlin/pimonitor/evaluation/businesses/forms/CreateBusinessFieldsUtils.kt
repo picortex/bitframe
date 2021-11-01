@@ -1,10 +1,10 @@
-package pimonitor.evaluation.business.forms
+package pimonitor.evaluation.businesses.forms
 
 import bitframe.presenters.fields.BooleanInputField
 import bitframe.presenters.fields.ButtonInputField
 import bitframe.presenters.fields.TextInputField
 import pimonitor.monitors.Monitor
-import pimonitor.evaluation.business.forms.CreateBusinessIntent as Intent
+import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
 
 internal fun AddBusinessFormFields() = CreateBusinessFields(
     inviterIntroduction = null,

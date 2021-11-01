@@ -1,8 +1,8 @@
-package pimonitor.evaluation.business
+package pimonitor.evaluation.businesses
 
 import pimonitor.PiMonitorService
 import pimonitor.evaluation.businesses.exports.CreateBusinessScope
-import pimonitor.evaluation.business.forms.CreateBusinessState.*
+import pimonitor.evaluation.businesses.forms.CreateBusinessState.*
 import react.Props
 import react.RBuilder
 import react.fc
@@ -11,7 +11,7 @@ import reakt.ErrorBox
 import reakt.LoadingBox
 import reakt.SuccessBox
 import useViewModelState
-import pimonitor.evaluation.business.forms.CreateBusinessIntent as Intent
+import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
 
 private external interface AddBusinessProps : Props {
     var uid: String?

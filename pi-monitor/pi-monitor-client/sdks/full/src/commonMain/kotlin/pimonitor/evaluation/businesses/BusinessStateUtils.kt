@@ -1,4 +1,4 @@
-package pimonitor.evaluation.business
+package pimonitor.evaluation.businesses
 
 import bitframe.presenters.collections.tableOf
 import pimonitor.monitored.MonitoredBusiness

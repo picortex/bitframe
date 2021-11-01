@@ -1,4 +1,4 @@
-package pimonitor.evaluation.business
+package pimonitor.evaluation.businesses
 
 import pimonitor.PiMonitorService
 import react.RBuilder

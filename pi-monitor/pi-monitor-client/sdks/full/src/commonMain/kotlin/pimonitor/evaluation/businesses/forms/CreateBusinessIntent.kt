@@ -1,4 +1,4 @@
-package pimonitor.evaluation.business.forms
+package pimonitor.evaluation.businesses.forms
 
 import pimonitor.monitored.CreateMonitoredBusinessParams
 

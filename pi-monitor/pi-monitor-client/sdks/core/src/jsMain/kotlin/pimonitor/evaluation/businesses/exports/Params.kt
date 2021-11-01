@@ -1,6 +1,6 @@
 @file:JsExport
 
-package pimonitor.evaluation.business.exports
+package pimonitor.evaluation.businesses.exports
 
 external interface CreateBusinessFormParams {
     var businessName: String

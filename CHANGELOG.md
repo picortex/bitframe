@@ -1,3 +1,7 @@
+# 0.0.36
+## PiMonitor
+- [[PM177]](https://github.com/picortex/bitframe/issues/177) SDK modification
+
 # 0.0.32
 
 ## PiMonitor Authentication

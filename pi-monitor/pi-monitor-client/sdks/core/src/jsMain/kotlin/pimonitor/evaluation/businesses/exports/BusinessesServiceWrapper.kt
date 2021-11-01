@@ -1,7 +1,7 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.evaluation.business.exports
+package pimonitor.evaluation.businesses.exports
 
 import later.then
 import pimonitor.evaluation.businesses.BusinessesService
