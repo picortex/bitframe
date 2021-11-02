@@ -16,7 +16,7 @@ class BrowserCacheTest {
     private val config = BrowserCacheConfig(
         storage = sessionStorage
     )
-    private val cache: Cache<String> = BrowserCache(config)
+    private val cache: Cache = BrowserCache(config)
 
     @Test
     fun should_be_able_to_load_and_save_primitively_easily() = runTest {

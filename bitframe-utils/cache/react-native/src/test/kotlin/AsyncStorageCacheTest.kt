@@ -10,7 +10,7 @@ import later.await
 import kotlin.test.Test
 
 class AsyncStorageCacheTest {
-    private val cache: Cache<String> = AsyncStorageCache()
+    private val cache: Cache = AsyncStorageCache()
 
     @Test
     fun should_be_able_to_load_and_save_primitively_easily() = runTest {

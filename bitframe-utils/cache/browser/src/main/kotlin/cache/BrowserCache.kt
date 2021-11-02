@@ -9,7 +9,7 @@ import later.later
 
 class BrowserCache(
     override val config: BrowserCacheConfig = BrowserCacheConfig()
-) : Cache<String>(config) {
+) : Cache(config) {
     private val storage = config.storage
 
     private val scope = config.scope

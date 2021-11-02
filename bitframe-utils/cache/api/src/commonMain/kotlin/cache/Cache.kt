@@ -11,11 +11,11 @@ import later.later
 /**
  * An interface to be able to [Cache] different objects
  */
-abstract class Cache<K : Any>(open val config: CacheConfiguration) {
+abstract class Cache(open val config: CacheConfiguration) {
     /**
      * Should return the set of all available keys in the [Cache]
      */
-    abstract fun keys(): Later<Set<K>>
+    abstract fun keys(): Later<Set<String>>
 
     @PublishedApi
     internal val scope
@@ -33,7 +33,7 @@ abstract class Cache<K : Any>(open val config: CacheConfiguration) {
      * - on success: resolves the saved object as it was cached
      * - on failure: rejects with a [CacheSaveException]
      */
-    abstract fun <T> save(key: K, obj: T, serializer: KSerializer<T>): Later<T>
+    abstract fun <T> save(key: String, obj: T, serializer: KSerializer<T>): Later<T>
 
     /**
      * Load object [T] from the [Cache], that was saved with a [key] and its serializer [serializer]
@@ -42,7 +42,7 @@ abstract class Cache<K : Any>(open val config: CacheConfiguration) {
      * - on success: resolves to the cached object
      * - on failure: rejects with a [CacheLoadException]
      */
-    abstract fun <T> load(key: K, serializer: KSerializer<T>): Later<T>
+    abstract fun <T> load(key: String, serializer: KSerializer<T>): Later<T>
 
     /**
      * Save object [T] on to the [Cache] with a [key]
@@ -53,7 +53,7 @@ abstract class Cache<K : Any>(open val config: CacheConfiguration) {
      * - on success: resolves the saved object as it was cached
      * - on failure: rejects with a [CacheSaveException]
      */
-    inline fun <reified T> save(key: K, obj: T): Later<T> = scope.later {
+    inline fun <reified T> save(key: String, obj: T): Later<T> = scope.later {
         try {
             save(key, obj, serializer()).await()
         } catch (e: Throwable) {
@@ -71,7 +71,7 @@ abstract class Cache<K : Any>(open val config: CacheConfiguration) {
      * - on failure: resolves with a null
      */
     inline fun <reified T> saveOrNull(
-        key: K,
+        key: String,
         obj: T,
         serializer: KSerializer<T>? = null
     ): Later<T?> = scope.later {
@@ -91,7 +91,7 @@ abstract class Cache<K : Any>(open val config: CacheConfiguration) {
      * - on success: resolves the saved object as it was cached
      * - on failure: resolves with a null
      */
-    inline fun <reified T> load(key: K): Later<T> = scope.later {
+    inline fun <reified T> load(key: String): Later<T> = scope.later {
         try {
             load<T>(key, serializer()).await()
         } catch (e: Throwable) {
@@ -109,7 +109,7 @@ abstract class Cache<K : Any>(open val config: CacheConfiguration) {
      * - on failure: resolves with a null
      */
     inline fun <reified T> loadOrNull(
-        key: K,
+        key: String,
         serializer: KSerializer<T>? = null
     ): Later<T?> = scope.later {
         try {

@@ -8,7 +8,7 @@ import later.later
 
 class AsyncStorageCache(
     override val config: AsyncStorageCacheConfig = AsyncStorageCacheConfig()
-) : Cache<String>(config) {
+) : Cache(config) {
 
     private val storage = config.storage
 

@@ -13,7 +13,7 @@ import kotlin.test.Test
 
 class MockCacheTest {
 
-    private val cache: Cache<String> = MockCache()
+    private val cache: Cache = MockCache()
 
     @Test
     fun should_be_able_to_load_and_save_primitively_easily() = runTest {
