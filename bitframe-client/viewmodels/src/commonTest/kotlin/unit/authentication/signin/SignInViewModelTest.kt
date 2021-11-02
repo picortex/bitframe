@@ -6,6 +6,7 @@ import bitframe.authentication.signin.*
 import bitframe.events.InMemoryEventBus
 import bitframe.presenters.feedbacks.FormFeedback.Loading
 import bitframe.presenters.feedbacks.FormFeedback.Success
+import cache.MockCache
 import expect.expect
 import expect.toBe
 import kotlinx.coroutines.runTest
@@ -15,7 +16,7 @@ import kotlin.test.Test
 class SignInViewModelTest {
     val bus = InMemoryEventBus()
     private val service = BitframeTestClientImpl(bus, TestClientConfiguration.of("app-id"))
-    private val vm = SignInViewModel(service.signIn)
+    private val vm = SignInViewModel(service.signIn, MockCache())
 
     @Test
     fun should_be_in_a_show_form_state_with_null_credentials_when_intent_with_null_credentials_is_posted() = runTest {
@@ -44,6 +45,7 @@ class SignInViewModelTest {
         val state = SignInState.Form(SignInFormFields(), null)
         vm.expect(SignInIntent.Submit(credentials)).toGoThrough(
             state.copy(status = Loading("Signing you in, please wait . . .")),
+            state.copy(status = Loading("Saving your session for next login")),
             state.copy(status = Success("Logged in successfully"))
         )
     }

@@ -12,6 +12,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(project(":cache-test"))
                 api(project(":pi-monitor-service-core"))
                 api(project(":bitframe-core"))
                 api(project(":bitframe-service-core"))

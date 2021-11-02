@@ -6,7 +6,7 @@ import later.await
 import pimonitor.PiMonitorService
 import pimonitor.authentication.signup.SignUpParams
 import pimonitor.authentication.signup.toCredentials
-import pimonitor.evaluation.business.forms.CreateBusinessViewModel
+import pimonitor.evaluation.businesses.forms.CreateBusinessViewModel
 import pimonitor.monitored.CreateMonitoredBusinessParams
 import testing.IntegrationTest
 import testing.annotations.Lifecycle
@@ -14,8 +14,8 @@ import testing.annotations.TestInstance
 import testing.annotations.Testcontainers
 import viewmodel.expect
 import kotlin.test.Test
-import pimonitor.evaluation.business.forms.CreateBusinessIntent as Intent
-import pimonitor.evaluation.business.forms.CreateBusinessState as State
+import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
+import pimonitor.evaluation.businesses.forms.CreateBusinessState as State
 
 @Testcontainers
 @TestInstance(Lifecycle.PER_CLASS)

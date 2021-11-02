@@ -6,6 +6,7 @@ import bitframe.authentication.users.User
 import bitframe.events.Event
 import bitframe.events.EventBus
 import bitframe.service.config.ServiceConfig
+import cache.Cache
 import later.Later
 import later.await
 import later.later
@@ -14,6 +15,7 @@ import kotlin.js.JsExport
 
 abstract class SignInService(
     open val bus: EventBus,
+    open val cache: Cache,
     protected open val config: ServiceConfig
 ) {
     val session: Live<Session> = Live(Session.Unknown)
@@ -21,6 +23,8 @@ abstract class SignInService(
     protected val scope get() = config.scope
 
     companion object {
+        const val SESSION_CACHE_KEY = "bitframe.session"
+        const val CREDENTIALS_CACHE_KEY = "bitframe.credentials"
         const val SIGN_IN_EVENT_ID = "bitframe.authentication.sign.in"
         const val SIGN_OUT_EVENT_ID = "bitframe.authentication.sign.out"
 
@@ -43,6 +47,8 @@ abstract class SignInService(
         if (conundrum.spaces.size == 1) {
             val (user, spaces) = conundrum
             val s = Session.SignedIn(App(config.appId), spaces.first(), user)
+            cache.save(CREDENTIALS_CACHE_KEY, credentials).await()
+            cache.save(SESSION_CACHE_KEY, s).await()
             session.value = s
             bus.dispatch(signInEvent(s))
         }
@@ -70,6 +76,7 @@ abstract class SignInService(
         }.also {
             session.value = it
             bus.dispatch(signInEvent(it))
+            cache.save(SESSION_CACHE_KEY, it).await()
         }
     }
 }

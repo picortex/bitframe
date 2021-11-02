@@ -9,6 +9,7 @@ import bitframe.authentication.users.UsersDao
 import bitframe.daos.conditions.contains
 import bitframe.events.EventBus
 import bitframe.service.config.ServiceConfig
+import cache.Cache
 import later.Later
 import later.await
 import later.later
@@ -17,9 +18,10 @@ open class SignInServiceImpl(
     private val usersDao: UsersDao,
     private val spacesDao: SpacesDao,
     override val config: ServiceConfig,
+    override val cache: Cache,
     override val bus: EventBus
-) : SignInService(bus, config) {
-    constructor(provider: AuthenticationDaoProvider, config: ServiceConfig, bus: EventBus) : this(provider.users, provider.spaces, config, bus)
+) : SignInService(bus, cache, config) {
+    constructor(provider: AuthenticationDaoProvider, config: ServiceConfig, cache: Cache, bus: EventBus) : this(provider.users, provider.spaces, config, cache, bus)
 
     override fun executeSignIn(credentials: SignInCredentials): Later<LoginConundrum> = scope.later {
         val matches = usersDao.all(where = "contacts" contains credentials.alias).await()

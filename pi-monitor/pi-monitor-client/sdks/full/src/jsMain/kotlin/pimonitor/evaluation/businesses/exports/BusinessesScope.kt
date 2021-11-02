@@ -4,13 +4,13 @@
 package pimonitor.evaluation.businesses.exports
 
 import pimonitor.PiMonitorService
-import pimonitor.evaluation.business.BusinessViewModel
+import pimonitor.evaluation.businesses.BusinessViewModel
 import pimonitor.evaluation.businesses.BusinessesService
 import pimonitor.monitored.MonitoredBusiness
 import useEventHandler
 import viewmodel.ViewModel
-import pimonitor.evaluation.business.BusinessesIntent as Intent
-import pimonitor.evaluation.business.BusinessesState as State
+import pimonitor.evaluation.businesses.BusinessesIntent as Intent
+import pimonitor.evaluation.businesses.BusinessesState as State
 
 class BusinessesScope(val service: PiMonitorService) {
     val viewModel: ViewModel<Intent, State> by lazy { BusinessViewModel(service.businesses) }

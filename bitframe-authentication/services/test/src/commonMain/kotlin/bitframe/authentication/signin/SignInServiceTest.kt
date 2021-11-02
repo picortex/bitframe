@@ -3,6 +3,7 @@ package bitframe.authentication.signin
 import bitframe.authentication.InMemoryAuthenticationDaoProvider
 import bitframe.events.InMemoryEventBus
 import bitframe.service.config.KtorClientConfiguration
+import cache.MockCache
 import expect.expect
 import expect.expectFailure
 import kotlinx.coroutines.runTest
@@ -19,9 +20,10 @@ open class SignInServiceTest : IntegrationTest() {
     val provider = InMemoryAuthenticationDaoProvider()
     open val service: SignInService by lazy {
         val bus = InMemoryEventBus()
+        val cache = MockCache()
         when (val cfg = config) {
-            is KtorClientConfiguration -> SignInServiceKtor(cfg, bus)
-            else -> SignInServiceImpl(provider, cfg, bus)
+            is KtorClientConfiguration -> SignInServiceKtor(cfg, cache, bus)
+            else -> SignInServiceImpl(provider, cfg, cache, bus)
         }
     }
 

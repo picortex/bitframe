@@ -39,6 +39,8 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
+                api(project(":cache-browser"))
+                api(project(":cache-react-native"))
                 api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
@@ -73,6 +75,7 @@ npmPublishing {
                 dependencies {
                     "platform" to "1.3.6"
                     "@js-joda/core" to "4.0.0"
+                    "@react-native-async-storage/async-storage" to "1.15.9"
                 }
                 repository {
                     type = "git"

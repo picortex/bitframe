@@ -24,5 +24,5 @@ open class BitframeTestClientImpl(
 
     override val spaces: SpacesService = SpacesServiceImpl(config, spacesDao, usersDao)
     override val users: UsersService = UsersServiceImpl(usersDao, spacesDao, config)
-    override val signIn: SignInService = SignInServiceImpl(usersDao, spacesDao, config, bus)
+    override val signIn: SignInService = SignInServiceImpl(usersDao, spacesDao, config, cache, bus)
 }

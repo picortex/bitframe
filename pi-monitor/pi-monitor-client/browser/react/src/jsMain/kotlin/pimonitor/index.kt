@@ -9,8 +9,8 @@ import kotlinx.extensions.By
 import kotlinx.extensions.get
 import org.w3c.dom.HTMLDivElement
 import pimonitor.authentication.signup.SignUp
-import pimonitor.evaluation.business.BusinessContainer
-import pimonitor.evaluation.business.InviteBusiness
+import pimonitor.evaluation.businesses.BusinessContainer
+import pimonitor.evaluation.businesses.InviteBusiness
 import reakt.setContent
 
 fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
