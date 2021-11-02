@@ -1,6 +1,7 @@
 package integration.authentication
 
 import bitframe.service.config.KtorClientConfiguration
+import cache.MockCache
 import expect.expect
 import pimonitor.PiMonitorService
 import pimonitor.PiMonitorServiceKtor
@@ -15,9 +16,10 @@ import kotlin.test.Test
 class SignUpServiceIntegrationTest : SignUpServiceTest() {
 
     override val service: PiMonitorService by lazy {
+        val cache = MockCache()
         when (val cfg = config) {
-            is KtorClientConfiguration -> PiMonitorServiceKtor(cfg)
-            else -> PiMonitorServiceStub(StubServiceConfig(cfg.appId))
+            is KtorClientConfiguration -> PiMonitorServiceKtor(cfg, cache)
+            else -> PiMonitorServiceStub(StubServiceConfig(cfg.appId), cache)
         }
     }
 

@@ -4,12 +4,10 @@
 package pimonitor.evaluation.businesses.exports
 
 import pimonitor.PiMonitorService
-import pimonitor.evaluation.business.exports.CreateBusinessFormParams
-import pimonitor.evaluation.business.exports.toParams
-import pimonitor.evaluation.business.forms.CreateBusinessViewModel
+import pimonitor.evaluation.businesses.forms.CreateBusinessViewModel
 import viewmodel.ViewModel
-import pimonitor.evaluation.business.forms.CreateBusinessIntent as Intent
-import pimonitor.evaluation.business.forms.CreateBusinessState as State
+import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
+import pimonitor.evaluation.businesses.forms.CreateBusinessState as State
 
 class CreateBusinessScope(service: PiMonitorService) {
     val viewModel: ViewModel<Intent, State> by lazy { CreateBusinessViewModel(service.monitors, service.businesses) }

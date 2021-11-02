@@ -12,6 +12,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(project(":cache-api"))
                 api(project(":bitframe-core"))
                 api(project(":bitframe-authentication-service-core"))
                 api(asoft("platform-core", vers.asoft.platform))
