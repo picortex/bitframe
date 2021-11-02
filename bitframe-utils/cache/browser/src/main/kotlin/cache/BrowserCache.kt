@@ -3,6 +3,7 @@
 package cache
 
 import cache.exceptions.CacheLoadException
+import cache.exceptions.CacheMissException
 import kotlinx.coroutines.delay
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
@@ -22,10 +23,13 @@ class BrowserCache(
 
     private val json = config.json
 
-    override val keys: Set<String>
-        get() = buildSet {
+    override fun size() = scope.later { storage.length }
+
+    override fun keys() = scope.later {
+        buildSet {
             for (i in 0 until storage.length) add(storage.key(i) as String)
         }
+    }
 
     override fun <T> save(key: String, obj: T, serializer: KSerializer<T>) = scope.later {
         storage.setItem(key, json.encodeToString(serializer, obj))
@@ -33,7 +37,7 @@ class BrowserCache(
     }
 
     override fun <T> load(key: String, serializer: KSerializer<T>): Later<T> = scope.later {
-        val js = storage.getItem(key) ?: throw CacheLoadException("Object of with key=$key was not found in the cache")
+        val js = storage.getItem(key) ?: throw CacheMissException(key)
         json.decodeFromString(serializer, js)
     }
 }

@@ -1,6 +1,7 @@
 package cache
 
 import cache.exceptions.CacheLoadException
+import cache.exceptions.CacheMissException
 import kotlinx.coroutines.delay
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.serializer
@@ -17,7 +18,17 @@ class MockCache<K : Any>(
 
     private val scope get() = config.scope
 
-    override val keys: Set<K> get() = cache.keys
+    override fun keys(): Later<Set<K>> = scope.later {
+        delay(config.simulationTime)
+        cache.keys
+    }
+
+    override fun size(): Later<Int> = scope.later {
+        delay(config.simulationTime)
+        cache.size
+    }
+
+    val keys: Set<K> get() = cache.keys
 
     override fun <T> save(key: K, obj: T, serializer: KSerializer<T>) = scope.later {
         delay(config.simulationTime)
@@ -27,7 +38,7 @@ class MockCache<K : Any>(
 
     override fun <T> load(key: K, serializer: KSerializer<T>): Later<T> = scope.later {
         delay(config.simulationTime)
-        val obj = cache[key] ?: throw CacheLoadException("Object of with key=$key was not found in the cache")
+        val obj = cache[key] ?: throw CacheMissException(key)
         obj as T
     }
 }

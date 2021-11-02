@@ -15,7 +15,7 @@ abstract class Cache<K : Any>(open val config: CacheConfiguration) {
     /**
      * Should return the set of all available keys in the [Cache]
      */
-    abstract val keys: Set<K>
+    abstract fun keys(): Later<Set<K>>
 
     @PublishedApi
     internal val scope
@@ -24,7 +24,7 @@ abstract class Cache<K : Any>(open val config: CacheConfiguration) {
     /**
      * Should return the size of the [Cache] which should ideally equal the number of [keys]
      */
-    open val size get() = keys.size
+    abstract fun size(): Later<Int>
 
     /**
      * Save object [T] on to the [Cache] with a [key] and its serializer [serializer]
@@ -95,7 +95,7 @@ abstract class Cache<K : Any>(open val config: CacheConfiguration) {
         try {
             load<T>(key, serializer()).await()
         } catch (e: Throwable) {
-            throw CacheLoadException(cause = e)
+            throw CacheLoadException(key, cause = e)
         }
     }
 
