@@ -2,17 +2,10 @@
 
 package cache
 
-import cache.exceptions.CacheLoadException
 import cache.exceptions.CacheMissException
-import kotlinx.coroutines.delay
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.serializer
 import later.Later
 import later.later
-import later.then
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 class BrowserCache(
     override val config: BrowserCacheConfig = BrowserCacheConfig()
