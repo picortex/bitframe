@@ -1,9 +1,121 @@
-@file:JsExport
-
 package cache
 
-import kotlin.js.JsExport
+import cache.exceptions.CacheLoadException
+import cache.exceptions.CacheSaveException
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.serializer
+import later.Later
+import later.await
+import later.later
 
-abstract class Cache {
+/**
+ * An interface to be able to [Cache] different objects
+ */
+abstract class Cache<K : Any>(open val config: CacheConfiguration) {
+    /**
+     * Should return the set of all available keys in the [Cache]
+     */
+    abstract val keys: Set<K>
 
+    @PublishedApi
+    internal val scope
+        get() = config.scope
+
+    /**
+     * Should return the size of the [Cache] which should ideally equal the number of [keys]
+     */
+    open val size get() = keys.size
+
+    /**
+     * Save object [T] on to the [Cache] with a [key] and its serializer [serializer]
+     *
+     * @return a [Later] that
+     * - on success: resolves the saved object as it was cached
+     * - on failure: rejects with a [CacheSaveException]
+     */
+    abstract fun <T> save(key: K, obj: T, serializer: KSerializer<T>): Later<T>
+
+    /**
+     * Load object [T] from the [Cache], that was saved with a [key] and its serializer [serializer]
+     *
+     * @return a [Later] that
+     * - on success: resolves to the cached object
+     * - on failure: rejects with a [CacheLoadException]
+     */
+    abstract fun <T> load(key: K, serializer: KSerializer<T>): Later<T>
+
+    /**
+     * Save object [T] on to the [Cache] with a [key]
+     *
+     * @see [save]
+     *
+     * @return a [Later] that
+     * - on success: resolves the saved object as it was cached
+     * - on failure: rejects with a [CacheSaveException]
+     */
+    inline fun <reified T> save(key: K, obj: T): Later<T> = scope.later {
+        try {
+            save(key, obj, serializer()).await()
+        } catch (e: Throwable) {
+            throw CacheSaveException(cause = e)
+        }
+    }
+
+    /**
+     * Save object [T] on to the [Cache] with a [key] and an optional [serializer]
+     *
+     * @see [Cache.save]
+     *
+     * @return [Later] that
+     * - on success: resolves the saved object as it was cached
+     * - on failure: resolves with a null
+     */
+    inline fun <reified T> saveOrNull(
+        key: K,
+        obj: T,
+        serializer: KSerializer<T>? = null
+    ): Later<T?> = scope.later {
+        try {
+            save(key, obj, serializer ?: serializer()).await()
+        } catch (e: Throwable) {
+            null
+        }
+    }
+
+    /**
+     * Load object [T] from the [Cache], that was saved with a [key] with an optional serializer [serializer]
+     *
+     * @see [load]
+     *
+     * @return [Later] that
+     * - on success: resolves the saved object as it was cached
+     * - on failure: resolves with a null
+     */
+    inline fun <reified T> load(key: K): Later<T> = scope.later {
+        try {
+            load<T>(key, serializer()).await()
+        } catch (e: Throwable) {
+            throw CacheLoadException(cause = e)
+        }
+    }
+
+    /**
+     * Load object [T] from the [Cache] with a [key] and an optional [serializer]
+     *
+     * @see [Cache.load]
+     *
+     * @return a [Later] that
+     * - on success: resolves the saved object as it was cached
+     * - on failure: resolves with a null
+     */
+    inline fun <reified T> loadOrNull(
+        key: K,
+        serializer: KSerializer<T>? = null
+    ): Later<T?> = scope.later {
+        try {
+            load(key, serializer ?: serializer()).await()
+        } catch (e: Throwable) {
+            null
+        }
+    }
 }

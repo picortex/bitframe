@@ -13,8 +13,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(project(":cache-api"))
                 api(asoft("later-ktx", vers.asoft.later))
-                api(kotlinx("serialization-core", vers.kotlinx.serialization))
+            }
+        }
+
+        val commonTest by getting {
+            dependencies {
+                implementation(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
     }
