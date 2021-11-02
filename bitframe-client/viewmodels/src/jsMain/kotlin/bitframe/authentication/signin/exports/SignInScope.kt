@@ -17,6 +17,10 @@ class SignInScope(service: BitframeService) {
         SignInViewModel(service.signIn, service.cache)
     }
 
+    val initForm = {
+        viewModel.post(Intent.InitForm)
+    }
+    
     val submit = { cred: SignInCredentials ->
         viewModel.post(Intent.Submit(cred.toSignInCredentials()))
     }

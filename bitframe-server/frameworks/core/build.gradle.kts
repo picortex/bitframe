@@ -26,6 +26,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
+                implementation(project(":cache-test"))
                 implementation(project(":bitframe-server-framework-test"))
                 implementation(project(":bitframe-server-dao-inmemory"))
                 implementation(project(":bitframe-events-inmemory"))

@@ -19,11 +19,8 @@ class SignInViewModel(
 
     private val recoveryTime = 3000
 
-    init {
-        coroutineScope.initialize()
-    }
-
     override fun CoroutineScope.execute(i: SignInIntent): Any = when (i) {
+        is SignInIntent.InitForm -> initialize()
         is SignInIntent.Submit -> signIn(i)
         is SignInIntent.Resolve -> resolve(i)
     }

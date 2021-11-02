@@ -45,6 +45,7 @@ class SignInViewModelTest {
         val state = SignInState.Form(SignInFormFields(), null)
         vm.expect(SignInIntent.Submit(credentials)).toGoThrough(
             state.copy(status = Loading("Signing you in, please wait . . .")),
+            state.copy(status = Loading("Saving your session for next login")),
             state.copy(status = Success("Logged in successfully"))
         )
     }

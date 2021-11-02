@@ -15,5 +15,5 @@ open class BitframeKtorClient(
     override val cache: Cache get() = TODO("Not yet implemented")
     override val spaces: SpacesService get() = TODO("Not yet implemented")
     override val users: UsersService get() = TODO("Not yet implemented")
-    override val signIn: SignInService = SignInServiceKtor(config, bus)
+    override val signIn: SignInService = SignInServiceKtor(config, cache, bus)
 }

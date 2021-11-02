@@ -1,3 +1,5 @@
 package bitframe.panel
 
-sealed class PanelIntent
+sealed class PanelIntent {
+    object InitPanel : PanelIntent()
+}

@@ -6,7 +6,6 @@ import bitframe.BitframeService
 import bitframe.authentication.signin.Session
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.signin.SignInService
-import bitframe.cache.CacheKey
 import cache.Cache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
@@ -24,11 +23,11 @@ class PanelViewModel(
     val cache: Cache
 ) : ViewModel<Intent, State>(State.Loading("Setting up your workspace")) {
 
-    init {
-        coroutineScope.initiate()
+    override fun CoroutineScope.execute(i: Intent) = when (i) {
+        Intent.InitPanel -> initialize()
     }
 
-    private fun CoroutineScope.initiate() = launch {
+    private fun CoroutineScope.initialize() = launch {
         flow {
             emit(State.Loading("Retrieving your last session"))
             val signInSession = service.signIn.currentSession
@@ -50,9 +49,5 @@ class PanelViewModel(
         }.collect {
             ui.value = it
         }
-    }
-    
-    override fun CoroutineScope.execute(i: Intent): Any {
-        TODO("Not yet implemented")
     }
 }

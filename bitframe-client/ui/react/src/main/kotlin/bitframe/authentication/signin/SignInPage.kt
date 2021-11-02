@@ -23,6 +23,8 @@ private val SignInPage = fc<SignInPageProps> { props ->
     val viewModel = scope.viewModel
     val useSignInEvent = scope.useSignInEvent
 
+    useEffectOnce { scope.initForm() }
+
     useSignInEvent {
         props.history.push("/panel")
     }

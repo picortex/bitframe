@@ -10,6 +10,7 @@ import bitframe.authentication.users.UsersDaoInMemory
 import bitframe.events.InMemoryEventBus
 import bitframe.service.config.KtorClientConfiguration
 import bitframe.service.config.ServiceConfig
+import cache.MockCache
 import expect.expect
 import expect.toBe
 import testing.pimonitor.APP_ID
@@ -20,6 +21,7 @@ class SignInServiceUnitTest : SignInServiceTest() {
         SignInServiceImpl(
             provider = InMemoryAuthenticationDaoProvider(),
             config = ServiceConfig(APP_ID),
+            cache = MockCache(),
             bus = InMemoryEventBus()
         )
     }

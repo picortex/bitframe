@@ -10,4 +10,6 @@ class PanelScope(val service: BitframeService) {
     val viewModel: ViewModel<PanelIntent, PanelState> by lazy {
         PanelViewModel(service, service.cache)
     }
+
+    val initPanel = { viewModel.post(PanelIntent.InitPanel) }
 }

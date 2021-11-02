@@ -9,14 +9,16 @@ import bitframe.authentication.users.UsersServiceImpl
 import bitframe.events.EventBus
 import bitframe.server.data.DAOProvider
 import bitframe.service.config.ServiceConfig
+import cache.Cache
 
 class AuthenticationServiceImpl(
     val bus: EventBus,
+    cache: Cache,
     private val usersDao: UsersDao,
     private val spacesDao: SpacesDao,
     private val config: ServiceConfig,
-    override val signIn: SignInService = SignInServiceImpl(usersDao, spacesDao, config, bus),
+    override val signIn: SignInService = SignInServiceImpl(usersDao, spacesDao, config, cache, bus),
     override val users: UsersService = UsersServiceImpl(usersDao, spacesDao, config)
 ) : AuthenticationService {
-    constructor(provider: DAOProvider, config: ServiceConfig, bus: EventBus) : this(bus,provider.users, provider.spaces, config)
+    constructor(provider: DAOProvider, config: ServiceConfig, cache: Cache, bus: EventBus) : this(bus, cache, provider.users, provider.spaces, config)
 }
