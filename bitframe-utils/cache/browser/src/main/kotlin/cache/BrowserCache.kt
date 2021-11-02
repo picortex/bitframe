@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalStdlibApi::class)
-
 package cache
 
 import cache.exceptions.CacheMissException
@@ -18,6 +16,7 @@ class BrowserCache(
 
     override fun size() = scope.later { storage.length }
 
+    @OptIn(ExperimentalStdlibApi::class)
     override fun keys() = scope.later {
         buildSet {
             for (i in 0 until storage.length) add(storage.key(i) as String)

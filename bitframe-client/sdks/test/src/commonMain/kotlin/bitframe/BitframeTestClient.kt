@@ -4,6 +4,8 @@ import bitframe.authentication.TestClientConfiguration
 import bitframe.authentication.signin.SignInService
 import bitframe.authentication.users.UsersService
 import bitframe.events.EventBus
+import cache.Cache
+import cache.MockCache
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
@@ -28,6 +30,7 @@ abstract class BitframeTestClient : BitframeService() {
         fun getDefault(bus: EventBus) = invoke(CONFIGURATION, bus)
     }
 
+    override val cache: Cache = MockCache()
     abstract override val signIn: SignInService
     abstract override val users: UsersService
 }

@@ -3,24 +3,29 @@
 
 package bitframe.authentication.signin.exports
 
+import bitframe.BitframeService
 import bitframe.authentication.signin.*
 import bitframe.authentication.spaces.Space
 import useEventHandler
 import viewmodel.ViewModel
+import bitframe.authentication.signin.SignInIntent as Intent
+import bitframe.authentication.signin.SignInState as State
 
-class SignInScope(service: SignInService) {
+class SignInScope(service: BitframeService) {
 
-    val viewModel: ViewModel<SignInIntent, SignInState> by lazy { SignInViewModel(service) }
+    val viewModel: ViewModel<Intent, State> by lazy {
+        SignInViewModel(service.signIn, service.cache)
+    }
 
     val submit = { cred: SignInCredentials ->
-        viewModel.post(SignInIntent.Submit(cred.toSignInCredentials()))
+        viewModel.post(Intent.Submit(cred.toSignInCredentials()))
     }
 
     val resolve = { space: Space ->
-        viewModel.post(SignInIntent.Resolve(space))
+        viewModel.post(Intent.Resolve(space))
     }
 
     val useSignInEvent: (callback: (Session.SignedIn) -> Unit) -> Unit = {
-        useEventHandler(service.bus, SignInService.SIGN_IN_EVENT_ID, it)
+        useEventHandler(service.signIn.bus, SignInService.SIGN_IN_EVENT_ID, it)
     }
 }

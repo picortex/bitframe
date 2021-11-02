@@ -39,6 +39,8 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
+                api(project(":cache-browser"))
+                api(project(":cache-react-native"))
                 api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
