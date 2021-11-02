@@ -1,8 +1,11 @@
 # 0.0.36
+
 ## PiMonitor
+
 - [[PM177]](https://github.com/picortex/bitframe/issues/177) SDK modification
 
 ## Bitframe
+
 - [[BF176]](https://github.com/picortex/bitframe/issues/176) Storage session cache for web and mobile
 
 # 0.0.32
