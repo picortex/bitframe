@@ -9,8 +9,7 @@ import bitframe.authentication.users.UsersService
 import bitframe.events.EventBus
 import bitframe.events.InMemoryEventBus
 import cache.Cache
-import pimonitor.client.authentication.signup.SignUpService
-import pimonitor.evaluation.businesses.BusinessesService
+import pimonitor.server.authentication.signup.SignUpService
 import pimonitor.monitors.MonitorsService
 import kotlin.js.JsExport
 

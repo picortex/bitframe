@@ -1,4 +1,4 @@
-package pimonitor.client.authentication.signup
+package pimonitor.server.authentication.signup
 
 import bitframe.authentication.apps.App
 import later.Later

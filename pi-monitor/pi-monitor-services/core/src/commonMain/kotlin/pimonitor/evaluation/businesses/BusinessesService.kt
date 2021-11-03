@@ -7,6 +7,7 @@ import bitframe.events.EventBus
 import bitframe.service.config.ServiceConfig
 import later.Later
 import later.await
+import later.later
 import pimonitor.monitored.CreateMonitoredBusinessParams
 import pimonitor.monitored.MonitoredBusiness
 import pimonitor.monitors.MonitorRef
@@ -14,9 +15,7 @@ import pimonitor.monitors.MonitorsService
 import kotlin.js.JsExport
 
 abstract class BusinessesService(
-    protected open val bus: EventBus,
-    protected open val monitorsService: MonitorsService,
-    protected open val config: ServiceConfig
+    val config: BusinessesServiceConfig
 ) {
     companion object {
         const val CREATE_BUSINESS_EVENT_ID = "pimonitor.evaluation.business.create"
@@ -24,6 +23,8 @@ abstract class BusinessesService(
     }
 
     protected val scope get() = config.scope
+    protected val monitorsService get() = config.monitorsService
+    protected val bus get() = config.bus
 
     abstract fun all(): Later<List<MonitoredBusiness>>
 

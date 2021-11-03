@@ -79,6 +79,8 @@ includeSubs(base = "pi-monitor-service", path = "pi-monitor/pi-monitor-services"
 
 includeSubs(base = "pi-monitor-service-client", path = "pi-monitor/pi-monitor-services/client", "core")
 
+includeSubs(base = "pi-monitor-service-server", path = "pi-monitor/pi-monitor-services/server", "core")
+
 includeSubs(base = "pi-monitor-client-sdk", path = "pi-monitor/pi-monitor-client/sdks", "core", "full")
 
 includeSubs(base = "pi-monitor-client", path = "pi-monitor/pi-monitor-client", "test")
