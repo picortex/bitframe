@@ -4,7 +4,6 @@ import bitframe.authentication.signin.SignInService
 import bitframe.authentication.spaces.SpacesDao
 import bitframe.authentication.users.UsersDao
 import bitframe.authentication.users.UsersService
-import bitframe.authentication.users.UsersServiceImpl
 import bitframe.events.EventBus
 import bitframe.server.data.DAOProvider
 import bitframe.service.config.ServiceConfig

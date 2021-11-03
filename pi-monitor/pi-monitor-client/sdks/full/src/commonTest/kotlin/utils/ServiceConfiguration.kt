@@ -1,14 +1,13 @@
 package utils
 
-import pimonitor.PiMonitorService
 import pimonitor.PiMonitorServiceStub
-import pimonitor.StubServiceConfig
+import pimonitor.PiMonitorServiceStubConfig
 
-private val DEFAULT_TEST_CLIENT_CONFIG = StubServiceConfig(
+private val DEFAULT_TEST_CLIENT_CONFIG = PiMonitorServiceStubConfig(
     appId = "test-app-default"
 )
 
-private val DELAYING_TEST_CLIENT_CONFIG = StubServiceConfig(
+private val DELAYING_TEST_CLIENT_CONFIG = PiMonitorServiceStubConfig(
     appId = "test-app-delayer",
     simulationTime = 3000
 )

@@ -5,15 +5,16 @@ import bitframe.authentication.client.signin.SignInServiceKtor
 import bitframe.authentication.client.signin.SignInServiceKtorConfig
 import bitframe.authentication.spaces.SpacesService
 import bitframe.authentication.users.UsersService
+import bitframe.client.BitframeService
 import bitframe.events.EventBus
 import bitframe.service.client.config.KtorClientConfiguration
 import cache.Cache
 
 open class BitframeKtorClient(
-    val bus: EventBus,
-    val config: KtorClientConfiguration
+    val config: BitframeKtorServiceConfig
 ) : BitframeService() {
-    override val cache: Cache get() = TODO("Not yet implemented")
+    val cache get() = config.cache
+    val bus get() = config.bus
     override val spaces: SpacesService get() = TODO("Not yet implemented")
     override val users: UsersService get() = TODO("Not yet implemented")
     override val signIn: SignInService = SignInServiceKtor(

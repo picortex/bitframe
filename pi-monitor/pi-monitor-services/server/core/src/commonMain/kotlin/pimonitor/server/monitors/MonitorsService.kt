@@ -1,24 +1,22 @@
 package pimonitor.server.monitors
 
-import bitframe.authentication.signin.Session
 import bitframe.authentication.users.UserRef
 import bitframe.daos.conditions.isEqualTo
-import bitframe.service.config.ServiceConfig
 import later.Later
 import later.await
-import live.Live
+import later.later
+import pimonitor.monitors.Monitor
+import pimonitor.monitors.MonitorsService
 
 class MonitorsService(
-    override val signInSession: Live<Session>,
-    private val dao: MonitorDao,
-    override val config: ServiceConfig
-) : MonitorsService(signInSession, config) {
-    init {
-        watchSignInSession()
-    }
+    override val config: MonitorsServiceConfig
+) : MonitorsService(config) {
 
-    override fun load(uid: String): Later<Monitor?> = scope.later{
-        dao.all().await().find { it.uid==uid }
+    private val dao get() = config.dao
+    private val scope get() = config.scope
+
+    override fun load(uid: String): Later<Monitor?> = scope.later {
+        dao.all().await().find { it.uid == uid }
     }
 
     override fun monitor(with: UserRef) = scope.later {

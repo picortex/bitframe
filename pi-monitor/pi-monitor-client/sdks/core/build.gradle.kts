@@ -21,8 +21,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":pi-monitor-core"))
-                api(project(":pi-monitor-service-ktor"))
-                api(project(":pi-monitor-service-stub"))
+                api(project(":pi-monitor-service-client-ktor"))
+                api(project(":pi-monitor-service-client-stub"))
                 api(kotlinx("datetime", vers.kotlinx.datetime))
                 api(asoft("logging-console", vers.asoft.logging))
                 api(asoft("name-generator", vers.asoft.contacts))

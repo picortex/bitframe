@@ -15,7 +15,7 @@ import pimonitor.monitors.MonitorsService
 import kotlin.js.JsExport
 
 abstract class BusinessesService(
-    val config: BusinessesServiceConfig
+    open val config: BusinessesServiceConfig
 ) {
     companion object {
         const val CREATE_BUSINESS_EVENT_ID = "pimonitor.evaluation.business.create"
@@ -23,7 +23,6 @@ abstract class BusinessesService(
     }
 
     protected val scope get() = config.scope
-    protected val monitorsService get() = config.monitorsService
     protected val bus get() = config.bus
 
     abstract fun all(): Later<List<MonitoredBusiness>>
@@ -35,7 +34,7 @@ abstract class BusinessesService(
 
     fun create(
         params: CreateMonitoredBusinessParams,
-        monitorRef: MonitorRef = monitorsService.currentMonitor.ref()
+        monitorRef: MonitorRef
     ) = scope.later {
         val business = executeCreate(params, monitorRef).await()
         bus.dispatch(createBusinessEvent(business))

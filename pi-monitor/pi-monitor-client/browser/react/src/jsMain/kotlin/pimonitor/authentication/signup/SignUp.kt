@@ -8,7 +8,7 @@ import kotlinx.extensions.onDesktop
 import kotlinx.extensions.onMobile
 import kotlinx.extensions.text
 import kotlinx.html.InputType
-import pimonitor.PiMonitorService
+import pimonitor.client.PiMonitorService
 import pimonitor.authentication.signup.exports.SignUpScope
 import react.Props
 import react.RBuilder

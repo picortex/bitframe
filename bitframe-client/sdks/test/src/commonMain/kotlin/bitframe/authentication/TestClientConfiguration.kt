@@ -1,7 +1,6 @@
 package bitframe.authentication
 
 import bitframe.daos.config.InMemoryDaoConfig
-import bitframe.service.config.ClientConfiguration
 import bitframe.service.config.ServiceConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

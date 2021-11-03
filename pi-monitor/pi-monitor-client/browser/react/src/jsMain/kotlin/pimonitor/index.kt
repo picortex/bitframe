@@ -16,8 +16,8 @@ import reakt.setContent
 fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
     val client = client(jso {
         appId = "test-client"
-//        url = "http://localhost:8080"
-        simulationTime = 1500
+        url = "http://localhost:8080"
+//        simulationTime = 1500
     })
     val version: String by konfig()
     Bitframe(

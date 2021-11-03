@@ -2,15 +2,16 @@
 
 package pimonitor
 
-import bitframe.BitframeService
+import bitframe.client.BitframeService
 import bitframe.authentication.client.signin.SignInService
 import bitframe.authentication.spaces.SpacesService
 import bitframe.authentication.users.UsersService
 import bitframe.events.EventBus
 import bitframe.events.InMemoryEventBus
 import cache.Cache
-import pimonitor.server.authentication.signup.SignUpService
 import pimonitor.monitors.MonitorsService
+import pimonitor.server.authentication.signup.SignUpService
+import pimonitor.server.businesses.BusinessesService
 import kotlin.js.JsExport
 
 abstract class PiMonitorService(

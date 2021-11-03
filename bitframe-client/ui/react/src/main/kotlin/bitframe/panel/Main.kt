@@ -1,20 +1,15 @@
 package bitframe.panel
 
-import bitframe.BitframeService
+import bitframe.client.BitframeService
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.css.em
 import react.Props
 import react.RBuilder
 import react.fc
-import react.router.dom.route
-import react.router.dom.switch
-import bitframe.PanelPageRoute
 import bitframe.SignInPageRoute
 import bitframe.renderers.Renderer
 import react.router.dom.Redirect
 import react.useEffectOnce
 import reakt.*
-import styled.styledDiv
 import useViewModelState
 
 private external interface PanelProps : Props {

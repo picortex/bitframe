@@ -3,6 +3,7 @@ package bitframe
 import bitframe.authentication.TestClientConfiguration
 import bitframe.authentication.client.signin.SignInService
 import bitframe.authentication.users.UsersService
+import bitframe.client.BitframeService
 import bitframe.events.EventBus
 import cache.Cache
 import cache.MockCache

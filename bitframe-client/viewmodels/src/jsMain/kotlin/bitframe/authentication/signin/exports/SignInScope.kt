@@ -3,7 +3,7 @@
 
 package bitframe.authentication.signin.exports
 
-import bitframe.BitframeService
+import bitframe.client.BitframeService
 import bitframe.authentication.signin.*
 import bitframe.authentication.spaces.Space
 import bitframe.authentication.client.signin.SignInService
@@ -15,7 +15,7 @@ import bitframe.authentication.signin.SignInState as State
 class SignInScope(service: BitframeService) {
 
     val viewModel: ViewModel<Intent, State> by lazy {
-        SignInViewModel(service.signIn, service.cache)
+        SignInViewModel(service.signIn, service.signIn.config.cache)
     }
 
     val initForm = {

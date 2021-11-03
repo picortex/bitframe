@@ -29,7 +29,7 @@ kotlin {
             dependencies {
                 api(project(":bitframe-server-framework-ktor"))
                 api(project(":bitframe-server-dao-inmemory"))
-                api(project(":pi-monitor-service-stub"))
+                api(project(":pi-monitor-service-client-stub"))
             }
         }
 

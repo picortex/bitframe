@@ -4,7 +4,7 @@
 package pimonitor.evaluation.businesses.exports
 
 import later.then
-import pimonitor.evaluation.businesses.BusinessesService
+import pimonitor.client.evaluation.businesses.BusinessesService
 
 class BusinessesServiceWrapper(service: BusinessesService) {
     val loadBusinesses = { service.all().then { it.toTypedArray() } }

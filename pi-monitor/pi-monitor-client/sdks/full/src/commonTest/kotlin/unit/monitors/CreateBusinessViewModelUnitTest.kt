@@ -1,14 +1,13 @@
 package unit.monitors
 
 import core.monitors.CreateBusinessViewModelTest
-import pimonitor.PiMonitorService
 import pimonitor.PiMonitorServiceStub
-import pimonitor.StubServiceConfig
+import pimonitor.PiMonitorServiceStubConfig
 import kotlin.test.Test
 
 class CreateBusinessViewModelUnitTest : CreateBusinessViewModelTest() {
     override val service: PiMonitorService by lazy {
-        PiMonitorServiceStub(StubServiceConfig(config.appId))
+        PiMonitorServiceStub(PiMonitorServiceStubConfig(config.appId))
     }
 
     @Test

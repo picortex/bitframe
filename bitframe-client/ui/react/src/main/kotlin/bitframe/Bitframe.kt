@@ -1,6 +1,7 @@
 package bitframe
 
 import bitframe.authentication.signin.SignInPage
+import bitframe.client.BitframeService
 import bitframe.landing.LandingPage
 import bitframe.panel.Panel
 import bitframe.renderers.Renderer

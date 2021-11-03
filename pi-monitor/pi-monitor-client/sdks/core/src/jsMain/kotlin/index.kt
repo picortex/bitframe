@@ -1,19 +1,19 @@
 @file:Suppress("EXPERIMENTAL_API_USAGE", "NON_EXPORTABLE_TYPE")
 @file:JsExport
 
-import bitframe.BitframeService
 import bitframe.authentication.signin.exports.SignInServiceWrapper
-import bitframe.service.client.config.KtorClientConfiguration
+import bitframe.client.BitframeService
 import cache.AsyncStorageCache
 import cache.BrowserCache
 import cache.MockCache
 import logging.ConsoleAppender
 import logging.Logging
-import pimonitor.PiMonitorService
-import pimonitor.PiMonitorServiceKtor
 import pimonitor.PiMonitorServiceStub
-import pimonitor.StubServiceConfig
+import pimonitor.PiMonitorServiceStubConfig
 import pimonitor.authentication.signup.exports.SignUpServiceWrapper
+import pimonitor.client.PiMonitorService
+import pimonitor.client.PiMonitorServiceKtor
+import pimonitor.client.PiMonitorServiceKtorConfig
 import pimonitor.evaluation.businesses.exports.BusinessesServiceWrapper
 import platform.Platform
 
@@ -40,11 +40,9 @@ fun client(config: ServiceConfiguration): PiMonitorService {
         else -> MockCache().also { console.log("Unknown platform, using a non persitient cach") }
     }
     return if (url == null) PiMonitorServiceStub(
-        config = StubServiceConfig(appId, simulationTime),
-        cache = cache
+        PiMonitorServiceStubConfig(appId, simulationTime, cache),
     ) else PiMonitorServiceKtor(
-        config = KtorClientConfiguration(url, appId),
-        cache = cache
+        PiMonitorServiceKtorConfig(appId, url, cache),
     )
 }
 

@@ -10,6 +10,8 @@ class BusinessesService(
     override val config: BusinessesServiceConfig
 ) : BusinessesService(config) {
 
+    private val dao = config.dao
+    
     override fun executeCreate(
         params: CreateMonitoredBusinessParams,
         monitorRef: MonitorRef,

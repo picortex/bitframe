@@ -5,7 +5,7 @@ package pimonitor.authentication.signup.exports
 
 import bitframe.authentication.signin.Session
 import bitframe.authentication.client.signin.SignInService
-import pimonitor.PiMonitorService
+import pimonitor.client.PiMonitorService
 import pimonitor.authentication.signup.SignUpResult
 import pimonitor.authentication.signup.SignUpService
 import pimonitor.authentication.signup.SignUpViewModel
@@ -40,10 +40,10 @@ class SignUpScope(
     }
 
     val useSignUpEvent: (callback: (SignUpResult) -> Unit) -> Unit = {
-        useEventHandler(service.bus, SignUpService.SIGN_UP_EVENT_ID, it)
+        useEventHandler(service.config.bus, SignUpService.SIGN_UP_EVENT_ID, it)
     }
 
     val useSignInEvent: (callback: (Session.SignedIn) -> Unit) -> Unit = {
-        useEventHandler(service.bus, SignInService.SIGN_IN_EVENT_ID, it)
+        useEventHandler(service.config.bus, SignInService.SIGN_IN_EVENT_ID, it)
     }
 }
