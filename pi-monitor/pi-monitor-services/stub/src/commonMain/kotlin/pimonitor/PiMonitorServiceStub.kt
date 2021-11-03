@@ -2,7 +2,8 @@ package pimonitor
 
 import bitframe.authentication.AuthenticationDaoProvider
 import bitframe.authentication.InMemoryAuthenticationDaoProvider
-import bitframe.authentication.signin.SignInServiceImpl
+import bitframe.authentication.client.signin.SignInServiceMock
+import bitframe.authentication.client.signin.SignInServiceMockConfig
 import bitframe.authentication.spaces.SpacesServiceImpl
 import bitframe.authentication.users.UsersService
 import bitframe.authentication.users.UsersServiceImpl
@@ -10,8 +11,6 @@ import bitframe.events.InMemoryEventBus
 import cache.Cache
 import cache.MockCache
 import cache.MockCacheConfig
-import pimonitor.authentication.signup.SignUpParams
-import pimonitor.authentication.signup.SignUpServiceImpl
 import pimonitor.evaluation.businesses.BusinessServiceImpl
 import pimonitor.monitored.MonitoredBusinessDaoInMemory
 import pimonitor.monitors.MonitorDaoInMemory
@@ -24,7 +23,9 @@ fun PiMonitorServiceStub(
     usersService: UsersService = UsersServiceImpl(provider, config),
 ): PiMonitorService {
     val bus = InMemoryEventBus()
-    val signInService = SignInServiceImpl(provider, config, cache, bus)
+    val signInService = SignInServiceMock(
+        config = SignInServiceMockConfig(usersDao = provider.users, scope = config.scope, cache = cache, bus = bus)
+    )
     val daoConfig = config.toInMemoryDaoConfig()
     val monitorDao = MonitorDaoInMemory(config = daoConfig)
     val monitoredBusinessDao = MonitoredBusinessDaoInMemory(config = daoConfig)

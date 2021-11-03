@@ -3,8 +3,9 @@ package bitframe
 import bitframe.authentication.AuthenticationDaoProvider
 import bitframe.authentication.InMemoryAuthenticationDaoProvider
 import bitframe.authentication.TestClientConfiguration
-import bitframe.authentication.signin.SignInService
-import bitframe.authentication.signin.SignInServiceImpl
+import bitframe.authentication.client.signin.SignInService
+import bitframe.authentication.client.signin.SignInServiceMock
+import bitframe.authentication.client.signin.SignInServiceMockConfig
 import bitframe.authentication.spaces.*
 import bitframe.authentication.users.*
 import bitframe.events.EventBus
@@ -24,5 +25,7 @@ open class BitframeTestClientImpl(
 
     override val spaces: SpacesService = SpacesServiceImpl(config, spacesDao, usersDao)
     override val users: UsersService = UsersServiceImpl(usersDao, spacesDao, config)
-    override val signIn: SignInService = SignInServiceImpl(usersDao, spacesDao, config, cache, bus)
+    override val signIn: SignInService = SignInServiceMock(
+        SignInServiceMockConfig(usersDao = usersDao, cache = cache, bus = bus)
+    )
 }

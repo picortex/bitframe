@@ -15,7 +15,7 @@ class TestClientConfiguration @JvmOverloads private constructor(
     /** The time (in milliseconds) a client would take to simulate fake activity */
     val simulationTime: Long = DEFAULT_SIMULATION_TIME,
     override val scope: CoroutineScope,
-) : ClientConfiguration(appId, scope) {
+) : ClientConfiguration {
     companion object {
         const val DEFAULT_SIMULATION_TIME: Long = 0
         private val cachedConfigs = mutableMapOf<String, TestClientConfiguration>()

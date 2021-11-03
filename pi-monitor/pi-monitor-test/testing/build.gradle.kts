@@ -12,7 +12,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-service-ktor"))
+                api(project(":bitframe-service-client-ktor"))
                 api(asoft("expect-coroutines", vers.asoft.expect))
             }
         }

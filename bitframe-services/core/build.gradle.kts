@@ -14,7 +14,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
-                api(asoft("platform-core",vers.asoft.platform))
             }
         }
 

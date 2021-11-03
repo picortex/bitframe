@@ -14,7 +14,7 @@ kotlin {
             dependencies {
                 api(project(":cache-api"))
                 api(project(":bitframe-core"))
-                api(project(":bitframe-authentication-service-core"))
+                api(project(":bitframe-authentication-service-client-core"))
                 api(asoft("platform-core", vers.asoft.platform))
                 api(asoft("later-ktx", vers.asoft.later))
                 api(kotlinx("coroutines-core", vers.kotlinx.coroutines))

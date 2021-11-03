@@ -19,7 +19,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-client-sdk-core"))
-                api(project(":bitframe-authentication-service-ktor"))
+                api(project(":bitframe-authentication-service-client-ktor"))
                 api("io.ktor:ktor-client-core:${vers.ktor}")
                 api(asoft("result-core", vers.asoft.duality))
             }

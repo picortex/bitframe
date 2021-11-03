@@ -1,7 +1,6 @@
 package bitframe.server.modules.authentication
 
 import bitframe.authentication.signin.SignInService
-import bitframe.authentication.signin.SignInServiceImpl
 import bitframe.authentication.spaces.SpacesDao
 import bitframe.authentication.users.UsersDao
 import bitframe.authentication.users.UsersService

@@ -1,13 +1,12 @@
 package integration.signup
 
-import bitframe.service.config.KtorClientConfiguration
+import bitframe.service.client.config.KtorClientConfiguration
 import cache.MockCache
 import core.signup.SignUpViewModelTest
 import pimonitor.PiMonitorService
 import pimonitor.PiMonitorServiceKtor
 import pimonitor.PiMonitorServiceStub
 import pimonitor.StubServiceConfig
-import kotlin.test.Ignore
 import kotlin.test.Test
 
 class SignUpViewModelIntegrationTest : SignUpViewModelTest() {

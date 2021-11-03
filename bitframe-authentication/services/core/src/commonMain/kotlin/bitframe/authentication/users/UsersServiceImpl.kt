@@ -4,7 +4,6 @@ import bitframe.authentication.AuthenticationDaoProvider
 import bitframe.authentication.signin.Basic
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.spaces.CreateSpaceParams
-import bitframe.authentication.spaces.RegisterSpaceParams
 import bitframe.authentication.spaces.SpacesDao
 import bitframe.service.config.ServiceConfig
 import later.Later

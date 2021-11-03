@@ -3,7 +3,7 @@
 
 import bitframe.BitframeService
 import bitframe.authentication.signin.exports.SignInServiceWrapper
-import bitframe.service.config.KtorClientConfiguration
+import bitframe.service.client.config.KtorClientConfiguration
 import cache.AsyncStorageCache
 import cache.BrowserCache
 import cache.MockCache

@@ -18,8 +18,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-client-sdk-core"))
+                api(project(":bitframe-authentication-service-client-test"))
                 api(project(":cache-test"))
-                api(project(":bitframe-authentication-dao-inmemory"))
             }
         }
 

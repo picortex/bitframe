@@ -2,15 +2,13 @@ package pimonitor.authentication.signup
 
 import bitframe.events.EventBus
 import bitframe.response.response.decodeResponseFromString
-import bitframe.service.MiniService
-import bitframe.service.config.KtorClientConfiguration
-import bitframe.service.utils.JsonContent
+import bitframe.service.client.config.KtorClientConfiguration
+import bitframe.service.client.utils.JsonContent
 import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.serialization.json.Json
 import later.Later
-import later.later
 
 class SignUpServiceKtor(
     override val bus: EventBus,

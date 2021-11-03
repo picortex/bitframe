@@ -1,7 +1,7 @@
 package bitframe
 
 import bitframe.authentication.TestClientConfiguration
-import bitframe.authentication.signin.SignInService
+import bitframe.authentication.client.signin.SignInService
 import bitframe.authentication.users.UsersService
 import bitframe.events.EventBus
 import cache.Cache

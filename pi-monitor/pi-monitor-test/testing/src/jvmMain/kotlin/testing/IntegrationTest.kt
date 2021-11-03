@@ -1,6 +1,6 @@
 package testing
 
-import bitframe.service.config.KtorClientConfiguration
+import bitframe.service.client.config.KtorClientConfiguration
 import bitframe.service.config.ServiceConfig
 import testing.pimonitor.APP_ID
 

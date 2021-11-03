@@ -4,7 +4,7 @@
 package pimonitor.authentication.signup.exports
 
 import bitframe.authentication.signin.Session
-import bitframe.authentication.signin.SignInService
+import bitframe.authentication.client.signin.SignInService
 import pimonitor.PiMonitorService
 import pimonitor.authentication.signup.SignUpResult
 import pimonitor.authentication.signup.SignUpService

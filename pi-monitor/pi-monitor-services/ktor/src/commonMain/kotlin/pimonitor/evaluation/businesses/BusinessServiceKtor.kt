@@ -1,7 +1,7 @@
 package pimonitor.evaluation.businesses
 
 import bitframe.events.EventBus
-import bitframe.service.config.KtorClientConfiguration
+import bitframe.service.client.config.KtorClientConfiguration
 import later.Later
 import pimonitor.monitored.CreateMonitoredBusinessParams
 import pimonitor.monitored.MonitoredBusiness

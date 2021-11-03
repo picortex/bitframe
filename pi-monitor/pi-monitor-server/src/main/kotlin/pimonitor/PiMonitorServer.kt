@@ -8,7 +8,6 @@ import bitframe.server.modules.authentication.AuthenticationModuleImpl
 import bitframe.server.modules.authentication.AuthenticationService
 import bitframe.service.config.ServiceConfig
 import cache.Cache
-import cache.MockCache
 import pimonitor.authentication.signup.SignUpController
 import pimonitor.authentication.signup.SignUpModule
 import pimonitor.monitored.MonitoredBusiness

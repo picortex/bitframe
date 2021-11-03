@@ -29,21 +29,29 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
 rootProject.name = "bitframe"
 
 include(":bitframe-core")
+
 include(":bitframe-presenters")
 
 includeRoot(name = "kotlinx-collections-interoperable", path = "bitframe-utils/kotlinx-collections-interoperable")
 
 includeSubs(base = "cache", path = "bitframe-utils/cache", "api", "test", "browser", "react-native")
 
+includeRoot(name = "validation", path = "bitframe-utils/validation")
+
 includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core", "processor")
 
 includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "test")
 
-includeSubs(base = "bitframe-service", path = "bitframe-services", "core", "ktor")
+includeSubs(base = "bitframe-service", path = "bitframe-services", "core")
+
+includeSubs(base = "bitframe-service-client", path = "bitframe-services/client", "core", "ktor")
 
 includeSubs(base = "bitframe-authentication", path = "bitframe-authentication", "core")
 
-includeSubs(base = "bitframe-authentication-service", path = "bitframe-authentication/services", "core", "ktor", "test")
+includeSubs(base = "bitframe-authentication-service", path = "bitframe-authentication/services", "core")
+
+includeSubs(base = "bitframe-authentication-service-client", path = "bitframe-authentication/services/client", "core", "ktor", "test")
+includeSubs(base = "bitframe-authentication-service-server", path = "bitframe-authentication/services/server", "core")
 
 includeSubs(base = "bitframe-authentication-dao", path = "bitframe-authentication/daos", "core", "inmemory")
 
@@ -68,6 +76,8 @@ includeRoot(name = "pi-monitor-server", path = "pi-monitor/pi-monitor-server")
 includeSubs(base = "pi-monitor-dao", path = "pi-monitor/pi-monitor-daos", "core", "inmemory")
 
 includeSubs(base = "pi-monitor-service", path = "pi-monitor/pi-monitor-services", "core", "ktor", "stub", "test")
+
+includeSubs(base = "pi-monitor-service-client", path = "pi-monitor/pi-monitor-services/client", "core")
 
 includeSubs(base = "pi-monitor-client-sdk", path = "pi-monitor/pi-monitor-client/sdks", "core", "full")
 

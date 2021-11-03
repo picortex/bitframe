@@ -3,7 +3,7 @@
 package pimonitor
 
 import bitframe.BitframeService
-import bitframe.authentication.signin.SignInService
+import bitframe.authentication.client.signin.SignInService
 import bitframe.authentication.spaces.SpacesService
 import bitframe.authentication.users.UsersService
 import bitframe.events.EventBus

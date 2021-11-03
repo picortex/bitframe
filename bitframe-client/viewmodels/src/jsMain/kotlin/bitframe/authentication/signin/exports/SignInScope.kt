@@ -6,6 +6,7 @@ package bitframe.authentication.signin.exports
 import bitframe.BitframeService
 import bitframe.authentication.signin.*
 import bitframe.authentication.spaces.Space
+import bitframe.authentication.client.signin.SignInService
 import useEventHandler
 import viewmodel.ViewModel
 import bitframe.authentication.signin.SignInIntent as Intent
@@ -20,7 +21,7 @@ class SignInScope(service: BitframeService) {
     val initForm = {
         viewModel.post(Intent.InitForm)
     }
-    
+
     val submit = { cred: SignInCredentials ->
         viewModel.post(Intent.Submit(cred.toSignInCredentials()))
     }
@@ -30,6 +31,6 @@ class SignInScope(service: BitframeService) {
     }
 
     val useSignInEvent: (callback: (Session.SignedIn) -> Unit) -> Unit = {
-        useEventHandler(service.signIn.bus, SignInService.SIGN_IN_EVENT_ID, it)
+        useEventHandler(service.signIn.config.bus, SignInService.SIGN_IN_EVENT_ID, it)
     }
 }

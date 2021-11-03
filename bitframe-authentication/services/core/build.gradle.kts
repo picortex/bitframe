@@ -13,6 +13,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(project(":validation"))
                 api(project(":cache-api"))
                 api(project(":bitframe-service-core"))
                 api(project(":bitframe-events-core"))
