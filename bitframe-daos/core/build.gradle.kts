@@ -17,6 +17,7 @@ kotlin {
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
                 api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
                 api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
+                api(asoft("later-core", vers.asoft.later))
             }
         }
 

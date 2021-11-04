@@ -15,6 +15,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-dao-core"))
+                api(asoft("later-ktx", vers.asoft.later))
             }
         }
 
