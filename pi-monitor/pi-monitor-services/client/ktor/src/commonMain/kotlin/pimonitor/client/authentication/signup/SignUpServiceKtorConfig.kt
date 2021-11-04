@@ -1,6 +1,0 @@
-package pimonitor.client.authentication.signup
-
-import bitframe.service.client.config.KtorClientConfiguration
-import pimonitor.authentication.signup.SignUpServiceConfig
-
-interface SignUpServiceKtorConfig : SignUpServiceConfig, KtorClientConfiguration

@@ -14,7 +14,7 @@ import validation.validate
 import kotlin.js.JsExport
 
 abstract class SignUpService(
-    open val config: SignUpServiceConfig
+    open val config: ServiceConfig
 ) {
     private val scope get() = config.scope
     private val bus get() = config.bus

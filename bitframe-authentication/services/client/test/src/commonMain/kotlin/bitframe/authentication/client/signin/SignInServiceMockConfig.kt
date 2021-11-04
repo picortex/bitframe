@@ -1,20 +1,17 @@
 package bitframe.authentication.client.signin
 
 import bitframe.authentication.users.User
-import bitframe.authentication.users.UsersDao
-import bitframe.authentication.users.UsersDaoInMemory
 import bitframe.events.EventBus
 import bitframe.events.InMemoryEventBus
-import bitframe.service.config.ServiceConfig
+import bitframe.service.client.config.ServiceConfig
 import cache.Cache
 import cache.MockCache
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface SignInServiceMockConfig : SignInServiceConfig, ServiceConfig {
+interface SignInServiceMockConfig : ServiceConfig {
     val users: MutableList<User>
 
     companion object {
@@ -31,12 +28,8 @@ interface SignInServiceMockConfig : SignInServiceConfig, ServiceConfig {
             cache: Cache = DEFAULT_CACHE,
             bus: EventBus = DEFAULT_BUS,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ) = object : SignInServiceMockConfig {
+        ): SignInServiceMockConfig = object : SignInServiceMockConfig, ServiceConfig by ServiceConfig(appId, cache, bus, scope) {
             override val users: MutableList<User> = users
-            override val bus: EventBus = bus
-            override val cache: Cache = cache
-            override val appId: String = appId
-            override val scope: CoroutineScope = scope
         }
 
         @JvmOverloads

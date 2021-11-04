@@ -1,5 +1,0 @@
-package bitframe.authentication.client.signin
-
-import bitframe.service.client.config.KtorClientConfiguration
-
-interface SignInServiceKtorConfig : SignInServiceConfig, KtorClientConfiguration

@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":pi-monitor-service-core"))
-                api(project(":bitframe-client-sdk-core"))
+                api(project(":bitframe-sdk-client-core"))
                 api(project(":bitframe-events-inmemory"))
             }
         }

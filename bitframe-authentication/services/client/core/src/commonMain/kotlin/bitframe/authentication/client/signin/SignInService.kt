@@ -8,6 +8,7 @@ import bitframe.authentication.signin.Session
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.spaces.Space
 import bitframe.events.Event
+import bitframe.service.client.config.ServiceConfig
 import later.Later
 import later.await
 import later.later
@@ -16,7 +17,7 @@ import kotlin.js.JsExport
 import bitframe.authentication.signin.SignInService as SignInServiceCore
 
 abstract class SignInService(
-    open val config: SignInServiceConfig
+    open val config: ServiceConfig
 ) : SignInServiceCore() {
     val session: Live<Session> = Live(Session.Unknown)
     val currentSession get() = session.value

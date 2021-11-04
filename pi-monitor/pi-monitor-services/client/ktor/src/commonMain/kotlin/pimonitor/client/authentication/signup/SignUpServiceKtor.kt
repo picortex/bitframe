@@ -2,6 +2,7 @@ package pimonitor.client.authentication.signup
 
 import bitframe.response.response.decodeResponseFromString
 import bitframe.service.client.MiniService
+import bitframe.service.client.config.KtorClientConfiguration
 import bitframe.service.client.utils.JsonContent
 import io.ktor.client.features.*
 import io.ktor.client.request.*
@@ -14,7 +15,7 @@ import pimonitor.authentication.signup.SignUpResult
 import pimonitor.authentication.signup.SignUpService
 
 class SignUpServiceKtor(
-    override val config: SignUpServiceKtorConfig
+    override val config: KtorClientConfiguration
 ) : SignUpService(config), MiniService {
     private val client = config.http
     private val baseUrl = "${config.url}/api/authentication"

@@ -13,6 +13,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(project(":bitframe-events-inmemory"))
                 api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }

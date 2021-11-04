@@ -1,7 +1,6 @@
 package pimonitor.client
 
 import bitframe.authentication.client.signin.SignInService
-import bitframe.authentication.client.signin.SignInServiceKtorConfig
 import bitframe.authentication.signin.Session
 import bitframe.events.EventBus
 import bitframe.events.InMemoryEventBus
@@ -11,7 +10,6 @@ import cache.Cache
 import io.ktor.client.*
 import kotlinx.coroutines.CoroutineScope
 import live.Live
-import pimonitor.client.authentication.signup.SignUpServiceKtorConfig
 import pimonitor.client.evaluation.businesses.BusinessServiceKtorConfig
 import pimonitor.client.monitors.MonitorsServiceConfig
 import pimonitor.client.monitors.MonitorsServiceKtor
@@ -24,10 +22,7 @@ class PiMonitorServiceKtorConfig @JvmOverloads constructor(
     override val bus: EventBus = InMemoryEventBus(),
     override val http: HttpClient = KtorClientConfiguration.DEFAULT_HTTP_CLIENT,
     override val scope: CoroutineScope = KtorClientConfiguration.DEFAULT_SCOPE
-) : PiMonitorServiceConfig,
-    KtorClientConfiguration,
-    SignInServiceKtorConfig,
-    SignUpServiceKtorConfig {
+) : KtorClientConfiguration {
 
     fun with(
         signInService: SignInService
@@ -38,7 +33,6 @@ class PiMonitorServiceKtorConfig @JvmOverloads constructor(
     fun with(
         monitorsService: MonitorsServiceKtor
     ): BusinessServiceKtorConfig = object : BusinessServiceKtorConfig, KtorClientConfiguration by this {
-        override val bus: EventBus = this@PiMonitorServiceKtorConfig.bus
         override val monitorsService = monitorsService
     }
 }
