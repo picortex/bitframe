@@ -1,8 +1,8 @@
 package pimonitor.server.businesses
 
-import pimonitor.evaluation.businesses.BusinessesServiceConfig
-import pimonitor.monitored.MonitoredBusinessDao
+import bitframe.service.config.ServiceConfig
+import pimonitor.monitored.MonitoredBusinessesDao
 
-interface BusinessesServiceConfig : BusinessesServiceConfig {
-    val dao: MonitoredBusinessDao
+interface BusinessesServiceConfig : ServiceConfig {
+    val businessesDao: MonitoredBusinessesDao
 }

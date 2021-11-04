@@ -3,7 +3,6 @@
 package pimonitor.evaluation.businesses
 
 import bitframe.events.Event
-import bitframe.events.EventBus
 import bitframe.service.config.ServiceConfig
 import later.Later
 import later.await
@@ -11,11 +10,10 @@ import later.later
 import pimonitor.monitored.CreateMonitoredBusinessParams
 import pimonitor.monitored.MonitoredBusiness
 import pimonitor.monitors.MonitorRef
-import pimonitor.monitors.MonitorsService
 import kotlin.js.JsExport
 
 abstract class BusinessesService(
-    open val config: BusinessesServiceConfig
+    open val config: ServiceConfig
 ) {
     companion object {
         const val CREATE_BUSINESS_EVENT_ID = "pimonitor.evaluation.business.create"

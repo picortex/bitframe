@@ -62,7 +62,7 @@ includeSubs(base = "bitframe-server-framework", path = "bitframe-server/framewor
 
 includeSubs(base = "bitframe-sdk-client", path = "bitframe-sdk/client", "core", "ktor")
 
-//includeSubs(base = "bitframe-client-sdk", path = "bitframe-client/sdks", "core", "test", "ktor")
+includeSubs(base = "bitframe-sdk-server", path = "bitframe-sdk/server", "core")
 
 includeSubs(base = "bitframe-client", path = "bitframe-client", "viewmodels")
 

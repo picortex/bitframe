@@ -5,7 +5,7 @@ import java.io.File
 
 fun main(args: Array<String>) {
     val config = PiMonitorApplicationConfig(
-        daoProvider = InMemoryPiMonitorDaoProvider(), // InMemoryDaoProvider(), // MySQLProvider, MongoDBProvider
+        provider = InMemoryPiMonitorDaoProvider(),
         client = File(args[0])
     )
     val server = PiMonitorServer(config)

@@ -1,9 +1,9 @@
 package bitframe.server.modules.authentication.controllers
 
+import bitframe.server.BitframeService
 import bitframe.server.http.HttpResponse
-import bitframe.server.modules.authentication.services.AuthenticationService
 
 interface AuthenticationController {
-    val service: AuthenticationService
+    val service: BitframeService
     suspend fun signIn(body: String?): HttpResponse
 }

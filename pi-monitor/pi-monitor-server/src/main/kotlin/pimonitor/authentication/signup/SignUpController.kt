@@ -21,8 +21,6 @@ private val json = Json {
 class SignUpController(
     private val service: SignUpService
 ) {
-    constructor(config: PiMonitorApplicationConfig) : this(SignUpService(config))
-
     @OptIn(ExperimentalSerializationApi::class)
     suspend fun signUp(req: HttpRequest) = response {
         val params = try {

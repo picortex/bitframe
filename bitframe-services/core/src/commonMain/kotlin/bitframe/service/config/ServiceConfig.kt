@@ -17,6 +17,8 @@ interface ServiceConfig {
 
         @JvmField
         val DEFAULT_SCOPE = CoroutineScope(SupervisorJob())
+
+        @JvmField
         val DEFAULT_BUS = InMemoryEventBus()
 
         @JvmSynthetic

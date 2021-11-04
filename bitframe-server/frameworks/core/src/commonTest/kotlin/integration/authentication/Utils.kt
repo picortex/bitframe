@@ -3,10 +3,7 @@ package integration.authentication
 import bitframe.events.EventBus
 import bitframe.events.InMemoryEventBus
 import bitframe.server.BitframeApplicationConfig
-import bitframe.server.BitframeDaoProvider
-import bitframe.server.data.DAOProvider
 import bitframe.server.modules.authentication.controllers.AuthenticationControllerImpl
-import bitframe.server.modules.authentication.services.AuthenticationServiceImpl
 import bitframe.service.config.ServiceConfig
 import cache.Cache
 import cache.MockCache

@@ -1,22 +1,23 @@
 package bitframe.server.modules.authentication.modules
 
-import bitframe.server.BitframeApplicationConfig
+import bitframe.server.BitframeService
 import bitframe.server.actions.Action
-import bitframe.server.data.DAOProvider
+import bitframe.server.modules.authentication.controllers.AuthenticationController
+import bitframe.server.modules.authentication.controllers.AuthenticationControllerImpl
 import bitframe.server.modules.authentication.services.signin.SignInAction
 
 class AuthenticationModuleImpl(
-    private val config: AuthenticationModuleConfig
+    private val controller: AuthenticationController
 ) : AuthenticationModule {
-    constructor(config: BitframeApplicationConfig<DAOProvider>) : this(AuthenticationModuleConfig(config))
+    constructor(service: BitframeService) : this(AuthenticationControllerImpl(service))
 
     init {
-        config.controller.service.users.createIfNotExist(config.defaultUserParams)
+        controller.service.users.createIfNotExist(AuthenticationModule.GENESIS)
     }
 
     override val name = "authentication"
 
-    override fun signInAction(): Action = SignInAction(config.controller)
+    override fun signInAction(): Action = SignInAction(controller)
 
     override val actions: List<Action> = listOf(
         signInAction(),

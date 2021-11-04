@@ -12,7 +12,7 @@ class MonitorsService(
     override val config: MonitorsServiceConfig
 ) : MonitorsService(config) {
 
-    private val dao get() = config.dao
+    private val dao get() = config.monitorsDao
     private val scope get() = config.scope
 
     override fun load(uid: String): Later<Monitor?> = scope.later {

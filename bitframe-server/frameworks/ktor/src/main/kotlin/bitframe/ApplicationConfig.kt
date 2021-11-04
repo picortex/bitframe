@@ -1,32 +1,20 @@
 package bitframe
 
-import bitframe.events.EventBus
 import bitframe.server.BitframeApplicationConfig
-import bitframe.server.data.DAOProvider
+import bitframe.server.BitframeService
 import bitframe.server.modules.Module
-import cache.Cache
-import cache.MockCache
-import kotlinx.coroutines.CoroutineScope
 import java.io.File
 
-interface ApplicationConfig<out P : DAOProvider> : BitframeApplicationConfig<P> {
+interface ApplicationConfig<out S : BitframeService> : BitframeApplicationConfig<S> {
     val client: File
 
     companion object {
-        operator fun <P : DAOProvider> invoke(
-            daoProvider: P,
+        operator fun <S : BitframeService> invoke(
             client: File,
-            cache: Cache = MockCache(),
-            bus: EventBus = BitframeApplicationConfig.DEFAULT_EVENT_BUS,
+            service: S,
             module: MutableList<Module> = mutableListOf(),
-            scope: CoroutineScope = BitframeApplicationConfig.DEFAULT_SCOPE,
-        ) = object : ApplicationConfig<P> {
+        ): ApplicationConfig<S> = object : ApplicationConfig<S>, BitframeApplicationConfig<S> by BitframeApplicationConfig(service, module) {
             override val client: File = client
-            override val daoProvider: P = daoProvider
-            override val cache: Cache = cache
-            override val bus: EventBus = bus
-            override val modules: MutableList<Module> = module
-            override val scope: CoroutineScope = scope
         }
     }
 }

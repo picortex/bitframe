@@ -12,7 +12,7 @@ class SignUpService(
 ) : SignUpService(config) {
     private val usersService get() = config.usersService
     private val scope get() = config.scope
-    private val dao get() = config.dao
+    private val dao get() = config.monitorsDao
     override fun executeSignUp(params: SignUpParams): Later<SignUpResult> = scope.later {
         val register = when (params) {
             is SignUpParams.Individual -> usersService.register(params.toRegisterUserParams())

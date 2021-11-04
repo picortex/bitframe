@@ -16,6 +16,7 @@ kotlin {
                 api(project(":bitframe-authentication-service-server-core"))
                 api(project(":bitframe-events-inmemory"))
                 api(project(":cache-test"))
+                api(project(":bitframe-sdk-server-core"))
                 api(asoft("result-core", vers.asoft.duality))
                 api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
                 api(asoft("logging-console", vers.asoft.logging))

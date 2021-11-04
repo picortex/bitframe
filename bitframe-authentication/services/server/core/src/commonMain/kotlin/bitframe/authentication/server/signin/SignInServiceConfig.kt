@@ -8,5 +8,4 @@ import kotlin.jvm.JvmOverloads
 
 interface SignInServiceConfig : ServiceConfig {
     val usersDao: UsersDao
-    val bus: EventBus
 }
