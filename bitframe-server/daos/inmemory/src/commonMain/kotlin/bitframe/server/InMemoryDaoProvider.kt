@@ -12,5 +12,4 @@ import bitframe.authentication.users.UsersDaoInMemory
 import bitframe.server.data.DAOProvider
 import kotlin.jvm.JvmOverloads
 
-class InMemoryDaoProvider : DAOProvider,
-    AuthenticationDaoProvider by InMemoryAuthenticationDaoProvider()
+class InMemoryDaoProvider : DAOProvider, AuthenticationDaoProvider by InMemoryAuthenticationDaoProvider()

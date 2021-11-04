@@ -1,8 +1,8 @@
-package bitframe.server.modules.authentication.signin
+package bitframe.server.modules.authentication.services.signin
 
 import bitframe.server.actions.Action
 import bitframe.server.http.HttpRoute
-import bitframe.server.modules.authentication.AuthenticationController
+import bitframe.server.modules.authentication.controllers.AuthenticationController
 import io.ktor.http.*
 
 @Suppress("FunctionName")

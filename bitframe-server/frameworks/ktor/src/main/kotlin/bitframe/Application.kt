@@ -3,7 +3,7 @@ package bitframe
 import bitframe.server.BitframeApplication
 import bitframe.server.http.HttpRequest
 import bitframe.server.modules.Module
-import bitframe.server.modules.authentication.AuthenticationModule
+import bitframe.server.modules.authentication.modules.AuthenticationModule
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
@@ -17,13 +17,11 @@ import kotlinx.serialization.mapper.Mapper
 import java.io.File
 
 class Application(
-    private val client: File,
-    authenticationModule: AuthenticationModule,
-    modules: List<Module>
-) : BitframeApplication(authenticationModule, modules) {
+    val config: ApplicationConfig
+) : BitframeApplication(config) {
     @JvmOverloads
     fun start(port: Int = 8080) = embeddedServer(CIO, port) {
-        println("Serving files from ${client.absolutePath}")
+        println("Serving files from ${config.client.absolutePath}")
         install(CORS) {
             method(HttpMethod.Options)
             method(HttpMethod.Get)
@@ -39,7 +37,7 @@ class Application(
         }
         routing {
             static("/") {
-                staticRootFolder = client.absoluteFile
+                staticRootFolder = config.client.absoluteFile
                 files(".")
                 file("main.bundle.js")
                 default("index.html")

@@ -7,8 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlin.jvm.JvmOverloads
 
-open class SpacesServiceConfig @JvmOverloads constructor(
-    val spacesDao: SpacesDao,
-    val usersDao: UsersDao,
-    override val scope: CoroutineScope = CoroutineScope(SupervisorJob())
-) : ServiceConfig
+interface SpacesServiceConfig : ServiceConfig {
+    val spacesDao: SpacesDao
+    val usersDao: UsersDao
+}

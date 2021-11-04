@@ -15,12 +15,12 @@ import pimonitor.server.businesses.BusinessesService
 import kotlin.js.JsExport
 
 abstract class PiMonitorService(
-    override val spaces: SpacesService,
-    override val users: UsersService,
-    override val signIn: SignInService,
+    val spaces: SpacesService,
+    val users: UsersService,
+    val signIn: SignInService,
     val signUp: SignUpService,
     val monitors: MonitorsService,
     val businesses: BusinessesService,
-    override val cache: Cache,
+//    override val cache: Cache,
     val bus: EventBus = InMemoryEventBus(),
-) : BitframeService()
+) //: BitframeService()

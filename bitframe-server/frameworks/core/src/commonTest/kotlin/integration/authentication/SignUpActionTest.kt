@@ -1,7 +1,7 @@
 package integration.authentication
 
 import bitframe.Sandbox
-import bitframe.server.modules.authentication.signin.SignInAction
+import bitframe.server.modules.authentication.services.signin.SignInAction
 import expect.expect
 import io.ktor.http.*
 import kotlinx.coroutines.runTest

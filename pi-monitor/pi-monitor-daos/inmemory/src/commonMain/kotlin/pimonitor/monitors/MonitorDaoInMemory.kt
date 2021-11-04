@@ -9,10 +9,10 @@ import later.later
 import pimonitor.authentication.signup.SignUpParams
 
 class MonitorDaoInMemory(
-    private val monitors: MutableMap<String, Monitor> = mutableMapOf(),
-    val config: InMemoryDaoConfig
+    val config: MonitorDaoInMemoryConfig = MonitorDaoInMemoryConfig()
 ) : MonitorDao {
     private val scope = config.scope
+    private val monitors = config.monitors
     override fun create(params: SignUpParams, ref: UserRef) = scope.later {
         delay(config.simulationTime)
         val uid = "monitor-${monitors.size + 1}"

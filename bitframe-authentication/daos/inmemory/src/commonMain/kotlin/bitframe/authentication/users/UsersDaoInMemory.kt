@@ -8,10 +8,10 @@ import later.Later
 import later.later
 
 class UsersDaoInMemory(
-    private val users: MutableMap<String, User> = mutableMapOf(),
-    private val config: InMemoryDaoConfig = InMemoryDaoConfig.DEFAULT
+    private val config: UsersDaoInMemoryConfig = UsersDaoInMemoryConfig()
 ) : UsersDao {
     private val scope = config.scope
+    private val users = config.users
     override fun create(params: CreateUserParams): Later<User> = scope.later {
         delay(config.simulationTime)
         val existing = users.values.find { it.name == params.name }

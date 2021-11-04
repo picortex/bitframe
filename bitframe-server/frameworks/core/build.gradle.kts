@@ -15,8 +15,9 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-core"))
-                api(project(":bitframe-authentication-service-core"))
-
+                api(project(":bitframe-authentication-service-server-core"))
+                api(project(":bitframe-events-inmemory"))
+                api(project(":cache-test"))
                 api(asoft("result-core", vers.asoft.duality))
                 api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
                 api(asoft("logging-console", vers.asoft.logging))
