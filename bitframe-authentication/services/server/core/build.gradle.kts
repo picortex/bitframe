@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-authentication-dao-core"))
-                api(project(":bitframe-authentication-service-core"))
+                implementation(project(":bitframe-authentication-service-core"))
             }
         }
 

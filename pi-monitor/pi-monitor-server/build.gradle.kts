@@ -24,10 +24,10 @@ kotlin {
     target {
         application()
         tasks.withType(KotlinCompile::class.java) {
-
+            kotlinOptions.jvmTarget = "16"
         }
         compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
+            kotlinOptions.jvmTarget = "16"
         }
     }
 

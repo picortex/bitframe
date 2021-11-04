@@ -18,7 +18,7 @@ fun PiMonitorServiceStub(
     val usersDao = UsersDaoInMemory()
     val signInService = SignInServiceMock(config.with(usersDao))
     val daoConfig = config.toInMemoryDaoConfig()
-    val monitorDao = MonitorDaoInMemory(config = daoConfig)
+//    val monitorDao = MonitorDaoInMemory(config = daoConfig)
     val monitoredBusinessDao = MonitoredBusinessDaoInMemory(config = daoConfig)
 //    return object : PiMonitorService(config) {
 //        override val spaces: SpacesService = SpacesService()

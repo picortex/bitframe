@@ -6,6 +6,7 @@ import bitframe.authentication.spaces.SpacesDao
 import bitframe.authentication.users.UsersDao
 import bitframe.events.EventBus
 import bitframe.server.BitframeApplicationConfig
+import bitframe.server.data.DAOProvider
 import cache.Cache
 import kotlinx.coroutines.CoroutineScope
 
@@ -13,7 +14,7 @@ interface AuthenticationServiceConfig : SignInServiceConfig, UsersServiceConfig 
     val cache: Cache
 
     companion object {
-        operator fun invoke(config: BitframeApplicationConfig) = object : AuthenticationServiceConfig {
+        operator fun <P : DAOProvider> invoke(config: BitframeApplicationConfig<P>) = object : AuthenticationServiceConfig {
             override val cache: Cache = config.cache
             override val usersDao: UsersDao = config.daoProvider.users
             override val bus: EventBus = config.bus

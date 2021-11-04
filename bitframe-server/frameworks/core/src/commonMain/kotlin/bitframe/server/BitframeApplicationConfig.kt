@@ -16,11 +16,6 @@ interface BitframeApplicationConfig<out P : DAOProvider> {
     val modules: MutableList<Module>
     val scope: CoroutineScope
 
-    fun with(vararg mods: Module): BitframeApplicationConfig<P> {
-        modules.addAll(mods)
-        return this
-    }
-
     companion object {
         val DEFAULT_EVENT_BUS = InMemoryEventBus()
         val DEFAULT_SCOPE = CoroutineScope(SupervisorJob())

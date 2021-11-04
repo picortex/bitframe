@@ -18,7 +18,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-authentication-service-core"))
+                implementation(project(":bitframe-authentication-service-core"))
                 api(project(":bitframe-core"))
                 api(project(":bitframe-service-client-core"))
                 api(asoft("later-ktx", vers.asoft.later))

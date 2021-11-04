@@ -40,7 +40,6 @@ interface PiMonitorApplicationConfig : ApplicationConfig<PiMonitorDAOProvider>,
                 override val scope: CoroutineScope = scope
             }
             override val usersService: UsersService = UsersService(usersServiceConfig)
-            override val appId: String = ""
         }
     }
 }

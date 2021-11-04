@@ -26,7 +26,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-authentication-service-client-core"))
+                implementation(project(":bitframe-authentication-service-client-core"))
                 api(project(":bitframe-authentication-dao-inmemory"))
                 api(project(":bitframe-events-inmemory"))
                 api(project(":cache-test"))

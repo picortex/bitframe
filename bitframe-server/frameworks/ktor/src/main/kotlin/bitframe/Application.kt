@@ -1,6 +1,7 @@
 package bitframe
 
 import bitframe.server.BitframeApplication
+import bitframe.server.data.DAOProvider
 import bitframe.server.http.HttpRequest
 import bitframe.server.modules.Module
 import bitframe.server.modules.authentication.modules.AuthenticationModule
@@ -16,9 +17,9 @@ import io.ktor.server.engine.*
 import kotlinx.serialization.mapper.Mapper
 import java.io.File
 
-class Application(
-    val config: ApplicationConfig
-) : BitframeApplication(config) {
+class Application<P : DAOProvider>(
+    val config: ApplicationConfig<P>
+) : BitframeApplication<P>(config) {
     @JvmOverloads
     fun start(port: Int = 8080) = embeddedServer(CIO, port) {
         println("Serving files from ${config.client.absolutePath}")

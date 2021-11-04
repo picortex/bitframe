@@ -6,15 +6,13 @@ plugins {
 }
 
 kotlin {
-    jvm {
-        library()
-        withJava()
-    }
+    jvm { library() }
     js(IR) { library() }
     sourceSets {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-core"))
+                implementation(project(":bitframe-authentication-service-core"))
                 api(project(":bitframe-authentication-service-server-core"))
                 api(project(":bitframe-events-inmemory"))
                 api(project(":cache-test"))

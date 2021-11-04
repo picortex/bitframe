@@ -22,7 +22,7 @@ class SignUpService(
         }.await()
         val monitor = dao.create(params, register.user.ref()).await()
         SignUpResult(
-            app = App(config.appId), space = register.spaces.first(), user = register.user, monitor = monitor
+            app = App(""), space = register.spaces.first(), user = register.user, monitor = monitor
         )
     }
 }

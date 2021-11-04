@@ -1,7 +1,7 @@
 package pimonitor.server.authentication.signup
 
 import bitframe.authentication.users.UsersService
-import bitframe.service.client.config.ServiceConfig
+import bitframe.service.config.ServiceConfig
 import pimonitor.authentication.signup.SignUpServiceConfig
 import pimonitor.monitors.MonitorDao
 

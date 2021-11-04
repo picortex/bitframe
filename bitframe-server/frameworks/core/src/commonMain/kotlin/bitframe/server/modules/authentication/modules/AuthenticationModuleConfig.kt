@@ -5,6 +5,7 @@ import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.CreateUserParams
 import bitframe.events.EventBus
 import bitframe.server.BitframeApplicationConfig
+import bitframe.server.data.DAOProvider
 import bitframe.server.modules.authentication.controllers.AuthenticationController
 import bitframe.server.modules.authentication.controllers.AuthenticationControllerImpl
 import bitframe.server.modules.authentication.services.AuthenticationService
@@ -27,7 +28,7 @@ interface AuthenticationModuleConfig {
             credentials = Basic("ghost@genesis.com", "genesis")
         )
 
-        operator fun invoke(config: BitframeApplicationConfig) = object : AuthenticationModuleConfig {
+        operator fun <P : DAOProvider> invoke(config: BitframeApplicationConfig<P>) = object : AuthenticationModuleConfig {
             val serviceConfig = AuthenticationServiceConfig(config)
             val service = AuthenticationServiceImpl(serviceConfig)
             override val bus: EventBus = config.bus
