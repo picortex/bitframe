@@ -31,10 +31,24 @@ class Table<D>(
 
     val live = Live(State(columns, rows))
 
-    fun selectAll() {
+    fun toggleAllSelected() = changeAllSelection(!areAllRowsSelected)
+
+    fun selectAll() = changeAllSelection(selected = true)
+
+    fun unSelectAll() = changeAllSelection(selected = false)
+
+    fun invertSelection() {
         live.value = live.value.copy(
             rows = live.value.rows.map {
-                it.copy(selected = true)
+                it.copy(selected = !it.selected)
+            }.toInteroperableList()
+        )
+    }
+
+    fun changeAllSelection(selected: Boolean) {
+        live.value = live.value.copy(
+            rows = live.value.rows.map {
+                it.copy(selected = selected)
             }.toInteroperableList()
         )
     }
