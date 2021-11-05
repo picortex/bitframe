@@ -5,9 +5,9 @@ package bitframe.presenters.collections.table
 import kotlin.js.JsExport
 
 data class Row<out D>(
-    val rowIndex: Int,
+    val index: Int,
     val data: D,
     val selected: Boolean = false
 ) {
-    val rowNumber get() = rowIndex + 1
+    val number get() = index + 1
 }

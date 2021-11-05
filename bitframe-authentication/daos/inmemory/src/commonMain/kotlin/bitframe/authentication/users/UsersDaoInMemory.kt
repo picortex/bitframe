@@ -4,21 +4,25 @@ import bitframe.daos.conditions.Condition
 import bitframe.daos.conditions.matching
 import bitframe.daos.config.InMemoryDaoConfig
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.sync.Mutex
 import later.Later
 import later.later
 
 class UsersDaoInMemory(
-    private val users: MutableMap<String, User> = mutableMapOf(),
-    private val config: InMemoryDaoConfig = InMemoryDaoConfig.DEFAULT
+    private val config: UsersDaoInMemoryConfig = UsersDaoInMemoryConfig()
 ) : UsersDao {
     private val scope = config.scope
+    private val users = config.users
+    private val lock = config.lock
     override fun create(params: CreateUserParams): Later<User> = scope.later {
         delay(config.simulationTime)
         val existing = users.values.find { it.name == params.name }
         if (existing == null) {
+            lock.lock()
             val uid = "user-${users.size + 1}"
             val user = params.toUser(uid)
             users[uid] = user
+            lock.unlock()
             user
         } else existing
     }

@@ -6,8 +6,12 @@ import pimonitor.monitored.MonitoredBusiness
 internal fun businessTable(businesses: List<MonitoredBusiness>) = tableOf(businesses) {
     selectable()
     column("Name") { it.data.name }
-    column("Contact Name") { it.data.contacts.first().name }
-    column("Contact Email") { it.data.contacts.first().email.value }
+    column("Reporting") { "None" }
+    column("Revenue") { "None" }
+    column("Expenses") { "None" }
+    column("GP") { "None" }
+    column("Velocity") { "2m/s" }
+    column("NCF") { "None" }
     actions("Actions") {
         action("Delete") { }
         action("View") { }

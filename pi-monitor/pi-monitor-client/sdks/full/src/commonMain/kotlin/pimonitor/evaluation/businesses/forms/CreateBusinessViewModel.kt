@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import pimonitor.evaluation.businesses.BusinessesService
-import pimonitor.monitors.MonitorsService
+import pimonitor.client.evaluation.businesses.BusinessesService
+import pimonitor.client.monitors.MonitorsService
 import viewmodel.ViewModel
 import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
 import pimonitor.evaluation.businesses.forms.CreateBusinessState as State

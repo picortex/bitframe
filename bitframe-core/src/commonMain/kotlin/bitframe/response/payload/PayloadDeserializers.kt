@@ -11,8 +11,12 @@ fun <D> Json.decodePayloadFromString(
 ): Payload<out D, out Nothing?> {
     val mapper = Mapper(this)
     val map = mapper.decodeFromString(json)
-    val dataJson = map[Payload<*, *>::data.name] as Map<String, Any?>
-    val data = decodeFromString(serializer, mapper.encodeToString(dataJson))
+    val dataValue = map[Payload<*, *>::data.name]
+    val data = if (dataValue is Map<*, *>) {
+        decodeFromString(serializer, mapper.encodeToString(dataValue as Map<String, *>))
+    } else {
+        decodeFromString(serializer, mapper.encodeToString(dataValue as List<Map<String, *>>))
+    }
     return payloadOf(data)
 }
 
@@ -23,9 +27,13 @@ fun <D, I> Json.decodePayloadFromString(
 ): Payload<out D, out I> {
     val mapper = Mapper(this)
     val map = mapper.decodeFromString(json)
-    val dataJson = map[Payload<*, *>::data.name] as Map<String, Any?>
-    val infoJson = map[Payload<*, *>::info.name] as Map<String, Any?>
-    val data = decodeFromString(dataSerializer, mapper.encodeToString(dataJson))
-    val info = decodeFromString(infoSerializer, mapper.encodeToString(infoJson))
+    val infoValue = map[Payload<*, *>::info.name] as Map<String, Any?>
+    val dataValue = map[Payload<*, *>::data.name]
+    val info = decodeFromString(infoSerializer, mapper.encodeToString(infoValue))
+    val data = if (dataValue is Map<*, *>) {
+        decodeFromString(dataSerializer, mapper.encodeToString(dataValue as Map<String, *>))
+    } else {
+        decodeFromString(dataSerializer, mapper.encodeToString(dataValue as List<Map<String, *>>))
+    }
     return payloadOf(data, info)
 }

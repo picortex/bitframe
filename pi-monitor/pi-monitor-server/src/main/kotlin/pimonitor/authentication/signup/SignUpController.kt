@@ -1,19 +1,17 @@
 package pimonitor.authentication.signup
 
-import bitframe.authentication.users.UsersService
-import bitframe.events.EventBus
 import bitframe.response.response.response
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
-import bitframe.service.config.ServiceConfig
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
 import io.ktor.http.HttpStatusCode.Companion.Created
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import later.await
-import pimonitor.monitors.MonitorDao
+import pimonitor.PiMonitorApplicationConfig
+import pimonitor.server.authentication.signup.SignUpService
 
 private val json = Json {
     encodeDefaults = true
@@ -23,13 +21,6 @@ private val json = Json {
 class SignUpController(
     private val service: SignUpService
 ) {
-    constructor(
-        config: ServiceConfig,
-        service: UsersService,
-        dao: MonitorDao,
-        bus: EventBus
-    ) : this(SignUpServiceImpl(dao, service, bus, config))
-
     @OptIn(ExperimentalSerializationApi::class)
     suspend fun signUp(req: HttpRequest) = response {
         val params = try {

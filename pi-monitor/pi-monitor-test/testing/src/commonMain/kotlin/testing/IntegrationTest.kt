@@ -1,6 +1,6 @@
 package testing
 
-import bitframe.service.config.ServiceConfig
+import bitframe.service.client.config.ServiceConfig
 
 expect open class IntegrationTest() : ContainerTest {
     val config: ServiceConfig

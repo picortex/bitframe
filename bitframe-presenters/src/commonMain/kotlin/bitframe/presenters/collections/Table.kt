@@ -82,10 +82,8 @@ class Table<D>(
     }
 
     override fun toString(): String {
-        return "Table(columns=${columns.size},rows=${rows.size})"
+        return "Table(cols=${columns.size},rows=${rows.size})"
     }
 
-    override fun hashCode(): Int {
-        return columns.hashCode()
-    }
+    override fun hashCode(): Int = toString().hashCode()
 }

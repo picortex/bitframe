@@ -1,16 +1,12 @@
 package integration.authentication
 
-import bitframe.service.config.KtorClientConfiguration
+import bitframe.service.client.config.KtorClientConfiguration
 import cache.MockCache
 import expect.expect
-import pimonitor.PiMonitorService
 import pimonitor.PiMonitorServiceKtor
 import pimonitor.PiMonitorServiceStub
-import pimonitor.StubServiceConfig
+import pimonitor.PiMonitorServiceStubConfig
 import pimonitor.authentication.signup.SignUpServiceTest
-import testing.annotations.Lifecycle
-import testing.annotations.TestInstance
-import testing.annotations.Testcontainers
 import kotlin.test.Test
 
 class SignUpServiceIntegrationTest : SignUpServiceTest() {
@@ -19,7 +15,7 @@ class SignUpServiceIntegrationTest : SignUpServiceTest() {
         val cache = MockCache()
         when (val cfg = config) {
             is KtorClientConfiguration -> PiMonitorServiceKtor(cfg, cache)
-            else -> PiMonitorServiceStub(StubServiceConfig(cfg.appId), cache)
+            else -> PiMonitorServiceStub(PiMonitorServiceStubConfig(cfg.appId), cache)
         }
     }
 

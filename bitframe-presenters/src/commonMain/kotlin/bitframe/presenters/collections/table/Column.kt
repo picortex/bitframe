@@ -4,6 +4,7 @@ package bitframe.presenters.collections.table
 
 import kotlin.js.JsExport
 import bitframe.presenters.collections.table.Action as TableAction
+import kotlinx.collections.interoperable.List
 
 sealed class Column<in D>(open val name: String) {
     data class Select<in D>(

@@ -12,6 +12,6 @@ class InMemoryAuthenticationDaoProviderTest {
     @Test
     fun should_start_with_test_data_loaded_into_the_respective_daos() = runTest {
         val users = provider.users.all().await()
-        expect(users).toBeOfSize(1)
+        expect(users).toBeOfSize(0)
     }
 }

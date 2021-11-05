@@ -2,7 +2,6 @@ package core.signup
 
 import bitframe.presenters.feedbacks.FormFeedback.*
 import kotlinx.coroutines.runTest
-import pimonitor.PiMonitorService
 import pimonitor.authentication.signup.*
 import testing.IntegrationTest
 import testing.annotations.Lifecycle

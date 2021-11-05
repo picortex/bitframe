@@ -1,6 +1,6 @@
 package bitframe.authentication.signin
 
-import bitframe.BitframeService
+import bitframe.client.BitframeService
 import bitframe.authentication.signin.exports.SignInScope
 import kotlinx.css.*
 import kotlinx.html.js.onClickFunction

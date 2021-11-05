@@ -6,8 +6,6 @@ import bitframe.authentication.users.UsersServiceImpl
 import bitframe.daos.config.InMemoryDaoConfig
 import bitframe.events.InMemoryEventBus
 import bitframe.server.data.DAOProvider
-import bitframe.server.modules.authentication.AuthenticationService
-import bitframe.server.modules.authentication.AuthenticationServiceImpl
 import bitframe.service.config.ServiceConfig
 import expect.expect
 import io.ktor.http.*

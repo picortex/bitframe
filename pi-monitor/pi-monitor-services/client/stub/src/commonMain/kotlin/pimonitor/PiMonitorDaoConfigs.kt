@@ -1,0 +1,4 @@
+package pimonitor
+
+class PiMonitorDaoConfigs {
+}

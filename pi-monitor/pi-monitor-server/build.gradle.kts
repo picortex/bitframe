@@ -3,6 +3,7 @@ import com.bmuschko.gradle.docker.tasks.container.DockerStartContainer
 import com.bmuschko.gradle.docker.tasks.container.DockerStopContainer
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
@@ -22,6 +23,12 @@ applikation {
 kotlin {
     target {
         application()
+        tasks.withType(KotlinCompile::class.java) {
+            kotlinOptions.jvmTarget = "16"
+        }
+        compilations.all {
+            kotlinOptions.jvmTarget = "16"
+        }
     }
 
     sourceSets {
@@ -29,7 +36,8 @@ kotlin {
             dependencies {
                 api(project(":bitframe-server-framework-ktor"))
                 api(project(":bitframe-server-dao-inmemory"))
-                api(project(":pi-monitor-service-stub"))
+                api(project(":pi-monitor-dao-inmemory"))
+                api(project(":pi-monitor-service-server-core"))
             }
         }
 

@@ -6,17 +6,17 @@ plugins {
 }
 
 kotlin {
-    jvm {
-        library()
-        withJava()
-    }
+    jvm { library() }
     js(IR) { library() }
     sourceSets {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-core"))
-                api(project(":bitframe-authentication-service-core"))
-
+                implementation(project(":bitframe-authentication-service-core"))
+                api(project(":bitframe-authentication-service-server-core"))
+                api(project(":bitframe-events-inmemory"))
+                api(project(":cache-test"))
+                api(project(":bitframe-sdk-server-core"))
                 api(asoft("result-core", vers.asoft.duality))
                 api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
                 api(asoft("logging-console", vers.asoft.logging))
