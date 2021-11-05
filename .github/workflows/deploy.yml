@@ -71,8 +71,8 @@ jobs:
       - name: Publish pimonitor js artifacts to npm registry
         run: ./gradlew publishJsNpmPublicationToPiCortex
 
-      - name: Publish bitframe & pimonitor artifacts to maven repository
-        run: ./gradlew publishAllPublicationsToPiCortex
+#      - name: Publish bitframe & pimonitor artifacts to maven repository
+#        run: ./gradlew publishAllPublicationsToPiCortex
 
       - name: build pimonitor-client-browser-react
         run: ./gradlew :pi-monitor-client-browser-react:webpackJsRelease
