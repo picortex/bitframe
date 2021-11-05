@@ -40,8 +40,13 @@ class BusinessViewModel(
     private fun businessTable(date: List<MonitoredBusiness>) = tableOf(date) {
         selectable()
         column("Name") { it.data.name }
-        column("Contact Name") { it.data.contacts.first().name }
-        column("Contact Email") { it.data.contacts.first().email.value }
+        column("Reporting") { "N/A" }
+        column("Revenue") { "N/A" }
+        column("Expenses") { "N/A" }
+        column("GP") { "N/A" }
+        column("Velocity") { "N/A" }
+        column("NCF") { "N/A" }
+        column("V/day") { "N/A" }
         actions("Actions") {
             action("Delete") { tree.log("Deleting: ${it.data.name}") }
             action("View") { tree.log("Viewing: ${it.data.name}") }

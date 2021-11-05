@@ -5,15 +5,17 @@ import bitframe.authentication.spaces.SpacesDaoInMemoryConfig
 import bitframe.authentication.users.User
 import bitframe.authentication.users.UsersDaoInMemoryConfig
 import bitframe.daos.config.DaoConfig
+import bitframe.daos.config.InMemoryDaoConfig
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.sync.Mutex
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
 interface InMemoryAuthenticationDaoProviderConfig : UsersDaoInMemoryConfig, SpacesDaoInMemoryConfig {
     companion object {
-        val DEFAULT_SCOPE = DaoConfig.DEFAULT_SCOPE
-        const val DEFAULT_SIMULATION_TIME = 0L
+        val DEFAULT_SCOPE = InMemoryDaoConfig.DEFAULT_SCOPE
+        val DEFAULT_SIMULATION_TIME = InMemoryDaoConfig.DEFAULT_SIMULATION_TIME
         val DEFAULT_SPACES = mutableMapOf<String, Space>()
         val DEFAULT_USERS = mutableMapOf<String, User>()
 
@@ -22,11 +24,11 @@ interface InMemoryAuthenticationDaoProviderConfig : UsersDaoInMemoryConfig, Spac
             simulationTime: Long = DEFAULT_SIMULATION_TIME,
             users: MutableMap<String, User> = DEFAULT_USERS,
             spaces: MutableMap<String, Space> = DEFAULT_SPACES,
+            lock: Mutex = InMemoryDaoConfig.DEFAULT_LOCK,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ) = object : InMemoryAuthenticationDaoProviderConfig {
+        ): InMemoryAuthenticationDaoProviderConfig = object : InMemoryAuthenticationDaoProviderConfig,
+            InMemoryDaoConfig by InMemoryDaoConfig(simulationTime, lock, scope) {
             override val users: MutableMap<String, User> = users
-            override val simulationTime: Long = simulationTime
-            override val scope: CoroutineScope = scope
             override val spaces: MutableMap<String, Space> = spaces
         }
 
@@ -36,7 +38,8 @@ interface InMemoryAuthenticationDaoProviderConfig : UsersDaoInMemoryConfig, Spac
             simulationTime: Long = DEFAULT_SIMULATION_TIME,
             users: MutableMap<String, User> = DEFAULT_USERS,
             spaces: MutableMap<String, Space> = DEFAULT_SPACES,
+            lock: Mutex = InMemoryDaoConfig.DEFAULT_LOCK,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ) = invoke(simulationTime, users, spaces, scope)
+        ) = invoke(simulationTime, users, spaces, lock, scope)
     }
 }

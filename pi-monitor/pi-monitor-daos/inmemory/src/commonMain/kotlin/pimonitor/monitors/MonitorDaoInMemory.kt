@@ -13,7 +13,9 @@ class MonitorDaoInMemory(
 ) : MonitorDao {
     private val scope = config.scope
     private val monitors = config.monitors
+    private val lock = config.lock
     override fun create(params: SignUpParams, ref: UserRef) = scope.later {
+        lock.lock()
         delay(config.simulationTime)
         val uid = "monitor-${monitors.size + 1}"
         val monitor = when (params) {
@@ -33,6 +35,7 @@ class MonitorDaoInMemory(
             )
         }
         monitors["monitor-${monitors.size + 1}"] = monitor
+        lock.unlock()
         monitor
     }
 

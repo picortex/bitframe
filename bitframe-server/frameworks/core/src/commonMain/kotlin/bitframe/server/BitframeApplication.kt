@@ -9,4 +9,6 @@ open class BitframeApplication<S : BitframeService>(
 ) {
     val authenticationModule: AuthenticationModule by lazy { AuthenticationModuleImpl(config.service) }
     open val modules: List<Module> get() = config.modules
+
+    open suspend fun onStart(service: S) {}
 }

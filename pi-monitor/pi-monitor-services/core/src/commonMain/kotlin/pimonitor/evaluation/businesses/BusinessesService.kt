@@ -11,6 +11,7 @@ import pimonitor.monitored.CreateMonitoredBusinessParams
 import pimonitor.monitored.MonitoredBusiness
 import pimonitor.monitors.MonitorRef
 import kotlin.js.JsExport
+import kotlin.js.JsName
 
 abstract class BusinessesService(
     open val config: ServiceConfig
@@ -30,6 +31,7 @@ abstract class BusinessesService(
         monitorRef: MonitorRef
     ): Later<MonitoredBusiness>
 
+    @JsName("createWithMonitorRef")
     fun create(
         params: CreateMonitoredBusinessParams,
         monitorRef: MonitorRef

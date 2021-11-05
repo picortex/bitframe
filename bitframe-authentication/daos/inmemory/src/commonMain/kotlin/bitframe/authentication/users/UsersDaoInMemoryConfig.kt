@@ -2,6 +2,7 @@ package bitframe.authentication.users
 
 import bitframe.daos.config.InMemoryDaoConfig
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.sync.Mutex
 
 interface UsersDaoInMemoryConfig : InMemoryDaoConfig {
     val users: MutableMap<String, User>
@@ -9,12 +10,11 @@ interface UsersDaoInMemoryConfig : InMemoryDaoConfig {
     companion object {
         operator fun invoke(
             users: MutableMap<String, User> = mutableMapOf(),
-            simulationTime: Long = InMemoryDaoConfig.DEFAULT_SIMULTATION_TIME,
+            simulationTime: Long = InMemoryDaoConfig.DEFAULT_SIMULATION_TIME,
+            lock: Mutex = InMemoryDaoConfig.DEFAULT_LOCK,
             scope: CoroutineScope = InMemoryDaoConfig.DEFAULT_SCOPE,
-        ) = object : UsersDaoInMemoryConfig {
+        ): UsersDaoInMemoryConfig = object : UsersDaoInMemoryConfig, InMemoryDaoConfig by InMemoryDaoConfig(simulationTime, lock, scope) {
             override val users: MutableMap<String, User> = users
-            override val simulationTime: Long = simulationTime
-            override val scope: CoroutineScope = scope
         }
     }
 }

@@ -24,5 +24,5 @@ class PiMonitorServiceStubConfig(
         override val cache: Cache = this@PiMonitorServiceStubConfig.cache
     }
 
-    fun toInMemoryDaoConfig() = InMemoryDaoConfig(simulationTime, scope)
+    fun toInMemoryDaoConfig() = InMemoryDaoConfig(simulationTime, scope = scope)
 }

@@ -1,7 +1,8 @@
 package testing
 
 import bitframe.service.client.config.KtorClientConfiguration
-import bitframe.service.config.ServiceConfig
+import bitframe.service.client.config.ServiceConfig
+import cache.MockCache
 import testing.pimonitor.APP_ID
 
 actual open class IntegrationTest : ContainerTest() {
@@ -12,11 +13,13 @@ actual open class IntegrationTest : ContainerTest() {
         get() = when (mode) {
             TestMode.DEV -> KtorClientConfiguration(
                 url = "http://localhost:8080",
-                appId = APP_ID
+                appId = APP_ID,
+                cache = MockCache()
             )
             TestMode.CI -> KtorClientConfiguration(
                 url = urlUnderTest,
-                appId = APP_ID
+                appId = APP_ID,
+                cache = MockCache()
             )
             TestMode.CD -> TODO()
         }

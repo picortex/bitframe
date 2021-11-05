@@ -7,7 +7,6 @@ import bitframe.service.client.utils.JsonContent
 import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import kotlinx.serialization.json.Json
 import later.Later
 import later.later
 import pimonitor.authentication.signup.SignUpParams
@@ -20,6 +19,7 @@ class SignUpServiceKtor(
     private val client = config.http
     private val baseUrl = "${config.url}/api/authentication"
     private val scope = config.scope
+    private val json = config.json
 
     override fun executeSignUp(params: SignUpParams): Later<SignUpResult> = scope.later {
         val resp = try {
@@ -27,6 +27,6 @@ class SignUpServiceKtor(
         } catch (err: ClientRequestException) {
             err.response
         }
-        Json.decodeResponseFromString(SignUpResult.serializer(), resp.readText()).response()
+        json.decodeResponseFromString(SignUpResult.serializer(), resp.readText()).response()
     }
 }

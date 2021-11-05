@@ -8,7 +8,7 @@ import bitframe.authentication.spaces.SpacesService
 import bitframe.authentication.users.UsersService
 import pimonitor.authentication.signup.SignUpService
 import pimonitor.client.authentication.signup.SignUpServiceKtor
-import pimonitor.client.evaluation.businesses.BusinessServiceKtor
+import pimonitor.client.evaluation.businesses.BusinessesServiceKtor
 import pimonitor.client.evaluation.businesses.BusinessesService
 import pimonitor.client.monitors.MonitorsService
 import pimonitor.client.monitors.MonitorsServiceKtor
@@ -24,6 +24,6 @@ fun PiMonitorServiceKtor(
         override val signIn: SignInService = signInService
         override val signUp: SignUpService = SignUpServiceKtor(config)
         override val monitors: MonitorsService = monitorsService
-        override val businesses: BusinessesService = BusinessServiceKtor(config.with(monitorsService))
+        override val businesses: BusinessesService = BusinessesServiceKtor(config.with(monitorsService))
     }
 }

@@ -4,6 +4,7 @@ import bitframe.events.EventBus
 import cache.Cache
 import io.ktor.client.*
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.serialization.json.Json
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
@@ -12,6 +13,7 @@ import kotlin.jvm.JvmSynthetic
 interface KtorClientConfiguration : ServiceConfig {
     val url: String
     val http: HttpClient
+    val json: Json
 
     companion object {
         @JvmField
@@ -23,6 +25,9 @@ interface KtorClientConfiguration : ServiceConfig {
         @JvmField
         val DEFAULT_BUS = ServiceConfig.DEFAULT_BUS
 
+        @JvmField
+        val DEFAULT_JSON = Json.Default
+
         @JvmSynthetic
         operator fun invoke(
             url: String,
@@ -30,10 +35,12 @@ interface KtorClientConfiguration : ServiceConfig {
             cache: Cache,
             bus: EventBus = DEFAULT_BUS,
             http: HttpClient = DEFAULT_HTTP_CLIENT,
+            json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE,
         ): KtorClientConfiguration = object : KtorClientConfiguration, ServiceConfig by ServiceConfig(appId, cache, bus, scope) {
             override val url: String = url
             override val http: HttpClient = http
+            override val json: Json = json
             override val appId: String = appId
         }
 
@@ -45,7 +52,8 @@ interface KtorClientConfiguration : ServiceConfig {
             cache: Cache,
             bus: EventBus = DEFAULT_BUS,
             http: HttpClient = DEFAULT_HTTP_CLIENT,
+            json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE,
-        ) = invoke(url, appId, cache, bus, http, scope)
+        ) = invoke(url, appId, cache, bus, http, json, scope)
     }
 }

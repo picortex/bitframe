@@ -2,10 +2,7 @@ package pimonitor.monitored
 
 import bitframe.daos.config.InMemoryDaoConfig
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
-import later.Later
-import later.later
-import pimonitor.monitors.MonitorRef
+import kotlinx.coroutines.sync.Mutex
 
 interface MonitoredBusinessDaoInMemoryConfig : InMemoryDaoConfig {
     val businesses: MutableMap<String, MonitoredBusiness>
@@ -13,10 +10,11 @@ interface MonitoredBusinessDaoInMemoryConfig : InMemoryDaoConfig {
     companion object {
         operator fun invoke(
             businesses: MutableMap<String, MonitoredBusiness> = mutableMapOf(),
-            simulationTime: Long = InMemoryDaoConfig.DEFAULT_SIMULTATION_TIME,
+            simulationTime: Long = InMemoryDaoConfig.DEFAULT_SIMULATION_TIME,
+            lock: Mutex = InMemoryDaoConfig.DEFAULT_LOCK,
             scope: CoroutineScope = InMemoryDaoConfig.DEFAULT_SCOPE
         ): MonitoredBusinessDaoInMemoryConfig = object : MonitoredBusinessDaoInMemoryConfig,
-            InMemoryDaoConfig by InMemoryDaoConfig(simulationTime, scope) {
+            InMemoryDaoConfig by InMemoryDaoConfig(simulationTime, lock, scope) {
             override val businesses: MutableMap<String, MonitoredBusiness> = businesses
         }
     }

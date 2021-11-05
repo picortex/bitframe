@@ -22,6 +22,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
+                api(project(":cache-test"))
                 api(asoft("expect-coroutines", vers.asoft.expect))
             }
         }

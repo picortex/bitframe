@@ -18,12 +18,13 @@ open class SignInServiceKtor(
 ) : SignInService(config), MiniService {
     private val path get() = config.url + "/api/authentication/sign-in"
     private val http get() = config.http
+    private val json get() = config.json
     override fun executeSignIn(credentials: SignInCredentials): Later<LoginConundrum> = scope.later {
         val resp = try {
             http.post(path) { body = JsonContent(credentials) }
         } catch (exp: ClientRequestException) {
             exp.response
         }
-        Json.decodeResponseFromString(LoginConundrum.serializer(), resp.readText()).response()
+        json.decodeResponseFromString(LoginConundrum.serializer(), resp.readText()).response()
     }
 }
