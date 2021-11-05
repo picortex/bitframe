@@ -54,7 +54,7 @@ val createDockerfile by tasks.creating(Dockerfile::class) {
     dependsOn("installDistRelease")
     dependsOn(":pi-monitor-client-browser-react:jsBrowserProductionWebpack")
     dependsOn(":pi-monitor-client-browser-react:webpackJsRelease")
-    from("openjdk:8-jre")
+    from("openjdk:16-jre")
     runCommand("mkdir /app /app/public")
     destFile.set(file("build/binaries/Dockerfile"))
     copyFile("./release", "/app")
