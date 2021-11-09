@@ -1,8 +1,10 @@
 package pimonitor.client.evaluation.businesses
 
 import bitframe.service.client.config.ServiceConfig
+import live.Live
 import pimonitor.client.monitors.MonitorsService
+import pimonitor.client.monitors.Session
 
 interface BusinessesServiceConfig : ServiceConfig {
-    val monitorsService: MonitorsService
+    val monitorSession: Live<Session>
 }

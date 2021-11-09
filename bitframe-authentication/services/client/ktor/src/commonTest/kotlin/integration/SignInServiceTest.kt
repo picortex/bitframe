@@ -1,5 +1,6 @@
 package integration
 
+import bitframe.authentication.client.signin.SignInService
 import bitframe.authentication.client.signin.SignInServiceKtor
 import bitframe.authentication.signin.SignInCredentials
 import expect.expect
@@ -8,7 +9,7 @@ import later.await
 import kotlin.test.Test
 
 open class SignInServiceTest {
-    private val service = SignInServiceKtor(CONFIG_UNDER_TEST)
+    private val service: SignInService = SignInServiceKtor(CONFIG_UNDER_TEST)
 
     @Test
     fun should_give_a_user_with_valid_credentials_access() = runTest {

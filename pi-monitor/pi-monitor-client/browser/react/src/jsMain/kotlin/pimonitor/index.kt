@@ -14,11 +14,10 @@ import pimonitor.evaluation.businesses.InviteBusiness
 import reakt.setContent
 
 fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
-    val client = client(jso {
+    val client = client {
         appId = "test-client"
-        url = "http://localhost:8080"
-//        simulationTime = 1500
-    })
+         url = "http://localhost:8080"
+    }
     val version: String by konfig()
     Bitframe(
         client = client,

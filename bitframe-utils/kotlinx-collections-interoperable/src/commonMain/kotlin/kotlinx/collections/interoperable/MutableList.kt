@@ -1,4 +1,5 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE", "WRONG_EXPORTED_DECLARATION")
 
 package kotlinx.collections.interoperable
 
@@ -8,4 +9,4 @@ import kotlin.js.JsExport
 import kotlin.collections.MutableList as KMutableList
 
 @Serializable(with = MutableListSerializer::class)
-abstract class MutableList<E> : List<E>(), KMutableList<E>
+interface MutableList<E> : List<E>, KMutableList<E>

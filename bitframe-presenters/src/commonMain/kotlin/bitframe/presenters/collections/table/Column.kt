@@ -2,9 +2,8 @@
 
 package bitframe.presenters.collections.table
 
-import kotlin.js.JsExport
-import bitframe.presenters.collections.table.Action as TableAction
 import kotlinx.collections.interoperable.List
+import kotlin.js.JsExport
 
 sealed class Column<in D>(open val name: String) {
     data class Select<in D>(
@@ -18,6 +17,6 @@ sealed class Column<in D>(open val name: String) {
 
     data class Action<in D>(
         override val name: String,
-        val actions: List<TableAction<D>>
+        val actions: List<RowAction<D>>
     ) : Column<D>(name)
 }

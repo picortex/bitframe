@@ -18,11 +18,11 @@ class PiMonitorServiceStubConfig(
     override val scope: CoroutineScope = ServiceConfig.DEFAULT_SCOPE,
 ) : ServiceConfig {
 
-    fun with(usersDao: UsersDao): SignInServiceMockConfig = object : SignInServiceMockConfig, ServiceConfig by this {
-        override val users: MutableList<User> = mutableListOf()
-        override val bus: EventBus = this@PiMonitorServiceStubConfig.bus
-        override val cache: Cache = this@PiMonitorServiceStubConfig.cache
-    }
+//    fun with(usersDao: UsersDao): SignInServiceMockConfig = object : SignInServiceMockConfig, ServiceConfig by this {
+//        override val users: MutableList<User> = mutableListOf()
+//        override val bus: EventBus = this@PiMonitorServiceStubConfig.bus
+//        override val cache: Cache = this@PiMonitorServiceStubConfig.cache
+//    }
 
     fun toInMemoryDaoConfig() = InMemoryDaoConfig(simulationTime, scope = scope)
 }

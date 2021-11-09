@@ -19,5 +19,5 @@ abstract class BusinessesService(
 
     fun create(
         params: CreateMonitoredBusinessParams
-    ) = create(params, config.monitorsService.currentMonitor.ref())
+    ) = create(params, config.monitorSession.value.currentMonitorOrThrow().ref())
 }

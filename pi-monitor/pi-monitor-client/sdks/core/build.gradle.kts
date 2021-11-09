@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
+
 plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
@@ -12,9 +14,12 @@ kotlin {
     js(IR) {
         val main by compilations
         main.outputModuleName = "pi-monitor-client-sdk-core"
-        main.compileKotlinTask.kotlinOptions.freeCompilerArgs += listOf("-Xir-per-module")
         library()
         binaries.library()
+    }
+
+    tasks.withType(Kotlin2JsCompile::class.java) {
+        kotlinOptions.freeCompilerArgs += listOf("-Xir-per-module")
     }
 
     sourceSets {

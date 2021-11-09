@@ -1,17 +1,16 @@
 @file:JsExport
-@file:Suppress("NON_EXPORTABLE_TYPE")
+@file:Suppress("NON_EXPORTABLE_TYPE", "WRONG_EXPORTED_DECLARATION")
 
 package kotlinx.collections.interoperable
 
 import kotlin.collections.Iterable as KIterable
 
-actual abstract class Iterable<out E> : KIterable<E> {
+actual interface Iterable<out E> : KIterable<E> {
+//    init {
+//        asDynamic()[Symbol.iterator] = ::SymbolIterator
+//    }
 
-    init {
-        asDynamic()[Symbol.iterator] = ::SymbolIterator
-    }
-
-    private fun SymbolIterator() = JsListIterator(iterator())
+//    private fun SymbolIterator() = JsListIterator(iterator())
 
     fun forEach(lambda: (item: E) -> Unit) {
         for (item in this) lambda(item)

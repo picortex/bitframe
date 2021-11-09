@@ -14,7 +14,7 @@ import later.Later
 import later.later
 
 open class SignInServiceKtor(
-    override val config: KtorClientConfiguration
+    override val config: SignInServiceKtorConfig
 ) : SignInService(config), MiniService {
     private val path get() = config.url + "/api/authentication/sign-in"
     private val http get() = config.http

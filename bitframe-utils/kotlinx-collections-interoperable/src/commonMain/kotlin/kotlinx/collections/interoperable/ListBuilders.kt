@@ -1,21 +1,14 @@
 package kotlinx.collections.interoperable
 
 import kotlin.collections.List as KList
+import kotlin.collections.mutableListOf as kMutableListOf
 
-inline fun <E> mutableListOf(): MutableList<E> = ArrayList(arrayListOf())
+inline fun <E> mutableListOf(): MutableList<E> = MutableListWrapper(kMutableListOf())
 
-inline fun <E> mutableListOf(vararg elements: E): MutableList<E> = ArrayList(arrayListOf(*elements))
+inline fun <E> mutableListOf(vararg elements: E): MutableList<E> = MutableListWrapper(kMutableListOf(*elements))
 
-fun <E> listOf(): List<E> = EmptyList
+inline fun <E> listOf(): List<E> = EmptyList
 
-fun emptyList(): List<Nothing> = EmptyList
+inline fun emptyList(): List<Nothing> = EmptyList
 
 inline fun <E> listOf(vararg elements: E): List<E> = mutableListOf(*elements)
-
-inline fun <E> KList<E>.toInteroperableArrayList() = ArrayList(this)
-
-inline fun <E> KList<E>.toInteroperableMutableList(): MutableList<E> = toInteroperableArrayList()
-
-inline fun <E> KList<E>.toInteroperableList(): List<E> = toInteroperableMutableList()
-
-inline fun <E> Array<E>.toInteroperableList(): List<E> = toList().toInteroperableList()

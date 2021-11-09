@@ -16,7 +16,7 @@ fun PiMonitorServiceStub(
     config: PiMonitorServiceStubConfig,
 ): PiMonitorService {
     val usersDao = UsersDaoInMemory()
-    val signInService = SignInServiceMock(config.with(usersDao))
+//    val signInService = SignInServiceMock(config.with(usersDao))
     val daoConfig = config.toInMemoryDaoConfig()
 //    val monitorDao = MonitorDaoInMemory(config = daoConfig)
 //    val monitoredBusinessDao = MonitoredBusinessDaoInMemory(config = daoConfig)

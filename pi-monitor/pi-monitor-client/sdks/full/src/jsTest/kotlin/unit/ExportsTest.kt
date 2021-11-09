@@ -13,6 +13,7 @@ class ExportsTest {
     fun should_get_a_service() {
         val cred: ServiceConfiguration = json {
             appId = "12345"
+            url = ""
         }
         console.log(cred)
         val service = service(cred)

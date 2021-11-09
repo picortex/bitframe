@@ -26,6 +26,13 @@ external interface ServiceConfiguration {
 
 private var isLoggingEnabled = false
 
+@JsName("clientWithConfigBlock")
+fun client(
+    block: ServiceConfiguration.() -> Unit
+): PiMonitorService = client(
+    js("{}").unsafeCast<ServiceConfiguration>().apply(block)
+)
+
 fun client(config: ServiceConfiguration): PiMonitorService {
     if (config.disableViewModelLogs != true && !isLoggingEnabled) {
         Logging.init(ConsoleAppender())

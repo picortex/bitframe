@@ -15,7 +15,8 @@ abstract class MonitorsService(
 ) : MonitorsService(config) {
 
     val signInSession get() = config.signInSession
-    val session: Live<Session> = Live(Session.Unknown)
+
+    val session get() = config.monitorSession
 
     val currentMonitor: Monitor
         get() = when (val s = session.value) {

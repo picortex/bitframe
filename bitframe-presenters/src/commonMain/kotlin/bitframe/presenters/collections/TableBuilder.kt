@@ -2,7 +2,9 @@ package bitframe.presenters.collections
 
 import bitframe.presenters.collections.table.ColumnBuilder
 import kotlinx.collections.interoperable.toInteroperableList
+import kotlin.jvm.JvmSynthetic
 
+@JvmSynthetic
 fun <D> tableOf(
     data: Collection<D>,
     builder: ColumnBuilder<D>.() -> Unit
