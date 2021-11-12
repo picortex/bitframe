@@ -4,7 +4,6 @@ package pimonitor.monitored
 
 import contacts.Email
 import kotlinx.serialization.Serializable
-import pimonitor.monitors.Monitor
 import pimonitor.monitors.MonitorRef
 import kotlin.js.JsExport
 

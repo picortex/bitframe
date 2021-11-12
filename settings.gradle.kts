@@ -38,6 +38,10 @@ includeSubs(base = "cache", path = "bitframe-utils/cache", "api", "test", "brows
 
 includeRoot(name = "validation", path = "bitframe-utils/validation")
 
+includeSubs(base = "bitframe-testing", path = "bitframe-testing", "containers")
+
+includeSubs(base = "bitframe-testing-instance", path = "bitframe-testing/instance", "browser", "server")
+
 includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core", "processor")
 
 includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "test")
