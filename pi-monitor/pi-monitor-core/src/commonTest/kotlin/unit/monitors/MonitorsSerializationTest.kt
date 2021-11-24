@@ -4,10 +4,9 @@ import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.User
 import contacts.Email
 import kotlinx.serialization.json.Json
-import pimonitor.monitors.CooperateMonitor
-import pimonitor.monitors.CooperateMonitor.ContactPerson
-import pimonitor.monitors.IndividualMonitor
-import pimonitor.monitors.Monitor
+import bitframe.monitors.CooperateMonitor
+import bitframe.monitors.CooperateMonitor.ContactPerson
+import bitframe.monitors.IndividualMonitor
 import kotlin.test.Test
 
 class MonitorsSerializationTest {

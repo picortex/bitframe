@@ -4,7 +4,7 @@ import bitframe.authentication.client.signin.SignInServiceKtor
 import expect.expect
 import kotlinx.coroutines.runTest
 import later.await
-import pimonitor.client.monitors.MonitorsServiceKtor
+import bitframe.client.monitors.MonitorsServiceKtor
 import kotlin.test.Test
 
 class MonitorsServiceKtorTest {

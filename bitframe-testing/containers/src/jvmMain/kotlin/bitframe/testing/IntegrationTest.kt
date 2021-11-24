@@ -2,10 +2,7 @@ package bitframe.testing
 
 import bitframe.service.client.config.KtorClientConfiguration
 import bitframe.service.client.config.ServiceConfig
-import bitframe.testing.ContainerTest
-import bitframe.testing.TestMode
 import cache.MockCache
-import bitframe.testing.pimonitor.APP_ID
 
 actual open class IntegrationTest : ContainerTest() {
     actual val config: ServiceConfig

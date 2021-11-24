@@ -50,8 +50,8 @@ kotlin {
 
 val createDockerfile by tasks.creating(Dockerfile::class) {
     dependsOn("installDistRelease")
-    dependsOn(":pi-monitor-client-browser-react:jsBrowserProductionWebpack")
-    dependsOn(":pi-monitor-client-browser-react:webpackJsRelease")
+    dependsOn(":bitframe-testing-instance-browser:jsBrowserProductionWebpack")
+    dependsOn(":bitframe-testing-instance-browser:webpackJsRelease")
     from("openjdk:16-jdk")
     runCommand("mkdir /app /app/public")
     destFile.set(file("build/binaries/Dockerfile"))
@@ -59,10 +59,10 @@ val createDockerfile by tasks.creating(Dockerfile::class) {
     copyFile("./public", "/app/public")
     workingDir("/app")
     exposePort(8080)
-    defaultCommand("./bin/pi-monitor-server", "/app/public")
+    defaultCommand("./bin/bitframe-testing-instance-server", "/app/public")
     doLast {
         copy {
-            from(rootProject.file("pi-monitor/pi-monitor-client/browser/react/build/websites/js/release"))
+            from(rootProject.file("bitframe-testing/instance/browser/build/websites/js/release"))
             into(file("build/binaries/public"))
             exclude("*.ts", "*.map")
         }
@@ -72,13 +72,13 @@ val createDockerfile by tasks.creating(Dockerfile::class) {
 val createDockerImage by tasks.creating(DockerBuildImage::class) {
     dependsOn(createDockerfile)
     inputDir.set(file("build/binaries"))
-    images.addAll("pi-monitor:${vers.bitframe.current}")
+    images.addAll("bitframe:${vers.bitframe.current}")
 }
 
 fun dockerPushTo(remote: String) = tasks.creating(Exec::class) {
     dependsOn(createDockerImage)
-    val localTag = "pi-monitor:${vers.bitframe.current}"
-    val remoteName = "$remote/pi-monitor:${vers.bitframe.current}"
+    val localTag = "bitframe:${vers.bitframe.current}"
+    val remoteName = "$remote/bitframe:${vers.bitframe.current}"
     commandLine("docker", "tag", localTag, remoteName)
     doLast {
         exec { commandLine("docker", "push", remoteName) }

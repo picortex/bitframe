@@ -34,21 +34,23 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-sdk-client-ktor"))
-                api(project(":cache-browser"))
-                api(project(":bitframe-client-viewmodels"))
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
+                api(project(":bitframe-authentication-core"))
             }
         }
 
         val commonTest by getting {
             dependencies {
                 implementation(asoft("expect-core", vers.asoft.expect))
+                api(project(":bitframe-testing-sdk-browser"))
             }
         }
 
         val jsMain by getting {
             dependencies {
+                api(project(":bitframe-sdk-client-ktor"))
+                api(project(":cache-browser"))
+                api(project(":bitframe-client-viewmodels"))
+                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
                 implementation(project(":bitframe-ui-react"))
                 implementation(asoft("applikation-runtime", vers.asoft.builders))
             }

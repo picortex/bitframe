@@ -3,7 +3,7 @@ package integration
 import expect.expect
 import kotlinx.coroutines.runTest
 import later.await
-import pimonitor.client.PiMonitorServiceKtor
+import bitframe.client.PiMonitorServiceKtor
 import kotlin.test.Test
 
 class BusinessesServiceKtorTest {

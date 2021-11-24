@@ -1,0 +1,5 @@
+package bitframe.client.monitors
+
+import bitframe.service.client.config.KtorClientConfiguration
+
+interface MonitorsServiceKtorConfig : MonitorsServiceConfig, KtorClientConfiguration

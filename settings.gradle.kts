@@ -42,6 +42,8 @@ includeSubs(base = "bitframe-testing", path = "bitframe-testing", "containers")
 
 includeSubs(base = "bitframe-testing-instance", path = "bitframe-testing/instance", "browser", "server")
 
+includeSubs(base = "bitframe-testing-sdk", path = "bitframe-testing/sdk", "browser")
+
 includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core", "processor")
 
 includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "test")
@@ -84,7 +86,7 @@ includeSubs(base = "pi-monitor-dao", path = "pi-monitor/pi-monitor-daos", "core"
 
 includeSubs(base = "pi-monitor-service", path = "pi-monitor/pi-monitor-services", "core", "test")
 
-includeSubs(base = "pi-monitor-service-client", path = "pi-monitor/pi-monitor-services/client", "core", "ktor", "stub")
+includeSubs(base = "pi-monitor-service-client", path = "pi-monitor/pi-monitor-services/client", "core", "ktor")
 
 includeSubs(base = "pi-monitor-service-server", path = "pi-monitor/pi-monitor-services/server", "core")
 

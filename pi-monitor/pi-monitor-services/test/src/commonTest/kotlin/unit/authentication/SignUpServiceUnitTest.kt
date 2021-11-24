@@ -1,12 +1,12 @@
 package unit.authentication
 
 import expect.expect
-import pimonitor.PiMonitorServiceStub
-import pimonitor.PiMonitorServiceStubConfig
-import pimonitor.authentication.signup.SignUpServiceTest
-import testing.annotations.Lifecycle
-import testing.annotations.TestInstance
-import testing.annotations.Testcontainers
+import bitframe.PiMonitorServiceStub
+import bitframe.PiMonitorServiceStubConfig
+import bitframe.authentication.signup.SignUpServiceTest
+import pimonitor.testing.annotations.Lifecycle
+import pimonitor.testing.annotations.TestInstance
+import pimonitor.testing.annotations.Testcontainers
 import kotlin.test.Test
 
 @Testcontainers

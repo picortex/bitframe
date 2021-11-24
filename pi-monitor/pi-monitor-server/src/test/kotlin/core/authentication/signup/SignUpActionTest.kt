@@ -10,9 +10,9 @@ import bitframe.service.config.ServiceConfig
 import expect.expect
 import io.ktor.http.*
 import kotlinx.coroutines.runTest
-import pimonitor.authentication.signup.DefaultSignUpAction
-import pimonitor.authentication.signup.SignUpController
-import pimonitor.monitors.MonitorDaoInMemory
+import bitframe.authentication.signup.DefaultSignUpAction
+import bitframe.authentication.signup.SignUpController
+import bitframe.monitors.MonitorDaoInMemory
 import kotlin.test.Test
 
 open class SignUpActionTest(component: ComponentUnderTest) {

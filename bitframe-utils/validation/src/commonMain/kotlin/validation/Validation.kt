@@ -5,12 +5,14 @@ package validation
 import kotlin.js.JsExport
 
 sealed class Validation<out T> {
-    data class Valid<out T>(val value: T) : Validation<T>()
-
-    data class Invalid(val cause: ValidationError) : Validation<Nothing>()
 
     fun throwIfInvalid() {
         if (this is Invalid) throw cause
+    }
+
+    fun getOrDefault(default: @UnsafeVariance T): T = when (this) {
+        is Valid -> value
+        is Invalid -> default
     }
 
     fun getOrThrow(): T = when (this) {

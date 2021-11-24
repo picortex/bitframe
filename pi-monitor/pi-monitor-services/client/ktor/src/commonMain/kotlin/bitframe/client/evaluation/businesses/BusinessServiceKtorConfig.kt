@@ -1,0 +1,5 @@
+package bitframe.client.evaluation.businesses
+
+import bitframe.service.client.config.KtorClientConfiguration
+
+interface BusinessServiceKtorConfig : BusinessesServiceConfig, KtorClientConfiguration

@@ -16,7 +16,7 @@ actual open class ContainerTest {
             TestMode.DEV
         }
 
-        private val dockerFilePath = RootProjectDir.getPath() + "/pi-monitor/pi-monitor-server/build/binaries/Dockerfile"
+        private val dockerFilePath get() = RootProjectDir.getPath() + "/bitframe-testing/instance/server/build/binaries/Dockerfile"
 
         private val dockerImage = ImageFromDockerfile()
             .withDockerfile(Path.of(dockerFilePath))

@@ -1,11 +1,11 @@
 package acceptance.utils
 
-import pimonitor.Application
-import pimonitor.WebApplication
-import testing.ContainerTest
+import bitframe.BrowserApplication
+import bitframe.WebApplication
+import bitframe.testing.ContainerTest
 
 open class AcceptanceTest : ContainerTest() {
     companion object {
-        val application: Application get() = WebApplication(urlUnderTest)
+        val application: BrowserApplication get() = WebApplication(urlUnderTest)
     }
 }

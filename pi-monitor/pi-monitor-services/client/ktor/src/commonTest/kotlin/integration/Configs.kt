@@ -1,7 +1,7 @@
 package integration
 
 import cache.MockCache
-import pimonitor.client.PiMonitorServiceKtorConfig
+import bitframe.client.PiMonitorServiceKtorConfig
 
 val DEV_KTOR_CLIENT_CONFIG = PiMonitorServiceKtorConfig(
     url = "http://localhost:8080",

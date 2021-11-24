@@ -1,14 +1,12 @@
 package integration
 
 import expect.expect
-import expect.toBe
 import kotlinx.coroutines.runTest
 import later.await
-import pimonitor.authentication.signup.SignUpParams
-import pimonitor.client.authentication.signup.SignUpServiceKtor
+import bitframe.authentication.signup.SignUpParams
+import bitframe.client.authentication.signup.SignUpServiceKtor
 import validation.ValidationError
 import kotlin.test.Test
-import kotlin.test.expect
 
 open class SignUpServiceKtorTest {
     private val service = SignUpServiceKtor(CONFIG_UNDER_TEST)

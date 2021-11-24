@@ -12,7 +12,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":pi-monitor-service-client-ktor"))
-                api(project(":pi-monitor-service-client-stub"))
                 api(project(":pi-monitor-test-testing"))
                 api(asoft("expect-coroutines", vers.asoft.expect))
             }

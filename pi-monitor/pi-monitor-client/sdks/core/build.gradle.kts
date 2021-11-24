@@ -27,11 +27,9 @@ kotlin {
             dependencies {
                 api(project(":pi-monitor-core"))
                 api(project(":pi-monitor-service-client-ktor"))
-                api(project(":pi-monitor-service-client-stub"))
+                api(project(":cache-test"))
                 api(kotlinx("datetime", vers.kotlinx.datetime))
                 api(asoft("logging-console", vers.asoft.logging))
-                api(asoft("name-generator", vers.asoft.contacts))
-                api(asoft("email-generator", vers.asoft.contacts))
             }
         }
 

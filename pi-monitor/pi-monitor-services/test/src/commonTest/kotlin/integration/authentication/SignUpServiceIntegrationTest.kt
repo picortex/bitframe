@@ -3,10 +3,10 @@ package integration.authentication
 import bitframe.service.client.config.KtorClientConfiguration
 import cache.MockCache
 import expect.expect
-import pimonitor.PiMonitorServiceKtor
-import pimonitor.PiMonitorServiceStub
-import pimonitor.PiMonitorServiceStubConfig
-import pimonitor.authentication.signup.SignUpServiceTest
+import bitframe.PiMonitorServiceKtor
+import bitframe.PiMonitorServiceStub
+import bitframe.PiMonitorServiceStubConfig
+import bitframe.authentication.signup.SignUpServiceTest
 import kotlin.test.Test
 
 class SignUpServiceIntegrationTest : SignUpServiceTest() {

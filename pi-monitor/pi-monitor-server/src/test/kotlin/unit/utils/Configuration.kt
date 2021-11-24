@@ -7,7 +7,7 @@ import bitframe.server.modules.authentication.services.AuthenticationServiceImpl
 import bitframe.service.config.ServiceConfig
 import cache.Cache
 import cache.MockCache
-import pimonitor.PiMonitorServer
+import bitframe.PiMonitorServer
 import java.io.File
 
 @JvmField

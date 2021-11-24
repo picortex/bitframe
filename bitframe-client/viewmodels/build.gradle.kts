@@ -23,6 +23,7 @@ kotlin {
                 api(project(":cache-test"))
                 api(project(":bitframe-sdk-client-core"))
                 api(project(":bitframe-events-inmemory"))
+                api(project(":bitframe-authentication-service-client-test"))
                 api(asoft("viewmodel-test-expect", vers.asoft.viewmodel))
             }
         }
