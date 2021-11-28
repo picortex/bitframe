@@ -40,7 +40,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(asoft("expect-core", vers.asoft.expect))
+                implementation(asoft.expect.core)
                 api(project(":bitframe-testing-sdk-browser"))
             }
         }
@@ -48,11 +48,11 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 api(project(":bitframe-sdk-client-ktor"))
-                api(project(":cache-browser"))
+                api(asoft.cache.browser)
                 api(project(":bitframe-client-viewmodels"))
                 api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
                 implementation(project(":bitframe-ui-react"))
-                implementation(asoft("applikation-runtime", vers.asoft.builders))
+                implementation(asoft.applikation.runtime)
             }
         }
 

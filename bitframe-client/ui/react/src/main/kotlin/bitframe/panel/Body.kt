@@ -5,8 +5,9 @@ import bitframe.renderers.Renderer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.css.em
 import react.RBuilder
-import react.router.dom.route
-import react.router.dom.switch
+import react.createElement
+import react.router.dom.Route
+import react.router.dom.Switch
 import reakt.DrawerState
 import reakt.NavigationAppBar
 import reakt.*
@@ -33,9 +34,12 @@ internal fun RBuilder.Body(
     )
 
     Surface(margin = 0.5.em) {
-        switch {
+        Switch {
             for ((path, renderer) in allRenderers) {
-                route("${PanelPageRoute}$path", render = renderer)
+                Route {
+                    attrs.path = arrayOf("${PanelPageRoute}$path")
+                    attrs.render = { props -> createElement { renderer(props) } }
+                }
             }
             styledDiv { +"Excuse me, are you lost?" }
         }

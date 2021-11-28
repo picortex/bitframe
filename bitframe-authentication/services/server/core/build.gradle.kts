@@ -21,7 +21,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(project(":bitframe-authentication-dao-inmemory"))
-                implementation(asoft("expect-coroutines", vers.asoft.expect))
+                implementation(asoft.expect.coroutines)
             }
         }
     }

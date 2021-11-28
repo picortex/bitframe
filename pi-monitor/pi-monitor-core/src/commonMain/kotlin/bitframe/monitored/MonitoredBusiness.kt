@@ -2,7 +2,7 @@
 
 package bitframe.monitored
 
-import contacts.Email
+import identifier.Email
 import kotlinx.serialization.Serializable
 import bitframe.monitors.MonitorRef
 import kotlin.js.JsExport

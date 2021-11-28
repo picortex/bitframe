@@ -4,7 +4,7 @@ package bitframe.authentication.signup
 
 import bitframe.events.Event
 import bitframe.service.config.ServiceConfig
-import contacts.Email
+import identifier.Email
 import later.Later
 import later.await
 import later.later

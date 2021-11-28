@@ -15,13 +15,13 @@ kotlin {
             dependencies {
                 api(project(":bitframe-service-core"))
                 api(project(":bitframe-authentication-service-server-core"))
-                api(asoft("platform-core", vers.asoft.platform))
+                api(asoft.platform.core)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(asoft("expect-core", vers.asoft.expect))
+                implementation(asoft.expect.core)
             }
         }
     }

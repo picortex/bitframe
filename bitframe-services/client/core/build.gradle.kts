@@ -13,15 +13,15 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":cache-api"))
+                api(asoft.cache.api)
                 api(project(":bitframe-service-core"))
-                api(asoft("platform-core", vers.asoft.platform))
+                api(asoft.platform.core)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(asoft("expect-core", vers.asoft.expect))
+                implementation(asoft.expect.core)
             }
         }
     }

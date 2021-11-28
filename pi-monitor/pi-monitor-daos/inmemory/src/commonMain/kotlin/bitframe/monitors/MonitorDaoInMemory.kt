@@ -2,7 +2,7 @@ package bitframe.monitors
 
 import bitframe.authentication.users.UserRef
 import bitframe.daos.conditions.Condition
-import contacts.Email
+import identifier.Email
 import kotlinx.coroutines.delay
 import later.later
 import bitframe.authentication.signup.SignUpParams

@@ -27,23 +27,23 @@ kotlin {
             dependencies {
                 api(project(":pi-monitor-core"))
                 api(project(":pi-monitor-service-client-ktor"))
-                api(project(":cache-test"))
+                api(asoft.cache.mock)
                 api(kotlinx("datetime", vers.kotlinx.datetime))
-                api(asoft("logging-console", vers.asoft.logging))
+                api(asoft.logging.console)
             }
         }
 
         val commonTest by getting {
             dependencies {
                 implementation(project(":pi-monitor-test-testing"))
-                implementation(asoft("expect-coroutines", vers.asoft.expect))
+                implementation(asoft.expect.coroutines)
             }
         }
 
         val jsMain by getting {
             dependencies {
-                api(project(":cache-browser"))
-                api(project(":cache-react-native"))
+                api(asoft.cache.browser)
+                api(asoft.cache.react.native)
                 api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }

@@ -12,9 +12,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":cache-test"))
+                api(asoft.cache.mock)
                 api(project(":bitframe-service-client-ktor"))
-                api(asoft("expect-coroutines", vers.asoft.expect))
+                api(asoft.expect.coroutines)
             }
         }
 

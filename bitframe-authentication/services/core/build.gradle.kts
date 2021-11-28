@@ -14,19 +14,19 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":validation"))
-                api(project(":cache-api"))
+                api(asoft.cache.api)
                 api(project(":bitframe-service-core"))
                 api(project(":bitframe-events-core"))
                 api(project(":bitframe-authentication-dao-core"))
-                api(asoft("live-core", vers.asoft.live))
-                api(asoft("later-ktx", vers.asoft.later))
+                api(asoft.live.core)
+                api(asoft.later.ktx)
             }
         }
 
         val commonTest by getting {
             dependencies {
                 implementation(project(":bitframe-authentication-dao-inmemory"))
-                implementation(asoft("expect-coroutines", vers.asoft.expect))
+                implementation(asoft.expect.coroutines)
             }
         }
     }

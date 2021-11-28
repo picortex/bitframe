@@ -15,13 +15,13 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-dao-core"))
-                api(asoft("later-ktx", vers.asoft.later))
+                api(asoft.later.ktx)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(asoft("expect-core", vers.asoft.expect))
+                implementation(asoft.expect.core)
             }
         }
     }

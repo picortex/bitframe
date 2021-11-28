@@ -27,14 +27,14 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(project(":pi-monitor-test-testing"))
-                implementation(asoft("viewmodel-test-expect", vers.asoft.viewmodel))
-                implementation(asoft("expect-core", vers.asoft.expect))
+                implementation(asoft.viewmodel.test.expect)
+                implementation(asoft.expect.core)
             }
         }
 
         val jsMain by getting {
             dependencies {
-                api(asoft("viewmodel-react", vers.asoft.viewmodel))
+                api(asoft.viewmodel.react)
             }
         }
     }

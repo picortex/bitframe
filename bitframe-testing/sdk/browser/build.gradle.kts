@@ -11,7 +11,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-sdk-client-core"))
-                api(asoft("expect-coroutines", vers.asoft.expect))
+                api(asoft.expect.coroutines)
             }
         }
 

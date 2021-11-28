@@ -1,4 +1,5 @@
 pluginManagement {
+    enableFeaturePreview("VERSION_CATALOGS")
     repositories {
         mavenCentral()
         google()
@@ -9,6 +10,14 @@ pluginManagement {
         eachPlugin {
             if (requested.id.namespace == "com.android") {
                 useModule("com.android.tools.build:gradle:${requested.version}")
+            }
+        }
+    }
+
+    dependencyResolutionManagement {
+        versionCatalogs {
+            file("gradle/versions").listFiles().map { it.nameWithoutExtension }.forEach {
+                create(it) { from(files("gradle/versions/$it.toml")) }
             }
         }
     }
@@ -32,9 +41,9 @@ include(":bitframe-core")
 
 include(":bitframe-presenters")
 
-includeRoot(name = "kotlinx-collections-interoperable", path = "bitframe-utils/kotlinx-collections-interoperable")
+//includeRoot(name = "kotlinx-collections-interoperable", path = "bitframe-utils/kotlinx-collections-interoperable")
 
-includeSubs(base = "cache", path = "bitframe-utils/cache", "api", "test", "browser", "react-native")
+//includeSubs(base = "cache", path = "bitframe-utils/cache", "api", "test", "browser", "react-native")
 
 includeRoot(name = "validation", path = "bitframe-utils/validation")
 

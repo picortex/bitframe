@@ -21,13 +21,13 @@ kotlin {
                 api(project(":bitframe-authentication-service-core"))
                 api(project(":bitframe-core"))
                 api(project(":bitframe-service-client-core"))
-                api(asoft("later-ktx", vers.asoft.later))
+                api(asoft.later.ktx)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                api(asoft("expect-coroutines", vers.asoft.expect))
+                api(asoft.expect.coroutines)
             }
         }
     }

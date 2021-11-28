@@ -1,6 +1,6 @@
 package bitframe.monitored
 
-import contacts.Email
+import identifier.Email
 import bitframe.monitored.MonitoredBusiness.ContactPerson
 import bitframe.monitors.MonitorRef
 

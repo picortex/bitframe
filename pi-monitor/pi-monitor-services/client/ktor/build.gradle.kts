@@ -22,8 +22,8 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                api(project(":cache-test"))
-                api(asoft("expect-coroutines", vers.asoft.expect))
+                api(asoft.cache.mock)
+                api(asoft.expect.coroutines)
             }
         }
     }

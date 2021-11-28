@@ -3,7 +3,7 @@
 package bitframe.monitors
 
 import bitframe.authentication.users.UserRef
-import contacts.Email
+import identifier.Email
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName

@@ -1,9 +1,8 @@
 package bitframe.authentication.signin
 
-import contacts.Email
-import contacts.Phone
+import identifier.Email
+import identifier.Phone
 import kotlinx.serialization.Serializable
-import kotlin.js.JsExport
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 

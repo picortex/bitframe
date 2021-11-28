@@ -22,14 +22,14 @@ kotlin {
                 api(project(":bitframe-core"))
                 api(project(":bitframe-service-client-ktor"))
                 api(kotlinx("serialization-json", vers.kotlinx.serialization))
-                api(asoft("later-ktx", vers.asoft.later))
+                api(asoft.later.ktx)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                api(project(":cache-test"))
-                api(asoft("expect-coroutines", vers.asoft.expect))
+                api(asoft.cache.mock)
+                api(asoft.expect.coroutines)
             }
         }
 
