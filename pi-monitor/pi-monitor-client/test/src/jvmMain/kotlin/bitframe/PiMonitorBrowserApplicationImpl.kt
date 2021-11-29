@@ -12,12 +12,12 @@ import bitframe.screens.authentication.SignUpScreen
 import bitframe.utils.isVisible
 import com.codeborne.selenide.Selenide.`$` as S
 
-class WebApplication(
+class PiMonitorBrowserApplicationImpl(
     private val url: String,
     private val landingScreen: LandingScreen = HomeScreenWeb(),
     private val signInScreen: SignInScreen = SignInScreenWeb(),
     private val signUpScreen: SignUpScreen = SignUpScreenWeb()
-) : Application {
+) : PiMonitorBrowserApplication {
 
     override suspend fun openLandingScreen(): LandingScreen {
         open(url)

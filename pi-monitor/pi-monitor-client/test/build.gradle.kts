@@ -11,6 +11,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":pi-monitor-client-sdk-core"))
+                api(project(":bitframe-testing-sdk-browser"))
                 api(asoft.expect.coroutines)
             }
         }

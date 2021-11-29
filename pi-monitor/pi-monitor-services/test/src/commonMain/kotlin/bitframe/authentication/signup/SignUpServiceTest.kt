@@ -1,20 +1,19 @@
 package bitframe.authentication.signup
 
+import bitframe.testing.annotations.Lifecycle
+import bitframe.testing.annotations.TestInstance
+import bitframe.testing.annotations.Testcontainers
 import expect.expect
 import kotlinx.coroutines.runTest
 import kotlinx.datetime.Clock
+import later.await
 import pimonitor.testing.PiMonitorIntegrationTest
-import pimonitor.testing.annotations.Lifecycle
-import pimonitor.testing.annotations.TestInstance
-import pimonitor.testing.annotations.Testcontainers
 import kotlin.test.Ignore
 import kotlin.test.Test
 
 @Testcontainers
 @TestInstance(Lifecycle.PER_CLASS)
 abstract class SignUpServiceTest : PiMonitorIntegrationTest() {
-
-    abstract val service: PiMonitorService
 
     @Test
     @Ignore // Fix after we have successfully found a way to initialize configurations/test data

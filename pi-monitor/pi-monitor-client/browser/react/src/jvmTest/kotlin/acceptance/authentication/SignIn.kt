@@ -2,7 +2,7 @@
 
 package acceptance.authentication
 
-import acceptance.utils.AcceptanceTest
+import acceptance.utils.PiMonitorAcceptanceTest
 import bitframe.authentication.signin.SignInCredentials
 import expect.expect
 import org.junit.jupiter.api.Nested
@@ -16,7 +16,7 @@ import bitframe.test
 
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class SignIn : AcceptanceTest() {
+class SignIn : PiMonitorAcceptanceTest() {
 
     @Nested
     inner class `When users with valid credentials attempts to login` {

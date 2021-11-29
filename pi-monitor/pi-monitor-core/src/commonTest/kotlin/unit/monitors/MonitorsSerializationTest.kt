@@ -2,7 +2,7 @@ package unit.monitors
 
 import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.User
-import contacts.Email
+import identifier.Email
 import kotlinx.serialization.json.Json
 import bitframe.monitors.CooperateMonitor
 import bitframe.monitors.CooperateMonitor.ContactPerson

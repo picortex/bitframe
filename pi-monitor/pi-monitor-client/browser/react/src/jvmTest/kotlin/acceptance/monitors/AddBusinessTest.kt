@@ -1,6 +1,6 @@
 package acceptance.monitors
 
-import acceptance.utils.AcceptanceTest
+import acceptance.utils.PiMonitorAcceptanceTest
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.junit.jupiter.Testcontainers
 import bitframe.authentication.signup.SignUpParams
@@ -10,7 +10,7 @@ import kotlin.test.Test
 
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class AddBusinessTest : AcceptanceTest() {
+class AddBusinessTest : PiMonitorAcceptanceTest() {
     @Test
     fun should_be_able_to_add_a_business() = application.test {
         val params = SignUpParams.Individual(
