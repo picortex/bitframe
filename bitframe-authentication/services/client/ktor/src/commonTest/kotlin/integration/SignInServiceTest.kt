@@ -6,8 +6,10 @@ import bitframe.authentication.signin.SignInCredentials
 import expect.expect
 import kotlinx.coroutines.runTest
 import later.await
+import kotlin.test.Ignore
 import kotlin.test.Test
 
+@Ignore // TODO: Move tests to bitframe instance tests
 open class SignInServiceTest {
     private val service: SignInService = SignInServiceKtor(CONFIG_UNDER_TEST)
 
