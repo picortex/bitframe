@@ -1,3 +1,7 @@
+@file:JsExport
+
 package validation
 
-data class Invalid(val cause: ValidationError) : Validation<Nothing>()
+import kotlin.js.JsExport
+
+class Invalid(val cause: ValidationError) : Validation<Nothing>

@@ -1,3 +1,7 @@
+@file:JsExport
+
 package validation
 
-data class Valid<out T>(val value: T) : Validation<T>()
+import kotlin.js.JsExport
+
+class Valid<out T>(val value: T) : Validation<T>

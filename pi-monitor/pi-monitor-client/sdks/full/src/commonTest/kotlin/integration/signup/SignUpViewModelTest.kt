@@ -1,32 +1,21 @@
 package integration.signup
 
-import bitframe.authentication.signup.SignUpViewModel
-import bitframe.client.PiMonitorService
+import bitframe.authentication.signup.*
 import bitframe.presenters.feedbacks.FormFeedback.*
-import cache.MockCache
+import bitframe.testing.annotations.Lifecycle
+import bitframe.testing.annotations.TestInstance
+import bitframe.testing.annotations.Testcontainers
 import kotlinx.coroutines.runTest
 import pimonitor.testing.PiMonitorIntegrationTest
-import pimonitor.testing.annotations.Lifecycle
-import pimonitor.testing.annotations.TestInstance
-import pimonitor.testing.annotations.Testcontainers
 import viewmodel.expect
 import kotlin.test.Ignore
 import kotlin.test.Test
-import pimonitor.authentication.signup.SignUpIntent as Intent
-import pimonitor.authentication.signup.SignUpState as State
+import bitframe.authentication.signup.SignUpIntent as Intent
+import bitframe.authentication.signup.SignUpState as State
 
 @Testcontainers
 @TestInstance(Lifecycle.PER_CLASS)
 class SignUpViewModelTest : PiMonitorIntegrationTest() {
-
-    override val service: PiMonitorService by lazy {
-        val cache = MockCache()
-//        PiMonitorServiceStub()
-//        when (val cfg = config) {
-//            is KtorClientConfiguration -> PiMonitorServiceKtor(cfg, cache)
-//            else -> PiMonitorServiceStub(PiMonitorServiceStubConfig(cfg.appId), cache)
-//        }
-    }
 
     val viewModel get() = SignUpViewModel(service.signUp, service.signIn)
     val vm by lazy { viewModel }

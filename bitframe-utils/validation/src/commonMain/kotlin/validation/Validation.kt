@@ -1,18 +1,19 @@
 @file:JsExport
+@file:Suppress("WRONG_EXPORTED_DECLARATION")
 
 package validation
 
 import kotlin.js.JsExport
 
-sealed class Validation<out T> {
+sealed interface Validation<out T> {
 
     fun throwIfInvalid() {
         if (this is Invalid) throw cause
     }
 
-    fun getOrDefault(default: @UnsafeVariance T): T = when (this) {
+    fun getOrDefault(defaultValue: @UnsafeVariance T): T = when (this) {
         is Valid -> value
-        is Invalid -> default
+        is Invalid -> defaultValue
     }
 
     fun getOrThrow(): T = when (this) {

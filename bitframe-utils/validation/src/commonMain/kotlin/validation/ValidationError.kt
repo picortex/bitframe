@@ -1,3 +1,10 @@
+@file:JsExport
+
 package validation
 
-open class ValidationError(message: String?, cause: Throwable?) : IllegalArgumentException(message, cause)
+import kotlin.js.JsExport
+
+open class ValidationError(
+    override val message: String?,
+    override val cause: Throwable?
+) : IllegalArgumentException(message, cause)
