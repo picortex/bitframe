@@ -1,13 +1,12 @@
 package unit.authentication
 
 import expect.expect
-import pimonitor.PiMonitorService
-import pimonitor.PiMonitorServiceStub
-import pimonitor.StubServiceConfig
-import pimonitor.authentication.signup.SignUpServiceTest
-import testing.annotations.Lifecycle
-import testing.annotations.TestInstance
-import testing.annotations.Testcontainers
+import bitframe.PiMonitorServiceStub
+import bitframe.PiMonitorServiceStubConfig
+import bitframe.authentication.signup.SignUpServiceTest
+import pimonitor.testing.annotations.Lifecycle
+import pimonitor.testing.annotations.TestInstance
+import pimonitor.testing.annotations.Testcontainers
 import kotlin.test.Test
 
 @Testcontainers
@@ -15,7 +14,7 @@ import kotlin.test.Test
 class SignUpServiceUnitTest : SignUpServiceTest() {
 
     override val service: PiMonitorService by lazy {
-        PiMonitorServiceStub(StubServiceConfig(config.appId))
+        PiMonitorServiceStub(PiMonitorServiceStubConfig(config.appId))
     }
 
     @Test

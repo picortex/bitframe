@@ -26,7 +26,7 @@ fun KotlinJvmTarget.testing(vararg names: String) {
                 }
             }
 
-            project.tasks.register("$name${it.capitalize()}Test", Test::class) {
+            project.tasks.register("${this@testing.name}${it.capitalize()}Test", Test::class) {
                 useJUnitPlatform()
                 classpath = compileDependencyFiles + runtimeDependencyFiles + output.allOutputs
                 testClassesDirs = output.classesDirs

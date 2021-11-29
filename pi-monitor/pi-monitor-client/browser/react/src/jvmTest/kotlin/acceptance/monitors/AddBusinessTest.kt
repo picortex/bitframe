@@ -1,12 +1,11 @@
 package acceptance.monitors
 
 import acceptance.utils.AcceptanceTest
-import kotlinx.coroutines.delay
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.junit.jupiter.Testcontainers
-import pimonitor.authentication.signup.SignUpParams
-import pimonitor.monitored.CreateMonitoredBusinessParams
-import pimonitor.test
+import bitframe.authentication.signup.SignUpParams
+import bitframe.monitored.CreateMonitoredBusinessParams
+import bitframe.test
 import kotlin.test.Test
 
 @Testcontainers

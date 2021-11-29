@@ -1,9 +1,11 @@
 package unit.authentication.signin
 
-import bitframe.BitframeTestClientImpl
-import bitframe.authentication.TestClientConfiguration
+import bitframe.authentication.client.signin.SignInServiceMock
+import bitframe.authentication.client.signin.SignInServiceMockConfig
 import bitframe.authentication.signin.*
-import bitframe.events.InMemoryEventBus
+import bitframe.authentication.spaces.Space
+import bitframe.authentication.users.Contacts
+import bitframe.authentication.users.User
 import bitframe.presenters.feedbacks.FormFeedback.Loading
 import bitframe.presenters.feedbacks.FormFeedback.Success
 import cache.MockCache
@@ -14,9 +16,26 @@ import viewmodel.expect
 import kotlin.test.Test
 
 class SignInViewModelTest {
-    val bus = InMemoryEventBus()
-    private val service = BitframeTestClientImpl(bus, TestClientConfiguration.of("app-id"))
-    private val vm = SignInViewModel(service.signIn, MockCache())
+
+    val config = SignInServiceMockConfig(
+        users = mutableListOf(
+            User(
+                uid = "user-1",
+                name = "User One",
+                tag = "usr01",
+                contacts = Contacts("user1@test.com"),
+                spaces = listOf(
+                    Space(
+                        uid = "space-1",
+                        name = "User One's Space",
+                        type = "",
+                        scope = ""
+                    )
+                )
+            )
+        )
+    )
+    private val vm = SignInViewModel(SignInServiceMock(config), MockCache())
 
     @Test
     fun should_be_in_a_show_form_state_with_null_credentials_when_intent_with_null_credentials_is_posted() = runTest {

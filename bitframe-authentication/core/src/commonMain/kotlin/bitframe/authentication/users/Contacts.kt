@@ -3,8 +3,8 @@ package bitframe.authentication.users
 import kotlinx.serialization.Serializable
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
-import contacts.Email as ValidEmail
-import contacts.Phone as ValidPhone
+import identifier.Email as ValidEmail
+import identifier.Phone as ValidPhone
 
 @Serializable(with = ContactsSerializer::class)
 sealed class Contacts {

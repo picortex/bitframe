@@ -12,13 +12,13 @@ kotlin {
         val main by getting {
             dependencies {
                 api(project(":bitframe-events-core"))
-                api(asoft("reakt-core", vers.asoft.reakt))
+                api(asoft.reakt.core)
             }
         }
 
         val test by getting {
             dependencies {
-                implementation(asoft("expect-coroutines", vers.asoft.expect))
+                implementation(asoft.expect.coroutines)
             }
         }
     }

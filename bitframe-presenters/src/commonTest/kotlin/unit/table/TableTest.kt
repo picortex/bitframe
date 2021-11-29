@@ -15,7 +15,7 @@ class TableTest {
 
     val processorsTable = tableOf(processors) {
         selectable()
-        column("No") { "${it.rowNumber}." }
+        column("No") { "${it.number}." }
         column("Name") { it.data.name }
         column("Cores") { "${it.data.cores} cores" }
         column("Speed") { "${it.data.clock} GHz" }

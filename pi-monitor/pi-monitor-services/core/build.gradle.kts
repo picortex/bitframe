@@ -14,14 +14,13 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":pi-monitor-dao-core"))
-                api(project(":bitframe-client-sdk-core"))
                 api(project(":bitframe-events-inmemory"))
             }
         }
 
         val commonTest by getting {
             dependencies {
-                api(asoft("expect-coroutines", vers.asoft.expect))
+                api(asoft.expect.coroutines)
             }
         }
     }

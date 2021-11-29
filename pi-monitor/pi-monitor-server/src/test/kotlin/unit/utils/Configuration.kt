@@ -3,11 +3,11 @@ package unit.utils
 import bitframe.ApplicationUnderTest
 import bitframe.events.InMemoryEventBus
 import bitframe.server.InMemoryDaoProvider
-import bitframe.server.modules.authentication.AuthenticationServiceImpl
+import bitframe.server.modules.authentication.services.AuthenticationServiceImpl
 import bitframe.service.config.ServiceConfig
 import cache.Cache
 import cache.MockCache
-import pimonitor.PiMonitorServer
+import bitframe.PiMonitorServer
 import java.io.File
 
 @JvmField

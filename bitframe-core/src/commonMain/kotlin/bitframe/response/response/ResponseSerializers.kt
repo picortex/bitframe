@@ -27,7 +27,10 @@ fun <D, I> Json.encodeResponseToString(
 }
 
 @PublishedApi
-internal val json = Json { encodeDefaults = true }
+internal val json = Json {
+    encodeDefaults = true
+    isLenient = true
+}
 
 inline fun <reified D> Response<D, *>.toJson(): String {
     val dataSerializer = serializer<D>()

@@ -11,19 +11,20 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":cache-api"))
-                api(project(":bitframe-client-sdk-core"))
+                api(asoft.cache.api)
+                api(project(":bitframe-sdk-client-core"))
                 api(project(":bitframe-presenters"))
-                api(asoft("viewmodel-core", vers.asoft.viewmodel))
+                api(asoft.viewmodel.core)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                api(project(":cache-test"))
-                api(project(":bitframe-client-sdk-test"))
+                api(asoft.cache.mock)
+                api(project(":bitframe-sdk-client-core"))
                 api(project(":bitframe-events-inmemory"))
-                api(asoft("viewmodel-test-expect", vers.asoft.viewmodel))
+                api(project(":bitframe-authentication-service-client-test"))
+                api(asoft.viewmodel.test.expect)
             }
         }
 

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
+
 plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
@@ -12,35 +14,36 @@ kotlin {
     js(IR) {
         val main by compilations
         main.outputModuleName = "pi-monitor-client-sdk-core"
-        main.compileKotlinTask.kotlinOptions.freeCompilerArgs += listOf("-Xir-per-module")
         library()
         binaries.library()
+    }
+
+    tasks.withType(Kotlin2JsCompile::class.java) {
+        kotlinOptions.freeCompilerArgs += listOf("-Xir-per-module")
     }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
                 api(project(":pi-monitor-core"))
-                api(project(":pi-monitor-service-ktor"))
-                api(project(":pi-monitor-service-stub"))
+                api(project(":pi-monitor-service-client-ktor"))
+                api(asoft.cache.mock)
                 api(kotlinx("datetime", vers.kotlinx.datetime))
-                api(asoft("logging-console", vers.asoft.logging))
-                api(asoft("name-generator", vers.asoft.contacts))
-                api(asoft("email-generator", vers.asoft.contacts))
+                api(asoft.logging.console)
             }
         }
 
         val commonTest by getting {
             dependencies {
                 implementation(project(":pi-monitor-test-testing"))
-                implementation(asoft("expect-coroutines", vers.asoft.expect))
+                implementation(asoft.expect.coroutines)
             }
         }
 
         val jsMain by getting {
             dependencies {
-                api(project(":cache-browser"))
-                api(project(":cache-react-native"))
+                api(asoft.cache.browser)
+                api(asoft.cache.react.native)
                 api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
