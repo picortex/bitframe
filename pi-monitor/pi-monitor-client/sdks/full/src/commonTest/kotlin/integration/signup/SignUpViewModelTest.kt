@@ -17,7 +17,7 @@ import bitframe.authentication.signup.SignUpState as State
 @TestInstance(Lifecycle.PER_CLASS)
 class SignUpViewModelTest : PiMonitorIntegrationTest() {
 
-    val viewModel get() = SignUpViewModel(service.signUp, service.signIn)
+    val viewModel get() = SignUpViewModel(piMonitorService.signUp, piMonitorService.signIn)
     val vm by lazy { viewModel }
 
     private val testIndividualParams = SignUpParams.Individual(

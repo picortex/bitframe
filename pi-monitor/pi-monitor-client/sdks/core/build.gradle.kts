@@ -18,7 +18,7 @@ kotlin {
         binaries.library()
     }
 
-    tasks.withType(Kotlin2JsCompile::class.java) {
+    tasks.withType<Kotlin2JsCompile> {
         kotlinOptions.freeCompilerArgs += listOf("-Xir-per-module")
     }
 

@@ -1,5 +1,7 @@
-package bitframe.authentication.signup
+package integration.authentication
 
+import bitframe.authentication.signup.SignUpParams
+import bitframe.authentication.signup.toCredentials
 import bitframe.testing.annotations.Lifecycle
 import bitframe.testing.annotations.TestInstance
 import bitframe.testing.annotations.Testcontainers
@@ -13,7 +15,7 @@ import kotlin.test.Test
 
 @Testcontainers
 @TestInstance(Lifecycle.PER_CLASS)
-abstract class SignUpServiceTest : PiMonitorIntegrationTest() {
+class SignUpServiceTest : PiMonitorIntegrationTest() {
 
     @Test
     @Ignore // Fix after we have successfully found a way to initialize configurations/test data
@@ -30,10 +32,10 @@ abstract class SignUpServiceTest : PiMonitorIntegrationTest() {
         )
 
         // When they sign up
-        val result = service.signUp.signUp(individual).await()
+        val result = piMonitorService.signUp.signUp(individual).await()
 
         // They should be able to sign in
-        val singInConundrum = service.signIn.signIn(individual.toCredentials()).await()
+        val singInConundrum = piMonitorService.signIn.signIn(individual.toCredentials()).await()
         expect(singInConundrum.spaces).toBeOfSize(1)
 
         // Their user tag should equal their username

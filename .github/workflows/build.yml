@@ -44,11 +44,11 @@ jobs:
       - name: Download gradle
         run: ./gradlew --version
 
-      - name: Prepare bitframe integration tests
+      - name: Prepare bitframe test containers
         run: TEST_MODE=CI ./gradlew :bitframe-testing-instance-server:createDockerfile
         working-directory: .
 
-      - name: Prepare pimonitor integration tests
+      - name: Prepare pimonitor test containers
         run: TEST_MODE=CI ./gradlew :pi-monitor-server:createDockerfile
         working-directory: .
 

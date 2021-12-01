@@ -8,9 +8,9 @@ import bitframe.testing.TestMode
 import cache.MockCache
 
 open class PiMonitorIntegrationTest : PiMonitorContainerTest() {
-    val service: PiMonitorService by lazy {
+    val piMonitorService: PiMonitorService by lazy {
         val config = PiMonitorServiceKtorConfig(
-            url = if (mode == TestMode.DEV) "http://localhost:8080" else urlUnderTest,
+            url = urlUnderTest,
             appId = APP_ID,
             cache = MockCache()
         )
