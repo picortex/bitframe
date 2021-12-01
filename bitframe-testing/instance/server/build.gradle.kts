@@ -50,8 +50,8 @@ kotlin {
 
 val createDockerfile by tasks.creating(Dockerfile::class) {
     dependsOn("installDistRelease")
-    dependsOn(":bitframe-testing-instance-browser:jsBrowserProductionWebpack")
-    dependsOn(":bitframe-testing-instance-browser:webpackJsRelease")
+    dependsOn(":bitframe-testing-instance-client-browser:jsBrowserProductionWebpack")
+    dependsOn(":bitframe-testing-instance-client-browser:webpackJsRelease")
     from("openjdk:16-jdk")
     runCommand("mkdir /app /app/public")
     destFile.set(file("build/binaries/Dockerfile"))
@@ -62,7 +62,7 @@ val createDockerfile by tasks.creating(Dockerfile::class) {
     defaultCommand("./bin/bitframe-testing-instance-server", "/app/public")
     doLast {
         copy {
-            from(rootProject.file("bitframe-testing/instance/browser/build/websites/js/release"))
+            from(rootProject.file("bitframe-testing/instance/client/browser/build/websites/js/release"))
             into(file("build/binaries/public"))
             exclude("*.ts", "*.map")
         }

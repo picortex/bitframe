@@ -49,7 +49,9 @@ includeRoot(name = "validation", path = "bitframe-utils/validation")
 
 includeSubs(base = "bitframe-testing", path = "bitframe-testing", "containers")
 
-includeSubs(base = "bitframe-testing-instance", path = "bitframe-testing/instance", "browser", "server")
+includeRoot(name = "bitframe-testing-instance-server", path = "bitframe-testing/instance/server")
+
+includeSubs(base = "bitframe-testing-instance-client", path = "bitframe-testing/instance/client", "core", "browser")
 
 includeSubs(base = "bitframe-testing-sdk", path = "bitframe-testing/sdk", "browser")
 
