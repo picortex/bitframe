@@ -23,7 +23,7 @@ class SignIn : AcceptanceTest() {
         @Test
         fun then_users_should_be_logged_in() = application.test {
             val signInScreen = openLandingScreen().clickSignInButton()
-            signInScreen.signIn(SignInCredentials("user1@test.com", "pass1"))
+            signInScreen.signIn(SignInCredentials("ssajja@gmail.com", "pass1"))
             expectUserToBeLoggedIn()
         }
     }

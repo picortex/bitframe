@@ -23,7 +23,7 @@ applikation {
 kotlin {
     target {
         application()
-        tasks.withType(KotlinCompile::class.java) {
+        tasks.withType<KotlinCompile> {
             kotlinOptions.jvmTarget = "16"
         }
         compilations.all {

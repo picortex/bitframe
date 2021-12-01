@@ -11,15 +11,17 @@ import bitframe.client.BitframeService
 import bitframe.client.BitframeServiceKtorConfig
 import cache.BrowserCache
 import kotlinx.browser.document
+import kotlinx.browser.window
 import kotlinx.extensions.By
 import kotlinx.extensions.get
 import org.w3c.dom.HTMLDivElement
 import reakt.setContent
 
 fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
+    val konfig = konfig()
     val config = BitframeServiceKtorConfig(
         appId = "test-client",
-        url = "http://localhost:8080",
+        url = konfig["url"]?.toString() ?: window.location.origin,
         cache = BrowserCache()
     )
     val client = object : BitframeService {

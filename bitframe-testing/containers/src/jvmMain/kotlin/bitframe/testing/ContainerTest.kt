@@ -29,7 +29,7 @@ actual open class ContainerTest {
 
         actual val urlUnderTest
             get() = when (mode) {
-                TestMode.DEV -> "http://localhost:8080"
+                TestMode.DEV -> "http://localhost:8081"
                 TestMode.CI -> "http://${container.containerIpAddress}:${container.firstMappedPort}"
                 TestMode.CD -> TODO("Setup CD environment to run tests before release")
             }
