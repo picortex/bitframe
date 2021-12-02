@@ -13,7 +13,9 @@ plugins {
 }
 
 applikation {
-    debug()
+    debug(
+        "url" to "http://localhost:8081"
+    )
     release()
 }
 
@@ -21,7 +23,7 @@ repositories {
     publicRepos()
 }
 
-rootProject.plugins.withType(NodeJsRootPlugin::class.java) {
+rootProject.plugins.withType<NodeJsRootPlugin> {
     rootProject.the<NodeJsRootExtension>().versions.apply {
         webpackDevServer.version = "4.1.0"
         webpackCli.version = "4.9.0"

@@ -4,6 +4,7 @@ import applikation.konfig
 import bitframe.Bitframe
 import client
 import kotlinx.browser.document
+import kotlinx.browser.window
 import kotlinx.extensions.By
 import kotlinx.extensions.get
 import org.w3c.dom.HTMLDivElement
@@ -13,9 +14,10 @@ import pimonitor.evaluation.businesses.InviteBusiness
 import reakt.setContent
 
 fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
+    val konfig = konfig()
     val client = client {
         appId = "test-client"
-         url = "http://localhost:8080"
+        url = konfig["url"]?.toString() ?: window.location.origin
     }
     val version: String by konfig()
     Bitframe(

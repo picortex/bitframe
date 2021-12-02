@@ -14,7 +14,7 @@ plugins {
 
 applikation {
     debug(
-        "url" to "http://localhost:8081"
+        "url" to "http://localhost:8080"
     )
     release()
 }
