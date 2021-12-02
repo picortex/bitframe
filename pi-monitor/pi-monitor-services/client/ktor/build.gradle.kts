@@ -24,6 +24,7 @@ kotlin {
             dependencies {
                 api(asoft.cache.mock)
                 api(asoft.expect.coroutines)
+                api(project(":pi-monitor-test-testing"))
             }
         }
     }

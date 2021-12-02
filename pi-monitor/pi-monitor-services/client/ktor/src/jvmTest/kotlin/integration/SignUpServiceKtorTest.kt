@@ -1,15 +1,21 @@
 package integration
 
+import bitframe.testing.annotations.Lifecycle
+import bitframe.testing.annotations.TestInstance
+import bitframe.testing.annotations.Testcontainers
 import expect.expect
 import kotlinx.coroutines.runTest
 import later.await
 import pimonitor.authentication.signup.SignUpParams
 import pimonitor.client.authentication.signup.SignUpServiceKtor
+import pimonitor.testing.PiMonitorIntegrationTest
 import validation.ValidationError
 import kotlin.test.Test
 
-open class SignUpServiceKtorTest {
-    private val service = SignUpServiceKtor(CONFIG_UNDER_TEST)
+@Testcontainers
+@TestInstance(Lifecycle.PER_CLASS)
+class SignUpServiceKtorTest : PiMonitorIntegrationTest() {
+    private val service get() = piMonitorService.signUp
 
     @Test
     fun should_successfully_register_a_user() = runTest {
