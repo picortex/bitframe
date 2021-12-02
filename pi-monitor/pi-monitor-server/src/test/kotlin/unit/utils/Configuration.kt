@@ -1,13 +1,13 @@
 package unit.utils
 
 import bitframe.ApplicationUnderTest
-import bitframe.PiMonitorApplicationConfig
+import pimonitor.PiMonitorApplicationConfig
 import bitframe.events.InMemoryEventBus
 import bitframe.server.InMemoryDaoProvider
 import bitframe.service.config.ServiceConfig
 import cache.Cache
 import cache.MockCache
-import bitframe.PiMonitorServer
+import pimonitor.PiMonitorServer
 import java.io.File
 
 @JvmField

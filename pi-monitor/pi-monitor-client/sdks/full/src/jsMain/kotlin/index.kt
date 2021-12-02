@@ -4,10 +4,10 @@
 import bitframe.client.BitframeService
 import bitframe.authentication.signin.exports.SignInScope
 import bitframe.panel.PanelScope
-import bitframe.authentication.signup.exports.SignUpScope
-import bitframe.client.PiMonitorService
-import bitframe.evaluation.businesses.exports.BusinessesScope
-import bitframe.evaluation.businesses.exports.CreateBusinessScope
+import pimonitor.authentication.signup.exports.SignUpScope
+import pimonitor.client.PiMonitorService
+import pimonitor.evaluation.businesses.exports.BusinessesScope
+import pimonitor.evaluation.businesses.exports.CreateBusinessScope
 
 fun signIn(service: BitframeService) = SignInScope(service)
 

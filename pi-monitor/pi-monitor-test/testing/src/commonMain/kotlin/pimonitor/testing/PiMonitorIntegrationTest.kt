@@ -1,8 +1,8 @@
 package pimonitor.testing
 
-import bitframe.client.PiMonitorService
-import bitframe.client.PiMonitorServiceKtor
-import bitframe.client.PiMonitorServiceKtorConfig
+import pimonitor.client.PiMonitorService
+import pimonitor.client.PiMonitorServiceKtor
+import pimonitor.client.PiMonitorServiceKtorConfig
 import bitframe.testing.APP_ID
 import bitframe.testing.TestMode
 import cache.MockCache

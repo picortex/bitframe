@@ -8,11 +8,11 @@ import cache.BrowserCache
 import cache.MockCache
 import logging.ConsoleAppender
 import logging.Logging
-import bitframe.authentication.signup.exports.SignUpServiceWrapper
-import bitframe.client.PiMonitorService
-import bitframe.client.PiMonitorServiceKtor
-import bitframe.client.PiMonitorServiceKtorConfig
-import bitframe.evaluation.businesses.exports.BusinessesServiceWrapper
+import pimonitor.authentication.signup.exports.SignUpServiceWrapper
+import pimonitor.client.PiMonitorService
+import pimonitor.client.PiMonitorServiceKtor
+import pimonitor.client.PiMonitorServiceKtorConfig
+import pimonitor.evaluation.businesses.exports.BusinessesServiceWrapper
 import platform.Platform
 
 external interface ServiceConfiguration {

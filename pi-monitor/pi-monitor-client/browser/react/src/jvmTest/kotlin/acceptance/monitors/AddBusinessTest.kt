@@ -3,8 +3,8 @@ package acceptance.monitors
 import acceptance.utils.PiMonitorAcceptanceTest
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.junit.jupiter.Testcontainers
-import bitframe.authentication.signup.SignUpParams
-import bitframe.monitored.CreateMonitoredBusinessParams
+import pimonitor.authentication.signup.SignUpParams
+import pimonitor.monitored.CreateMonitoredBusinessParams
 import bitframe.test
 import kotlin.test.Test
 

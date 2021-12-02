@@ -1,7 +1,7 @@
 package acceptance.utils
 
-import bitframe.PiMonitorBrowserApplication
-import bitframe.PiMonitorBrowserApplicationImpl
+import pimonitor.PiMonitorBrowserApplication
+import pimonitor.PiMonitorBrowserApplicationImpl
 import pimonitor.testing.PiMonitorContainerTest
 
 open class PiMonitorAcceptanceTest : PiMonitorContainerTest() {

@@ -12,7 +12,7 @@ plugins {
 }
 
 application {
-    mainClass.set("bitframe.MainKt")
+    mainClass.set("pimonitor.MainKt")
 }
 
 applikation {
