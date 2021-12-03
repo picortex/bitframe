@@ -3,9 +3,9 @@
 
 package pimonitor.evaluation.businesses.exports
 
-import pimonitor.PiMonitorService
+import pimonitor.client.PiMonitorService
+import pimonitor.client.evaluation.businesses.BusinessesService
 import pimonitor.evaluation.businesses.BusinessViewModel
-import pimonitor.evaluation.businesses.BusinessesService
 import pimonitor.monitored.MonitoredBusiness
 import useEventHandler
 import viewmodel.ViewModel
@@ -20,6 +20,6 @@ class BusinessesScope(val service: PiMonitorService) {
     val showCreateBusinessForm: () -> Unit = { viewModel.post(Intent.ShowBusinessForm) }
 
     val useBusinessAddedEvent: (callback: (MonitoredBusiness) -> Unit) -> Unit = { callback ->
-        useEventHandler(service.bus, BusinessesService.CREATE_BUSINESS_EVENT_ID, callback)
+        useEventHandler(service.signIn.config.bus, BusinessesService.CREATE_BUSINESS_EVENT_ID, callback)
     }
 }

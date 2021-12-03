@@ -3,6 +3,10 @@ plugins {
     id("tz.co.asoft.library")
 }
 
+repositories {
+    publicRepos()
+}
+
 kotlin {
     js(IR) { browserLib() }
 
@@ -10,8 +14,8 @@ kotlin {
         val main by getting {
             dependencies {
                 api(project(":bitframe-client-viewmodels"))
-                api(asoft("viewmodel-react", vers.asoft.viewmodel))
-                api(asoft("reakt-web", vers.asoft.reakt))
+                api(asoft.viewmodel.react)
+                api(asoft.reakt.web)
             }
         }
     }

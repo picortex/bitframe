@@ -14,13 +14,13 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
-                api(asoft("live-core", vers.asoft.live))
+                api(asoft.live.core)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(asoft("expect-coroutines", vers.asoft.expect))
+                implementation(asoft.expect.coroutines)
             }
         }
     }

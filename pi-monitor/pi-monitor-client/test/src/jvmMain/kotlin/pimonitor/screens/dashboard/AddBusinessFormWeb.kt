@@ -3,6 +3,7 @@ package pimonitor.screens.dashboard
 import pimonitor.monitored.CreateMonitoredBusinessParams
 import pimonitor.utils.name
 import pimonitor.utils.submit
+import pimonitor.screens.dashboard.AddBusinessForm
 
 class AddBusinessFormWeb : AddBusinessForm {
     val businessName by name()

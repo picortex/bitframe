@@ -2,18 +2,17 @@
 
 package acceptance.authentication
 
-import acceptance.utils.AcceptanceTest
+import acceptance.utils.PiMonitorAcceptanceTest
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.junit.jupiter.Testcontainers
 import pimonitor.authentication.signup.SignUpParams
-import pimonitor.test
-import kotlin.test.Ignore
+import bitframe.test
 import kotlin.test.Test
 
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class SignUp : AcceptanceTest() {
+class SignUp : PiMonitorAcceptanceTest() {
 
     @Nested
     inner class `Individual Registration` {

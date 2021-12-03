@@ -7,14 +7,13 @@ plugins {
 }
 
 kotlin {
-    js(IR) { browserLib() }
+    js(IR) { library() }
 
     sourceSets {
         val main by getting {
             dependencies {
                 api(project(":cache-api"))
                 api(kotlinx("serialization-json", vers.kotlinx.serialization))
-                api(asoft("later-core", vers.asoft.later))
             }
         }
 

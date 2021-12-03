@@ -4,7 +4,6 @@ package pimonitor.authentication.signup
 
 import bitframe.presenters.fields.ButtonInputField
 import bitframe.presenters.fields.DropDownInputField
-import bitframe.presenters.fields.DropDownInputField.Option
 import bitframe.presenters.fields.TextInputField
 import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_BUSINESS
 import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_INDIVIDUAL

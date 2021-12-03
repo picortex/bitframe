@@ -1,11 +1,9 @@
-@file:JsExport
-
 package bitframe.panel
 
-import bitframe.BitframeService
+import bitframe.client.BitframeService
+import bitframe.authentication.client.signin.SignInService
 import bitframe.authentication.signin.Session
 import bitframe.authentication.signin.SignInCredentials
-import bitframe.authentication.signin.SignInService
 import cache.Cache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
@@ -14,7 +12,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import viewmodel.ViewModel
-import kotlin.js.JsExport
 import bitframe.panel.PanelIntent as Intent
 import bitframe.panel.PanelState as State
 

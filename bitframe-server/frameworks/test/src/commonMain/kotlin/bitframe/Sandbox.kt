@@ -1,6 +1,5 @@
 package bitframe
 
-import bitframe.server.BitframeApplication
 import bitframe.server.actions.Action
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.HttpResponse
@@ -14,7 +13,6 @@ import kotlinx.serialization.mapper.Mapper
 import logging.ConsoleAppender
 
 open class Sandbox(val component: ComponentUnderTest) {
-    constructor(application: BitframeApplication) : this(ApplicationUnderTest(application))
     constructor(module: Module) : this(ModuleUnderTest(module))
     constructor(route: HttpRoute) : this(RouteUnderTest(route))
     constructor(action: Action) : this(ActionUnderTest(action))
@@ -22,7 +20,7 @@ open class Sandbox(val component: ComponentUnderTest) {
     private val console = ConsoleAppender()
 
     private val routes = when (component) {
-        is ApplicationUnderTest<*> -> component.application.modules.flatMap {
+        is ApplicationUnderTest<*, *> -> component.application.modules.flatMap {
             it.actions.map { a -> a.route }
         }
         is ModuleUnderTest<*> -> component.module.actions.map { it.route }
@@ -47,13 +45,13 @@ open class Sandbox(val component: ComponentUnderTest) {
         }
     }
 
-    suspend fun get(path: String) = request(HttpRequest(Get, path, mapOf(), null))
+    suspend fun get(path: String) = request(HttpRequest(Get, path, mapOf(), mapOf(), null))
 
     suspend fun post(
         path: String,
         headers: Map<String, String> = mapOf(),
         body: String = "{}"
-    ) = request(HttpRequest(Post, path, headers, body))
+    ) = request(HttpRequest(Post, path, headers, mapOf(), body))
 
     suspend fun post(
         path: String,
@@ -65,5 +63,5 @@ open class Sandbox(val component: ComponentUnderTest) {
         path: String,
         headers: Map<String, String> = mapOf(),
         body: String = "{}"
-    ) = request(HttpRequest(Put, path, headers, body))
+    ) = request(HttpRequest(Put, path, headers, mapOf(), body))
 }

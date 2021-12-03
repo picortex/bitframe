@@ -1,19 +1,17 @@
 @file:Suppress("EXPERIMENTAL_API_USAGE", "NON_EXPORTABLE_TYPE")
 @file:JsExport
 
-import bitframe.BitframeService
 import bitframe.authentication.signin.exports.SignInServiceWrapper
-import bitframe.service.config.KtorClientConfiguration
+import bitframe.client.BitframeService
 import cache.AsyncStorageCache
 import cache.BrowserCache
 import cache.MockCache
 import logging.ConsoleAppender
 import logging.Logging
-import pimonitor.PiMonitorService
-import pimonitor.PiMonitorServiceKtor
-import pimonitor.PiMonitorServiceStub
-import pimonitor.StubServiceConfig
 import pimonitor.authentication.signup.exports.SignUpServiceWrapper
+import pimonitor.client.PiMonitorService
+import pimonitor.client.PiMonitorServiceKtor
+import pimonitor.client.PiMonitorServiceKtorConfig
 import pimonitor.evaluation.businesses.exports.BusinessesServiceWrapper
 import platform.Platform
 
@@ -26,25 +24,27 @@ external interface ServiceConfiguration {
 
 private var isLoggingEnabled = false
 
+@JsName("clientWithConfigBlock")
+fun client(
+    block: ServiceConfiguration.() -> Unit
+): PiMonitorService = client(
+    js("{}").unsafeCast<ServiceConfiguration>().apply(block)
+)
+
 fun client(config: ServiceConfiguration): PiMonitorService {
     if (config.disableViewModelLogs != true && !isLoggingEnabled) {
         Logging.init(ConsoleAppender())
         isLoggingEnabled = true
     }
-    val url = config.url
+    val url = config.url ?: error("Url must not be null | undefined")
     val appId = config.appId
-    val simulationTime = config.simulationTime?.toLong() ?: 2000L
     val cache = when {
         Platform.isBrowser -> BrowserCache()
         Platform.isReactNative -> AsyncStorageCache()
         else -> MockCache().also { console.log("Unknown platform, using a non persitient cach") }
     }
-    return if (url == null) PiMonitorServiceStub(
-        config = StubServiceConfig(appId, simulationTime),
-        cache = cache
-    ) else PiMonitorServiceKtor(
-        config = KtorClientConfiguration(url, appId),
-        cache = cache
+    return PiMonitorServiceKtor(
+        PiMonitorServiceKtorConfig(appId, url, cache),
     )
 }
 

@@ -6,27 +6,26 @@ plugins {
 }
 
 kotlin {
-    jvm {
-        library()
-        withJava()
-    }
+    jvm { library() }
     js(IR) { library() }
     sourceSets {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-core"))
-                api(project(":bitframe-authentication-service-core"))
-
-                api(asoft("result-core", vers.asoft.duality))
-                api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
-                api(asoft("logging-console", vers.asoft.logging))
-                api(asoft("later-ktx", vers.asoft.later))
+                implementation(project(":bitframe-authentication-service-core"))
+                api(project(":bitframe-authentication-service-server-core"))
+                api(project(":bitframe-events-inmemory"))
+                api(asoft.cache.mock)
+                api(project(":bitframe-sdk-server-core"))
+                api(asoft.kotlinx.serialization.mapper)
+                api(asoft.logging.console)
+                api(asoft.later.ktx)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(project(":cache-test"))
+                implementation(asoft.cache.mock)
                 implementation(project(":bitframe-server-framework-test"))
                 implementation(project(":bitframe-server-dao-inmemory"))
                 implementation(project(":bitframe-events-inmemory"))

@@ -16,9 +16,9 @@ import kotlin.js.JsName
 data class User(
     val uid: String,
     val name: String,
-    val tag: String,
+    val tag: String = name,
     val contacts: Contacts,
-    val photoUrl: String?,
+    val photoUrl: String? = null,
     val status: Status = Status.SignedOut,
     val spaces: List<Space>,
     val verifiedContacts: Contacts = Contacts.None,

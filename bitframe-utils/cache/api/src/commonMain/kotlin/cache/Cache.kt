@@ -18,7 +18,7 @@ abstract class Cache(open val config: CacheConfiguration) {
     abstract fun keys(): Later<Set<String>>
 
     @PublishedApi
-    internal val scope
+    internal open val scope
         get() = config.scope
 
     /**

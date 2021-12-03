@@ -17,14 +17,14 @@ kotlin {
                 api(project(":bitframe-annotations-core"))
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
                 api("io.ktor:ktor-http:${vers.ktor}")
-                api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
-                api(asoft("later-core", vers.asoft.later))
+                api(asoft.kotlinx.serialization.mapper)
+                api(asoft.later.core)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(asoft("expect-core", vers.asoft.expect))
+                implementation(asoft.expect.core)
             }
         }
     }

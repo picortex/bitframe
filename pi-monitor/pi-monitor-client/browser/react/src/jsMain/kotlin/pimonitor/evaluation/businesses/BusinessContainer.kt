@@ -2,12 +2,14 @@ package pimonitor.evaluation.businesses
 
 import kotlinx.css.JustifyContent
 import kotlinx.css.justifyContent
-import pimonitor.PiMonitorService
+import pimonitor.client.PiMonitorService
+import pimonitor.evaluation.businesses.BusinessesIntent
+import pimonitor.evaluation.businesses.BusinessesState
 import pimonitor.evaluation.businesses.exports.BusinessesScope
 import react.Props
 import react.RBuilder
 import react.fc
-import react.router.dom.routeLink
+import react.router.dom.Link
 import react.useEffectOnce
 import reakt.*
 import styled.css
@@ -33,7 +35,10 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
                 css { justifyContent = JustifyContent.flexEnd }
                 ContainedButton("Create") { viewModel.post(BusinessesIntent.ShowBusinessForm) }
                 val link = "/invite/${monitor?.uid}"
-                routeLink(to = link) { +link }
+                Link {
+                    attrs.to = link
+                    +link
+                }
             }
             if (state.table.isEmpty) EmptyBusiness()
             else BusinessTable(state.table)

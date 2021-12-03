@@ -8,10 +8,10 @@ import later.Later
 import later.later
 
 class SpacesDaoInMemory(
-    private val spaces: MutableMap<String, Space> = mutableMapOf(),
-    private val config: InMemoryDaoConfig = InMemoryDaoConfig.DEFAULT
+    private val config: SpacesDaoInMemoryConfig = SpacesDaoInMemoryConfig()
 ) : SpacesDao {
     private val scope = config.scope
+    private val spaces = config.spaces
     override fun createIfNotExist(params: CreateSpaceParams): Later<Space> = scope.later {
         delay(config.simulationTime)
         val existing = spaces.values.find { it.name.contentEquals(params.name) }
