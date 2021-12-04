@@ -1,6 +1,6 @@
 package pimonitor.authentication.signup
 
-import bitframe.presenters.feedbacks.FormFeedback
+import presenters.feedbacks.FormFeedback
 
 fun SignUpState.IndividualForm.copy(
     i: SignUpIntent.Submit.IndividualForm, status: FormFeedback?

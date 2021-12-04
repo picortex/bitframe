@@ -40,7 +40,7 @@ rootProject.name = "bitframe"
 
 include(":bitframe-core")
 
-include(":bitframe-presenters")
+includeRoot(name = "bitframe-presenters", path = "bitframe-utils/presenters/core")
 
 //includeRoot(name = "kotlinx-collections-interoperable", path = "bitframe-utils/kotlinx-collections-interoperable")
 

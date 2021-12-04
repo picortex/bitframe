@@ -1,12 +1,13 @@
 @file:JsExport
 
-package bitframe.presenters.fields
+package presenters.fields
 
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @Serializable
-data class BooleanInputField(
+data class TextInputField(
     val label: String,
-    var value: Boolean? = null
+    val hint: String = label,
+    var value: String? = null
 )

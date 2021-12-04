@@ -1,6 +1,6 @@
 package unit.table
 
-import bitframe.presenters.collections.tableOf
+import presenters.collections.tableOf
 import kotlin.test.Test
 
 class TableTest {

@@ -1,6 +1,6 @@
 package pimonitor.evaluation.businesses
 
-import bitframe.presenters.collections.Table
+import presenters.collections.Table
 import pimonitor.monitored.MonitoredBusiness
 import pimonitor.reakt.BitframeTable
 import react.Props

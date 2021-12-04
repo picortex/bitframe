@@ -1,4 +1,4 @@
-package bitframe.presenters.collections.table
+package presenters.collections.table
 
 import kotlinx.collections.interoperable.mutableListOf
 

@@ -1,6 +1,6 @@
-package bitframe.presenters.collections
+package presenters.collections
 
-import bitframe.presenters.collections.table.ColumnBuilder
+import presenters.collections.table.ColumnBuilder
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlin.jvm.JvmSynthetic
 

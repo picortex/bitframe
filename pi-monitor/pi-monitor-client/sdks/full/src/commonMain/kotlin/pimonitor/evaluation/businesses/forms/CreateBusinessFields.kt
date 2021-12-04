@@ -2,9 +2,9 @@
 
 package pimonitor.evaluation.businesses.forms
 
-import bitframe.presenters.fields.BooleanInputField
-import bitframe.presenters.fields.ButtonInputField
-import bitframe.presenters.fields.TextInputField
+import presenters.fields.BooleanInputField
+import presenters.fields.ButtonInputField
+import presenters.fields.TextInputField
 import kotlin.js.JsExport
 
 data class CreateBusinessFields internal constructor(

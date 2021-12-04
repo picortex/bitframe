@@ -1,4 +1,4 @@
-package bitframe.presenters.collections.table
+package presenters.collections.table
 
 class ColumnBuilder<D>(internal val columns: MutableList<Column<D>> = mutableListOf()) {
     fun selectable(name: String = "Select") {

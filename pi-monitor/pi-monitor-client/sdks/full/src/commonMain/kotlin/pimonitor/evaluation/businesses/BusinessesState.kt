@@ -2,7 +2,7 @@
 
 package pimonitor.evaluation.businesses
 
-import bitframe.presenters.collections.Table
+import presenters.collections.Table
 import pimonitor.monitored.MonitoredBusiness
 import kotlin.js.JsExport
 

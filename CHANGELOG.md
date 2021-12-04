@@ -1,6 +1,7 @@
 # 0.0.51
 
 - Moved bitframe-events to utils
+- Moved presenters to utils
 
 # 0.0.50
 

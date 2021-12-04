@@ -1,6 +1,6 @@
 package pimonitor.evaluation.businesses
 
-import bitframe.presenters.collections.tableOf
+import presenters.collections.tableOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -10,7 +10,6 @@ import later.await
 import logging.logger
 import pimonitor.evaluation.businesses.BusinessesIntent.LoadBusinesses
 import pimonitor.evaluation.businesses.BusinessesIntent.ShowBusinessForm
-import pimonitor.evaluation.businesses.BusinessesService
 import pimonitor.monitored.MonitoredBusiness
 import viewmodel.ViewModel
 import pimonitor.evaluation.businesses.BusinessesIntent as Intent

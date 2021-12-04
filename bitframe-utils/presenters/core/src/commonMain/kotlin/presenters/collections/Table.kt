@@ -1,9 +1,9 @@
 @file:JsExport
 
-package bitframe.presenters.collections
+package presenters.collections
 
-import bitframe.presenters.collections.table.Column
-import bitframe.presenters.collections.table.Row
+import presenters.collections.table.Column
+import presenters.collections.table.Row
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import live.Live

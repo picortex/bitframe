@@ -1,6 +1,6 @@
 @file:JsExport
 
-package bitframe.presenters.collections.table
+package presenters.collections.table
 
 import kotlinx.collections.interoperable.List
 import kotlin.js.JsExport

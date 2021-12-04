@@ -1,6 +1,6 @@
 @file:JsExport
 
-package bitframe.presenters.fields
+package presenters.fields
 
 import kotlin.js.JsExport
 import kotlin.js.JsName

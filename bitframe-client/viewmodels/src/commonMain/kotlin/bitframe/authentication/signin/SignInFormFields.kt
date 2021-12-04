@@ -2,8 +2,8 @@
 
 package bitframe.authentication.signin
 
-import bitframe.presenters.fields.ButtonInputField
-import bitframe.presenters.fields.TextInputField
+import presenters.fields.ButtonInputField
+import presenters.fields.TextInputField
 import kotlin.js.JsExport
 
 data class SignInFormFields(

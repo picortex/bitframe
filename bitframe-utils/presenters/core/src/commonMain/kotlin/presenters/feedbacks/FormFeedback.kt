@@ -1,6 +1,6 @@
 @file:JsExport
 
-package bitframe.presenters.feedbacks
+package presenters.feedbacks
 
 import kotlin.js.JsExport
 

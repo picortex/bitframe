@@ -1,7 +1,7 @@
 package unit.table
 
-import bitframe.presenters.collections.Table
-import bitframe.presenters.collections.table.Column
+import presenters.collections.Table
+import presenters.collections.table.Column
 
 fun <D> print(table: Table<D>) {
     table.columns.forEach {
