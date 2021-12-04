@@ -23,7 +23,7 @@ applikation {
 kotlin {
     target {
         application()
-        tasks.withType(KotlinCompile::class.java) {
+        tasks.withType<KotlinCompile> {
             kotlinOptions.jvmTarget = "16"
         }
         compilations.all {
@@ -44,7 +44,7 @@ kotlin {
         val test by getting {
             dependencies {
                 implementation(project(":bitframe-server-framework-test"))
-                implementation(asoft("expect-coroutines", vers.asoft.expect))
+                implementation(asoft.expect.coroutines)
             }
         }
     }

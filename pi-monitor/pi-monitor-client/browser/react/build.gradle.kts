@@ -13,11 +13,17 @@ plugins {
 }
 
 applikation {
-    debug()
+    debug(
+        "url" to "http://localhost:8081"
+    )
     release()
 }
 
-rootProject.plugins.withType(NodeJsRootPlugin::class.java) {
+repositories {
+    publicRepos()
+}
+
+rootProject.plugins.withType<NodeJsRootPlugin> {
     rootProject.the<NodeJsRootExtension>().versions.apply {
         webpackDevServer.version = "4.1.0"
         webpackCli.version = "4.9.0"
@@ -41,14 +47,14 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(asoft("expect-core", vers.asoft.expect))
+                implementation(asoft.expect.core)
             }
         }
 
         val jsMain by getting {
             dependencies {
                 implementation(project(":bitframe-ui-react"))
-                implementation(asoft("applikation-runtime", vers.asoft.builders))
+                implementation(asoft.applikation.runtime)
             }
         }
 

@@ -20,6 +20,6 @@ class BusinessesScope(val service: PiMonitorService) {
     val showCreateBusinessForm: () -> Unit = { viewModel.post(Intent.ShowBusinessForm) }
 
     val useBusinessAddedEvent: (callback: (MonitoredBusiness) -> Unit) -> Unit = { callback ->
-        useEventHandler(service.config.bus, BusinessesService.CREATE_BUSINESS_EVENT_ID, callback)
+        useEventHandler(service.signIn.config.bus, BusinessesService.CREATE_BUSINESS_EVENT_ID, callback)
     }
 }

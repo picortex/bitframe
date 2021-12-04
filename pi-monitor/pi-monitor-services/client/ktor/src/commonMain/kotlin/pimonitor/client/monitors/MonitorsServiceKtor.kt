@@ -4,12 +4,11 @@ import bitframe.authentication.users.UserRef
 import bitframe.response.response.decodeResponseFromString
 import bitframe.service.client.utils.JsonContent
 import io.ktor.client.features.*
-import io.ktor.client.features.get
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import io.ktor.http.cio.*
 import later.Later
 import later.later
+import pimonitor.client.monitors.MonitorsService
 import pimonitor.monitors.Monitor
 
 class MonitorsServiceKtor(

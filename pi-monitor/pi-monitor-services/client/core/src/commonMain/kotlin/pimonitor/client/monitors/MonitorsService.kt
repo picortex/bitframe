@@ -4,7 +4,6 @@ package pimonitor.client.monitors
 
 import kotlinx.coroutines.launch
 import later.await
-import live.Live
 import pimonitor.monitors.Monitor
 import pimonitor.monitors.MonitorsService
 import kotlin.js.JsExport
@@ -15,7 +14,8 @@ abstract class MonitorsService(
 ) : MonitorsService(config) {
 
     val signInSession get() = config.signInSession
-    val session: Live<Session> = Live(Session.Unknown)
+
+    val session get() = config.monitorSession
 
     val currentMonitor: Monitor
         get() = when (val s = session.value) {

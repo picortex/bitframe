@@ -1,6 +1,7 @@
 package pimonitor.authentication.signup
 
 import bitframe.authentication.signin.SignInService
+import pimonitor.authentication.signup.SignUpService
 import bitframe.presenters.feedbacks.FormFeedback.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -12,6 +13,7 @@ import later.await
 import logging.logger
 import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_BUSINESS
 import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_INDIVIDUAL
+import pimonitor.authentication.signup.toCredentials
 import viewmodel.ViewModel
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State

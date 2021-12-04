@@ -10,6 +10,7 @@ import later.await
 import logging.logger
 import pimonitor.evaluation.businesses.BusinessesIntent.LoadBusinesses
 import pimonitor.evaluation.businesses.BusinessesIntent.ShowBusinessForm
+import pimonitor.evaluation.businesses.BusinessesService
 import pimonitor.monitored.MonitoredBusiness
 import viewmodel.ViewModel
 import pimonitor.evaluation.businesses.BusinessesIntent as Intent
@@ -40,13 +41,13 @@ class BusinessViewModel(
     private fun businessTable(date: List<MonitoredBusiness>) = tableOf(date) {
         selectable()
         column("Name") { it.data.name }
-        column("Reporting") { "N/A" }
-        column("Revenue") { "N/A" }
-        column("Expenses") { "N/A" }
-        column("GP") { "N/A" }
-        column("Velocity") { "N/A" }
-        column("NCF") { "N/A" }
-        column("V/day") { "N/A" }
+        column("Reporting") { "" }
+        column("Revenue") { "" }
+        column("Expenses") { "" }
+        column("GP") { "" }
+        column("Velocity") { "" }
+        column("NCF") { "" }
+        column("V/day") { "" }
         actions("Actions") {
             action("Delete") { tree.log("Deleting: ${it.data.name}") }
             action("View") { tree.log("Viewing: ${it.data.name}") }

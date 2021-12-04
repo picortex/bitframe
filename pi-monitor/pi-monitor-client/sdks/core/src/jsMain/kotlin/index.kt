@@ -8,8 +8,6 @@ import cache.BrowserCache
 import cache.MockCache
 import logging.ConsoleAppender
 import logging.Logging
-import pimonitor.PiMonitorServiceStub
-import pimonitor.PiMonitorServiceStubConfig
 import pimonitor.authentication.signup.exports.SignUpServiceWrapper
 import pimonitor.client.PiMonitorService
 import pimonitor.client.PiMonitorServiceKtor
@@ -26,22 +24,26 @@ external interface ServiceConfiguration {
 
 private var isLoggingEnabled = false
 
+@JsName("clientWithConfigBlock")
+fun client(
+    block: ServiceConfiguration.() -> Unit
+): PiMonitorService = client(
+    js("{}").unsafeCast<ServiceConfiguration>().apply(block)
+)
+
 fun client(config: ServiceConfiguration): PiMonitorService {
     if (config.disableViewModelLogs != true && !isLoggingEnabled) {
         Logging.init(ConsoleAppender())
         isLoggingEnabled = true
     }
-    val url = config.url
+    val url = config.url ?: error("Url must not be null | undefined")
     val appId = config.appId
-    val simulationTime = config.simulationTime?.toLong() ?: 2000L
     val cache = when {
         Platform.isBrowser -> BrowserCache()
         Platform.isReactNative -> AsyncStorageCache()
         else -> MockCache().also { console.log("Unknown platform, using a non persitient cach") }
     }
-    return if (url == null) PiMonitorServiceStub(
-        PiMonitorServiceStubConfig(appId, simulationTime, cache),
-    ) else PiMonitorServiceKtor(
+    return PiMonitorServiceKtor(
         PiMonitorServiceKtorConfig(appId, url, cache),
     )
 }

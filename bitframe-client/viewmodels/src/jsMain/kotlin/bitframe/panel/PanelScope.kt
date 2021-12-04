@@ -8,7 +8,7 @@ import viewmodel.ViewModel
 
 class PanelScope(val service: BitframeService) {
     val viewModel: ViewModel<PanelIntent, PanelState> by lazy {
-        PanelViewModel(service, service.config.cache)
+        PanelViewModel(service, service.signIn.config.cache)
     }
 
     val initPanel = { viewModel.post(PanelIntent.InitPanel) }

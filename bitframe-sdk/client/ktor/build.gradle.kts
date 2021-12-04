@@ -21,14 +21,12 @@ kotlin {
                 api(project(":bitframe-sdk-client-core"))
                 api(project(":bitframe-authentication-service-client-ktor"))
                 api("io.ktor:ktor-client-core:${vers.ktor}")
-                api(asoft("result-core", vers.asoft.duality))
             }
         }
 
         val commonTest by getting {
             dependencies {
-                api(asoft("kotlinx-coroutines-test", vers.asoft.foundation))
-                api(asoft("expect-coroutines", vers.asoft.expect))
+                api(asoft.expect.coroutines)
             }
         }
 
@@ -41,7 +39,6 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(project(":pi-monitor-test-testing"))
-                implementation(asoft("expect-coroutines", vers.asoft.expect))
             }
         }
 

@@ -1,4 +1,5 @@
 pluginManagement {
+    enableFeaturePreview("VERSION_CATALOGS")
     repositories {
         mavenCentral()
         google()
@@ -9,6 +10,14 @@ pluginManagement {
         eachPlugin {
             if (requested.id.namespace == "com.android") {
                 useModule("com.android.tools.build:gradle:${requested.version}")
+            }
+        }
+    }
+
+    dependencyResolutionManagement {
+        versionCatalogs {
+            file("gradle/versions").listFiles().map { it.nameWithoutExtension }.forEach {
+                create(it) { from(files("gradle/versions/$it.toml")) }
             }
         }
     }
@@ -32,11 +41,19 @@ include(":bitframe-core")
 
 include(":bitframe-presenters")
 
-includeRoot(name = "kotlinx-collections-interoperable", path = "bitframe-utils/kotlinx-collections-interoperable")
+//includeRoot(name = "kotlinx-collections-interoperable", path = "bitframe-utils/kotlinx-collections-interoperable")
 
-includeSubs(base = "cache", path = "bitframe-utils/cache", "api", "test", "browser", "react-native")
+//includeSubs(base = "cache", path = "bitframe-utils/cache", "api", "test", "browser", "react-native")
 
 includeRoot(name = "validation", path = "bitframe-utils/validation")
+
+includeSubs(base = "bitframe-testing", path = "bitframe-testing", "containers")
+
+includeRoot(name = "bitframe-testing-instance-server", path = "bitframe-testing/instance/server")
+
+includeSubs(base = "bitframe-testing-instance-client", path = "bitframe-testing/instance/client", "core", "browser")
+
+includeSubs(base = "bitframe-testing-sdk", path = "bitframe-testing/sdk", "browser")
 
 includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core", "processor")
 
@@ -80,7 +97,7 @@ includeSubs(base = "pi-monitor-dao", path = "pi-monitor/pi-monitor-daos", "core"
 
 includeSubs(base = "pi-monitor-service", path = "pi-monitor/pi-monitor-services", "core", "test")
 
-includeSubs(base = "pi-monitor-service-client", path = "pi-monitor/pi-monitor-services/client", "core", "ktor", "stub")
+includeSubs(base = "pi-monitor-service-client", path = "pi-monitor/pi-monitor-services/client", "core", "ktor")
 
 includeSubs(base = "pi-monitor-service-server", path = "pi-monitor/pi-monitor-services/server", "core")
 

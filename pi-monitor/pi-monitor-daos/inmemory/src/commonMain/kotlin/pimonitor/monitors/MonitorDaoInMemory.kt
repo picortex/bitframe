@@ -2,11 +2,13 @@ package pimonitor.monitors
 
 import bitframe.authentication.users.UserRef
 import bitframe.daos.conditions.Condition
-import bitframe.daos.config.InMemoryDaoConfig
-import contacts.Email
+import identifier.Email
 import kotlinx.coroutines.delay
 import later.later
 import pimonitor.authentication.signup.SignUpParams
+import pimonitor.monitors.CooperateMonitor
+import pimonitor.monitors.IndividualMonitor
+import pimonitor.monitors.MonitorDao
 
 class MonitorDaoInMemory(
     val config: MonitorDaoInMemoryConfig = MonitorDaoInMemoryConfig()

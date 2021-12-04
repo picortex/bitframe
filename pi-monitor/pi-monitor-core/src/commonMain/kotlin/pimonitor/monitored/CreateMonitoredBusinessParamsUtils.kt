@@ -1,6 +1,6 @@
 package pimonitor.monitored
 
-import contacts.Email
+import identifier.Email
 import pimonitor.monitored.MonitoredBusiness.ContactPerson
 import pimonitor.monitors.MonitorRef
 

@@ -6,9 +6,10 @@ import bitframe.landing.LandingPage
 import bitframe.panel.Panel
 import bitframe.renderers.Renderer
 import react.RBuilder
-import react.router.dom.browserRouter
-import react.router.dom.route
-import react.router.dom.switch
+import react.createElement
+import react.router.dom.BrowserRouter
+import react.router.dom.Route
+import react.router.dom.Switch
 import styled.styledDiv
 
 const val SignInPageRoute = "/authentication/sign-in/"
@@ -31,10 +32,13 @@ fun RBuilder.Bitframe(
     pages: Map<String, Renderer> = mapOf(),
     sections: Map<String, Renderer> = mapOf(),
     version: String
-) = browserRouter {
+) = BrowserRouter {
     val allRouteRenderers = pages.toMutableMap() + defaultRenderers(client, sections, version)
-    switch {
-        for ((path, renderer) in allRouteRenderers) route(path, render = renderer)
+    Switch {
+        for ((path, renderer) in allRouteRenderers) Route {
+            attrs.path = arrayOf(path)
+            attrs.render = { props -> createElement { renderer(props) } }
+        }
         styledDiv { +"Whoops, Not Found" }
     }
 }

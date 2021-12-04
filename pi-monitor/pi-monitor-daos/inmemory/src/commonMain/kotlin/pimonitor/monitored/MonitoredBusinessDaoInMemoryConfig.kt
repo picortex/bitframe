@@ -3,6 +3,7 @@ package pimonitor.monitored
 import bitframe.daos.config.InMemoryDaoConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.sync.Mutex
+import pimonitor.monitored.MonitoredBusiness
 
 interface MonitoredBusinessDaoInMemoryConfig : InMemoryDaoConfig {
     val businesses: MutableMap<String, MonitoredBusiness>

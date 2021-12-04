@@ -2,7 +2,6 @@ package pimonitor.authentication.signup
 
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.spaces.CreateSpaceParams
-import bitframe.authentication.spaces.RegisterSpaceParams
 import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.RegisterUserParams
 

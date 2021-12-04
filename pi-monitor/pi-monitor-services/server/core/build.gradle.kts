@@ -21,7 +21,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                api(asoft("expect-coroutines", vers.asoft.expect))
+                api(asoft.expect.coroutines)
             }
         }
     }

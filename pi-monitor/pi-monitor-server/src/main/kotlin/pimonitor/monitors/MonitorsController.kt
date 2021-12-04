@@ -7,7 +7,6 @@ import bitframe.server.http.toHttpResponse
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import later.await
-import pimonitor.monitored.CreateMonitoredBusinessParams
 import pimonitor.server.monitors.MonitorsService
 
 class MonitorsController(

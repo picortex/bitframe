@@ -3,7 +3,6 @@
 package pimonitor.monitors
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import kotlin.js.JsExport
 
 @Serializable

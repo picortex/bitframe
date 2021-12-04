@@ -10,8 +10,8 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import later.await
-import pimonitor.PiMonitorApplicationConfig
 import pimonitor.server.authentication.signup.SignUpService
+import pimonitor.authentication.signup.SignUpParams
 
 private val json = Json {
     encodeDefaults = true

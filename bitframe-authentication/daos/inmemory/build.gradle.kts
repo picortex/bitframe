@@ -14,15 +14,15 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":bitframe-authentication-dao-core"))
-                api(asoft("kotlinx-serialization-mapper", vers.asoft.mapper))
-                api(asoft("later-ktx", vers.asoft.later))
+                api(asoft.kotlinx.serialization.mapper)
+                api(asoft.later.ktx)
                 api(project(":bitframe-dao-test"))
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(asoft("expect-coroutines", vers.asoft.expect))
+                implementation(asoft.expect.coroutines)
             }
         }
     }

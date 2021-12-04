@@ -3,6 +3,7 @@ package pimonitor.monitors
 import bitframe.daos.config.InMemoryDaoConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.sync.Mutex
+import pimonitor.monitors.Monitor
 
 interface MonitorDaoInMemoryConfig : InMemoryDaoConfig {
     val monitors: MutableMap<String, Monitor>

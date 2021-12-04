@@ -9,6 +9,9 @@ import pimonitor.client.PiMonitorService
 import pimonitor.authentication.signup.SignUpResult
 import pimonitor.authentication.signup.SignUpService
 import pimonitor.authentication.signup.SignUpViewModel
+import pimonitor.authentication.signup.exports.RegisterBusinessParams
+import pimonitor.authentication.signup.exports.RegisterIndividualParams
+import pimonitor.authentication.signup.exports.toSignUpParams
 import useEventHandler
 import viewmodel.ViewModel
 import pimonitor.authentication.signup.SignUpIntent as Intent
@@ -40,10 +43,10 @@ class SignUpScope(
     }
 
     val useSignUpEvent: (callback: (SignUpResult) -> Unit) -> Unit = {
-        useEventHandler(service.config.bus, SignUpService.SIGN_UP_EVENT_ID, it)
+        useEventHandler(service.signIn.config.bus, SignUpService.SIGN_UP_EVENT_ID, it)
     }
 
     val useSignInEvent: (callback: (Session.SignedIn) -> Unit) -> Unit = {
-        useEventHandler(service.config.bus, SignInService.SIGN_IN_EVENT_ID, it)
+        useEventHandler(service.signIn.config.bus, SignInService.SIGN_IN_EVENT_ID, it)
     }
 }

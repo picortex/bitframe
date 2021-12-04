@@ -38,11 +38,7 @@ class BitframeTableComponent<D> private constructor(props: Props<D>) : RComponen
 
     override fun componentDidMount() {
         watcher = table.live.watch {
-            setState {
-                console.log("Setting state")
-                table = it
-                console.log("Rows", table.rows.toArray())
-            }
+            setState { table = it }
         }
     }
 

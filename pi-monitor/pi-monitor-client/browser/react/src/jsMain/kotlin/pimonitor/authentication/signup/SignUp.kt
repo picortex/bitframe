@@ -1,6 +1,7 @@
 package pimonitor.authentication.signup
 
 import bitframe.PanelPageRoute
+import pimonitor.authentication.signup.SignUpState
 import bitframe.components.TextInput
 import bitframe.presenters.feedbacks.FormFeedback
 import kotlinx.css.*
@@ -18,6 +19,7 @@ import react.router.dom.useHistory
 import react.router.dom.withRouter
 import reakt.*
 import pimonitor.reakt.DropDown
+import pimonitor.authentication.signup.SignUpParams
 import styled.css
 import styled.styledH2
 import theme.clazz

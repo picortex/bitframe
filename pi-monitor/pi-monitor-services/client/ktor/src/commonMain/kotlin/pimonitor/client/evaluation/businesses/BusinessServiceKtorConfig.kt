@@ -1,8 +1,6 @@
 package pimonitor.client.evaluation.businesses
 
 import bitframe.service.client.config.KtorClientConfiguration
-import pimonitor.client.monitors.MonitorsServiceKtor
+import pimonitor.client.evaluation.businesses.BusinessesServiceConfig
 
-interface BusinessServiceKtorConfig : BusinessesServiceConfig, KtorClientConfiguration {
-    override val monitorsService: MonitorsServiceKtor
-}
+interface BusinessServiceKtorConfig : BusinessesServiceConfig, KtorClientConfiguration
