@@ -1,3 +1,7 @@
+# 0.0.50
+
+- Refactored and did a lot of housekeeping
+
 # 0.0.37
 
 ## Bitframe
