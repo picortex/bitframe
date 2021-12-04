@@ -2,8 +2,7 @@ package bitframe.authentication.client.signin
 
 import bitframe.authentication.signin.Session
 import bitframe.authentication.users.User
-import bitframe.events.EventBus
-import bitframe.events.InMemoryEventBus
+import events.EventBus
 import bitframe.service.client.config.ServiceConfig
 import cache.Cache
 import cache.MockCache

@@ -1,7 +1,7 @@
 package bitframe.authentication.client.signin
 
 import bitframe.authentication.signin.Session
-import bitframe.events.EventBus
+import events.EventBus
 import bitframe.service.client.config.KtorClientConfiguration
 import cache.Cache
 import io.ktor.client.*

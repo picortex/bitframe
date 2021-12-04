@@ -1,3 +1,7 @@
+# 0.0.51
+
+- Moved bitframe-events to utils
+
 # 0.0.50
 
 - Refactored and did a lot of housekeeping

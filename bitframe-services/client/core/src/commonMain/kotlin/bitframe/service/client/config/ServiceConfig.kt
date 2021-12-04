@@ -1,10 +1,8 @@
 package bitframe.service.client.config
 
-import bitframe.events.EventBus
+import events.EventBus
 import cache.Cache
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
-import live.Live
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic

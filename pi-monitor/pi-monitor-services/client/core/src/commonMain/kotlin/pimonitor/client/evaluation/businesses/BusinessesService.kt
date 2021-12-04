@@ -2,7 +2,7 @@
 
 package pimonitor.client.evaluation.businesses
 
-import bitframe.events.Event
+import events.Event
 import pimonitor.evaluation.businesses.BusinessesService
 import pimonitor.monitored.CreateMonitoredBusinessParams
 import pimonitor.monitored.MonitoredBusiness

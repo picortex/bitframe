@@ -1,5 +1,6 @@
 pluginManagement {
     enableFeaturePreview("VERSION_CATALOGS")
+    enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
     repositories {
         mavenCentral()
         google()
@@ -83,7 +84,7 @@ includeSubs(base = "bitframe-sdk-server", path = "bitframe-sdk/server", "core")
 
 includeSubs(base = "bitframe-client", path = "bitframe-client", "viewmodels")
 
-includeSubs(base = "bitframe-events", path = "bitframe-events", "core", "inmemory", "react")
+includeSubs(base = "bitframe-events", path = "bitframe-utils/events", "core", "inmemory", "react")
 
 includeSubs(base = "bitframe-ui", path = "bitframe-client/ui", "react")
 

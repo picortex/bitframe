@@ -2,13 +2,12 @@
 
 package pimonitor.authentication.signup
 
-import bitframe.events.Event
+import events.Event
 import bitframe.service.config.ServiceConfig
 import identifier.Email
 import later.Later
 import later.await
 import later.later
-import pimonitor.authentication.signup.SignUpParams
 import validation.Validation
 import validation.validate
 import kotlin.js.JsExport

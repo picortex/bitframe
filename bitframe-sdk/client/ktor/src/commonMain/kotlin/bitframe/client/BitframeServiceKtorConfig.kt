@@ -3,7 +3,7 @@ package bitframe.client
 import bitframe.authentication.client.signin.SignInServiceConfig
 import bitframe.authentication.client.signin.SignInServiceKtorConfig
 import bitframe.authentication.signin.Session
-import bitframe.events.EventBus
+import events.EventBus
 import bitframe.service.client.config.KtorClientConfiguration
 import bitframe.service.client.config.ServiceConfig
 import cache.Cache

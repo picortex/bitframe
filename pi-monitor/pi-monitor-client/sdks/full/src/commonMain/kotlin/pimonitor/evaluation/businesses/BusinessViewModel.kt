@@ -19,6 +19,7 @@ import pimonitor.evaluation.businesses.BusinessesState as State
 class BusinessViewModel(
     val service: BusinessesService
 ) : ViewModel<Intent, State>(State.Loading("Loading business")) {
+
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         LoadBusinesses -> loadBusiness()
         ShowBusinessForm -> ui.value = State.BusinessForm()
@@ -49,6 +50,7 @@ class BusinessViewModel(
         column("NCF") { "" }
         column("V/day") { "" }
         actions("Actions") {
+            action("Invite to share reports") {}
             action("Delete") { tree.log("Deleting: ${it.data.name}") }
             action("View") { tree.log("Viewing: ${it.data.name}") }
         }
