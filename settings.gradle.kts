@@ -42,7 +42,7 @@ include(":bitframe-core")
 
 
 // <Bitframe Utils>
-includeSubs("mailer", "bitframe-utils/mailer", "api", "mock")
+includeSubs("mailer", "bitframe-utils/mailer", "api", "mock", "smtp")
 
 includeSubs(base = "bitframe-events", path = "bitframe-utils/events", "core", "inmemory", "react")
 
@@ -96,6 +96,8 @@ includeSubs(base = "bitframe-ui", path = "bitframe-client/ui", "react")
 include(":pi-monitor")
 
 includeRoot(name = "pi-monitor-core", path = "pi-monitor/pi-monitor-core")
+
+includeSubs(base = "pi-monitor-dashboard", path = "pi-monitor/pi-monitor-integrations/dashboard", "core", "picortex")
 
 includeRoot(name = "pi-monitor-server", path = "pi-monitor/pi-monitor-server")
 

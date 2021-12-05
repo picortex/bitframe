@@ -44,4 +44,23 @@ class TemplateCompilerTest {
         )
         expect(actual).toBe("Hello Anderson, hope you are alright")
     }
+
+    @Test
+    fun should_interpolate_a_well_crafted_message() {
+        val template = """
+            Dear {{name}},
+            I hope you are doing okay.
+            <b>To do this</b>
+            This message should remind you of our {{budget}} that we discussed on {{date}}
+        """.trimIndent()
+        val compiler = TemplateCompiler()
+        println(
+            compiler.compile(
+                template,
+                "name" to "Luge",
+                "budget" to "TZS 5,000/=",
+                "date" to "Wednesday"
+            )
+        )
+    }
 }

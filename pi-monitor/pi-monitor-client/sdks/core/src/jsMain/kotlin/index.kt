@@ -41,7 +41,7 @@ fun client(config: ServiceConfiguration): PiMonitorService {
     val cache = when {
         Platform.isBrowser -> BrowserCache()
         Platform.isReactNative -> AsyncStorageCache()
-        else -> MockCache().also { console.log("Unknown platform, using a non persitient cach") }
+        else -> MockCache().also { console.log("Unknown platform, using a non persitient cache") }
     }
     return PiMonitorServiceKtor(
         PiMonitorServiceKtorConfig(appId, url, cache),

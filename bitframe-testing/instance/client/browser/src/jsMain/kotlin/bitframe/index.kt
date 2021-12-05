@@ -19,17 +19,21 @@ import reakt.setContent
 
 fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
     val konfig = konfig()
+
     val config = BitframeServiceKtorConfig(
         appId = "test-client",
         url = konfig["url"]?.toString() ?: window.location.origin,
         cache = BrowserCache()
     )
+
     val client = object : BitframeService {
         override val spaces: SpacesService = SpacesServiceKtor(config)
         override val users: UsersService = UsersServiceKtor(config)
         override val signIn: SignInService = SignInServiceKtor(config)
     }
+
     val version: String by konfig()
+
     Bitframe(
         client = client,
         pages = mapOf(),
