@@ -40,14 +40,20 @@ rootProject.name = "bitframe"
 
 include(":bitframe-core")
 
+
+// <Bitframe Utils>
+includeSubs("mailer", "bitframe-utils/mailer", "api", "mock")
+
+includeSubs(base = "bitframe-events", path = "bitframe-utils/events", "core", "inmemory", "react")
+
+includeSubs(base = "bitframe-events", path = "bitframe-utils/events", "core", "inmemory", "react")
+
 includeRoot(name = "bitframe-presenters", path = "bitframe-utils/presenters/core")
-
-//includeRoot(name = "kotlinx-collections-interoperable", path = "bitframe-utils/kotlinx-collections-interoperable")
-
-//includeSubs(base = "cache", path = "bitframe-utils/cache", "api", "test", "browser", "react-native")
 
 includeRoot(name = "validation", path = "bitframe-utils/validation")
 
+
+//<Bitframe Testing>
 includeSubs(base = "bitframe-testing", path = "bitframe-testing", "containers")
 
 includeRoot(name = "bitframe-testing-instance-server", path = "bitframe-testing/instance/server")
@@ -55,6 +61,7 @@ includeRoot(name = "bitframe-testing-instance-server", path = "bitframe-testing/
 includeSubs(base = "bitframe-testing-instance-client", path = "bitframe-testing/instance/client", "core", "browser")
 
 includeSubs(base = "bitframe-testing-sdk", path = "bitframe-testing/sdk", "browser")
+//</Bitframe Testing>
 
 includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core", "processor")
 
@@ -83,8 +90,6 @@ includeSubs(base = "bitframe-sdk-client", path = "bitframe-sdk/client", "core", 
 includeSubs(base = "bitframe-sdk-server", path = "bitframe-sdk/server", "core")
 
 includeSubs(base = "bitframe-client", path = "bitframe-client", "viewmodels")
-
-includeSubs(base = "bitframe-events", path = "bitframe-utils/events", "core", "inmemory", "react")
 
 includeSubs(base = "bitframe-ui", path = "bitframe-client/ui", "react")
 
