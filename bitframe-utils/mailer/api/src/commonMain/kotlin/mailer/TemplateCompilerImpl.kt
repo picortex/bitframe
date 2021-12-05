@@ -17,10 +17,18 @@ class TemplateCompilerImpl : TemplateCompiler {
         val inputParamMaps = parameters.toMap()
         var output = input
         params.forEach { param ->
-            val providedParam = inputParamMaps[param.name]?.toString()
-                ?: error("Param ${param.name} was found in template but it's value isn't provided during compilation compilation")
-            output = output.replace(param.raw, providedParam)
+            output = output.replace(
+                oldValue = param.raw,
+                newValue = inputParamMaps[param.name]?.toString() ?: throw ParameterNotFound(param, inputParamMaps)
+            )
         }
         return output
     }
+
+    class ParameterNotFound(
+        val param: TemplateCompiler.Parameter,
+        val params: Map<String, Any>
+    ) : RuntimeException(
+        """Template Parameter ${param.name} was found in template but it's value isn't provided during compilation compilation Provided Params are: ${params.entries.joinToString { "${it.key}=${it.value}" }}""".trimIndent()
+    )
 }

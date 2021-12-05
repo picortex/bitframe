@@ -39,7 +39,7 @@ class TemplateCompilerTest {
             template,
             *arrayOf(
                 "greeting" to "Hello",
-                "name" to "Anderson"
+                "names" to "Anderson"
             )
         )
         expect(actual).toBe("Hello Anderson, hope you are alright")
