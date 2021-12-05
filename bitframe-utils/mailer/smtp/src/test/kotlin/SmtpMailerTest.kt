@@ -7,6 +7,7 @@ import mailer.Mailer
 import mailer.SmtpMailer
 import mailer.SmtpMailerConfig
 import java.util.*
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 class SmtpMailerTest {
@@ -21,6 +22,7 @@ class SmtpMailerTest {
     val mailer: Mailer = SmtpMailer(config)
 
     @Test
+    @Ignore("This would be taking a lot of credit running it over and over")
     fun should_send_an_email() = runTest {
         val cfg = config.toProperties()
         println(cfg)
