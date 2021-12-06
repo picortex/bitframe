@@ -1,3 +1,5 @@
+package unit
+
 import expect.expect
 import identifier.Email
 import kotlinx.coroutines.runTest
@@ -10,6 +12,7 @@ import kotlin.test.Test
 
 class MailerMockTest {
     val config = MockMailerConfig(
+        simulationTime = 1000L,
         separator = "= = = = = = = = = ="
     )
     val mailer: Mailer = MockMailer(config)

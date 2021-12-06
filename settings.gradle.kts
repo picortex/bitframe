@@ -44,6 +44,8 @@ include(":bitframe-core")
 // <Bitframe Utils>
 includeSubs("mailer", "bitframe-utils/mailer", "api", "mock", "smtp")
 
+includeRoot("templater", "bitframe-utils/templater")
+
 includeSubs(base = "bitframe-events", path = "bitframe-utils/events", "core", "inmemory", "react")
 
 includeSubs(base = "bitframe-events", path = "bitframe-utils/events", "core", "inmemory", "react")
