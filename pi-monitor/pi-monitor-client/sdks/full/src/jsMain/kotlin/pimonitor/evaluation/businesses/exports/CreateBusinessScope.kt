@@ -5,8 +5,7 @@ package pimonitor.evaluation.businesses.exports
 
 import pimonitor.client.PiMonitorService
 import pimonitor.evaluation.businesses.forms.CreateBusinessViewModel
-import pimonitor.evaluation.businesses.exports.CreateBusinessFormParams
-import pimonitor.evaluation.businesses.exports.toParams
+import useViewModelState
 import viewmodel.ViewModel
 import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
 import pimonitor.evaluation.businesses.forms.CreateBusinessState as State
@@ -18,4 +17,6 @@ class CreateBusinessScope(service: PiMonitorService) {
     val submitForm = { params: CreateBusinessFormParams ->
         viewModel.post(Intent.SubmitForm(params.toParams()))
     }
+
+    val useStateFromViewModel = { useViewModelState(viewModel) }
 }
