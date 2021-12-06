@@ -1,3 +1,5 @@
+package integration
+
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.request.*
