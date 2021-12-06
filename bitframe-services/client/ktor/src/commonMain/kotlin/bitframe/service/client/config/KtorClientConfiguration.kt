@@ -1,6 +1,6 @@
 package bitframe.service.client.config
 
-import bitframe.events.EventBus
+import events.EventBus
 import cache.Cache
 import io.ktor.client.*
 import kotlinx.coroutines.CoroutineScope

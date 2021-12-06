@@ -1,7 +1,7 @@
 package bitframe.service.config
 
-import bitframe.events.EventBus
-import bitframe.events.InMemoryEventBus
+import events.EventBus
+import events.InMemoryEventBus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlin.jvm.JvmField

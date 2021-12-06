@@ -6,8 +6,8 @@ import bitframe.authentication.signin.*
 import bitframe.authentication.spaces.Space
 import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.User
-import bitframe.presenters.feedbacks.FormFeedback.Loading
-import bitframe.presenters.feedbacks.FormFeedback.Success
+import presenters.feedbacks.FormFeedback.Loading
+import presenters.feedbacks.FormFeedback.Success
 import cache.MockCache
 import expect.expect
 import expect.toBe

@@ -1,3 +1,10 @@
+# 0.0.51
+
+- Moved bitframe-events to utils
+- Moved presenters to utils
+- Added a Templater, and it's compiler
+- Added a Mailer for clients
+
 # 0.0.50
 
 - Refactored and did a lot of housekeeping

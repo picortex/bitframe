@@ -25,8 +25,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":pi-monitor-core"))
-                api(project(":pi-monitor-service-client-ktor"))
+                api(projects.piMonitorCore)
+                api(projects.piMonitorServiceClientKtor)
                 api(asoft.cache.mock)
                 api(kotlinx("datetime", vers.kotlinx.datetime))
                 api(asoft.logging.console)
@@ -35,7 +35,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(project(":pi-monitor-test-testing"))
+                implementation(projects.piMonitorTestTesting)
                 implementation(asoft.expect.coroutines)
             }
         }

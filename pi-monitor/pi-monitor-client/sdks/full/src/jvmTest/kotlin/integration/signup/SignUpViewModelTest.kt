@@ -1,6 +1,6 @@
 package integration.signup
 
-import bitframe.presenters.feedbacks.FormFeedback.*
+import presenters.feedbacks.FormFeedback.*
 import bitframe.testing.annotations.Lifecycle
 import bitframe.testing.annotations.TestInstance
 import bitframe.testing.annotations.Testcontainers

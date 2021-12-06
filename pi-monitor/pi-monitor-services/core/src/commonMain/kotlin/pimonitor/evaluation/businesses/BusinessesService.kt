@@ -2,7 +2,7 @@
 
 package pimonitor.evaluation.businesses
 
-import bitframe.events.Event
+import events.Event
 import bitframe.service.config.ServiceConfig
 import later.Later
 import later.await

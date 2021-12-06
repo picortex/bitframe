@@ -7,7 +7,7 @@ import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.signin.Session
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.spaces.Space
-import bitframe.events.Event
+import events.Event
 import later.Later
 import later.await
 import later.later

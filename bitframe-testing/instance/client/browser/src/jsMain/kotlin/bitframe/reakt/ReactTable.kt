@@ -1,7 +1,7 @@
 package bitframe.reakt
 
-import bitframe.presenters.collections.Table
-import bitframe.presenters.collections.table.Row
+import presenters.collections.Table
+import presenters.collections.table.Row
 import kotlinx.css.*
 import kotlinx.html.InputType
 import kotlinx.html.js.onClickFunction
@@ -14,7 +14,7 @@ import styled.css
 import styled.styledDiv
 import styled.styledInput
 import kotlin.reflect.KClass
-import bitframe.presenters.collections.table.Column as BColumn
+import presenters.collections.table.Column as BColumn
 import react.Props as RProps
 import react.State as RState
 

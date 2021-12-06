@@ -5,7 +5,7 @@ import bitframe.authentication.server.spaces.SpacesServiceConfig
 import bitframe.authentication.server.users.UsersServiceConfig
 import bitframe.authentication.spaces.SpacesDao
 import bitframe.authentication.users.UsersDao
-import bitframe.events.EventBus
+import events.EventBus
 import bitframe.service.config.ServiceConfig
 import kotlinx.coroutines.CoroutineScope
 

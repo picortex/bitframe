@@ -1,6 +1,6 @@
 package bitframe.server
 
-import bitframe.events.InMemoryEventBus
+import events.InMemoryEventBus
 import bitframe.server.modules.Module
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
