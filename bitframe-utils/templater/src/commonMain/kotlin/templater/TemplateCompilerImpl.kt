@@ -2,7 +2,8 @@ package templater
 
 internal class TemplateCompilerImpl : TemplateCompiler {
     override fun findParameters(input: String): List<Parameter> {
-        val regex = Regex("""\{{2}\s?\w+\s?}{2}""")
+//        val regex = Regex("""\{{2}\s?\w+\s?}{2}""") TODO: Fix this in JS please
+        val regex = Regex("""\{\{\s?\w+\s?}}""")
         val params = mutableListOf<Parameter>()
         regex.findAll(input).forEach { m ->
             params.add(Parameter(m.value))

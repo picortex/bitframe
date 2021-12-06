@@ -6,7 +6,6 @@ import identifier.Email
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.listOf
 import kotlin.js.JsExport
-import kotlin.math.atan
 
 data class EmailDraft(
     val subject: String,
