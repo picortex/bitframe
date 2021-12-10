@@ -14,6 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(asoft.later.ktx)
+                api(projects.bitframePresenters)
             }
         }
 

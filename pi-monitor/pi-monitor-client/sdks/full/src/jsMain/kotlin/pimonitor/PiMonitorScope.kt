@@ -14,7 +14,7 @@ class PiMonitorScope(
     val signIn: SignInScope,
     val signUp: SignUpScope,
     val panel: PanelScope,
-    val business: BusinessesScope,
+    val businesses: BusinessesScope,
     val createBusiness: CreateBusinessScope,
     val contacts: ContactsScope
 ) {
