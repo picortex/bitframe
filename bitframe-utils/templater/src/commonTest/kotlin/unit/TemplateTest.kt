@@ -5,7 +5,7 @@ import templater.Template
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-//@Ignore // TODO: Compiler RegEx in JS is breaking
+@Ignore // TODO: Compiler RegEx in JS is breaking
 class TemplateTest {
     @Test
     fun should_interpolate_a_well_crafted_message() {
