@@ -16,7 +16,7 @@ class PiCortexDashboardProvider(
     private val client get() = config.client
     private val parser get() = config.parser
 
-    fun technicalDashboardOf(credentials: PiCortexUserCredentials) = scope.later<TechnicalDashboard> {
+    fun technicalDashboardOf(credentials: PiCortexUserCredentials) = scope.later<OperationalDashboard> {
         val res = try {
             val map = mapOf(
                 "secret" to credentials.secret,

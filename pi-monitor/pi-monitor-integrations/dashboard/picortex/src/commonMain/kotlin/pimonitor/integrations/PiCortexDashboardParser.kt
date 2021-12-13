@@ -118,8 +118,8 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
         )
     )
 
-    fun parseTechnicalDashboard(json: String): TechnicalDashboard {
-        val board = TechnicalDashboard()
+    fun parseTechnicalDashboard(json: String): OperationalDashboard {
+        val board = OperationalDashboard()
         return board.copy(
             clients = board.clients.copy(value = parseNumberOfClients(json)),
             employees = board.employees.copy(value = parseNumberOfEmployees(json)),

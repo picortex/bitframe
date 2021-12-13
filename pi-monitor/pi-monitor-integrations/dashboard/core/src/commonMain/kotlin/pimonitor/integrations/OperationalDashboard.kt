@@ -5,7 +5,7 @@ package pimonitor.integrations
 import presenters.charts.BarChart
 import kotlin.js.JsExport
 
-data class TechnicalDashboard(
+data class OperationalDashboard(
     val clients: DashboardEntry = DashboardEntry("Clients"),
     val employees: DashboardEntry = DashboardEntry("Employees"),
     val jobs: DashboardEntry = DashboardEntry("Jobs"),

@@ -76,4 +76,22 @@ class PiCortexDashboardParserTest {
         show(chart)
         expect(chart).toBeNonNull()
     }
+
+    @Test
+    fun should_do_this_and_that() {
+        /**
+         * const business = state.business
+         *
+         * const oData = business.operationData = {
+         *   cards: [],
+         *   charts: []
+         * }
+         *
+         * const overview = business.overview = {
+         *  info: {},
+         *  cards: [],
+         *  charts: []
+         * }
+         */
+    }
 }
