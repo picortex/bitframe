@@ -43,7 +43,6 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
             if (state.table.isEmpty) EmptyBusiness()
             else BusinessTable(state.table)
         }
-        is BusinessesState.BusinessForm -> AddBusiness(scope.service)
         is BusinessesState.Success -> SuccessBox(state.message)
         is BusinessesState.Failure -> ErrorBox(state.cause)
     }
