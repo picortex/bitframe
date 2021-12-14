@@ -1,3 +1,6 @@
+# 0.0.52
+- [[BF127]](https://github.com/picortex/bitframe/issues/217) CreateBusiness Dialog Implementation
+
 # 0.0.51
 
 - Moved bitframe-events to utils
