@@ -1,7 +1,7 @@
 package pimonitor
 
 import bitframe.ApplicationConfig
-import bitframe.events.EventBus
+import events.EventBus
 import bitframe.server.modules.Module
 import kotlinx.coroutines.CoroutineScope
 import pimonitor.server.PiMonitorDaoProvider

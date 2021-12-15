@@ -2,10 +2,10 @@
 
 package pimonitor.authentication.signup
 
-import bitframe.presenters.feedbacks.FormFeedback
-import bitframe.presenters.fields.ButtonInputField
-import bitframe.presenters.fields.DropDownInputField
-import bitframe.presenters.fields.DropDownInputField.Option
+import presenters.feedbacks.FormFeedback
+import presenters.fields.ButtonInputField
+import presenters.fields.DropDownInputField
+import presenters.fields.DropDownInputField.Option
 import kotlin.js.JsExport
 
 sealed class SignUpState(val select: DropDownInputField, open val status: FormFeedback?) {

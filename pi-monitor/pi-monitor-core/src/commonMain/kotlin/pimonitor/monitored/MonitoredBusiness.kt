@@ -3,6 +3,7 @@
 package pimonitor.monitored
 
 import identifier.Email
+import kotlinx.collections.interoperable.List
 import kotlinx.serialization.Serializable
 import pimonitor.monitors.MonitorRef
 import kotlin.js.JsExport
@@ -17,8 +18,6 @@ data class MonitoredBusiness(
     init {
         require(contacts.isNotEmpty()) { "A business must have at least one contact person" }
     }
-
-    val contactsArray get() = contacts.toTypedArray()
 
     @Serializable
     data class ContactPerson(

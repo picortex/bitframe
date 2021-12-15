@@ -1,7 +1,7 @@
 package bitframe.authentication.signin
 
 import bitframe.components.TextInput
-import bitframe.presenters.feedbacks.FormFeedback
+import presenters.feedbacks.FormFeedback
 import kotlinx.css.*
 import kotlinx.extensions.text
 import kotlinx.html.InputType

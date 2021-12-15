@@ -2,9 +2,9 @@
 
 package pimonitor.authentication.signup
 
-import bitframe.presenters.fields.ButtonInputField
-import bitframe.presenters.fields.DropDownInputField
-import bitframe.presenters.fields.TextInputField
+import presenters.fields.ButtonInputField
+import presenters.fields.DropDownInputField
+import presenters.fields.TextInputField
 import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_BUSINESS
 import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_INDIVIDUAL
 import kotlin.js.JsExport

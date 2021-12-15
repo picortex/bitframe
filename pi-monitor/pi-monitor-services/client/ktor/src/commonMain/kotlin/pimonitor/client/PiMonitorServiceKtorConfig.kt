@@ -3,7 +3,7 @@ package pimonitor.client
 import bitframe.authentication.client.signin.SignInServiceConfig.Companion.DEFAULT_SIGN_IN_SESSION
 import bitframe.authentication.client.signin.SignInServiceKtorConfig
 import bitframe.client.BitframeServiceConfig
-import bitframe.events.EventBus
+import events.EventBus
 import bitframe.service.client.config.KtorClientConfiguration.Companion.DEFAULT_BUS
 import bitframe.service.client.config.KtorClientConfiguration.Companion.DEFAULT_HTTP_CLIENT
 import bitframe.service.client.config.KtorClientConfiguration.Companion.DEFAULT_JSON

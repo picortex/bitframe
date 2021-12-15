@@ -8,13 +8,15 @@ import pimonitor.authentication.signup.exports.SignUpScope
 import pimonitor.client.PiMonitorService
 import pimonitor.evaluation.businesses.exports.BusinessesScope
 import pimonitor.evaluation.businesses.exports.CreateBusinessScope
+import pimonitor.evaluation.contacts.exports.ContactsScope
 
 class PiMonitorScope(
     val signIn: SignInScope,
     val signUp: SignUpScope,
     val panel: PanelScope,
-    val business: BusinessesScope,
-    val createBusiness: CreateBusinessScope
+    val businesses: BusinessesScope,
+    val createBusiness: CreateBusinessScope,
+    val contacts: ContactsScope
 ) {
     @JsName("fromService")
     constructor(service: PiMonitorService) : this(
@@ -22,6 +24,7 @@ class PiMonitorScope(
         SignUpScope(service),
         PanelScope(service),
         BusinessesScope(service),
-        CreateBusinessScope(service)
+        CreateBusinessScope(service),
+        ContactsScope(service)
     )
 }

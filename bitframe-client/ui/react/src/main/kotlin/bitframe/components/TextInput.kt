@@ -1,6 +1,6 @@
 package bitframe.components
 
-import bitframe.presenters.fields.TextInputField
+import presenters.fields.TextInputField
 import kotlinx.html.InputType
 import react.RBuilder
 import reakt.TextInput

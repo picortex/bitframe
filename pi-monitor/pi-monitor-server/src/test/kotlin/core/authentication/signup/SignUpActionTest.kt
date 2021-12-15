@@ -1,16 +1,9 @@
 package core.authentication.signup
 
 import bitframe.*
-import bitframe.authentication.users.UsersService
-import bitframe.daos.config.InMemoryDaoConfig
-import bitframe.events.InMemoryEventBus
-import bitframe.service.config.ServiceConfig
 import expect.expect
 import io.ktor.http.*
 import kotlinx.coroutines.runTest
-import pimonitor.authentication.signup.DefaultSignUpAction
-import pimonitor.authentication.signup.SignUpController
-import pimonitor.monitors.MonitorDaoInMemory
 import kotlin.test.Ignore
 import kotlin.test.Test
 

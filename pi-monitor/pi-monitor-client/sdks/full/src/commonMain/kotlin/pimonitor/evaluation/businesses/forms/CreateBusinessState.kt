@@ -2,7 +2,7 @@
 
 package pimonitor.evaluation.businesses.forms
 
-import bitframe.presenters.feedbacks.FormFeedback
+import presenters.feedbacks.FormFeedback
 import kotlin.js.JsExport
 
 sealed class CreateBusinessState {

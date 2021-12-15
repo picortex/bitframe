@@ -1,8 +1,8 @@
 package pimonitor.evaluation.businesses.forms
 
-import bitframe.presenters.fields.BooleanInputField
-import bitframe.presenters.fields.ButtonInputField
-import bitframe.presenters.fields.TextInputField
+import presenters.fields.BooleanInputField
+import presenters.fields.ButtonInputField
+import presenters.fields.TextInputField
 import pimonitor.monitors.Monitor
 import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
 

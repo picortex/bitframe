@@ -1,7 +1,7 @@
 package bitframe.authentication.signin
 
 import bitframe.authentication.client.signin.SignInService
-import bitframe.presenters.feedbacks.FormFeedback.*
+import presenters.feedbacks.FormFeedback.*
 import cache.Cache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay

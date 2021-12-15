@@ -4,7 +4,7 @@ package bitframe.authentication.signin
 
 import bitframe.authentication.spaces.Space
 import bitframe.authentication.users.User
-import bitframe.presenters.feedbacks.FormFeedback
+import presenters.feedbacks.FormFeedback
 import kotlin.js.JsExport
 
 sealed class SignInState {

@@ -1,9 +1,7 @@
 package integration.authentication
 
-import bitframe.events.EventBus
-import bitframe.events.InMemoryEventBus
-import bitframe.server.BitframeApplicationConfig
-import bitframe.server.modules.authentication.controllers.AuthenticationControllerImpl
+import events.EventBus
+import events.InMemoryEventBus
 import bitframe.service.config.ServiceConfig
 import cache.Cache
 import cache.MockCache

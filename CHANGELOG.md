@@ -1,3 +1,15 @@
+# 0.0.52
+
+- [[BF127]](https://github.com/picortex/bitframe/issues/217) Implemented CreateBusiness Dialog
+- [[BF220]](https://github.com/picortex/bitframe/issues/220) implemented "Invite to share reports" dialog
+
+# 0.0.51
+
+- Moved bitframe-events to utils
+- Moved presenters to utils
+- Added a Templater, and it's compiler
+- Added a Mailer for clients
+
 # 0.0.50
 
 - Refactored and did a lot of housekeeping

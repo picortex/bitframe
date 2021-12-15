@@ -13,6 +13,7 @@ import pimonitor.authentication.signup.exports.RegisterBusinessParams
 import pimonitor.authentication.signup.exports.RegisterIndividualParams
 import pimonitor.authentication.signup.exports.toSignUpParams
 import useEventHandler
+import useViewModelState
 import viewmodel.ViewModel
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
@@ -49,4 +50,6 @@ class SignUpScope(
     val useSignInEvent: (callback: (Session.SignedIn) -> Unit) -> Unit = {
         useEventHandler(service.signIn.config.bus, SignInService.SIGN_IN_EVENT_ID, it)
     }
+
+    val useStateFromViewModel = { useViewModelState(viewModel) }
 }
