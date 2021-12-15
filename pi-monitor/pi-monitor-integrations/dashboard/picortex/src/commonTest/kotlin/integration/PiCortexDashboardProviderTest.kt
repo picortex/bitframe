@@ -10,7 +10,7 @@ class PiCortexDashboardProviderTest {
     val provider = PiCortexDashboardProvider()
 
     val credentials = PiCortexUserCredentials(
-        subdomain = "b2bdemo",
+        subdomain = "b2bdemo", // https://b2b.picortex.co/
         secret = "89aqiclvjktp0aa4bgfqpbppf6"
     )
 

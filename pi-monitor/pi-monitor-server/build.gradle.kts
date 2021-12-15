@@ -38,6 +38,7 @@ kotlin {
                 api(project(":bitframe-server-dao-inmemory"))
                 api(project(":pi-monitor-dao-inmemory"))
                 api(project(":pi-monitor-service-server-core"))
+                api(projects.mailerSmtp)
             }
         }
 
