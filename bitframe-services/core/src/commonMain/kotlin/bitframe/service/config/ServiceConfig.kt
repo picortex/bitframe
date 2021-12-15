@@ -4,6 +4,7 @@ import events.EventBus
 import events.InMemoryEventBus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
+import mailer.Mailer
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic

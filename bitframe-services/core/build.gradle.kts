@@ -13,7 +13,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-events-inmemory"))
+                api(projects.bitframeEventsInmemory)
+                api(projects.mailerApi)
                 api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
             }
         }
@@ -21,6 +22,12 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(asoft.expect.core)
+            }
+        }
+
+        val jvmMain by getting {
+            dependencies {
+                api(projects.mailerSmtp)
             }
         }
     }

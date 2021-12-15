@@ -27,6 +27,11 @@ class Table<D>(
         val allSelectedRows = rows.filter { it.selected }
 
         val areSomeRowsSelected = !areNoRowsSelected && rows.size != allSelectedRows.size
+
+        val rowActions
+            get() = columns.filterIsInstance<Column.Action<*>>().flatMap {
+                it.actions
+            }.toInteroperableList()
     }
 
     val live = Live(State(columns, rows))
@@ -82,6 +87,8 @@ class Table<D>(
     val allSelectedRows get() = live.value.allSelectedRows
 
     val areSomeRowsSelected get() = live.value.areSomeRowsSelected
+
+    val rowActions get() = live.value.rowActions
 
     companion object {
         fun <D> of(

@@ -6,12 +6,14 @@ import org.testcontainers.junit.jupiter.Testcontainers
 import pimonitor.authentication.signup.SignUpParams
 import pimonitor.monitored.CreateMonitoredBusinessParams
 import bitframe.test
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AddBusinessTest : PiMonitorAcceptanceTest() {
     @Test
+    @Ignore
     fun should_be_able_to_add_a_business() = application.test {
         val params = SignUpParams.Individual(
             name = "Jane Doe", email = "jane@doe.com", password = "janedoe"
