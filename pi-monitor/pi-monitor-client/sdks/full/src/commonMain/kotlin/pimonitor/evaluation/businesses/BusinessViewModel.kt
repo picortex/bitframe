@@ -26,7 +26,7 @@ class BusinessViewModel(
     private fun CoroutineScope.inviteToShareReports(i: InviteToShareReports) = launch {
         flow<State> {
             val state = ui.value as? State.Businesses ?: error("Can't show invite business form while business have not fully loaded")
-            emit(state.copy(dialog = BusinessesDialog.InviteToShareReports))
+            emit(state.copy(dialog = BusinessesDialog.InviteToShareReports(i.monitored)))
         }.catch {
             emit(State.Failure(it))
         }.collect {
@@ -37,7 +37,7 @@ class BusinessViewModel(
     private fun CoroutineScope.showBusinessForm() = launch {
         flow<State> {
             val state = ui.value as? State.Businesses ?: error("Can't show create business form while not fully loaded")
-            emit(state.copy(dialog = BusinessesDialog.CreateBusiness))
+            emit(state.copy(dialog = BusinessesDialog.CreateBusiness()))
         }.catch {
             emit(State.Failure(it))
         }.collect {
