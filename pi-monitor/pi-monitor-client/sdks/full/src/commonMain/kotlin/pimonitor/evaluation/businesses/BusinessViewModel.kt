@@ -51,7 +51,7 @@ class BusinessViewModel(
             val businesses = service.all().await()
             val state = State.Businesses(
                 table = businessTable(businesses),
-                dialog = BusinessesDialog.None
+                dialog = BusinessesDialog.None()
             )
             emit(state)
         }.catch {
