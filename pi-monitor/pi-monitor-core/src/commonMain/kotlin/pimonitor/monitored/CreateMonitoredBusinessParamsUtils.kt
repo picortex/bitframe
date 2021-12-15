@@ -1,6 +1,7 @@
 package pimonitor.monitored
 
 import identifier.Email
+import kotlinx.collections.interoperable.listOf
 import pimonitor.monitored.MonitoredBusiness.ContactPerson
 import pimonitor.monitors.MonitorRef
 
