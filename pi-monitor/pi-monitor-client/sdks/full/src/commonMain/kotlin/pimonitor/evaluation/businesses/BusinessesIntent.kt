@@ -7,6 +7,7 @@ import kotlin.js.JsExport
 
 sealed class BusinessesIntent {
     object LoadBusinesses : BusinessesIntent()
-    object ShowBusinessForm : BusinessesIntent()
-    data class InviteToShareReports(val monitored: MonitoredBusiness) : BusinessesIntent()
+    object ShowCreateBusinessForm : BusinessesIntent()
+    object ExitDialog : BusinessesIntent()
+    data class ShowInviteToShareReportsForm(val monitored: MonitoredBusiness) : BusinessesIntent()
 }

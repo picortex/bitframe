@@ -16,13 +16,15 @@ import pimonitor.evaluation.businesses.BusinessesState as State
 class BusinessesScope(val service: PiMonitorService) {
     val viewModel: ViewModel<Intent, State> by lazy { BusinessViewModel(service.businesses) }
 
+    val useStateFromViewModel = { useViewModelState(viewModel) }
+
     val loadBusinesses: () -> Unit = { viewModel.post(Intent.LoadBusinesses) }
 
-    val showCreateBusinessForm: () -> Unit = { viewModel.post(Intent.ShowBusinessForm) }
+    val exitDialog: () -> Unit = { viewModel.post(Intent.ExitDialog) }
+
+    val showCreateBusinessForm: () -> Unit = { viewModel.post(Intent.ShowCreateBusinessForm) }
 
     val useBusinessAddedEvent: (callback: (MonitoredBusiness) -> Unit) -> Unit = { callback ->
         useEventHandler(service.signIn.config.bus, BusinessesService.CREATE_BUSINESS_EVENT_ID, callback)
     }
-
-    val useStateFromViewModel = { useViewModelState(viewModel) }
 }

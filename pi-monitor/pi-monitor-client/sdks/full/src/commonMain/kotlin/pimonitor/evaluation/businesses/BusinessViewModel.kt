@@ -19,14 +19,22 @@ class BusinessViewModel(
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         LoadBusinesses -> loadBusiness()
-        ShowBusinessForm -> showBusinessForm()
-        is InviteToShareReports -> inviteToShareReports(i)
+        ShowCreateBusinessForm -> showBusinessForm()
+        is ShowInviteToShareReportsForm -> inviteToShareReports(i)
+        ExitDialog -> exitDialog()
     }
 
-    private fun CoroutineScope.inviteToShareReports(i: InviteToShareReports) = launch {
+    private fun exitDialog() {
+        val state = ui.value as? State.Businesses ?: return
+        if (state.dialog !is BusinessesDialog.None) {
+            ui.value = state.copy(dialog = BusinessesDialog.None())
+        }
+    }
+
+    private fun CoroutineScope.inviteToShareReports(i: ShowInviteToShareReportsForm) = launch {
         flow<State> {
             val state = ui.value as? State.Businesses ?: error("Can't show invite business form while business have not fully loaded")
-            emit(state.copy(dialog = BusinessesDialog.InviteToShareReports(i.monitored)))
+            emit(state.copy(dialog = BusinessesDialog.InviteToShareReports(monitored = i.monitored)))
         }.catch {
             emit(State.Failure(it))
         }.collect {
@@ -72,7 +80,7 @@ class BusinessViewModel(
         column("NCF") { "" }
         column("V/day") { "" }
         actions("Actions") {
-            action("Invite to share reports") { post(InviteToShareReports(it.data)) }
+            action("Invite to share reports") { post(ShowInviteToShareReportsForm(it.data)) }
 //            action("Delete") { tree.log("Deleting: ${it.data.name}") }
 //            action("View") { tree.log("Viewing: ${it.data.name}") }
         }

@@ -3,8 +3,6 @@ package pimonitor.evaluation.businesses
 import kotlinx.css.JustifyContent
 import kotlinx.css.justifyContent
 import pimonitor.client.PiMonitorService
-import pimonitor.evaluation.businesses.BusinessesIntent
-import pimonitor.evaluation.businesses.BusinessesState
 import pimonitor.evaluation.businesses.exports.BusinessesScope
 import react.Props
 import react.RBuilder
@@ -33,7 +31,7 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
         is BusinessesState.Businesses -> styledDiv {
             FlexBox {
                 css { justifyContent = JustifyContent.flexEnd }
-                ContainedButton("Create") { viewModel.post(BusinessesIntent.ShowBusinessForm) }
+                ContainedButton("Create") { viewModel.post(BusinessesIntent.ShowCreateBusinessForm) }
                 val link = "/invite/${monitor?.uid}"
                 Link {
                     attrs.to = link
