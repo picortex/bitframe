@@ -41,7 +41,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":pi-monitor-client-sdk-full"))
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
+                api(kotlinx.coroutines.core)
             }
         }
 

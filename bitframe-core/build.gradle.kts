@@ -16,7 +16,7 @@ kotlin {
             dependencies {
                 api(project(":bitframe-annotations-core"))
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
-                api("io.ktor:ktor-http:${vers.ktor}")
+                api(ktor.http)
                 api(asoft.kotlinx.serialization.mapper)
                 api(asoft.later.core)
             }

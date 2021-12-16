@@ -1,7 +1,7 @@
 @file:JsExport
 @file:Suppress("EXPERIMENTAL_API_USAGE", "NON_EXPORTABLE_TYPE")
 
-import bitframe.client.BitframeService
+import bitframe.api.BitframeService
 import bitframe.authentication.signin.exports.SignInScope
 import bitframe.panel.PanelScope
 import pimonitor.PiMonitorScope

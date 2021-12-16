@@ -16,7 +16,7 @@ kotlin {
             dependencies {
                 api(kotlinx("serialization-core", vers.kotlinx.serialization))
                 api(asoft.kotlinx.serialization.mapper)
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
+                api(kotlinx.coroutines.core)
                 api(asoft.later.core)
             }
         }

@@ -3,7 +3,7 @@
 
 package bitframe.panel
 
-import bitframe.client.BitframeService
+import bitframe.api.BitframeService
 import viewmodel.ViewModel
 
 class PanelScope(val service: BitframeService) {

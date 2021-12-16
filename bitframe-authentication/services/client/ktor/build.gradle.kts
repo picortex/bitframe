@@ -18,9 +18,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-authentication-service-client-core"))
-                api(project(":bitframe-core"))
-                api(project(":bitframe-service-client-ktor"))
+                api(projects.bitframeAuthenticationServiceClientCore)
+                api(projects.bitframeCore)
+                api(projects.bitframeServiceClientKtor)
                 api(kotlinx("serialization-json", vers.kotlinx.serialization))
                 api(asoft.later.ktx)
             }
@@ -35,7 +35,7 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                api("io.ktor:ktor-client-cio:${vers.ktor}")
+                api(ktor.client.cio)
             }
         }
 
@@ -47,7 +47,7 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                api("io.ktor:ktor-client-js:${vers.ktor}")
+                api(ktor.client.js)
             }
         }
     }

@@ -44,7 +44,7 @@ kotlin {
             dependencies {
                 api(asoft.cache.browser)
                 api(asoft.cache.react.native)
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
+                api(kotlinx.coroutines.core)
             }
         }
     }

@@ -3,7 +3,7 @@
 
 package bitframe.authentication.signin.exports
 
-import bitframe.client.BitframeService
+import bitframe.api.BitframeService
 import bitframe.authentication.signin.*
 import bitframe.authentication.spaces.Space
 import bitframe.authentication.client.signin.SignInService

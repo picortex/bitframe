@@ -87,7 +87,9 @@ includeSubs(base = "bitframe-server-dao", path = "bitframe-server/daos", "core",
 
 includeSubs(base = "bitframe-server-framework", path = "bitframe-server/frameworks", "core", "test", "ktor")
 
-includeSubs(base = "bitframe-sdk-client", path = "bitframe-sdk/client", "core", "ktor")
+includeSubs(base = "bitframe-api", "bitframe-api", "core", "ktor")
+
+includeSubs(base = "bitframe-sdk-client", path = "bitframe-sdk/client", "core")
 
 includeSubs(base = "bitframe-sdk-server", path = "bitframe-sdk/server", "core")
 
@@ -110,6 +112,10 @@ includeSubs(base = "pi-monitor-service", path = "pi-monitor/pi-monitor-services"
 includeSubs(base = "pi-monitor-service-client", path = "pi-monitor/pi-monitor-services/client", "core", "ktor")
 
 includeSubs(base = "pi-monitor-service-server", path = "pi-monitor/pi-monitor-services/server", "core")
+
+includeSubs(base = "pi-monitor-api", path = "pi-monitor/pi-monitor-api", "core", "ktor")
+
+includeSubs(base = "pi-monitor-sdk-client", path = "pi-monitor/pi-monitor-sdk/client", "core", "react")
 
 includeSubs(base = "pi-monitor-client-sdk", path = "pi-monitor/pi-monitor-client/sdks", "core", "full")
 

@@ -2,7 +2,7 @@
 @file:JsExport
 
 import bitframe.authentication.signin.exports.SignInServiceWrapper
-import bitframe.client.BitframeService
+import bitframe.api.BitframeService
 import cache.AsyncStorageCache
 import cache.BrowserCache
 import cache.MockCache

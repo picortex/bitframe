@@ -1,6 +1,6 @@
 package bitframe.panel
 
-import bitframe.client.BitframeService
+import bitframe.api.BitframeService
 import kotlinx.coroutines.flow.MutableStateFlow
 import react.Props
 import react.RBuilder

@@ -11,7 +11,7 @@ kotlin {
         val main by getting {
             dependencies {
                 api(project(":bitframe-server-framework-core"))
-                api("io.ktor:ktor-server-cio:${vers.ktor}")
+                api(ktor.server.cio)
             }
         }
     }

@@ -1,6 +1,6 @@
 package bitframe.panel
 
-import bitframe.client.BitframeService
+import bitframe.api.BitframeService
 import bitframe.authentication.client.signin.SignInService
 import bitframe.authentication.signin.Session
 import bitframe.authentication.signin.SignInCredentials
