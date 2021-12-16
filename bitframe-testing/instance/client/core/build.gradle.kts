@@ -16,6 +16,7 @@ kotlin {
             dependencies {
                 api(projects.bitframeAuthenticationServiceClientCore)
                 api(projects.bitframeSdkClientCore)
+                api(projects.bitframeApiKtor)
                 api(asoft.cache.mock)
                 api(asoft.expect.coroutines)
             }

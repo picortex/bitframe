@@ -2,7 +2,7 @@
 
 package pimonitor.evaluation.contacts.exports
 
-import pimonitor.client.PiMonitorService
+import pimonitor.api.PiMonitorService
 import pimonitor.evaluation.contacts.ContactsState
 import pimonitor.evaluation.contacts.ContactsViewModel
 import useViewModelState

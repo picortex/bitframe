@@ -5,6 +5,8 @@ import bitframe.service.client.utils.JsonContent
 import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
+import kotlinx.collections.interoperable.List
+import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.serialization.builtins.ListSerializer
 import later.Later
 import later.later
@@ -43,6 +45,6 @@ class BusinessesServiceKtor(
         } catch (exp: ClientRequestException) {
             exp.response
         }
-        json.decodeResponseFromString(ListSerializer(serializer), resp.readText()).response()
+        json.decodeResponseFromString(ListSerializer(serializer), resp.readText()).response().toInteroperableList()
     }
 }

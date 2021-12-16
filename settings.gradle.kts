@@ -115,9 +115,9 @@ includeSubs(base = "pi-monitor-service-server", path = "pi-monitor/pi-monitor-se
 
 includeSubs(base = "pi-monitor-api", path = "pi-monitor/pi-monitor-api", "core", "ktor")
 
-includeSubs(base = "pi-monitor-sdk-client", path = "pi-monitor/pi-monitor-sdk/client", "core", "react")
+includeSubs(base = "pi-monitor-sdk-client", path = "pi-monitor/pi-monitor-sdk/client", "core", "react", "react-ktor")
 
-includeSubs(base = "pi-monitor-client-sdk", path = "pi-monitor/pi-monitor-client/sdks", "core", "full")
+//includeSubs(base = "pi-monitor-client-sdk", path = "pi-monitor/pi-monitor-client/sdks", "core", "full")
 
 includeSubs(base = "pi-monitor-client", path = "pi-monitor/pi-monitor-client", "test")
 

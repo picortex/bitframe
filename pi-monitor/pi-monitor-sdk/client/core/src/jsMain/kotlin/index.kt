@@ -19,5 +19,3 @@ fun panel(service: BitframeService) = PanelScope(service)
 fun business(service: PiMonitorService) = BusinessesScope(service)
 
 fun createBusiness(service: PiMonitorService) = CreateBusinessScope(service)
-
-fun scope(config: ServiceConfiguration) = PiMonitorScope(client(config))

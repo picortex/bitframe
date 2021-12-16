@@ -40,7 +40,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":pi-monitor-client-sdk-full"))
                 api(kotlinx.coroutines.core)
             }
         }
@@ -53,7 +52,8 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                implementation(project(":bitframe-ui-react"))
+                implementation(projects.piMonitorSdkClientReactKtor)
+                implementation(projects.bitframeUiReact)
                 implementation(asoft.applikation.runtime)
             }
         }

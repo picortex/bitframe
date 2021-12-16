@@ -1,5 +1,6 @@
 package pimonitor.server.businesses
 
+import kotlinx.collections.interoperable.List
 import kotlinx.coroutines.launch
 import later.Later
 import later.await
@@ -14,7 +15,7 @@ class BusinessesService(
 ) : BusinessesService(config) {
 
     private val dao = config.businessesDao
-    private val mailer get() = config.mailer
+//    private val mailer get() = config.mailer
 
     override fun executeCreate(
         params: CreateMonitoredBusinessParams,

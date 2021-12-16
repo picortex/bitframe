@@ -3,15 +3,12 @@
 
 package pimonitor.authentication.signup.exports
 
-import bitframe.authentication.signin.Session
 import bitframe.authentication.client.signin.SignInService
-import pimonitor.client.PiMonitorService
+import bitframe.authentication.signin.Session
+import pimonitor.api.PiMonitorService
 import pimonitor.authentication.signup.SignUpResult
 import pimonitor.authentication.signup.SignUpService
 import pimonitor.authentication.signup.SignUpViewModel
-import pimonitor.authentication.signup.exports.RegisterBusinessParams
-import pimonitor.authentication.signup.exports.RegisterIndividualParams
-import pimonitor.authentication.signup.exports.toSignUpParams
 import useEventHandler
 import useViewModelState
 import viewmodel.ViewModel

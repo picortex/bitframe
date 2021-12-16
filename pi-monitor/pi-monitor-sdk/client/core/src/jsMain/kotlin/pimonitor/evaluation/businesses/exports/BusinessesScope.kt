@@ -3,7 +3,7 @@
 
 package pimonitor.evaluation.businesses.exports
 
-import pimonitor.client.PiMonitorService
+import pimonitor.api.PiMonitorService
 import pimonitor.client.evaluation.businesses.BusinessesService
 import pimonitor.evaluation.businesses.BusinessViewModel
 import pimonitor.monitored.MonitoredBusiness
