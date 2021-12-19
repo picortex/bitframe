@@ -20,6 +20,12 @@ kotlin {
                 api(projects.piMonitorSdkClientReact)
             }
         }
+
+        val test by getting {
+            dependencies {
+                implementation(asoft.expect.core)
+            }
+        }
     }
 }
 

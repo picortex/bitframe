@@ -15,7 +15,7 @@ import pimonitor.evaluation.businesses.BusinessesIntent as Intent
 import pimonitor.evaluation.businesses.BusinessesState as State
 
 open class BusinessesReactScope(
-    private val service: PiMonitorService
+    val service: PiMonitorService
 ) : BusinessesScope(service), ReactUIScope<Intent, State> {
     val useBusinessAddedEvent: (callback: (MonitoredBusiness) -> Unit) -> Unit = { callback ->
         useEventHandler(service.signIn.config.bus, BusinessesService.CREATE_BUSINESS_EVENT_ID, callback)
