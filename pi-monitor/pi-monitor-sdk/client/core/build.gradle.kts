@@ -15,7 +15,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.piMonitorApiCore)
-                api(project(":bitframe-client-viewmodels"))
+                api(projects.bitframeSdkClientCore)
             }
         }
 
@@ -24,12 +24,6 @@ kotlin {
                 implementation(project(":pi-monitor-test-testing"))
                 implementation(asoft.viewmodel.test.expect)
                 implementation(asoft.expect.core)
-            }
-        }
-
-        val jsMain by getting {
-            dependencies {
-                api(asoft.viewmodel.react)
             }
         }
     }

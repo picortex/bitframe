@@ -14,9 +14,11 @@ kotlin {
             dependencies {
                 api(projects.bitframeCore)
                 api(projects.bitframeApiCore)
+                api(projects.bitframePresenters)
                 api(asoft.cache.api)
                 api(asoft.platform.core)
                 api(asoft.later.ktx)
+                api(asoft.viewmodel.core)
                 api(kotlinx.coroutines.core)
             }
         }

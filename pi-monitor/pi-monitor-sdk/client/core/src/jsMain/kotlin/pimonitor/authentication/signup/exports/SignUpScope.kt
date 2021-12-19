@@ -3,22 +3,17 @@
 
 package pimonitor.authentication.signup.exports
 
-import bitframe.authentication.client.signin.SignInService
-import bitframe.authentication.signin.Session
+import bitframe.client.UIScope
 import pimonitor.api.PiMonitorService
-import pimonitor.authentication.signup.SignUpResult
-import pimonitor.authentication.signup.SignUpService
 import pimonitor.authentication.signup.SignUpViewModel
-import useEventHandler
-import useViewModelState
 import viewmodel.ViewModel
 import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
-class SignUpScope(
+open class SignUpScope(
     private val service: PiMonitorService
-) {
-    val viewModel: ViewModel<Intent, State> by lazy { SignUpViewModel(service.signUp, service.signIn) }
+) : UIScope<Intent, State> {
+    override val viewModel: ViewModel<Intent, State> by lazy { SignUpViewModel(service.signUp, service.signIn) }
 
     val registerAsIndividual = {
         viewModel.post(Intent.SelectRegisterAsIndividual)
@@ -39,14 +34,4 @@ class SignUpScope(
     val submitBusinessForm = { params: RegisterBusinessParams ->
         viewModel.post(Intent.Submit.BusinessForm(params.toSignUpParams()))
     }
-
-    val useSignUpEvent: (callback: (SignUpResult) -> Unit) -> Unit = {
-        useEventHandler(service.signIn.config.bus, SignUpService.SIGN_UP_EVENT_ID, it)
-    }
-
-    val useSignInEvent: (callback: (Session.SignedIn) -> Unit) -> Unit = {
-        useEventHandler(service.signIn.config.bus, SignInService.SIGN_IN_EVENT_ID, it)
-    }
-
-    val useStateFromViewModel = { useViewModelState(viewModel) }
 }

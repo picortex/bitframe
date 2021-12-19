@@ -13,7 +13,7 @@ kotlin {
     sourceSets {
         val main by getting {
             dependencies {
-                api(project(":bitframe-client-viewmodels"))
+                api(projects.bitframeSdkClientReact)
                 api(asoft.viewmodel.react)
                 api(asoft.reakt.web)
             }

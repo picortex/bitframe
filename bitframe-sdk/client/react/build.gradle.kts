@@ -10,8 +10,9 @@ kotlin {
     sourceSets {
         val main by getting {
             dependencies {
-                api(projects.piMonitorSdkClientCore)
-                api(projects.bitframeSdkClientReact)
+                api(projects.bitframeSdkClientCore)
+                api(projects.bitframeEventsReact)
+                api(asoft.viewmodel.react)
             }
         }
     }

@@ -53,7 +53,7 @@ kotlin {
                 api(projects.bitframeSdkClientCore)
 
                 api(asoft.cache.browser)
-                api(project(":bitframe-client-viewmodels"))
+                api(projects.bitframeSdkClientReact)
                 api(kotlinx.coroutines.core)
                 implementation(project(":bitframe-ui-react"))
                 implementation(asoft.applikation.runtime)

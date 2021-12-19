@@ -10,13 +10,13 @@ import pimonitor.evaluation.businesses.exports.BusinessesScope
 import pimonitor.evaluation.businesses.exports.CreateBusinessScope
 import pimonitor.evaluation.contacts.exports.ContactsScope
 
-class PiMonitorScope(
-    val signIn: SignInScope,
-    val signUp: SignUpScope,
-    val panel: PanelScope,
-    val businesses: BusinessesScope,
-    val createBusiness: CreateBusinessScope,
-    val contacts: ContactsScope
+open class PiMonitorScope(
+    open val signIn: SignInScope,
+    open val signUp: SignUpScope,
+    open val panel: PanelScope,
+    open val businesses: BusinessesScope,
+    open val createBusiness: CreateBusinessScope,
+    open val contacts: ContactsScope
 ) {
     @JsName("fromService")
     constructor(service: PiMonitorService) : this(
