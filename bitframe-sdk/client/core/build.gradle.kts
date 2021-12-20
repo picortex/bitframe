@@ -22,5 +22,13 @@ kotlin {
                 api(kotlinx.coroutines.core)
             }
         }
+
+        val commonTest by getting {
+            dependencies {
+                implementation(projects.bitframeAuthenticationServiceClientTest)
+                implementation(asoft.expect.coroutines)
+                implementation(asoft.viewmodel.test.expect)
+            }
+        }
     }
 }
