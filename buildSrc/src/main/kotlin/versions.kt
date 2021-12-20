@@ -21,7 +21,7 @@ object vers {
     }
 
     object bitframe {
-        val current = "0.0.54"
+        val current = "0.0.55"
         val previous = "0.0.51"
     }
 
