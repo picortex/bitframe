@@ -7,8 +7,8 @@ import bitframe.authentication.client.spaces.SpacesServiceKtor
 import bitframe.authentication.client.users.UsersServiceKtor
 import bitframe.authentication.spaces.SpacesService
 import bitframe.authentication.users.UsersService
-import bitframe.client.BitframeService
-import bitframe.client.BitframeServiceKtorConfig
+import bitframe.api.BitframeService
+import bitframe.api.BitframeServiceKtorConfig
 import cache.BrowserCache
 import kotlinx.browser.document
 import kotlinx.browser.window

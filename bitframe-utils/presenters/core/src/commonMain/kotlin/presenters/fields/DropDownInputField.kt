@@ -13,10 +13,8 @@ data class DropDownInputField(
     @JsName("from")
     constructor(vararg options: Option) : this(options.toInteroperableList())
 
-    val items get() = options.toTypedArray()
-
-    val itemLabels get() = options.map { it.label }
-    val itemValues get() = options.map { it.value }
+    val itemLabels get() = options.map { it.label }.toInteroperableList()
+    val itemValues get() = options.map { it.value }.toInteroperableList()
 
     val selected get() = options.firstOrNull { it.selected }
 

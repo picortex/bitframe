@@ -1,5 +1,7 @@
 package pimonitor.monitored
 
+import kotlinx.collections.interoperable.List
+import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.coroutines.delay
 import later.Later
 import later.later
@@ -25,6 +27,6 @@ class MonitoredBusinessDaoInMemory(
 
     override fun all(): Later<List<MonitoredBusiness>> = scope.later {
         delay(config.simulationTime)
-        monitoredBusinesses.values.toList()
+        monitoredBusinesses.values.toInteroperableList()
     }
 }

@@ -2,9 +2,8 @@ package pimonitor.evaluation.businesses
 
 import kotlinx.css.JustifyContent
 import kotlinx.css.justifyContent
-import pimonitor.client.PiMonitorService
-import pimonitor.evaluation.businesses.BusinessesIntent
-import pimonitor.evaluation.businesses.BusinessesState
+import pimonitor.api.PiMonitorService
+import pimonitor.evaluation.businesses.exports.BusinessesReactScope
 import pimonitor.evaluation.businesses.exports.BusinessesScope
 import react.Props
 import react.RBuilder
@@ -17,7 +16,7 @@ import styled.styledDiv
 import useViewModelState
 
 private external interface BusinessContainerProps : Props {
-    var scope: BusinessesScope
+    var scope: BusinessesReactScope
 }
 
 private val BusinessContainer = fc<BusinessContainerProps> { props ->
@@ -33,7 +32,7 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
         is BusinessesState.Businesses -> styledDiv {
             FlexBox {
                 css { justifyContent = JustifyContent.flexEnd }
-                ContainedButton("Create") { viewModel.post(BusinessesIntent.ShowBusinessForm) }
+                ContainedButton("Create") { viewModel.post(BusinessesIntent.ShowCreateBusinessForm) }
                 val link = "/invite/${monitor?.uid}"
                 Link {
                     attrs.to = link
@@ -49,5 +48,5 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
 }
 
 fun RBuilder.BusinessContainer(service: PiMonitorService) = child(BusinessContainer) {
-    attrs.scope = BusinessesScope(service)
+    attrs.scope = BusinessesReactScope(service)
 }

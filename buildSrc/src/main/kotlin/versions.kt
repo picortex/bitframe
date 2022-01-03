@@ -5,8 +5,6 @@ object vers {
 
     val kotlinpoet = "1.12.1"
 
-    val ktor = "1.6.3"
-
     val selenide = "5.23.0"
 
     val docker = "7.1.0"
@@ -18,13 +16,12 @@ object vers {
     val testContainers = "1.16.0"
 
     object kotlinx {
-        val coroutines = "1.5.2-native-mt"
         val serialization = "1.3.1"
         val datetime = "0.3.1"
     }
 
     object bitframe {
-        val current = "0.0.54"
+        val current = "0.0.55"
         val previous = "0.0.51"
     }
 

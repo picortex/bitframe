@@ -15,7 +15,7 @@ kotlin {
             dependencies {
                 api(project(":bitframe-service-client-core"))
                 api(kotlinx("serialization-json", vers.kotlinx.serialization))
-                api("io.ktor:ktor-client-core:${vers.ktor}")
+                api(ktor.client.core)
             }
         }
 
