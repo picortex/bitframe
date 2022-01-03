@@ -1,11 +1,10 @@
 package pimonitor.testing
 
-import pimonitor.client.PiMonitorService
-import pimonitor.client.PiMonitorServiceKtor
-import pimonitor.client.PiMonitorServiceKtorConfig
+import pimonitor.api.PiMonitorServiceKtor
 import bitframe.testing.APP_ID
-import bitframe.testing.TestMode
 import cache.MockCache
+import pimonitor.api.PiMonitorService
+import pimonitor.api.PiMonitorServiceKtorConfig
 
 open class PiMonitorIntegrationTest : PiMonitorContainerTest() {
     val piMonitorService: PiMonitorService by lazy {

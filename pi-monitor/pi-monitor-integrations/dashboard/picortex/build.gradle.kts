@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.piMonitorDashboardCore)
-                api("io.ktor:ktor-client-core:${vers.ktor}")
+                api(ktor.client.core)
                 api(asoft.kotlinx.serialization.mapper)
             }
         }
@@ -27,7 +27,7 @@ kotlin {
 
         val jvmTest by getting {
             dependencies {
-                api("io.ktor:ktor-client-cio:${vers.ktor}")
+                api(ktor.client.cio)
             }
         }
     }

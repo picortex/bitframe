@@ -15,7 +15,7 @@ kotlin {
             dependencies {
                 api(projects.bitframeEventsInmemory)
                 api(projects.mailerApi)
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
+                api(kotlinx.coroutines.core)
             }
         }
 

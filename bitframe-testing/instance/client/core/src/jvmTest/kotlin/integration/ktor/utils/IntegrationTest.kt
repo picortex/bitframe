@@ -1,8 +1,7 @@
 package integration.ktor.utils
 
-import bitframe.authentication.client.signin.SignInServiceKtorConfig
-import bitframe.client.BitframeService
-import bitframe.client.BitframeServiceKtorConfig
+import bitframe.api.BitframeService
+import bitframe.api.BitframeServiceKtorConfig
 import bitframe.testing.ContainerTest
 import cache.MockCache
 

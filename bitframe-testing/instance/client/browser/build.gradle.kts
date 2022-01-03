@@ -49,10 +49,12 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                api(project(":bitframe-sdk-client-ktor"))
+                api(projects.bitframeApiKtor)
+                api(projects.bitframeSdkClientCore)
+
                 api(asoft.cache.browser)
-                api(project(":bitframe-client-viewmodels"))
-                api(kotlinx("coroutines-core", vers.kotlinx.coroutines))
+                api(projects.bitframeSdkClientReact)
+                api(kotlinx.coroutines.core)
                 implementation(project(":bitframe-ui-react"))
                 implementation(asoft.applikation.runtime)
             }
