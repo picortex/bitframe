@@ -1,6 +1,7 @@
 package bitframe.authentication.signin
 
 import bitframe.authentication.client.signin.SignInService
+import bitframe.client.BitframeViewModelConfig
 import presenters.feedbacks.FormFeedback.*
 import cache.Cache
 import kotlinx.coroutines.CoroutineScope
@@ -13,11 +14,12 @@ import later.await
 import viewmodel.ViewModel
 
 class SignInViewModel(
-    private val service: SignInService,
-    private val cache: Cache
-) : ViewModel<SignInIntent, SignInState>(SignInState.Form(SignInFormFields(), null)) {
+    config: BitframeViewModelConfig
+) : ViewModel<SignInIntent, SignInState>(SignInState.Form(SignInFormFields(), null), config) {
 
-    private val recoveryTime = 3000
+    private val service: SignInService = config.service.signIn
+    private val cache: Cache = config.service.config.cache
+    private val recoveryTime = config.recoveryTime
 
     override fun CoroutineScope.execute(i: SignInIntent): Any = when (i) {
         is SignInIntent.InitForm -> initialize()

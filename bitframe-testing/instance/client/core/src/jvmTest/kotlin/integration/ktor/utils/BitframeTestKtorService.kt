@@ -10,7 +10,7 @@ import bitframe.api.BitframeService
 import bitframe.api.BitframeServiceKtorConfig
 
 internal class BitframeTestKtorService(
-    private val config: BitframeServiceKtorConfig
+    override val config: BitframeServiceKtorConfig
 ) : BitframeService {
     override val spaces: SpacesService = SpacesServiceKtor(config)
     override val users: UsersService = UsersServiceKtor(config)

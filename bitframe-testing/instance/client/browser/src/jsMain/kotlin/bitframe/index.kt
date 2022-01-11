@@ -8,6 +8,7 @@ import bitframe.authentication.client.users.UsersServiceKtor
 import bitframe.authentication.spaces.SpacesService
 import bitframe.authentication.users.UsersService
 import bitframe.api.BitframeService
+import bitframe.api.BitframeServiceConfig
 import bitframe.api.BitframeServiceKtorConfig
 import cache.BrowserCache
 import kotlinx.browser.document
@@ -27,6 +28,7 @@ fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
     )
 
     val client = object : BitframeService {
+        override val config: BitframeServiceConfig = config
         override val spaces: SpacesService = SpacesServiceKtor(config)
         override val users: UsersService = UsersServiceKtor(config)
         override val signIn: SignInService = SignInServiceKtor(config)

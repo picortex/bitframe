@@ -10,6 +10,7 @@ import pimonitor.client.monitors.MonitorsServiceKtor
 fun PiMonitorServiceKtor(
     config: PiMonitorServiceKtorConfig,
 ) = object : PiMonitorService {
+    override val config: PiMonitorServiceKtorConfig = config
     override val spaces by lazy { SpacesServiceKtor(config) }
     override val users by lazy { UsersServiceKtor(config) }
     override val signIn by lazy { SignInServiceKtor(config) }

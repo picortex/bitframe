@@ -9,6 +9,7 @@ import bitframe.authentication.users.UsersService
 import kotlin.js.JsExport
 
 interface BitframeService {
+    val config: BitframeServiceConfig
     val spaces: SpacesService
     val users: UsersService
     val signIn: SignInService

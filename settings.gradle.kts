@@ -77,7 +77,7 @@ includeSubs(base = "bitframe-authentication", path = "bitframe-authentication", 
 
 includeSubs(base = "bitframe-authentication-service", path = "bitframe-authentication/services", "core")
 
-includeSubs(base = "bitframe-authentication-service-client", path = "bitframe-authentication/services/client", "core", "ktor", "test")
+includeSubs(base = "bitframe-authentication-service-client", path = "bitframe-authentication/services/client", "core", "ktor", "mock")
 
 includeSubs(base = "bitframe-authentication-service-server", path = "bitframe-authentication/services/server", "core")
 
@@ -87,7 +87,7 @@ includeSubs(base = "bitframe-server-dao", path = "bitframe-server/daos", "core",
 
 includeSubs(base = "bitframe-server-framework", path = "bitframe-server/frameworks", "core", "test", "ktor")
 
-includeSubs(base = "bitframe-api", "bitframe-api", "core", "ktor")
+includeSubs(base = "bitframe-api", "bitframe-api", "core", "ktor", "mock")
 
 includeSubs(base = "bitframe-sdk-client", path = "bitframe-sdk/client", "core", "react")
 
