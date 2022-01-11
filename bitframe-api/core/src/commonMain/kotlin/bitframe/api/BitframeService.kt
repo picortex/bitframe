@@ -16,4 +16,5 @@ interface BitframeService {
 
     val bus get() = config.bus
     val cache get() = config.cache
+    val userSession get() = signIn.session
 }
