@@ -1,18 +1,18 @@
-package bitframe.client
+package pimonitor
 
 import bitframe.api.BitframeService
+import bitframe.client.BitframeViewModelConfig
 import kotlinx.coroutines.CoroutineScope
 import logging.Logger
+import pimonitor.api.PiMonitorService
 import viewmodel.ViewModelConfig
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface BitframeViewModelConfig : ViewModelConfig {
-    val service: BitframeService
-    val recoveryTime: Long
-    val transitionTime: Long
+interface PiMonitorViewModelConfig : BitframeViewModelConfig {
+    override val service: PiMonitorService
 
     companion object {
 
@@ -30,13 +30,13 @@ interface BitframeViewModelConfig : ViewModelConfig {
 
         @JvmSynthetic
         operator fun invoke(
-            service: BitframeService,
+            service: PiMonitorService,
             recoveryTime: Long = DEFAULT_RECOVERY_TIME,
             transitionTime: Long = DEFAULT_TRANSITION_TIME,
             logger: Logger = DEFAULT_LOGGER,
             builder: () -> CoroutineScope = DEFAULT_SCOPE_BUILDER
-        ): BitframeViewModelConfig = object : BitframeViewModelConfig {
-            override val service: BitframeService = service
+        ): PiMonitorViewModelConfig = object : PiMonitorViewModelConfig {
+            override val service = service
             override val recoveryTime: Long = recoveryTime
             override val transitionTime: Long = transitionTime
             override val logger: Logger = logger
@@ -46,11 +46,11 @@ interface BitframeViewModelConfig : ViewModelConfig {
         @JvmStatic
         @JvmOverloads
         fun create(
-            service: BitframeService,
+            service: PiMonitorService,
             recoveryTime: Long = DEFAULT_RECOVERY_TIME,
             transitionTime: Long = DEFAULT_TRANSITION_TIME,
             logger: Logger = DEFAULT_LOGGER,
             builder: () -> CoroutineScope = DEFAULT_SCOPE_BUILDER
-        ): BitframeViewModelConfig = invoke(service, recoveryTime, transitionTime, logger, builder)
+        ): PiMonitorViewModelConfig = invoke(service, recoveryTime, transitionTime, logger, builder)
     }
 }

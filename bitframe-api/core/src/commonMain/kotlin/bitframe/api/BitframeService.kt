@@ -13,4 +13,7 @@ interface BitframeService {
     val spaces: SpacesService
     val users: UsersService
     val signIn: SignInService
+
+    val bus get() = config.bus
+    val cache get() = config.cache
 }

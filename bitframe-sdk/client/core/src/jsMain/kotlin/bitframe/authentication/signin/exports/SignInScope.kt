@@ -3,19 +3,18 @@
 
 package bitframe.authentication.signin.exports
 
-import bitframe.api.BitframeService
-import bitframe.authentication.signin.*
+import bitframe.authentication.signin.SignInViewModel
 import bitframe.authentication.spaces.Space
-import bitframe.authentication.client.signin.SignInService
+import bitframe.client.BitframeViewModelConfig
 import bitframe.client.UIScope
 import viewmodel.ViewModel
 import bitframe.authentication.signin.SignInIntent as Intent
 import bitframe.authentication.signin.SignInState as State
 
-open class SignInScope(service: BitframeService) : UIScope<Intent, State> {
+open class SignInScope(config: BitframeViewModelConfig) : UIScope<Intent, State> {
 
     override val viewModel: ViewModel<Intent, State> by lazy {
-        SignInViewModel(service.signIn, service.signIn.config.cache)
+        SignInViewModel(config)
     }
 
     val initForm = {

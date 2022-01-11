@@ -4,6 +4,7 @@
 package pimonitor.authentication.signup.exports
 
 import bitframe.client.UIScope
+import pimonitor.PiMonitorViewModelConfig
 import pimonitor.api.PiMonitorService
 import pimonitor.authentication.signup.SignUpViewModel
 import viewmodel.ViewModel
@@ -11,9 +12,9 @@ import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
 open class SignUpScope(
-    private val service: PiMonitorService
+    config: PiMonitorViewModelConfig
 ) : UIScope<Intent, State> {
-    override val viewModel: ViewModel<Intent, State> by lazy { SignUpViewModel(service.signUp, service.signIn) }
+    override val viewModel: ViewModel<Intent, State> by lazy { SignUpViewModel(config) }
 
     val registerAsIndividual = {
         viewModel.post(Intent.SelectRegisterAsIndividual)

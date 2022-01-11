@@ -3,17 +3,17 @@
 
 package bitframe.authentication.signin.exports
 
-import bitframe.api.BitframeService
 import bitframe.authentication.client.signin.SignInService
-import bitframe.authentication.signin.*
+import bitframe.authentication.signin.Session
+import bitframe.client.BitframeViewModelConfig
 import bitframe.client.ReactUIScope
 import useEventHandler
 import bitframe.authentication.signin.SignInIntent as Intent
 import bitframe.authentication.signin.SignInState as State
 
-class SignInReactScope(service: BitframeService) : SignInScope(service), ReactUIScope<Intent, State> {
+class SignInReactScope(config: BitframeViewModelConfig) : SignInScope(config), ReactUIScope<Intent, State> {
 
     val useSignInEvent: (callback: (Session.SignedIn) -> Unit) -> Unit = {
-        useEventHandler(service.signIn.config.bus, SignInService.SIGN_IN_EVENT_ID, it)
+        useEventHandler(config.service.config.bus, SignInService.SIGN_IN_EVENT_ID, it)
     }
 }
