@@ -1,6 +1,6 @@
 package unit
 
-import ViewModelConfiguration
+import ServiceConfiguration
 import expect.expect
 import service
 import kotlin.test.Test
@@ -11,7 +11,7 @@ class ExportsTest {
 
     @Test
     fun should_get_a_service() {
-        val cred: ViewModelConfiguration = json {
+        val cred: ServiceConfiguration = json {
             appId = "12345"
             url = ""
         }
