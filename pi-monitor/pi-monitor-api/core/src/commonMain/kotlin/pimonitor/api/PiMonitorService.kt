@@ -13,4 +13,6 @@ interface PiMonitorService : BitframeService {
     val signUp: SignUpService
     val monitors: MonitorsService
     val businesses: BusinessesService
+
+    val monitorSession get() = monitors.session
 }

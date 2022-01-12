@@ -1,6 +1,7 @@
 package pimonitor.evaluation.businesses
 
-import pimonitor.api.PiMonitorService
+import pimonitor.PiMonitorReactScope
+import pimonitor.PiMonitorViewModelConfig
 import pimonitor.evaluation.businesses.exports.CreateBusinessReactScope
 import pimonitor.evaluation.businesses.forms.CreateBusinessState.*
 import react.Props
@@ -33,7 +34,7 @@ private val AddBusiness = fc<AddBusinessProps> { props ->
     }
 }
 
-internal fun RBuilder.AddBusiness(service: PiMonitorService, uid: String? = null) = child(AddBusiness) {
-    attrs.scope = CreateBusinessReactScope(service)
+internal fun RBuilder.AddBusiness(scope: PiMonitorReactScope, uid: String? = null) = child(AddBusiness) {
+    attrs.scope = scope.createBusiness
     attrs.uid = uid
 }

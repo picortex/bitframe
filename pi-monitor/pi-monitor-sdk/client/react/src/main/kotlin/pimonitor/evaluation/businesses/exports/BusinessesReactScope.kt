@@ -4,6 +4,7 @@
 package pimonitor.evaluation.businesses.exports
 
 import bitframe.client.ReactUIScope
+import pimonitor.PiMonitorViewModelConfig
 import pimonitor.api.PiMonitorService
 import pimonitor.client.evaluation.businesses.BusinessesService
 import pimonitor.evaluation.businesses.BusinessViewModel
@@ -15,9 +16,10 @@ import pimonitor.evaluation.businesses.BusinessesIntent as Intent
 import pimonitor.evaluation.businesses.BusinessesState as State
 
 open class BusinessesReactScope(
-    val service: PiMonitorService
-) : BusinessesScope(service), ReactUIScope<Intent, State> {
+    private val config: PiMonitorViewModelConfig
+) : BusinessesScope(config), ReactUIScope<Intent, State> {
+    val service get() = config.service
     val useBusinessAddedEvent: (callback: (MonitoredBusiness) -> Unit) -> Unit = { callback ->
-        useEventHandler(service.signIn.config.bus, BusinessesService.CREATE_BUSINESS_EVENT_ID, callback)
+        useEventHandler(config.service.bus, BusinessesService.CREATE_BUSINESS_EVENT_ID, callback)
     }
 }

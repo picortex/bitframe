@@ -10,7 +10,7 @@ import bitframe.service.client.config.KtorClientConfiguration
 import later.Later
 
 class UsersServiceKtor(
-    private val configuration: KtorClientConfiguration
+    private val config: KtorClientConfiguration
 ) : UsersService() {
     override fun createIfNotExist(params: CreateUserParams): Later<User> {
         TODO("Not yet implemented")

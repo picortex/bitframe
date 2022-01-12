@@ -1,10 +1,11 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor
 
+import bitframe.BitframeReactScope
 import bitframe.authentication.signin.exports.SignInReactScope
 import bitframe.panel.PanelScope
-import pimonitor.api.PiMonitorService
 import pimonitor.authentication.signup.exports.SignUpReactScope
 import pimonitor.evaluation.businesses.exports.BusinessesReactScope
 import pimonitor.evaluation.businesses.exports.CreateBusinessReactScope
@@ -17,14 +18,14 @@ class PiMonitorReactScope(
     override val businesses: BusinessesReactScope,
     override val createBusiness: CreateBusinessReactScope,
     override val contacts: ContactsReactScope
-) : PiMonitorScope(signIn, signUp, panel, businesses, createBusiness, contacts) {
-    @JsName("fromService")
-    constructor(service: PiMonitorService) : this(
-        SignInReactScope(service),
-        SignUpReactScope(service),
-        PanelScope(service),
-        BusinessesReactScope(service),
-        CreateBusinessReactScope(service),
-        ContactsReactScope(service)
+) : PiMonitorScope(signIn, signUp, panel, businesses, createBusiness, contacts), BitframeReactScope {
+    @JsName("fromViewModelConfig")
+    constructor(config: PiMonitorViewModelConfig) : this(
+        SignInReactScope(config),
+        SignUpReactScope(config),
+        PanelScope(config),
+        BusinessesReactScope(config),
+        CreateBusinessReactScope(config),
+        ContactsReactScope(config)
     )
 }

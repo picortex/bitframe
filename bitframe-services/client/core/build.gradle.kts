@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(asoft.cache.api)
-                api(project(":bitframe-service-core"))
+                api(projects.bitframeServiceCore)
                 api(asoft.platform.core)
             }
         }

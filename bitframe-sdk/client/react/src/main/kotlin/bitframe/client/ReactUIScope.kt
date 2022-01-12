@@ -6,7 +6,7 @@ package bitframe.client
 import useViewModelState
 
 interface ReactUIScope<in I, S> : UIScope<I, S> {
-    val useStateFromViewModel: () -> Unit
+    val useStateFromViewModel: () -> S
         get() = {
             useViewModelState(viewModel)
         }
