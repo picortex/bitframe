@@ -1,9 +1,11 @@
 package bitframe.panel
 
 import bitframe.api.BitframeService
+import bitframe.api.BitframeServiceConfig
 import bitframe.authentication.client.signin.SignInService
 import bitframe.authentication.signin.Session
 import bitframe.authentication.signin.SignInCredentials
+import bitframe.client.BitframeViewModelConfig
 import cache.Cache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
@@ -16,9 +18,10 @@ import bitframe.panel.PanelIntent as Intent
 import bitframe.panel.PanelState as State
 
 class PanelViewModel(
-    val service: BitframeService,
-    val cache: Cache
-) : ViewModel<Intent, State>(State.Loading("Setting up your workspace")) {
+    config: BitframeViewModelConfig
+) : ViewModel<Intent, State>(State.Loading("Setting up your workspace"), config) {
+    val service: BitframeService = config.service
+    val cache: Cache = config.service.cache
 
     override fun CoroutineScope.execute(i: Intent) = when (i) {
         Intent.InitPanel -> initialize()

@@ -3,12 +3,12 @@
 
 package bitframe.panel
 
-import bitframe.api.BitframeService
+import bitframe.client.BitframeViewModelConfig
 import viewmodel.ViewModel
 
-class PanelScope(val service: BitframeService) {
+class PanelScope(config: BitframeViewModelConfig) {
     val viewModel: ViewModel<PanelIntent, PanelState> by lazy {
-        PanelViewModel(service, service.signIn.config.cache)
+        PanelViewModel(config)
     }
     val initPanel = { viewModel.post(PanelIntent.InitPanel) }
 }

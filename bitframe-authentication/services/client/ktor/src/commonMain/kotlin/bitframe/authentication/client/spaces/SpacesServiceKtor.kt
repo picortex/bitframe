@@ -6,7 +6,7 @@ import bitframe.authentication.spaces.SpacesService
 import bitframe.service.client.config.KtorClientConfiguration
 import later.Later
 
-class SpacesServiceKtor(val configuration: KtorClientConfiguration) : SpacesService() {
+class SpacesServiceKtor(val config: KtorClientConfiguration) : SpacesService() {
     override fun register(params: RegisterSpaceParams): Later<Space> {
         TODO("Not yet implemented")
     }

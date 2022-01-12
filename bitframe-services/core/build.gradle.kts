@@ -16,6 +16,7 @@ kotlin {
                 api(projects.bitframeEventsInmemory)
                 api(projects.mailerApi)
                 api(kotlinx.coroutines.core)
+                api(asoft.logging.console)
             }
         }
 

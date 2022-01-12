@@ -6,6 +6,7 @@ import bitframe.service.client.config.ServiceConfig
 import cache.Cache
 import kotlinx.coroutines.CoroutineScope
 import live.Live
+import logging.Logger
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
@@ -24,13 +25,10 @@ interface SignInServiceConfig : ServiceConfig {
             cache: Cache,
             signInSession: Live<Session> = DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = ServiceConfig.DEFAULT_BUS,
+            logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = ServiceConfig.DEFAULT_SCOPE,
-        ): SignInServiceConfig = object : SignInServiceConfig {
+        ): SignInServiceConfig = object : SignInServiceConfig, ServiceConfig by ServiceConfig(appId, cache, bus, logger, scope) {
             override val signInSession: Live<Session> = signInSession
-            override val appId: String = appId
-            override val cache: Cache = cache
-            override val bus: EventBus = bus
-            override val scope: CoroutineScope = scope
         }
 
         @JvmStatic
@@ -40,7 +38,8 @@ interface SignInServiceConfig : ServiceConfig {
             cache: Cache,
             signInSession: Live<Session> = Live(Session.Unknown),
             bus: EventBus = ServiceConfig.DEFAULT_BUS,
+            logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = ServiceConfig.DEFAULT_SCOPE,
-        ) = invoke(appId, cache, signInSession, bus, scope)
+        ) = invoke(appId, cache, signInSession, bus, logger, scope)
     }
 }

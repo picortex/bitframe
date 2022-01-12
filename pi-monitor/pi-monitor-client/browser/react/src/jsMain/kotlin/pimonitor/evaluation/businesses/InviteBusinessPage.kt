@@ -1,6 +1,7 @@
 package pimonitor.evaluation.businesses
 
-import pimonitor.api.PiMonitorService
+import pimonitor.PiMonitorReactScope
+import pimonitor.PiMonitorViewModelConfig
 import react.RBuilder
 
-fun RBuilder.InviteBusiness(service: PiMonitorService, uid: String?) = AddBusiness(service, uid)
+fun RBuilder.InviteBusiness(scope: PiMonitorReactScope, uid: String?) = AddBusiness(scope, uid)

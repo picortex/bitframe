@@ -13,11 +13,12 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(asoft.cache.mock)
-                api(project(":bitframe-testing-containers"))
-                api(project(":bitframe-testing-sdk-browser"))
-                api(projects.piMonitorApiKtor)
-                api(project(":bitframe-service-client-ktor"))
+                api(projects.bitframeTestingContainers)
+                api(projects.bitframeTestingSdkBrowser)
+                api(projects.bitframeServiceClientKtor)
                 api(asoft.expect.coroutines)
+                api(projects.piMonitorApiKtor)
+                api(projects.piMonitorSdkClientCore)
             }
         }
 

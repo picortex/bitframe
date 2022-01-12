@@ -8,10 +8,12 @@ import bitframe.authentication.users.UsersDao
 import events.EventBus
 import bitframe.service.config.ServiceConfig
 import kotlinx.coroutines.CoroutineScope
+import logging.Logger
 
 class BitframeTestServerServiceConfig(
     override val spacesDao: SpacesDao,
     override val usersDao: UsersDao,
     override val bus: EventBus = ServiceConfig.DEFAULT_BUS,
+    override val logger: Logger = ServiceConfig.DEFAULT_LOGGER,
     override val scope: CoroutineScope = ServiceConfig.DEFAULT_SCOPE
 ) : SpacesServiceConfig, UsersServiceConfig, SignInServiceConfig

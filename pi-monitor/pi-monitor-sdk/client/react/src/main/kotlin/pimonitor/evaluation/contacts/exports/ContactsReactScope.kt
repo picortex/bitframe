@@ -3,8 +3,8 @@
 package pimonitor.evaluation.contacts.exports
 
 import bitframe.client.ReactUIScope
-import pimonitor.api.PiMonitorService
+import pimonitor.PiMonitorViewModelConfig
 import pimonitor.evaluation.contacts.ContactsIntent as Intent
 import pimonitor.evaluation.contacts.ContactsState as State
 
-class ContactsReactScope(service: PiMonitorService) : ContactsScope(service), ReactUIScope<Intent, State>
+class ContactsReactScope(config: PiMonitorViewModelConfig) : ContactsScope(config), ReactUIScope<Intent, State>

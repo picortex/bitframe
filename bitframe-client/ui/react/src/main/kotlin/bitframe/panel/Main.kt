@@ -1,11 +1,12 @@
 package bitframe.panel
 
-import bitframe.api.BitframeService
+import bitframe.BitframeScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import react.Props
 import react.RBuilder
 import react.fc
 import bitframe.SignInPageRoute
+import bitframe.client.BitframeViewModelConfig
 import bitframe.renderers.Renderer
 import react.router.dom.Redirect
 import react.useEffectOnce
@@ -35,8 +36,8 @@ private val Panel = fc<PanelProps> { props ->
     }
 }
 
-fun RBuilder.Panel(client: BitframeService, moduleRenderers: Map<String, Renderer>) = child(Panel) {
+fun RBuilder.Panel(scope: BitframeScope, moduleRenderers: Map<String, Renderer>) = child(Panel) {
     attrs.controller = MutableStateFlow(DrawerState.Opened)
     attrs.moduleRenderers = moduleRenderers
-    attrs.scope = PanelScope(client)
+    attrs.scope = scope.panel
 }

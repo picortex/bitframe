@@ -8,6 +8,7 @@ import cache.Cache
 import cache.MockCache
 import kotlinx.coroutines.CoroutineScope
 import live.Live
+import logging.Logger
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
@@ -39,8 +40,9 @@ interface SignInServiceMockConfig : SignInServiceConfig {
             cache: Cache = DEFAULT_CACHE,
             signInSession: Live<Session> = SignInServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = DEFAULT_BUS,
+            logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): SignInServiceMockConfig = object : SignInServiceMockConfig, SignInServiceConfig by SignInServiceConfig(appId, cache, signInSession, bus, scope) {
+        ): SignInServiceMockConfig = object : SignInServiceMockConfig, SignInServiceConfig by SignInServiceConfig(appId, cache, signInSession, bus, logger, scope) {
             override val users: MutableList<User> = users
         }
 
@@ -52,7 +54,8 @@ interface SignInServiceMockConfig : SignInServiceConfig {
             cache: Cache = DEFAULT_CACHE,
             signInSession: Live<Session> = SignInServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = DEFAULT_BUS,
+            logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ) = invoke(appId, users, cache, signInSession, bus, scope)
+        ) = invoke(appId, users, cache, signInSession, bus, logger, scope)
     }
 }

@@ -2,9 +2,10 @@ package pimonitor.evaluation.businesses
 
 import kotlinx.css.JustifyContent
 import kotlinx.css.justifyContent
-import pimonitor.api.PiMonitorService
+import pimonitor.PiMonitorReactScope
+import pimonitor.PiMonitorViewModelConfig
+import pimonitor.client.monitors.currentMonitorOrNull
 import pimonitor.evaluation.businesses.exports.BusinessesReactScope
-import pimonitor.evaluation.businesses.exports.BusinessesScope
 import react.Props
 import react.RBuilder
 import react.fc
@@ -13,7 +14,6 @@ import react.useEffectOnce
 import reakt.*
 import styled.css
 import styled.styledDiv
-import useViewModelState
 
 private external interface BusinessContainerProps : Props {
     var scope: BusinessesReactScope
@@ -24,10 +24,10 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
     val viewModel = scope.viewModel
     val loadBusinesses = scope.loadBusinesses
     val useBusinessAddedEvent = scope.useBusinessAddedEvent
-    val monitor = scope.service.monitors.currentMonitorOrNull
+    val monitor = scope.service.monitorSession.currentMonitorOrNull
     useBusinessAddedEvent { loadBusinesses() }
     useEffectOnce { loadBusinesses() }
-    when (val state = useViewModelState(viewModel)) {
+    when (val state = scope.useStateFromViewModel()) {
         is BusinessesState.Loading -> LoadingBox(state.message)
         is BusinessesState.Businesses -> styledDiv {
             FlexBox {
@@ -47,6 +47,6 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
     }
 }
 
-fun RBuilder.BusinessContainer(service: PiMonitorService) = child(BusinessContainer) {
-    attrs.scope = BusinessesReactScope(service)
+fun RBuilder.BusinessContainer(scope: PiMonitorReactScope) = child(BusinessContainer) {
+    attrs.scope = scope.businesses
 }

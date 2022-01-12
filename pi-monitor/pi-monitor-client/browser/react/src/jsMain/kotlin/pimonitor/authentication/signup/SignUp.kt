@@ -8,9 +8,9 @@ import kotlinx.extensions.onDesktop
 import kotlinx.extensions.onMobile
 import kotlinx.extensions.text
 import kotlinx.html.InputType
-import pimonitor.api.PiMonitorService
+import pimonitor.PiMonitorReactScope
+import pimonitor.PiMonitorViewModelConfig
 import pimonitor.authentication.signup.exports.SignUpReactScope
-import pimonitor.authentication.signup.exports.SignUpScope
 import react.Props
 import react.RBuilder
 import react.dom.p
@@ -109,6 +109,6 @@ private val SignUp = fc<SignUpProps> { props ->
     }
 }
 
-fun RBuilder.SignUp(service: PiMonitorService) = child(withRouter(SignUp)) {
-    attrs.scope = SignUpReactScope(service)
+fun RBuilder.SignUp(scope: PiMonitorReactScope) = child(withRouter(SignUp)) {
+    attrs.scope = scope.signUp
 }

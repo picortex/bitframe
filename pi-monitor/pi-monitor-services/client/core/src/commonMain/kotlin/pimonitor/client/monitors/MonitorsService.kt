@@ -17,18 +17,9 @@ abstract class MonitorsService(
 
     val session get() = config.monitorSession
 
-    val currentMonitor: Monitor
-        get() = when (val s = session.value) {
-            Session.Unknown -> error("Can't get a monitor, have you signed in?")
-            is Session.Active -> s.monitor
-        }
+    val currentMonitor: Monitor get() = session.currentMonitorOrThrow
 
-    val currentMonitorOrNull: Monitor?
-        get() = try {
-            currentMonitor
-        } catch (c: Throwable) {
-            null
-        }
+    val currentMonitorOrNull: Monitor? get() = session.currentMonitorOrNull
 
     protected val scope get() = config.scope
 

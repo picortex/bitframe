@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import pimonitor.PiMonitorViewModelConfig
 import pimonitor.api.PiMonitorService
 import presenters.collections.tableOf
 import viewmodel.ViewModel
@@ -13,8 +14,9 @@ import pimonitor.evaluation.contacts.ContactsIntent as Intent
 import pimonitor.evaluation.contacts.ContactsState as State
 
 class ContactsViewModel(
-    val service: PiMonitorService
-) : ViewModel<Intent, State>(State.Loading("Loading contacts, please wait")) {
+    config: PiMonitorViewModelConfig
+) : ViewModel<Intent, State>(State.Loading("Loading contacts, please wait"), config) {
+    private val service: PiMonitorService = config.service
     override fun CoroutineScope.execute(i: pimonitor.evaluation.contacts.ContactsIntent) = when (i) {
         Intent.LoadContacts -> loadContacts()
     }
