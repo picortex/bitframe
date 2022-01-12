@@ -10,6 +10,7 @@ import cache.MockCache
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
 import live.Live
+import logging.Logger
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
@@ -39,8 +40,9 @@ interface BitframeServiceMockConfig : BitframeServiceConfig, SignInServiceMockCo
             cache: Cache = DEFAULT_CACHE,
             signInSession: Live<Session> = SignInServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = DEFAULT_BUS,
+            logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): BitframeServiceMockConfig = object : BitframeServiceMockConfig, SignInServiceMockConfig by SignInServiceMockConfig(appId, users, cache, signInSession, bus, scope) {
+        ): BitframeServiceMockConfig = object : BitframeServiceMockConfig, SignInServiceMockConfig by SignInServiceMockConfig(appId, users, cache, signInSession, bus, logger, scope) {
             override val users: MutableList<User> = users
         }
 
@@ -52,7 +54,8 @@ interface BitframeServiceMockConfig : BitframeServiceConfig, SignInServiceMockCo
             cache: Cache = DEFAULT_CACHE,
             signInSession: Live<Session> = SignInServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = DEFAULT_BUS,
+            logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): BitframeServiceMockConfig = invoke(appId, users, cache, signInSession, bus, scope)
+        ): BitframeServiceMockConfig = invoke(appId, users, cache, signInSession, bus, logger, scope)
     }
 }

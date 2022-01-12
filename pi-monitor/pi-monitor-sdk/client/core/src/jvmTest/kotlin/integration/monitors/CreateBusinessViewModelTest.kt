@@ -20,9 +20,7 @@ import pimonitor.evaluation.businesses.forms.CreateBusinessState as State
 @TestInstance(Lifecycle.PER_CLASS)
 class CreateBusinessViewModelTest : PiMonitorIntegrationTest() {
     val service get() = piMonitorService
-    val vm by lazy {
-        CreateBusinessViewModel(service.monitors, service.businesses)
-    }
+    val vm by lazy { CreateBusinessViewModel(config) }
 
     @Test
     fun should_be_able_to_go_to_show_add_business_form_state() = runTest {
