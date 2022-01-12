@@ -15,7 +15,6 @@ class ExportsTest {
             appId = "12345"
             url = ""
         }
-        console.log(cred)
         val service = service(cred)
         console.log(service)
         expect(service).toBeNonNull()
