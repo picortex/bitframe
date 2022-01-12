@@ -8,6 +8,7 @@ import io.ktor.client.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
 import live.Live
+import logging.Logger
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmSynthetic
 
@@ -20,11 +21,12 @@ interface SignInServiceKtorConfig : SignInServiceConfig, KtorClientConfiguration
             cache: Cache,
             session: Live<Session> = SignInServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = KtorClientConfiguration.DEFAULT_BUS,
+            logger: Logger = KtorClientConfiguration.DEFAULT_LOGGER,
             http: HttpClient = KtorClientConfiguration.DEFAULT_HTTP_CLIENT,
             json: Json = KtorClientConfiguration.DEFAULT_JSON,
             scope: CoroutineScope = KtorClientConfiguration.DEFAULT_SCOPE,
         ): SignInServiceKtorConfig = object : SignInServiceKtorConfig,
-            KtorClientConfiguration by KtorClientConfiguration(url, appId, cache, bus, http, json, scope) {
+            KtorClientConfiguration by KtorClientConfiguration(url, appId, cache, bus, logger, http, json, scope) {
             override val signInSession: Live<Session> = session
         }
 
@@ -36,9 +38,10 @@ interface SignInServiceKtorConfig : SignInServiceConfig, KtorClientConfiguration
             cache: Cache,
             session: Live<Session> = SignInServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = KtorClientConfiguration.DEFAULT_BUS,
+            logger: Logger = KtorClientConfiguration.DEFAULT_LOGGER,
             http: HttpClient = KtorClientConfiguration.DEFAULT_HTTP_CLIENT,
             json: Json = KtorClientConfiguration.DEFAULT_JSON,
             scope: CoroutineScope = KtorClientConfiguration.DEFAULT_SCOPE,
-        ) = invoke(url, appId, cache, session, bus, http, json, scope)
+        ) = invoke(url, appId, cache, session, bus, logger, http, json, scope)
     }
 }

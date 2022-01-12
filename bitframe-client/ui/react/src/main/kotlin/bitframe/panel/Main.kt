@@ -1,6 +1,6 @@
 package bitframe.panel
 
-import bitframe.api.BitframeService
+import bitframe.BitframeScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import react.Props
 import react.RBuilder
@@ -36,8 +36,8 @@ private val Panel = fc<PanelProps> { props ->
     }
 }
 
-fun RBuilder.Panel(config: BitframeViewModelConfig, moduleRenderers: Map<String, Renderer>) = child(Panel) {
+fun RBuilder.Panel(scope: BitframeScope, moduleRenderers: Map<String, Renderer>) = child(Panel) {
     attrs.controller = MutableStateFlow(DrawerState.Opened)
     attrs.moduleRenderers = moduleRenderers
-    attrs.scope = PanelScope(config)
+    attrs.scope = scope.panel
 }

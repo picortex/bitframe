@@ -2,12 +2,10 @@ package pimonitor.evaluation.businesses
 
 import kotlinx.css.JustifyContent
 import kotlinx.css.justifyContent
+import pimonitor.PiMonitorReactScope
 import pimonitor.PiMonitorViewModelConfig
-import pimonitor.api.PiMonitorService
 import pimonitor.client.monitors.currentMonitorOrNull
-import pimonitor.client.monitors.currentMonitorOrThrow
 import pimonitor.evaluation.businesses.exports.BusinessesReactScope
-import pimonitor.evaluation.businesses.exports.BusinessesScope
 import react.Props
 import react.RBuilder
 import react.fc
@@ -16,7 +14,6 @@ import react.useEffectOnce
 import reakt.*
 import styled.css
 import styled.styledDiv
-import useViewModelState
 
 private external interface BusinessContainerProps : Props {
     var scope: BusinessesReactScope
@@ -50,6 +47,6 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
     }
 }
 
-fun RBuilder.BusinessContainer(config: PiMonitorViewModelConfig) = child(BusinessContainer) {
-    attrs.scope = BusinessesReactScope(config)
+fun RBuilder.BusinessContainer(scope: PiMonitorReactScope) = child(BusinessContainer) {
+    attrs.scope = scope.businesses
 }

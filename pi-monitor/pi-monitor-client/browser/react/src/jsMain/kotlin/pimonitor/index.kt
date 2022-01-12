@@ -2,35 +2,38 @@ package pimonitor
 
 import applikation.konfig
 import bitframe.Bitframe
-import client
+import kotlinext.js.jso
 import kotlinx.browser.document
-import kotlinx.browser.window
 import kotlinx.extensions.By
 import kotlinx.extensions.get
-import logging.Logger
 import org.w3c.dom.HTMLDivElement
 import pimonitor.authentication.signup.SignUp
 import pimonitor.evaluation.businesses.BusinessContainer
 import pimonitor.evaluation.businesses.InviteBusiness
 import reakt.setContent
+import scope
 
 fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
     val konfig = konfig()
-    val client = client {
+    val scope = scope {
         appId = "test-client"
         url = "https://dev.picortex.com"//konfig["url"]?.toString() ?: window.location.origin
-        disableViewModelLogs = true
+        viewModel = jso {
+            recoveryTime = undefined
+            logging = jso {
+                console = false
+            }
+        }
     }
-    val config = PiMonitorViewModelConfig(service = client)
     val version: String by konfig()
     Bitframe(
-        config = config,
+        scope = scope,
         pages = mapOf(
-            "/authentication/sign-up" to { SignUp(config) },
-            "/invite/:uid" to { InviteBusiness(config, it.match.params["uid"]) }
+            "/authentication/sign-up" to { SignUp(scope) },
+            "/invite/:uid" to { InviteBusiness(scope, it.match.params["uid"]) }
         ),
         sections = mapOf(
-            "/evaluation/business" to { BusinessContainer(config) }
+            "/evaluation/business" to { BusinessContainer(scope) }
         ),
         version = version
     )

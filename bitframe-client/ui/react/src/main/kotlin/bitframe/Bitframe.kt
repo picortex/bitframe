@@ -1,8 +1,6 @@
 package bitframe
 
 import bitframe.authentication.signin.SignInPage
-import bitframe.api.BitframeService
-import bitframe.client.BitframeViewModelConfig
 import bitframe.landing.LandingPage
 import bitframe.panel.Panel
 import bitframe.renderers.Renderer
@@ -19,22 +17,22 @@ const val PanelPageRoute = "/panel"
 const val HomeRoute = "/"
 
 private fun defaultRenderers(
-    config: BitframeViewModelConfig,
+    scope: BitframeReactScope,
     moduleRenderers: Map<String, Renderer>,
     version: String
 ): Map<String, Renderer> = mapOf(
-    SignInPageRoute to { SignInPage(config, version) },
-    PanelPageRoute to { Panel(config, moduleRenderers) },
+    SignInPageRoute to { SignInPage(scope, version) },
+    PanelPageRoute to { Panel(scope, moduleRenderers) },
     HomeRoute to { LandingPage(version) }
 )
 
 fun RBuilder.Bitframe(
-    config: BitframeViewModelConfig,
+    scope: BitframeReactScope,
     pages: Map<String, Renderer> = mapOf(),
     sections: Map<String, Renderer> = mapOf(),
     version: String
 ) = BrowserRouter {
-    val allRouteRenderers = pages.toMutableMap() + defaultRenderers(config, sections, version)
+    val allRouteRenderers = pages.toMutableMap() + defaultRenderers(scope, sections, version)
     Switch {
         for ((path, renderer) in allRouteRenderers) Route {
             attrs.path = arrayOf(path)

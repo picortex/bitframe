@@ -8,11 +8,13 @@ import bitframe.service.client.config.KtorClientConfiguration.Companion.DEFAULT_
 import bitframe.service.client.config.KtorClientConfiguration.Companion.DEFAULT_HTTP_CLIENT
 import bitframe.service.client.config.KtorClientConfiguration.Companion.DEFAULT_JSON
 import bitframe.service.client.config.KtorClientConfiguration.Companion.DEFAULT_SCOPE
+import bitframe.service.client.config.ServiceConfig
 import cache.Cache
 import io.ktor.client.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
 import live.Live
+import logging.Logger
 import pimonitor.client.evaluation.businesses.BusinessServiceKtorConfig
 import pimonitor.client.monitors.MonitorsServiceConfig.Companion.DEFAULT_MONITOR_SESSION
 import pimonitor.client.monitors.MonitorsServiceKtorConfig
@@ -28,6 +30,7 @@ class PiMonitorServiceKtorConfig @JvmOverloads constructor(
     override val monitorSession: Live<MonitorSession> = DEFAULT_MONITOR_SESSION,
     override val json: Json = DEFAULT_JSON,
     override val bus: EventBus = DEFAULT_BUS,
+    override val logger: Logger = ServiceConfig.DEFAULT_LOGGER,
     override val http: HttpClient = DEFAULT_HTTP_CLIENT,
     override val scope: CoroutineScope = DEFAULT_SCOPE,
 ) : BitframeServiceConfig,

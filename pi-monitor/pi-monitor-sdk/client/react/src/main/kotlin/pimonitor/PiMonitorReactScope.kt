@@ -3,6 +3,7 @@
 
 package pimonitor
 
+import bitframe.BitframeReactScope
 import bitframe.authentication.signin.exports.SignInReactScope
 import bitframe.panel.PanelScope
 import pimonitor.authentication.signup.exports.SignUpReactScope
@@ -17,7 +18,7 @@ class PiMonitorReactScope(
     override val businesses: BusinessesReactScope,
     override val createBusiness: CreateBusinessReactScope,
     override val contacts: ContactsReactScope
-) : PiMonitorScope(signIn, signUp, panel, businesses, createBusiness, contacts) {
+) : PiMonitorScope(signIn, signUp, panel, businesses, createBusiness, contacts), BitframeReactScope {
     @JsName("fromViewModelConfig")
     constructor(config: PiMonitorViewModelConfig) : this(
         SignInReactScope(config),

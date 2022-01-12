@@ -1,28 +1,20 @@
 @file:Suppress("EXPERIMENTAL_API_USAGE", "NON_EXPORTABLE_TYPE")
 @file:JsExport
 
-import bitframe.authentication.signin.exports.SignInServiceWrapper
 import bitframe.api.BitframeService
+import bitframe.authentication.signin.exports.SignInServiceWrapper
 import cache.AsyncStorageCache
 import cache.BrowserCache
 import cache.MockCache
+import logging.Appender
 import logging.ConsoleAppender
-import logging.Logging
-import pimonitor.authentication.signup.exports.SignUpServiceWrapper
+import logging.Logger
 import pimonitor.api.PiMonitorService
 import pimonitor.api.PiMonitorServiceKtor
 import pimonitor.api.PiMonitorServiceKtorConfig
+import pimonitor.authentication.signup.exports.SignUpServiceWrapper
 import pimonitor.evaluation.businesses.exports.BusinessesServiceWrapper
 import platform.Platform
-
-external interface ServiceConfiguration {
-    var appId: String
-    var url: String?
-    var simulationTime: Int?
-    var disableViewModelLogs: Boolean?
-}
-
-private var isLoggingEnabled = false
 
 @JsName("clientWithConfigBlock")
 fun client(
@@ -32,19 +24,24 @@ fun client(
 )
 
 fun client(config: ServiceConfiguration): PiMonitorService {
-    if (config.disableViewModelLogs != true && !isLoggingEnabled) {
-        Logging.init(ConsoleAppender())
-        isLoggingEnabled = true
-    }
     val url = config.url ?: error("Url must not be null | undefined")
     val appId = config.appId
+
+    // default caches
     val cache = when {
         Platform.isBrowser -> BrowserCache()
         Platform.isReactNative -> AsyncStorageCache()
         else -> MockCache().also { console.log("Unknown platform, using a non persitient cache") }
     }
+
+    // default service appenders
+    val appenders = mutableListOf<Appender>()
+    if (config.logging?.console != false) {
+        appenders.add(ConsoleAppender())
+    }
+    val logger = Logger(*appenders.toTypedArray())
     return PiMonitorServiceKtor(
-        PiMonitorServiceKtorConfig(appId, url, cache),
+        PiMonitorServiceKtorConfig(appId, url, cache, logger = logger),
     )
 }
 

@@ -23,10 +23,10 @@ interface PiMonitorViewModelConfig : BitframeViewModelConfig {
         val DEFAULT_SCOPE_BUILDER = ViewModelConfig.DEFAULT_SCOPE_BUILDER
 
         @JvmField
-        val DEFAULT_RECOVERY_TIME = 3000L
+        val DEFAULT_RECOVERY_TIME = BitframeViewModelConfig.DEFAULT_RECOVERY_TIME
 
         @JvmField
-        val DEFAULT_TRANSITION_TIME = 3000L
+        val DEFAULT_TRANSITION_TIME = BitframeViewModelConfig.DEFAULT_TRANSITION_TIME
 
         @JvmSynthetic
         operator fun invoke(
