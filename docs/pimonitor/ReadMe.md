@@ -11,7 +11,10 @@ The PiMonitor API is a library, and an architectural layer that handles the foll
 
 - Encoding user data to a format accepted by the server
 - Decoding user data to a modal accepted by the application
-- Authentication & Session handling
+- User input validation
+- Authentication
+- Session handling
+- Cache management
 - Communicating with the server
 
 It is not opinionated to any platform, framework or architecture which means it can be used anywhere and anyhow as the programmer needs.
