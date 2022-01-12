@@ -4,6 +4,7 @@ import bitframe.ApplicationConfig
 import events.EventBus
 import bitframe.server.modules.Module
 import kotlinx.coroutines.CoroutineScope
+import logging.Logger
 import pimonitor.server.PiMonitorDaoProvider
 import pimonitor.server.PiMonitorService
 import pimonitor.server.PiMonitorServiceConfig
@@ -24,11 +25,12 @@ interface PiMonitorApplicationConfig : ApplicationConfig<PiMonitorService> {
         operator fun invoke(
             client: File,
             bus: EventBus = PiMonitorServiceConfig.DEFAULT_BUS,
+            logger: Logger = PiMonitorServiceConfig.DEFAULT_LOGGER,
             provider: PiMonitorDaoProvider,
             modules: MutableList<Module> = mutableListOf(),
             scope: CoroutineScope = PiMonitorServiceConfig.DEFAULT_SCOPE
         ): PiMonitorApplicationConfig {
-            val config = PiMonitorServiceConfig(bus, provider, scope)
+            val config = PiMonitorServiceConfig(bus, logger, provider, scope)
             val service = PiMonitorService(config)
             return invoke(client, service, modules)
         }
