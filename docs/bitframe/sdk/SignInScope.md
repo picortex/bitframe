@@ -37,7 +37,17 @@ Just like any other [UIScope](./UIScope.md), it has a viewModel. which consumes 
   }
   ```
 
+- #### resolve
+
+  This intent should be invoked while attempting to resolve a known conundrum
+
 ### [States](../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/authentication/signin/SignInState.kt)
+
+```typescript
+import SDK, { useViewModelState } from ". . ."
+const State = SDK.bitframe.authentication.signin.SignInState
+const state = useViewModelState(viewmodel)
+```
 
 - #### Form
 
@@ -48,10 +58,11 @@ Just like any other [UIScope](./UIScope.md), it has a viewModel. which consumes 
 
       The fields carry information on what should be displayed on the form
 
-      ```typescript
-      const State = SDKbitframe.authentication.signin.SignInState
-      const state = useViewModelState(viewmodel)
-      
+    - [status](../../../bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/feedbacks/FormFeedback.kt)
+
+      The status property presents gives you access to get feedback from the viewmdoel. The feedback can be due to an error, success, or a background work that is being done by the viewmodel
+
+      ```typescript      
       if(state instanceof State.Form) {
         const { 
             title, // string
@@ -61,17 +72,26 @@ Just like any other [UIScope](./UIScope.md), it has a viewModel. which consumes 
         return (
           <div>
             <p>{title}</p>
+            <span>{state.status ? state.status.message : ""}</span>
             <input placeholder={email.hint}/>
             <input placeholder={password.hint}/>
           </div>
         );
       }
       ```
-
-    - [status](../../../bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/feedbacks/FormFeedback.kt)
-
-      The status property presents gives you access to get feedback from the viewmdoel. The feedback can be due to an error, success, or a background work that is being done by the viewmodel
-
 - #### Conundrum
   A conundrum state is when a user with multiple users spaces attempts to log in, and the sdk can't choose which space to log the user into. The state offers the user a choice to select which space
   they need to log into. And the spaces can be retrieved from the spaces property
+
+  ```typescript      
+  if(state instanceof State.Conundrum) {
+    return (
+      <div>
+        <p>Choose your space</p>
+        {state.spaces.toArray().map((space)=>{
+            return <p>{space.name}</p>
+        })}
+      </div>
+    );
+  }
+  ```
