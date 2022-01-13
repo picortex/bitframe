@@ -11,12 +11,12 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-core"))
-                implementation(project(":bitframe-authentication-service-core"))
-                api(project(":bitframe-authentication-service-server-core"))
-                api(project(":bitframe-events-inmemory"))
+                api(projects.bitframeCore)
+                implementation(projects.bitframeAuthenticationServiceCore)
+                api(projects.bitframeAuthenticationServiceServerCore)
+                api(projects.bitframeEventsInmemory)
+                api(projects.bitframeSdkServerCore)
                 api(asoft.cache.mock)
-                api(project(":bitframe-sdk-server-core"))
                 api(asoft.kotlinx.serialization.mapper)
                 api(asoft.logging.console)
                 api(asoft.later.ktx)
@@ -26,10 +26,10 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(asoft.cache.mock)
-                implementation(project(":bitframe-server-framework-test"))
-                implementation(project(":bitframe-server-dao-inmemory"))
-                implementation(project(":bitframe-events-inmemory"))
-                implementation(kotlinx("serialization-core", vers.kotlinx.serialization))
+                implementation(projects.bitframeServerFrameworkTest)
+                implementation(projects.bitframeServerDaoInmemory)
+                implementation(projects.bitframeEventsInmemory)
+                implementation(kotlinx.serialization.core)
             }
         }
 
