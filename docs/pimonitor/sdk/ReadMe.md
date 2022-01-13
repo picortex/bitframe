@@ -54,6 +54,12 @@ This configuration block is not final and can be refined/updated. So you can sug
 
 ### [PiMonitorReactScope](../../../pi-monitor/pi-monitor-sdk/client/react/src/main/kotlin/pimonitor/PiMonitorReactScope.kt)
 
-The PiMonitorReactScope is basically a wrapper of different [UIScope](../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/UIScope.kt) which are meant to be used in a react
-application. These scopes (that are specifically targeting react) also happen to implement [ReactUIScope](../../../bitframe-sdk/client/react/src/main/kotlin/bitframe/client/ReactUIScope.kt) to make it
-easy to use from react.
+The PiMonitorReactScope is basically a wrapper of different [UIScope](../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/UIScope.kt)s which are meant to be used in a react
+applications. These scopes (that are specifically targeting react) also happen to implement [ReactUIScope](../../../bitframe-sdk/client/react/src/main/kotlin/bitframe/client/ReactUIScope.kt) to make
+it easy to use from react.
+
+Bellow is a list of scopes available the PiMonitorReactScope
+
+- #### SignInScope
+
+PiMonitor's uses Bitframe's SignInScope. Click [here](../../bitframe/sdk/SignInScope.md) to learn more about Bitframe's SignInScope
