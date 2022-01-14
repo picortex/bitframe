@@ -14,6 +14,10 @@ interface BitframeViewModelConfig : ViewModelConfig {
     val recoveryTime: Long
     val transitionTime: Long
 
+    // accessors
+    val bus get() = service.config.bus
+    val cache get() = service.config.cache
+
     companion object {
 
         @JvmField

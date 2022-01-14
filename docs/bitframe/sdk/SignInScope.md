@@ -67,12 +67,12 @@ const {
 
 ### [States](../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/authentication/signin/SignInState.kt)
 
-To make it easier to get a hold of the SignInScope's state, we will get to the top level namespace and call it `State```
+To make it easier to get a hold of the SignInScope's state, we will get to the top level namespace and call it `State`
 
 ```typescript
 const State = SDK.bitframe.authentication.signin.SignInState
 
-function SingInPage() {
+function SignInPage() {
   const state = useViewModelState(viewmodel)
   // . . .
 }
@@ -89,7 +89,8 @@ function SingInPage() {
 
     - [status](../../../bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/feedbacks/FormFeedback.kt)
 
-      The status property presents gives you access to get feedback from the viewmdoel. The feedback can be due to an error, success, or a background work that is being done by the viewmodel
+      The status property presenter gives you access to get feedback from the viewmodel. The feedback can be due to an error, success, loading, or any background work that currently is being done by
+      the viewmodel
 
       ```typescript     
       if(state instanceof State.Form) {
@@ -109,8 +110,8 @@ function SingInPage() {
       }
       ```
 - #### Conundrum
-  A conundrum state is when a user with multiple users spaces attempts to log in, and the sdk can't choose which space to log the user into. The state offers the user a choice to select which space
-  they need to log into. And the spaces can be retrieved from the spaces property
+  A conundrum state is when a user with multiple users [spaces](../../../bitframe-authentication/core/src/commonMain/kotlin/bitframe/authentication/spaces/Space.kt) attempts to log in, and the sdk
+  can't choose which space to log the user into. The state offers the user a choice to select which space they need to log into. And the spaces can be retrieved from the spaces property
 
   ```typescript      
   if(state instanceof State.Conundrum) {

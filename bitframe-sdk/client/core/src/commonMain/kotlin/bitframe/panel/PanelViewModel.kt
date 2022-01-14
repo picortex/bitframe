@@ -19,7 +19,7 @@ class PanelViewModel(
     config: BitframeViewModelConfig
 ) : ViewModel<Intent, State>(State.Loading("Setting up your workspace"), config) {
     val service: BitframeService = config.service
-    val cache: Cache = config.service.cache
+    val cache: Cache = config.cache
 
     override fun CoroutineScope.execute(i: Intent) = when (i) {
         Intent.InitPanel -> initialize()

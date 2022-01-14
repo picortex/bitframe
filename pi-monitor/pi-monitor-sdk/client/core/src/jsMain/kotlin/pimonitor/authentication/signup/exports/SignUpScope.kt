@@ -14,7 +14,13 @@ import pimonitor.authentication.signup.SignUpState as State
 open class SignUpScope(
     config: PiMonitorViewModelConfig
 ) : UIScope<Intent, State> {
+    override val service: PiMonitorService = config.service
+
     override val viewModel: ViewModel<Intent, State> by lazy { SignUpViewModel(config) }
+
+    val TYPE_BUSINESS get() = State.REGISTER_AS_BUSINESS.value
+
+    val TYPE_INDIVIDUAL get() = State.REGISTER_AS_INDIVIDUAL.value
 
     val registerAsIndividual = {
         viewModel.post(Intent.SelectRegisterAsIndividual)
