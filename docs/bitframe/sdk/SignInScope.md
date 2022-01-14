@@ -5,7 +5,7 @@ As the name suggests, this is a [UIScope](./UIScope.md) used in sign in screens
 Just like any other [UIScope](./UIScope.md), it has a viewModel. which consumes the following specific intents and spits out the relative state respectively
 
 <pre>
-import { scope } from ". . ."
+import { SDK, scope, useViewModelState } from ". . ."
 
 const {
   viewModel,
@@ -38,8 +38,6 @@ const {
 
   This is an intent that helps initiate the form fields.
   ```typescript
-  const { initForm } = signInScope;
-  
   export function SignInPage() {
     useEffect(()=>{
       initForm()
@@ -47,14 +45,12 @@ const {
   }
   ```
 
-  It is advised to call `initForm` at the start of the rendering cycle
+  `initForm` should be invoked at the start of the rendering cycle
 - #### submit
 
   Submit intent should be invoked when the user has finished entering the data on the form and submitted it. The intent should be called with the email and password fields as show in
   the [SignInCredentials](../../../bitframe-authentication/services/client/core/src/jsMain/kotlin/bitframe/authentication/signin/exports/SignInCredentials.kt) interface
   ```typescript
-  const { submit } = signInScope;
-  
   export function SignInPage() {
     return <Form onSubmit={(e)=>{
       submit({
@@ -69,16 +65,17 @@ const {
 
   This intent should be invoked while attempting to resolve a known conundrum.
 
-  ```typescript
-  const { resolve } = signInScope
-  ```
-
 ### [States](../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/authentication/signin/SignInState.kt)
 
+To make it easier to get a hold of the SignInScope's state, we will get to the top level namespace and call it `State```
+
 ```typescript
-import SDK, { useViewModelState } from ". . ."
 const State = SDK.bitframe.authentication.signin.SignInState
-const state = useViewModelState(viewmodel)
+
+function SingInPage() {
+  const state = useViewModelState(viewmodel)
+  // . . .
+}
 ```
 
 - #### Form
@@ -94,7 +91,7 @@ const state = useViewModelState(viewmodel)
 
       The status property presents gives you access to get feedback from the viewmdoel. The feedback can be due to an error, success, or a background work that is being done by the viewmodel
 
-      ```typescript      
+      ```typescript     
       if(state instanceof State.Form) {
         const { 
             title, // string
