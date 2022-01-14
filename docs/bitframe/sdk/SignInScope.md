@@ -1,4 +1,4 @@
-### SignInScope
+## SignInScope
 
 As the name suggests, this is a [UIScope](./UIScope.md) used in sign in screens
 
@@ -31,9 +31,9 @@ const {
 } = scope.signIn
 ```
 
-#### Intents
+### Intents
 
-- ##### initForm
+- #### initForm
 
   This is an intent that helps initiate the form fields.
   ```typescript
