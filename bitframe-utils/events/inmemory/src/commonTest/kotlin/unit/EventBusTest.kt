@@ -91,12 +91,13 @@ class EventBusTest {
     fun bus_should_throw_a_descriptive_error_when_an_subscribers_subscribes_to_an_invalid_type() = runTest {
         val err = expectFailure {
             val event: Event<Int> = TestEvent(22)
-            val subscriber = bus.subscribe("test_event") { data: String ->
-
+            val subscriber = bus.subscribe("test_event") { data: Event<Int> ->
+                println("data: ${data.topic}")
             }
             bus.dispatch(event)
             subscriber.unsubscribe()
         }
         expect(err).toBe<SubscriptionException>()
+        expect(err.message).toBe("Subscriber of topic test_event did not subscribe to get data of type Int")
     }
 }
