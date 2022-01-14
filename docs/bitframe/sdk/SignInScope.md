@@ -4,8 +4,9 @@ As the name suggests, this is a [UIScope](./UIScope.md) used in sign in screens
 
 Just like any other [UIScope](./UIScope.md), it has a viewModel. which consumes the following specific intents and spits out the relative state respectively
 
-<pre class="highlight highlight-source-ts position-relative overflow-auto">
+<pre>
 import { scope } from ". . ."
+
 const {
   viewModel,
   /** intents */
