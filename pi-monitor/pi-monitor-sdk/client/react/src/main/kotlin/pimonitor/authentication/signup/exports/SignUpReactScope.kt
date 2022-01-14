@@ -18,10 +18,10 @@ class SignUpReactScope(
 ) : SignUpScope(config), ReactUIScope<Intent, State> {
 
     val useSignUpEvent: (callback: (SignUpResult) -> Unit) -> Unit = {
-        useEventHandler(config.service.bus, SignUpService.SIGN_UP_EVENT_ID, it)
+        useEventHandler(config.service.bus, SignUpService.SIGN_UP_EVENT_TOPIC, it)
     }
 
     val useSignInEvent: (callback: (Session.SignedIn) -> Unit) -> Unit = {
-        useEventHandler(config.service.bus, SignInService.SIGN_IN_EVENT_ID, it)
+        useEventHandler(config.service.bus, SignInService.SIGN_IN_EVENT_TOPIC, it)
     }
 }

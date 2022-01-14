@@ -27,19 +27,20 @@ fun client(config: ServiceConfiguration): PiMonitorService {
     val url = config.url ?: error("Url must not be null | undefined")
     val appId = config.appId
 
-    // default caches
-    val cache = when {
-        Platform.isBrowser -> BrowserCache()
-        Platform.isReactNative -> AsyncStorageCache()
-        else -> MockCache().also { console.log("Unknown platform, using a non persitient cache") }
-    }
-
     // default service appenders
     val appenders = mutableListOf<Appender>()
     if (config.logging?.console != false) {
         appenders.add(ConsoleAppender())
     }
     val logger = Logger(*appenders.toTypedArray())
+
+    // default caches
+    val cache = when {
+        Platform.isBrowser -> BrowserCache()
+        Platform.isReactNative -> AsyncStorageCache()
+        else -> MockCache().also { logger.warn("Unknown javascript platform, using a non persistent cache") }
+    }
+
     return PiMonitorServiceKtor(
         PiMonitorServiceKtorConfig(appId, url, cache, logger = logger),
     )

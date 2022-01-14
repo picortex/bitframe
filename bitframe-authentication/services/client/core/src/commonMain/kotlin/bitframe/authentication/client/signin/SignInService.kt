@@ -28,10 +28,10 @@ abstract class SignInService(
     companion object {
         const val SESSION_CACHE_KEY = "bitframe.session"
         const val CREDENTIALS_CACHE_KEY = "bitframe.credentials"
-        const val SIGN_IN_EVENT_ID = "bitframe.authentication.sign.in"
-        const val SIGN_OUT_EVENT_ID = "bitframe.authentication.sign.out"
+        const val SIGN_IN_EVENT_TOPIC = "bitframe.authentication.sign.in"
+        const val SIGN_OUT_EVENT_TOPIC = "bitframe.authentication.sign.out"
 
-        fun signInEvent(session: Session.SignedIn) = Event(SIGN_IN_EVENT_ID, session)
+        fun signInEvent(session: Session.SignedIn) = Event(session, SIGN_IN_EVENT_TOPIC)
     }
 
     override fun signIn(cred: SignInCredentials): Later<LoginConundrum> = scope.later {

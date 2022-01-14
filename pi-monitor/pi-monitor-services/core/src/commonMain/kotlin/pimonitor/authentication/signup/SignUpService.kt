@@ -19,8 +19,8 @@ abstract class SignUpService(
     private val bus get() = config.bus
 
     companion object {
-        const val SIGN_UP_EVENT_ID = "pimonitor.authentication.signup"
-        fun signUpEvent(data: SignUpResult) = Event(SIGN_UP_EVENT_ID, data)
+        const val SIGN_UP_EVENT_TOPIC = "pimonitor.authentication.signup"
+        fun signUpEvent(data: SignUpResult) = Event(data, SIGN_UP_EVENT_TOPIC)
     }
 
     fun validate(params: SignUpParams): Validation<SignUpParams> = validate {

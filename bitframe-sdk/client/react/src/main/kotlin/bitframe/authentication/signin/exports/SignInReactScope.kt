@@ -14,6 +14,6 @@ import bitframe.authentication.signin.SignInState as State
 class SignInReactScope(config: BitframeViewModelConfig) : SignInScope(config), ReactUIScope<Intent, State> {
 
     val useSignInEvent: (callback: (Session.SignedIn) -> Unit) -> Unit = {
-        useEventHandler(config.service.config.bus, SignInService.SIGN_IN_EVENT_ID, it)
+        useEventHandler(config.service.config.bus, SignInService.SIGN_IN_EVENT_TOPIC, it)
     }
 }

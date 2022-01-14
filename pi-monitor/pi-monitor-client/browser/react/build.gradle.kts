@@ -55,6 +55,7 @@ kotlin {
                 implementation(projects.piMonitorSdkClientReactKtor)
                 implementation(projects.bitframeUiReact)
                 implementation(asoft.applikation.runtime)
+                implementation(kotlinw.css)
             }
         }
 
