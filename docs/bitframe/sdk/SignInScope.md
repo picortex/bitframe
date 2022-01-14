@@ -4,6 +4,30 @@ As the name suggests, this is a [UIScope](./UIScope.md) used in sign in screens
 
 Just like any other [UIScope](./UIScope.md), it has a viewModel. which consumes the following specific intents and spits out the relative state respectively
 
+<pre><code>
+const {
+  viewModel,
+  /** intents */
+  <a href="#initform">initForm</a>,
+  submit,
+  resolve,
+  /** hooks */
+  useSignInEvent
+}
+</code></pre>
+
+```typescript
+const {
+  viewModel,
+  /** intents */
+  initForm,
+  submit,
+  resolve,
+  /** hooks */
+  useSignInEvent
+}
+```
+
 #### Intents
 
 - ##### initForm
@@ -39,7 +63,11 @@ Just like any other [UIScope](./UIScope.md), it has a viewModel. which consumes 
 
 - #### resolve
 
-  This intent should be invoked while attempting to resolve a known conundrum
+  This intent should be invoked while attempting to resolve a known conundrum.
+
+  ```typescript
+  const { resolve } = signInScope
+  ```
 
 ### [States](../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/authentication/signin/SignInState.kt)
 
@@ -89,7 +117,7 @@ const state = useViewModelState(viewmodel)
       <div>
         <p>Choose your space</p>
         {state.spaces.toArray().map((space)=>{
-            return <p>{space.name}</p>
+            return <p onClick={()=>resolve(space)}>{space.name}</p>
         })}
       </div>
     );
