@@ -10,10 +10,10 @@ const {
   viewModel,
   /** intents */
   <a href="#initform">initForm</a>,
-  submit,
-  resolve,
+  <a href="#submit">submit</a>,
+  <a href="#resolve">resolve</a>,
   /** hooks */
-  useSignInEvent
+  <a href="#usesigninevent">useSignInEvent</a>
 } = scope.signIn
 </pre>
 
@@ -126,3 +126,9 @@ const state = useViewModelState(viewmodel)
     );
   }
   ```
+
+### Hooks
+
+#### useSignInEvent
+
+A hook
