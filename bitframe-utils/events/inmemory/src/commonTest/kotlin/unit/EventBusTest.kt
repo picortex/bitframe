@@ -3,7 +3,11 @@ package unit
 import events.Event
 import events.EventBus
 import events.InMemoryEventBus
+import events.SubscriptionException
 import expect.expect
+import expect.expectFailure
+import expect.toBe
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 
 class EventBusTest {
@@ -83,8 +87,16 @@ class EventBusTest {
         expect(receivedData2).toBe(2)
     }
 
-    // TODO
-    fun bus_should_throw_a_descriptive_error_when_an_subscribers_subscribes_to_an_invalid_type() {
+    @Test
+    fun bus_should_throw_a_descriptive_error_when_an_subscribers_subscribes_to_an_invalid_type() = runTest {
+        val err = expectFailure {
+            val event: Event<Int> = TestEvent(22)
+            val subscriber = bus.subscribe("test_event") { data: String ->
 
+            }
+            bus.dispatch(event)
+            subscriber.unsubscribe()
+        }
+        expect(err).toBe<SubscriptionException>()
     }
 }
