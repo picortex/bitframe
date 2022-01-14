@@ -25,7 +25,7 @@ open class SignInScope(config: BitframeViewModelConfig) : UIScope<Intent, State>
         viewModel.post(Intent.Submit(cred.toSignInCredentials()))
     }
 
-    val resolve = { space: Space ->
-        viewModel.post(Intent.Resolve(space))
+    val resolveConundrum = { space: Space ->
+        viewModel.post(Intent.ResolveConundrum(space))
     }
 }

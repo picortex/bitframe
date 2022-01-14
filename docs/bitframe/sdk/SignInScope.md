@@ -12,7 +12,7 @@ const {
   /** intents */
   <a href="#initform">initForm</a>,
   <a href="#submit">submit</a>,
-  <a href="#resolve">resolve</a>,
+  <a href="#resolveConundrum">resolveConundrum</a>,
   /** hooks */
   <a href="#usesigninevent">useSignInEvent</a>
 } = scope.signIn
@@ -26,7 +26,7 @@ const {
   /** intents */
   initForm,
   submit,
-  resolve,
+  resolveConundrum,
   /** hooks */
   useSignInEvent
 } = scope.signIn
@@ -45,7 +45,7 @@ const {
   }
   ```
 
-  `initForm` should be invoked at the start of the rendering cycle
+  `initForm` should be invoked only once at the beginning of the rendering cycle
 - #### submit
 
   Submit intent should be invoked when the user has finished entering the data on the form and submitted it. The intent should be called with the email and password fields as show in
@@ -61,9 +61,9 @@ const {
   }
   ```
 
-- #### resolve
+- #### resolveConundrum
 
-  This intent should be invoked while attempting to resolve a known conundrum.
+  This intent should be invoked while attempting to resolve a known [conundrum](#conundrum).
 
 ### [States](../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/authentication/signin/SignInState.kt)
 
@@ -118,7 +118,7 @@ function SingInPage() {
       <div>
         <p>Choose your space</p>
         {state.spaces.toArray().map((space)=>{
-            return <p onClick={()=>resolve(space)}>{space.name}</p>
+            return <p onClick={()=>resolveConundrum(space)}>{space.name}</p>
         })}
       </div>
     );
@@ -143,5 +143,6 @@ function SignInPage() {
     console.log(`Welcome ${session.user.name}`)
     navigate("/panel")
   })
+  // . . .
 }
 ```

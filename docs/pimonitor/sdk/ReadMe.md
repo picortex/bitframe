@@ -63,3 +63,8 @@ Bellow is a list of scopes available the PiMonitorReactScope
 - #### SignInScope
 
   PiMonitor's uses Bitframe's SignInScope. Click [here](../../bitframe/sdk/SignInScope.md) to learn more about Bitframe's SignInScope
+
+- #### SignUpScope
+  TODO: To be documented
+
+- ### BusinessesScope

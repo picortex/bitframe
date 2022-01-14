@@ -54,7 +54,7 @@ abstract class SignInService(
      *
      * This method should only be called when [signIn] returned a conundrum with at least two [LoginConundrum.spaces]
      */
-    fun resolve(space: Space): Later<Session.SignedIn> = scope.later {
+    fun resolveConundrum(space: Space): Later<Session.SignedIn> = scope.later {
         val error = IllegalStateException(
             """
                 You are attempting to resolve a non exiting conundrum,

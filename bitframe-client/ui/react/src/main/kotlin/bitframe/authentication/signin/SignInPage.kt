@@ -2,16 +2,11 @@ package bitframe.authentication.signin
 
 import bitframe.BitframeReactScope
 import bitframe.authentication.signin.exports.SignInReactScope
-import bitframe.client.BitframeViewModelConfig
 import kotlinx.css.*
 import kotlinx.html.js.onClickFunction
 import react.Props
 import react.RBuilder
-import react.dom.attrs
-import react.dom.button
-import react.dom.div
 import react.fc
-import react.router.useLocation
 import react.router.useNavigate
 import react.useEffectOnce
 import reakt.Grid
@@ -64,7 +59,7 @@ private val SignInPage = fc<SignInPageProps> { props ->
                         css { cursor = Cursor.pointer }
                         +space.name
                         attrs.onClickFunction = {
-                            scope.resolve(space)
+                            scope.resolveConundrum(space)
                         }
                     }
                 }
