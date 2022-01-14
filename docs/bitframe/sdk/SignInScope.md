@@ -129,4 +129,19 @@ function SingInPage() {
 
 #### useSignInEvent
 
-A hook
+This is a react hook, that gets called when a user successfuly signs in. It should be used to listen to the sign in events and navigate the user to the respective dashboard. The callback that is
+passed in, will be invoked with a [session](../../../bitframe-authentication/core/src/commonMain/kotlin/bitframe/authentication/signin/Session.kt) which is an instance of
+class [Session.SignedIn](../../../bitframe-authentication/core/src/commonMain/kotlin/bitframe/authentication/signin/Session.kt), and that can give you further information of the user that is currently
+logged in
+
+```typescript
+import { useNavigate } from "react-router"
+
+function SignInPage() {
+  const navigate = useNavigate()
+  useSignInEvent((session)=>{
+    console.log(`Welcome ${session.user.name}`)
+    navigate("/panel")
+  })
+}
+```
