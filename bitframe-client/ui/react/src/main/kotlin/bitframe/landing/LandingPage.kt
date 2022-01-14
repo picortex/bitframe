@@ -6,8 +6,7 @@ import kotlinx.css.*
 import react.Props
 import react.RBuilder
 import react.fc
-import react.functionComponent
-import react.router.dom.withRouter
+import react.router.useNavigate
 import reakt.*
 import styled.css
 
@@ -16,6 +15,7 @@ private external interface LandingPageProps : Props {
 }
 
 private val LandingPage = fc<LandingPageProps> { props ->
+    val navigate = useNavigate()
     Grid {
         css {
             height = 100.vh
@@ -25,13 +25,13 @@ private val LandingPage = fc<LandingPageProps> { props ->
             css { gap = 1.em }
             +"Welcome to Bitframe ${props.version}"
             Grid(cols = "1fr 1fr") {
-                ContainedButton("Sing Up") { props.withRouter.history.push(SignUpPageRoute) }
-                ContainedButton("Sign In") { props.withRouter.history.push(SignInPageRoute) }
+                ContainedButton("Sing Up") { navigate(SignUpPageRoute) }
+                ContainedButton("Sign In") { navigate(SignInPageRoute) }
             }
         }
     }
 }
 
-fun RBuilder.LandingPage(version: String) = child(withRouter(LandingPage)) {
+fun RBuilder.LandingPage(version: String) = LandingPage {
     attrs.version = version
 }

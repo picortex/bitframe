@@ -8,9 +8,15 @@ repositories {
     google()
 }
 
+object vers {
+    val kotlin = "1.6.10"
+    val ktor = "1.6.3"
+    val foundation = "1.4.50"
+}
+
 dependencies {
-    implementation("gradle.plugin.tz.co.asoft:foundation-plugins:1.4.0")
-    implementation("io.ktor:ktor-client-cio:1.6.0")
-    implementation("tz.co.asoft:kotlinx-serialization-mapper:0.0.71")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30")
+    implementation("tz.co.asoft:foundation-plugins:${vers.foundation}")
+    implementation("io.ktor:ktor-client-cio:${vers.ktor}")
+    implementation("tz.co.asoft:kotlinx-serialization-mapper:${vers.foundation}")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${vers.kotlin}")
 }

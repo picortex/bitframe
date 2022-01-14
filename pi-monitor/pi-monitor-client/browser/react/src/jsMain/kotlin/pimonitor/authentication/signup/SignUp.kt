@@ -9,16 +9,14 @@ import kotlinx.extensions.onMobile
 import kotlinx.extensions.text
 import kotlinx.html.InputType
 import pimonitor.PiMonitorReactScope
-import pimonitor.PiMonitorViewModelConfig
 import pimonitor.authentication.signup.exports.SignUpReactScope
 import react.Props
 import react.RBuilder
 import react.dom.p
 import react.fc
-import react.router.dom.useHistory
-import react.router.dom.withRouter
 import reakt.*
 import pimonitor.reakt.DropDown
+import react.router.useNavigate
 import styled.css
 import styled.styledH2
 import theme.clazz
@@ -34,9 +32,9 @@ private val SignUp = fc<SignUpProps> { props ->
     val useSignInEvent = scope.useSignInEvent
     val viewModel = scope.viewModel
     val state = useViewModelState(viewModel)
-    val history = useHistory()
+    val navigate = useNavigate()
     useSignInEvent {
-        history.push(PanelPageRoute)
+        navigate(PanelPageRoute)
     }
     FlexBox {
         css {
@@ -109,6 +107,6 @@ private val SignUp = fc<SignUpProps> { props ->
     }
 }
 
-fun RBuilder.SignUp(scope: PiMonitorReactScope) = child(withRouter(SignUp)) {
+fun RBuilder.SignUp(scope: PiMonitorReactScope) = SignUp {
     attrs.scope = scope.signUp
 }
