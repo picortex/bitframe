@@ -57,29 +57,7 @@ to communicate with the PiMonitor Server
 
   This configuration block is not final and can be refined/updated. So you can suggest a better syntax if you happen to have one
 
-### [PiMonitorReactScope](../../../../pi-monitor/pi-monitor-sdk/client/react/src/main/kotlin/pimonitor/PiMonitorReactScope.kt)
+### [PiMonitorReactScope](./00_PiMonitorReactScope.md)
 
-The [PiMonitorReactScope](../../../../pi-monitor/pi-monitor-sdk/client/react/src/main/kotlin/pimonitor/PiMonitorReactScope.kt) basically exposes the underlying micro scopes of the entire PiMonitor
-application, that are already wrapped and ready to be used in react.
-
-This guid will assume that you already have created the file `lib/sdk.js` and because you have exported `scope` successfully from said file, one can easily import the scope object anywhere in the
-application like so
-
-```typescript
-import { scope } from "libs/sdk"
-```
-
-Now, lets go over how you can use this scope to cater for you needs by covering all the provided UIScopes below.
-
-- #### SignInReactScope
-  This scope can be obtained by calling
-  ```typescript
-  const signInScope = scope.signIn
-  ```
-  Since it is the exact same [SignInReactScope](../../../bitframe/sdk/react/SignInReactScope.md) provided by the [Bitframe React SDK](../../../bitframe/sdk/ReadMe.md), I suggest you get your
-  acquainted by it [here](../../../bitframe/sdk/react/SignInReactScope.md)
-
-- #### SignUpScope
-  TODO: To be documented
-
-- ### BusinessesScope
+The [PiMonitorReactScope](./00_PiMonitorReactScope.md) exposes the underlying micro ui scopes of the entire PiMonitor application, that are already wrapped and ready to be used in react.
+Click [here](./00_PiMonitorReactScope.md) to learn more how to fully utilize it

@@ -1,8 +1,8 @@
-## [UIScopes](../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/UIScope.kt)
+## [UIScopes](../../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/UIScope.kt)
 
 ### Introduction
 
-![UIScope Mechanism](./UIScope.png)
+![UIScope Mechanism](UIScope.png)
 A UIScope is very synonymous to a screen, but it has much more going on than just a screen. A Scope has an underlying viewmodel which acts as a finite state machine for that particular scope.
 
 Once invoked, the intents are fed into the viewmodel, which then digest and spits our the respective state as an outcome to that intent
@@ -12,7 +12,7 @@ Once invoked, the intents are fed into the viewmodel, which then digest and spit
 A basic UIScope has three components. These are:-
 
 - #### ViewModel
-  Every [UIScope](../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/UIScope.kt) must have exactly one ViewModel which manages the state. It accomplishes that by translating what
+  Every [UIScope](../../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/UIScope.kt) must have exactly one ViewModel which manages the state. It accomplishes that by translating what
   you do (sending intents), into what you want to show (spitting out states). Normally, you wouldn't directly interact with it, but you will experience its effect while consuming the controlled state.
 
   ```typescript

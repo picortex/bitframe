@@ -1,82 +1,25 @@
 ## SignInScope
 
-As the name suggests, this is a [UIScope](./UIScope.md) used in sign in screens
-
-Just like any other [UIScope](./UIScope.md), it has a viewModel. which consumes the following specific intents and spits out the relative state respectively
-
-<pre>
-import { SDK, scope, useViewModelState } from ". . ."
-
-const {
-  viewModel,
-  /** intents */
-  <a href="#initform">initForm</a>,
-  <a href="#submit">submit</a>,
-  <a href="#resolveConundrum">resolveConundrum</a>,
-  /** hooks */
-  <a href="#usesigninevent">useSignInEvent</a>
-} = scope.signIn
-</pre>
-
-```typescript
-import { scope } from ". . ."
-
-const {
-  viewModel,
-  /** intents */
-  initForm,
-  submit,
-  resolveConundrum,
-  /** hooks */
-  useSignInEvent
-} = scope.signIn
-```
+As the name suggests, this is a [UIScope](./UIScope.md) used in sign in screens, which consumes the following specific intents and spits out the relative state respectively
 
 ### Intents
 
 - #### initForm
 
   This is an intent that helps initiate the form fields.
-  ```typescript
-  export function SignInPage() {
-    useEffect(()=>{
-      initForm()
-    },[])
-  }
-  ```
-
   `initForm` should be invoked only once at the beginning of the rendering cycle
 - #### submit
 
   Submit intent should be invoked when the user has finished entering the data on the form and submitted it. The intent should be called with the email and password fields as show in
-  the [SignInCredentials](../../../bitframe-authentication/services/client/core/src/jsMain/kotlin/bitframe/authentication/signin/exports/SignInCredentials.kt) interface
-  ```typescript
-  export function SignInPage() {
-    return <Form onSubmit={(e)=>{
-      submit({
-        email: e.target.email.value,
-        password: e.target.password.value
-      })
-    }}>
-  }
-  ```
+  the [SignInCredentials](../../../../bitframe-authentication/services/client/core/src/jsMain/kotlin/bitframe/authentication/signin/exports/SignInCredentials.kt) interface
 
 - #### resolveConundrum
 
   This intent should be invoked while attempting to resolve a known [conundrum](#conundrum).
 
-### [States](../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/authentication/signin/SignInState.kt)
+### [States](../../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/authentication/signin/SignInState.kt)
 
-To make it easier to get a hold of the SignInScope's state, we will get to the top level namespace and call it `State`
-
-```typescript
-const State = SDK.bitframe.authentication.signin.SignInState
-
-function SignInPage() {
-  const state = useViewModelState(viewmodel)
-  // . . .
-}
-```
+There are two mutually exclusive state in the sign in scope
 
 - #### Form
 

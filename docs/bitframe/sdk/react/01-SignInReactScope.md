@@ -1,33 +1,17 @@
-## SignInScope
+# SignInReactScope
 
-As the name suggests, this is a [UIScope](./UIScope.md) used in sign in screens
-
-Just like any other [UIScope](./UIScope.md), it has a viewModel. which consumes the following specific intents and spits out the relative state respectively
-
-<pre>
-import { SDK, scope, useViewModelState } from ". . ."
-
-const {
-  viewModel,
-  /** intents */
-  <a href="#initform">initForm</a>,
-  <a href="#submit">submit</a>,
-  <a href="#resolveConundrum">resolveConundrum</a>,
-  /** hooks */
-  <a href="#usesigninevent">useSignInEvent</a>
-} = scope.signIn
-</pre>
+As the name suggests, this is a [UIScope](./UIScope.md) used in sign in screens, which consumes the following specific intents and spits out the relative state respectively
 
 ```typescript
-import { scope } from ". . ."
+import { scope } from "lib/sdk.js"
 
 const {
-  viewModel,
   /** intents */
   initForm,
   submit,
   resolveConundrum,
   /** hooks */
+  useStateFromViewModel,
   useSignInEvent
 } = scope.signIn
 ```
@@ -73,7 +57,7 @@ To make it easier to get a hold of the SignInScope's state, we will get to the t
 const State = SDK.bitframe.authentication.signin.SignInState
 
 function SignInPage() {
-  const state = useViewModelState(viewmodel)
+  const state = useStateFromViewModel()
   // . . .
 }
 ```
@@ -83,11 +67,11 @@ function SignInPage() {
   This is the default state that the scope begins in, As it can be seen in [SignInState.Form](../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/authentication/signin/SignInState.kt), it
   has the following properties
 
-    - [fields](../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/authentication/signin/SignInFormFields.kt)
+    - [fields](../../../../bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/authentication/signin/SignInFormFields.kt)
 
       The fields carry information on what should be displayed on the form
 
-    - [status](../../../bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/feedbacks/FormFeedback.kt)
+    - [status](../../../../bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/feedbacks/FormFeedback.kt)
 
       The status property presenter gives you access to get feedback from the viewmodel. The feedback can be due to an error, success, loading, or any background work that currently is being done by
       the viewmodel
@@ -110,7 +94,7 @@ function SignInPage() {
       }
       ```
 - #### Conundrum
-  A conundrum state is when a user with multiple users [spaces](../../../bitframe-authentication/core/src/commonMain/kotlin/bitframe/authentication/spaces/Space.kt) attempts to log in, and the sdk
+  A conundrum state is when a user with multiple users [spaces](../../../../bitframe-authentication/core/src/commonMain/kotlin/bitframe/authentication/spaces/Space.kt) attempts to log in, and the sdk
   can't choose which space to log the user into. The state offers the user a choice to select which space they need to log into. And the spaces can be retrieved from the spaces property
 
   ```typescript      
@@ -128,12 +112,14 @@ function SignInPage() {
 
 ### Hooks
 
+#### useStateFromViewModel
+
 #### useSignInEvent
 
 This is a react hook, that gets called when a user successfuly signs in. It should be used to listen to the sign in events and navigate the user to the respective dashboard. The callback that is
-passed in, will be invoked with a [session](../../../bitframe-authentication/core/src/commonMain/kotlin/bitframe/authentication/signin/Session.kt) which is an instance of
-class [Session.SignedIn](../../../bitframe-authentication/core/src/commonMain/kotlin/bitframe/authentication/signin/Session.kt), and that can give you further information of the user that is currently
-logged in
+passed in, will be invoked with a [session](../../../../bitframe-authentication/core/src/commonMain/kotlin/bitframe/authentication/signin/Session.kt) which is an instance of
+class [Session.SignedIn](../../../../bitframe-authentication/core/src/commonMain/kotlin/bitframe/authentication/signin/Session.kt), and that can give you further information of the user that is
+currently logged in
 
 ```typescript
 import { useNavigate } from "react-router"

@@ -43,7 +43,7 @@ While the API is a tool enough for itself, the SDK goes further to unify logic a
 
 Since all these are usually bundled in a specific scope, the PiMonitor SDK comes with a PiMonitorScope type that wraps all the available scopes supported by the SDK
 
-To understand more on what a scope is, please read more about [UIScope](../bitframe/sdk/UIScope.md) here
+To understand more on what a scope is, please read more about [UIScope](../bitframe/sdk/core/UIScope.md) here
 
 ## Bitframe Tools
 
