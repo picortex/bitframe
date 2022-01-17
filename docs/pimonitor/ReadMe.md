@@ -1,9 +1,11 @@
-# PiMonitor Documentation
+# PiMonitor
 
-PiMonitor tools have been split into two major parts
+PiMonitor is a software solution aiming to help different entities to monitor Small Medium Enterprises (SMEs).
 
-- [The API](./api/ReadMe.md) (previously called the sdk-core)
-- [The SDK](./sdk/ReadMe.md) (previously called the sdk-full)
+This guide, will provide information on the tools to be used to integrate with or build PiMonitor all together. It is split into two parts mainly:-
+
+- [The API](./api/ReadMe.md)
+- [The SDK](./sdk/ReadMe.md)
 
 ### [The API](./api/ReadMe.md)
 
