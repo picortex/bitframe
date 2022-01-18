@@ -1,5 +1,5 @@
 package bitframe
 
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 
 fun <A : BrowserApplication> A.test(block: suspend A.() -> Unit) = runTest { block() }
