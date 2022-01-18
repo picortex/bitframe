@@ -57,7 +57,7 @@ to communicate with the PiMonitor Server
 
   This configuration block is not final and can be refined/updated. So you can suggest a better syntax if you happen to have one
 
-### [PiMonitorReactScope](./00_PiMonitorReactScope.md)
+### [PiMonitorReactScope](./00-PiMonitorReactScope.md)
 
-The [PiMonitorReactScope](./00_PiMonitorReactScope.md) exposes the underlying micro ui scopes of the entire PiMonitor application, that are already wrapped and ready to be used in react.
-Click [here](./00_PiMonitorReactScope.md) to learn more how to fully utilize it
+The [PiMonitorReactScope](./00-PiMonitorReactScope.md) exposes the underlying micro ui scopes of the entire PiMonitor application, that are already wrapped and ready to be used in react.
+Click [here](./00-PiMonitorReactScope.md) to learn more how to fully utilize it

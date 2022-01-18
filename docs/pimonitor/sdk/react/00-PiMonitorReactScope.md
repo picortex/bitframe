@@ -15,12 +15,8 @@ Now, lets go over how you can use this scope to cater for your needs by covering
 seen [here](../../../../pi-monitor/pi-monitor-sdk/client/react/src/main/kotlin/pimonitor/PiMonitorReactScope.kt):-
 
 - #### SignInReactScope
-  This scope can be obtained by calling
-  ```typescript
-  const signInScope = scope.signIn
-  ```
-  Since it is the exact same [SignInReactScope](../../../bitframe/sdk/react/SignInReactScope.md) provided by the [Bitframe React SDK](../../../bitframe/sdk/ReadMe.md), I suggest you get your
-  acquainted by it [here](../../../bitframe/sdk/react/SignInReactScope.md)
+  This scope can be obtained by calling `scope.signIn` which returns a [SignInReactScope](../../../bitframe/sdk/react/01-SignInReactScope.md) provided by
+  the [Bitframe React SDK](../../../bitframe/sdk/ReadMe.md), I suggest you get your acquainted by the sign in react scope [here](../../../bitframe/sdk/react/01-SignInReactScope.md)
 
 - #### SignUpScope
   TODO: To be documented
