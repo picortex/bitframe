@@ -30,7 +30,7 @@ fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
         scope = scope,
         pages = mapOf(
             "/authentication/sign-up" to { SignUp(scope) },
-            "/invite/:uid" to { InviteBusiness(scope, it.match.params["uid"]) }
+            "/invite/:uid" to { InviteBusiness(scope, null) }
         ),
         sections = mapOf(
             "/evaluation/business" to { BusinessContainer(scope) }

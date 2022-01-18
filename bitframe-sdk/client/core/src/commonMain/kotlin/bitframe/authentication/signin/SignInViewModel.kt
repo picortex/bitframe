@@ -7,7 +7,6 @@ import cache.Cache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
@@ -24,7 +23,7 @@ class SignInViewModel(
     override fun CoroutineScope.execute(i: SignInIntent): Any = when (i) {
         is SignInIntent.InitForm -> initialize()
         is SignInIntent.Submit -> signIn(i)
-        is SignInIntent.Resolve -> resolve(i)
+        is SignInIntent.ResolveConundrum -> resolveConundrum(i)
     }
 
     private fun CoroutineScope.initialize() = launch {
@@ -40,8 +39,8 @@ class SignInViewModel(
         }
     }
 
-    private fun resolve(i: SignInIntent.Resolve) {
-        service.resolve(i.space)
+    private fun resolveConundrum(i: SignInIntent.ResolveConundrum) {
+        service.resolveConundrum(i.space)
     }
 
     private fun CoroutineScope.signIn(i: SignInIntent.Submit) = launch {

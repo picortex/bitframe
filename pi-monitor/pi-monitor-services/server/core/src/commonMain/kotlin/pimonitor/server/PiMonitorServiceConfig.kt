@@ -63,6 +63,7 @@ interface PiMonitorServiceConfig : ServiceConfig,
             scope: CoroutineScope = DEFAULT_SCOPE
         ) = invoke(
             bus = bus,
+            logger = logger,
             spacesDao = provider.spaces,
             usersDao = provider.users,
             monitorsDao = provider.monitors,

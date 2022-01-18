@@ -1,5 +1,5 @@
 @file:JsExport
-@file:Suppress("WRONG_EXPORTED_DECLARATION")
+@file:Suppress("WRONG_EXPORTED_DECLARATION", "NON_EXPORTABLE_TYPE")
 
 package bitframe
 

@@ -13,8 +13,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(kotlinx("datetime", vers.kotlinx.datetime))
-                api(kotlinx("serialization-core", vers.kotlinx.serialization))
+                api(kotlinx.datetime)
+                api(kotlinx.serialization.core)
                 api(asoft.later.core)
                 api(asoft.identifier.core)
             }
@@ -22,7 +22,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(kotlinx("serialization-json", vers.kotlinx.serialization))
+                implementation(kotlinx.serialization.json)
                 implementation(asoft.expect.core)
             }
         }

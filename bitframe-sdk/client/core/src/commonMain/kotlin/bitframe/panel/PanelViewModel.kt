@@ -1,7 +1,6 @@
 package bitframe.panel
 
 import bitframe.api.BitframeService
-import bitframe.api.BitframeServiceConfig
 import bitframe.authentication.client.signin.SignInService
 import bitframe.authentication.signin.Session
 import bitframe.authentication.signin.SignInCredentials
@@ -9,7 +8,6 @@ import bitframe.client.BitframeViewModelConfig
 import cache.Cache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
@@ -21,7 +19,7 @@ class PanelViewModel(
     config: BitframeViewModelConfig
 ) : ViewModel<Intent, State>(State.Loading("Setting up your workspace"), config) {
     val service: BitframeService = config.service
-    val cache: Cache = config.service.cache
+    val cache: Cache = config.cache
 
     override fun CoroutineScope.execute(i: Intent) = when (i) {
         Intent.InitPanel -> initialize()
@@ -39,7 +37,7 @@ class PanelViewModel(
                 val res = service.signIn.signIn(cred).await()
                 if (res.spaces.size != 1) {
                     val session = cache.load<Session.SignedIn>(SignInService.SESSION_CACHE_KEY).await()
-                    service.signIn.resolve(session.space)
+                    service.signIn.resolveConundrum(session.space)
                 }
                 val session = service.signIn.currentSession as Session.SignedIn
                 emit(State.Panel(session, sections))

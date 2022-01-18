@@ -1,27 +1,28 @@
 package bitframe.panel
 
-import bitframe.BitframeScope
+import bitframe.BitframeReactScope
+import bitframe.authentication.signin.SignInPage
+import bitframe.renderers.Renderer
 import kotlinx.coroutines.flow.MutableStateFlow
 import react.Props
 import react.RBuilder
 import react.fc
-import bitframe.SignInPageRoute
-import bitframe.client.BitframeViewModelConfig
-import bitframe.renderers.Renderer
-import react.router.dom.Redirect
 import react.useEffectOnce
-import reakt.*
+import reakt.DrawerState
+import reakt.LoadingBox
+import reakt.NavigationDrawer
 import useViewModelState
 
 private external interface PanelProps : Props {
+    var version: String
     var controller: MutableStateFlow<DrawerState>
     var moduleRenderers: Map<String, Renderer>
-    var scope: PanelScope
+    var scope: BitframeReactScope
 }
 
 private val Panel = fc<PanelProps> { props ->
     val controller = props.controller
-    val scope = props.scope
+    val scope = props.scope.panel
     useEffectOnce { scope.initPanel() }
     when (val state = useViewModelState(scope.viewModel)) {
         is PanelState.Loading -> LoadingBox(state.message, 80)
@@ -30,14 +31,13 @@ private val Panel = fc<PanelProps> { props ->
             drawer = { Drawer(controller, state) },
             content = { Body(controller, props.moduleRenderers) }
         )
-        PanelState.Login -> Redirect {
-            attrs.to = SignInPageRoute
-        }
+        PanelState.Login -> SignInPage(props.scope, props.version)
     }
 }
 
-fun RBuilder.Panel(scope: BitframeScope, moduleRenderers: Map<String, Renderer>) = child(Panel) {
+fun RBuilder.Panel(scope: BitframeReactScope, moduleRenderers: Map<String, Renderer>, version: String) = child(Panel) {
     attrs.controller = MutableStateFlow(DrawerState.Opened)
     attrs.moduleRenderers = moduleRenderers
-    attrs.scope = scope.panel
+    attrs.scope = scope
+    attrs.version = version
 }

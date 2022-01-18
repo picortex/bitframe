@@ -20,8 +20,8 @@ abstract class BusinessesService(
     open val config: ServiceConfig
 ) {
     companion object {
-        const val CREATE_BUSINESS_EVENT_ID = "pimonitor.evaluation.business.create"
-        fun createBusinessEvent(business: MonitoredBusiness) = Event(CREATE_BUSINESS_EVENT_ID, business)
+        const val CREATE_BUSINESS_EVENT_TOPIC = "pimonitor.evaluation.business.create"
+        fun createBusinessEvent(business: MonitoredBusiness) = Event(business, CREATE_BUSINESS_EVENT_TOPIC)
     }
 
     protected val scope get() = config.scope

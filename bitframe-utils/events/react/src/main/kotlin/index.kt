@@ -3,9 +3,9 @@ import react.useEffectOnce
 
 fun <D> useEventHandler(
     bus: EventBus,
-    eventId: String,
+    topic: String,
     callback: (D) -> Unit
 ): Unit = useEffectOnce {
-    val subscriber = bus.subscribe(eventId, callback)
+    val subscriber = bus.subscribe(topic, callback)
     cleanup { subscriber.unsubscribe() }
 }

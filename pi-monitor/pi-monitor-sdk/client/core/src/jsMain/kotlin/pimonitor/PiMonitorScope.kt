@@ -1,4 +1,5 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor
 
@@ -17,14 +18,4 @@ open class PiMonitorScope(
     open val businesses: BusinessesScope,
     open val createBusiness: CreateBusinessScope,
     open val contacts: ContactsScope
-) : BitframeScope {
-    @JsName("fromViewModelConfig")
-    constructor(config: PiMonitorViewModelConfig) : this(
-        SignInScope(config),
-        SignUpScope(config),
-        PanelScope(config),
-        BusinessesScope(config),
-        CreateBusinessScope(config),
-        ContactsScope(config)
-    )
-}
+) : BitframeScope

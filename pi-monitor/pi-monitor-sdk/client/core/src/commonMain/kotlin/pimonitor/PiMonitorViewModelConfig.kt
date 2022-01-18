@@ -1,6 +1,5 @@
 package pimonitor
 
-import bitframe.api.BitframeService
 import bitframe.client.BitframeViewModelConfig
 import kotlinx.coroutines.CoroutineScope
 import logging.Logger

@@ -1,7 +1,7 @@
 object vers {
-    val kotlin = "1.6.10" // this
+    val kotlin = "1.6.10"
 
-    val ksp = "1.6.10-1.0.2" // this
+    val ksp = "1.6.10-1.0.2"
 
     val kotlinpoet = "1.12.1"
 
@@ -15,14 +15,10 @@ object vers {
 
     val testContainers = "1.16.0"
 
-    object kotlinx {
-        val serialization = "1.3.1"
-        val datetime = "0.3.1"
-    }
 
     object bitframe {
-        val current = "0.0.55"
-        val previous = "0.0.51"
+        val current = "0.0.56"
+        val previous = "0.0.52"
     }
 
     object npm {

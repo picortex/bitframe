@@ -15,7 +15,7 @@ kotlin {
             dependencies {
                 api(asoft.later.ktx)
                 api(asoft.identifier.core)
-                api(kotlinx("serialization-core", vers.kotlinx.serialization))
+                api(kotlinx.serialization.core)
             }
         }
 

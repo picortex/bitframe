@@ -14,7 +14,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(kotlinx("serialization-core", vers.kotlinx.serialization))
+                api(kotlinx.serialization.core)
                 api(asoft.kotlinx.serialization.mapper)
                 api(kotlinx.coroutines.core)
                 api(asoft.later.core)

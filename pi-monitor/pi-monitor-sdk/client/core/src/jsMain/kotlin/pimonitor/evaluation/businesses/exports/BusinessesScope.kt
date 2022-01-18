@@ -12,6 +12,9 @@ import pimonitor.evaluation.businesses.BusinessesIntent as Intent
 import pimonitor.evaluation.businesses.BusinessesState as State
 
 open class BusinessesScope(config: PiMonitorViewModelConfig) : UIScope<Intent, State> {
+
+    override val service: PiMonitorService = config.service
+
     override val viewModel: ViewModel<Intent, State> by lazy { BusinessViewModel(config) }
 
     val loadBusinesses: () -> Unit = { viewModel.post(Intent.LoadBusinesses) }
