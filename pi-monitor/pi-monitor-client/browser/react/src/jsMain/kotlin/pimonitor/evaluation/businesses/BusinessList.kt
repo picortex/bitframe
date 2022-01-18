@@ -3,9 +3,7 @@ package pimonitor.evaluation.businesses
 import presenters.collections.Table
 import pimonitor.monitored.MonitoredBusiness
 import pimonitor.reakt.BitframeTable
-import react.Props
-import react.RBuilder
-import react.functionComponent
+import react.*
 import useLive
 
 fun <D> useTable(table: Table<D>) = useLive(table.live)
@@ -14,7 +12,7 @@ external interface BusinessTableProps : Props {
     var table: Table<MonitoredBusiness>
 }
 
-val BusinessTable = functionComponent<BusinessTableProps> { props ->
+val BusinessTable = fc<BusinessTableProps> { props ->
     BitframeTable(props.table)
 //    ReactTable(props.table)
 }

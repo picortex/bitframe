@@ -2,17 +2,15 @@ package bitframe.authentication.signin
 
 import bitframe.BitframeReactScope
 import bitframe.authentication.signin.exports.SignInReactScope
-import bitframe.client.BitframeViewModelConfig
 import kotlinx.css.*
 import kotlinx.html.js.onClickFunction
 import react.Props
 import react.RBuilder
 import react.fc
-import react.router.dom.withRouter
+import react.router.useNavigate
 import react.useEffectOnce
 import reakt.Grid
 import reakt.centerContent
-import reakt.history
 import styled.css
 import styled.styledDiv
 import styled.styledH2
@@ -28,11 +26,12 @@ private val SignInPage = fc<SignInPageProps> { props ->
     val scope = props.scope
     val viewModel = scope.viewModel
     val useSignInEvent = scope.useSignInEvent
+    val navigate = useNavigate()
 
     useEffectOnce { scope.initForm() }
 
     useSignInEvent {
-        props.history.push("/panel")
+        navigate("/panel")
     }
 
     styledDiv {
@@ -60,7 +59,7 @@ private val SignInPage = fc<SignInPageProps> { props ->
                         css { cursor = Cursor.pointer }
                         +space.name
                         attrs.onClickFunction = {
-                            scope.resolve(space)
+                            scope.resolveConundrum(space)
                         }
                     }
                 }
@@ -81,7 +80,7 @@ private val SignInPage = fc<SignInPageProps> { props ->
 fun RBuilder.SignInPage(
     scope: BitframeReactScope,
     version: String
-) = child(withRouter(SignInPage)) {
+) = SignInPage {
     attrs.scope = scope.signIn
     attrs.version = version
 }

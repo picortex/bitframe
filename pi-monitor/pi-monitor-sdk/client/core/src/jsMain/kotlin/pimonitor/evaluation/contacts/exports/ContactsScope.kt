@@ -12,6 +12,8 @@ import pimonitor.evaluation.contacts.ContactsState as State
 
 open class ContactsScope(config: PiMonitorViewModelConfig) : UIScope<Intent, State> {
 
+    override val service: PiMonitorService = config.service
+
     override val viewModel: ViewModel<Intent, State> by lazy { ContactsViewModel(config) }
 
     val loadContacts = {

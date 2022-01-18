@@ -3,23 +3,29 @@ package unit
 import events.Event
 import events.EventBus
 import events.InMemoryEventBus
+import events.SubscriptionException
 import expect.expect
+import expect.expectFailure
+import expect.toBe
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 
 class EventBusTest {
     val bus: EventBus = InMemoryEventBus()
 
+    class TestEvent<out T>(data: T) : Event<T>(data, "test_event")
+
     @Test
     fun should_be_able_to_dispatch_a_event() {
-        val event = Event("test_event", 23)
+        val event = TestEvent(23)
         bus.dispatch(event)
     }
 
     @Test
     fun should_be_able_to_subscribe_to_events() {
-        val event = Event("test-event", 7)
+        val event = TestEvent(7)
         var receivedData: Int? = null
-        bus.subscribe("test-event") { data: Int ->
+        bus.subscribe("test_event") { data: Int ->
             receivedData = data
         }
         bus.dispatch(event)
@@ -28,8 +34,8 @@ class EventBusTest {
 
     @Test
     fun subscribers_should_listen_only_to_the_event_id_the_specify() {
-        val event1 = Event("test-event-1", 1)
-        val event2 = Event("test-event-2", 2)
+        val event1 = Event(1, "test-event-1")
+        val event2 = Event(2, "test-event-2")
         var receivedData: Int? = null
         bus.subscribe("test-event-1") { data: Int ->
             receivedData = data
@@ -44,7 +50,7 @@ class EventBusTest {
         data class Person(val name: String)
 
         val person = Person("John")
-        val event = Event("created_person", person)
+        val event = Event(person, "created_person")
         var called: Person? = null
         bus.subscribe("created_person") { data: Person ->
             called = data
@@ -57,7 +63,7 @@ class EventBusTest {
     @Test
     fun should_unsubscribe_a_specific_subscriber() {
         fun send(int: Int) {
-            bus.dispatch(Event("test-event", int))
+            bus.dispatch(Event(int, "test-event"))
         }
 
         var receivedData1: Int? = null
@@ -74,15 +80,24 @@ class EventBusTest {
         send(2)
         expect(receivedData1).toBe(2)
         expect(receivedData2).toBe(2)
-        subscriber2.unsubscribe()
+//        subscriber2.unsubscribe()
         subscriber2.unsubscribe()
         send(3)
         expect(receivedData1).toBe(3)
         expect(receivedData2).toBe(2)
     }
 
-    // TODO
-    fun bus_should_throw_a_descriptive_error_when_an_subscribers_subscribes_to_an_invalid_type() {
-
+    @Test
+    fun bus_should_throw_a_descriptive_error_when_an_subscribers_subscribes_to_an_invalid_type() = runTest {
+        val err = expectFailure {
+            val event: Event<Int> = TestEvent(22)
+            val subscriber = bus.subscribe("test_event") { data: Event<Int> ->
+                println("data: ${data.topic}")
+            }
+            bus.dispatch(event)
+            subscriber.unsubscribe()
+        }
+        expect(err).toBe<SubscriptionException>()
+        expect(err.message).toBe("Subscriber of topic test_event did not subscribe to get data of type Int")
     }
 }

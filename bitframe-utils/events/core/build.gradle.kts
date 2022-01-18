@@ -13,7 +13,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(kotlinx("serialization-core", vers.kotlinx.serialization))
+                api(kotlinx.serialization.core)
                 api(asoft.live.core)
             }
         }

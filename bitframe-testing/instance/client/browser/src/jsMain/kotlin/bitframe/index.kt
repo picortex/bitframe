@@ -11,9 +11,7 @@ import bitframe.api.BitframeService
 import bitframe.api.BitframeServiceConfig
 import bitframe.api.BitframeServiceKtorConfig
 import bitframe.authentication.signin.exports.SignInReactScope
-import bitframe.authentication.signin.exports.SignInScope
 import bitframe.client.BitframeViewModelConfig
-import bitframe.panel.PanelScope
 import cache.BrowserCache
 import kotlinx.browser.document
 import kotlinx.browser.window

@@ -1,6 +1,6 @@
 package bitframe.renderers
 
-import react.RBuilder
-import react.router.dom.RouteComponentProps
+import react.RElementBuilder
+import react.router.RouteProps
 
-typealias Renderer = RBuilder.(props: RouteComponentProps) -> Unit
+typealias Renderer = RElementBuilder<RouteProps>.() -> Unit
