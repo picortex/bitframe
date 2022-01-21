@@ -8,6 +8,7 @@ import expect.expect
 import expect.expectFailure
 import expect.toBe
 import kotlinx.coroutines.test.runTest
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 class EventBusTest {
@@ -88,6 +89,7 @@ class EventBusTest {
     }
 
     @Test
+    @Ignore
     fun bus_should_throw_a_descriptive_error_when_an_subscribers_subscribes_to_an_invalid_type() = runTest {
         val err = expectFailure {
             val event: Event<Int> = TestEvent(22)
