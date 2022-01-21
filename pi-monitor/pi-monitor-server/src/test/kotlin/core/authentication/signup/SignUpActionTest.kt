@@ -3,7 +3,7 @@ package core.authentication.signup
 import bitframe.*
 import expect.expect
 import io.ktor.http.*
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
