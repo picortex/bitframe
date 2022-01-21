@@ -7,7 +7,7 @@ import bitframe.authentication.spaces.Space
 import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.User
 import expect.expect
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import later.await
 import kotlin.test.Test
 

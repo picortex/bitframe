@@ -4,7 +4,7 @@ import bitframe.testing.annotations.Lifecycle
 import bitframe.testing.annotations.TestInstance
 import bitframe.testing.annotations.Testcontainers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import later.await
 import pimonitor.authentication.signup.SignUpParams
 import pimonitor.authentication.signup.toCredentials

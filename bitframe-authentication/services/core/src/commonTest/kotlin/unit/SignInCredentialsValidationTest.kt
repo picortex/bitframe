@@ -4,7 +4,7 @@ import bitframe.authentication.signin.SignInCredentials
 import expect.expect
 import expect.expectFailure
 import expect.toBe
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import validation.Invalid
 import kotlin.test.Test
 

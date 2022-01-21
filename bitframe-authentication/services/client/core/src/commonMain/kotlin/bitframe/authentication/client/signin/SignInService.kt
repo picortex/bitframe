@@ -32,7 +32,7 @@ abstract class SignInService(
         const val SIGN_IN_EVENT_TOPIC = "bitframe.authentication.sign.in"
         const val SIGN_OUT_EVENT_TOPIC = "bitframe.authentication.sign.out"
 
-        fun signInEvent(session: Session.SignedIn) = Event(session, SIGN_IN_EVENT_TOPIC)
+        private fun SignInEvent(session: Session.SignedIn) = Event(session, SIGN_IN_EVENT_TOPIC)
     }
 
     override fun signIn(cred: SignInCredentials): Later<LoginConundrum> = scope.later {
@@ -45,7 +45,7 @@ abstract class SignInService(
             cache.save(CREDENTIALS_CACHE_KEY, credentials).await()
             cache.save(SESSION_CACHE_KEY, s).await()
             session.value = s
-            bus.dispatch(signInEvent(s))
+            bus.dispatch(SignInEvent(s))
         }
         conundrum
     }
@@ -70,8 +70,18 @@ abstract class SignInService(
             is Session.SignedOut -> throw error
         }.also {
             session.value = it
-            bus.dispatch(signInEvent(it))
+            bus.dispatch(SignInEvent(it))
             cache.save(SESSION_CACHE_KEY, it).await()
         }
+    }
+
+    fun signInWithLastSession(): Later<Session.SignedIn?> = scope.later {
+        val cred = cache.load<SignInCredentials>(CREDENTIALS_CACHE_KEY).await()
+        val res = signIn(cred).await()
+        if (res.spaces.size != 1) {
+            val session = cache.load<Session.SignedIn>(SESSION_CACHE_KEY).await()
+            resolveConundrum(session.space).await()
+        }
+        currentSession as? Session.SignedIn
     }
 }

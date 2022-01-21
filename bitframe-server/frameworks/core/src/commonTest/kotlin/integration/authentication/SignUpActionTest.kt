@@ -1,6 +1,6 @@
 package integration.authentication
 
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 

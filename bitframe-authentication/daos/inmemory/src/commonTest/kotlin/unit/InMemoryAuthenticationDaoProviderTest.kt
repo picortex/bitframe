@@ -2,7 +2,7 @@ package unit
 
 import bitframe.authentication.InMemoryAuthenticationDaoProvider
 import expect.expect
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import later.await
 import kotlin.test.Test
 

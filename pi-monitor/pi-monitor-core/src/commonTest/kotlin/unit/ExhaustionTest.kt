@@ -1,8 +1,7 @@
 package unit
 
 import expect.expect
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 
 class ExhaustionTest {

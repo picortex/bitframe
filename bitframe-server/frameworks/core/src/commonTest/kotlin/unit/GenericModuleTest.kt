@@ -10,7 +10,7 @@ import bitframe.server.http.HttpRoute
 import expect.expect
 import io.ktor.http.HttpMethod.Companion.Post
 import io.ktor.http.HttpStatusCode.Companion.OK
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 
 class GenericModuleTest {

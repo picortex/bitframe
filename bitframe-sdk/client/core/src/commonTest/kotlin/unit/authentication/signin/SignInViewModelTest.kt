@@ -2,19 +2,16 @@ package unit.authentication.signin
 
 import bitframe.api.BitframeServiceMock
 import bitframe.api.BitframeServiceMockConfig
-import bitframe.authentication.client.signin.SignInServiceMock
-import bitframe.authentication.client.signin.SignInServiceMockConfig
 import bitframe.authentication.signin.*
 import bitframe.authentication.spaces.Space
 import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.User
 import bitframe.client.BitframeViewModelConfig
-import presenters.feedbacks.FormFeedback.Loading
-import presenters.feedbacks.FormFeedback.Success
-import cache.MockCache
 import expect.expect
 import expect.toBe
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
+import presenters.feedbacks.FormFeedback.Loading
+import presenters.feedbacks.FormFeedback.Success
 import viewmodel.expect
 import kotlin.test.Test
 
