@@ -29,7 +29,7 @@ private val Panel = fc<PanelProps> { props ->
         is PanelState.Panel -> NavigationDrawer(
             drawerState = controller,
             drawer = { Drawer(controller, state) },
-            content = { Body(controller, props.moduleRenderers) }
+            content = { Body(controller, props.scope, props.moduleRenderers) }
         )
         PanelState.Login -> SignInPage(props.scope, props.version)
     }

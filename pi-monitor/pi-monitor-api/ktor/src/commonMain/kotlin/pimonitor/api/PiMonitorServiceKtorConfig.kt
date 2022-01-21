@@ -1,6 +1,6 @@
 package pimonitor.api
 
-import bitframe.authentication.client.signin.SignInServiceConfig.Companion.DEFAULT_SIGN_IN_SESSION
+import bitframe.authentication.client.SigningServiceConfig.Companion.DEFAULT_SIGN_IN_SESSION
 import bitframe.authentication.client.signin.SignInServiceKtorConfig
 import bitframe.api.BitframeServiceConfig
 import events.EventBus

@@ -3,6 +3,7 @@
 package bitframe.authentication.client.signin
 
 import bitframe.authentication.apps.App
+import bitframe.authentication.client.SigningServiceConfig
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.signin.Session
 import bitframe.authentication.signin.SignInCredentials
@@ -16,7 +17,7 @@ import kotlin.js.JsExport
 import bitframe.authentication.signin.SignInService as SignInServiceCore
 
 abstract class SignInService(
-    open val config: SignInServiceConfig
+    open val config: SigningServiceConfig
 ) : SignInServiceCore() {
     val session: Live<Session> get() = config.signInSession
     val currentSession get() = session.value

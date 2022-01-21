@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import live.Watcher
 import viewmodel.ViewModel
 import bitframe.panel.PanelIntent as Intent
 import bitframe.panel.PanelState as State
@@ -21,12 +22,25 @@ class PanelViewModel(
     val service: BitframeService = config.service
     val cache: Cache = config.cache
 
+    var sessionWatcher: Watcher<Session>? = null
+
     override fun CoroutineScope.execute(i: Intent) = when (i) {
         Intent.InitPanel -> initialize()
     }
 
+    private fun watchSessionAndUpdateUI() {
+        sessionWatcher = service.signIn.session.watch {
+            val oldState = ui.value as? State.Panel
+            when {
+                it is Session.SignedOut -> ui.value = State.Login
+                it is Session.SignedIn && it != oldState?.session -> ui.value = State.Panel(it, sections)
+            }
+        }
+    }
+
     private fun CoroutineScope.initialize() = launch {
         flow {
+            // TODO: See if this logic can be moved into services, calling cache methods from a viewmodel is a code smell
             emit(State.Loading("Retrieving your last session"))
             val signInSession = service.signIn.currentSession
             if (signInSession is Session.SignedIn) {
@@ -47,5 +61,11 @@ class PanelViewModel(
         }.collect {
             ui.value = it
         }
+        watchSessionAndUpdateUI()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        sessionWatcher?.stop()
     }
 }

@@ -10,4 +10,5 @@ interface SessionAware {
     val userSession get() = userLiveSession.value as? Session.SignedIn
     val currentUser: User?
     val currentSpace: Space?
+    val signOut: () -> Unit
 }

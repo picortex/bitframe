@@ -1,4 +1,4 @@
-package bitframe.authentication.client.signin
+package bitframe.authentication.client
 
 import bitframe.authentication.signin.Session
 import events.EventBus
@@ -12,7 +12,7 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface SignInServiceConfig : ServiceConfig {
+interface SigningServiceConfig : ServiceConfig {
     val signInSession: Live<Session>
 
     companion object {
@@ -27,7 +27,7 @@ interface SignInServiceConfig : ServiceConfig {
             bus: EventBus = ServiceConfig.DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = ServiceConfig.DEFAULT_SCOPE,
-        ): SignInServiceConfig = object : SignInServiceConfig, ServiceConfig by ServiceConfig(appId, cache, bus, logger, scope) {
+        ): SigningServiceConfig = object : SigningServiceConfig, ServiceConfig by ServiceConfig(appId, cache, bus, logger, scope) {
             override val signInSession: Live<Session> = signInSession
         }
 

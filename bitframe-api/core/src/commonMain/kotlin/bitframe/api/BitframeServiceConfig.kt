@@ -1,5 +1,5 @@
 package bitframe.api
 
-import bitframe.authentication.client.signin.SignInServiceConfig
+import bitframe.authentication.client.SigningServiceConfig
 
-interface BitframeServiceConfig : SignInServiceConfig
+interface BitframeServiceConfig : SigningServiceConfig

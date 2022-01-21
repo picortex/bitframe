@@ -1,9 +1,13 @@
+@file:JsExport
+@file:Suppress("WRONG_EXPORTED_DECLARATION")
+
 package bitframe.client
 
 import bitframe.api.BitframeService
 import kotlinx.coroutines.CoroutineScope
 import logging.Logger
 import viewmodel.ViewModelConfig
+import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
