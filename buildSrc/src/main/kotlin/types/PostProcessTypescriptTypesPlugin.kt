@@ -7,7 +7,6 @@ open class PostProcessTypescriptTypesPlugin : Plugin<Project> {
     override fun apply(target: Project) = target.afterEvaluate {
         val purifyTask = tasks.create("purifyTypes", PurifyTypesTask::class.java)
         val compileTask = tasks.findByName("productionLibraryCompileSync")
-        println("Compile Task found: ${compileTask?.name}")
         purifyTask.mustRunAfter(compileTask)
     }
 }

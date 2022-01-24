@@ -1,3 +1,5 @@
+import dev.petuska.npm.publish.task.NpmPublishTask
+
 plugins {
     kotlin("js")
     id("tz.co.asoft.library")
@@ -73,5 +75,11 @@ npmPublishing {
                 }
             }
         }
+    }
+}
+
+afterEvaluate {
+    tasks.withType(NpmPublishTask::class.java).forEach {
+        it.dependsOn("purifyTypes")
     }
 }

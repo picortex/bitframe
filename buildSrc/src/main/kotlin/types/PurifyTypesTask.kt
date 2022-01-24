@@ -6,38 +6,40 @@ import java.io.File
 
 open class PurifyTypesTask : DefaultTask() {
     @get:InputDirectory
-    var directory: File = File(project.buildDir, "compileSync/main/productionLibrary/kotlin")
+    var directory: File = File(project.buildDir, "publications/npm/js")
 
     @get:Input
     var contentsToBeRemoved = listOf(
-        "component", "_init_", "factory", "hashCode()", "toString", "copy", "equals", "serializer()", "constructor", "descriptor: kotlinx."
+        "component", "_init_", "factory", "hashCode()", "toString", "copy", "equals", "serializer()", "descriptor: kotlinx."
     )
 
     @get:InputFile
     val inputFile: File?
-        get() = directory.listFiles().firstOrNull {
+        get() = directory.listFiles()?.firstOrNull {
             it.name.contains(".d.ts")
         }
 
     @get:OutputFile
     val outputFile: File
-        get() = File(directory, inputFile?.name)
+        get() = File(directory, "index.d.ts")
 
     @TaskAction
     fun process() {
         val lines = inputFile?.readLines() ?: error("Couldn't get files")
-        println("Before: ${lines.size}")
         val filteredLines = lines.filter { line ->
             !contentsToBeRemoved.any { content -> line.contains(content) }
+        }.map {
+            changeNullables(it)
         }
-        println("After : ${filteredLines.size}")
-        println(outputFile.absolutePath)
         outputFile.apply {
+            delete()
             createNewFile()
             filteredLines.forEach { appendText("$it\n") }
         }
-//        filteredLines.forEach {
-//            println(it)
-//        }
+    }
+
+    private fun changeNullables(line: String): String {
+        if (!line.contains(": Nullable<")) return line
+        return line.replace(": Nullable<", "?: Nullable<")
     }
 }
