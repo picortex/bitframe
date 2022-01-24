@@ -24,7 +24,7 @@ class PanelViewModel(
     }
 
     private fun watchSessionAndUpdateUI() {
-        sessionWatcher = service.session.watch {
+        sessionWatcher = service.session.watch(ignoreImmediateValue = true) {
             val oldState = ui.value as? State.Panel
             when {
                 it is Session.SignedOut -> ui.value = State.Login

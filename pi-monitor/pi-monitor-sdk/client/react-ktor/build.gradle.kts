@@ -5,6 +5,8 @@ plugins {
     id("org.jetbrains.dokka")
 }
 
+apply<types.PostProcessTypescriptTypesPlugin>()
+
 kotlin {
     js(IR) {
         val main by compilations
@@ -54,6 +56,7 @@ npmPublishing {
             moduleName = "pi-monitor-client-full"
             readme = file("README.md")
             packageJson {
+                types = "index.d.ts"
                 dependencies {
                     "platform" to "1.3.6"
                     "@js-joda/core" to "4.0.0"
