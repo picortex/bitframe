@@ -18,6 +18,6 @@ sealed class PortfolioState {
 
     class Failure(
         override val cause: Throwable,
-        override val message: String = cause.message ?: "Unknown error",
+        override val message: String = "Unknown error",
     ) : PortfolioState(), FeedbackFailure
 }

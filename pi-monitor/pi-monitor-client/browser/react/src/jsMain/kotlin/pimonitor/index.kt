@@ -4,6 +4,8 @@ import applikation.konfig
 import bitframe.Bitframe
 import kotlinext.js.jso
 import kotlinx.browser.document
+import kotlinx.css.*
+import kotlinx.css.properties.transition
 import kotlinx.extensions.By
 import kotlinx.extensions.get
 import org.w3c.dom.HTMLDivElement
@@ -12,6 +14,8 @@ import pimonitor.evaluation.businesses.BusinessContainer
 import pimonitor.evaluation.businesses.InviteBusiness
 import reakt.setContent
 import scope
+import styled.css
+import styled.styledDiv
 
 fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
     val konfig = konfig()
