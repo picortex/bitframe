@@ -3,6 +3,9 @@
 
 package presenters.feedbacks
 
+import presenters.feedbacks.builders.makeFailure
+import presenters.feedbacks.builders.makeLoading
+import presenters.feedbacks.builders.makeSuccess
 import kotlin.js.JsExport
 
 sealed interface FormFeedback {
@@ -12,10 +15,7 @@ sealed interface FormFeedback {
         val loading: Boolean get() = true
 
         companion object {
-            operator fun invoke(message: String) = object : Loading {
-                override val message = message
-                override val loading = true
-            }
+            operator fun invoke(message: String) = makeLoading(message)
         }
     }
 
@@ -27,11 +27,7 @@ sealed interface FormFeedback {
             operator fun invoke(
                 cause: Throwable,
                 message: String = cause.message ?: "Unknown failure"
-            ): Failure = object : Failure {
-                override val cause = cause
-                override val message = message
-                override val failure = true
-            }
+            ): Failure = makeFailure(cause, message)
         }
     }
 
@@ -39,10 +35,7 @@ sealed interface FormFeedback {
         val success: Boolean get() = true
 
         companion object {
-            operator fun invoke(message: String) = object : Loading {
-                override val message = message
-                override val loading = true
-            }
+            operator fun invoke(message: String) = makeSuccess(message)
         }
     }
 }

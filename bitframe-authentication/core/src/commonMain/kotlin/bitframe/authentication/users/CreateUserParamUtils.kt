@@ -3,6 +3,7 @@ package bitframe.authentication.users
 import bitframe.authentication.signin.EmailPassword
 import bitframe.authentication.signin.PhonePassword
 import bitframe.authentication.signin.UsernamePassword
+import kotlinx.collections.interoperable.listOf
 
 fun CreateUserParams.toUser(uid: String) = User(
     uid = uid,
