@@ -3,8 +3,12 @@ package integration.monitors
 import bitframe.testing.annotations.Lifecycle
 import bitframe.testing.annotations.TestInstance
 import bitframe.testing.annotations.Testcontainers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withContext
 import later.await
 import pimonitor.authentication.signup.SignUpParams
 import pimonitor.authentication.signup.toCredentials
@@ -35,9 +39,11 @@ class CreateBusinessViewModelTest : PiMonitorIntegrationTest() {
             password = "jane"
         )
         // signUp as a business
-        service.signUp.signUp(monitor).await()
-        service.signIn.signIn(monitor.toCredentials())
-        delay(100)
+        withContext(Dispatchers.Default) {
+            service.signUp.signUp(monitor).await()
+            service.signIn.signIn(monitor.toCredentials())
+            delay(100)
+        }
         vm.expect(Intent.ShowForm(null)).toBeIn<State.Form>()
         val params = CreateMonitoredBusinessParams(
             businessName = "PiCortext LLC",
