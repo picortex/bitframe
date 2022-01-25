@@ -26,7 +26,7 @@ sealed interface FormFeedback {
         companion object {
             operator fun invoke(
                 cause: Throwable,
-                message: String = cause.message ?: "Unknown failure"
+                message: String? = null
             ): Failure = makeFailure(cause, message)
         }
     }
