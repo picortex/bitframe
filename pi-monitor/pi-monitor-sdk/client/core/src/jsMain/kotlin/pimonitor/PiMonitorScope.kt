@@ -14,6 +14,7 @@ import pimonitor.authentication.signup.exports.SignUpScope
 import pimonitor.evaluation.businesses.exports.BusinessesScope
 import pimonitor.evaluation.businesses.exports.CreateBusinessScope
 import pimonitor.evaluation.contacts.exports.ContactsScope
+import pimonitor.portfolio.PortfolioScope
 
 open class PiMonitorScope(
     override val config: PiMonitorViewModelConfig,
@@ -22,7 +23,8 @@ open class PiMonitorScope(
     override val panel: PanelScope,
     open val businesses: BusinessesScope,
     open val createBusiness: CreateBusinessScope,
-    open val contacts: ContactsScope
+    open val contacts: ContactsScope,
+    open val portfolio: PortfolioScope
 ) : BitframeScope {
 
     override val userLiveSession: Live<Session> get() = config.service.signIn.session

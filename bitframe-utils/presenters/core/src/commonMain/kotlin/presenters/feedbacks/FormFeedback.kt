@@ -1,22 +1,48 @@
 @file:JsExport
+@file:Suppress("WRONG_EXPORTED_DECLARATION")
 
 package presenters.feedbacks
 
 import kotlin.js.JsExport
 
-sealed class FormFeedback(open val message: String) {
-    data class Loading(override val message: String) : FormFeedback(message) {
-        val loading = true
+sealed interface FormFeedback {
+    val message: String
+
+    interface Loading : FormFeedback {
+        val loading: Boolean get() = true
+
+        companion object {
+            operator fun invoke(message: String) = object : Loading {
+                override val message = message
+                override val loading = true
+            }
+        }
     }
 
-    data class Failure(
-        val cause: Throwable,
-        override val message: String = cause.message ?: "Unknown failure"
-    ) : FormFeedback(message) {
-        val failure = true
+    interface Failure : FormFeedback {
+        val cause: Throwable
+        val failure: Boolean get() = true
+
+        companion object {
+            operator fun invoke(
+                cause: Throwable,
+                message: String = cause.message ?: "Unknown failure"
+            ): Failure = object : Failure {
+                override val cause = cause
+                override val message = message
+                override val failure = true
+            }
+        }
     }
 
-    data class Success(override val message: String) : FormFeedback(message) {
-        val success = true
+    interface Success : FormFeedback {
+        val success: Boolean get() = true
+
+        companion object {
+            operator fun invoke(message: String) = object : Loading {
+                override val message = message
+                override val loading = true
+            }
+        }
     }
 }

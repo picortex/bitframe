@@ -4,6 +4,7 @@ import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.signin.SignInService
 import bitframe.daos.conditions.contains
+import kotlinx.collections.interoperable.toInteroperableList
 import later.Later
 import later.await
 import later.later
@@ -20,7 +21,7 @@ open class SignInService(
         val match = matches.first()
         LoginConundrum(
             user = match,
-            spaces = match.spaces
+            spaces = match.spaces.toInteroperableList()
         )
     }
 
