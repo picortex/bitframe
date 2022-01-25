@@ -27,6 +27,7 @@ sealed class SignInState {
 
     data class Conundrum(
         val user: User,
-        val spaces: List<Space>
+        val spaces: List<Space>,
+        val status: FormFeedback?
     ) : SignInState()
 }

@@ -40,6 +40,7 @@ open class PurifyTypesTask : DefaultTask() {
 
     private fun changeNullables(line: String): String {
         if (!line.contains(": Nullable<")) return line
-        return line.replace(": Nullable<", "?: Nullable<")
+        val stage1 = line.replace(": Nullable<", "?: Nullable<")
+        return stage1.replace("()?: Nullable", "(): Nullable")
     }
 }

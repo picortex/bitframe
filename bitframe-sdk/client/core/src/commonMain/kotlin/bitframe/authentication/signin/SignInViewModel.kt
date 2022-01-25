@@ -11,10 +11,11 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import viewmodel.ViewModel
+import bitframe.authentication.signin.SignInState as State
 
 class SignInViewModel(
     config: BitframeViewModelConfig
-) : ViewModel<SignInIntent, SignInState>(SignInState.Form(SignInFormFields(), null), config) {
+) : ViewModel<SignInIntent, State>(State.Form(SignInFormFields(), null), config) {
 
     private val service: SignInService = config.service.signIn
     private val cache: Cache = config.service.config.cache
@@ -27,8 +28,8 @@ class SignInViewModel(
     }
 
     private fun CoroutineScope.initialize() = launch {
-        val state = SignInState.Form(SignInFormFields(), null)
-        flow {
+        val state = State.Form(SignInFormFields(), null)
+        flow<State> {
             emit(state.copy(status = Loading("Fetching your previous credentials")))
             val cred = cache.load<SignInCredentials>(SignInService.CREDENTIALS_CACHE_KEY).await()
             emit(state.copy(fields = SignInFormFields.with(cred)))
@@ -39,17 +40,26 @@ class SignInViewModel(
         }
     }
 
-    private fun resolveConundrum(i: SignInIntent.ResolveConundrum) {
-        service.resolveConundrum(i.space)
+    private fun CoroutineScope.resolveConundrum(i: SignInIntent.ResolveConundrum) = launch {
+        flow<State> {
+            val state = ui.value as? State.Conundrum ?: error("Do not resolve a conundrum while not in a conundrum state")
+            emit(state.copy(status = Loading("Logging into ${i.space.name}")))
+            service.resolveConundrum(i.space).await()
+            emit(state.copy(status = Success()))
+        }.catch {
+            emit(ui.value.copy(it))
+        }.collect {
+            ui.value = it
+        }
     }
 
     private fun CoroutineScope.signIn(i: SignInIntent.Submit) = launch {
-        val state = ui.value as SignInState.Form
+        val state = ui.value as State.Form
         flow {
             emit(state.copy(status = Loading("Signing you in, please wait . . .")))
             val conundrum = service.signIn(i.credentials).await()
             if (conundrum.spaces.size > 1) {
-                emit(SignInState.Conundrum(conundrum.user, conundrum.spaces))
+                emit(State.Conundrum(conundrum.user, conundrum.spaces, null))
             } else {
                 emit(state.copy(status = Loading("Saving your session for next login")))
                 cache.save(SignInService.SESSION_CACHE_KEY, service.currentSession)
@@ -57,7 +67,7 @@ class SignInViewModel(
             }
         }.catch {
             emit(state.copy(status = Failure(it)))
-            delay(recoveryTime.toLong())
+            delay(recoveryTime)
             emit(state.copy(i, null))
         }.collect { ui.value = it }
     }

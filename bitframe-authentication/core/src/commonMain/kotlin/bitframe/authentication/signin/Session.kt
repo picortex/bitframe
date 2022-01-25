@@ -14,19 +14,35 @@ sealed class Session {
     @Serializable
     data class SignedIn(
         val app: App,
-        val space: Space,
-        val user: User
+        override val space: Space,
+        override val user: User
     ) : Session()
 
     data class Conundrum(
         val app: App,
         val spaces: List<Space>,
-        val user: User
+        override val user: User
     ) : Session()
-    
+
     data class SignedOut(
         val app: App,
-        val space: Space?,
-        val user: User?
+        override val space: Space?,
+        override val user: User?
     ) : Session()
+
+    open val user: User?
+        get() = when (this) {
+            Unknown -> null
+            is SignedIn -> user
+            is Conundrum -> user
+            is SignedOut -> null
+        }
+
+    open val space: Space?
+        get() = when (this) {
+            Unknown -> null
+            is SignedIn -> space
+            is Conundrum -> null
+            is SignedOut -> null
+        }
 }

@@ -59,6 +59,7 @@ private val SignInPage = fc<SignInPageProps> { props ->
                         css { cursor = Cursor.pointer }
                         +space.name
                         attrs.onClickFunction = {
+                            console.log("Clicked")
                             scope.resolveConundrum(space)
                         }
                     }

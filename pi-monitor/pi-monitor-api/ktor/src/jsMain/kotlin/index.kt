@@ -36,7 +36,7 @@ fun client(config: ServiceConfiguration): PiMonitorService {
 
     // default caches
     val cache = when {
-        Platform.isBrowser -> BrowserCache()
+        Platform.isBrowser -> BrowserWACache()
         Platform.isReactNative -> AsyncStorageCache()
         else -> MockCache().also { logger.warn("Unknown javascript platform, using a non persistent cache") }
     }

@@ -25,7 +25,7 @@ fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
         viewModel = jso {
             recoveryTime = undefined
             logging = jso {
-                console = false
+                console = true
             }
         }
     }
