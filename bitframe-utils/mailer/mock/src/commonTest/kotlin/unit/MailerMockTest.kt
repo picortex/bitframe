@@ -2,7 +2,7 @@ package unit
 
 import expect.expect
 import identifier.Email
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import later.await
 import mailer.EmailDraft
 import mailer.Mailer

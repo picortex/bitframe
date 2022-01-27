@@ -1,5 +1,6 @@
 package bitframe.authentication.client.signin
 
+import bitframe.authentication.client.SigningServiceConfig
 import bitframe.authentication.signin.Session
 import bitframe.authentication.users.User
 import events.EventBus
@@ -14,7 +15,7 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface SignInServiceMockConfig : SignInServiceConfig {
+interface SignInServiceMockConfig : SigningServiceConfig {
     val users: MutableList<User>
 
     companion object {
@@ -38,11 +39,11 @@ interface SignInServiceMockConfig : SignInServiceConfig {
             appId: String = DEFAULT_APP_ID,
             users: MutableList<User> = DEFAULT_USERS,
             cache: Cache = DEFAULT_CACHE,
-            signInSession: Live<Session> = SignInServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            signInSession: Live<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): SignInServiceMockConfig = object : SignInServiceMockConfig, SignInServiceConfig by SignInServiceConfig(appId, cache, signInSession, bus, logger, scope) {
+        ): SignInServiceMockConfig = object : SignInServiceMockConfig, SigningServiceConfig by SigningServiceConfig(appId, cache, signInSession, bus, logger, scope) {
             override val users: MutableList<User> = users
         }
 
@@ -52,7 +53,7 @@ interface SignInServiceMockConfig : SignInServiceConfig {
             appId: String = DEFAULT_APP_ID,
             users: MutableList<User> = DEFAULT_USERS,
             cache: Cache = DEFAULT_CACHE,
-            signInSession: Live<Session> = SignInServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            signInSession: Live<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE

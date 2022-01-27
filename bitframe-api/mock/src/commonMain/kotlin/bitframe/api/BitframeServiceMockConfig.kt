@@ -1,6 +1,6 @@
 package bitframe.api
 
-import bitframe.authentication.client.signin.SignInServiceConfig
+import bitframe.authentication.client.SigningServiceConfig
 import bitframe.authentication.client.signin.SignInServiceMockConfig
 import bitframe.authentication.signin.Session
 import bitframe.authentication.users.User
@@ -38,7 +38,7 @@ interface BitframeServiceMockConfig : BitframeServiceConfig, SignInServiceMockCo
             appId: String = DEFAULT_APP_ID,
             users: MutableList<User> = DEFAULT_USERS,
             cache: Cache = DEFAULT_CACHE,
-            signInSession: Live<Session> = SignInServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            signInSession: Live<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
@@ -52,7 +52,7 @@ interface BitframeServiceMockConfig : BitframeServiceConfig, SignInServiceMockCo
             appId: String = DEFAULT_APP_ID,
             users: MutableList<User> = DEFAULT_USERS,
             cache: Cache = DEFAULT_CACHE,
-            signInSession: Live<Session> = SignInServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            signInSession: Live<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE

@@ -1,22 +1,52 @@
 @file:JsExport
+@file:Suppress("WRONG_EXPORTED_DECLARATION")
 
 package presenters.feedbacks
 
+import presenters.feedbacks.builders.FailureImpl
+import presenters.feedbacks.builders.LoadingImpl
+import presenters.feedbacks.builders.SuccessImpl
 import kotlin.js.JsExport
+import kotlin.js.JsName
+import kotlin.jvm.JvmStatic
 
-sealed class FormFeedback(open val message: String) {
-    data class Loading(override val message: String) : FormFeedback(message) {
-        val loading = true
+sealed interface FormFeedback {
+    val message: String
+
+    interface Loading : FormFeedback {
+        val loading: Boolean get() = true
+
+        companion object {
+            operator fun invoke(message: String): Loading = LoadingImpl(message)
+        }
     }
 
-    data class Failure(
-        val cause: Throwable,
-        override val message: String = cause.message ?: "Unknown failure"
-    ) : FormFeedback(message) {
-        val failure = true
+    interface Failure : FormFeedback {
+        val cause: Throwable
+        val failure: Boolean get() = true
+
+        companion object {
+            @JvmStatic
+            val DEFAULT_MESSAGE = "Unknown error"
+
+            @JsName("_init_")
+            operator fun invoke(
+                cause: Throwable
+            ): Failure = FailureImpl(cause, cause.message ?: DEFAULT_MESSAGE)
+
+            @JsName("_init_WithMessage")
+            operator fun invoke(
+                cause: Throwable,
+                message: String
+            ): Failure = FailureImpl(cause, message)
+        }
     }
 
-    data class Success(override val message: String) : FormFeedback(message) {
-        val success = true
+    interface Success : FormFeedback {
+        val success: Boolean get() = true
+
+        companion object {
+            operator fun invoke(message: String = "Success"): Success = SuccessImpl(message)
+        }
     }
 }

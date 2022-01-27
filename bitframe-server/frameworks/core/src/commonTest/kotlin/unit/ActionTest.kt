@@ -6,7 +6,7 @@ import bitframe.server.http.HttpResponse
 import bitframe.server.http.HttpRoute
 import expect.expect
 import io.ktor.http.*
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 
 class ActionTest {

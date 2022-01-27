@@ -13,10 +13,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":pi-monitor-service-client-core"))
-                api(project(":bitframe-service-client-ktor"))
-                api(project(":bitframe-core"))
-                api(project(":bitframe-authentication-service-client-ktor"))
+                api(projects.piMonitorServiceClientCore)
+                api(projects.bitframeServiceClientKtor)
+                api(projects.bitframeCore)
+                api(projects.bitframeAuthenticationServiceClientKtor)
             }
         }
 
@@ -24,7 +24,7 @@ kotlin {
             dependencies {
                 api(asoft.cache.mock)
                 api(asoft.expect.coroutines)
-                api(project(":pi-monitor-test-testing"))
+                api(projects.piMonitorTestTesting)
             }
         }
     }

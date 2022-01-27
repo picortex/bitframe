@@ -1,9 +1,13 @@
+    import dev.petuska.npm.publish.task.NpmPublishTask
+
 plugins {
     kotlin("js")
     id("tz.co.asoft.library")
     id("dev.petuska.npm.publish")
     id("org.jetbrains.dokka")
 }
+
+apply<types.PostProcessTypescriptTypesPlugin>()
 
 kotlin {
     js(IR) {
@@ -54,6 +58,7 @@ npmPublishing {
             moduleName = "pi-monitor-client-full"
             readme = file("README.md")
             packageJson {
+                types = "index.d.ts"
                 dependencies {
                     "platform" to "1.3.6"
                     "@js-joda/core" to "4.0.0"
@@ -70,5 +75,11 @@ npmPublishing {
                 }
             }
         }
+    }
+}
+
+afterEvaluate {
+    tasks.withType(NpmPublishTask::class.java).forEach {
+        it.dependsOn("purifyTypes")
     }
 }

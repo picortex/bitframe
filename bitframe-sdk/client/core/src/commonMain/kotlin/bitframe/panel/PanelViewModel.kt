@@ -1,16 +1,13 @@
 package bitframe.panel
 
-import bitframe.api.BitframeService
-import bitframe.authentication.client.signin.SignInService
 import bitframe.authentication.signin.Session
-import bitframe.authentication.signin.SignInCredentials
 import bitframe.client.BitframeViewModelConfig
-import cache.Cache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import live.Watcher
 import viewmodel.ViewModel
 import bitframe.panel.PanelIntent as Intent
 import bitframe.panel.PanelState as State
@@ -18,28 +15,33 @@ import bitframe.panel.PanelState as State
 class PanelViewModel(
     config: BitframeViewModelConfig
 ) : ViewModel<Intent, State>(State.Loading("Setting up your workspace"), config) {
-    val service: BitframeService = config.service
-    val cache: Cache = config.cache
+    val service = config.service.signIn
+
+    var sessionWatcher: Watcher<Session>? = null
 
     override fun CoroutineScope.execute(i: Intent) = when (i) {
         Intent.InitPanel -> initialize()
     }
 
+    private fun watchSessionAndUpdateUI() {
+        sessionWatcher = service.session.watch(ignoreImmediateValue = true) {
+            val oldState = ui.value as? State.Panel
+            when {
+                it is Session.SignedOut -> ui.value = State.Login
+                it is Session.SignedIn && it != oldState?.session -> ui.value = State.Panel(it, sections)
+            }
+        }
+    }
+
     private fun CoroutineScope.initialize() = launch {
         flow {
             emit(State.Loading("Retrieving your last session"))
-            val signInSession = service.signIn.currentSession
+            val signInSession = service.currentSession
             if (signInSession is Session.SignedIn) {
                 emit(State.Panel(signInSession, sections))
             } else {
-                val cred = cache.load<SignInCredentials>(SignInService.CREDENTIALS_CACHE_KEY).await()
                 emit(State.Loading("Re authenticating you with your last session"))
-                val res = service.signIn.signIn(cred).await()
-                if (res.spaces.size != 1) {
-                    val session = cache.load<Session.SignedIn>(SignInService.SESSION_CACHE_KEY).await()
-                    service.signIn.resolveConundrum(session.space)
-                }
-                val session = service.signIn.currentSession as Session.SignedIn
+                val session = service.signInWithLastSession().await() ?: error("Couldn't sign in with last session")
                 emit(State.Panel(session, sections))
             }
         }.catch {
@@ -47,5 +49,11 @@ class PanelViewModel(
         }.collect {
             ui.value = it
         }
+        watchSessionAndUpdateUI()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        sessionWatcher?.stop()
     }
 }

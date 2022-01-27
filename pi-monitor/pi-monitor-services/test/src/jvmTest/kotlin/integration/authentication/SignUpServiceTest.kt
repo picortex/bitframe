@@ -6,7 +6,7 @@ import bitframe.testing.annotations.Lifecycle
 import bitframe.testing.annotations.TestInstance
 import bitframe.testing.annotations.Testcontainers
 import expect.expect
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import later.await
 import pimonitor.testing.PiMonitorIntegrationTest

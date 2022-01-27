@@ -1,6 +1,6 @@
 package bitframe.api
 
-import bitframe.authentication.client.signin.SignInServiceConfig
+import bitframe.authentication.client.SigningServiceConfig
 import bitframe.authentication.client.signin.SignInServiceKtorConfig
 import bitframe.authentication.signin.Session
 import events.EventBus
@@ -19,7 +19,7 @@ interface BitframeServiceKtorConfig : BitframeServiceConfig, SignInServiceKtorCo
             appId: String,
             url: String,
             cache: Cache,
-            signInSession: Live<Session> = SignInServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            signInSession: Live<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = ServiceConfig.DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             http: HttpClient = KtorClientConfiguration.DEFAULT_HTTP_CLIENT,

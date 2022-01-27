@@ -6,6 +6,7 @@ import bitframe.authentication.spaces.CreateSpaceParams
 import bitframe.authentication.users.CreateUserParams
 import bitframe.authentication.users.RegisterUserParams
 import bitframe.authentication.users.UsersService
+import kotlinx.collections.interoperable.listOf
 import later.Later
 import later.await
 import later.later

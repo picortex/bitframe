@@ -4,6 +4,7 @@ package bitframe.authentication.signin
 
 import bitframe.authentication.spaces.Space
 import bitframe.authentication.users.User
+import kotlinx.collections.interoperable.List
 import presenters.feedbacks.FormFeedback
 import presenters.feedbacks.FormFeedback.Failure
 import presenters.feedbacks.FormFeedback.Success
@@ -26,6 +27,7 @@ sealed class SignInState {
 
     data class Conundrum(
         val user: User,
-        val spaces: List<Space>
+        val spaces: List<Space>,
+        val status: FormFeedback?
     ) : SignInState()
 }

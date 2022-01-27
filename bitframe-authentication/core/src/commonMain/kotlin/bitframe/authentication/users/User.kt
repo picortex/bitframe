@@ -9,6 +9,8 @@ import kotlinx.datetime.Clock
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import kotlinx.serialization.builtins.LongAsStringSerializer
+import kotlinx.collections.interoperable.List
+import kotlinx.collections.interoperable.listOf
 import kotlin.js.JsExport
 import kotlin.js.JsName
 

@@ -1,6 +1,6 @@
 package integration
 
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import later.await
 import pimonitor.integrations.PiCortexDashboardProvider
 import pimonitor.integrations.PiCortexUserCredentials

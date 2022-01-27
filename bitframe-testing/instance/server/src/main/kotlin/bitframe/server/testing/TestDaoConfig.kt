@@ -5,6 +5,7 @@ import bitframe.authentication.spaces.SpacesDaoInMemoryConfig
 import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.User
 import bitframe.authentication.users.UsersDaoInMemoryConfig
+import kotlinx.collections.interoperable.listOf
 
 private val space = Space(
     uid = "space-1",

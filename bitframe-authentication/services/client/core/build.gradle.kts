@@ -15,6 +15,7 @@ kotlin {
 
     js(IR) { library() }
 
+    val tmp = 3
     sourceSets {
         val commonMain by getting {
             dependencies {

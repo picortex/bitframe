@@ -1,5 +1,6 @@
 package bitframe.authentication.client.signin
 
+import bitframe.authentication.client.SigningServiceConfig
 import bitframe.authentication.signin.Session
 import events.EventBus
 import bitframe.service.client.config.KtorClientConfiguration
@@ -12,14 +13,14 @@ import logging.Logger
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmSynthetic
 
-interface SignInServiceKtorConfig : SignInServiceConfig, KtorClientConfiguration {
+interface SignInServiceKtorConfig : SigningServiceConfig, KtorClientConfiguration {
     companion object {
         @JvmSynthetic
         operator fun invoke(
             url: String,
             appId: String,
             cache: Cache,
-            session: Live<Session> = SignInServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            session: Live<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = KtorClientConfiguration.DEFAULT_BUS,
             logger: Logger = KtorClientConfiguration.DEFAULT_LOGGER,
             http: HttpClient = KtorClientConfiguration.DEFAULT_HTTP_CLIENT,
@@ -36,7 +37,7 @@ interface SignInServiceKtorConfig : SignInServiceConfig, KtorClientConfiguration
             url: String,
             appId: String,
             cache: Cache,
-            session: Live<Session> = SignInServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            session: Live<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = KtorClientConfiguration.DEFAULT_BUS,
             logger: Logger = KtorClientConfiguration.DEFAULT_LOGGER,
             http: HttpClient = KtorClientConfiguration.DEFAULT_HTTP_CLIENT,

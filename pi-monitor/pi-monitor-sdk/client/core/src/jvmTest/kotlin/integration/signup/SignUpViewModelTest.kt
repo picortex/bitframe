@@ -4,7 +4,7 @@ import presenters.feedbacks.FormFeedback.*
 import bitframe.testing.annotations.Lifecycle
 import bitframe.testing.annotations.TestInstance
 import bitframe.testing.annotations.Testcontainers
-import kotlinx.coroutines.runTest
+import kotlinx.coroutines.test.runTest
 import pimonitor.authentication.signup.*
 import pimonitor.testing.PiMonitorIntegrationTest
 import viewmodel.expect

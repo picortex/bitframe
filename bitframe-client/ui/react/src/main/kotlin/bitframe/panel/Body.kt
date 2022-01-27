@@ -1,16 +1,16 @@
 package bitframe.panel
 
-import bitframe.PanelPageRoute
+import bitframe.BitframeReactScope
 import bitframe.renderers.Renderer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.css.em
 import react.RBuilder
 import react.createElement
-import react.router.Route
-import react.router.Routes
+import react.router.*
+import reakt.ContainedButton
 import reakt.DrawerState
 import reakt.NavigationAppBar
-import reakt.*
+import reakt.Surface
 import styled.styledDiv
 
 private fun defaultRenderers(): Map<String, Renderer> = mapOf(
@@ -20,28 +20,28 @@ private fun defaultRenderers(): Map<String, Renderer> = mapOf(
 
 internal fun RBuilder.Body(
     controller: MutableStateFlow<DrawerState>,
+    scope: BitframeReactScope,
     moduleRenderers: Map<String, Renderer>
 ) = styledDiv {
-    val allRenderers = moduleRenderers.toMutableMap().apply {
-        putAll(defaultRenderers())
-    }
-
     NavigationAppBar(
         drawerController = controller,
         left = {
             +"Dashboard"
+        },
+        right = {
+            ContainedButton(
+                name = "Logout",
+                onClick = { scope.signOut() }
+            )
         }
     )
 
     Surface(margin = 0.5.em) {
         Routes {
-            for ((path, renderer) in allRenderers) {
-                Route {
-                    attrs.path = "${PanelPageRoute}$path"
-                    renderer()
-                }
+            for ((path, renderer) in moduleRenderers + defaultRenderers()) Route {
+                attrs.path = path // "${PanelPageRoute}$path"
+                attrs.element = createElement { renderer() }
             }
-            styledDiv { +"Excuse me, are you lost?" }
         }
     }
 }
