@@ -2,10 +2,8 @@
 
 package pimonitor.client.evaluation.businesses
 
-import events.Event
 import pimonitor.evaluation.businesses.BusinessesService
 import pimonitor.monitored.CreateMonitoredBusinessParams
-import pimonitor.monitored.MonitoredBusiness
 import kotlin.js.JsExport
 
 abstract class BusinessesService(

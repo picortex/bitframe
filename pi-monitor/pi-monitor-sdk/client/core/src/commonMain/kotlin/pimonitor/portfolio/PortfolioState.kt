@@ -2,7 +2,6 @@
 
 package pimonitor.portfolio
 
-import presenters.cards.ValueCard
 import kotlin.js.JsExport
 import presenters.feedbacks.FormFeedback.Failure as FeedbackFailure
 import presenters.feedbacks.FormFeedback.Loading as FeedbackLoading
@@ -16,8 +15,8 @@ sealed class PortfolioState {
         val data: PortfolioData
     ) : PortfolioState()
 
-    class Failure(
+    data class Failure(
         override val cause: Throwable,
-        override val message: String = "Unknown error",
+        override val message: String = cause.message ?: FeedbackFailure.DEFAULT_MESSAGE,
     ) : PortfolioState(), FeedbackFailure
 }

@@ -11,7 +11,7 @@ import bitframe.authentication.users.UsersService
 interface BitframeServiceMock : BitframeService {
     companion object {
         operator fun invoke(
-            config: BitframeServiceMockConfig
+            config: BitframeServiceMockConfig = BitframeServiceMockConfig()
         ): BitframeServiceMock = object : BitframeServiceMock {
             override val config: BitframeServiceConfig = config
             override val spaces: SpacesService = SpacesServiceMock(config)

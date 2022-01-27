@@ -109,11 +109,11 @@ includeSubs(base = "pi-monitor-dao", path = "pi-monitor/pi-monitor-daos", "core"
 
 includeSubs(base = "pi-monitor-service", path = "pi-monitor/pi-monitor-services", "core", "test")
 
-includeSubs(base = "pi-monitor-service-client", path = "pi-monitor/pi-monitor-services/client", "core", "ktor")
+includeSubs(base = "pi-monitor-service-client", path = "pi-monitor/pi-monitor-services/client", "core", "ktor", "mock")
 
 includeSubs(base = "pi-monitor-service-server", path = "pi-monitor/pi-monitor-services/server", "core")
 
-includeSubs(base = "pi-monitor-api", path = "pi-monitor/pi-monitor-api", "core", "ktor")
+includeSubs(base = "pi-monitor-api", path = "pi-monitor/pi-monitor-api", "core", "ktor", "mock")
 
 includeSubs(base = "pi-monitor-sdk-client", path = "pi-monitor/pi-monitor-sdk/client", "core", "react", "react-ktor")
 
