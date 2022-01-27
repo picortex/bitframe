@@ -13,7 +13,7 @@ sealed class PortfolioState {
     ) : PortfolioState(), FeedbackLoading
 
     data class Portfolio(
-        val totalBusinesses: ValueCard
+        val data: PortfolioData
     ) : PortfolioState()
 
     class Failure(
