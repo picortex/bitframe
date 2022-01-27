@@ -23,8 +23,6 @@ to communicate with the PiMonitor Server
     const config = {
         appId: "<app-id>",
         url: "https://dev.picortex.com",
-        serviceLoggers: undefined,
-        viewModel: undefined
     }
     
     export const scope = SDK.scope(config)

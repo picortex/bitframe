@@ -7,6 +7,7 @@ import bitframe.authentication.client.users.UsersServiceKtor
 import pimonitor.client.authentication.signup.SignUpServiceKtor
 import pimonitor.client.evaluation.businesses.BusinessesServiceKtor
 import pimonitor.client.monitors.MonitorsServiceKtor
+import pimonitor.portfolio.PortfolioService
 
 fun PiMonitorServiceKtor(
     config: PiMonitorServiceKtorConfig,
@@ -19,4 +20,5 @@ fun PiMonitorServiceKtor(
     override val signOut: SignOutService = SignOutService(config)
     override val monitors by lazy { MonitorsServiceKtor(config) }
     override val businesses by lazy { BusinessesServiceKtor(config) }
+    override val portfolio by lazy { PortfolioService(businesses) }
 }

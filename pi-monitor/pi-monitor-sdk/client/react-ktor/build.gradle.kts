@@ -1,4 +1,4 @@
-import dev.petuska.npm.publish.task.NpmPublishTask
+    import dev.petuska.npm.publish.task.NpmPublishTask
 
 plugins {
     kotlin("js")

@@ -13,9 +13,11 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.piMonitorCore)
-                api(projects.bitframePresenters)
-                api(projects.bitframeEventsInmemory)
+                api(projects.piMonitorApiCore)
+                api(projects.piMonitorServiceClientMock)
+                api(projects.bitframeApiMock)
+                api(asoft.cache.mock)
+                api(asoft.logging.console)
             }
         }
 

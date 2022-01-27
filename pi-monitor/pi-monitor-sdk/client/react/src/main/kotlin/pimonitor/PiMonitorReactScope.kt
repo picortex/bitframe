@@ -11,6 +11,7 @@ import pimonitor.authentication.signup.exports.SignUpReactScope
 import pimonitor.evaluation.businesses.exports.BusinessesReactScope
 import pimonitor.evaluation.businesses.exports.CreateBusinessReactScope
 import pimonitor.evaluation.contacts.exports.ContactsReactScope
+import pimonitor.portfolio.PortfolioReactScope
 import pimonitor.portfolio.PortfolioScope
 
 class PiMonitorReactScope private constructor(
@@ -21,7 +22,7 @@ class PiMonitorReactScope private constructor(
     override val businesses: BusinessesReactScope,
     override val createBusiness: CreateBusinessReactScope,
     override val contacts: ContactsReactScope,
-    override val portfolio: PortfolioScope
+    override val portfolio: PortfolioReactScope
 ) : PiMonitorScope(config, signIn, signUp, panel, businesses, createBusiness, contacts, portfolio),
     BitframeReactScope, SessionAware {
     @JsName("fromViewModelConfig")
@@ -33,6 +34,6 @@ class PiMonitorReactScope private constructor(
         BusinessesReactScope(config),
         CreateBusinessReactScope(config),
         ContactsReactScope(config),
-        PortfolioScope(config)
+        PortfolioReactScope(config)
     )
 }

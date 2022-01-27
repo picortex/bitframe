@@ -13,9 +13,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":pi-monitor-service-core"))
-                api(project(":bitframe-sdk-server-core"))
-                api(project(":bitframe-events-inmemory"))
+                api(projects.piMonitorServiceCore)
+                api(projects.bitframeSdkServerCore)
+                api(projects.piMonitorDaoCore)
+                api(projects.bitframeEventsInmemory)
             }
         }
 
