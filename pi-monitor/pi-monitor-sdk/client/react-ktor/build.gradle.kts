@@ -9,7 +9,6 @@ plugins {
 
 apply<types.PostProcessTypescriptTypesPlugin>()
 
-val tmp = 4
 kotlin {
     js(IR) {
         val main by compilations
