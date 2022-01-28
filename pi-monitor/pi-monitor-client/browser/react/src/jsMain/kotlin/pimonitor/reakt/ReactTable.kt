@@ -6,6 +6,7 @@ import kotlinx.css.*
 import kotlinx.html.InputType
 import kotlinx.html.js.onClickFunction
 import live.Watcher
+import live.value
 import react.*
 import react.Component
 import react.dom.attrs
@@ -37,7 +38,7 @@ class BitframeTableComponent<D> private constructor(props: Props<D>) : RComponen
     private var watcher: Watcher<*>? = null
 
     override fun componentDidMount() {
-        watcher = table.live.watch(ignoreImmediateValue = true) {
+        watcher = table.live.peek {
             setState { table = it }
         }
     }
