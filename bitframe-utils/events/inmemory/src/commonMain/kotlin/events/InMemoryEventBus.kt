@@ -1,6 +1,6 @@
 package events
 
-import live.Live
+import live.value
 import live.MutableLive
 
 class InMemoryEventBus : EventBus() {

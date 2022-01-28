@@ -8,6 +8,7 @@ import bitframe.authentication.signin.Session
 import events.Event
 import kotlinx.coroutines.launch
 import later.await
+import live.value
 import kotlin.js.JsExport
 import kotlin.jvm.JvmStatic
 
@@ -30,7 +31,7 @@ class SignOutService(private val config: SigningServiceConfig) {
         logger.info("Signing out . . .")
         val signInSession = config.signInSession
         val session = signInSession.value as? Session.SignedIn ?: return
-
+        
         signInSession.value = Session.SignedOut(
             app = session.app,
             space = session.space,
