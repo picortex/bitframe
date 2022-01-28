@@ -34,7 +34,7 @@ class BitframeTableComponent<D> private constructor(props: Props<D>) : RComponen
         state = State(props.table.live.value)
     }
 
-    private var watcher: Watcher<Table.State<D>>? = null
+    private var watcher: Watcher<*>? = null
 
     override fun componentDidMount() {
         watcher = table.live.watch {

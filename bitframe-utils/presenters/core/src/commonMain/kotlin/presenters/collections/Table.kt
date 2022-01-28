@@ -6,7 +6,7 @@ import presenters.collections.table.Column
 import presenters.collections.table.Row
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
-import live.Live
+import live.MutableLive
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
@@ -34,7 +34,7 @@ class Table<D>(
             }.toInteroperableList()
     }
 
-    val live = Live(State(columns, rows))
+    val live = MutableLive(State(columns, rows))
 
     fun toggleAllSelected() = changeAllSelection(!areAllRowsSelected)
 

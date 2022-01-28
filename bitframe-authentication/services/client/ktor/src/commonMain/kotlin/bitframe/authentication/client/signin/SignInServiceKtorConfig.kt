@@ -8,7 +8,7 @@ import cache.Cache
 import io.ktor.client.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
-import live.Live
+import live.MutableLive
 import logging.Logger
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmSynthetic
@@ -20,7 +20,7 @@ interface SignInServiceKtorConfig : SigningServiceConfig, KtorClientConfiguratio
             url: String,
             appId: String,
             cache: Cache,
-            session: Live<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            session: MutableLive<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = KtorClientConfiguration.DEFAULT_BUS,
             logger: Logger = KtorClientConfiguration.DEFAULT_LOGGER,
             http: HttpClient = KtorClientConfiguration.DEFAULT_HTTP_CLIENT,
@@ -28,7 +28,7 @@ interface SignInServiceKtorConfig : SigningServiceConfig, KtorClientConfiguratio
             scope: CoroutineScope = KtorClientConfiguration.DEFAULT_SCOPE,
         ): SignInServiceKtorConfig = object : SignInServiceKtorConfig,
             KtorClientConfiguration by KtorClientConfiguration(url, appId, cache, bus, logger, http, json, scope) {
-            override val signInSession: Live<Session> = session
+            override val signInSession: MutableLive<Session> = session
         }
 
         @JvmSynthetic
@@ -37,7 +37,7 @@ interface SignInServiceKtorConfig : SigningServiceConfig, KtorClientConfiguratio
             url: String,
             appId: String,
             cache: Cache,
-            session: Live<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            session: MutableLive<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = KtorClientConfiguration.DEFAULT_BUS,
             logger: Logger = KtorClientConfiguration.DEFAULT_LOGGER,
             http: HttpClient = KtorClientConfiguration.DEFAULT_HTTP_CLIENT,
