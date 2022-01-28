@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import live.Watcher
+import live.value
 import viewmodel.ViewModel
 import bitframe.panel.PanelIntent as Intent
 import bitframe.panel.PanelState as State
@@ -24,11 +25,10 @@ class PanelViewModel(
     }
 
     private fun watchSessionAndUpdateUI() {
-        sessionWatcher = service.session.watch(ignoreImmediateValue = true) {
-            val oldState = ui.value as? State.Panel
+        sessionWatcher = service.session.peek {
             when {
                 it is Session.SignedOut -> ui.value = State.Login
-                it is Session.SignedIn && it != oldState?.session -> ui.value = State.Panel(it, sections)
+                it is Session.SignedIn -> ui.value = State.Panel(it, sections)
             }
         }
     }

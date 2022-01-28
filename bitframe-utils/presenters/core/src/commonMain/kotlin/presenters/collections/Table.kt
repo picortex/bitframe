@@ -7,6 +7,7 @@ import presenters.collections.table.Row
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import live.MutableLive
+import live.value
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
