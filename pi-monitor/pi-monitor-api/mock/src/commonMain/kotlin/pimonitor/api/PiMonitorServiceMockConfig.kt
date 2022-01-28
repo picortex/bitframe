@@ -10,7 +10,7 @@ import events.InMemoryEventBus
 import kotlinx.collections.interoperable.mutableListOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
-import live.Live
+import live.MutableLive
 import logging.ConsoleAppender
 import logging.Logger
 import pimonitor.client.evaluation.businesses.BusinessesServiceConfig
@@ -20,8 +20,8 @@ import bitframe.authentication.signin.Session as SignInSession
 import pimonitor.client.monitors.Session as MonitorSession
 
 class PiMonitorServiceMockConfig @JvmOverloads constructor(
-    override val signInSession: Live<SignInSession> = Live(SignInSession.Unknown),
-    override val monitorSession: Live<MonitorSession> = Live(MonitorSession.Unknown),
+    override val signInSession: MutableLive<SignInSession> = MutableLive(SignInSession.Unknown),
+    override val monitorSession: MutableLive<MonitorSession> = MutableLive(MonitorSession.Unknown),
     override val appId: String = "mock-service",
     override val cache: Cache = MockCache(),
     override val bus: EventBus = InMemoryEventBus(),
