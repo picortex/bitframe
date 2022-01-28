@@ -17,7 +17,7 @@ class PanelViewModel(
 ) : ViewModel<Intent, State>(State.Loading("Setting up your workspace"), config) {
     val service = config.service.signIn
 
-    var sessionWatcher: Watcher<Session>? = null
+    var sessionWatcher: Watcher<*>? = null
 
     override fun CoroutineScope.execute(i: Intent) = when (i) {
         Intent.InitPanel -> initialize()

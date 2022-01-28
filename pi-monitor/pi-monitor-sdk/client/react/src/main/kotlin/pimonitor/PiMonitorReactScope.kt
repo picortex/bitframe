@@ -24,8 +24,8 @@ class PiMonitorReactScope private constructor(
     override val contacts: ContactsReactScope,
     override val portfolio: PortfolioReactScope
 ) : PiMonitorScope(config, signIn, signUp, panel, businesses, createBusiness, contacts, portfolio),
-    BitframeReactScope, SessionAware {
-    @JsName("fromViewModelConfig")
+    BitframeReactScope {
+    @JsName("_init_fromViewModelConfig")
     constructor(config: PiMonitorViewModelConfig) : this(
         config,
         SignInReactScope(config),

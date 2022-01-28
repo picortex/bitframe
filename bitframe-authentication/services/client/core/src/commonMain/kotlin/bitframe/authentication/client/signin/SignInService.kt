@@ -12,7 +12,7 @@ import events.Event
 import later.Later
 import later.await
 import later.later
-import live.Live
+import live.MutableLive
 import kotlin.js.JsExport
 import kotlin.jvm.JvmStatic
 import bitframe.authentication.signin.SignInService as SignInServiceCore
@@ -20,7 +20,7 @@ import bitframe.authentication.signin.SignInService as SignInServiceCore
 abstract class SignInService(
     open val config: SigningServiceConfig
 ) : SignInServiceCore() {
-    val session: Live<Session> get() = config.signInSession
+    val session: MutableLive<Session> get() = config.signInSession
     val currentSession get() = session.value
     protected val scope get() = config.scope
     private val logger

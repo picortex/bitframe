@@ -1,21 +1,22 @@
 package events
 
 import live.Live
+import live.MutableLive
 
 class InMemoryEventBus : EventBus() {
-    private val dispatchers = mutableMapOf<String, Live<Any>>()
+    private val dispatchers = mutableMapOf<String, MutableLive<Any>>()
     private val subscribers = mutableMapOf<String, MutableList<Subscriber<Any>>>()
 
     override fun <D> dispatch(event: Event<D>) {
-        val live: Live<out Any>? = dispatchers[event.topic]
+        val live: MutableLive<out Any>? = dispatchers[event.topic]
         if (live == null) {
-            val l = Live(event.data)
-            dispatchers[event.topic] = l as Live<Any>
+            val l = MutableLive(event.data)
+            dispatchers[event.topic] = l as MutableLive<Any>
             l.watch { value ->
                 subscribers[event.topic]?.forEach { it.invoke(value) }
             }
         } else {
-            (live as Live<Any>).value = event.data as Any
+            (live as MutableLive<Any>).value = event.data as Any
         }
     }
 
