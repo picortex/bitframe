@@ -9,7 +9,7 @@ import cache.Cache
 import cache.MockCache
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
-import live.Live
+import live.MutableLive
 import logging.Logger
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
@@ -38,7 +38,7 @@ interface BitframeServiceMockConfig : BitframeServiceConfig, SignInServiceMockCo
             appId: String = DEFAULT_APP_ID,
             users: MutableList<User> = DEFAULT_USERS,
             cache: Cache = DEFAULT_CACHE,
-            signInSession: Live<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            signInSession: MutableLive<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
@@ -52,7 +52,7 @@ interface BitframeServiceMockConfig : BitframeServiceConfig, SignInServiceMockCo
             appId: String = DEFAULT_APP_ID,
             users: MutableList<User> = DEFAULT_USERS,
             cache: Cache = DEFAULT_CACHE,
-            signInSession: Live<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            signInSession: MutableLive<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE

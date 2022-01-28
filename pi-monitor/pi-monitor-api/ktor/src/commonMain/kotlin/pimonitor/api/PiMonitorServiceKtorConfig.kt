@@ -13,7 +13,7 @@ import cache.Cache
 import io.ktor.client.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
-import live.Live
+import live.MutableLive
 import logging.Logger
 import pimonitor.client.evaluation.businesses.BusinessServiceKtorConfig
 import pimonitor.client.monitors.MonitorsServiceConfig.Companion.DEFAULT_MONITOR_SESSION
@@ -26,8 +26,8 @@ class PiMonitorServiceKtorConfig @JvmOverloads constructor(
     override val appId: String,
     override val url: String,
     override val cache: Cache,
-    override val signInSession: Live<SignInSession> = DEFAULT_SIGN_IN_SESSION,
-    override val monitorSession: Live<MonitorSession> = DEFAULT_MONITOR_SESSION,
+    override val signInSession: MutableLive<SignInSession> = DEFAULT_SIGN_IN_SESSION,
+    override val monitorSession: MutableLive<MonitorSession> = DEFAULT_MONITOR_SESSION,
     override val json: Json = DEFAULT_JSON,
     override val bus: EventBus = DEFAULT_BUS,
     override val logger: Logger = ServiceConfig.DEFAULT_LOGGER,

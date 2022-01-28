@@ -5,8 +5,17 @@ import org.gradle.api.tasks.*
 import java.io.File
 
 open class PurifyTypesTask : DefaultTask() {
+
+    companion object {
+        @JvmField
+        val DEFAULT_OUTPUT_FILENAME = "index.d.ts"
+
+        @JvmField
+        val DEFAULT_DIRECTORY = "publications/npm/js"
+    }
+
     @get:InputDirectory
-    var directory: File = File(project.buildDir, "publications/npm/js")
+    var directory: File = File(project.buildDir, DEFAULT_DIRECTORY)
 
     @get:Input
     var contentsToBeRemoved = listOf(
@@ -16,12 +25,12 @@ open class PurifyTypesTask : DefaultTask() {
     @get:InputFile
     val inputFile: File?
         get() = directory.listFiles()?.firstOrNull {
-            it.name.contains(".d.ts")
+            it.name.contains(".d.ts") && !it.name.contains(outputFile.name)
         }
 
     @get:OutputFile
     val outputFile: File
-        get() = File(directory, "index.d.ts")
+        get() = File(directory, DEFAULT_OUTPUT_FILENAME)
 
     @TaskAction
     fun process() {
