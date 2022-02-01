@@ -6,6 +6,7 @@ import bitframe.authentication.apps.App
 import bitframe.authentication.spaces.Space
 import bitframe.authentication.users.User
 import kotlinx.serialization.Serializable
+import kotlinx.collections.interoperable.List
 import kotlin.js.JsExport
 
 sealed class Session {
@@ -15,7 +16,8 @@ sealed class Session {
     data class SignedIn(
         val app: App,
         override val space: Space,
-        override val user: User
+        override val user: User,
+        val spaces: List<Space>,
     ) : Session()
 
     data class Conundrum(
@@ -27,6 +29,7 @@ sealed class Session {
     data class SignedOut(
         val app: App,
         override val space: Space?,
+        val spaces: List<Space>,
         override val user: User?
     ) : Session()
 

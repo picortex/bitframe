@@ -12,4 +12,5 @@ class SessionAwareImpl(service: BitframeService) : SessionAware {
     override val currentUser: User? get() = currentSignInSession?.user
     override val currentSpace: Space? get() = currentSignInSession?.space
     override val signOut: () -> Unit = { service.signOut.signOut() }
+    override val switchSpace: (space: Space) -> Unit = { service.signIn.switchToSpace(it) }
 }

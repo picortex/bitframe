@@ -12,4 +12,5 @@ interface SessionAware {
     val currentUser: User?
     val currentSpace: Space?
     val signOut: () -> Unit
+    val switchSpace: (space: Space) -> Unit
 }
