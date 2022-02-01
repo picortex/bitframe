@@ -35,7 +35,8 @@ class SignOutService(private val config: SigningServiceConfig) {
         signInSession.value = Session.SignedOut(
             app = session.app,
             space = session.space,
-            user = session.user
+            user = session.user,
+            spaces = session.spaces
         )
 
         config.scope.launch {

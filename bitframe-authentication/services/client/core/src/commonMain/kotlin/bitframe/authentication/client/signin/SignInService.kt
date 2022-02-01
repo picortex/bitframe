@@ -44,7 +44,13 @@ abstract class SignInService(
         val SIGN_IN_EVENT_TOPIC = "bitframe.authentication.sign.in"
 
         @JvmStatic
+        val SWITCH_SPACE_EVENT_TOPIC = "bitframe.authentication.space.switch"
+
+        @JvmStatic
         private fun SignInEvent(session: Session.SignedIn) = Event(session, SIGN_IN_EVENT_TOPIC)
+
+        @JvmStatic
+        private fun SwithSpaceEvent(session: Session.SignedIn) = Event(session, SWITCH_SPACE_EVENT_TOPIC)
     }
 
     override fun signIn(cred: SignInCredentials): Later<LoginConundrum> = scope.later {
@@ -53,7 +59,7 @@ abstract class SignInService(
         val conundrum = executeSignIn(cred).await()
         if (conundrum.spaces.size == 1) {
             val (user, spaces) = conundrum
-            val s = Session.SignedIn(App(config.appId), spaces.first(), user)
+            val s = Session.SignedIn(App(config.appId), spaces.first(), user, spaces)
             cache.save(CREDENTIALS_CACHE_KEY, credentials).await()
             finalizeSignIn(s)
         } else {
@@ -79,8 +85,8 @@ abstract class SignInService(
         logger.obj(session.value)
         when (val s = session.value) {
             Session.Unknown -> throw error
-            is Session.SignedIn -> Session.SignedIn(App(config.appId), space, s.user)
-            is Session.Conundrum -> Session.SignedIn(App(config.appId), space, s.user)
+            is Session.SignedIn -> Session.SignedIn(App(config.appId), space, s.user, s.spaces)
+            is Session.Conundrum -> Session.SignedIn(App(config.appId), space, s.user, s.spaces)
             is Session.SignedOut -> throw error
         }.also { finalizeSignIn(it) }
     }
@@ -89,6 +95,21 @@ abstract class SignInService(
         session.value = s
         cache.save(SESSION_CACHE_KEY, s).await()
         bus.dispatch(SignInEvent(s))
+    }
+
+    /**
+     * Switch from the current space to the new [space]
+     */
+    fun switchToSpace(space: Space) = scope.later {
+        val error = IllegalStateException(
+            """You are attempting to switch spaces while you haven't logged in yet. Make sure you are logged in first,"""
+        )
+        when (val s = session.value) {
+            Session.Unknown -> throw error
+            is Session.SignedIn -> Session.SignedIn(App(config.appId), space, s.user, s.spaces)
+            is Session.Conundrum -> throw error
+            is Session.SignedOut -> throw error
+        }.also { finalizeSignIn(it) }
     }
 
     fun signInWithLastSession(): Later<Session.SignedIn?> = scope.later {

@@ -31,4 +31,5 @@ open class PiMonitorScope(
     override val currentUser: User? get() = userSession?.user
     override val currentSpace: Space? get() = userSession?.space
     override val signOut: () -> Unit = { config.service.signOut.signOut() }
+    override val switchSpace: (space: Space) -> Unit = { config.service.signIn.switchToSpace(it) }
 }
