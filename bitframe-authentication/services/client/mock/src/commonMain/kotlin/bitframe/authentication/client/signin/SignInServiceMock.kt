@@ -24,7 +24,7 @@ open class SignInServiceMock(
             session.value = if (it.spaces.size > 1) {
                 Session.Conundrum(App(config.appId), it.spaces, it.user)
             } else {
-                Session.SignedIn(App(config.appId), it.spaces.first(), it.user)
+                Session.SignedIn(App(config.appId), it.spaces.first(), it.user, it.spaces)
             }
         }
     }
