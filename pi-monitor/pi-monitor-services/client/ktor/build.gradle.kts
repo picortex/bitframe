@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.piMonitorServiceClientCore)
-                api(projects.bitframeServiceClientKtor)
+                api(projects.bitframeServiceConfigClientKtor)
                 api(projects.bitframeCore)
                 api(projects.bitframeAuthenticationServiceClientKtor)
             }

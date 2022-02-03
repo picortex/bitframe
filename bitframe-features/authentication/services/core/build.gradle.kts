@@ -13,11 +13,11 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":validation"))
+                api(projects.validation)
                 api(asoft.cache.api)
-                api(project(":bitframe-service-core"))
-                api(project(":bitframe-events-core"))
-                api(project(":bitframe-authentication-dao-core"))
+                api(projects.bitframeServiceConfigCore)
+                api(projects.bitframeEventsCore)
+                api(projects.bitframeAuthenticationDaoCore)
                 api(asoft.live.core)
                 api(asoft.later.ktx)
             }

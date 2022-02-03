@@ -20,7 +20,7 @@ kotlin {
             dependencies {
                 api(projects.bitframeAuthenticationServiceClientCore)
                 api(projects.bitframeCore)
-                api(projects.bitframeServiceClientKtor)
+                api(projects.bitframeServiceConfigClientKtor)
                 api(kotlinx.serialization.json)
                 api(asoft.later.ktx)
             }

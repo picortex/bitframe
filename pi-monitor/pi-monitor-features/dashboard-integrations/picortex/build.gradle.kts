@@ -13,15 +13,21 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(asoft.cache.api)
-                api(projects.bitframeServiceConfigCore)
-                api(asoft.platform.core)
+                api(projects.piMonitorDashboardIntegrationCore)
+                api(ktor.client.core)
+                api(asoft.kotlinx.serialization.mapper)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(asoft.expect.core)
+                api(asoft.expect.coroutines)
+            }
+        }
+
+        val jvmTest by getting {
+            dependencies {
+                api(ktor.client.cio)
             }
         }
     }

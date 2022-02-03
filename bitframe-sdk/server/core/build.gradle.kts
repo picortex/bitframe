@@ -13,8 +13,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-service-core"))
-                api(project(":bitframe-authentication-service-server-core"))
+                api(projects.bitframeServiceConfigCore)
+                api(projects.bitframeAuthenticationServiceServerCore)
                 api(asoft.platform.core)
             }
         }

@@ -13,7 +13,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(asoft.cache.mock)
-                api(project(":bitframe-service-client-ktor"))
+                api(projects.bitframeServiceConfigClientKtor)
                 api(asoft.expect.coroutines)
             }
         }

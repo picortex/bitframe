@@ -15,7 +15,7 @@ kotlin {
                 api(asoft.cache.mock)
                 api(projects.bitframeTestingContainers)
                 api(projects.bitframeTestingSdkBrowser)
-                api(projects.bitframeServiceClientKtor)
+                api(projects.bitframeServiceConfigClientKtor)
                 api(asoft.expect.coroutines)
                 api(projects.piMonitorApiKtor)
                 api(projects.piMonitorSdkClientCore)
