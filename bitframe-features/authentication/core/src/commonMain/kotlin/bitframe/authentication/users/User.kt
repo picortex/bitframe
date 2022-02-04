@@ -5,6 +5,7 @@ package bitframe.authentication.users
 
 import bitframe.authentication.ISystemPermission
 import bitframe.authentication.spaces.Space
+import bitframe.modal.HasId
 import kotlinx.datetime.Clock
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -16,7 +17,7 @@ import kotlin.js.JsName
 
 @Serializable
 data class User(
-    val uid: String,
+    override val uid: String = "",
     val name: String,
     val tag: String = name,
     val contacts: Contacts,
@@ -27,7 +28,7 @@ data class User(
     val registeredOn: Long = Clock.System.now().toEpochMilliseconds(),
     val lastSeen: Long = Clock.System.now().toEpochMilliseconds(),
     val deleted: Boolean = false
-) {
+) : HasId {
     @Serializable
     sealed class Status {
         @Serializable
@@ -39,6 +40,8 @@ data class User(
         @Serializable
         object SignedOut : Status()
     }
+
+    override fun copy(id: String) = copy(uid = id)
 
     @Serializable
     class Permissions(

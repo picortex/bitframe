@@ -3,25 +3,39 @@ package bitframe.authentication.server.users
 import bitframe.authentication.signin.Basic
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.spaces.CreateSpaceParams
-import bitframe.authentication.users.CreateUserParams
-import bitframe.authentication.users.RegisterUserParams
+import bitframe.authentication.spaces.Space
+import bitframe.authentication.spaces.toSpace
+import bitframe.authentication.users.*
 import bitframe.authentication.users.UsersService
+import bitframe.daos.conditions.isEqualTo
+import bitframe.daos.get
+import bitframe.service.server.config.ServiceConfig
 import kotlinx.collections.interoperable.listOf
 import later.Later
 import later.await
 import later.later
 
 class UsersService(
-    private val config: UsersServiceConfig
+    private val config: ServiceConfig
 ) : UsersService() {
-    private val spacesDao = config.spacesDao
-    private val usersDao = config.usersDao
+    private val spacesDao = config.daoFactory.get<Space>()
+    private val usersDao = config.daoFactory.get<User>()
     private val scope = config.scope
+
+    fun createSpaceIfNotExist(params: CreateSpaceParams): Later<Space> = scope.later {
+        val existing = spacesDao.all(condition = "name" isEqualTo params.name).await().firstOrNull()
+        existing ?: spacesDao.create(params.toSpace("")).await()
+    }
+
+    fun createUserIfNotExist(params: CreateUserParams) = scope.later {
+        val existing = usersDao.all(condition = "name" isEqualTo params.name).await().firstOrNull()
+        existing ?: usersDao.create(params.toUser("")).await()
+    }
 
     override fun createIfNotExist(params: CreateUserParams) = scope.later {
         val accountParams = CreateSpaceParams("Genesis")
-        val account = spacesDao.createIfNotExist(accountParams)
-        val user = usersDao.createIfNotExist(params)
+        val account = createSpaceIfNotExist(accountParams)
+        val user = createUserIfNotExist(params)
         account.await(); user.await()
     }
 
@@ -38,8 +52,8 @@ class UsersService(
             )
         )
         val spaceParams = CreateSpaceParams(space.name)
-        val s = spacesDao.createIfNotExist(spaceParams).await()
-        val u = usersDao.create(userParams).await()
+        val s = createSpaceIfNotExist(spaceParams).await()
+        val u = usersDao.create(userParams.toUser("")).await()
         val usr = usersDao.update(u.copy(spaces = listOf(s))).await()
         LoginConundrum(usr, usr.spaces)
     }

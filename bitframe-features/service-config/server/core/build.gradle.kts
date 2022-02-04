@@ -15,6 +15,7 @@ kotlin {
             dependencies {
                 api(asoft.cache.api)
                 api(projects.bitframeServiceConfigCore)
+                api(projects.bitframeDaoCore)
                 api(asoft.platform.core)
             }
         }

@@ -1,8 +1,11 @@
 package bitframe.daos
 
 import bitframe.daos.conditions.Condition
+import bitframe.daos.conditions.matching
 import bitframe.modal.HasId
 import kotlinx.coroutines.delay
+import kotlinx.serialization.InternalSerializationApi
+import kotlinx.serialization.serializer
 import later.Later
 import later.await
 import later.later
@@ -43,8 +46,13 @@ class MockDao<D : HasId>(
         item
     }
 
+    @OptIn(InternalSerializationApi::class)
     override fun all(condition: Condition<String, Any>?): Later<List<D>> = scope.later {
         delay(config.simulationTime)
-        items.values.toMutableList()
+        if (condition == null) {
+            items.values.toList()
+        } else {
+            items.values.matching(condition, config.clazz.serializer())
+        }
     }
 }

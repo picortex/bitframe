@@ -11,4 +11,8 @@ interface HasId {
 
     @JsName("_ignore_")
     fun copy(id: String): HasId
+
+    companion object {
+        const val UNSET = ""
+    }
 }
