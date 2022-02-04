@@ -1,7 +1,5 @@
 package unit
 
-import bitframe.server.data.DataSource
-import bitframe.InMemoryDataSource
 import bitframe.Sandbox
 import bitframe.server.modules.StaticModule
 import bitframe.server.actions.Action
@@ -15,8 +13,6 @@ import kotlin.test.Test
 
 class GenericModuleTest {
     class Customer(val name: String)
-
-    val db: DataSource = InMemoryDataSource()
 
     @Test
     fun should_have_a_route_scoped_under_the_module() {
@@ -39,7 +35,7 @@ class GenericModuleTest {
     }
 
     @Test
-    fun should_build_a_module_as_a_list_of_actions() = runTest{
+    fun should_build_a_module_as_a_list_of_actions() = runTest {
         val createAction = Action(
             name = "create",
             params = mapOf(

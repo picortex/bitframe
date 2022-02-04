@@ -34,17 +34,16 @@ kotlin {
     sourceSets {
         val main by getting {
             dependencies {
-                api(project(":bitframe-server-framework-ktor"))
-                api(project(":bitframe-server-dao-inmemory"))
-                api(project(":pi-monitor-dao-inmemory"))
-                api(project(":pi-monitor-service-server-core"))
+                api(projects.bitframeServerFrameworkKtor)
+                api(projects.piMonitorDaoInmemory)
+                api(projects.piMonitorServiceServerCore)
                 api(projects.mailerSmtp)
             }
         }
 
         val test by getting {
             dependencies {
-                implementation(project(":bitframe-server-framework-test"))
+                implementation(projects.bitframeServerFrameworkTest)
                 implementation(asoft.expect.coroutines)
             }
         }

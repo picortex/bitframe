@@ -1,11 +1,6 @@
 package unit
 
-import bitframe.server.data.DataSource
-import bitframe.InMemoryDataSource
-
 class ApplicationIntegrationTest {
-
-    val db: DataSource = InMemoryDataSource()
 
 //    @Test
 //    fun should_create_successfully_create_an_entity() {

@@ -5,7 +5,6 @@ package pimonitor.monitors
 import bitframe.authentication.users.UserRef
 import bitframe.service.config.ServiceConfig
 import later.Later
-import pimonitor.monitors.Monitor
 import kotlin.js.JsExport
 
 abstract class MonitorsService(

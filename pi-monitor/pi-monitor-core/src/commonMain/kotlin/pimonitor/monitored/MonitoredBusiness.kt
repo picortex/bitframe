@@ -2,6 +2,7 @@
 
 package pimonitor.monitored
 
+import bitframe.modal.HasId
 import identifier.Email
 import kotlinx.collections.interoperable.List
 import kotlinx.serialization.Serializable
@@ -10,11 +11,11 @@ import kotlin.js.JsExport
 
 @Serializable
 data class MonitoredBusiness(
-    val uid: String,
     val name: String,
     val contacts: List<ContactPerson>,
-    val monitorRef: MonitorRef
-) {
+    val monitorRef: MonitorRef,
+    override val uid: String = HasId.UNSET,
+) : HasId {
     init {
         require(contacts.isNotEmpty()) { "A business must have at least one contact person" }
     }
@@ -26,4 +27,6 @@ data class MonitoredBusiness(
         val position: String,
         val email: Email
     )
+
+    override fun copy(id: String) = copy(uid = id)
 }

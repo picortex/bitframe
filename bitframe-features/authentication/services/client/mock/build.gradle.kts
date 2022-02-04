@@ -26,16 +26,15 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":bitframe-authentication-service-client-core"))
-                api(project(":bitframe-authentication-dao-inmemory"))
-                api(project(":bitframe-events-inmemory"))
+                implementation(projects.bitframeAuthenticationServiceClientCore)
+                api(projects.bitframeEventsInmemory)
                 api(asoft.cache.mock)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                api(project(":pi-monitor-test-testing"))
+                api(projects.piMonitorTestTesting)
                 api(asoft.expect.coroutines)
             }
         }

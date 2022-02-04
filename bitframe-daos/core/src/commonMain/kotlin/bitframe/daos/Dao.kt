@@ -1,6 +1,7 @@
 package bitframe.daos
 
 import bitframe.daos.conditions.Condition
+import kotlinx.collections.interoperable.List
 import later.Later
 
 interface Dao<T> {
@@ -10,6 +11,8 @@ interface Dao<T> {
     fun update(obj: T): Later<T>
 
     fun load(uid: String): Later<T>
+
+    fun loadOrNull(uid: String): Later<T?>
 
     fun delete(uid: String): Later<T>
 

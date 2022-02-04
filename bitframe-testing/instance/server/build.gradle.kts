@@ -34,14 +34,13 @@ kotlin {
     sourceSets {
         val main by getting {
             dependencies {
-                api(project(":bitframe-server-framework-ktor"))
-                api(project(":bitframe-server-dao-inmemory"))
+                api(projects.bitframeServerFrameworkKtor)
             }
         }
 
         val test by getting {
             dependencies {
-                implementation(project(":bitframe-server-framework-test"))
+                implementation(projects.bitframeServerFrameworkTest)
                 implementation(asoft.expect.coroutines)
             }
         }

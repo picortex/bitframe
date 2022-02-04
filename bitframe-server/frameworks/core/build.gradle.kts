@@ -27,7 +27,6 @@ kotlin {
             dependencies {
                 implementation(asoft.cache.mock)
                 implementation(projects.bitframeServerFrameworkTest)
-                implementation(projects.bitframeServerDaoInmemory)
                 implementation(projects.bitframeEventsInmemory)
                 implementation(kotlinx.serialization.core)
             }

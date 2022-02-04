@@ -3,6 +3,8 @@ package bitframe.daos
 import bitframe.daos.conditions.Condition
 import bitframe.daos.conditions.matching
 import bitframe.modal.HasId
+import kotlinx.collections.interoperable.List
+import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.coroutines.delay
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.serializer
@@ -40,6 +42,14 @@ class MockDao<D : HasId>(
         items[uid] ?: throw RuntimeException("data with uid=$uid is not found in dao")
     }
 
+    override fun loadOrNull(uid: String): Later<D?> = scope.later {
+        try {
+            load(uid).await()
+        } catch (err: Throwable) {
+            null
+        }
+    }
+
     override fun delete(uid: String): Later<D> = scope.later {
         val item = load(uid).await()
         items.remove(uid)
@@ -50,7 +60,7 @@ class MockDao<D : HasId>(
     override fun all(condition: Condition<String, Any>?): Later<List<D>> = scope.later {
         delay(config.simulationTime)
         if (condition == null) {
-            items.values.toList()
+            items.values.toInteroperableList()
         } else {
             items.values.matching(condition, config.clazz.serializer())
         }

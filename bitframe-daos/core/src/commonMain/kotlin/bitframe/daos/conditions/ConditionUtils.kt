@@ -1,5 +1,7 @@
 package bitframe.daos.conditions
 
+import kotlinx.collections.interoperable.List
+import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.mapper.Mapper
@@ -16,4 +18,4 @@ fun <T> Collection<T>.matching(
         Condition.Operator.Equals -> map[condition.lhs].toString().contentEquals(condition.rhs.toString(), ignoreCase = true)
         Condition.Operator.Contains -> map[condition.lhs].toString().contains(condition.rhs.toString(), ignoreCase = true)
     }
-}
+}.toInteroperableList()

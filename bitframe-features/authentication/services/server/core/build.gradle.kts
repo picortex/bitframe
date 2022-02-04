@@ -13,7 +13,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeAuthenticationDaoCore)
                 api(projects.bitframeServiceConfigServerCore)
                 implementation(projects.bitframeAuthenticationServiceCore)
             }
@@ -21,7 +20,6 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(projects.bitframeAuthenticationDaoInmemory)
                 implementation(asoft.expect.coroutines)
             }
         }

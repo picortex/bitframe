@@ -3,6 +3,7 @@
 package pimonitor.monitors
 
 import bitframe.authentication.users.UserRef
+import bitframe.modal.HasId
 import identifier.Email
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -30,4 +31,6 @@ data class CooperateMonitor(
         val email: Email,
         val userRef: UserRef
     )
+
+    override fun copy(id: String) = copy(uid = id)
 }
