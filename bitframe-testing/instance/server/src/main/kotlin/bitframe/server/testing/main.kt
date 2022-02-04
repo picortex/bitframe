@@ -2,10 +2,6 @@ package bitframe.server.testing
 
 import bitframe.Application
 import bitframe.ApplicationConfig
-import bitframe.authentication.spaces.SpacesDaoInMemory
-import bitframe.authentication.users.User
-import bitframe.authentication.users.UsersDaoInMemory
-import bitframe.authentication.users.UsersDaoInMemoryConfig
 import bitframe.daos.MockDaoFactory
 import bitframe.server.BitframeService
 import bitframe.service.server.config.ServiceConfig

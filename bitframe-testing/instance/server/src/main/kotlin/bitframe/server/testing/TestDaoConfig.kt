@@ -1,10 +1,8 @@
 package bitframe.server.testing
 
 import bitframe.authentication.spaces.Space
-import bitframe.authentication.spaces.SpacesDaoInMemoryConfig
 import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.User
-import bitframe.authentication.users.UsersDaoInMemoryConfig
 import kotlinx.collections.interoperable.listOf
 
 private val space = Space(
@@ -13,7 +11,7 @@ private val space = Space(
     type = "",
     scope = ""
 )
-
+/*
 fun TestSpacesDaoConfig() = SpacesDaoInMemoryConfig(
     spaces = mutableMapOf("space-1" to space)
 )
@@ -29,3 +27,4 @@ fun TestUsersDaoConfig() = UsersDaoInMemoryConfig(
         )
     )
 )
+*/
