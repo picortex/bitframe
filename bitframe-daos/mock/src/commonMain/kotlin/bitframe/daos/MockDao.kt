@@ -8,11 +8,11 @@ import later.await
 import later.later
 import kotlin.reflect.KClass
 
-class InMemoryDao<D : HasId>(
-    val config: InMemoryDaoConfig<D>
+class MockDao<D : HasId>(
+    val config: MockDaoConfig<D>
 ) : Dao<D> {
 
-    constructor(clazz: KClass<D>) : this(InMemoryDaoConfig(clazz))
+    constructor(clazz: KClass<D>) : this(MockDaoConfig(clazz))
 
     private val items get() = config.items
 

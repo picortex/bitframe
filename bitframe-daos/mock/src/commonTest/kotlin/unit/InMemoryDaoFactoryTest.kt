@@ -1,7 +1,7 @@
 package unit
 
 import bitframe.daos.DaoFactory
-import bitframe.daos.InMemoryDaoFactory
+import bitframe.daos.MockDaoFactory
 import bitframe.daos.get
 import expect.expect
 import kotlinx.coroutines.test.runTest
@@ -9,7 +9,7 @@ import later.await
 import kotlin.test.Test
 
 class InMemoryDaoFactoryTest {
-    private val factory: DaoFactory = InMemoryDaoFactory()
+    private val factory: DaoFactory = MockDaoFactory()
 
     @Test
     fun can_easily_initiate_a_factory() {

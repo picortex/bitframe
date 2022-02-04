@@ -6,7 +6,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlin.jvm.JvmField
 import kotlin.reflect.KClass
 
-interface InMemoryDaoConfig<D : Any> : DaoConfig {
+interface MockDaoConfig<D : Any> : DaoConfig {
     val clazz: KClass<D>
     val items: MutableMap<String, D>
     val simulationTime: Long
@@ -39,7 +39,7 @@ interface InMemoryDaoConfig<D : Any> : DaoConfig {
 
         @JvmField
         val DEFAULT_SCOPE = DaoConfig.DEFAULT_SCOPE
-        
+
         operator fun <D : Any> invoke(
             clazz: KClass<D>,
             items: MutableMap<String, D> = mutableMapOf(),
@@ -48,7 +48,7 @@ interface InMemoryDaoConfig<D : Any> : DaoConfig {
             prefix: String? = null,
             lock: Mutex = DEFAULT_LOCK,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): InMemoryDaoConfig<D> = object : InMemoryDaoConfig<D> {
+        ): MockDaoConfig<D> = object : MockDaoConfig<D> {
             override val clazz: KClass<D> = clazz
             override val items: MutableMap<String, D> = items
             override val simulationTime: Long = simulationTime
@@ -65,6 +65,6 @@ interface InMemoryDaoConfig<D : Any> : DaoConfig {
             prefix: String? = null,
             lock: Mutex = DEFAULT_LOCK,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): InMemoryDaoConfig<D> = invoke(D::class, items, simulationTime, namespace, prefix, lock, scope)
+        ): MockDaoConfig<D> = invoke(D::class, items, simulationTime, namespace, prefix, lock, scope)
     }
 }

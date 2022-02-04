@@ -12,8 +12,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":pi-monitor-dao-core"))
-                api(project(":bitframe-dao-test"))
+                api(projects.piMonitorDaoCore)
+                api(projects.bitframeDaoMock)
             }
         }
 

@@ -67,7 +67,7 @@ includeSubs(base = "bitframe-testing-sdk", path = "bitframe-testing/sdk", "brows
 
 includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core", "processor")
 
-includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "test")
+includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock")
 
 // services
 includeSubs(base = "bitframe-service-config", path = "bitframe-features/service-config", "core")

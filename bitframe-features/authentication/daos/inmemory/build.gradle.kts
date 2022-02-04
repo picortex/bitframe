@@ -13,10 +13,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-authentication-dao-core"))
+                api(projects.bitframeAuthenticationDaoCore)
                 api(asoft.kotlinx.serialization.mapper)
                 api(asoft.later.ktx)
-                api(project(":bitframe-dao-test"))
+                api(projects.bitframeDaoMock)
             }
         }
 

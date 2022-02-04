@@ -7,7 +7,7 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface InMemoryDaoConfig : DaoConfig {
+interface MockDaoConfig : DaoConfig {
     val simulationTime: Long
     val lock: Mutex
 
@@ -35,7 +35,7 @@ interface InMemoryDaoConfig : DaoConfig {
             simulationTime: Long = DEFAULT_SIMULATION_TIME,
             lock: Mutex = DEFAULT_LOCK,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ) = object : InMemoryDaoConfig {
+        ) = object : MockDaoConfig {
             override val simulationTime: Long = simulationTime
             override val lock: Mutex = lock
             override val scope: CoroutineScope = scope

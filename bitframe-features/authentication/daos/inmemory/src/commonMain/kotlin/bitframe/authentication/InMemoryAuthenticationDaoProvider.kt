@@ -7,7 +7,6 @@ import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.User
 import bitframe.authentication.users.UsersDao
 import bitframe.authentication.users.UsersDaoInMemory
-import bitframe.daos.config.InMemoryDaoConfig
 import kotlinx.collections.interoperable.listOf
 
 class InMemoryAuthenticationDaoProvider(
