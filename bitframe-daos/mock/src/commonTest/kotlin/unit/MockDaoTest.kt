@@ -7,7 +7,7 @@ import kotlinx.coroutines.test.runTest
 import later.await
 import kotlin.test.Test
 
-class InMemoryDaoTest {
+class MockDaoTest {
     @Test
     fun creates_a_dao_easily() {
         val dao = MockDao<Human>()

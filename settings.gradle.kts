@@ -67,7 +67,7 @@ includeSubs(base = "bitframe-testing-sdk", path = "bitframe-testing/sdk", "brows
 
 includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core", "processor")
 
-includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock")
+includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mongo")
 
 // services
 includeSubs(base = "bitframe-service-config", path = "bitframe-features/service-config", "core")
@@ -101,8 +101,6 @@ includeRoot(name = "pi-monitor-core", path = "pi-monitor/pi-monitor-core")
 includeSubs(base = "pi-monitor-dashboard-integration", path = "pi-monitor/pi-monitor-features/dashboard-integrations", "core", "picortex")
 
 includeRoot(name = "pi-monitor-server", path = "pi-monitor/pi-monitor-server")
-
-includeSubs(base = "pi-monitor-dao", path = "pi-monitor/pi-monitor-daos", "core", "inmemory")
 
 includeSubs(base = "pi-monitor-service", path = "pi-monitor/pi-monitor-services", "core", "test")
 

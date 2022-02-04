@@ -1,26 +1,24 @@
 plugins {
-    kotlin("multiplatform")
+    kotlin("jvm")
     id("tz.co.asoft.library")
     `picortex-publish`
 }
 
 kotlin {
-    jvm {
+    target {
         library()
-        withJava()
     }
-    js(IR) { library() }
     sourceSets {
-        val commonMain by getting {
+        val main by getting {
             dependencies {
                 api(projects.bitframeDaoCore)
+                api(kmongo.coroutines)
                 api(asoft.later.ktx)
             }
         }
 
-        val commonTest by getting {
+        val test by getting {
             dependencies {
-                implementation(projects.bitframeAnnotationsCore)
                 implementation(asoft.expect.coroutines)
             }
         }

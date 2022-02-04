@@ -12,9 +12,11 @@ fun main(vararg args: String) {
         daoFactory = MockDaoFactory()
     )
 
+    val service = BitframeService(serviceConfig)
+
     val appConfig = ApplicationConfig(
         client = File(args[0]),
-        service = BitframeService(serviceConfig)
+        service = service
     )
 
     val app = Application(appConfig)

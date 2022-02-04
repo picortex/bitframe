@@ -8,7 +8,7 @@ import kotlinx.coroutines.test.runTest
 import later.await
 import kotlin.test.Test
 
-class InMemoryDaoFactoryTest {
+class MockDaoFactoryTest {
     private val factory: DaoFactory = MockDaoFactory()
 
     @Test

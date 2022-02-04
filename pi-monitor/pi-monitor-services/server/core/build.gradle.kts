@@ -15,7 +15,6 @@ kotlin {
             dependencies {
                 api(projects.piMonitorServiceCore)
                 api(projects.bitframeSdkServerCore)
-                api(projects.piMonitorDaoCore)
                 api(projects.bitframeEventsInmemory)
             }
         }

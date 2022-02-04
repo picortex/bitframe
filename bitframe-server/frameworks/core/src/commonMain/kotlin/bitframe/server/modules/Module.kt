@@ -15,6 +15,12 @@ interface Module {
         "name" to name,
         "actions" to actions.map { it.info() }
     )
+
+    companion object {
+        inline operator fun <reified D : Any> invoke(
+            config: ModuleConfiguration<D> = ModuleConfiguration()
+        ): Module = ModuleImpl(config)
+    }
 }
 
 @JvmOverloads
@@ -41,7 +47,3 @@ fun <T : Any> Module(
         })
     )
 }
-
-inline fun <reified T : Any> Module(
-    name: String = T::class.simpleName ?: error("Provide name for module")
-): Module = Module(T::class, name)

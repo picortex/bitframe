@@ -35,7 +35,6 @@ kotlin {
         val main by getting {
             dependencies {
                 api(projects.bitframeServerFrameworkKtor)
-                api(projects.piMonitorDaoInmemory)
                 api(projects.piMonitorServiceServerCore)
                 api(projects.mailerSmtp)
             }
