@@ -14,14 +14,15 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-dao-core"))
+                api(projects.bitframeDaoCore)
                 api(asoft.later.ktx)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(asoft.expect.core)
+                implementation(projects.bitframeAnnotationsCore)
+                implementation(asoft.expect.coroutines)
             }
         }
     }

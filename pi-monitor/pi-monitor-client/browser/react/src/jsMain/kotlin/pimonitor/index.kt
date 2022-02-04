@@ -2,13 +2,20 @@ package pimonitor
 
 import applikation.konfig
 import bitframe.Bitframe
+import cache.BrowserCache
 import kotlinext.js.jso
 import kotlinx.browser.document
+import kotlinx.browser.window
 import kotlinx.css.*
 import kotlinx.css.properties.transition
 import kotlinx.extensions.By
 import kotlinx.extensions.get
+import live.Live
+import live.MutableLive
+import live.mutableLiveOf
+import live.value
 import org.w3c.dom.HTMLDivElement
+import org.w3c.dom.get
 import pimonitor.authentication.signup.SignUp
 import pimonitor.evaluation.businesses.BusinessContainer
 import pimonitor.evaluation.businesses.InviteBusiness
@@ -29,6 +36,10 @@ fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
             }
         }
     }
+
+    val cache = BrowserCache()
+    window.asDynamic().cache = cache
+    console.log(cache)
     val version: String by konfig()
     Bitframe(
         scope = scope,

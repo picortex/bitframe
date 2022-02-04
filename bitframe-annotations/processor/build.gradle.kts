@@ -10,7 +10,7 @@ kotlin {
             dependencies {
                 implementation("com.squareup:javapoet:${vers.kotlinpoet}")
                 implementation("com.google.devtools.ksp:symbol-processing-api:${vers.ksp}")
-                implementation(project(":bitframe-annotations-core"))
+                implementation(projects.bitframeAnnotationsCore)
             }
             kotlin.srcDir("src/main/kotlin")
             resources.srcDir("src/main/resources")

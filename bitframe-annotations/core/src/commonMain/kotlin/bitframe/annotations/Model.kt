@@ -1,6 +1,6 @@
 package bitframe.annotations
 
 @Target(AnnotationTarget.CLASS)
-annotation class ModuleScope(
+annotation class Model(
     val name: String = ""
 )

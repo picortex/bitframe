@@ -1,6 +1,5 @@
 package bitframe.daos.config
 
-import kotlinx.atomicfu.locks.ReentrantLock
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.sync.Mutex
 import kotlin.jvm.JvmField

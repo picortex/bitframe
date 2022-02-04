@@ -3,9 +3,9 @@ package bitframe.daos
 import bitframe.daos.conditions.Condition
 import later.Later
 
-interface Dao<in I, T> {
+interface Dao<T> {
 
-    fun create(input: I): Later<T>
+    fun create(input: T): Later<T>
 
     fun update(obj: T): Later<T>
 
