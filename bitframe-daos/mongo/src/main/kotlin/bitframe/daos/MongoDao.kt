@@ -1,31 +1,18 @@
 package bitframe.daos
 
 import bitframe.daos.conditions.Condition
-import bitframe.daos.conditions.matching
 import bitframe.modal.HasId
-import com.mongodb.ConnectionString
-import com.mongodb.MongoClientSettings
-import com.mongodb.MongoCredential
 import com.mongodb.client.model.Filters.eq
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
-import kotlinx.coroutines.delay
 import kotlinx.serialization.InternalSerializationApi
-import kotlinx.serialization.serializer
 import later.Later
 import later.await
 import later.later
-import org.bson.conversions.Bson
 import org.bson.types.ObjectId
 import org.litote.kmongo.coroutine.coroutine
-import org.litote.kmongo.coroutine.insertOne
 import org.litote.kmongo.eq
-import org.litote.kmongo.json
-import org.litote.kmongo.out
 import org.litote.kmongo.reactivestreams.KMongo
-import org.litote.kmongo.reactivestreams.getCollection
-import org.litote.kmongo.util.idValue
-import kotlin.reflect.KClass
 
 class MongoDao<D : HasId>(
     val config: MongoDaoConfig<D>

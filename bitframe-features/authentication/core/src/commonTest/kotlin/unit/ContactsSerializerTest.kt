@@ -17,4 +17,11 @@ class ContactsSerializerTest {
         val json = Json.encodeToString(Person.serializer(), person)
         expect(json).toBe("""{"contacts":["email@test.com"]}""")
     }
+
+    @Test
+    fun should_deserialize_a_contact() {
+        val json = """{"contacts":["email@test.com"]}"""
+        val obj = Json.decodeFromString(Person.serializer(), json)
+        expect(obj).toBe(Person(Contacts("email@test.com")))
+    }
 }

@@ -12,7 +12,7 @@ kotlin {
         val main by getting {
             dependencies {
                 api(projects.bitframeDaoCore)
-                api(kmongo.coroutines)
+                api(kmongo.coroutines.serialization)
                 api(asoft.later.ktx)
             }
         }

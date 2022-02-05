@@ -37,6 +37,8 @@ kotlin {
                 api(projects.bitframeServerFrameworkKtor)
                 api(projects.piMonitorServiceServerCore)
                 api(projects.mailerSmtp)
+                api(projects.bitframeDaoMock)
+                api(projects.bitframeDaoMongo)
             }
         }
 

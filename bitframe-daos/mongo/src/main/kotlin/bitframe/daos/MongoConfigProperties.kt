@@ -13,7 +13,8 @@ interface MongoConfigProperties {
         clazz = clazz,
         host = host,
         username = username,
-        password = password
+        password = password,
+        database = database
     )
 
     fun connectionString() = ConnectionString("mongodb://$username:$password@$host")

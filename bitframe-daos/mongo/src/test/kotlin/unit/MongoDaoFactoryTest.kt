@@ -6,17 +6,18 @@ import bitframe.daos.MongoDaoFactoryConfig
 import bitframe.daos.get
 import expect.expect
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.Clock
 import later.await
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-@Ignore
 class MongoDaoFactoryTest {
 
     val config = MongoDaoFactoryConfig(
         host = "127.0.0.1:27017",
         username = "root",
-        password = "example"
+        password = "example",
+        database = "test-app"
     )
 
     private val factory: DaoFactory = MongoDaoFactory(config)
