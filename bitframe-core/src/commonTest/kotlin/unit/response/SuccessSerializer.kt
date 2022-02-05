@@ -4,6 +4,8 @@ import bitframe.response.Success
 import bitframe.response.success.decodeSuccessFromString
 import bitframe.response.success.encodeSuccessToString
 import expect.expect
+import kotlinx.collections.interoperable.listOf
+import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
@@ -24,6 +26,13 @@ class SuccessSerializer {
         val success = Success.of(Person())
         println(success)
         println(json.encodeSuccessToString(Person.serializer(), success))
+    }
+
+    @Test
+    fun should_serialize_a_list_success() {
+        val success = Success.of(listOf(Person()))
+        println(success)
+        println(json.encodeSuccessToString(ListSerializer(Person.serializer()), success))
     }
 
     @Test

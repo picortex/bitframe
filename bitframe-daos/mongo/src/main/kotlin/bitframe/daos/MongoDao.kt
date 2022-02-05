@@ -1,6 +1,7 @@
 package bitframe.daos
 
 import bitframe.daos.conditions.Condition
+import bitframe.daos.conditions.toMongoFilter
 import bitframe.modal.HasId
 import com.mongodb.client.model.Filters.eq
 import kotlinx.collections.interoperable.List
@@ -57,7 +58,7 @@ class MongoDao<D : HasId>(
         if (condition == null) {
             collection.find().toList().toInteroperableList()
         } else {
-            collection.find().toList().toInteroperableList()
+            collection.find(condition.toMongoFilter()).toList().toInteroperableList()
         }
     }
 }

@@ -1,7 +1,7 @@
 package bitframe.daos
 
 import bitframe.daos.conditions.Condition
-import bitframe.daos.conditions.matching
+import bitframe.daos.conditions.toMockFilter
 import bitframe.modal.HasId
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
@@ -23,17 +23,23 @@ class MockDao<D : HasId>(
 
     private val scope get() = config.scope
 
+    private val lock get() = config.lock
+
     override fun create(input: D): Later<D> = scope.later {
+        lock.lock(this@MockDao)
         delay(config.simulationTime)
         val nextId = "${config.prefix}-${items.size + 1}"
         val output = input.copy(id = nextId) as D
         items[nextId] = output
+        lock.unlock(this@MockDao)
         output
     }
 
     override fun update(obj: D): Later<D> = scope.later {
+        lock.lock(this@MockDao)
         delay(config.simulationTime)
         items[obj.uid] = obj
+        lock.unlock(this@MockDao)
         obj
     }
 
@@ -51,18 +57,22 @@ class MockDao<D : HasId>(
     }
 
     override fun delete(uid: String): Later<D> = scope.later {
+        lock.lock(this@MockDao)
+        delay(config.simulationTime)
         val item = load(uid).await()
         items.remove(uid)
+        lock.unlock(this@MockDao)
         item
     }
 
     @OptIn(InternalSerializationApi::class)
     override fun all(condition: Condition<String, Any>?): Later<List<D>> = scope.later {
+        lock.lock(this@MockDao)
         delay(config.simulationTime)
         if (condition == null) {
             items.values.toInteroperableList()
         } else {
-            items.values.matching(condition, config.clazz.serializer())
-        }
+            items.values.filter(condition.toMockFilter(config.clazz.serializer())).toInteroperableList()
+        }.also { lock.unlock(this@MockDao) }
     }
 }
