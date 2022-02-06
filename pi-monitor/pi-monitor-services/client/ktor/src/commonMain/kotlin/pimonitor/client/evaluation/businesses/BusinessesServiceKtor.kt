@@ -2,15 +2,14 @@ package pimonitor.client.evaluation.businesses
 
 import bitframe.response.response.decodeResponseFromString
 import bitframe.service.client.utils.JsonContent
-import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
+import io.ktor.util.*
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.serialization.builtins.ListSerializer
 import later.Later
 import later.later
-import pimonitor.client.evaluation.businesses.BusinessesService
 import pimonitor.monitored.CreateBusinessRequestBody
 import pimonitor.monitored.CreateMonitoredBusinessParams
 import pimonitor.monitored.MonitoredBusiness
@@ -26,25 +25,18 @@ class BusinessesServiceKtor(
 
     private val serializer = MonitoredBusiness.serializer()
 
+    @OptIn(InternalAPI::class)
     override fun executeCreate(
         params: CreateMonitoredBusinessParams,
         monitorRef: MonitorRef
     ): Later<MonitoredBusiness> = scope.later {
-        val resp = try {
-            val reqBody = CreateBusinessRequestBody(params, monitorRef)
-            http.post(url) { body = JsonContent(reqBody) }
-        } catch (exp: ClientRequestException) {
-            exp.response
-        }
-        json.decodeResponseFromString(serializer, resp.readText()).response()
+        val reqBody = CreateBusinessRequestBody(params, monitorRef)
+        val resp = http.post(url) { body = JsonContent(reqBody) }
+        json.decodeResponseFromString(serializer, resp.bodyAsText()).response()
     }
 
     override fun all(): Later<List<MonitoredBusiness>> = scope.later {
-        val resp = try {
-            http.get(url)
-        } catch (exp: ClientRequestException) {
-            exp.response
-        }
-        json.decodeResponseFromString(ListSerializer(serializer), resp.readText()).response().toInteroperableList()
+        val resp = http.get(url)
+        json.decodeResponseFromString(ListSerializer(serializer), resp.bodyAsText()).response().toInteroperableList()
     }
 }

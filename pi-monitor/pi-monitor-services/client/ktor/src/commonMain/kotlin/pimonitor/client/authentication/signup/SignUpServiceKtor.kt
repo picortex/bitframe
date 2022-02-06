@@ -4,9 +4,9 @@ import bitframe.response.response.decodeResponseFromString
 import bitframe.service.client.MiniService
 import bitframe.service.client.config.KtorClientConfiguration
 import bitframe.service.client.utils.JsonContent
-import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
+import io.ktor.util.*
 import later.Later
 import later.later
 import pimonitor.authentication.signup.SignUpParams
@@ -21,12 +21,9 @@ class SignUpServiceKtor(
     private val scope = config.scope
     private val json = config.json
 
+    @OptIn(InternalAPI::class)
     override fun executeSignUp(params: SignUpParams): Later<SignUpResult> = scope.later {
-        val resp = try {
-            client.post("$baseUrl/sign-up") { body = JsonContent(params) }
-        } catch (err: ClientRequestException) {
-            err.response
-        }
-        json.decodeResponseFromString(SignUpResult.serializer(), resp.readText()).response()
+        val resp = client.post("$baseUrl/sign-up") { body = JsonContent(params) }
+        json.decodeResponseFromString(SignUpResult.serializer(), resp.bodyAsText()).response()
     }
 }
