@@ -38,7 +38,7 @@ fun responseOf(
 )
 
 @OptIn(ExperimentalContracts::class, ExperimentalTypeInference::class)
-inline fun <D> response(@BuilderInference builder: ResponseBuilder<D, *>.() -> Unit): Response<D, Nothing?> {
+inline fun <D> response(@BuilderInference builder: ResponseBuilder<D, Nothing?>.() -> Unit): Response<D, Nothing?> {
     contract {
         callsInPlace(builder, InvocationKind.EXACTLY_ONCE)
     }
@@ -47,7 +47,8 @@ inline fun <D> response(@BuilderInference builder: ResponseBuilder<D, *>.() -> U
         responseBuilder.apply(builder)
         responseBuilder.response()
     } catch (cause: Throwable) {
-        responseOf(cause)
+        println("Err(in Response): ${cause.message}")
+        responseOf(cause, cause.message)
     }
 }
 
@@ -61,7 +62,7 @@ inline fun <D, I> responseWithInfo(@BuilderInference builder: ResponseBuilder<D,
         responseBuilder.apply(builder)
         responseBuilder.response()
     } catch (cause: Throwable) {
-        responseOf(cause)
+        responseOf(cause, cause.message)
     }
 }
 

@@ -1,6 +1,7 @@
 package bitframe.response
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import kotlin.jvm.JvmOverloads
 
 @Serializable

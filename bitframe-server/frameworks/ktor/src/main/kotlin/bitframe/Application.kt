@@ -1,5 +1,6 @@
 package bitframe
 
+import bitframe.response.Error
 import bitframe.response.Failure
 import bitframe.response.Status
 import bitframe.response.response.responseOf
@@ -66,11 +67,7 @@ open class Application<S : BitframeService>(
                 val allModules = modules + authenticationModule
                 for (rout in allModules.flatMap { it.actions.map { a -> a.route } }) route(rout.path, rout.method) {
                     handle {
-                        val response = try {
-                            rout.handler(mapToHttpRequest(rout, call))
-                        } catch (cause: Throwable) {
-                            responseOf(Status(InternalServerError), cause).toHttpResponse<Failure>()
-                        }
+                        val response = rout.runHandlerCatching(mapToHttpRequest(rout, call))
                         call.respondText(response.body, contentType = ContentType.Application.Json, status = response.status)
                     }
                 }

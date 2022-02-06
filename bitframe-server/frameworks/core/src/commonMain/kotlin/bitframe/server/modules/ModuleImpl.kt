@@ -3,6 +3,7 @@ package bitframe.server.modules
 import bitframe.server.actions.Action
 import bitframe.server.http.HttpRoute
 import io.ktor.http.*
+import kotlin.reflect.typeOf
 
 class ModuleImpl<D : Any>(private val config: ModuleConfiguration<D>) : Module {
     override val name: String get() = config.name
@@ -16,7 +17,7 @@ class ModuleImpl<D : Any>(private val config: ModuleConfiguration<D>) : Module {
             controller.load(it.body)
         }),
         Action("many", mapOf(), HttpRoute(HttpMethod.Get, "$basePath/all") {
-            controller.load(it.body)
+            controller.loadMany(it.body)
         }),
         Action("update", mapOf(), HttpRoute(HttpMethod.Put, "$basePath/") {
             controller.update(it.body)

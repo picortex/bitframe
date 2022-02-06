@@ -14,6 +14,6 @@ interface Controller {
     suspend fun delete(body: String?): HttpResponse
 
     companion object {
-        operator fun invoke(): Controller = ControllerImpl()
+        operator fun <D : Any> invoke(config: ControllerConfig<D>): Controller = ControllerImpl(config)
     }
 }
