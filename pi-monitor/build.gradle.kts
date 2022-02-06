@@ -4,7 +4,7 @@ plugins {
     `docker-compose`
 }
 
-val tmp = 3
+val tmp = 0
 
 val runWeb by tasks.creating {
     dependsOn(":pi-monitor-client-browser-react:runJsDebug")
