@@ -1,18 +1,12 @@
 package bitframe
 
-import bitframe.response.Error
-import bitframe.response.Failure
-import bitframe.response.Status
-import bitframe.response.response.responseOf
 import bitframe.server.BitframeApplication
 import bitframe.server.BitframeService
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.HttpRoute
-import bitframe.server.http.toHttpResponse
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
-import io.ktor.http.HttpStatusCode.Companion.InternalServerError
 import io.ktor.http.content.*
 import io.ktor.request.*
 import io.ktor.response.*
@@ -54,7 +48,6 @@ open class Application<S : BitframeService>(
                 header(HttpHeaders.ContentType)
                 header(HttpHeaders.AccessControlAllowOrigin)
                 anyHost()
-                allowCredentials = true
             }
             routing {
                 static("/") {

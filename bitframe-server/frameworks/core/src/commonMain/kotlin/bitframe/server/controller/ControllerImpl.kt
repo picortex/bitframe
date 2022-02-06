@@ -21,9 +21,7 @@ class ControllerImpl<D : Any>(val config: ControllerConfig<D>) : Controller {
     }.toHttpResponse(serializer)
 
     override suspend fun loadMany(body: String?): HttpResponse = response<List<D>> {
-        println("Reached point one")
         val all = service.all().await()
-        println("Reached point 2")
         resolve(all)
     }.toHttpResponse(ListSerializer(serializer))
 

@@ -1,5 +1,5 @@
 [versions]
-ktor = "1.6.3"
+ktor = "1.6.7"
 
 [libraries]
 client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }

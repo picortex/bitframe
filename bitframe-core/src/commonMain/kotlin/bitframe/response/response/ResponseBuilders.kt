@@ -39,24 +39,19 @@ fun responseOf(
 
 @OptIn(ExperimentalContracts::class, ExperimentalTypeInference::class)
 inline fun <D> response(@BuilderInference builder: ResponseBuilder<D, Nothing?>.() -> Unit): Response<D, Nothing?> {
-    contract {
-        callsInPlace(builder, InvocationKind.EXACTLY_ONCE)
-    }
+    contract { callsInPlace(builder) }
     return try {
         val responseBuilder = ResponseBuilder<D, Nothing?>()
         responseBuilder.apply(builder)
         responseBuilder.response()
     } catch (cause: Throwable) {
-        println("Err(in Response): ${cause.message}")
         responseOf(cause, cause.message)
     }
 }
 
 @OptIn(ExperimentalContracts::class, ExperimentalTypeInference::class)
 inline fun <D, I> responseWithInfo(@BuilderInference builder: ResponseBuilder<D, I>.() -> Unit): Response<D, I> {
-    contract {
-        callsInPlace(builder, InvocationKind.EXACTLY_ONCE)
-    }
+    contract { callsInPlace(builder) }
     return try {
         val responseBuilder = ResponseBuilder<D, I>()
         responseBuilder.apply(builder)

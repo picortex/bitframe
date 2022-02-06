@@ -14,7 +14,10 @@ class ModuleImpl<D : Any>(private val config: ModuleConfiguration<D>) : Module {
             controller.create(it.body)
         }),
         Action("single", mapOf(), HttpRoute(HttpMethod.Get, "$basePath/{uid}") {
-            controller.load(it.body)
+            println("[Module] Before response")
+            val resp = controller.load(it.body)
+            println("[Module] After response")
+            resp
         }),
         Action("many", mapOf(), HttpRoute(HttpMethod.Get, "$basePath/all") {
             controller.loadMany(it.body)

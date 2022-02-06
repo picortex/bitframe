@@ -18,7 +18,7 @@ class ResponseBuilder<D, I> {
     fun resolve(with: D, info: I, code: HttpStatusCode = HttpStatusCode.OK) {
         data = with
         this.info = info
-        this.status = code
+        status = code
     }
 
     fun badRequest(message: String): Nothing = reject(HttpStatusCode.BadRequest, Throwable(message))

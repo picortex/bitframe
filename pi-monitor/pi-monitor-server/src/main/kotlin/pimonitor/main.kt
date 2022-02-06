@@ -22,7 +22,7 @@ fun main(args: Array<String>) {
             daoFactory = daoFactory
         ),
         daoFactory = daoFactory,
-        client = File(args[0])
+        client = File(args.getOrNull(0) ?: "/default")
     )
     val server = PiMonitorServer(config)
     server.start()
