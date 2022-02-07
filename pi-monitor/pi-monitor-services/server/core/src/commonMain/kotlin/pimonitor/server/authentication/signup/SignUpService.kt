@@ -9,13 +9,13 @@ import later.Later
 import later.await
 import later.later
 import pimonitor.authentication.signup.*
-import pimonitor.authentication.signup.SignUpService
+import pimonitor.authentication.signup.SignUpService as CoreSignUpService
 import pimonitor.monitors.CooperateMonitor
 import pimonitor.monitors.IndividualMonitor
 
 class SignUpService(
     override val config: ServiceConfig
-) : SignUpService(config), RegisterUser by RegisterUserImpl(config) {
+) : CoreSignUpService(config), RegisterUser by RegisterUserImpl(config) {
     private val scope get() = config.scope
     private val individualMonitorsDao get() = config.daoFactory.get<IndividualMonitor>()
     private val cooperateMonitorsDao get() = config.daoFactory.get<CooperateMonitor>()

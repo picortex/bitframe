@@ -1,11 +1,11 @@
 package bitframe.authentication.client.signin
 
-import bitframe.authentication.signin.Session
 import bitframe.actors.users.User
-import events.EventBus
+import bitframe.service.Session
 import bitframe.service.client.config.ServiceConfig
 import cache.Cache
 import cache.MockCache
+import events.EventBus
 import kotlinx.coroutines.CoroutineScope
 import live.MutableLive
 import logging.Logger
@@ -14,7 +14,7 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface SignInServiceMockConfig : SigningServiceConfig {
+interface SignInServiceMockConfig : ServiceConfig {
     val users: MutableList<User>
 
     companion object {
@@ -38,11 +38,11 @@ interface SignInServiceMockConfig : SigningServiceConfig {
             appId: String = DEFAULT_APP_ID,
             users: MutableList<User> = DEFAULT_USERS,
             cache: Cache = DEFAULT_CACHE,
-            signInSession: MutableLive<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
+            session: MutableLive<Session> = ServiceConfig.DEFAULT_LIVE_SESSION,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): SignInServiceMockConfig = object : SignInServiceMockConfig, SigningServiceConfig by SigningServiceConfig(appId, cache, signInSession, bus, logger, scope) {
+        ): SignInServiceMockConfig = object : SignInServiceMockConfig, ServiceConfig by ServiceConfig(appId, cache, bus, logger, session, scope) {
             override val users: MutableList<User> = users
         }
 
@@ -52,10 +52,10 @@ interface SignInServiceMockConfig : SigningServiceConfig {
             appId: String = DEFAULT_APP_ID,
             users: MutableList<User> = DEFAULT_USERS,
             cache: Cache = DEFAULT_CACHE,
-            signInSession: MutableLive<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
+            session: MutableLive<Session> = ServiceConfig.DEFAULT_LIVE_SESSION,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ) = invoke(appId, users, cache, signInSession, bus, logger, scope)
+        ) = invoke(appId, users, cache, bus, logger, session, scope)
     }
 }

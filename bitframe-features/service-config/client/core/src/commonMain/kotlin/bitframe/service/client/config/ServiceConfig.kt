@@ -1,6 +1,6 @@
 package bitframe.service.client.config
 
-import bitframe.service.client.Session
+import bitframe.service.Session
 import cache.Cache
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope

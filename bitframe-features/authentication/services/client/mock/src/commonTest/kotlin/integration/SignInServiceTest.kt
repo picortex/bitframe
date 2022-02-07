@@ -1,5 +1,6 @@
 package integration
 
+import bitframe.actors.spaces.Space
 import bitframe.authentication.client.signin.SignInServiceMock
 import bitframe.authentication.client.signin.SignInServiceMockConfig
 import bitframe.authentication.signin.SignInCredentials
@@ -17,7 +18,7 @@ open class SignInServiceTest {
                 uid = "user-1",
                 name = "User One",
                 tag = "user-one",
-                contacts = Contacts.of("user01@test.com"),
+                contacts = listOf(),// Contacts.of("user01@test.com"),
                 photoUrl = null,
                 spaces = listOf(
                     Space(

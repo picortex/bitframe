@@ -1,6 +1,8 @@
 package bitframe.daos
 
 import bitframe.actors.modal.HasId
+import bitframe.actors.spaces.Space
+import bitframe.actors.users.UserRef
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone

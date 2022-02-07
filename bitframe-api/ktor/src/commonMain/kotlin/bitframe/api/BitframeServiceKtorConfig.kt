@@ -1,6 +1,6 @@
 package bitframe.api
 
-import bitframe.authentication.signin.Session
+import bitframe.service.Session
 import bitframe.service.client.config.KtorClientConfiguration
 import bitframe.service.client.config.ServiceConfig
 import cache.Cache
@@ -11,20 +11,20 @@ import kotlinx.serialization.json.Json
 import live.MutableLive
 import logging.Logger
 
-interface BitframeServiceKtorConfig : BitframeServiceConfig, SignInServiceKtorConfig {
+interface BitframeServiceKtorConfig : BitframeServiceConfig, KtorClientConfiguration {
     companion object {
         operator fun invoke(
             appId: String,
             url: String,
             cache: Cache,
-            signInSession: MutableLive<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            session: MutableLive<Session> = ServiceConfig.DEFAULT_LIVE_SESSION,
             bus: EventBus = ServiceConfig.DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             http: HttpClient = KtorClientConfiguration.DEFAULT_HTTP_CLIENT,
             json: Json = KtorClientConfiguration.DEFAULT_JSON,
             scope: CoroutineScope = ServiceConfig.DEFAULT_SCOPE
         ) = object : BitframeServiceKtorConfig {
-            override val signInSession: MutableLive<Session> = signInSession
+            override val session: MutableLive<Session> = session
             override val appId: String = appId
             override val cache: Cache = cache
             override val bus: EventBus = bus

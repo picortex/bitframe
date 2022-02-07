@@ -6,7 +6,7 @@ import bitframe.actors.apps.App
 import bitframe.actors.spaces.Space
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.signin.SignInCredentials
-import bitframe.service.client.Session
+import bitframe.service.Session
 import bitframe.service.client.config.ServiceConfig
 import events.Event
 import later.Later

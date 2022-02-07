@@ -2,7 +2,7 @@ package bitframe.api
 
 import bitframe.actors.spaces.Space
 import bitframe.actors.users.User
-import bitframe.service.client.Session
+import bitframe.service.Session
 import live.Live
 import live.value
 

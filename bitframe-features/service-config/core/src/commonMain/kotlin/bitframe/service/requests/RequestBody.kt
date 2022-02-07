@@ -1,17 +1,17 @@
-package bitframe.service.client.requests
+package bitframe.service.requests
 
-import bitframe.service.client.Session
+import bitframe.service.Session
 import kotlinx.serialization.Serializable
 
-sealed class RequestBody<T> {
+sealed class RequestBody<out T> {
     @Serializable
-    data class Authorized<T>(
+    data class Authorized<out T>(
         val session: Session.SignedIn,
         val data: T
     ) : RequestBody<T>()
 
     @Serializable
-    data class UnAuthorized<T>(
+    data class UnAuthorized<out T>(
         val appId: String,
         val data: T
     ) : RequestBody<T>()

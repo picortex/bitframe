@@ -1,9 +1,10 @@
 package pimonitor.authentication.signup
 
-import response.response.response
+import response.response
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
+import bitframe.service.requests.RequestBody
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
 import io.ktor.http.HttpStatusCode.Companion.Created
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -23,19 +24,19 @@ class SignUpController(
     @OptIn(ExperimentalSerializationApi::class)
     suspend fun signUp(req: HttpRequest) = response {
         val params = try {
-            json.decodeFromString<SignUpParams>(req.compulsoryBody())
+            json.decodeFromString<RequestBody.UnAuthorized<SignUpParams>>(req.compulsoryBody())
         } catch (err: Throwable) {
             null
         } ?: try {
-            json.decodeFromString<SignUpParams.Business>(req.compulsoryBody())
+            json.decodeFromString<RequestBody.UnAuthorized<SignUpParams.Business>>(req.compulsoryBody())
         } catch (err: Throwable) {
             null
         } ?: try {
-            json.decodeFromString<SignUpParams.Individual>(req.compulsoryBody())
+            json.decodeFromString<RequestBody.UnAuthorized<SignUpParams.Individual>>(req.compulsoryBody())
         } catch (err: Throwable) {
             reject(BadRequest, "Make sure you have the proper sign up params")
         }
-        val conundrum = service.signUp(params).await()
+        val conundrum = service.signUp(params.data).await()
         resolve(conundrum, Created)
     }.toHttpResponse()
 }

@@ -14,10 +14,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeCore)
-                api(projects.bitframeAuthenticationCore)
+                api(projects.bitframeActors)
                 api(kotlinx.serialization.core)
-                api(asoft.kotlinx.serialization.mapper)
                 api(kotlinx.coroutines.core)
                 api(kotlinx.datetime)
                 api(asoft.later.core)

@@ -1,5 +1,6 @@
 package pimonitor.server.monitors
 
+import bitframe.actors.users.UserRef
 import bitframe.daos.conditions.isEqualTo
 import bitframe.daos.get
 import bitframe.service.server.config.ServiceConfig

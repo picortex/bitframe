@@ -1,7 +1,7 @@
 package bitframe.server.modules.authentication.controllers
 
 import bitframe.authentication.signin.SignInCredentials
-import response.response.response
+import response.response
 import bitframe.server.BitframeService
 import bitframe.server.http.HttpResponse
 import bitframe.server.http.toHttpResponse

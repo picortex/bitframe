@@ -14,6 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeDaoCore)
+                api(asoft.kotlinx.serialization.mapper)
                 api(asoft.later.ktx)
             }
         }

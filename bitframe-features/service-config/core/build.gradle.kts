@@ -14,6 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeEventsInmemory)
+                api(projects.bitframeActors)
                 api(projects.mailerApi)
                 api(kotlinx.coroutines.core)
                 api(asoft.logging.console)

@@ -2,7 +2,7 @@
 
 package bitframe.panel
 
-import bitframe.service.client.Session
+import bitframe.service.Session
 import kotlinx.collections.interoperable.List
 import kotlin.js.JsExport
 

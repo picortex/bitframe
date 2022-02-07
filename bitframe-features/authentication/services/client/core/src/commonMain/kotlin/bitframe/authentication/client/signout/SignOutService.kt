@@ -3,7 +3,7 @@
 package bitframe.authentication.client.signout
 
 import bitframe.authentication.client.signin.SignInService
-import bitframe.service.client.Session
+import bitframe.service.Session
 import bitframe.service.client.config.ServiceConfig
 import events.Event
 import kotlinx.coroutines.launch

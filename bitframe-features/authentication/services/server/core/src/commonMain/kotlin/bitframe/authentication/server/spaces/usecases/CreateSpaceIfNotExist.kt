@@ -1,5 +1,6 @@
 package bitframe.authentication.server.spaces.usecases
 
+import bitframe.actors.spaces.Space
 import bitframe.authentication.spaces.CreateSpaceParams
 import bitframe.service.server.config.ServiceConfig
 import later.Later

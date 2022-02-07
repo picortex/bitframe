@@ -1,10 +1,9 @@
-package response.response
+package response
 
-import response.*
-import response.payload.payloadOf
 import io.ktor.http.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
+import response.payload.payloadOf
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 import kotlin.experimental.ExperimentalTypeInference

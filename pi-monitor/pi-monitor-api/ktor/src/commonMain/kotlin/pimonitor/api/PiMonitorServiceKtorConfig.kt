@@ -17,7 +17,7 @@ import pimonitor.client.evaluation.businesses.BusinessServiceKtorConfig
 import pimonitor.client.monitors.MonitorsServiceConfig.Companion.DEFAULT_MONITOR_SESSION
 import pimonitor.client.monitors.MonitorsServiceKtorConfig
 import kotlin.jvm.JvmOverloads
-import bitframe.service.client.Session as SignInSession
+import bitframe.service.Session as SignInSession
 import pimonitor.client.monitors.Session as MonitorSession
 
 class PiMonitorServiceKtorConfig @JvmOverloads constructor(

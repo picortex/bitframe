@@ -1,6 +1,6 @@
 package bitframe.service.client.config
 
-import bitframe.service.client.Session
+import bitframe.service.Session
 import events.EventBus
 import cache.Cache
 import io.ktor.client.*

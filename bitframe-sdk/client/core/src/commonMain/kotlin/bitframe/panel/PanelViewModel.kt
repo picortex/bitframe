@@ -1,7 +1,7 @@
 package bitframe.panel
 
 import bitframe.client.BitframeViewModelConfig
-import bitframe.service.client.Session
+import bitframe.service.Session
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow

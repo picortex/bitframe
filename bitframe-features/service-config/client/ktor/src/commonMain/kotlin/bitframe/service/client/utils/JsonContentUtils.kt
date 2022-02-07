@@ -1,8 +1,7 @@
 package bitframe.service.client.utils
 
-import bitframe.service.client.Session
-import bitframe.service.client.requests.RequestBody
-import bitframe.service.client.requests.RequestBody.UnAuthorized.Companion
+import bitframe.service.Session
+import bitframe.service.requests.RequestBody
 import io.ktor.http.*
 import io.ktor.http.content.*
 import kotlinx.serialization.KSerializer

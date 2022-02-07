@@ -1,5 +1,6 @@
 package bitframe.server
 
+import bitframe.actors.spaces.Space
 import bitframe.actors.users.User
 import bitframe.daos.DaoFactory
 import bitframe.server.modules.Module

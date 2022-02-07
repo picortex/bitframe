@@ -11,7 +11,7 @@ import later.later
 import pimonitor.authentication.signup.SignUpParams
 import pimonitor.authentication.signup.SignUpResult
 import pimonitor.authentication.signup.SignUpService
-import response.response.decodeResponseFromString
+import response.decodeResponseFromString
 
 class SignUpServiceKtor(
     override val config: KtorClientConfiguration

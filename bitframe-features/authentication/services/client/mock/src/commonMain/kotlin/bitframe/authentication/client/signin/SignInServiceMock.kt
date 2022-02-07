@@ -2,8 +2,8 @@ package bitframe.authentication.client.signin
 
 import bitframe.actors.apps.App
 import bitframe.authentication.signin.LoginConundrum
-import bitframe.authentication.signin.Session
 import bitframe.authentication.signin.SignInCredentials
+import bitframe.service.Session
 import kotlinx.collections.interoperable.toInteroperableList
 import later.Later
 import later.later
@@ -13,7 +13,10 @@ open class SignInServiceMock(
     override val config: SignInServiceMockConfig = SignInServiceMockConfig()
 ) : SignInService(config) {
     override fun executeSignIn(credentials: SignInCredentials): Later<LoginConundrum> = scope.later {
-        val matches = config.users.filter { it.contacts.contains(credentials.identifier) }
+        val matches = config.users.filter {
+//            it.contacts.contains(credentials.identifier)
+            false
+        }
         if (matches.isEmpty()) throw RuntimeException("User with loginId=${credentials.identifier}, not found")
         val match = matches.first()
         LoginConundrum(

@@ -1,10 +1,9 @@
-package response.response
+package response
 
-import response.Response
-import response.failure.decodeFailureFromString
-import response.success.decodeSuccessFromString
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
+import response.failure.decodeFailureFromString
+import response.success.decodeSuccessFromString
 
 fun <D> Json.decodeResponseFromString(
     dataSerializer: KSerializer<D>,

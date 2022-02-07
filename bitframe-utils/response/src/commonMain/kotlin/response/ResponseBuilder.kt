@@ -1,6 +1,5 @@
 package response
 
-import response.response.responseOf
 import io.ktor.http.*
 
 class ResponseBuilder<D, I> {

@@ -11,8 +11,8 @@ import io.ktor.client.statement.*
 import io.ktor.util.*
 import later.Later
 import later.later
-import response.response.decodeResponseFromString
-import response.response.responseOf
+import response.decodeResponseFromString
+import response.responseOf
 
 open class SignInServiceKtor(
     override val config: KtorClientConfiguration

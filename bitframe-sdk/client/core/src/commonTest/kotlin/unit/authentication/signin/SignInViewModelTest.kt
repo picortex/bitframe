@@ -1,5 +1,7 @@
 package unit.authentication.signin
 
+import bitframe.actors.spaces.Space
+import bitframe.actors.users.Contacts
 import bitframe.api.BitframeServiceMock
 import bitframe.api.BitframeServiceMockConfig
 import bitframe.authentication.signin.*
@@ -23,7 +25,8 @@ class SignInViewModelTest {
                 uid = "user-1",
                 name = "User One",
                 tag = "usr01",
-                contacts = Contacts("user1@test.com"),
+                contacts = listOf(),
+//                contacts = Contacts("user1@test.com"),
                 spaces = listOf(
                     Space(
                         uid = "space-1",

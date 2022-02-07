@@ -1,11 +1,11 @@
 package bitframe.server.controller
 
-import response.response.response
 import bitframe.server.http.HttpResponse
 import bitframe.server.http.toHttpResponse
 import kotlinx.collections.interoperable.List
 import kotlinx.serialization.builtins.ListSerializer
 import later.await
+import response.response
 
 class ControllerImpl<D : Any>(val config: ControllerConfig<D>) : Controller {
     private val service by lazy { config.service }

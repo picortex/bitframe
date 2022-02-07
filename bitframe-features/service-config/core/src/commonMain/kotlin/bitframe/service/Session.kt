@@ -1,6 +1,6 @@
 @file:JsExport
 
-package bitframe.service.client
+package bitframe.service
 
 import bitframe.actors.apps.App
 import bitframe.actors.spaces.Space

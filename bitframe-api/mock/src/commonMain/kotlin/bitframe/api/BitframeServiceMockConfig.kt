@@ -1,8 +1,8 @@
 package bitframe.api
 
 import bitframe.authentication.client.signin.SignInServiceMockConfig
-import bitframe.authentication.signin.Session
 import bitframe.actors.users.User
+import bitframe.service.Session
 import bitframe.service.client.config.ServiceConfig
 import cache.Cache
 import cache.MockCache
@@ -37,11 +37,11 @@ interface BitframeServiceMockConfig : BitframeServiceConfig, SignInServiceMockCo
             appId: String = DEFAULT_APP_ID,
             users: MutableList<User> = DEFAULT_USERS,
             cache: Cache = DEFAULT_CACHE,
-            signInSession: MutableLive<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            session: MutableLive<Session> = ServiceConfig.DEFAULT_LIVE_SESSION,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): BitframeServiceMockConfig = object : BitframeServiceMockConfig, SignInServiceMockConfig by SignInServiceMockConfig(appId, users, cache, signInSession, bus, logger, scope) {
+        ): BitframeServiceMockConfig = object : BitframeServiceMockConfig, SignInServiceMockConfig by SignInServiceMockConfig(appId, users, cache, bus, logger, session, scope) {
             override val users: MutableList<User> = users
         }
 
@@ -51,10 +51,10 @@ interface BitframeServiceMockConfig : BitframeServiceConfig, SignInServiceMockCo
             appId: String = DEFAULT_APP_ID,
             users: MutableList<User> = DEFAULT_USERS,
             cache: Cache = DEFAULT_CACHE,
-            signInSession: MutableLive<Session> = SigningServiceConfig.DEFAULT_SIGN_IN_SESSION,
+            session: MutableLive<Session> = ServiceConfig.DEFAULT_LIVE_SESSION,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): BitframeServiceMockConfig = invoke(appId, users, cache, signInSession, bus, logger, scope)
+        ): BitframeServiceMockConfig = invoke(appId, users, cache, session, bus, logger, scope)
     }
 }

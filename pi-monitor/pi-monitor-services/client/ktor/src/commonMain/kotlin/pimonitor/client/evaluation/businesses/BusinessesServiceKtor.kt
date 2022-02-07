@@ -1,6 +1,6 @@
 package pimonitor.client.evaluation.businesses
 
-import response.response.decodeResponseFromString
+import response.decodeResponseFromString
 import bitframe.service.client.utils.JsonContent
 import io.ktor.client.request.*
 import io.ktor.client.statement.*

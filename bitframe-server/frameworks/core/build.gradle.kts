@@ -12,6 +12,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeCore)
+                api(projects.response)
                 implementation(projects.bitframeAuthenticationServiceCore)
                 api(projects.bitframeAuthenticationServiceServerCore)
                 api(projects.bitframeEventsInmemory)

@@ -1,9 +1,9 @@
 package bitframe.server.http
 
+import io.ktor.http.*
 import response.Error
 import response.Status
-import response.response.responseOf
-import io.ktor.http.*
+import response.responseOf
 
 data class HttpRoute(
     val method: HttpMethod,
