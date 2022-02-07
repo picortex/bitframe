@@ -1,9 +1,7 @@
-package bitframe
+package bitframe.server
 
 import bitframe.daos.DaoFactory
-import bitframe.server.BitframeApplicationConfig
 import bitframe.server.BitframeApplicationConfig.Companion.defaultModules
-import bitframe.server.BitframeService
 import bitframe.server.modules.Module
 import java.io.File
 

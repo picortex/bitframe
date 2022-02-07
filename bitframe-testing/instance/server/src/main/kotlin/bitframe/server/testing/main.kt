@@ -1,26 +1,16 @@
 package bitframe.server.testing
 
-import bitframe.Application
-import bitframe.ApplicationConfig
 import bitframe.daos.MockDaoFactory
-import bitframe.server.BitframeService
+import bitframe.server.*
 import bitframe.service.server.config.ServiceConfig
 import java.io.File
 
 fun main(vararg args: String) {
-    val daoFactory = MockDaoFactory()
-    val serviceConfig = ServiceConfig(
-        daoFactory = daoFactory
-    )
-
-    val service = BitframeService(serviceConfig)
-
-    val appConfig = ApplicationConfig(
-        client = File(args[0]),
-        service = service,
-        daoFactory = daoFactory
-    )
-
-    val app = Application(appConfig)
-    app.start()
+    bitframeApplication {
+        public = File(args[0])
+        database { MockDaoFactory() }
+        service { factory ->
+            BitframeService(ServiceConfig(factory))
+        }
+    }.start()
 }

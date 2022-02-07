@@ -55,7 +55,7 @@ interface MockDaoConfig<D : Any> : DaoConfig {
             override val lock: Mutex = lock
             override val scope: CoroutineScope = scope
             override val namespace = namespace ?: clazz.simpleName?.lowercase() ?: DEFAULT_NAMESPACE
-            override val prefix = prefix ?: clazz.simpleName?.lowercase() ?: DEFAULT_NAMESPACE
+            override val prefix = prefix ?: clazz.simpleName?.lowercase() ?: DEFAULT_PREFIX
         }
 
         inline operator fun <reified D : Any> invoke(
