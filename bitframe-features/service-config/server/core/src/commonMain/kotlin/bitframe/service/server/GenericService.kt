@@ -1,6 +1,6 @@
 package bitframe.service.server
 
-import bitframe.modal.HasId
+import bitframe.actors.modal.HasId
 import kotlinx.collections.interoperable.List
 import later.Later
 import bitframe.service.GenericService as CoreGenericService

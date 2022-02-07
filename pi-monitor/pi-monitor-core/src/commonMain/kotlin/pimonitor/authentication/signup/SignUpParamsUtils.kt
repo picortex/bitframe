@@ -1,10 +1,10 @@
 package pimonitor.authentication.signup
 
+import bitframe.actors.users.Contacts
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.spaces.CreateSpaceParams
-import bitframe.authentication.users.Contacts
-import bitframe.authentication.users.RegisterUserParams
-import bitframe.authentication.users.UserRef
+import bitframe.actors.users.RegisterUserParams
+import bitframe.actors.users.UserRef
 import identifier.Email
 import pimonitor.monitors.CooperateMonitor
 import pimonitor.monitors.IndividualMonitor

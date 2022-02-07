@@ -2,12 +2,12 @@
 
 package bitframe.authentication.client.signin
 
-import bitframe.authentication.apps.App
-import bitframe.authentication.client.SigningServiceConfig
+import bitframe.actors.apps.App
+import bitframe.actors.spaces.Space
 import bitframe.authentication.signin.LoginConundrum
-import bitframe.authentication.signin.Session
 import bitframe.authentication.signin.SignInCredentials
-import bitframe.authentication.spaces.Space
+import bitframe.service.client.Session
+import bitframe.service.client.config.ServiceConfig
 import events.Event
 import later.Later
 import later.await
@@ -19,9 +19,9 @@ import kotlin.jvm.JvmStatic
 import bitframe.authentication.signin.SignInService as SignInServiceCore
 
 abstract class SignInService(
-    open val config: SigningServiceConfig
+    open val config: ServiceConfig
 ) : SignInServiceCore() {
-    val session: MutableLive<Session> get() = config.signInSession
+    val session: MutableLive<Session> get() = config.session
     val currentSession get() = session.value
     protected val scope get() = config.scope
     private val logger

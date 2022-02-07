@@ -1,12 +1,7 @@
 package bitframe.server.modules
 
-import bitframe.modal.HasId
+import bitframe.actors.modal.HasId
 import bitframe.server.actions.Action
-import bitframe.server.http.HttpResponse
-import bitframe.server.http.HttpRoute
-import io.ktor.http.*
-import kotlin.jvm.JvmOverloads
-import kotlin.reflect.KClass
 
 interface Module {
     val name: String

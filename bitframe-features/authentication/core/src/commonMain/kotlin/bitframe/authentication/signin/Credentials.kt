@@ -38,5 +38,6 @@ data class PhonePassword(val phone: Phone, val password: String) : Basic() {
     constructor(phone: String, password: String) : this(Phone(phone), password)
 }
 
+@Deprecated("We no longer use username & password credentials any more")
 @Serializable
 data class UsernamePassword(val username: String, val password: String) : Basic()

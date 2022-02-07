@@ -1,6 +1,6 @@
 package pimonitor.evaluation
 
-import bitframe.response.response.response
+import response.response.response
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.toHttpResponse
 import kotlinx.serialization.decodeFromString

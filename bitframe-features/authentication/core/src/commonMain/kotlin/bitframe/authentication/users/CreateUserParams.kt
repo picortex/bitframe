@@ -1,5 +1,6 @@
 package bitframe.authentication.users
 
+import bitframe.actors.users.Contacts
 import bitframe.authentication.signin.Credentials
 import kotlinx.serialization.Serializable
 

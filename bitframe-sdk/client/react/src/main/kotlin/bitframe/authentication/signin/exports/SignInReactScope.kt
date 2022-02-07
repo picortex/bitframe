@@ -4,9 +4,9 @@
 package bitframe.authentication.signin.exports
 
 import bitframe.authentication.client.signin.SignInService
-import bitframe.authentication.signin.Session
 import bitframe.client.BitframeViewModelConfig
 import bitframe.client.ReactUIScope
+import bitframe.service.client.Session
 import useEventHandler
 import useViewModelState
 import bitframe.authentication.signin.SignInIntent as Intent

@@ -1,6 +1,6 @@
 package unit
 
-import bitframe.modal.HasId
+import bitframe.actors.modal.HasId
 
 data class Human(
     override val uid: String = "",

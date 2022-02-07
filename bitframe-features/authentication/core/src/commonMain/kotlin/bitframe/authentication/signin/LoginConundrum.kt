@@ -2,8 +2,8 @@
 
 package bitframe.authentication.signin
 
-import bitframe.authentication.spaces.Space
-import bitframe.authentication.users.User
+import bitframe.actors.spaces.Space
+import bitframe.actors.users.User
 import kotlinx.collections.interoperable.List
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport

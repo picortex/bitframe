@@ -10,7 +10,7 @@ import kotlin.js.JsExport
 abstract class SignInService {
 
     open fun validate(credentials: SignInCredentials): Validation<SignInCredentials> = validate {
-        require(credentials.alias.isNotEmpty()) { "loginId (i.e. email/phone/username), must not be empty" }
+        require(credentials.identifier.isNotEmpty()) { "loginId (i.e. email/phone/username), must not be empty" }
         require(credentials.password.isNotEmpty()) { "Password must not be empty" }
         credentials
     }

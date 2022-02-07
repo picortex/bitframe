@@ -1,8 +1,7 @@
 package bitframe.authentication.client.signin
 
-import bitframe.authentication.client.SigningServiceConfig
 import bitframe.authentication.signin.Session
-import bitframe.authentication.users.User
+import bitframe.actors.users.User
 import events.EventBus
 import bitframe.service.client.config.ServiceConfig
 import cache.Cache

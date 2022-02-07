@@ -1,7 +1,6 @@
 package bitframe.panel
 
-import bitframe.authentication.signin.Session
-import bitframe.authentication.signin.SignInService
+import bitframe.service.client.Session
 import kotlinx.coroutines.flow.MutableStateFlow
 import react.RBuilder
 import reakt.*

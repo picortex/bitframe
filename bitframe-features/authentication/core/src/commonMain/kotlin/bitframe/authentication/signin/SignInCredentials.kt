@@ -7,7 +7,7 @@ import kotlin.js.JsExport
 
 /**
  * a model for holding credentials for a basic authentication
- * @param alias maybe an email, phone or username
+ * @param identifier maybe an email or a phone
  * @param password the secret phrase to grant the user access
  */
 @Serializable
@@ -15,6 +15,6 @@ data class SignInCredentials(
     /**
      * Can be an email, phone or username
      */
-    val alias: String,
+    val identifier: String,
     val password: String
 )

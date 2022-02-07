@@ -1,7 +1,5 @@
 package bitframe.api
 
-import bitframe.authentication.client.SigningServiceConfig
-import bitframe.authentication.client.signin.SignInServiceKtorConfig
 import bitframe.authentication.signin.Session
 import bitframe.service.client.config.KtorClientConfiguration
 import bitframe.service.client.config.ServiceConfig
@@ -10,7 +8,6 @@ import events.EventBus
 import io.ktor.client.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
-import live.Live
 import live.MutableLive
 import logging.Logger
 

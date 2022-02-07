@@ -3,9 +3,7 @@ package integration
 import bitframe.authentication.client.signin.SignInServiceMock
 import bitframe.authentication.client.signin.SignInServiceMockConfig
 import bitframe.authentication.signin.SignInCredentials
-import bitframe.authentication.spaces.Space
-import bitframe.authentication.users.Contacts
-import bitframe.authentication.users.User
+import bitframe.actors.users.User
 import expect.expect
 import kotlinx.collections.interoperable.listOf
 import kotlinx.coroutines.test.runTest

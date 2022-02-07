@@ -14,10 +14,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeCore)
-                api(kotlinx.datetime)
-                api(kotlinx.serialization.core)
+                api(projects.bitframeActors)
                 api(asoft.later.core)
-                api(asoft.identifier.core)
             }
         }
 

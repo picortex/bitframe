@@ -1,6 +1,6 @@
 package bitframe.daos
 
-import bitframe.modal.HasId
+import bitframe.actors.modal.HasId
 import kotlin.reflect.KClass
 
 class MockDaoFactory : DaoFactory {

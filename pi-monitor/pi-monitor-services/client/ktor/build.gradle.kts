@@ -13,6 +13,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(projects.response)
                 api(projects.piMonitorServiceClientCore)
                 api(projects.bitframeServiceConfigClientKtor)
                 api(projects.bitframeCore)

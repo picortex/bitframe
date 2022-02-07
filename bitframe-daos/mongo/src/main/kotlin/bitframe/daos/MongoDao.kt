@@ -2,7 +2,7 @@ package bitframe.daos
 
 import bitframe.daos.conditions.Condition
 import bitframe.daos.conditions.toMongoFilter
-import bitframe.modal.HasId
+import bitframe.actors.modal.HasId
 import com.mongodb.client.model.Filters.eq
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList

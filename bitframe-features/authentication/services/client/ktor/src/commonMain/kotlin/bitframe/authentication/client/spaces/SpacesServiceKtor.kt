@@ -1,8 +1,8 @@
 package bitframe.authentication.client.spaces
 
-import bitframe.authentication.spaces.RegisterSpaceParams
-import bitframe.authentication.spaces.Space
-import bitframe.authentication.spaces.SpacesService
+import bitframe.actors.spaces.RegisterSpaceParams
+import bitframe.actors.spaces.Space
+import bitframe.actors.spaces.SpacesService
 import bitframe.service.client.config.KtorClientConfiguration
 import later.Later
 

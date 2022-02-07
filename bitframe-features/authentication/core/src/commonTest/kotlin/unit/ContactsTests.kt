@@ -1,6 +1,6 @@
 package unit
 
-import bitframe.authentication.users.Contacts
+import bitframe.actors.users.Contacts
 import expect.expect
 import expect.toBe
 import kotlin.test.Test

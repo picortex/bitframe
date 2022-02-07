@@ -1,7 +1,5 @@
 package pimonitor.api
 
-import bitframe.authentication.client.SigningServiceConfig.Companion.DEFAULT_SIGN_IN_SESSION
-import bitframe.authentication.client.signin.SignInServiceKtorConfig
 import bitframe.api.BitframeServiceConfig
 import events.EventBus
 import bitframe.service.client.config.KtorClientConfiguration.Companion.DEFAULT_BUS
@@ -19,14 +17,14 @@ import pimonitor.client.evaluation.businesses.BusinessServiceKtorConfig
 import pimonitor.client.monitors.MonitorsServiceConfig.Companion.DEFAULT_MONITOR_SESSION
 import pimonitor.client.monitors.MonitorsServiceKtorConfig
 import kotlin.jvm.JvmOverloads
-import bitframe.authentication.signin.Session as SignInSession
+import bitframe.service.client.Session as SignInSession
 import pimonitor.client.monitors.Session as MonitorSession
 
 class PiMonitorServiceKtorConfig @JvmOverloads constructor(
     override val appId: String,
     override val url: String,
     override val cache: Cache,
-    override val signInSession: MutableLive<SignInSession> = DEFAULT_SIGN_IN_SESSION,
+    override val session: MutableLive<SignInSession> = ServiceConfig.DEFAULT_LIVE_SESSION,
     override val monitorSession: MutableLive<MonitorSession> = DEFAULT_MONITOR_SESSION,
     override val json: Json = DEFAULT_JSON,
     override val bus: EventBus = DEFAULT_BUS,
@@ -34,6 +32,5 @@ class PiMonitorServiceKtorConfig @JvmOverloads constructor(
     override val http: HttpClient = DEFAULT_HTTP_CLIENT,
     override val scope: CoroutineScope = DEFAULT_SCOPE,
 ) : BitframeServiceConfig,
-    SignInServiceKtorConfig,
     MonitorsServiceKtorConfig,
     BusinessServiceKtorConfig

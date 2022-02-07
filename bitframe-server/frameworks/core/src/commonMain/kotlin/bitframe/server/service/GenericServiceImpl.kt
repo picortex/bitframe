@@ -1,7 +1,7 @@
 package bitframe.server.service
 
 import bitframe.daos.conditions.Condition
-import bitframe.modal.HasId
+import bitframe.actors.modal.HasId
 import kotlinx.collections.interoperable.List
 import later.Later
 

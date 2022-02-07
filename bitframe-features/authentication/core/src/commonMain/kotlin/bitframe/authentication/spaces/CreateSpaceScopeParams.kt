@@ -1,7 +1,7 @@
 package bitframe.authentication.spaces
 
+import bitframe.actors.spaces.SpacePermission
 import kotlinx.serialization.Serializable
-import kotlin.js.JsExport
 
 @Serializable
 class CreateSpaceScopeParams(

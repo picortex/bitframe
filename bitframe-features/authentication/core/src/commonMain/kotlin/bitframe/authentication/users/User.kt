@@ -4,9 +4,10 @@
 package bitframe.authentication.users
 
 import bitframe.authentication.ISystemPermission
-import bitframe.authentication.spaces.Space
-import bitframe.modal.HasId
-import bitframe.modal.Savable
+import bitframe.actors.modal.Savable
+import bitframe.actors.spaces.Space
+import bitframe.actors.users.UserContact
+import bitframe.actors.users.UserRef
 import kotlinx.datetime.Clock
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -14,16 +15,16 @@ import kotlinx.serialization.builtins.LongAsStringSerializer
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.listOf
 import kotlin.js.JsExport
-import kotlin.js.JsName
 
+@Deprecated("Use bitframe.actors.users")
 @Serializable
 data class User(
     override val uid: String = "",
     val name: String,
     val tag: String = name,
-    val contacts: Contacts,
-    val photoUrl: String? = null,
+    val contacts: List<UserContact>,
     val spaces: List<Space>,
+    val photoUrl: String? = null,
     val status: Status = Status.SignedOut,
     val registeredOn: Long = Clock.System.now().toEpochMilliseconds(),
     val lastSeen: Long = Clock.System.now().toEpochMilliseconds(),
@@ -81,7 +82,6 @@ data class User(
         uid = uid,
         name = name,
         tag = tag,
-        contacts = contacts,
         photoUrl = photoUrl
     )
 }

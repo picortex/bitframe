@@ -1,9 +1,6 @@
 package bitframe.server.testing
 
-import bitframe.authentication.spaces.Space
-import bitframe.authentication.users.Contacts
-import bitframe.authentication.users.User
-import kotlinx.collections.interoperable.listOf
+import bitframe.actors.spaces.Space
 
 private val space = Space(
     uid = "space-1",

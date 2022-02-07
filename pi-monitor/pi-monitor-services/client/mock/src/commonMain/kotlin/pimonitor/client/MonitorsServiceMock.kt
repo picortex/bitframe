@@ -1,6 +1,5 @@
 package pimonitor.client
 
-import bitframe.authentication.users.UserRef
 import later.Later
 import pimonitor.client.monitors.MonitorsService
 import pimonitor.client.monitors.MonitorsServiceConfig

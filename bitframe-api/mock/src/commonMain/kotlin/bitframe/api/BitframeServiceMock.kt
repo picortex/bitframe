@@ -5,8 +5,8 @@ import bitframe.authentication.client.signin.SignInServiceMock
 import bitframe.authentication.client.signout.SignOutService
 import bitframe.authentication.client.spaces.SpacesServiceMock
 import bitframe.authentication.client.users.UsersServiceMock
-import bitframe.authentication.spaces.SpacesService
-import bitframe.authentication.users.UsersService
+import bitframe.actors.spaces.SpacesService
+import bitframe.actors.users.UsersService
 
 interface BitframeServiceMock : BitframeService {
     companion object {

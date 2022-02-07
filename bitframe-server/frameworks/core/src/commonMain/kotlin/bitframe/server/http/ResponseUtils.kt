@@ -1,7 +1,7 @@
 package bitframe.server.http
 
-import bitframe.response.Response
-import bitframe.response.response.encodeResponseToString
+import response.Response
+import response.response.encodeResponseToString
 import io.ktor.http.*
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.serializers.ListSerializer

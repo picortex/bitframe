@@ -1,8 +1,8 @@
 package bitframe.server.http
 
-import bitframe.response.Error
-import bitframe.response.Status
-import bitframe.response.response.responseOf
+import response.Error
+import response.Status
+import response.response.responseOf
 import io.ktor.http.*
 
 data class HttpRoute(

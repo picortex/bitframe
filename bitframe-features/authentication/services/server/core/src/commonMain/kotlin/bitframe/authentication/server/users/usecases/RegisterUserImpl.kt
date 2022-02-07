@@ -5,10 +5,10 @@ import bitframe.authentication.signin.Basic
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.spaces.CreateSpaceParams
 import bitframe.authentication.users.CreateUserParams
-import bitframe.authentication.users.RegisterUserParams
-import bitframe.authentication.users.User
+import bitframe.actors.users.RegisterUserParams
+import bitframe.actors.users.User
 import bitframe.authentication.users.toUser
-import bitframe.authentication.users.usecases.RegisterUser
+import bitframe.actors.users.usecases.RegisterUser
 import bitframe.daos.get
 import bitframe.service.server.config.ServiceConfig
 import kotlinx.collections.interoperable.listOf

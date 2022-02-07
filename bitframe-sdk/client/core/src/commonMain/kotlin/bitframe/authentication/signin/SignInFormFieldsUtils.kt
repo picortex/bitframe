@@ -5,6 +5,6 @@ internal fun SignInFormFields.copy(i: SignInIntent.Submit) = copy(
 )
 
 internal fun SignInFormFields.copy(credentials: SignInCredentials) = copy(
-    email = email.copy(value = credentials.alias),
+    email = email.copy(value = credentials.identifier),
     password = password.copy(value = credentials.password)
 )

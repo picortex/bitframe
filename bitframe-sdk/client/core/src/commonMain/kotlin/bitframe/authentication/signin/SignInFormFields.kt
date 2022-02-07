@@ -16,7 +16,7 @@ data class SignInFormFields(
 ) {
     companion object {
         internal fun with(credentials: SignInCredentials?) = SignInFormFields().apply {
-            email.value = credentials?.alias
+            email.value = credentials?.identifier
             password.value = credentials?.password
         }
     }

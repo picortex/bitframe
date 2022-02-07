@@ -3,9 +3,7 @@ package unit.authentication.signin
 import bitframe.api.BitframeServiceMock
 import bitframe.api.BitframeServiceMockConfig
 import bitframe.authentication.signin.*
-import bitframe.authentication.spaces.Space
-import bitframe.authentication.users.Contacts
-import bitframe.authentication.users.User
+import bitframe.actors.users.User
 import bitframe.client.BitframeViewModelConfig
 import expect.expect
 import expect.toBe

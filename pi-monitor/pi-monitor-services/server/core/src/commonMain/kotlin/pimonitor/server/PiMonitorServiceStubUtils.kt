@@ -1,6 +1,6 @@
 package pimonitor.server
 
-import bitframe.authentication.spaces.RegisterSpaceParams
+import bitframe.actors.spaces.RegisterSpaceParams
 import later.await
 import pimonitor.authentication.signup.SignUpParams
 

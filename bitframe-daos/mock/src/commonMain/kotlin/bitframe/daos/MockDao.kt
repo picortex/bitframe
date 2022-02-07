@@ -2,7 +2,7 @@ package bitframe.daos
 
 import bitframe.daos.conditions.Condition
 import bitframe.daos.conditions.toMockFilter
-import bitframe.modal.HasId
+import bitframe.actors.modal.HasId
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.coroutines.delay

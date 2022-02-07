@@ -3,10 +3,11 @@ package bitframe.authentication.server.users
 import bitframe.authentication.server.spaces.usecases.CreateSpaceIfNotExist
 import bitframe.authentication.server.users.usecases.RegisterUserImpl
 import bitframe.authentication.spaces.CreateSpaceParams
-import bitframe.authentication.spaces.Space
-import bitframe.authentication.users.*
-import bitframe.authentication.users.UsersService
-import bitframe.authentication.users.usecases.RegisterUser
+import bitframe.actors.users.*
+import bitframe.actors.users.UsersService
+import bitframe.actors.users.usecases.RegisterUser
+import bitframe.authentication.users.CreateUserParams
+import bitframe.authentication.users.toUser
 import bitframe.daos.conditions.isEqualTo
 import bitframe.daos.get
 import bitframe.service.server.config.ServiceConfig

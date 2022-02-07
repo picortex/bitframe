@@ -1,7 +1,6 @@
 package bitframe.server
 
-import bitframe.authentication.spaces.Space
-import bitframe.authentication.users.User
+import bitframe.actors.users.User
 import bitframe.daos.DaoFactory
 import bitframe.server.modules.Module
 import bitframe.server.modules.ModuleConfiguration

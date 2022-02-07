@@ -1,13 +1,13 @@
 package bitframe.api
 
-import bitframe.authentication.signin.Session
-import bitframe.authentication.spaces.Space
-import bitframe.authentication.users.User
+import bitframe.actors.spaces.Space
+import bitframe.actors.users.User
+import bitframe.service.client.Session
 import live.Live
 import live.value
 
 class SessionAwareImpl(service: BitframeService) : SessionAware {
-    override val userLiveSession: Live<Session> = service.config.signInSession
+    override val userLiveSession: Live<Session> = service.config.session
     val currentSignInSession get() = userLiveSession.value as? Session.SignedIn
     override val currentUser: User? get() = currentSignInSession?.user
     override val currentSpace: Space? get() = currentSignInSession?.space

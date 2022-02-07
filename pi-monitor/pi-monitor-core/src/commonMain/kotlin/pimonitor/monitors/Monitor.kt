@@ -2,7 +2,7 @@
 
 package pimonitor.monitors
 
-import bitframe.modal.HasId
+import bitframe.actors.modal.HasId
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 

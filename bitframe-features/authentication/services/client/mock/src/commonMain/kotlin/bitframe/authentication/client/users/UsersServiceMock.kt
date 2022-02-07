@@ -3,9 +3,9 @@ package bitframe.authentication.client.users
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.spaces.CreateSpaceParams
 import bitframe.authentication.users.CreateUserParams
-import bitframe.authentication.users.RegisterUserParams
-import bitframe.authentication.users.User
-import bitframe.authentication.users.UsersService
+import bitframe.actors.users.RegisterUserParams
+import bitframe.actors.users.User
+import bitframe.actors.users.UsersService
 import bitframe.service.client.config.ServiceConfig
 import later.Later
 

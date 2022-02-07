@@ -1,8 +1,8 @@
 package pimonitor.server.authentication.signup
 
-import bitframe.authentication.apps.App
+import bitframe.actors.apps.App
 import bitframe.authentication.server.users.usecases.RegisterUserImpl
-import bitframe.authentication.users.usecases.RegisterUser
+import bitframe.actors.users.usecases.RegisterUser
 import bitframe.daos.get
 import bitframe.service.server.config.ServiceConfig
 import later.Later
@@ -12,7 +12,6 @@ import pimonitor.authentication.signup.*
 import pimonitor.authentication.signup.SignUpService
 import pimonitor.monitors.CooperateMonitor
 import pimonitor.monitors.IndividualMonitor
-import pimonitor.monitors.Monitor
 
 class SignUpService(
     override val config: ServiceConfig

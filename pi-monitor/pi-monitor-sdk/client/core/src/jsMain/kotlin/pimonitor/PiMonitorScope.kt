@@ -4,11 +4,11 @@
 package pimonitor
 
 import bitframe.BitframeScope
-import bitframe.authentication.signin.Session
 import bitframe.authentication.signin.exports.SignInScope
-import bitframe.authentication.spaces.Space
-import bitframe.authentication.users.User
+import bitframe.actors.spaces.Space
+import bitframe.actors.users.User
 import bitframe.panel.PanelScope
+import bitframe.service.client.Session
 import live.Live
 import pimonitor.authentication.signup.exports.SignUpScope
 import pimonitor.evaluation.businesses.exports.BusinessesScope

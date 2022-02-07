@@ -15,7 +15,7 @@ open class SignInScreenWeb : SignInScreen {
     override suspend fun isVisible(): Boolean = email.isVisible() && pass.isVisible()
 
     override suspend fun signIn(credentials: SignInCredentials): DashboardScreen {
-        email.sendKeys(credentials.alias)
+        email.sendKeys(credentials.identifier)
         pass.sendKeys(credentials.password)
         pass.pressEnter()
         return DashboardScreenWeb()

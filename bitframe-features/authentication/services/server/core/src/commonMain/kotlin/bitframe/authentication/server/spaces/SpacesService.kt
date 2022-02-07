@@ -2,13 +2,12 @@ package bitframe.authentication.server.spaces
 
 import bitframe.authentication.server.spaces.usecases.CreateSpaceIfNotExist
 import bitframe.authentication.spaces.CreateSpaceParams
-import bitframe.authentication.spaces.RegisterSpaceParams
-import bitframe.authentication.spaces.SpacesService
-import bitframe.authentication.users.User
+import bitframe.actors.spaces.RegisterSpaceParams
+import bitframe.actors.spaces.SpacesService
+import bitframe.actors.users.User
 import bitframe.daos.conditions.isEqualTo
 import bitframe.daos.get
 import bitframe.service.server.config.ServiceConfig
-import kotlinx.collections.interoperable.toInteroperableList
 import later.await
 import later.later
 

@@ -1,8 +1,6 @@
 package bitframe.daos
 
-import bitframe.authentication.spaces.Space
-import bitframe.authentication.users.UserRef
-import bitframe.modal.HasId
+import bitframe.actors.modal.HasId
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone

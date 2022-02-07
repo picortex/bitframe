@@ -1,6 +1,6 @@
 package bitframe.authentication.signin
 
-import bitframe.authentication.spaces.Space
+import bitframe.actors.spaces.Space
 
 sealed class SignInIntent {
     object InitForm : SignInIntent()

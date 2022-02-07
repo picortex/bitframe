@@ -21,6 +21,7 @@ kotlin {
                 api(projects.bitframeAuthenticationServiceClientCore)
                 api(projects.bitframeCore)
                 api(projects.bitframeServiceConfigClientKtor)
+                api(projects.response)
                 api(kotlinx.serialization.json)
                 api(asoft.later.ktx)
             }

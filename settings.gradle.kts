@@ -46,6 +46,8 @@ includeSubs("mailer", "bitframe-utils/mailer", "api", "mock", "smtp")
 
 includeRoot("templater", "bitframe-utils/templater")
 
+includeRoot("bitframe-actors", "bitframe-actors")
+
 includeSubs(base = "bitframe-events", path = "bitframe-utils/events", "core", "inmemory", "react")
 
 includeSubs(base = "bitframe-events", path = "bitframe-utils/events", "core", "inmemory", "react")
@@ -53,6 +55,8 @@ includeSubs(base = "bitframe-events", path = "bitframe-utils/events", "core", "i
 includeRoot(name = "bitframe-presenters", path = "bitframe-utils/presenters/core")
 
 includeRoot(name = "validation", path = "bitframe-utils/validation")
+
+includeRoot(name = "response", path = "bitframe-utils/response")
 
 
 //<Bitframe Testing>

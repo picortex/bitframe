@@ -1,7 +1,6 @@
 package bitframe.authentication.spaces
 
 import bitframe.authentication.ISystemPermission
-import kotlin.js.JsExport
 
 enum class Permissions(
     override val title: String,

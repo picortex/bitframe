@@ -2,7 +2,7 @@
 
 package pimonitor.monitors
 
-import bitframe.authentication.users.UserRef
+import bitframe.actors.users.UserRef
 import bitframe.service.config.ServiceConfig
 import later.Later
 import kotlin.js.JsExport

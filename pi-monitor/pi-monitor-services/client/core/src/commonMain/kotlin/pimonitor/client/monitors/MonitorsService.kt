@@ -8,13 +8,13 @@ import live.value
 import pimonitor.monitors.Monitor
 import pimonitor.monitors.MonitorsService
 import kotlin.js.JsExport
-import bitframe.authentication.signin.Session as SignInSession
+import bitframe.service.client.Session as SignInSession
 
 abstract class MonitorsService(
     override val config: MonitorsServiceConfig
 ) : MonitorsService(config) {
 
-    val signInSession get() = config.signInSession
+    val signInSession get() = config.session
 
     val session get() = config.monitorSession
 

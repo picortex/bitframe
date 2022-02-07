@@ -3,7 +3,7 @@ package bitframe.authentication.server.signin
 import bitframe.authentication.signin.LoginConundrum
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.signin.SignInService
-import bitframe.authentication.users.User
+import bitframe.actors.users.User
 import bitframe.daos.conditions.contains
 import bitframe.daos.get
 import bitframe.service.server.config.ServiceConfig
@@ -21,8 +21,8 @@ class SignInService(
     private val usersDao = config.daoFactory.get<User>()
 
     override fun executeSignIn(credentials: SignInCredentials): Later<LoginConundrum> = scope.later {
-        val matches = usersDao.all(condition = "contacts" contains credentials.alias).await()
-        if (matches.isEmpty()) throw RuntimeException("User with loginId=${credentials.alias}, not found")
+        val matches = usersDao.all(condition = "contacts" contains credentials.identifier).await()
+        if (matches.isEmpty()) throw RuntimeException("User with loginId=${credentials.identifier}, not found")
         val match = matches.first()
         LoginConundrum(
             user = match,

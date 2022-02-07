@@ -1,9 +1,8 @@
 package bitframe.api
 
-import bitframe.authentication.client.SigningServiceConfig
 import bitframe.authentication.client.signin.SignInServiceMockConfig
 import bitframe.authentication.signin.Session
-import bitframe.authentication.users.User
+import bitframe.actors.users.User
 import bitframe.service.client.config.ServiceConfig
 import cache.Cache
 import cache.MockCache

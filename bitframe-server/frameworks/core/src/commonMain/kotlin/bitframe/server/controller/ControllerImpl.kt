@@ -1,6 +1,6 @@
 package bitframe.server.controller
 
-import bitframe.response.response.response
+import response.response.response
 import bitframe.server.http.HttpResponse
 import bitframe.server.http.toHttpResponse
 import kotlinx.collections.interoperable.List

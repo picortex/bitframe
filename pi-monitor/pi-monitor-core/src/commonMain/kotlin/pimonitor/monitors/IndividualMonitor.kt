@@ -2,8 +2,7 @@
 
 package pimonitor.monitors
 
-import bitframe.authentication.users.UserRef
-import bitframe.modal.HasId
+import bitframe.actors.users.UserRef
 import identifier.Email
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport

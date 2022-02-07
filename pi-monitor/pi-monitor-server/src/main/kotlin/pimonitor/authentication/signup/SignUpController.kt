@@ -1,6 +1,6 @@
 package pimonitor.authentication.signup
 
-import bitframe.response.response.response
+import response.response.response
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
@@ -11,7 +11,6 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import later.await
 import pimonitor.server.authentication.signup.SignUpService
-import pimonitor.authentication.signup.SignUpParams
 
 private val json = Json {
     encodeDefaults = true

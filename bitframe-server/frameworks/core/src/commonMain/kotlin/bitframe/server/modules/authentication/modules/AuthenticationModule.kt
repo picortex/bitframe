@@ -1,7 +1,6 @@
 package bitframe.server.modules.authentication.modules
 
 import bitframe.authentication.signin.Basic
-import bitframe.authentication.users.Contacts
 import bitframe.authentication.users.CreateUserParams
 import bitframe.server.actions.Action
 import bitframe.server.modules.Module

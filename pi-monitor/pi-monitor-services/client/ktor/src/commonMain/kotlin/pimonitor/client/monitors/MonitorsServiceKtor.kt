@@ -1,7 +1,7 @@
 package pimonitor.client.monitors
 
-import bitframe.authentication.users.UserRef
-import bitframe.response.response.decodeResponseFromString
+import bitframe.actors.users.UserRef
+import response.response.decodeResponseFromString
 import bitframe.service.client.utils.JsonContent
 import io.ktor.client.request.*
 import io.ktor.client.statement.*

@@ -2,9 +2,9 @@
 
 package bitframe.authentication.client.signout
 
-import bitframe.authentication.client.SigningServiceConfig
 import bitframe.authentication.client.signin.SignInService
-import bitframe.authentication.signin.Session
+import bitframe.service.client.Session
+import bitframe.service.client.config.ServiceConfig
 import events.Event
 import kotlinx.coroutines.launch
 import later.await
@@ -12,10 +12,10 @@ import live.value
 import kotlin.js.JsExport
 import kotlin.jvm.JvmStatic
 
-class SignOutService(private val config: SigningServiceConfig) {
+class SignOutService(private val config: ServiceConfig) {
     private val logger
         get() = config.logger.with(
-            "User" to (config.signInSession.value as? Session.SignedIn)?.user?.name,
+            "User" to (config.session.value as? Session.SignedIn)?.user?.name,
             "Source" to SignOutService::class.simpleName
         )
 
@@ -29,9 +29,9 @@ class SignOutService(private val config: SigningServiceConfig) {
 
     fun signOut() {
         logger.info("Signing out . . .")
-        val signInSession = config.signInSession
+        val signInSession = config.session
         val session = signInSession.value as? Session.SignedIn ?: return
-        
+
         signInSession.value = Session.SignedOut(
             app = session.app,
             space = session.space,

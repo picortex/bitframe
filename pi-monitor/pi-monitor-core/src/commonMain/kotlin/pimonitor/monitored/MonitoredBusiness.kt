@@ -2,7 +2,7 @@
 
 package pimonitor.monitored
 
-import bitframe.modal.HasId
+import bitframe.actors.modal.HasId
 import identifier.Email
 import kotlinx.collections.interoperable.List
 import kotlinx.serialization.Serializable

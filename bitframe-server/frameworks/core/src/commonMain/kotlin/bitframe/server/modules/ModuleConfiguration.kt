@@ -1,7 +1,7 @@
 package bitframe.server.modules
 
 import bitframe.daos.DaoFactory
-import bitframe.modal.HasId
+import bitframe.actors.modal.HasId
 import bitframe.server.controller.Controller
 import bitframe.server.controller.ControllerConfig
 import bitframe.server.service.GenericService

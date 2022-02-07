@@ -1,13 +1,11 @@
 package bitframe.authentication.server.spaces.usecases
 
 import bitframe.authentication.spaces.CreateSpaceParams
-import bitframe.authentication.spaces.Space
 import bitframe.authentication.spaces.toSpace
 import bitframe.daos.conditions.isEqualTo
 import bitframe.daos.get
 import bitframe.service.server.config.ServiceConfig
 import later.Later
-import later.await
 import later.later
 
 internal class CreateSpaceIfNotExistImpl(

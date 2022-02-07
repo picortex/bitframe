@@ -2,7 +2,7 @@ package pimonitor.api
 
 import bitframe.api.BitframeServiceConfig
 import bitframe.api.BitframeServiceMockConfig
-import bitframe.authentication.users.User
+import bitframe.actors.users.User
 import cache.Cache
 import cache.MockCache
 import events.EventBus

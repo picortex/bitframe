@@ -5,7 +5,7 @@ package bitframe.authentication.signin.exports
 
 import bitframe.api.BitframeService
 import bitframe.authentication.signin.SignInViewModel
-import bitframe.authentication.spaces.Space
+import bitframe.actors.spaces.Space
 import bitframe.client.BitframeViewModelConfig
 import bitframe.client.UIScope
 import viewmodel.ViewModel
