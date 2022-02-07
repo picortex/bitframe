@@ -6,6 +6,7 @@ package bitframe.authentication.users
 import bitframe.authentication.ISystemPermission
 import bitframe.authentication.spaces.Space
 import bitframe.modal.HasId
+import bitframe.modal.Savable
 import kotlinx.datetime.Clock
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -22,13 +23,12 @@ data class User(
     val tag: String = name,
     val contacts: Contacts,
     val photoUrl: String? = null,
-    val status: Status = Status.SignedOut,
     val spaces: List<Space>,
-    val verifiedContacts: Contacts = Contacts.None,
+    val status: Status = Status.SignedOut,
     val registeredOn: Long = Clock.System.now().toEpochMilliseconds(),
     val lastSeen: Long = Clock.System.now().toEpochMilliseconds(),
-    val deleted: Boolean = false
-) : HasId {
+    override val deleted: Boolean = false
+) : Savable {
     @Serializable
     sealed class Status {
         @Serializable
@@ -41,7 +41,7 @@ data class User(
         object SignedOut : Status()
     }
 
-    override fun copy(id: String) = copy(uid = id)
+    override fun copy(id: String, deleted: Boolean) = copy(uid = id, deleted = deleted)
 
     @Serializable
     class Permissions(

@@ -9,7 +9,7 @@ import kotlin.js.JsName
 interface HasId {
     val uid: String
 
-    @JsName("_ignore_")
+    @JsName("_ignore_hasIdCopy")
     fun copy(id: String): HasId
 
     companion object {

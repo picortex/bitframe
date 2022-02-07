@@ -2,7 +2,7 @@
 
 package bitframe.authentication.spaces
 
-import bitframe.modal.HasId
+import bitframe.modal.Savable
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
@@ -13,7 +13,7 @@ data class Space(
     val scope: String,
     val type: String,
     override val uid: String = "",
-    val deleted: Boolean = false
-) : HasId {
-    override fun copy(id: String): HasId = copy(uid = id)
+    override val deleted: Boolean = false
+) : Savable {
+    override fun copy(id: String, deleted: Boolean) = copy(uid = id, deleted = deleted)
 }

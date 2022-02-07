@@ -6,6 +6,7 @@ import kotlin.jvm.JvmSynthetic
 import identifier.Email as ValidEmail
 import identifier.Phone as ValidPhone
 
+@Deprecated("Use UserContact instead")
 @Serializable(with = ContactsSerializer::class)
 sealed class Contacts {
 
