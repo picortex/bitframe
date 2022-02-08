@@ -17,6 +17,7 @@ kotlin {
                 api(projects.bitframeActors)
                 api(projects.mailerApi)
                 api(kotlinx.coroutines.core)
+                api(asoft.platform.core)
                 api(asoft.logging.console)
             }
         }

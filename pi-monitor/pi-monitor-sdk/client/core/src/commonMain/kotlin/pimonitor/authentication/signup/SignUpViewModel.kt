@@ -1,10 +1,8 @@
 package pimonitor.authentication.signup
 
-import bitframe.authentication.signin.SignInService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
@@ -18,11 +16,11 @@ import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
 class SignUpViewModel(
-    config: PiMonitorViewModelConfig
+    private val config: PiMonitorViewModelConfig
 ) : ViewModel<Intent, State>(State.IndividualForm(IndividualFormFields(), null), config) {
-    private val signUpService: SignUpService = config.service.signUp
-    private val signInService: SignInService = config.service.signIn
-    private val recoveryTime = config.recoveryTime
+    private val signUpService get() = config.service.signUp
+    private val signInService get() = config.service.signIn
+    private val recoveryTime get() = config.recoveryTime
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         Intent.SelectRegisterAsIndividual -> selectRegisterAsIndividual()
@@ -36,7 +34,7 @@ class SignUpViewModel(
             REGISTER_AS_BUSINESS.value -> State.BusinessForm(BusinessFormFields(), null)
             REGISTER_AS_INDIVIDUAL.value -> State.IndividualForm(IndividualFormFields(), null)
             else -> {
-                logger?.warn("Registering as ${i.type} is not supported. Defaulting to Registering as ${REGISTER_AS_INDIVIDUAL.value}")
+                logger.warn("Registering as ${i.type} is not supported. Defaulting to Registering as ${REGISTER_AS_INDIVIDUAL.value}")
                 State.IndividualForm(IndividualFormFields(), null)
             }
         }
@@ -51,7 +49,7 @@ class SignUpViewModel(
             signInService.signIn(i.params.toCredentials()).await()
             emit(state.copy(i, Success("Successfully signed in")))
         }.catch {
-            emit(state.copy(i, Failure(it, "Failed to create your account")))
+            emit(state.copy(i, Failure(it, "Failed to create your account: ${it.message}")))
             delay(recoveryTime)
             emit(state.copy(i, null))
         }.collect {

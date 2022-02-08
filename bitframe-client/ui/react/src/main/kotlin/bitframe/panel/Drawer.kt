@@ -1,6 +1,6 @@
 package bitframe.panel
 
-import bitframe.service.client.Session
+import bitframe.service.Session
 import kotlinx.coroutines.flow.MutableStateFlow
 import react.RBuilder
 import reakt.*

@@ -11,5 +11,5 @@ fun SignInAction(
     name: String = "sign-in",
     path: String = "/api/authentication/sign-in"
 ) = Action(name, mapOf(), HttpRoute(HttpMethod.Post, path) {
-    controller.signIn(it.body)
+    controller.signIn(it)
 })

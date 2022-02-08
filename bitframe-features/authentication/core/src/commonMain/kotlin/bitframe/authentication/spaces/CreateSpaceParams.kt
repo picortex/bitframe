@@ -7,5 +7,7 @@ import kotlin.js.JsExport
 
 @Serializable
 class CreateSpaceParams(
-    val name: String
+    val name: String,
+    val type: String,
+    val scope: String
 )

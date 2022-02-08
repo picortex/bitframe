@@ -5,19 +5,19 @@ import bitframe.actors.modal.HasId
 import kotlinx.collections.interoperable.List
 import later.Later
 
-interface GenericService<T> {
+interface GenericService<out T> {
 
-    fun create(input: T): Later<T>
+    fun create(input: @UnsafeVariance T): Later<out T>
 
-    fun update(obj: T): Later<T>
+    fun update(obj: @UnsafeVariance T): Later<out T>
 
-    fun load(uid: String): Later<T>
+    fun load(uid: String): Later<out T>
 
-    fun loadOrNull(uid: String): Later<T?>
+    fun loadOrNull(uid: String): Later<out T?>
 
-    fun delete(uid: String): Later<T>
+    fun delete(uid: String): Later<out T>
 
-    fun all(condition: Condition<String, Any>? = null): Later<List<T>>
+    fun all(condition: Condition<String, Any>? = null): Later<out List<T>>
 
     companion object {
         operator fun <T : HasId> invoke(config: GenericServiceConfig<T>): GenericService<T> = GenericServiceImpl(config)

@@ -6,8 +6,10 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
+import kotlin.reflect.KClass
 
-interface DaoConfig {
+interface DaoConfig<D : Any> {
+    val clazz: KClass<D>
     val scope: CoroutineScope
 
     companion object {
@@ -15,12 +17,19 @@ interface DaoConfig {
         val DEFAULT_SCOPE = CoroutineScope(SupervisorJob())
 
         @JvmSynthetic
-        operator fun invoke(scope: CoroutineScope = DEFAULT_SCOPE) = object : DaoConfig {
+        operator fun <D : Any> invoke(
+            clazz: KClass<D>,
+            scope: CoroutineScope = DEFAULT_SCOPE
+        ) = object : DaoConfig<D> {
+            override val clazz = clazz
             override val scope: CoroutineScope = scope
         }
 
         @JvmOverloads
         @JvmStatic
-        fun create(scope: CoroutineScope = DEFAULT_SCOPE) = invoke(scope)
+        fun <D : Any> create(
+            clazz: KClass<D>,
+            scope: CoroutineScope = DEFAULT_SCOPE
+        ) = invoke(clazz, scope)
     }
 }

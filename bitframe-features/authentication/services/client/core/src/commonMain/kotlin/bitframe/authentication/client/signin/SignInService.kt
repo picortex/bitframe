@@ -4,10 +4,11 @@ package bitframe.authentication.client.signin
 
 import bitframe.actors.apps.App
 import bitframe.actors.spaces.Space
-import bitframe.authentication.signin.LoginConundrum
+import bitframe.authentication.signin.SignInResult
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.service.Session
 import bitframe.service.client.config.ServiceConfig
+import bitframe.service.requests.RequestBody
 import events.Event
 import later.Later
 import later.await
@@ -53,14 +54,17 @@ abstract class SignInService(
         private fun SwithSpaceEvent(session: Session.SignedIn) = Event(session, SWITCH_SPACE_EVENT_TOPIC)
     }
 
-    override fun signIn(cred: SignInCredentials): Later<LoginConundrum> = scope.later {
-        val credentials = validate(cred).getOrThrow()
-
-        val conundrum = executeSignIn(cred).await()
+    fun signIn(cred: SignInCredentials): Later<SignInResult> = scope.later {
+        val validCredentials = validate(cred).getOrThrow()
+        val rb = RequestBody.UnAuthorized(
+            appId = config.appId,
+            data = validCredentials
+        )
+        val conundrum = signIn(rb).await()
         if (conundrum.spaces.size == 1) {
             val (user, spaces) = conundrum
             val s = Session.SignedIn(App(config.appId), spaces.first(), user, spaces)
-            cache.save(CREDENTIALS_CACHE_KEY, credentials).await()
+            cache.save(CREDENTIALS_CACHE_KEY, validCredentials).await()
             finalizeSignIn(s)
         } else {
             session.value = Session.Conundrum(App(config.appId), conundrum.spaces, conundrum.user)
@@ -69,9 +73,9 @@ abstract class SignInService(
     }
 
     /**
-     * Resolve a [LoginConundrum] by specifying which [Space] a user currently wants to log in
+     * Resolve a [SignInResult] by specifying which [Space] a user currently wants to log in
      *
-     * This method should only be called when [signIn] returned a conundrum with at least two [LoginConundrum.spaces]
+     * This method should only be called when [signIn] returned a conundrum with at least two [SignInResult.spaces]
      */
     fun resolveConundrum(space: Space): Later<Session.SignedIn> = scope.later {
         logger.info("Resolving conundrum with Space(name=${space.name})")

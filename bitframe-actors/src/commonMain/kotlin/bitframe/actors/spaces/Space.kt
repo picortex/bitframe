@@ -9,9 +9,9 @@ import kotlin.js.JsExport
 @Serializable
 data class Space(
     val name: String,
-    val photoUrl: String? = null,
     val scope: String,
     val type: String,
+    val photoUrl: String? = null,
     override val uid: String = "",
     override val deleted: Boolean = false
 ) : Savable {

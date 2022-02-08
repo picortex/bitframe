@@ -18,12 +18,13 @@ kotlin {
                 api(kotlinx.serialization.core)
                 api(kotlinx.coroutines.core)
                 api(kotlinx.datetime)
-                api(asoft.later.core)
+                api(asoft.later.ktx)
             }
         }
 
         val commonTest by getting {
             dependencies {
+                implementation(projects.bitframeDaoMock)
                 implementation(asoft.expect.core)
             }
         }

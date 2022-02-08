@@ -16,7 +16,7 @@ data class UserPhone(
     val whatsapp: Boolean = false,
     override val uid: String = HasId.UNSET,
     override val deleted: Boolean = false,
-) : UserContact {
+) : UserContact() {
 
     init {
         // validate the phone

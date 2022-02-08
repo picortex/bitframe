@@ -36,7 +36,7 @@ class SignUpController(
         } catch (err: Throwable) {
             reject(BadRequest, "Make sure you have the proper sign up params")
         }
-        val conundrum = service.signUp(params.data).await()
+        val conundrum = service.signUp(params).await()
         resolve(conundrum, Created)
     }.toHttpResponse()
 }

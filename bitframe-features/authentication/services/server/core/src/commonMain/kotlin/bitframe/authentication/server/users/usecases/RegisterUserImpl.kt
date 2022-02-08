@@ -1,42 +1,95 @@
 package bitframe.authentication.server.users.usecases
 
+import bitframe.actors.spaces.Space
+import bitframe.actors.users.*
 import bitframe.authentication.server.spaces.usecases.CreateSpaceIfNotExist
-import bitframe.authentication.signin.Basic
-import bitframe.authentication.signin.LoginConundrum
+import bitframe.authentication.signin.SignInResult
 import bitframe.authentication.spaces.CreateSpaceParams
-import bitframe.authentication.users.CreateUserParams
-import bitframe.actors.users.RegisterUserParams
-import bitframe.actors.users.User
-import bitframe.authentication.users.toUser
 import bitframe.actors.users.usecases.RegisterUser
+import bitframe.authentication.server.users.UserFoundException
+import bitframe.actors.modal.Identifier
+import bitframe.authentication.users.UserCredentials
+import bitframe.daos.CompoundDao
+import bitframe.daos.conditions.isEqualTo
 import bitframe.daos.get
 import bitframe.service.server.config.ServiceConfig
+import identifier.Name
 import kotlinx.collections.interoperable.listOf
+import kotlinx.datetime.Clock
 import later.Later
 import later.await
 import later.later
+import validation.validate
 
 class RegisterUserImpl(
     private val config: ServiceConfig
 ) : RegisterUser, CreateSpaceIfNotExist by CreateSpaceIfNotExist(config) {
 
-    override fun registerWithSpace(
+    private val usersDao by lazy { config.daoFactory.get<User>() }
+    private val spacesDao by lazy { config.daoFactory.get<Space>() }
+    private val contactsDao by lazy {
+        CompoundDao(
+            config.daoFactory.get<UserPhone>(),
+            config.daoFactory.get<UserEmail>(),
+        )
+    }
+    private val credentialsDao by lazy { config.daoFactory.get<UserCredentials>() }
+
+    fun validate(params: RegisterUserParams) = validate {
+        Identifier.from(params.identifier)
+        params
+    }
+
+    override fun register(
         user: RegisterUserParams,
         space: CreateSpaceParams
-    ): Later<LoginConundrum> = config.scope.later {
-        val usersDao = config.daoFactory.get<User>()
-        val userParams = CreateUserParams(
+    ): Later<SignInResult> = config.scope.later {
+        val userParams = validate(user).getOrThrow()
+        val registered = contactsDao.all("value" isEqualTo user.identifier).await()
+        if (registered.isNotEmpty()) throw UserFoundException(user.identifier)
+
+        val userInput = User(
             name = user.name,
-            contacts = user.contacts,
-            credentials = Basic(
-                identity = user.contacts.firstValue(),
-                password = user.password
-            )
+            tag = Name(user.name).first,
+            contacts = listOf(),
+            spaces = listOf()
         )
-        val spaceParams = CreateSpaceParams(space.name)
-        val s = createSpaceIfNotExist(spaceParams).await()
-        val u = usersDao.create(userParams.toUser("")).await()
-        val usr = usersDao.update(u.copy(spaces = listOf(s))).await()
-        LoginConundrum(usr, usr.spaces)
+
+        val userIntermediateOutput = usersDao.create(userInput).await()
+        println(userIntermediateOutput)
+
+        val credentialsInput = UserCredentials(
+            userId = userIntermediateOutput.uid,
+            credential = user.password
+        )
+
+        val credentialsOutput = credentialsDao.create(credentialsInput)
+
+        val contactsInput = UserContact.of(
+            value = userParams.identifier,
+            userId = userIntermediateOutput.uid,
+            userRef = userIntermediateOutput.ref()
+        )
+
+        val contactsOutput = contactsDao.create(contactsInput)
+
+        val spaceInput = Space(
+            name = space.name,
+            scope = space.scope,
+            type = space.type
+        )
+
+        val contacts = contactsOutput.await();
+        val spaceOutput = spacesDao.create(spaceInput).await()
+        credentialsOutput.await();
+
+        val userFinalOutput = usersDao.update(
+            userIntermediateOutput.copy(
+                spaces = listOf(spaceOutput),
+                contacts = listOf(contacts),
+                lastSeen = Clock.System.now().toEpochMilliseconds()
+            )
+        ).await()
+        SignInResult(userFinalOutput, userFinalOutput.spaces)
     }
 }

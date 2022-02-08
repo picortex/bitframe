@@ -8,15 +8,15 @@ import later.Later
 class GenericServiceImpl<T : HasId>(val config: GenericServiceConfig<T>) : GenericService<T> {
     private val dao by lazy { config.daoFactory.get(config.clazz) }
 
-    override fun create(input: T): Later<T> = dao.create(input)
+    override fun create(input: T) = dao.create(input)
 
-    override fun update(obj: T): Later<T> = dao.update(obj)
+    override fun update(obj: T) = dao.update(obj)
 
-    override fun load(uid: String): Later<T> = dao.load(uid)
+    override fun load(uid: String) = dao.load(uid)
 
-    override fun loadOrNull(uid: String): Later<T?> = dao.loadOrNull(uid)
+    override fun loadOrNull(uid: String) = dao.loadOrNull(uid)
 
-    override fun delete(uid: String): Later<T> = dao.delete(uid)
+    override fun delete(uid: String) = dao.delete(uid)
 
-    override fun all(condition: Condition<String, Any>?): Later<List<T>> = dao.all(condition)
+    override fun all(condition: Condition<String, Any>?) = dao.all(condition)
 }

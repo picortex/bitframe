@@ -1,7 +1,7 @@
 package pimonitor.monitors
 
 import bitframe.actors.users.UserRef
-import response.response.response
+import response.response
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.toHttpResponse
 import kotlinx.serialization.decodeFromString

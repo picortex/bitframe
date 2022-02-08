@@ -4,7 +4,7 @@
 package pimonitor.api
 
 import bitframe.api.BitframeService
-import pimonitor.authentication.signup.SignUpService
+import pimonitor.client.authentication.signup.SignUpService
 import pimonitor.client.evaluation.businesses.BusinessesService
 import pimonitor.client.monitors.MonitorsService
 import pimonitor.portfolio.PortfolioService

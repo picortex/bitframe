@@ -1,6 +1,7 @@
 package pimonitor.server
 
 import bitframe.actors.spaces.RegisterSpaceParams
+import bitframe.service.requests.RequestBody
 import later.await
 import pimonitor.authentication.signup.SignUpParams
 
@@ -25,7 +26,7 @@ private val TEST_PARAMS = listOf(
 
 suspend fun PiMonitorService.populateTestEntities() {
     println(">>>> Populating test data")
-    val res = TEST_PARAMS.map { signUp.signUp(it).await() }.last()
+    val res = TEST_PARAMS.map { signUp.signUp(RequestBody.UnAuthorized("test", it)).await() }.last()
     listOf("PiCortex", "Mitikaz").map {
         val ref = res.user.ref()
         println("Setting up $it for ${ref.name}")

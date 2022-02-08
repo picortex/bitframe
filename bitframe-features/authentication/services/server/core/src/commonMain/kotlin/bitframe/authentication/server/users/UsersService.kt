@@ -30,7 +30,7 @@ class UsersService(
     }
 
     override fun createIfNotExist(params: CreateUserParams) = scope.later {
-        val accountParams = CreateSpaceParams("Genesis")
+        val accountParams = CreateSpaceParams("Genesis", "genesis", "genesis")
         val account = createSpaceIfNotExist(accountParams)
         val user = createUserIfNotExist(params)
         account.await(); user.await()

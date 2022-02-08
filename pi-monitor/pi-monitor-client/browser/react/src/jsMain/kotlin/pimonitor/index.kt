@@ -28,9 +28,12 @@ fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
     val konfig = konfig()
     val scope = scope {
         appId = "test-client"
-        url = "https://dev.picortex.com"
+//        url = "https://dev.picortex.com"
 //        url = konfig["url"]?.toString() ?: window.location.origin
-//        url = "http://localhost:8080"
+        url = "http://localhost:8080"
+        serviceLoggers = jso {
+            console = true
+        }
         viewModel = jso {
             recoveryTime = undefined
             logging = jso {
@@ -39,9 +42,6 @@ fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
         }
     }
 
-    val cache = BrowserCache()
-    window.asDynamic().cache = cache
-    console.log(cache)
     val version: String by konfig()
     Bitframe(
         scope = scope,

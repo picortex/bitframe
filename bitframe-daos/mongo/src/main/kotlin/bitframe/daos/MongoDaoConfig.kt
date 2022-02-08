@@ -7,8 +7,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlin.jvm.JvmField
 import kotlin.reflect.KClass
 
-interface MongoDaoConfig<D : Any> : DaoConfig, MongoConfigProperties {
-    val clazz: KClass<D>
+interface MongoDaoConfig<D : Any> : DaoConfig<D>, MongoConfigProperties {
     val collection: String
     val prefix: String
 

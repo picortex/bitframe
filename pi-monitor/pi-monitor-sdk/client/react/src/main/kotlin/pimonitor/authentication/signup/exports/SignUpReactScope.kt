@@ -5,7 +5,7 @@ package pimonitor.authentication.signup.exports
 
 import bitframe.authentication.client.signin.SignInService
 import bitframe.client.ReactUIScope
-import bitframe.service.client.Session
+import bitframe.service.Session
 import pimonitor.PiMonitorViewModelConfig
 import pimonitor.authentication.signup.SignUpResult
 import pimonitor.authentication.signup.SignUpService

@@ -3,7 +3,7 @@
 
 package pimonitor.authentication.signup.exports
 
-import pimonitor.authentication.signup.SignUpService
+import pimonitor.client.authentication.signup.SignUpService
 
 open class SignUpServiceWrapper(service: SignUpService) {
 

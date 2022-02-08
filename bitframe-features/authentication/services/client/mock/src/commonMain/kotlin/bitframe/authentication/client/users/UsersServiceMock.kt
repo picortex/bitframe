@@ -1,6 +1,6 @@
 package bitframe.authentication.client.users
 
-import bitframe.authentication.signin.LoginConundrum
+import bitframe.authentication.signin.SignInResult
 import bitframe.authentication.spaces.CreateSpaceParams
 import bitframe.authentication.users.CreateUserParams
 import bitframe.actors.users.RegisterUserParams
@@ -16,7 +16,7 @@ class UsersServiceMock(
         TODO("Not yet implemented")
     }
 
-    override fun registerWithSpace(user: RegisterUserParams, space: CreateSpaceParams): Later<LoginConundrum> {
+    override fun register(user: RegisterUserParams, space: CreateSpaceParams): Later<SignInResult> {
         TODO("Not yet implemented")
     }
 }

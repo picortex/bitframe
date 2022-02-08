@@ -16,7 +16,7 @@ import org.litote.kmongo.eq
 import org.litote.kmongo.reactivestreams.KMongo
 
 class MongoDao<D : HasId>(
-    val config: MongoDaoConfig<D>
+    override val config: MongoDaoConfig<D>
 ) : Dao<D> {
 
     private val client = KMongo.createClient(config.connectionString())

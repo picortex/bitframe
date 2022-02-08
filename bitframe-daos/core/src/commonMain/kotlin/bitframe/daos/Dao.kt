@@ -1,20 +1,36 @@
 package bitframe.daos
 
 import bitframe.daos.conditions.Condition
+import bitframe.daos.config.DaoConfig
 import kotlinx.collections.interoperable.List
+import bitframe.daos.exceptions.EntityNotFoundException
 import later.Later
+import later.await
+import later.later
 
-interface Dao<T> {
+interface Dao<out T : Any> {
 
-    fun create(input: T): Later<T>
+    val config: DaoConfig<@UnsafeVariance T>
 
-    fun update(obj: T): Later<T>
+    fun create(input: @UnsafeVariance T): Later<out T>
 
-    fun load(uid: String): Later<T>
+    fun update(obj: @UnsafeVariance T): Later<out T>
 
-    fun loadOrNull(uid: String): Later<T?>
+    /**
+     * Loads an entity by its uid and returns it
+     * @throws [EntityNotFoundException] when the object is not found
+     */
+    fun load(uid: String): Later<out T>
 
-    fun delete(uid: String): Later<T>
+    fun loadOrNull(uid: String): Later<out T?> = config.scope.later {
+        try {
+            load(uid).await()
+        } catch (err: Throwable) {
+            null
+        }
+    }
 
-    fun all(condition: Condition<String, Any>? = null): Later<List<T>>
+    fun delete(uid: String): Later<out T>
+
+    fun all(condition: Condition<String, Any>? = null): Later<out List<T>>
 }

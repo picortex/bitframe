@@ -1,26 +1,30 @@
 package pimonitor.authentication.signup
 
-import bitframe.actors.users.Contacts
-import bitframe.authentication.signin.SignInCredentials
-import bitframe.authentication.spaces.CreateSpaceParams
 import bitframe.actors.users.RegisterUserParams
 import bitframe.actors.users.UserRef
+import bitframe.authentication.signin.SignInCredentials
+import bitframe.authentication.spaces.CreateSpaceParams
 import identifier.Email
+import pimonitor.authentication.SpaceTypes
 import pimonitor.monitors.CooperateMonitor
 import pimonitor.monitors.IndividualMonitor
 
 fun SignUpParams.Individual.toRegisterUserParams() = RegisterUserParams(
-    name = name, contacts = Contacts.Email(email), password = password
+    name = name,
+    identifier = email,
+    password = password
 )
 
 fun SignUpParams.Business.toRegisterUserParams() = RegisterUserParams(
     name = individualName,
-    contacts = Contacts.Email(individualEmail),
+    identifier = individualEmail,
     password = password
 )
 
 fun SignUpParams.Business.toCreateSpaceParams() = CreateSpaceParams(
-    name = businessName
+    name = businessName,
+    type = SpaceTypes.MONITOR_BUSINESS.name,
+    scope = SpaceTypes.MONITOR_BUSINESS.name
 )
 
 fun SignUpParams.toCredentials() = when (this) {

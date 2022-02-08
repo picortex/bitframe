@@ -6,6 +6,7 @@ import bitframe.authentication.signin.exports.SignInServiceWrapper
 import cache.AsyncStorageCache
 import cache.BrowserCache
 import cache.MockCache
+import kotlinx.serialization.json.Json
 import logging.Appender
 import logging.ConsoleAppender
 import logging.Logger
@@ -41,8 +42,9 @@ fun client(config: ServiceConfiguration): PiMonitorService {
         else -> MockCache().also { logger.warn("Unknown javascript platform, using a non persistent cache") }
     }
 
+    val json = Json { encodeDefaults = true }
     return PiMonitorServiceKtor(
-        PiMonitorServiceKtorConfig(appId, url, cache, logger = logger),
+        PiMonitorServiceKtorConfig(appId, url, cache, logger = logger, json = json),
     )
 }
 

@@ -1,8 +1,11 @@
+@file:JsExport
+
 package bitframe.actors.users
 
 import bitframe.actors.modal.HasId
 import identifier.Email
 import kotlinx.serialization.Serializable
+import kotlin.js.JsExport
 
 @Serializable
 data class UserEmail(
@@ -12,7 +15,7 @@ data class UserEmail(
     override val verified: Boolean = false,
     override val uid: String = HasId.UNSET,
     override val deleted: Boolean = false,
-) : UserContact {
+) : UserContact() {
     init {
         // validate the email
         Email(value)

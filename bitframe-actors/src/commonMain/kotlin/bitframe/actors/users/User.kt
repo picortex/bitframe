@@ -3,6 +3,7 @@
 
 package bitframe.actors.users
 
+import bitframe.actors.modal.HasId
 import bitframe.actors.modal.Savable
 import bitframe.actors.spaces.Space
 import kotlinx.collections.interoperable.List
@@ -14,7 +15,6 @@ import kotlin.js.JsExport
 
 @Serializable
 data class User(
-    override val uid: String = "",
     val name: String,
     val tag: String = name,
     val contacts: List<UserContact>,
@@ -23,6 +23,7 @@ data class User(
     val status: Status = Status.SignedOut,
     val registeredOn: Long = Clock.System.now().toEpochMilliseconds(),
     val lastSeen: Long = Clock.System.now().toEpochMilliseconds(),
+    override val uid: String = HasId.UNSET,
     override val deleted: Boolean = false
 ) : Savable {
     @Serializable

@@ -14,7 +14,7 @@ import later.later
 import kotlin.reflect.KClass
 
 class MockDao<D : HasId>(
-    val config: MockDaoConfig<D>
+    override val config: MockDaoConfig<D>
 ) : Dao<D> {
 
     constructor(clazz: KClass<D>) : this(MockDaoConfig(clazz))

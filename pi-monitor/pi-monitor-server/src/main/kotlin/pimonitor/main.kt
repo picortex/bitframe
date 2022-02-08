@@ -4,12 +4,15 @@ import bitframe.daos.MongoDaoFactory
 import bitframe.daos.MongoDaoFactoryConfig
 import bitframe.server.bitframeApplication
 import bitframe.service.server.config.ServiceConfig
+import pimonitor.authentication.signup.SignUpController
+import pimonitor.authentication.signup.SignUpModule
 import pimonitor.server.PiMonitorService
+import pimonitor.server.authentication.signup.SignUpService
 import pimonitor.server.populateTestEntities
 import java.io.File
 
 fun main(args: Array<String>) {
-    bitframeApplication {
+    bitframeApplication<PiMonitorService> {
         public = File(args.getOrNull(0) ?: "/default")
         database {
 //            MockDaoFactory()
@@ -22,9 +25,15 @@ fun main(args: Array<String>) {
                 )
             )
         }
+
         service { factory ->
             PiMonitorService(ServiceConfig(factory))
         }
+
+        install { ser ->
+            SignUpModule(SignUpController(ser.signUp))
+        }
+
         onStart { populateTestEntities() }
     }.start()
 }

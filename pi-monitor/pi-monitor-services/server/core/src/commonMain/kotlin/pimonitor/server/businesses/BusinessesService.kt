@@ -22,9 +22,9 @@ class BusinessesService(
     override fun executeCreate(
         params: CreateMonitoredBusinessParams,
         monitorRef: MonitorRef,
-    ): Later<MonitoredBusiness> = dao.create(
+    ): Later<out MonitoredBusiness> = dao.create(
         params.toMonitoredBusiness("", monitorRef)
     )
 
-    override fun all(): Later<List<MonitoredBusiness>> = dao.all()
+    override fun all(): Later<out List<MonitoredBusiness>> = dao.all()
 }

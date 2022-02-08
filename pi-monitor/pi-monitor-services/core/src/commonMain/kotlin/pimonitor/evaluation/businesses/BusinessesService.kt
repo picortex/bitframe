@@ -27,12 +27,12 @@ abstract class BusinessesService(
     protected val scope get() = config.scope
     protected val bus get() = config.bus
 
-    abstract fun all(): Later<List<MonitoredBusiness>>
+    abstract fun all(): Later<out List<MonitoredBusiness>>
 
     protected abstract fun executeCreate(
         params: CreateMonitoredBusinessParams,
         monitorRef: MonitorRef
-    ): Later<MonitoredBusiness>
+    ): Later<out MonitoredBusiness>
 
     @JsName("validateMonitoredBusinessParams")
     fun validate(params: CreateMonitoredBusinessParams) = validate {

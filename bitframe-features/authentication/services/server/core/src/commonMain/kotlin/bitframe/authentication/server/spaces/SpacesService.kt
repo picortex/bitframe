@@ -19,7 +19,7 @@ class SpacesService(
     private val usersDao = config.daoFactory.get<User>()
     override fun register(params: RegisterSpaceParams) = scope.later {
         val user = usersDao.all("uid" isEqualTo params.userRef.uid).await().first()
-        val space = createSpaceIfNotExist(CreateSpaceParams(params.name)).await()
+        val space = createSpaceIfNotExist(CreateSpaceParams(params.name, params.name, params.name)).await()
         usersDao.update(user.copy(spaces = (user.spaces + space).toInteroperableList()))
         space
     }
