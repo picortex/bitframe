@@ -39,6 +39,6 @@ class SignUpServiceTest : PiMonitorIntegrationTest() {
         expect(singInConundrum.spaces).toBeOfSize(1)
 
         // Their user tag should equal their username
-        expect(email).toBe(result.user.contacts.mapEachToString().first())
+        expect(email).toBe(result.user.contacts.map { it.value }.first())
     }
 }

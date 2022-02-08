@@ -10,7 +10,7 @@ import pimonitor.monitors.IndividualMonitor
 import kotlin.test.Test
 
 class MonitorsSerializationTest {
-    val userRef get() = User("", "", "", Contacts.None, null, spaces = listOf()).ref()
+    val userRef get() = User("", "", listOf(), listOf(), null).ref()
 
     @Test
     fun should_serialize_an_individual_monitor() {

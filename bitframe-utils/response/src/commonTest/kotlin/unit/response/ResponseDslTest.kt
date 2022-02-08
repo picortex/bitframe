@@ -1,6 +1,6 @@
 package unit.response
 
-import response.response.response
+import response.response
 import expect.expect
 import io.ktor.http.*
 import kotlinx.serialization.Serializable
