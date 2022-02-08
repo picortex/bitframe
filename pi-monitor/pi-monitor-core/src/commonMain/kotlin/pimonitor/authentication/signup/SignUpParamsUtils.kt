@@ -5,27 +5,33 @@ import bitframe.actors.users.UserRef
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.spaces.CreateSpaceParams
 import identifier.Email
+import identifier.Name
 import pimonitor.authentication.SpaceTypes
 import pimonitor.monitors.CooperateMonitor
 import pimonitor.monitors.IndividualMonitor
 
 fun SignUpParams.Individual.toRegisterUserParams() = RegisterUserParams(
-    name = name,
-    identifier = email,
-    password = password
+    userName = name,
+    userIdentifier = email,
+    userPassword = password,
+    spaceName = "${Name(name).first}'s Space",
+    spaceType = SpaceTypes.MONITOR_INDIVIDUAL.name,
+    spaceScope = SpaceTypes.MONITOR_INDIVIDUAL.name
 )
 
 fun SignUpParams.Business.toRegisterUserParams() = RegisterUserParams(
-    name = individualName,
-    identifier = individualEmail,
-    password = password
+    userName = individualName,
+    userIdentifier = individualEmail,
+    userPassword = password,
+    spaceName = businessName,
+    spaceType = SpaceTypes.MONITOR_BUSINESS.name,
+    spaceScope = SpaceTypes.MONITOR_BUSINESS.name,
 )
 
-fun SignUpParams.Business.toCreateSpaceParams() = CreateSpaceParams(
-    name = businessName,
-    type = SpaceTypes.MONITOR_BUSINESS.name,
-    scope = SpaceTypes.MONITOR_BUSINESS.name
-)
+fun SignUpParams.toRegisterUserParams() = when (this) {
+    is SignUpParams.Individual -> toRegisterUserParams()
+    is SignUpParams.Business -> toRegisterUserParams()
+}
 
 fun SignUpParams.toCredentials() = when (this) {
     is SignUpParams.Individual -> SignInCredentials(email, password)

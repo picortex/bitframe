@@ -17,6 +17,7 @@ kotlin {
                 api(projects.bitframeServiceConfigCore)
                 api(projects.bitframeDaoCore)
                 api(asoft.platform.core)
+                api(projects.bitframeServiceConfigDaod)
             }
         }
 

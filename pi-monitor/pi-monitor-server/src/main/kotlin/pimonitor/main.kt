@@ -7,7 +7,6 @@ import bitframe.service.server.config.ServiceConfig
 import pimonitor.authentication.signup.SignUpController
 import pimonitor.authentication.signup.SignUpModule
 import pimonitor.server.PiMonitorService
-import pimonitor.server.authentication.signup.SignUpService
 import pimonitor.server.populateTestEntities
 import java.io.File
 

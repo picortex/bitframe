@@ -5,7 +5,7 @@ import bitframe.actors.users.User
 import bitframe.actors.users.UsersService
 import bitframe.actors.users.usecases.RegisterUser
 import bitframe.authentication.server.spaces.usecases.CreateSpaceIfNotExist
-import bitframe.authentication.server.users.usecases.RegisterUserImpl
+import bitframe.authentication.service.daod.usecase.RegisterUserImpl
 import bitframe.authentication.spaces.CreateSpaceParams
 import bitframe.authentication.users.CreateUserParams
 import bitframe.authentication.users.toUser

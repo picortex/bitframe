@@ -13,18 +13,20 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeCore)
-                api(projects.bitframeAuthenticationServiceClientMock)
-                api(projects.piMonitorServiceClientCore)
-                api(projects.piMonitorServiceDaod)
+                api(projects.bitframeServiceConfigCore)
+                api(projects.bitframeDaoCore)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                api(asoft.cache.mock)
-                api(asoft.expect.coroutines)
-                api(projects.piMonitorTestTesting)
+                implementation(asoft.expect.core)
+            }
+        }
+
+        val jvmMain by getting {
+            dependencies {
+                api(projects.mailerSmtp)
             }
         }
     }

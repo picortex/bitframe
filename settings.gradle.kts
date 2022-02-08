@@ -74,7 +74,7 @@ includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core"
 includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mongo")
 
 // services
-includeSubs(base = "bitframe-service-config", path = "bitframe-features/service-config", "core")
+includeSubs(base = "bitframe-service-config", path = "bitframe-features/service-config", "core", "daod")
 
 includeSubs(base = "bitframe-service-config-client", path = "bitframe-features/service-config/client", "core", "ktor")
 
@@ -82,7 +82,7 @@ includeSubs(base = "bitframe-service-config-server", path = "bitframe-features/s
 
 includeSubs(base = "bitframe-authentication", path = "bitframe-features/authentication", "core")
 
-includeSubs(base = "bitframe-authentication-service", path = "bitframe-features/authentication/services", "core")
+includeSubs(base = "bitframe-authentication-service", path = "bitframe-features/authentication/services", "core", "daod")
 
 includeSubs(base = "bitframe-authentication-service-client", path = "bitframe-features/authentication/services/client", "core", "ktor", "mock")
 
@@ -106,7 +106,7 @@ includeSubs(base = "pi-monitor-dashboard-integration", path = "pi-monitor/pi-mon
 
 includeRoot(name = "pi-monitor-server", path = "pi-monitor/pi-monitor-server")
 
-includeSubs(base = "pi-monitor-service", path = "pi-monitor/pi-monitor-services", "core", "test")
+includeSubs(base = "pi-monitor-service", path = "pi-monitor/pi-monitor-services", "core", "daod", "test")
 
 includeSubs(base = "pi-monitor-service-client", path = "pi-monitor/pi-monitor-services/client", "core", "ktor", "mock")
 

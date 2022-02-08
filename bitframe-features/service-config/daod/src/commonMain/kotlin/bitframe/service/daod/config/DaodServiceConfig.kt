@@ -1,28 +1,31 @@
-package bitframe.service.server.config
+package bitframe.service.daod.config
 
 import bitframe.daos.DaoFactory
-import bitframe.service.daod.config.DaodServiceConfig
+import bitframe.service.config.ServiceConfig
 import events.EventBus
-import cache.Cache
+import events.InMemoryEventBus
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import logging.ConsoleAppender
 import logging.Logger
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
-import bitframe.service.config.ServiceConfig as CoreServiceConfig
 
-interface ServiceConfig : DaodServiceConfig {
+interface DaodServiceConfig : ServiceConfig {
+    val daoFactory: DaoFactory
+
     companion object {
-        @JvmField
-        val DEFAULT_SCOPE = CoreServiceConfig.DEFAULT_SCOPE
 
         @JvmField
-        val DEFAULT_BUS = CoreServiceConfig.DEFAULT_BUS
+        val DEFAULT_SCOPE = CoroutineScope(SupervisorJob())
 
         @JvmField
-        val DEFAULT_LOGGER = CoreServiceConfig.DEFAULT_LOGGER
+        val DEFAULT_BUS = InMemoryEventBus()
+
+        @JvmField
+        val DEFAULT_LOGGER = Logger(ConsoleAppender())
 
         @JvmSynthetic
         operator fun invoke(
@@ -30,8 +33,11 @@ interface ServiceConfig : DaodServiceConfig {
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): ServiceConfig = object : ServiceConfig, CoreServiceConfig by CoreServiceConfig(bus, logger, scope) {
+        ): DaodServiceConfig = object : DaodServiceConfig {
             override val daoFactory: DaoFactory = daoFactory
+            override val bus = bus
+            override val logger: Logger = logger
+            override val scope = scope
         }
 
         @JvmOverloads

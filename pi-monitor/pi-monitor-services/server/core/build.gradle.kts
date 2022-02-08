@@ -16,6 +16,7 @@ kotlin {
                 api(projects.piMonitorServiceCore)
                 api(projects.bitframeSdkServerCore)
                 api(projects.bitframeEventsInmemory)
+                api(projects.piMonitorServiceDaod)
             }
         }
 

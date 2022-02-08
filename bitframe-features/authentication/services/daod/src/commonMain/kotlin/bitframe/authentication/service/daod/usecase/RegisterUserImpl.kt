@@ -1,19 +1,16 @@
-package bitframe.authentication.server.users.usecases
+package bitframe.authentication.service.daod.usecase
 
+import bitframe.actors.modal.Identifier
 import bitframe.actors.spaces.Space
 import bitframe.actors.users.*
-import bitframe.authentication.server.spaces.usecases.CreateSpaceIfNotExist
-import bitframe.authentication.signin.SignInResult
-import bitframe.authentication.spaces.CreateSpaceParams
 import bitframe.actors.users.usecases.RegisterUser
-import bitframe.authentication.server.users.UserFoundException
-import bitframe.actors.modal.Identifier
+import bitframe.authentication.service.daod.exceptions.UserFoundException
+import bitframe.authentication.signin.SignInResult
 import bitframe.authentication.users.UserCredentials
 import bitframe.daos.CompoundDao
 import bitframe.daos.conditions.isEqualTo
 import bitframe.daos.get
-import bitframe.service.server.config.ServiceConfig
-import identifier.Name
+import bitframe.service.daod.config.DaodServiceConfig
 import kotlinx.collections.interoperable.listOf
 import kotlinx.datetime.Clock
 import later.Later
@@ -22,9 +19,8 @@ import later.later
 import validation.validate
 
 class RegisterUserImpl(
-    private val config: ServiceConfig
-) : RegisterUser, CreateSpaceIfNotExist by CreateSpaceIfNotExist(config) {
-
+    private val config: DaodServiceConfig
+) : RegisterUser {
     private val usersDao by lazy { config.daoFactory.get<User>() }
     private val spacesDao by lazy { config.daoFactory.get<Space>() }
     private val contactsDao by lazy {
@@ -36,51 +32,36 @@ class RegisterUserImpl(
     private val credentialsDao by lazy { config.daoFactory.get<UserCredentials>() }
 
     fun validate(params: RegisterUserParams) = validate {
-        Identifier.from(params.identifier)
+        Identifier.from(params.userIdentifier)
         params
     }
 
-    override fun register(
-        user: RegisterUserParams,
-        space: CreateSpaceParams
-    ): Later<SignInResult> = config.scope.later {
-        val userParams = validate(user).getOrThrow()
-        val registered = contactsDao.all("value" isEqualTo user.identifier).await()
-        if (registered.isNotEmpty()) throw UserFoundException(user.identifier)
+    override fun register(params: RegisterUserParams): Later<SignInResult> = config.scope.later {
+        val userParams = validate(params).getOrThrow()
+        val registered = contactsDao.all("value" isEqualTo params.userIdentifier).await()
+        if (registered.isNotEmpty()) throw UserFoundException(params.userIdentifier)
 
-        val userInput = User(
-            name = user.name,
-            tag = Name(user.name).first,
-            contacts = listOf(),
-            spaces = listOf()
-        )
-
-        val userIntermediateOutput = usersDao.create(userInput).await()
-        println(userIntermediateOutput)
+        val userIntermediateOutput = usersDao.create(params.toUserInput()).await()
 
         val credentialsInput = UserCredentials(
             userId = userIntermediateOutput.uid,
-            credential = user.password
+            credential = params.userPassword
         )
 
         val credentialsOutput = credentialsDao.create(credentialsInput)
 
         val contactsInput = UserContact.of(
-            value = userParams.identifier,
+            value = userParams.userIdentifier,
             userId = userIntermediateOutput.uid,
             userRef = userIntermediateOutput.ref()
         )
 
         val contactsOutput = contactsDao.create(contactsInput)
 
-        val spaceInput = Space(
-            name = space.name,
-            scope = space.scope,
-            type = space.type
-        )
-
         val contacts = contactsOutput.await();
-        val spaceOutput = spacesDao.create(spaceInput).await()
+
+        val spaceOutput = spacesDao.create(params.toSpaceInput()).await()
+
         credentialsOutput.await();
 
         val userFinalOutput = usersDao.update(

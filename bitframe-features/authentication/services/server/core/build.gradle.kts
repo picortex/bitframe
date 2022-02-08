@@ -15,6 +15,7 @@ kotlin {
             dependencies {
                 api(projects.bitframeServiceConfigServerCore)
                 implementation(projects.bitframeAuthenticationServiceCore)
+                api(projects.bitframeAuthenticationServiceDaod)
             }
         }
 
