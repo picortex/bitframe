@@ -1,13 +1,11 @@
 package unit.response
 
-import response.Failure
-import response.Success
-import response.response.*
 import expect.expect
 import expect.toBe
 import io.ktor.http.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import response.*
 import kotlin.test.Test
 import kotlin.test.fail
 
