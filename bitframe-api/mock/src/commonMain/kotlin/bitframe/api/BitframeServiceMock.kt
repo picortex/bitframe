@@ -13,11 +13,11 @@ interface BitframeServiceMock : BitframeService {
         operator fun invoke(
             config: BitframeServiceMockConfig = BitframeServiceMockConfig()
         ): BitframeServiceMock = object : BitframeServiceMock {
-            override val config: BitframeServiceConfig = config
-            override val spaces: SpacesService = SpacesServiceMock(config)
-            override val users: UsersService = UsersServiceMock(config)
-            override val signIn: SignInService = SignInServiceMock(config)
-            override val signOut: SignOutService = SignOutService(config)
+            override val config: BitframeServiceConfig by lazy { config }
+            override val spaces: SpacesService by lazy { SpacesServiceMock(config) }
+            override val users: UsersService by lazy { UsersServiceMock(config) }
+            override val signIn: SignInService by lazy { SignInServiceMock(config) }
+            override val signOut: SignOutService by lazy { SignOutService(config) }
         }
     }
 }

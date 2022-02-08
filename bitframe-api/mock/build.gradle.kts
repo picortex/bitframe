@@ -15,6 +15,7 @@ kotlin {
                 api(asoft.cache.mock)
                 api(projects.bitframeApiCore)
                 api(projects.bitframeAuthenticationServiceClientMock)
+                api(projects.bitframeServiceConfigClientMock)
             }
         }
     }

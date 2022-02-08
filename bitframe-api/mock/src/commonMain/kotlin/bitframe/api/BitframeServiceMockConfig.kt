@@ -1,10 +1,9 @@
 package bitframe.api
 
-import bitframe.actors.users.User
+import bitframe.daos.DaoFactory
 import bitframe.service.Session
-import bitframe.service.client.config.ServiceConfig
+import bitframe.service.client.config.MockServiceConfig
 import cache.Cache
-import cache.MockCache
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
 import live.MutableLive
@@ -14,46 +13,50 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface BitframeServiceMockConfig : BitframeServiceConfig, SignInServiceMockConfig {
+interface BitframeServiceMockConfig : BitframeServiceConfig, MockServiceConfig {
     companion object {
         @JvmField
-        val DEFAULT_SCOPE = ServiceConfig.DEFAULT_SCOPE
+        val DEFAULT_APP_ID = MockServiceConfig.DEFAULT_APP_ID
 
         @JvmField
-        val DEFAULT_CACHE = MockCache()
+        val DEFAULT_SCOPE = MockServiceConfig.DEFAULT_SCOPE
 
         @JvmField
-        val DEFAULT_BUS = ServiceConfig.DEFAULT_BUS
+        val DEFAULT_LIVE_SESSION = MockServiceConfig.DEFAULT_LIVE_SESSION
 
         @JvmField
-        val DEFAULT_USERS = mutableListOf<User>()
+        val DEFAULT_LOGGER = MockServiceConfig.DEFAULT_LOGGER
 
         @JvmField
-        val DEFAULT_APP_ID = "<test-id>"
+        val DEFAULT_CACHE = MockServiceConfig.DEFAULT_CACHE
+
+        @JvmField
+        val DEFAULT_BUS = MockServiceConfig.DEFAULT_BUS
+
+        @JvmField
+        val DEFAULT_DAO_FACTORY = MockServiceConfig.DEFAULT_DAO_FACTORY
 
         @JvmSynthetic
         operator fun invoke(
-            appId: String = DEFAULT_APP_ID,
-            users: MutableList<User> = DEFAULT_USERS,
-            cache: Cache = DEFAULT_CACHE,
-            session: MutableLive<Session> = ServiceConfig.DEFAULT_LIVE_SESSION,
-            bus: EventBus = DEFAULT_BUS,
-            logger: Logger = ServiceConfig.DEFAULT_LOGGER,
-            scope: CoroutineScope = DEFAULT_SCOPE
-        ): BitframeServiceMockConfig = object : BitframeServiceMockConfig, SignInServiceMockConfig by SignInServiceMockConfig(appId, users, cache, bus, logger, session, scope) {
-            override val users: MutableList<User> = users
-        }
+            appId: String = MockServiceConfig.DEFAULT_APP_ID,
+            cache: Cache = MockServiceConfig.DEFAULT_CACHE,
+            session: MutableLive<Session> = MockServiceConfig.DEFAULT_LIVE_SESSION,
+            daoFactory: DaoFactory = MockServiceConfig.DEFAULT_DAO_FACTORY,
+            bus: EventBus = MockServiceConfig.DEFAULT_BUS,
+            logger: Logger = MockServiceConfig.DEFAULT_LOGGER,
+            scope: CoroutineScope = MockServiceConfig.DEFAULT_SCOPE
+        ): BitframeServiceMockConfig = object : BitframeServiceMockConfig, MockServiceConfig by MockServiceConfig(appId, cache, session, daoFactory, bus, logger, scope) {}
 
         @JvmStatic
         @JvmOverloads
         fun create(
-            appId: String = DEFAULT_APP_ID,
-            users: MutableList<User> = DEFAULT_USERS,
-            cache: Cache = DEFAULT_CACHE,
-            session: MutableLive<Session> = ServiceConfig.DEFAULT_LIVE_SESSION,
-            bus: EventBus = DEFAULT_BUS,
-            logger: Logger = ServiceConfig.DEFAULT_LOGGER,
-            scope: CoroutineScope = DEFAULT_SCOPE
-        ): BitframeServiceMockConfig = invoke(appId, users, cache, session, bus, logger, scope)
+            appId: String = MockServiceConfig.DEFAULT_APP_ID,
+            cache: Cache = MockServiceConfig.DEFAULT_CACHE,
+            session: MutableLive<Session> = MockServiceConfig.DEFAULT_LIVE_SESSION,
+            daoFactory: DaoFactory = MockServiceConfig.DEFAULT_DAO_FACTORY,
+            bus: EventBus = MockServiceConfig.DEFAULT_BUS,
+            logger: Logger = MockServiceConfig.DEFAULT_LOGGER,
+            scope: CoroutineScope = MockServiceConfig.DEFAULT_SCOPE
+        ): BitframeServiceMockConfig = invoke(appId, cache, session, daoFactory, bus, logger, scope)
     }
 }
