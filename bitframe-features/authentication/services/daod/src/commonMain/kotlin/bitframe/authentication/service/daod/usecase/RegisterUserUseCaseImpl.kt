@@ -3,7 +3,7 @@ package bitframe.authentication.service.daod.usecase
 import bitframe.actors.modal.Identifier
 import bitframe.actors.spaces.Space
 import bitframe.actors.users.*
-import bitframe.actors.users.usecases.RegisterUser
+import bitframe.actors.users.usecases.RegisterUserUseCase
 import bitframe.authentication.service.daod.exceptions.UserFoundException
 import bitframe.authentication.signin.SignInResult
 import bitframe.authentication.users.UserCredentials
@@ -18,9 +18,9 @@ import later.await
 import later.later
 import validation.validate
 
-class RegisterUserImpl(
+class RegisterUserUseCaseImpl(
     private val config: DaodServiceConfig
-) : RegisterUser {
+) : RegisterUserUseCase {
     private val usersDao by lazy { config.daoFactory.get<User>() }
     private val spacesDao by lazy { config.daoFactory.get<Space>() }
     private val contactsDao by lazy {

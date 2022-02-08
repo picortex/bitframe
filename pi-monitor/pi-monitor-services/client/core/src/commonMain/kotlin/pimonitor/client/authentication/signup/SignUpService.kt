@@ -10,13 +10,12 @@ import later.later
 import pimonitor.authentication.signup.SignUpParams
 import pimonitor.authentication.signup.SignUpResult
 import pimonitor.authentication.signup.SignUpService
+import pimonitor.authentication.signup.SignUpUseCase
 import kotlin.js.JsExport
 
 abstract class SignUpService(
     override val config: ServiceConfig
-) : SignUpService(config) {
-    private val scope get() = config.scope
-    private val bus get() = config.bus
+) : SignUpService(config), SignUpUseCase {
 
     fun signUp(params: SignUpParams): Later<SignUpResult> = scope.later {
         val request = RequestBody.UnAuthorized(

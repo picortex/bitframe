@@ -1,14 +1,10 @@
 package pimonitor.client
 
-import bitframe.service.client.config.ServiceConfig
-import bitframe.service.requests.RequestBody
-import later.Later
-import pimonitor.authentication.signup.SignUpParams
-import pimonitor.authentication.signup.SignUpResult
+import bitframe.service.client.config.MockServiceConfig
+import pimonitor.authentication.signup.SignUpUseCase
 import pimonitor.client.authentication.signup.SignUpService
+import pimonitor.service.daod.signup.SignUpDaodUseCase
 
-class SignUpServiceMock(override val config: ServiceConfig) : SignUpService(config) {
-    override fun signUp(rb: RequestBody.UnAuthorized<SignUpParams>): Later<SignUpResult> {
-        TODO("Not yet implemented")
-    }
-}
+class SignUpServiceMock(
+    override val config: MockServiceConfig
+) : SignUpService(config), SignUpUseCase by SignUpDaodUseCase(config)

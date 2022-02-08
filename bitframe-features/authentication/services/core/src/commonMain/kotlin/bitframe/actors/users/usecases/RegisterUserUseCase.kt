@@ -5,6 +5,6 @@ import bitframe.authentication.signin.SignInResult
 import bitframe.authentication.spaces.CreateSpaceParams
 import later.Later
 
-interface RegisterUser {
+interface RegisterUserUseCase {
     fun register(params: RegisterUserParams): Later<SignInResult>
 }

@@ -28,6 +28,7 @@ kotlin {
             dependencies {
                 implementation(projects.bitframeAuthenticationServiceClientCore)
                 implementation(projects.bitframeAuthenticationServiceDaod)
+                implementation(projects.bitframeServiceConfigClientMock)
                 api(projects.bitframeEventsInmemory)
                 api(asoft.cache.mock)
             }

@@ -1,6 +1,5 @@
 package bitframe.api
 
-import bitframe.authentication.client.signin.SignInServiceMockConfig
 import bitframe.actors.users.User
 import bitframe.service.Session
 import bitframe.service.client.config.ServiceConfig

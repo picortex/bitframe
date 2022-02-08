@@ -16,13 +16,13 @@ import bitframe.service.config.ServiceConfig as CoreServiceConfig
 interface ServiceConfig : DaodServiceConfig {
     companion object {
         @JvmField
-        val DEFAULT_SCOPE = CoreServiceConfig.DEFAULT_SCOPE
+        val DEFAULT_SCOPE = DaodServiceConfig.DEFAULT_SCOPE
 
         @JvmField
-        val DEFAULT_BUS = CoreServiceConfig.DEFAULT_BUS
+        val DEFAULT_BUS = DaodServiceConfig.DEFAULT_BUS
 
         @JvmField
-        val DEFAULT_LOGGER = CoreServiceConfig.DEFAULT_LOGGER
+        val DEFAULT_LOGGER = DaodServiceConfig.DEFAULT_LOGGER
 
         @JvmSynthetic
         operator fun invoke(

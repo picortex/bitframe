@@ -13,9 +13,9 @@ import kotlin.js.JsName
 
 abstract class SignUpService(
     open val config: ServiceConfig
-) {
-    private val scope get() = config.scope
-    private val bus get() = config.bus
+) : SignUpUseCase {
+    protected val scope get() = config.scope
+    protected val bus get() = config.bus
 
     companion object {
         const val SIGN_UP_EVENT_TOPIC = "pimonitor.authentication.signup"
@@ -51,6 +51,4 @@ abstract class SignUpService(
         is SignUpParams.Individual -> validate(params)
         is SignUpParams.Business -> validate(params)
     }
-
-    protected abstract fun signUp(rb: RequestBody.UnAuthorized<SignUpParams>): Later<SignUpResult>
 }

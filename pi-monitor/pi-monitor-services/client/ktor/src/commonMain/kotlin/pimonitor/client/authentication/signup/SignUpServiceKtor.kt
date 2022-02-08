@@ -16,22 +16,22 @@ class SignUpServiceKtor(
 ) : SignUpService(config) {
     private val client = config.http
     private val baseUrl = "${config.url}/api/authentication"
-    private val scope = config.scope
     private val json = config.json
-    private val logger by lazy {
-        config.logger.with(
-            "source" to this::class.simpleName
-        )
-    }
+
+    val logger = config.logger.with(
+        "source" to this::class.simpleName
+    )
 
     @OptIn(InternalAPI::class)
     override fun signUp(rb: RequestBody.UnAuthorized<SignUpParams>) = scope.later {
+        logger.log("Before request")
         val resp = client.post("$baseUrl/sign-up") {
-            body = json.of(rb, SignUpParams.serializer()).also {
-                logger.info("Sending request to $baseUrl")
-                logger.obj(it.text)
-            }
+            body = json.of(rb, SignUpParams.serializer())
         }
+        logger.log("After request")
+        logger.log("Before calling bodyAsText")
+        logger.log(resp.bodyAsText())
+        logger.log("After calling bodyAsText")
         json.decodeResponseFromString(SignUpResult.serializer(), resp.bodyAsText()).response()
     }
 }

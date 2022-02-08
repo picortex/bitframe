@@ -3,12 +3,14 @@ package pimonitor.authentication.signup
 import response.response
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.compulsoryBody
+import bitframe.server.http.toHttpResponse
 import bitframe.service.requests.RequestBody
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
 import io.ktor.http.HttpStatusCode.Companion.Created
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import later.await
 import pimonitor.service.daod.signup.SignUpService
 
 private val json = Json {

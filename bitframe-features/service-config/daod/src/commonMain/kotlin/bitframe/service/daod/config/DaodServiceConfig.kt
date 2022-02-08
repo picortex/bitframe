@@ -19,13 +19,13 @@ interface DaodServiceConfig : ServiceConfig {
     companion object {
 
         @JvmField
-        val DEFAULT_SCOPE = CoroutineScope(SupervisorJob())
+        val DEFAULT_SCOPE = ServiceConfig.DEFAULT_SCOPE
 
         @JvmField
-        val DEFAULT_BUS = InMemoryEventBus()
+        val DEFAULT_BUS = ServiceConfig.DEFAULT_BUS
 
         @JvmField
-        val DEFAULT_LOGGER = Logger(ConsoleAppender())
+        val DEFAULT_LOGGER = ServiceConfig.DEFAULT_LOGGER
 
         @JvmSynthetic
         operator fun invoke(

@@ -76,7 +76,7 @@ includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mong
 // services
 includeSubs(base = "bitframe-service-config", path = "bitframe-features/service-config", "core", "daod")
 
-includeSubs(base = "bitframe-service-config-client", path = "bitframe-features/service-config/client", "core", "ktor")
+includeSubs(base = "bitframe-service-config-client", path = "bitframe-features/service-config/client", "core", "ktor", "mock")
 
 includeSubs(base = "bitframe-service-config-server", path = "bitframe-features/service-config/server", "core")
 

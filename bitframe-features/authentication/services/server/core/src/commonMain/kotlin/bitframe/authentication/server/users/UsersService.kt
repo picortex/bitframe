@@ -3,9 +3,9 @@ package bitframe.authentication.server.users
 import bitframe.actors.spaces.Space
 import bitframe.actors.users.User
 import bitframe.actors.users.UsersService
-import bitframe.actors.users.usecases.RegisterUser
+import bitframe.actors.users.usecases.RegisterUserUseCase
 import bitframe.authentication.server.spaces.usecases.CreateSpaceIfNotExist
-import bitframe.authentication.service.daod.usecase.RegisterUserImpl
+import bitframe.authentication.service.daod.usecase.RegisterUserUseCaseImpl
 import bitframe.authentication.spaces.CreateSpaceParams
 import bitframe.authentication.users.CreateUserParams
 import bitframe.authentication.users.toUser
@@ -19,7 +19,7 @@ class UsersService(
     private val config: ServiceConfig
 ) : UsersService(),
     CreateSpaceIfNotExist by CreateSpaceIfNotExist(config),
-    RegisterUser by RegisterUserImpl(config) {
+    RegisterUserUseCase by RegisterUserUseCaseImpl(config) {
     private val spacesDao = config.daoFactory.get<Space>()
     private val usersDao = config.daoFactory.get<User>()
     private val scope = config.scope

@@ -2,7 +2,6 @@ package integration
 
 import bitframe.actors.spaces.Space
 import bitframe.authentication.client.signin.SignInServiceMock
-import bitframe.authentication.client.signin.SignInServiceMockConfig
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.actors.users.User
 import expect.expect

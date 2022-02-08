@@ -20,7 +20,9 @@ interface KtorClientConfiguration : ServiceConfig {
 
     companion object {
         @JvmField
-        val DEFAULT_HTTP_CLIENT = HttpClient { }
+        val DEFAULT_HTTP_CLIENT = HttpClient {
+            expectSuccess = false
+        }
 
         @JvmField
         val DEFAULT_SCOPE = ServiceConfig.DEFAULT_SCOPE

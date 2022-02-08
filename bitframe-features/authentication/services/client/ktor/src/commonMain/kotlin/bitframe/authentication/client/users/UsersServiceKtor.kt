@@ -16,7 +16,7 @@ class UsersServiceKtor(
         TODO("Not yet implemented")
     }
 
-    override fun register(user: RegisterUserParams, space: CreateSpaceParams): Later<SignInResult> {
+    override fun register(params: RegisterUserParams): Later<SignInResult> {
         TODO("Not yet implemented")
     }
 }
