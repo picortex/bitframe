@@ -1,6 +1,8 @@
 package unit
 
+import bitframe.authentication.client.signin.SignInServiceMock
 import bitframe.authentication.signin.SignInCredentials
+import bitframe.authentication.signin.SignInService
 import expect.expect
 import expect.expectFailure
 import expect.toBe
@@ -9,7 +11,7 @@ import validation.Invalid
 import kotlin.test.Test
 
 open class SignInCredentialsValidationTest {
-    val service = UnitTestSignInService()
+    val service: SignInService = SignInServiceMock()
 
     @Test
     fun should_fail_when_credentials_are_empty() = runTest {
@@ -17,7 +19,7 @@ open class SignInCredentialsValidationTest {
         val validation = service.validate(credentials)
         expect(validation).toBe<Invalid>()
         val invalid = validation as Invalid
-        expect(invalid.cause.message).toBe("loginId (i.e. email/phone/username), must not be empty")
+        expect(invalid.cause.message).toBe("login identifier (i.e. email/phone), must not be empty")
     }
 
     @Test
