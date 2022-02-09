@@ -1,11 +1,12 @@
 package bitframe.server.controller
 
-import bitframe.server.service.GenericService
+import bitframe.actors.modal.Savable
+import bitframe.service.server.GenericService
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlin.jvm.JvmField
 
-interface ControllerConfig<D : Any> {
+interface GenericControllerConfig<D : Savable> {
     val serializer: KSerializer<D>
     val service: GenericService<D>
     val json: Json
@@ -14,11 +15,11 @@ interface ControllerConfig<D : Any> {
         @JvmField
         val DEFAULT_JSON = Json { }
 
-        operator fun <D : Any> invoke(
+        operator fun <D : Savable> invoke(
             serializer: KSerializer<D>,
             service: GenericService<D>,
             json: Json = DEFAULT_JSON
-        ): ControllerConfig<D> = object : ControllerConfig<D> {
+        ): GenericControllerConfig<D> = object : GenericControllerConfig<D> {
             override val serializer: KSerializer<D> = serializer
             override val service: GenericService<D> = service
             override val json: Json = json

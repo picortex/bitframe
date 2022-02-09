@@ -1,11 +1,11 @@
 package bitframe.server.modules
 
+import bitframe.actors.modal.Savable
 import bitframe.server.actions.Action
 import bitframe.server.http.HttpRoute
 import io.ktor.http.*
-import kotlin.reflect.typeOf
 
-class ModuleImpl<D : Any>(private val config: ModuleConfiguration<D>) : Module {
+class GenericModule<D : Savable>(private val config: GenericModuleConfig<D>) : Module {
     override val name: String get() = config.name
     private val controller = config.controller
     private val basePath = config.basePath
@@ -14,9 +14,7 @@ class ModuleImpl<D : Any>(private val config: ModuleConfiguration<D>) : Module {
             controller.create(it.body)
         }),
         Action("single", mapOf(), HttpRoute(HttpMethod.Get, "$basePath/{uid}") {
-            println("[Module] Before response")
             val resp = controller.load(it.body)
-            println("[Module] After response")
             resp
         }),
         Action("many", mapOf(), HttpRoute(HttpMethod.Get, "$basePath/all") {

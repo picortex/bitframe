@@ -3,10 +3,7 @@ package bitframe.service.daod.config
 import bitframe.daos.DaoFactory
 import bitframe.service.config.ServiceConfig
 import events.EventBus
-import events.InMemoryEventBus
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
-import logging.ConsoleAppender
 import logging.Logger
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads

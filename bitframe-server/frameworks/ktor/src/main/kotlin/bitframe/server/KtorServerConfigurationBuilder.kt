@@ -13,7 +13,6 @@ interface KtorServerConfigurationBuilder<S : BitframeService> : ServerConfigurat
     fun buildApplicationConfig(): ApplicationConfig<S> = ApplicationConfig(
         client = public ?: error("Public path has not been set"),
         service = buildService().also { GlobalScope.launch { startCallback?.invoke(it) } },
-        daoFactory = buildDaoFactory()
     )
 
     fun install(builder: (service: S) -> Module) {

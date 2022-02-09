@@ -3,6 +3,7 @@ package pimonitor
 import bitframe.daos.MongoDaoFactory
 import bitframe.daos.MongoDaoFactoryConfig
 import bitframe.server.bitframeApplication
+import bitframe.server.modules.GenericModule
 import bitframe.service.server.config.ServiceConfig
 import pimonitor.authentication.signup.SignUpController
 import pimonitor.authentication.signup.SignUpModule
@@ -31,6 +32,10 @@ fun main(args: Array<String>) {
 
         install { ser ->
             SignUpModule(SignUpController(ser.signUp))
+        }
+
+        install {
+            GenericModule(it.userEmails)
         }
 
         onStart { populateTestEntities() }

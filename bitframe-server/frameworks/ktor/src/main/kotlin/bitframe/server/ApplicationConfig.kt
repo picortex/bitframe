@@ -1,7 +1,5 @@
 package bitframe.server
 
-import bitframe.daos.DaoFactory
-import bitframe.server.BitframeApplicationConfig.Companion.defaultModules
 import bitframe.server.modules.Module
 import java.io.File
 
@@ -12,9 +10,8 @@ interface ApplicationConfig<out S : BitframeService> : BitframeApplicationConfig
         operator fun <S : BitframeService> invoke(
             client: File,
             service: S,
-            daoFactory: DaoFactory,
-            module: MutableList<Module> = mutableListOf(),
-        ): ApplicationConfig<S> = object : ApplicationConfig<S>, BitframeApplicationConfig<S> by BitframeApplicationConfig(service, daoFactory, (module + defaultModules(daoFactory)).toMutableList()) {
+            modules: MutableList<Module> = mutableListOf(),
+        ): ApplicationConfig<S> = object : ApplicationConfig<S>, BitframeApplicationConfig<S> by BitframeApplicationConfig(service, modules) {
             override val client: File = client
         }
     }

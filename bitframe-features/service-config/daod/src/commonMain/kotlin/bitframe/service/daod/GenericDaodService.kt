@@ -1,11 +1,13 @@
-package bitframe.server.service
+package bitframe.service.daod
 
-import bitframe.daos.conditions.Condition
-import bitframe.actors.modal.HasId
-import kotlinx.collections.interoperable.List
-import later.Later
+import bitframe.actors.modal.Savable
+import bitframe.service.GenericService
+import bitframe.service.daod.config.GenericDaodServiceConfig
 
-class GenericServiceImpl<T : HasId>(val config: GenericServiceConfig<T>) : GenericService<T> {
+open class GenericDaodService<T : Savable>(
+    override val config: GenericDaodServiceConfig<T>
+) : GenericService<T> {
+
     private val dao by lazy { config.daoFactory.get(config.clazz) }
 
     override fun create(input: T) = dao.create(input)
@@ -18,5 +20,5 @@ class GenericServiceImpl<T : HasId>(val config: GenericServiceConfig<T>) : Gener
 
     override fun delete(uid: String) = dao.delete(uid)
 
-    override fun all(condition: Condition<String, Any>?) = dao.all(condition)
+    override fun all() = dao.all()
 }

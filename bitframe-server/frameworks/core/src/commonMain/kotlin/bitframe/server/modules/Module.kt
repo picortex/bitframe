@@ -1,6 +1,5 @@
 package bitframe.server.modules
 
-import bitframe.actors.modal.HasId
 import bitframe.server.actions.Action
 
 interface Module {
@@ -11,10 +10,4 @@ interface Module {
         "name" to name,
         "actions" to actions.map { it.info() }
     )
-
-    companion object {
-        inline operator fun <reified D : HasId> invoke(
-            config: ModuleConfiguration<D>
-        ): Module = ModuleImpl(config)
-    }
 }

@@ -7,11 +7,12 @@ import kotlinx.collections.interoperable.List
 import later.Later
 import kotlin.js.JsExport
 
-abstract class GenericService<out T>(open val config: ServiceConfig) {
-    abstract fun create(input: @UnsafeVariance T): Later<out T>
-    abstract fun update(obj: @UnsafeVariance T): Later<out T>
-    abstract fun load(uid: String): Later<out T>
-    abstract fun loadOrNull(uid: String): Later<out T?>
-    abstract fun delete(uid: String): Later<out T>
-    abstract fun all(): Later<out List<T>>
+interface GenericService<out T> {
+    val config: ServiceConfig
+    fun create(input: @UnsafeVariance T): Later<out T>
+    fun update(obj: @UnsafeVariance T): Later<out T>
+    fun load(uid: String): Later<out T>
+    fun loadOrNull(uid: String): Later<out T?>
+    fun delete(uid: String): Later<out T>
+    fun all(): Later<out List<T>>
 }

@@ -1,45 +1,42 @@
 package bitframe.service.client.config
 
 import bitframe.daos.DaoFactory
-import bitframe.daos.MockDaoFactory
 import bitframe.service.Session
 import bitframe.service.daod.config.DaodServiceConfig
+import bitframe.service.daod.config.GenericDaodServiceConfig
 import cache.Cache
-import cache.MockCache
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
 import live.MutableLive
 import logging.Logger
 import kotlin.jvm.JvmField
-import kotlin.jvm.JvmOverloads
-import kotlin.jvm.JvmStatic
-import kotlin.jvm.JvmSynthetic
+import kotlin.reflect.KClass
 
-interface MockServiceConfig : ServiceConfig, DaodServiceConfig {
+interface GenericMockServiceConfig<T : Any> : GenericDaodServiceConfig<T>, MockServiceConfig {
     companion object {
         @JvmField
-        val DEFAULT_APP_ID = "<mock-app>"
+        val DEFAULT_APP_ID = MockServiceConfig.DEFAULT_APP_ID
 
         @JvmField
-        val DEFAULT_CACHE = MockCache()
+        val DEFAULT_DAO_FACTORY = MockServiceConfig.DEFAULT_DAO_FACTORY
 
         @JvmField
-        val DEFAULT_DAO_FACTORY = MockDaoFactory()
+        val DEFAULT_BUS = DaodServiceConfig.DEFAULT_BUS
 
         @JvmField
-        val DEFAULT_LIVE_SESSION = ServiceConfig.DEFAULT_LIVE_SESSION
+        val DEFAULT_CACHE = MockServiceConfig.DEFAULT_CACHE
 
         @JvmField
-        val DEFAULT_SCOPE = ServiceConfig.DEFAULT_SCOPE
+        val DEFAULT_LIVE_SESSION = MockServiceConfig.DEFAULT_LIVE_SESSION
 
         @JvmField
-        val DEFAULT_BUS = ServiceConfig.DEFAULT_BUS
+        val DEFAULT_LOGGER = DaodServiceConfig.DEFAULT_LOGGER
 
         @JvmField
-        val DEFAULT_LOGGER = ServiceConfig.DEFAULT_LOGGER
+        val DEFAULT_SCOPE = DaodServiceConfig.DEFAULT_SCOPE
 
-        @JvmSynthetic
-        operator fun invoke(
+        operator fun <D : Any> invoke(
+            clazz: KClass<D>,
             appId: String = DEFAULT_APP_ID,
             cache: Cache = DEFAULT_CACHE,
             session: MutableLive<Session> = DEFAULT_LIVE_SESSION,
@@ -47,19 +44,11 @@ interface MockServiceConfig : ServiceConfig, DaodServiceConfig {
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): MockServiceConfig = object : MockServiceConfig {
-            override val daoFactory: DaoFactory = daoFactory
-            override val appId: String = appId
-            override val session: MutableLive<Session> = session
-            override val cache: Cache = cache
-            override val bus = bus
-            override val logger: Logger = logger
-            override val scope = scope
+        ): GenericMockServiceConfig<D> = object : GenericMockServiceConfig<D>, MockServiceConfig by MockServiceConfig(appId, cache, session, daoFactory, bus, logger, scope) {
+            override val clazz: KClass<D> = clazz
         }
 
-        @JvmOverloads
-        @JvmStatic
-        fun create(
+        inline operator fun <reified D : Any> invoke(
             appId: String = DEFAULT_APP_ID,
             cache: Cache = DEFAULT_CACHE,
             session: MutableLive<Session> = DEFAULT_LIVE_SESSION,
@@ -67,6 +56,6 @@ interface MockServiceConfig : ServiceConfig, DaodServiceConfig {
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ) = invoke(appId, cache, session, daoFactory, bus, logger, scope)
+        ): GenericMockServiceConfig<D> = invoke(D::class, appId, cache, session, daoFactory, bus, logger, scope)
     }
 }

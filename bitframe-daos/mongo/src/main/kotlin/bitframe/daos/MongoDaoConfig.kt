@@ -12,10 +12,6 @@ interface MongoDaoConfig<D : Any> : DaoConfig<D>, MongoConfigProperties {
     val prefix: String
 
     companion object {
-
-        @JvmField
-        val DEFAULT_LOCK = Mutex()
-
         @JvmField
         val DEFAULT_DATABASE = "app"
 
@@ -38,7 +34,7 @@ interface MongoDaoConfig<D : Any> : DaoConfig<D>, MongoConfigProperties {
             override val username: String = username
             override val password: String = password
             override val database: String = database
-            override val collection: String = collection ?: clazz.qualifiedName?.lowercase() ?: error("Can't get collection name")
+            override val collection: String = collection ?: defaultCollectionNameOf(clazz) ?: error("Can't get collection name")
             override val prefix: String = prefix ?: clazz.simpleName?.lowercase() ?: error("Can't get id prefix")
         }
 
@@ -51,5 +47,11 @@ interface MongoDaoConfig<D : Any> : DaoConfig<D>, MongoConfigProperties {
             prefix: String? = null,
             scope: CoroutineScope = DEFAULT_SCOPE
         ) = invoke(D::class, host, username, password, database, collection, prefix, scope)
+
+        @JvmStatic
+        fun <T : Any> defaultCollectionNameOf(clazz: KClass<T>): String? {
+            val qualifiedName = clazz.qualifiedName ?: return null
+            return "${qualifiedName}s".split(".").takeLast(2).joinToString(separator = ".")
+        }
     }
 }
