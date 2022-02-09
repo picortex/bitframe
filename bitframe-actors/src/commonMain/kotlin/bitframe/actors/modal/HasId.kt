@@ -9,8 +9,8 @@ import kotlin.js.JsName
 interface HasId {
     val uid: String
 
-    @JsName("_ignore_hasIdCopy")
-    fun copy(id: String): HasId
+    @JsName("_ignore_copyId")
+    fun copyId(id: String): HasId
 
     companion object {
         const val UNSET = ""

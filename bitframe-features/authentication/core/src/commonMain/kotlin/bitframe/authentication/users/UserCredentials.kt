@@ -11,5 +11,5 @@ data class UserCredentials(
     override val uid: String = HasId.UNSET,
     override val deleted: Boolean = false
 ) : Savable {
-    override fun copy(id: String, deleted: Boolean) = copy(uid = id, deleted = deleted)
+    override fun copySavable(id: String, deleted: Boolean) = copy(uid = id, deleted = deleted)
 }

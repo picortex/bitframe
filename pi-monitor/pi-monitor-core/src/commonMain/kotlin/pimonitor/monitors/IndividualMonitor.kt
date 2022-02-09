@@ -14,5 +14,5 @@ data class IndividualMonitor(
     val email: Email,
     val userRef: UserRef
 ) : Monitor() {
-    override fun copy(id: String) = copy(uid = id)
+    override fun copyId(id: String) = copy(uid = id)
 }

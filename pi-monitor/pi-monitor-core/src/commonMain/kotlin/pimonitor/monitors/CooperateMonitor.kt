@@ -31,5 +31,5 @@ data class CooperateMonitor(
         val userRef: UserRef
     )
 
-    override fun copy(id: String) = copy(uid = id)
+    override fun copyId(id: String) = copy(uid = id)
 }

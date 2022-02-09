@@ -3,7 +3,7 @@ package bitframe.daos.conditions
 import com.mongodb.client.model.Filters
 import org.bson.conversions.Bson
 
-fun Condition<String, *>.toMongoFilter(): Bson = when (operator) {
+fun Condition<*>.toMongoFilter(): Bson = when (operator) {
     Condition.Operator.LessThan -> TODO()
     Condition.Operator.GreaterThan -> TODO()
     Condition.Operator.Equals -> Filters.eq(lhs, rhs)

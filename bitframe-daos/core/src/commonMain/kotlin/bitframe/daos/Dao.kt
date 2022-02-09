@@ -32,5 +32,5 @@ interface Dao<out T : Any> {
 
     fun delete(uid: String): Later<out T>
 
-    fun all(condition: Condition<String, Any>? = null): Later<out List<T>>
+    fun all(condition: Condition<*>? = null): Later<out List<T>>
 }

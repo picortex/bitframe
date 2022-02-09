@@ -1,13 +1,12 @@
 package pimonitor.server
 
 import bitframe.actors.users.UserEmail
-import bitframe.actors.users.UserPhone
 import bitframe.server.BitframeService
 import bitframe.service.server.GenericService
 import bitframe.service.server.config.ServiceConfig
-import pimonitor.service.daod.signup.SignUpService
 import pimonitor.server.businesses.BusinessesService
 import pimonitor.server.monitors.MonitorsService
+import pimonitor.service.daod.signup.SignUpService
 
 class PiMonitorService(config: ServiceConfig) : BitframeService(config) {
     val signUp: SignUpService by lazy { SignUpService(config) }

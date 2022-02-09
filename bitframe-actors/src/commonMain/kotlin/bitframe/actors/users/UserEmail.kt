@@ -23,5 +23,5 @@ data class UserEmail(
 
     fun asPrimitiveEmail() = Email(value)
 
-    override fun copy(id: String, deleted: Boolean) = copy(uid = id, deleted = deleted)
+    override fun copySavable(id: String, deleted: Boolean) = copy(uid = id, deleted = deleted)
 }

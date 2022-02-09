@@ -4,7 +4,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.mapper.Mapper
 
-fun <T> Condition<String, *>.toMockFilter(
+fun <T> Condition<*>.toMockFilter(
     serializer: KSerializer<T>
 ) = { it: T ->
     val json = Json.encodeToString(serializer, it)

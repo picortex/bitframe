@@ -9,6 +9,6 @@ import kotlin.js.JsName
 interface Deletable {
     val deleted: Boolean
 
-    @JsName("_ignore_deletableCopy")
-    fun copy(deleted: Boolean): Deletable
+    @JsName("_ignore_copyDeleted")
+    fun copyDeleted(deleted: Boolean): Deletable
 }

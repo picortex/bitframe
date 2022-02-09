@@ -29,7 +29,7 @@ class MockDao<D : HasId>(
         lock.lock()
         delay(config.simulationTime)
         val nextId = "${config.prefix}-${items.size + 1}"
-        val output = input.copy(id = nextId) as D
+        val output = input.copyId(id = nextId) as D
         items[nextId] = output
         lock.unlock()
         output
@@ -66,7 +66,7 @@ class MockDao<D : HasId>(
     }
 
     @OptIn(InternalSerializationApi::class)
-    override fun all(condition: Condition<String, Any>?): Later<List<D>> = scope.later {
+    override fun all(condition: Condition<*>?): Later<List<D>> = scope.later {
         lock.lock()
         delay(config.simulationTime)
         if (condition == null) {

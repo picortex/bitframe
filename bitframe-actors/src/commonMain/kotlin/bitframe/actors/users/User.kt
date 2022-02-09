@@ -12,6 +12,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import kotlinx.serialization.builtins.LongAsStringSerializer
 import kotlin.js.JsExport
+import kotlin.js.JsName
 
 @Serializable
 data class User(
@@ -38,7 +39,7 @@ data class User(
         object SignedOut : Status()
     }
 
-    override fun copy(id: String, deleted: Boolean) = copy(uid = id, deleted = deleted)
+    override fun copySavable(id: String, deleted: Boolean) = copy(uid = id, deleted = deleted)
 
     fun ref() = UserRef(
         uid = uid,

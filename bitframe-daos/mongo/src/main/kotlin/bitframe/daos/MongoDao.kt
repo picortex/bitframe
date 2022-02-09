@@ -26,7 +26,7 @@ class MongoDao<D : HasId>(
 
     override fun create(input: D): Later<D> = scope.later {
         val id = ObjectId.get()
-        val output = input.copy("${config.prefix}-$id") as D
+        val output = input.copyId("${config.prefix}-$id") as D
         collection.insertOne(output)
         output
     }
@@ -54,7 +54,7 @@ class MongoDao<D : HasId>(
     }
 
     @OptIn(InternalSerializationApi::class)
-    override fun all(condition: Condition<String, Any>?): Later<List<D>> = scope.later {
+    override fun all(condition: Condition<*>?): Later<List<D>> = scope.later {
         if (condition == null) {
             collection.find().toList().toInteroperableList()
         } else {

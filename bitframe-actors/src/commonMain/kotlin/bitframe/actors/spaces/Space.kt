@@ -15,5 +15,5 @@ data class Space(
     override val uid: String = "",
     override val deleted: Boolean = false
 ) : Savable {
-    override fun copy(id: String, deleted: Boolean) = copy(uid = id, deleted = deleted)
+    override fun copySavable(id: String, deleted: Boolean) = copy(uid = id, deleted = deleted)
 }
