@@ -29,7 +29,7 @@ class MockDao<D : HasId>(
         lock.lock()
         delay(config.simulationTime)
         val nextId = "${config.prefix}-${items.size + 1}"
-        val output = input.copyId(id = nextId) as D
+        val output = input.copyId(uid = nextId) as D
         items[nextId] = output
         lock.unlock()
         output

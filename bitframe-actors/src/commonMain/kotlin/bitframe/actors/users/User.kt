@@ -12,14 +12,11 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import kotlinx.serialization.builtins.LongAsStringSerializer
 import kotlin.js.JsExport
-import kotlin.js.JsName
 
 @Serializable
 data class User(
     val name: String,
     val tag: String = name,
-    val contacts: List<UserContact>,
-    val spaces: List<Space>,
     val photoUrl: String? = null,
     val status: Status = Status.SignedOut,
     val registeredOn: Long = Clock.System.now().toEpochMilliseconds(),
@@ -39,7 +36,7 @@ data class User(
         object SignedOut : Status()
     }
 
-    override fun copySavable(id: String, deleted: Boolean) = copy(uid = id, deleted = deleted)
+    override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
 
     fun ref() = UserRef(
         uid = uid,

@@ -15,10 +15,12 @@ class MonitorModule(
             HttpResponse(HttpStatusCode.OK)
         }),
         Action("load", mapOf(), HttpRoute(HttpMethod.Get, "/api/monitors/{uid}") {
-            controller.get(it)
+//            controller.get(it)
+            TODO()
         }),
         Action("load-with-user-ref", mapOf(), HttpRoute(HttpMethod.Post, "/api/monitors/user") {
-            controller.getWithUser(it)
+//            controller.getWithUser(it)
+            TODO()
         })
     )
 }

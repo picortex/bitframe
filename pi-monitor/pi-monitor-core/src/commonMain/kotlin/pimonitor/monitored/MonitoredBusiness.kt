@@ -3,30 +3,18 @@
 package pimonitor.monitored
 
 import bitframe.actors.modal.HasId
-import identifier.Email
-import kotlinx.collections.interoperable.List
+import bitframe.actors.modal.Savable
 import kotlinx.serialization.Serializable
-import pimonitor.monitors.MonitorRef
 import kotlin.js.JsExport
 
 @Serializable
 data class MonitoredBusiness(
     val name: String,
-    val contacts: List<ContactPerson>,
-    val monitorRef: MonitorRef,
+    val spaceId: String,
+    val email: String = "",
+    val address: String = "",
     override val uid: String = HasId.UNSET,
-) : HasId {
-    init {
-        require(contacts.isNotEmpty()) { "A business must have at least one contact person" }
-    }
-
-    @Serializable
-    data class ContactPerson(
-        val uid: String,
-        val name: String,
-        val position: String,
-        val email: Email
-    )
-
-    override fun copyId(id: String) = copy(uid = id)
+    override val deleted: Boolean = false
+) : Savable {
+    override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
 }

@@ -6,5 +6,5 @@ data class Human(
     override val uid: String = "",
     val name: String
 ) : HasId {
-    override fun copyId(id: String): Human = copy(uid = id)
+    override fun copyId(uid: String): Human = copy(uid = uid)
 }

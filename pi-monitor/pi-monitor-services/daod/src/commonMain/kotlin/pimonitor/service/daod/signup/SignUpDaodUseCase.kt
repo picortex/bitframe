@@ -3,35 +3,30 @@ package pimonitor.service.daod.signup
 import bitframe.actors.apps.App
 import bitframe.actors.users.usecases.RegisterUserUseCase
 import bitframe.authentication.service.daod.usecase.RegisterUserUseCaseImpl
-import bitframe.daos.CompoundDao
 import bitframe.daos.get
 import bitframe.service.daod.config.DaodServiceConfig
 import bitframe.service.requests.RequestBody
-import later.Later
 import later.await
 import later.later
 import pimonitor.authentication.signup.*
-import pimonitor.monitors.CooperateMonitor
-import pimonitor.monitors.IndividualMonitor
+import pimonitor.businesses.BUSINESS_TYPE
+import pimonitor.businesses.Business
 
 class SignUpDaodUseCase(
     val config: DaodServiceConfig
 ) : SignUpUseCase, RegisterUserUseCase by RegisterUserUseCaseImpl(config) {
     private val scope get() = config.scope
-    val monitorsDao by lazy {
-        CompoundDao(
-            config.daoFactory.get<IndividualMonitor>(),
-            config.daoFactory.get<CooperateMonitor>()
-        )
-    }
+    private val businessDao by lazy { config.daoFactory.get<Business>() }
 
     override fun signUp(rb: RequestBody.UnAuthorized<SignUpParams>) = scope.later {
         val params = rb.data
         val result = register(params.toRegisterUserParams()).await()
-        val ref = result.user.ref()
-        val monitor = monitorsDao.create(params.toMonitor("", ref)).await()
+        val space = result.spaces.first()
+        (params as? SignUpParams.Business)?.let {
+            businessDao.create(Business(spaceId = space.uid, type = BUSINESS_TYPE.Monitor))
+        }
         SignUpResult(
-            app = App(rb.appId), space = result.spaces.first(), user = result.user, monitor = monitor
+            app = App(rb.appId), space = space, user = result.user
         )
     }
 }

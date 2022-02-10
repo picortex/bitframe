@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
                     host = "127.0.0.1:27017",
                     username = "root",
                     password = "example",
-                    database = "pimonitor-staging"
+                    database = "pi"
                 )
             )
         }

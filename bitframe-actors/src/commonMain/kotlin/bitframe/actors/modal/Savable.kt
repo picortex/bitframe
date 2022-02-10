@@ -7,10 +7,10 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 interface Savable : HasId, Deletable {
-    override fun copyDeleted(deleted: Boolean) = copySavable(id = uid, deleted = deleted)
+    override fun copyDeleted(deleted: Boolean) = copySavable(uid = uid, deleted = deleted)
 
-    override fun copyId(id: String) = copySavable(id = id, deleted = deleted)
+    override fun copyId(uid: String) = copySavable(uid = uid, deleted = deleted)
 
     @JsName("_ignore_copySavable")
-    fun copySavable(id: String, deleted: Boolean): Savable
+    fun copySavable(uid: String, deleted: Boolean): Savable
 }

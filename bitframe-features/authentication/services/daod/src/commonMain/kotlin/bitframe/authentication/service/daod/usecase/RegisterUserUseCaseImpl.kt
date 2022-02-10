@@ -12,7 +12,6 @@ import bitframe.daos.conditions.isEqualTo
 import bitframe.daos.get
 import bitframe.service.daod.config.DaodServiceConfig
 import kotlinx.collections.interoperable.listOf
-import kotlinx.datetime.Clock
 import later.Later
 import later.await
 import later.later
@@ -23,6 +22,8 @@ class RegisterUserUseCaseImpl(
 ) : RegisterUserUseCase {
     private val usersDao by lazy { config.daoFactory.get<User>() }
     private val spacesDao by lazy { config.daoFactory.get<Space>() }
+    private val userSpaceInfoDao by lazy { config.daoFactory.get<UserSpaceInfo>() }
+
     private val contactsDao by lazy {
         CompoundDao(
             config.daoFactory.get<UserPhone>(),
@@ -37,40 +38,37 @@ class RegisterUserUseCaseImpl(
     }
 
     override fun register(params: RegisterUserParams): Later<SignInResult> = config.scope.later {
-        val userParams = validate(params).getOrThrow()
-        val registered = contactsDao.all("value" isEqualTo params.userIdentifier).await()
-        if (registered.isNotEmpty()) throw UserFoundException(params.userIdentifier)
+        val input = validate(params).getOrThrow()
+        val registered = contactsDao.all("value" isEqualTo input.userIdentifier).await()
+        if (registered.isNotEmpty()) throw UserFoundException(input.userIdentifier)
 
-        val userIntermediateOutput = usersDao.create(params.toUserInput()).await()
+        val userOutput = usersDao.create(input.toUserInput()).await()
+        val spaceOutput = spacesDao.create(input.toSpaceInput()).await()
+
+        val infoInput = UserSpaceInfo(
+            userId = userOutput.uid,
+            spaceId = spaceOutput.uid,
+            type = input.userType
+        )
+
+        userSpaceInfoDao.create(infoInput).await()
 
         val credentialsInput = UserCredentials(
-            userId = userIntermediateOutput.uid,
-            credential = params.userPassword
+            userId = userOutput.uid,
+            credential = input.userPassword
         )
 
         val credentialsOutput = credentialsDao.create(credentialsInput)
 
         val contactsInput = UserContact.of(
-            value = userParams.userIdentifier,
-            userId = userIntermediateOutput.uid,
-            userRef = userIntermediateOutput.ref()
+            value = input.userIdentifier,
+            userId = userOutput.uid,
         )
 
-        val contactsOutput = contactsDao.create(contactsInput)
-
-        val contacts = contactsOutput.await();
-
-        val spaceOutput = spacesDao.create(params.toSpaceInput()).await()
+        contactsDao.create(contactsInput).await()
 
         credentialsOutput.await();
 
-        val userFinalOutput = usersDao.update(
-            userIntermediateOutput.copy(
-                spaces = listOf(spaceOutput),
-                contacts = listOf(contacts),
-                lastSeen = Clock.System.now().toEpochMilliseconds()
-            )
-        ).await()
-        SignInResult(userFinalOutput, userFinalOutput.spaces)
+        SignInResult(userOutput, listOf(spaceOutput))
     }
 }

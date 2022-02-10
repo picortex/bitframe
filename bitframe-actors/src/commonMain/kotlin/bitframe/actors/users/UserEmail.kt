@@ -11,7 +11,6 @@ import kotlin.js.JsExport
 data class UserEmail(
     override val value: String,
     override val userId: String,
-    override val userRef: UserRef,
     override val verified: Boolean = false,
     override val uid: String = HasId.UNSET,
     override val deleted: Boolean = false,
@@ -23,5 +22,5 @@ data class UserEmail(
 
     fun asPrimitiveEmail() = Email(value)
 
-    override fun copySavable(id: String, deleted: Boolean) = copy(uid = id, deleted = deleted)
+    override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
 }

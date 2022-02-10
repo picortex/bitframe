@@ -11,7 +11,6 @@ import kotlin.js.JsExport
 data class UserPhone(
     override val value: String,
     override val userId: String,
-    override val userRef: UserRef,
     override val verified: Boolean = false,
     val whatsapp: Boolean = false,
     override val uid: String = HasId.UNSET,
@@ -25,5 +24,5 @@ data class UserPhone(
 
     fun asPrimitivePhone() = Phone(value)
 
-    override fun copySavable(id: String, deleted: Boolean) = copy(uid = id, deleted = deleted)
+    override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
 }

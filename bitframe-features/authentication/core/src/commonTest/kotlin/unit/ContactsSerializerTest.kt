@@ -1,6 +1,5 @@
 package unit
 
-import bitframe.actors.users.Contacts
 import expect.expect
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json

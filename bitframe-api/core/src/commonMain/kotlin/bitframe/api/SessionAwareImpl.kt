@@ -4,7 +4,6 @@ import bitframe.actors.spaces.Space
 import bitframe.actors.users.User
 import bitframe.service.Session
 import live.Live
-import live.value
 
 class SessionAwareImpl(service: BitframeService) : SessionAware {
     override val userLiveSession: Live<Session> = service.config.session

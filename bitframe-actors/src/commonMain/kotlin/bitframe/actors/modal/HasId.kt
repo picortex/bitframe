@@ -10,7 +10,7 @@ interface HasId {
     val uid: String
 
     @JsName("_ignore_copyId")
-    fun copyId(id: String): HasId
+    fun copyId(uid: String): HasId
 
     companion object {
         const val UNSET = ""

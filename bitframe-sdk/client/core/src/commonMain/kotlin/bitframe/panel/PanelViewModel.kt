@@ -7,8 +7,9 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import live.WatchMode
 import live.Watcher
-import live.value
+import live.watch
 import viewmodel.ViewModel
 import bitframe.panel.PanelIntent as Intent
 import bitframe.panel.PanelState as State
@@ -18,18 +19,15 @@ class PanelViewModel(
 ) : ViewModel<Intent, State>(State.Loading("Setting up your workspace"), config) {
     val service = config.service.signIn
 
-    var sessionWatcher: Watcher<*>? = null
-
     override fun CoroutineScope.execute(i: Intent) = when (i) {
         Intent.InitPanel -> initialize()
     }
 
-    private fun watchSessionAndUpdateUI() {
-        sessionWatcher = service.session.peek {
-            when {
-                it is Session.SignedOut -> ui.value = State.Login
-                it is Session.SignedIn -> ui.value = State.Panel(it, sections)
-            }
+    private fun watchSessionAndUpdateUI() = coroutineScope.watch(service.session, WatchMode.EAGERLY) {
+        when (it) {
+            is Session.SignedOut -> ui.value = State.Login
+            is Session.SignedIn -> ui.value = State.Panel(it, sections)
+            else -> {}
         }
     }
 
@@ -50,10 +48,5 @@ class PanelViewModel(
             ui.value = it
         }
         watchSessionAndUpdateUI()
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        sessionWatcher?.stop()
     }
 }

@@ -18,7 +18,7 @@ kotlin {
                 api(asoft.cache.api)
                 api(asoft.platform.core)
                 api(asoft.later.ktx)
-                api(asoft.viewmodel.core)
+                api(asoft.viewmodel.coroutines)
                 api(kotlinx.coroutines.core)
             }
         }

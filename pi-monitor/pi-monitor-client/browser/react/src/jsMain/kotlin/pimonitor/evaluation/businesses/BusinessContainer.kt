@@ -1,10 +1,9 @@
 package pimonitor.evaluation.businesses
 
+import bitframe.service.Session
 import kotlinx.css.JustifyContent
 import kotlinx.css.justifyContent
 import pimonitor.PiMonitorReactScope
-import pimonitor.PiMonitorViewModelConfig
-import pimonitor.client.monitors.currentMonitorOrNull
 import pimonitor.evaluation.businesses.exports.BusinessesReactScope
 import react.Props
 import react.RBuilder
@@ -24,7 +23,7 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
     val viewModel = scope.viewModel
     val loadBusinesses = scope.loadBusinesses
     val useBusinessAddedEvent = scope.useBusinessAddedEvent
-    val monitor = scope.service.monitorSession.currentMonitorOrNull
+//    val monitor = scope.service.monitorSession.currentMonitorOrNull
     useBusinessAddedEvent { loadBusinesses() }
     useEffectOnce { loadBusinesses() }
     when (val state = scope.useStateFromViewModel()) {
@@ -33,7 +32,7 @@ private val BusinessContainer = fc<BusinessContainerProps> { props ->
             FlexBox {
                 css { justifyContent = JustifyContent.flexEnd }
                 ContainedButton("Create") { viewModel.post(BusinessesIntent.ShowCreateBusinessForm) }
-                val link = "/invite/${monitor?.uid}"
+                val link = "/invite/${(scope.service.config.session.value as? Session.SignedIn)?.user?.uid}"
                 Link {
                     attrs.to = link
                     +link

@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import live.value
 import pimonitor.PiMonitorViewModelConfig
 import pimonitor.api.PiMonitorService
 import presenters.collections.tableOf
@@ -23,10 +22,10 @@ class ContactsViewModel(
     }
 
     private fun CoroutineScope.loadContacts() = launch {
-        flow {
+        flow<State> {
             emit(State.Loading("Fetching contacts, please wait"))
-            val model = service.businesses.all().await().flatMap { it.contacts.map { contact -> ContactModel(it, contact) } }
-            emit(State.Contacts(createContactsTable(model)))
+//            val model = service.businesses.all().await().flatMap { it.contacts.map { contact -> ContactModel(it, contact) } }
+//            emit(State.Contacts(createContactsTable(model)))
         }.catch {
             emit(State.Failure(it))
         }.collect {
@@ -34,11 +33,11 @@ class ContactsViewModel(
         }
     }
 
-    private fun createContactsTable(contacts: List<ContactModel>) = tableOf(contacts) {
-        selectable()
-        column("Name") { it.data.contact.name }
-        column("Position") { it.data.contact.position }
-        column("Business") { it.data.business.name }
-        column("Email") { it.data.contact.email.value }
-    }
+//    private fun createContactsTable(contacts: List<ContactModel>) = tableOf(contacts) {
+//        selectable()
+//        column("Name") { it.data.contact.name }
+//        column("Position") { it.data.contact.position }
+//        column("Business") { it.data.business.name }
+//        column("Email") { it.data.contact.email.value }
+//    }
 }

@@ -9,10 +9,7 @@ import events.EventBus
 import kotlinx.coroutines.CoroutineScope
 import live.MutableLive
 import logging.Logger
-import pimonitor.client.evaluation.businesses.BusinessesServiceConfig
-import pimonitor.client.monitors.MonitorsServiceConfig
 import kotlin.jvm.JvmOverloads
-import pimonitor.client.monitors.Session as MonitorSession
 
 class PiMonitorServiceMockConfig @JvmOverloads constructor(
     override val appId: String = MockServiceConfig.DEFAULT_APP_ID,

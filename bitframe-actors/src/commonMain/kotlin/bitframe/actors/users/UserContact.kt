@@ -15,7 +15,6 @@ import kotlin.jvm.JvmStatic
 sealed class UserContact : Savable {
     abstract val verified: Boolean
     abstract val userId: String
-    abstract val userRef: UserRef
     abstract val value: String
 
     companion object {
@@ -24,16 +23,15 @@ sealed class UserContact : Savable {
         fun of(
             value: String,
             userId: String,
-            userRef: UserRef,
             verified: Boolean = false,
             uid: String = HasId.UNSET,
             deleted: Boolean = false,
         ): UserContact = when (val id = Identifier.from(value)) {
             is Identifier.Phone -> UserPhone(
-                id.value, userId, userRef, verified, whatsapp = false, uid, deleted
+                value = id.value, userId, verified, whatsapp = false, uid, deleted
             )
             is Identifier.Email -> UserEmail(
-                id.value, userId, userRef, verified, uid, deleted
+                value = id.value, userId, verified, uid, deleted
             )
         }
     }

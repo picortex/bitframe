@@ -20,5 +20,5 @@ data class History(
         Created, Deleted, Updated
     }
 
-    override fun copyId(id: String): History = copy(uid = id)
+    override fun copyId(uid: String): History = copy(uid = uid)
 }

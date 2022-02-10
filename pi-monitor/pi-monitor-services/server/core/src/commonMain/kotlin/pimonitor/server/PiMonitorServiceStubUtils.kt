@@ -27,11 +27,11 @@ private val TEST_PARAMS = listOf(
 suspend fun PiMonitorService.populateTestEntities() {
     println(">>>> Populating test data")
     val res = TEST_PARAMS.map { signUp.signUp(RequestBody.UnAuthorized("test", it)).await() }.last()
-    listOf("PiCortex", "Mitikaz").map {
-        val ref = res.user.ref()
-        println("Setting up $it for ${ref.name}")
-        spaces.register(RegisterSpaceParams(it, ref)).await()
-        println("Finished Setting up $it for ${ref.name}")
-    }
+//    listOf("PiCortex", "Mitikaz").map {
+//        val ref = res.user.ref()
+//        println("Setting up $it for ${ref.name}")
+//        spaces.register(RegisterSpaceParams(it, ref)).await()
+//        println("Finished Setting up $it for ${ref.name}")
+//    }
     println(">>>> Finished populating test data")
 }

@@ -3,7 +3,6 @@ package pimonitor.evaluation.businesses.forms
 import presenters.fields.BooleanInputField
 import presenters.fields.ButtonInputField
 import presenters.fields.TextInputField
-import pimonitor.monitors.Monitor
 import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
 
 internal fun AddBusinessFormFields() = CreateBusinessFields(
@@ -28,8 +27,8 @@ internal fun AddBusinessFormFields() = CreateBusinessFields(
     submitButton = ButtonInputField(text = "Submit")
 )
 
-internal fun InviteBusinessFormFields(inviter: Monitor) = CreateBusinessFields(
-    inviterIntroduction = "${inviter.name} has invited to you to share your info with them",
+internal fun InviteBusinessFormFields(name: String) = CreateBusinessFields(
+    inviterIntroduction = "$name has invited to you to share your info with them",
     title = "Enter your business info",
     businessName = TextInputField(
         label = "Business name",

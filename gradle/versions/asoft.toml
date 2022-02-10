@@ -1,6 +1,6 @@
 [versions]
-foundation = "1.4.61"
-stdlib = "0.2.23"
+foundation = "1.4.62"
+stdlib = "0.2.25"
 
 [libraries]
 applikation-runtime = { module = "tz.co.asoft:applikation-runtime", version.ref = "foundation" }
@@ -32,5 +32,6 @@ reakt-icons = { module = "tz.co.asoft:reakt-icons", version.ref = "stdlib" }
 reakt-web = { module = "tz.co.asoft:reakt-web", version.ref = "stdlib" }
 
 viewmodel-core = { module = "tz.co.asoft:viewmodel-core", version.ref = "stdlib" }
+viewmodel-coroutines = { module = "tz.co.asoft:viewmodel-coroutines", version.ref = "stdlib" }
 viewmodel-react = { module = "tz.co.asoft:viewmodel-react", version.ref = "stdlib" }
 viewmodel-test-expect = { module = "tz.co.asoft:viewmodel-test-expect", version.ref = "stdlib" }

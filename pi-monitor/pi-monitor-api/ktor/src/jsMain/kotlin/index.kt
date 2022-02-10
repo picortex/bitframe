@@ -54,4 +54,4 @@ fun signInService(client: BitframeService) = SignInServiceWrapper(client.signIn)
 
 fun signUpService(client: PiMonitorService) = SignUpServiceWrapper(client.signUp)
 
-fun businessesService(client: PiMonitorService) = BusinessesServiceWrapper(client.businesses)
+//fun businessesService(client: PiMonitorService) = BusinessesServiceWrapper(client.businesses)

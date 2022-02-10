@@ -50,7 +50,7 @@ class PortfolioService(
 
     private fun contactsCard(businesses: List<MonitoredBusiness>) = ValueCard(
         title = "Contacts",
-        value = businesses.flatMap { it.contacts }.size.toString(),
+        value = "12", //businesses.flatMap { it.contacts }.size.toString(),
         details = "Last updated now"
     )
 

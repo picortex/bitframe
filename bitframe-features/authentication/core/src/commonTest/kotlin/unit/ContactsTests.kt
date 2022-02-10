@@ -1,8 +1,6 @@
 package unit
 
-import bitframe.actors.users.Contacts
 import expect.expect
-import expect.toBe
 import kotlin.test.Test
 
 class ContactsTests {

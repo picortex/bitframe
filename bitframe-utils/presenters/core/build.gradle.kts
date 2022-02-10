@@ -6,6 +6,8 @@ plugins {
     `picortex-publish`
 }
 
+val tmp = 1
+
 kotlin {
     jvm { library() }
     js(IR) { library() }

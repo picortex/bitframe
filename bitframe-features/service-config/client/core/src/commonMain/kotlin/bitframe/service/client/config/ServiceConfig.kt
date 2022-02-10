@@ -1,10 +1,12 @@
 package bitframe.service.client.config
 
 import bitframe.service.Session
+import bitframe.service.Session.Unknown
 import cache.Cache
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
 import live.MutableLive
+import live.mutableLiveOf
 import logging.Logger
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
@@ -25,7 +27,7 @@ interface ServiceConfig : CoreServiceConfig {
         val DEFAULT_BUS = CoreServiceConfig.DEFAULT_BUS
 
         @JvmField
-        val DEFAULT_LIVE_SESSION = MutableLive<Session>(Session.Unknown)
+        val DEFAULT_LIVE_SESSION = mutableLiveOf<Session>(Unknown)
 
         @JvmField
         val DEFAULT_LOGGER = CoreServiceConfig.DEFAULT_LOGGER

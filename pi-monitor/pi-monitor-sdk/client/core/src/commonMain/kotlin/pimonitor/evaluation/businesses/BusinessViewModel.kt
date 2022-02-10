@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import live.value
 import pimonitor.PiMonitorViewModelConfig
 import pimonitor.evaluation.businesses.BusinessesIntent.*
 import pimonitor.monitored.MonitoredBusiness
@@ -20,7 +19,7 @@ class BusinessViewModel(
     config: PiMonitorViewModelConfig
 ) : ViewModel<Intent, State>(State.Loading("Loading business"), config) {
 
-    private val service: BusinessesService = config.service.businesses
+//    private val service: BusinessesService = config.service.businesses
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         LoadBusinesses -> loadBusiness()
@@ -59,14 +58,14 @@ class BusinessViewModel(
     }
 
     private fun CoroutineScope.loadBusiness() = launch {
-        flow {
+        flow<State> {
             emit(State.Loading("Loading business, please wait . . ."))
-            val businesses = service.all().await()
-            val state = State.Businesses(
-                table = businessTable(businesses),
-                dialog = BusinessesDialog.None()
-            )
-            emit(state)
+//            val businesses = service.all().await()
+//            val state = State.Businesses(
+//                table = businessTable(businesses),
+//                dialog = BusinessesDialog.None()
+//            )
+//            emit(state)
         }.catch {
             emit(State.Failure(it))
         }.collect {

@@ -12,7 +12,7 @@ class AuthenticationModuleImpl(
     constructor(service: BitframeService) : this(AuthenticationControllerImpl(service))
 
     init {
-        controller.service.users.createIfNotExist(AuthenticationModule.GENESIS)
+//        controller.service.users.createIfNotExist(AuthenticationModule.GENESIS)
     }
 
     override val name = "authentication"
