@@ -4,14 +4,14 @@
 package pimonitor.evaluation.businesses.exports
 
 import bitframe.client.UIScope
-import pimonitor.PiMonitorViewModelConfig
+import pimonitor.PiMonitorScopeConfig
 import pimonitor.api.PiMonitorService
 import pimonitor.evaluation.businesses.BusinessViewModel
 import viewmodel.ViewModel
 import pimonitor.evaluation.businesses.BusinessesIntent as Intent
 import pimonitor.evaluation.businesses.BusinessesState as State
 
-open class BusinessesScope(config: PiMonitorViewModelConfig) : UIScope<Intent, State> {
+open class BusinessesScope(config: PiMonitorScopeConfig) : UIScope<Intent, State> {
 
     override val service: PiMonitorService = config.service
 

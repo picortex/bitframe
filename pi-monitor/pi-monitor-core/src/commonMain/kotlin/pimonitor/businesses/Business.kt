@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Business(
     val spaceId: String,
-    val type: PiMonitorBusinessType,
+    val type: BusinessType,
     val email: String = "",
     val address: String = "",
     val logo: String? = "",

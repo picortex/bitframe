@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import pimonitor.PiMonitorViewModelConfig
+import pimonitor.PiMonitorScopeConfig
 import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_BUSINESS
 import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_INDIVIDUAL
 import presenters.feedbacks.FormFeedback.*
@@ -15,15 +15,13 @@ import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
 class SignUpViewModel(
-    private val config: PiMonitorViewModelConfig
+    private val config: PiMonitorScopeConfig
 ) : ViewModel<Intent, State>(State.IndividualForm(IndividualFormFields(), null), config) {
     private val signUpService get() = config.service.signUp
     private val signInService get() = config.service.signIn
     private val recoveryTime get() = config.recoveryTime
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
-        Intent.SelectRegisterAsIndividual -> selectRegisterAsIndividual()
-        Intent.SelectRegisterAsBusiness -> selectRegisterAsBusiness()
         is Intent.ChangeRegistrationType -> updateRegistrationType(i)
         is Intent.Submit -> submitForm(i)
     }
@@ -54,13 +52,5 @@ class SignUpViewModel(
         }.collect {
             ui.value = it
         }
-    }
-
-    private fun selectRegisterAsIndividual() {
-        ui.value = State.IndividualForm(IndividualFormFields(), null)
-    }
-
-    private fun selectRegisterAsBusiness() {
-        ui.value = State.BusinessForm(BusinessFormFields(), null)
     }
 }

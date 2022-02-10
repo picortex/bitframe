@@ -4,13 +4,13 @@
 package pimonitor.evaluation.businesses.exports
 
 import bitframe.client.ReactUIScope
-import pimonitor.PiMonitorViewModelConfig
+import pimonitor.PiMonitorScopeConfig
 import useViewModelState
 import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
 import pimonitor.evaluation.businesses.forms.CreateBusinessState as State
 
 class CreateBusinessReactScope internal constructor(
-    config: PiMonitorViewModelConfig
+    config: PiMonitorScopeConfig
 ) : CreateBusinessScope(config), ReactUIScope<Intent, State> {
     override val useStateFromViewModel: () -> State = {
         useViewModelState(viewModel)

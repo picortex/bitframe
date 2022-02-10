@@ -2,19 +2,20 @@
 
 package pimonitor.spaces
 
+import bitframe.actors.spaces.SpaceType
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 
 object SPACE_TYPE {
     @JvmField
-    val CooperateMonitor = PiMonitorSpaceType.CooperateMonitor
+    val COOPERATE_MONITOR: SpaceType = "PIMONITOR_COOPERATE_MONITOR"
 
     @JvmField
-    val IndividualMonitor = PiMonitorSpaceType.IndividualMonitor
+    val INDIVIDUAL_MONITOR: SpaceType = "PIMONITOR_INDIVIDUAL_MONITOR"
 
     @JvmField
-    val Monitored = PiMonitorSpaceType.Monitored
+    val MONITORED: SpaceType = "PIMONITOR_MONITORED"
 
     @JvmField
-    val PiCortexGovernor = PiMonitorSpaceType.PiCortexGovernor
+    val GOVERNOR: SpaceType = "PIMONITOR_GOVERNOR"
 }

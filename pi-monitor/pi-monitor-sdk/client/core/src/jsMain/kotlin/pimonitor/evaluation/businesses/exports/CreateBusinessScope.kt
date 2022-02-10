@@ -4,14 +4,14 @@
 package pimonitor.evaluation.businesses.exports
 
 import bitframe.client.UIScope
-import pimonitor.PiMonitorViewModelConfig
+import pimonitor.PiMonitorScopeConfig
 import pimonitor.api.PiMonitorService
 import pimonitor.evaluation.businesses.forms.CreateBusinessViewModel
 import viewmodel.ViewModel
 import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
 import pimonitor.evaluation.businesses.forms.CreateBusinessState as State
 
-open class CreateBusinessScope(config: PiMonitorViewModelConfig) : UIScope<Intent, State> {
+open class CreateBusinessScope(config: PiMonitorScopeConfig) : UIScope<Intent, State> {
     override val service: PiMonitorService = config.service
     override val viewModel: ViewModel<Intent, State> by lazy { CreateBusinessViewModel(config) }
 

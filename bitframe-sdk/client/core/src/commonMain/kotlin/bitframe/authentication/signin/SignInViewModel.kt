@@ -1,7 +1,7 @@
 package bitframe.authentication.signin
 
 import bitframe.authentication.client.signin.SignInService
-import bitframe.client.BitframeViewModelConfig
+import bitframe.client.BitframeScopeConfig
 import presenters.feedbacks.FormFeedback.*
 import cache.Cache
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +14,7 @@ import viewmodel.ViewModel
 import bitframe.authentication.signin.SignInState as State
 
 class SignInViewModel(
-    config: BitframeViewModelConfig
+    config: BitframeScopeConfig
 ) : ViewModel<SignInIntent, State>(State.Form(SignInFormFields(), null), config) {
 
     private val service: SignInService = config.service.signIn

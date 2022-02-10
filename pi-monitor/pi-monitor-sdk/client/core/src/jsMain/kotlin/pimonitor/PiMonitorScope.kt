@@ -17,7 +17,7 @@ import pimonitor.evaluation.contacts.exports.ContactsScope
 import pimonitor.portfolio.PortfolioScope
 
 open class PiMonitorScope(
-    override val config: PiMonitorViewModelConfig,
+    override val config: PiMonitorScopeConfig,
     override val signIn: SignInScope,
     open val signUp: SignUpScope,
     override val panel: PanelScope,

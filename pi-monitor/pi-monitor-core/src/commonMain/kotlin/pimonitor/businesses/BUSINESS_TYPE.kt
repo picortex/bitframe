@@ -7,8 +7,8 @@ import kotlin.jvm.JvmField
 
 object BUSINESS_TYPE {
     @JvmField
-    val Monitor = PiMonitorBusinessType.Monitor
+    val MONITOR = "PIMONITOR_MONITOR"
 
     @JvmField
-    val Monitored = PiMonitorBusinessType.Monitored
+    val MONITORED = "PIMONITOR_MONITORED"
 }

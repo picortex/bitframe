@@ -2,21 +2,18 @@ package pimonitor.evaluation.businesses
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import later.await
-import pimonitor.PiMonitorViewModelConfig
+import pimonitor.PiMonitorScopeConfig
 import pimonitor.evaluation.businesses.BusinessesIntent.*
 import pimonitor.monitored.MonitoredBusiness
 import presenters.collections.tableOf
 import viewmodel.ViewModel
-import viewmodel.ViewModelConfig
 import pimonitor.evaluation.businesses.BusinessesIntent as Intent
 import pimonitor.evaluation.businesses.BusinessesState as State
 
 class BusinessViewModel(
-    config: PiMonitorViewModelConfig
+    config: PiMonitorScopeConfig
 ) : ViewModel<Intent, State>(State.Loading("Loading business"), config) {
 
 //    private val service: BusinessesService = config.service.businesses

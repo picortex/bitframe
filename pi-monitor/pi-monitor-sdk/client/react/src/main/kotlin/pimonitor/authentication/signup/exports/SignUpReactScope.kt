@@ -6,7 +6,7 @@ package pimonitor.authentication.signup.exports
 import bitframe.authentication.client.signin.SignInService
 import bitframe.client.ReactUIScope
 import bitframe.service.Session
-import pimonitor.PiMonitorViewModelConfig
+import pimonitor.PiMonitorScopeConfig
 import pimonitor.authentication.signup.SignUpResult
 import pimonitor.authentication.signup.SignUpService
 import useEventHandler
@@ -15,7 +15,7 @@ import pimonitor.authentication.signup.SignUpIntent as Intent
 import pimonitor.authentication.signup.SignUpState as State
 
 class SignUpReactScope internal constructor(
-    config: PiMonitorViewModelConfig
+    config: PiMonitorScopeConfig
 ) : SignUpScope(config), ReactUIScope<Intent, State> {
 
     override val useStateFromViewModel: () -> State = {

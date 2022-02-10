@@ -1,6 +1,5 @@
 package unit
 
-import bitframe.actors.users.UserEmail
 import expect.expect
 import kotlinx.coroutines.test.runTest
 import later.await
@@ -20,7 +19,6 @@ class AuthFlowTest {
             password = "john@doe.com"
         )
         val res = service.signUp.signUp(params).await()
-        val contact = res.user.contacts.first() as UserEmail
-        expect(contact.value).toBe("john@doe.com")
+        expect(res.user.name).toBe("John Doe")
     }
 }

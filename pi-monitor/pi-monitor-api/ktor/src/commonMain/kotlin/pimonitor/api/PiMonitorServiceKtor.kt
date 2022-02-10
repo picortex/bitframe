@@ -15,7 +15,7 @@ fun PiMonitorServiceKtor(
     override val users by lazy { UsersServiceKtor(config) }
     override val signIn by lazy { SignInServiceKtor(config) }
     override val signUp by lazy { SignUpServiceKtor(config) }
-    override val signOut: SignOutService = SignOutService(config)
+    override val signOut by lazy { SignOutService(config) }
 //    override val monitors by lazy { MonitorsServiceKtor(config) }
 //    override val businesses by lazy { BusinessesServiceKtor(config) }
 //    override val portfolio by lazy { PortfolioService(businesses) }

@@ -10,7 +10,7 @@ import bitframe.actors.spaces.SpacesService
 import bitframe.actors.users.UsersService
 import bitframe.authentication.client.signout.SignOutService
 import bitframe.authentication.signin.exports.SignInReactScope
-import bitframe.client.BitframeViewModelConfig
+import bitframe.client.BitframeScopeConfig
 import bitframe.panel.PanelReactScope
 import cache.BrowserCache
 import kotlinx.browser.document
@@ -37,11 +37,11 @@ fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
         override val signOut: SignOutService = SignOutService(config)
     }
 
-    val vmConfig = BitframeViewModelConfig(service)
+    val vmConfig = BitframeScopeConfig(service)
 
     val scope = object : BitframeReactScope, SessionAware by SessionAwareImpl(service) {
         override val signIn = SignInReactScope(vmConfig)
-        override val config: BitframeViewModelConfig = vmConfig
+        override val config: BitframeScopeConfig = vmConfig
         override val panel = PanelReactScope(vmConfig)
     }
 

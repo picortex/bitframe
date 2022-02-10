@@ -1,26 +1,17 @@
-@file:JsExport
-@file:Suppress("WRONG_EXPORTED_DECLARATION")
+package pimonitor
 
-package bitframe.client
-
-import bitframe.api.BitframeService
+import bitframe.client.BitframeScopeConfig
 import kotlinx.coroutines.CoroutineScope
 import logging.Logger
+import pimonitor.api.PiMonitorService
 import viewmodel.ViewModelConfig
-import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface BitframeViewModelConfig : ViewModelConfig {
-    val service: BitframeService
-    val recoveryTime: Long
-    val transitionTime: Long
-
-    // accessors
-    val bus get() = service.config.bus
-    val cache get() = service.config.cache
+interface PiMonitorScopeConfig : BitframeScopeConfig {
+    override val service: PiMonitorService
 
     companion object {
 
@@ -31,20 +22,20 @@ interface BitframeViewModelConfig : ViewModelConfig {
         val DEFAULT_SCOPE_BUILDER = ViewModelConfig.DEFAULT_SCOPE_BUILDER
 
         @JvmField
-        val DEFAULT_RECOVERY_TIME = 3000L
+        val DEFAULT_RECOVERY_TIME = BitframeScopeConfig.DEFAULT_RECOVERY_TIME
 
         @JvmField
-        val DEFAULT_TRANSITION_TIME = 3000L
+        val DEFAULT_TRANSITION_TIME = BitframeScopeConfig.DEFAULT_TRANSITION_TIME
 
         @JvmSynthetic
         operator fun invoke(
-            service: BitframeService,
+            service: PiMonitorService,
             recoveryTime: Long = DEFAULT_RECOVERY_TIME,
             transitionTime: Long = DEFAULT_TRANSITION_TIME,
             logger: Logger = DEFAULT_LOGGER,
             builder: () -> CoroutineScope = DEFAULT_SCOPE_BUILDER
-        ): BitframeViewModelConfig = object : BitframeViewModelConfig {
-            override val service: BitframeService = service
+        ): PiMonitorScopeConfig = object : PiMonitorScopeConfig {
+            override val service = service
             override val recoveryTime: Long = recoveryTime
             override val transitionTime: Long = transitionTime
             override val logger: Logger = logger
@@ -54,11 +45,11 @@ interface BitframeViewModelConfig : ViewModelConfig {
         @JvmStatic
         @JvmOverloads
         fun create(
-            service: BitframeService,
+            service: PiMonitorService,
             recoveryTime: Long = DEFAULT_RECOVERY_TIME,
             transitionTime: Long = DEFAULT_TRANSITION_TIME,
             logger: Logger = DEFAULT_LOGGER,
             builder: () -> CoroutineScope = DEFAULT_SCOPE_BUILDER
-        ): BitframeViewModelConfig = invoke(service, recoveryTime, transitionTime, logger, builder)
+        ): PiMonitorScopeConfig = invoke(service, recoveryTime, transitionTime, logger, builder)
     }
 }

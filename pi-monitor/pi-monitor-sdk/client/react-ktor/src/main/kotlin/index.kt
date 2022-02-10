@@ -6,7 +6,7 @@ import logging.Appender
 import logging.ConsoleAppender
 import logging.Logger
 import pimonitor.PiMonitorReactScope
-import pimonitor.PiMonitorViewModelConfig
+import pimonitor.PiMonitorScopeConfig
 
 fun scope(config: SDKConfiguration): PiMonitorReactScope {
 
@@ -23,8 +23,8 @@ fun scope(config: SDKConfiguration): PiMonitorReactScope {
             console = true
             sentry = false
         }
-        recoveryTime = PiMonitorViewModelConfig.DEFAULT_RECOVERY_TIME.toInt()
-        transitionTime = PiMonitorViewModelConfig.DEFAULT_TRANSITION_TIME.toInt()
+        recoveryTime = PiMonitorScopeConfig.DEFAULT_RECOVERY_TIME.toInt()
+        transitionTime = PiMonitorScopeConfig.DEFAULT_TRANSITION_TIME.toInt()
     }
 
     // loggers
@@ -35,10 +35,10 @@ fun scope(config: SDKConfiguration): PiMonitorReactScope {
 
     val logger = Logger(*appenders.toTypedArray())
 
-    val piMonitorViewModelConfig = PiMonitorViewModelConfig(
+    val piMonitorViewModelConfig = PiMonitorScopeConfig(
         service = service,
-        recoveryTime = vmConfig.recoveryTime?.toLong() ?: PiMonitorViewModelConfig.DEFAULT_RECOVERY_TIME,
-        transitionTime = vmConfig.transitionTime?.toLong() ?: PiMonitorViewModelConfig.DEFAULT_TRANSITION_TIME,
+        recoveryTime = vmConfig.recoveryTime?.toLong() ?: PiMonitorScopeConfig.DEFAULT_RECOVERY_TIME,
+        transitionTime = vmConfig.transitionTime?.toLong() ?: PiMonitorScopeConfig.DEFAULT_TRANSITION_TIME,
         logger = logger
     )
 

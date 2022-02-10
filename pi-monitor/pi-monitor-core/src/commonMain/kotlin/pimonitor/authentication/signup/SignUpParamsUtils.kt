@@ -1,30 +1,27 @@
 package pimonitor.authentication.signup
 
 import bitframe.actors.users.RegisterUserParams
-import bitframe.actors.users.UserRef
 import bitframe.authentication.signin.SignInCredentials
-import identifier.Email
 import identifier.Name
-import pimonitor.businesses.Business
-import pimonitor.spaces.PiMonitorSpaceType
-import pimonitor.users.PiMonitorUserType
+import pimonitor.spaces.SPACE_TYPE
+import pimonitor.users.USER_TYPE
 
 fun SignUpParams.Individual.toRegisterUserParams() = RegisterUserParams(
     userName = name,
     userIdentifier = email,
     userPassword = password,
-    userType = PiMonitorUserType.Monitor,
+    userType = USER_TYPE.MONITOR,
     spaceName = "${Name(name).first}'s Space",
-    spaceType = PiMonitorSpaceType.IndividualMonitor
+    spaceType = SPACE_TYPE.INDIVIDUAL_MONITOR
 )
 
 fun SignUpParams.Business.toRegisterUserParams() = RegisterUserParams(
     userName = individualName,
     userIdentifier = individualEmail,
     userPassword = password,
-    userType = PiMonitorUserType.Monitor,
+    userType = USER_TYPE.MONITOR,
     spaceName = businessName,
-    spaceType = PiMonitorSpaceType.CooperateMonitor,
+    spaceType = SPACE_TYPE.COOPERATE_MONITOR,
 )
 
 fun SignUpParams.toRegisterUserParams() = when (this) {

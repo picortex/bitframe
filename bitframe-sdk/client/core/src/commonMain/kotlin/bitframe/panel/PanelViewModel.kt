@@ -1,6 +1,6 @@
 package bitframe.panel
 
-import bitframe.client.BitframeViewModelConfig
+import bitframe.client.BitframeScopeConfig
 import bitframe.service.Session
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
@@ -8,14 +8,13 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import live.WatchMode
-import live.Watcher
 import live.watch
 import viewmodel.ViewModel
 import bitframe.panel.PanelIntent as Intent
 import bitframe.panel.PanelState as State
 
 class PanelViewModel(
-    config: BitframeViewModelConfig
+    config: BitframeScopeConfig
 ) : ViewModel<Intent, State>(State.Loading("Setting up your workspace"), config) {
     val service = config.service.signIn
 

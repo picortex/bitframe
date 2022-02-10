@@ -24,14 +24,10 @@ class SignUpServiceKtor(
 
     @OptIn(InternalAPI::class)
     override fun signUp(rb: RequestBody.UnAuthorized<SignUpParams>) = scope.later {
-        logger.log("Before request")
         val resp = client.post("$baseUrl/sign-up") {
             body = json.of(rb, SignUpParams.serializer())
         }
-        logger.log("After request")
-        logger.log("Before calling bodyAsText")
         logger.log(resp.bodyAsText())
-        logger.log("After calling bodyAsText")
         json.decodeResponseFromString(SignUpResult.serializer(), resp.bodyAsText()).response()
     }
 }

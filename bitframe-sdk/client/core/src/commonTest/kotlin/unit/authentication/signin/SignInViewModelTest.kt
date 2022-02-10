@@ -1,20 +1,15 @@
 package unit.authentication.signin
 
 import bitframe.actors.users.RegisterUserParams
-import bitframe.actors.users.usecases.RegisterUserUseCase
 import bitframe.api.BitframeServiceMock
 import bitframe.api.BitframeServiceMockConfig
 import bitframe.authentication.service.daod.usecase.RegisterUserUseCaseImpl
 import bitframe.authentication.signin.*
-import bitframe.client.BitframeViewModelConfig
+import bitframe.client.BitframeScopeConfig
 import expect.expect
 import expect.toBe
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import later.await
-import live.value
 import presenters.feedbacks.FormFeedback.Loading
 import presenters.feedbacks.FormFeedback.Success
 import viewmodel.expect
@@ -26,7 +21,7 @@ class SignInViewModelTest {
 
     val register = RegisterUserUseCaseImpl(serviceConfig)
     val service = BitframeServiceMock(serviceConfig)
-    val viewModelConfig = BitframeViewModelConfig(service)
+    val viewModelConfig = BitframeScopeConfig(service)
     private val vm = SignInViewModel(viewModelConfig)
 
     @Test

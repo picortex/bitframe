@@ -4,7 +4,6 @@
 package pimonitor
 
 import bitframe.BitframeReactScope
-import bitframe.api.SessionAware
 import bitframe.authentication.signin.exports.SignInReactScope
 import bitframe.panel.PanelReactScope
 import pimonitor.authentication.signup.exports.SignUpReactScope
@@ -12,10 +11,9 @@ import pimonitor.evaluation.businesses.exports.BusinessesReactScope
 import pimonitor.evaluation.businesses.exports.CreateBusinessReactScope
 import pimonitor.evaluation.contacts.exports.ContactsReactScope
 import pimonitor.portfolio.PortfolioReactScope
-import pimonitor.portfolio.PortfolioScope
 
 class PiMonitorReactScope private constructor(
-    override val config: PiMonitorViewModelConfig,
+    override val config: PiMonitorScopeConfig,
     override val signIn: SignInReactScope,
     override val signUp: SignUpReactScope,
     override val panel: PanelReactScope,
@@ -26,7 +24,7 @@ class PiMonitorReactScope private constructor(
 ) : PiMonitorScope(config, signIn, signUp, panel, businesses, createBusiness, contacts, portfolio),
     BitframeReactScope {
     @JsName("_init_fromViewModelConfig")
-    constructor(config: PiMonitorViewModelConfig) : this(
+    constructor(config: PiMonitorScopeConfig) : this(
         config,
         SignInReactScope(config),
         SignUpReactScope(config),

@@ -1,7 +1,6 @@
 package pimonitor.evaluation.businesses
 
 import pimonitor.PiMonitorReactScope
-import pimonitor.PiMonitorViewModelConfig
 import pimonitor.evaluation.businesses.exports.CreateBusinessReactScope
 import pimonitor.evaluation.businesses.forms.CreateBusinessState.*
 import react.Props

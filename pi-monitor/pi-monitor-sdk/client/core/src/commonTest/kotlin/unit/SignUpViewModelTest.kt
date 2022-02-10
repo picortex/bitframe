@@ -2,7 +2,7 @@ package unit
 
 import kotlinx.coroutines.test.runTest
 import logging.Logger
-import pimonitor.PiMonitorViewModelConfig
+import pimonitor.PiMonitorScopeConfig
 import pimonitor.api.PiMonitorService
 import pimonitor.api.PiMonitorServiceMock
 import pimonitor.authentication.signup.*
@@ -12,7 +12,7 @@ import kotlin.test.Test
 
 class SignUpViewModelTest {
     val service: PiMonitorService = PiMonitorServiceMock()
-    val config = PiMonitorViewModelConfig(
+    val config = PiMonitorScopeConfig(
         service = service,
         logger = Logger()
     )

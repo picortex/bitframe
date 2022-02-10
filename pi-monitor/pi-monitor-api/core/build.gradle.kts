@@ -19,6 +19,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
+                api(projects.piMonitorApiMock)
                 api(asoft.expect.coroutines)
             }
         }

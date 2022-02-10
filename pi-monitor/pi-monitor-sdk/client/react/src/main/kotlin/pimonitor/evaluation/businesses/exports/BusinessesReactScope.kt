@@ -4,7 +4,7 @@
 package pimonitor.evaluation.businesses.exports
 
 import bitframe.client.ReactUIScope
-import pimonitor.PiMonitorViewModelConfig
+import pimonitor.PiMonitorScopeConfig
 import pimonitor.evaluation.businesses.BusinessesService
 import pimonitor.monitored.MonitoredBusiness
 import useEventHandler
@@ -13,7 +13,7 @@ import pimonitor.evaluation.businesses.BusinessesIntent as Intent
 import pimonitor.evaluation.businesses.BusinessesState as State
 
 open class BusinessesReactScope internal constructor(
-    private val config: PiMonitorViewModelConfig
+    private val config: PiMonitorScopeConfig
 ) : BusinessesScope(config), ReactUIScope<Intent, State> {
 
     override val useStateFromViewModel: () -> State = {

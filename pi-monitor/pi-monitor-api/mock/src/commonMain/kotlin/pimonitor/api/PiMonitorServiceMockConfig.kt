@@ -19,5 +19,4 @@ class PiMonitorServiceMockConfig @JvmOverloads constructor(
     override val bus: EventBus = MockServiceConfig.DEFAULT_BUS,
     override val logger: Logger = MockServiceConfig.DEFAULT_LOGGER,
     override val scope: CoroutineScope = MockServiceConfig.DEFAULT_SCOPE,
-    override val monitorSession: MutableLive<MonitorSession> = MutableLive(MonitorSession.Unknown)
-) : BitframeServiceMockConfig by BitframeServiceMockConfig(appId, cache, session, daoFactory, bus, logger, scope), MonitorsServiceConfig, BusinessesServiceConfig
+) : BitframeServiceMockConfig by BitframeServiceMockConfig(appId, cache, session, daoFactory, bus, logger, scope)

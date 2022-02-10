@@ -1,4 +1,4 @@
-package pimonitor.client
+package pimonitor.client.authentication.signup
 
 import bitframe.service.client.config.MockServiceConfig
 import pimonitor.authentication.signup.SignUpUseCase

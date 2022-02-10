@@ -10,10 +10,6 @@ import later.Later
 class UsersServiceMock(
     private val config: ServiceConfig
 ) : UsersService() {
-    override fun createIfNotExist(params: CreateUserParams): Later<User> {
-        TODO("Not yet implemented")
-    }
-
     override fun register(params: RegisterUserParams): Later<SignInResult> {
         TODO("Not yet implemented")
     }

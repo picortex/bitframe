@@ -4,15 +4,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import later.await
-import pimonitor.PiMonitorViewModelConfig
-import presenters.cards.ValueCard
+import pimonitor.PiMonitorScopeConfig
 import viewmodel.ViewModel
 import pimonitor.portfolio.PortfolioIntent as Intent
 import pimonitor.portfolio.PortfolioState as State
 
 class PortfolioViewModel(
-    private val config: PiMonitorViewModelConfig
+    private val config: PiMonitorScopeConfig
 ) : ViewModel<Intent, State>(State.Loading("Loading portfolio . . "), config) {
 //    private val service get() = config.service.portfolio
 

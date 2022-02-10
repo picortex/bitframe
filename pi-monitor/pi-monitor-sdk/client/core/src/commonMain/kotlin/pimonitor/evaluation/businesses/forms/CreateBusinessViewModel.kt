@@ -5,15 +5,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import later.await
-import pimonitor.PiMonitorViewModelConfig
-import pimonitor.client.evaluation.businesses.BusinessesService
+import pimonitor.PiMonitorScopeConfig
 import viewmodel.ViewModel
 import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
 import pimonitor.evaluation.businesses.forms.CreateBusinessState as State
 
 class CreateBusinessViewModel(
-    config: PiMonitorViewModelConfig
+    config: PiMonitorScopeConfig
 ) : ViewModel<Intent, State>(State.Loading("Preparing form, please wait . . ."), config) {
     //    private val monitorService: MonitorsService = config.service.monitors
 //    private val businessService: BusinessesService = config.service.businesses

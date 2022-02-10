@@ -23,7 +23,7 @@ class SignUpDaodUseCase(
         val result = register(params.toRegisterUserParams()).await()
         val space = result.spaces.first()
         (params as? SignUpParams.Business)?.let {
-            businessDao.create(Business(spaceId = space.uid, type = BUSINESS_TYPE.Monitor))
+            businessDao.create(Business(spaceId = space.uid, type = BUSINESS_TYPE.MONITOR))
         }
         SignUpResult(
             app = App(rb.appId), space = space, user = result.user
