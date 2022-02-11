@@ -20,7 +20,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeAuthenticationServiceCore)
-                api(projects.bitframeCore)
                 api(projects.bitframeServiceConfigClientCore)
                 api(asoft.later.ktx)
             }

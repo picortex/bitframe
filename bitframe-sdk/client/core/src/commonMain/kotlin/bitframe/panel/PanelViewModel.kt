@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import live.WatchMode
+import live.WatchMode.Companion.EAGERLY
 import live.watch
 import viewmodel.ViewModel
 import bitframe.panel.PanelIntent as Intent
@@ -22,10 +23,10 @@ class PanelViewModel(
         Intent.InitPanel -> initialize()
     }
 
-    private fun watchSessionAndUpdateUI() = coroutineScope.watch(service.session, WatchMode.EAGERLY) {
+    private fun watchSessionAndUpdateUI() = coroutineScope.watch(service.session, EAGERLY) {
         when (it) {
             is Session.SignedOut -> ui.value = State.Login
-            is Session.SignedIn -> ui.value = State.Panel(it, sections)
+            is Session.SignedIn -> ui.value = State.Panel(it)
             else -> {}
         }
     }
@@ -35,11 +36,11 @@ class PanelViewModel(
             emit(State.Loading("Retrieving your last session"))
             val signInSession = service.currentSession
             if (signInSession is Session.SignedIn) {
-                emit(State.Panel(signInSession, sections))
+                emit(State.Panel(signInSession))
             } else {
                 emit(State.Loading("Re authenticating you with your last session"))
                 val session = service.signInWithLastSession().await() ?: error("Couldn't sign in with last session")
-                emit(State.Panel(session, sections))
+                emit(State.Panel(session))
             }
         }.catch {
             emit(State.Login)

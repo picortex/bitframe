@@ -16,7 +16,6 @@ kotlin {
                 api(projects.response)
                 api(projects.piMonitorServiceClientCore)
                 api(projects.bitframeServiceConfigClientKtor)
-                api(projects.bitframeCore)
                 api(projects.bitframeAuthenticationServiceClientKtor)
             }
         }

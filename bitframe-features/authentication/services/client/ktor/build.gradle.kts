@@ -19,7 +19,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeAuthenticationServiceClientCore)
-                api(projects.bitframeCore)
                 api(projects.bitframeServiceConfigClientKtor)
                 api(projects.response)
                 api(kotlinx.serialization.json)

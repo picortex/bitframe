@@ -13,7 +13,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeCore)
                 api(projects.bitframeServiceConfigClientMock)
                 api(projects.bitframeAuthenticationServiceClientMock)
                 api(projects.piMonitorServiceClientCore)

@@ -38,9 +38,6 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
 
 rootProject.name = "bitframe"
 
-include(":bitframe-core")
-
-
 // <Bitframe Utils>
 includeSubs("mailer", "bitframe-utils/mailer", "api", "mock", "smtp")
 

@@ -9,10 +9,7 @@ import kotlin.js.JsExport
 sealed class PanelState {
     data class Loading(val message: String) : PanelState()
 
-    data class Panel(
-        val session: Session.SignedIn,
-        val modules: List<UIModuleGroup>
-    ) : PanelState()
+    data class Panel(val session: Session.SignedIn) : PanelState()
 
     object Login : PanelState()
 }

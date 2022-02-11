@@ -10,7 +10,7 @@ internal fun RBuilder.Drawer(
     state: PanelState.Panel
 ) = NavPane(
     drawerController = controller,
-    moduleGroups = state.modules.toModuleGroups(),
+    moduleGroups = emptyMap(),
     header = {
         CompanyHeader(
             logoPath = "https://res.cloudinary.com/dc3mzhqp1/image/upload/v1597218653/PiLogos/logo_2x_eema7k.png",
@@ -18,11 +18,3 @@ internal fun RBuilder.Drawer(
         )
     }
 )
-
-private fun List<UIModuleGroup>.toModuleGroups() = associate { group ->
-    val scopeName = group.name.lowercase().replace(" ", "-")
-    group.name to group.modules.map { module ->
-        val moduleName = module.name.lowercase().replace(" ", "-")
-        NavMenu(module.name, link = "/panel/$scopeName/$moduleName", icon = FaUser, "")
-    }
-}
