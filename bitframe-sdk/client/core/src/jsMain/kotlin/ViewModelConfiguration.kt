@@ -1,7 +1,7 @@
 @file:JsExport
 
-external interface ViewModelConfiguration {
-    var logging: LoggingConfiguration?
-    var recoveryTime: Int?
-    var transitionTime: Int?
+actual external interface ViewModelConfiguration {
+    actual var logging: LoggingConfiguration?
+    actual var recoveryTime: Int?
+    actual var transitionTime: Int?
 }

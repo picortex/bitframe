@@ -16,10 +16,8 @@ import bitframe.daos.get
 import bitframe.service.daod.config.DaodServiceConfig
 import bitframe.service.requests.RequestBody
 import kotlinx.collections.interoperable.toInteroperableList
-import later.Later
 import later.await
 import later.later
-import kotlin.reflect.KProperty1
 
 class SignInDaodUseCase(val config: DaodServiceConfig) : SignInUseCase {
     private val scope get() = config.scope
@@ -35,13 +33,17 @@ class SignInDaodUseCase(val config: DaodServiceConfig) : SignInUseCase {
         )
     }
 
-    override fun signIn(rb: RequestBody.UnAuthorized<SignInCredentials>): Later<SignInResult> = scope.later {
+    override fun signIn(rb: RequestBody.UnAuthorized<SignInCredentials>) = scope.later {
         val contact = contactsDao.all("value" isEqualTo rb.data.identifier).await().firstOrNull() ?: throw EntityNotFoundException("identifier", rb.data.identifier)
         val user = usersDao.load(contact.userId).await()
         val credentials = credentialsDao.all(UserCredentials::userId isEqualTo user.uid).await().first()
         if (credentials.credential != rb.data.password) throw RuntimeException("Incorrect password")
         val info = userSpaceInfoDao.all("userId" isEqualTo user.uid).await()
-        val spaces = info.map { spacesDao.load(it.spaceId) }
-        SignInResult(user, spaces.map { it.await() }.toInteroperableList())
+        val spaces = buildList {
+            for (infoX in info) add(spacesDao.load(infoX.spaceId))
+        }.map { it.await() }
+        // // Commended out coz it kept failing on JS about suspend function only in a suspend context
+        // val space = info.map { spacesDao.load(it.spaceId) }.map { scope.async { it.await() }.await() }
+        SignInResult(user, spaces.toInteroperableList())
     }
 }

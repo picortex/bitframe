@@ -1,9 +1,8 @@
 package bitframe.authentication.client.users
 
-import bitframe.authentication.signin.SignInResult
 import bitframe.actors.users.RegisterUserParams
-import bitframe.actors.users.User
 import bitframe.actors.users.UsersService
+import bitframe.authentication.signin.SignInResult
 import bitframe.service.client.config.KtorClientConfiguration
 import later.Later
 

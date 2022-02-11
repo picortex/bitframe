@@ -13,7 +13,7 @@ import kotlin.js.JsExport
 @Serializable
 data class SignInCredentials(
     /**
-     * Can be an email, phone or username
+     * Can be an email, phone
      */
     val identifier: String,
     val password: String

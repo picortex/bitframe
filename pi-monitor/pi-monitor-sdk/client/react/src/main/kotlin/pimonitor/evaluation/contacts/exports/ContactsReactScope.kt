@@ -4,6 +4,7 @@ package pimonitor.evaluation.contacts.exports
 
 import bitframe.client.ReactUIScope
 import pimonitor.PiMonitorScopeConfig
+import pimonitor.evaluation.contacts.ContactsScope
 import useViewModelState
 import pimonitor.evaluation.contacts.ContactsIntent as Intent
 import pimonitor.evaluation.contacts.ContactsState as State

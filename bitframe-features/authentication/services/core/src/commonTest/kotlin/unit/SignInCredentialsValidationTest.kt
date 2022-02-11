@@ -1,7 +1,6 @@
 package unit
 
 import bitframe.authentication.client.signin.SignInServiceMock
-import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.signin.SignInService
 import expect.expect
 import expect.expectFailure

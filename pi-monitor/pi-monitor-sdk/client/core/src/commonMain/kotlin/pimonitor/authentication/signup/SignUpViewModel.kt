@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.PiMonitorScopeConfig
+import pimonitor.authentication.signup.SignUpIntent.Submit.BusinessForm
+import pimonitor.authentication.signup.SignUpIntent.Submit.IndividualForm
 import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_BUSINESS
 import pimonitor.authentication.signup.SignUpState.Companion.REGISTER_AS_INDIVIDUAL
 import presenters.feedbacks.FormFeedback.*
@@ -41,9 +43,15 @@ class SignUpViewModel(
         val state = ui.value
         flow {
             emit(state.copy(i, Loading("Creating your account, please wait . . .")))
-            signUpService.signUp(i.params).await()
+            when (i) {
+                is IndividualForm -> signUpService.signUp(i.params)
+                is BusinessForm -> signUpService.signUp(i.params)
+            }.await()
             emit(state.copy(i, Loading("Success. Signing you in, please wait . . .")))
-            signInService.signIn(i.params.toCredentials()).await()
+            when (i) {
+                is IndividualForm -> signInService.signIn(i.params.toRawCredentials())
+                is BusinessForm -> signInService.signIn(i.params.toRawCredentials())
+            }
             emit(state.copy(i, Success("Successfully signed in")))
         }.catch {
             emit(state.copy(i, Failure(it, "Failed to create your account: ${it.message}")))

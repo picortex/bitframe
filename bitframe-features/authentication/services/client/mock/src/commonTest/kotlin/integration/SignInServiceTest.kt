@@ -2,7 +2,6 @@ package integration
 
 import bitframe.authentication.client.signin.SignInService
 import bitframe.authentication.client.signin.SignInServiceMock
-import bitframe.authentication.signin.SignInCredentials
 import expect.expect
 import expect.expectFailure
 import kotlinx.coroutines.test.runTest

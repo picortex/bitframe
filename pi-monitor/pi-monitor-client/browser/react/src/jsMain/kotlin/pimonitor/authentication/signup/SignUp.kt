@@ -91,7 +91,7 @@ private val SignUp = fc<SignUpProps> { props ->
                     val name by text()
                     val email by text()
                     val password by text()
-                    val params = SignUpParams.Individual(name, email, password)
+                    val params = RawIndividualSignUpParams(name, email, password)
                     viewModel.post(Intent.Submit.IndividualForm(params))
                 }
                 is SignUpState.BusinessForm -> {
@@ -99,7 +99,7 @@ private val SignUp = fc<SignUpProps> { props ->
                     val individualName by text()
                     val individualEmail by text()
                     val password by text()
-                    val params = SignUpParams.Business(businessName, individualName, individualEmail, password)
+                    val params = RawBusinessSignUpParams(businessName, individualName, individualEmail, password)
                     viewModel.post(Intent.Submit.BusinessForm(params))
                 }
             }

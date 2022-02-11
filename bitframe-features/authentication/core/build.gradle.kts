@@ -15,8 +15,17 @@ kotlin {
             dependencies {
                 api(projects.bitframeCore)
                 api(projects.bitframeActors)
+                api(projects.validation)
                 api(asoft.later.core)
             }
+        }
+
+        val nonJsMain by creating {
+            dependsOn(commonMain)
+        }
+
+        val jvmMain by getting {
+            dependsOn(nonJsMain)
         }
 
         val commonTest by getting {

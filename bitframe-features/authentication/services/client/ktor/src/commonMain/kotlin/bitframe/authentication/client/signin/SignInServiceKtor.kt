@@ -1,11 +1,10 @@
 package bitframe.authentication.client.signin
 
-import bitframe.authentication.signin.SignInResult
 import bitframe.authentication.signin.SignInCredentials
+import bitframe.authentication.signin.SignInResult
 import bitframe.service.client.MiniService
 import bitframe.service.client.config.KtorClientConfiguration
 import bitframe.service.client.utils.of
-import bitframe.service.client.utils.unAuthorizedBodyOf
 import bitframe.service.requests.RequestBody
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
@@ -14,7 +13,6 @@ import io.ktor.util.*
 import later.Later
 import later.later
 import response.decodeResponseFromString
-import response.responseOf
 
 open class SignInServiceKtor(
     override val config: KtorClientConfiguration

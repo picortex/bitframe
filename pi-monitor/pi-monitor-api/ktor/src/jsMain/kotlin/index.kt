@@ -2,9 +2,7 @@
 @file:JsExport
 
 import bitframe.api.BitframeService
-import bitframe.authentication.signin.exports.SignInServiceWrapper
 import cache.AsyncStorageCache
-import cache.BrowserCache
 import cache.MockCache
 import kotlinx.serialization.json.Json
 import logging.Appender
@@ -13,8 +11,6 @@ import logging.Logger
 import pimonitor.api.PiMonitorService
 import pimonitor.api.PiMonitorServiceKtor
 import pimonitor.api.PiMonitorServiceKtorConfig
-import pimonitor.authentication.signup.exports.SignUpServiceWrapper
-import pimonitor.evaluation.businesses.exports.BusinessesServiceWrapper
 import platform.Platform
 
 @JsName("clientWithConfigBlock")
@@ -49,9 +45,3 @@ fun client(config: ServiceConfiguration): PiMonitorService {
 }
 
 fun service(config: ServiceConfiguration): PiMonitorService = client(config)
-
-fun signInService(client: BitframeService) = SignInServiceWrapper(client.signIn)
-
-fun signUpService(client: PiMonitorService) = SignUpServiceWrapper(client.signUp)
-
-//fun businessesService(client: PiMonitorService) = BusinessesServiceWrapper(client.businesses)

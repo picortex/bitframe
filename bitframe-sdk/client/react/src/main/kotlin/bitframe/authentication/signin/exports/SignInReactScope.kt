@@ -4,6 +4,7 @@
 package bitframe.authentication.signin.exports
 
 import bitframe.authentication.client.signin.SignInService
+import bitframe.authentication.signin.SignInScope
 import bitframe.client.BitframeScopeConfig
 import bitframe.client.ReactUIScope
 import bitframe.service.Session

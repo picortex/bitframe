@@ -9,10 +9,10 @@ sealed class SignUpIntent {
     /**
      * type = [SignUpState.REGISTER_AS_BUSINESS] | [SignUpState.REGISTER_AS_INDIVIDUAL]
      */
-    data class ChangeRegistrationType(val type: String) : SignUpIntent()
+    data class ChangeRegistrationType(val type: SignUpType) : SignUpIntent()
 
-    sealed class Submit(open val params: SignUpParams) : SignUpIntent() {
-        data class IndividualForm(override val params: SignUpParams.Individual) : Submit(params)
-        data class BusinessForm(override val params: SignUpParams.Business) : Submit(params)
+    sealed class Submit : SignUpIntent() {
+        data class IndividualForm(val params: IRawIndividualSignUpParams) : Submit()
+        data class BusinessForm(val params: IRawBusinessSignUpParams) : Submit()
     }
 }

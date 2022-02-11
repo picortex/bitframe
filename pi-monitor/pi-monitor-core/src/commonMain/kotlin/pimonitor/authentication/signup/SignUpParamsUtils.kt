@@ -24,7 +24,7 @@ fun SignUpParams.Business.toRegisterUserParams() = RegisterUserParams(
     spaceType = SPACE_TYPE.COOPERATE_MONITOR,
 )
 
-fun SignUpParams.toRegisterUserParams() = when (this) {
+fun SignUpParams.toRegisterUserParams(): RegisterUserParams = when (this) {
     is SignUpParams.Individual -> toRegisterUserParams()
     is SignUpParams.Business -> toRegisterUserParams()
 }

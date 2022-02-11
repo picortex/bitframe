@@ -5,6 +5,7 @@ package pimonitor.evaluation.businesses.exports
 
 import bitframe.client.ReactUIScope
 import pimonitor.PiMonitorScopeConfig
+import pimonitor.evaluation.businesses.CreateBusinessScope
 import useViewModelState
 import pimonitor.evaluation.businesses.forms.CreateBusinessIntent as Intent
 import pimonitor.evaluation.businesses.forms.CreateBusinessState as State

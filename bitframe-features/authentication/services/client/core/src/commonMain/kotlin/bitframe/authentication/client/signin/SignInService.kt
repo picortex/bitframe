@@ -4,8 +4,10 @@ package bitframe.authentication.client.signin
 
 import bitframe.actors.apps.App
 import bitframe.actors.spaces.Space
-import bitframe.authentication.signin.SignInResult
+import bitframe.authentication.signin.IRawSignInCredentials
 import bitframe.authentication.signin.SignInCredentials
+import bitframe.authentication.signin.SignInResult
+import bitframe.authentication.signin.toSignInCredentials
 import bitframe.service.Session
 import bitframe.service.client.config.ServiceConfig
 import bitframe.service.requests.RequestBody
@@ -15,7 +17,9 @@ import later.await
 import later.later
 import live.MutableLive
 import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlin.jvm.JvmStatic
+import kotlin.jvm.JvmSynthetic
 import bitframe.authentication.signin.SignInService as SignInServiceCore
 
 abstract class SignInService(
@@ -53,6 +57,10 @@ abstract class SignInService(
         private fun SwithSpaceEvent(session: Session.SignedIn) = Event(session, SWITCH_SPACE_EVENT_TOPIC)
     }
 
+    @JvmSynthetic
+    fun signIn(cred: IRawSignInCredentials) = signIn(cred.toSignInCredentials())
+
+    @JsName("_ignore_signIn")
     fun signIn(cred: SignInCredentials): Later<SignInResult> = scope.later {
         val validCredentials = validate(cred).getOrThrow()
         val rb = RequestBody.UnAuthorized(

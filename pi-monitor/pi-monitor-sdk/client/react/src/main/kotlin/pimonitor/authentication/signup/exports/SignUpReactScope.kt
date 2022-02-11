@@ -8,6 +8,7 @@ import bitframe.client.ReactUIScope
 import bitframe.service.Session
 import pimonitor.PiMonitorScopeConfig
 import pimonitor.authentication.signup.SignUpResult
+import pimonitor.authentication.signup.SignUpScope
 import pimonitor.authentication.signup.SignUpService
 import useEventHandler
 import useViewModelState

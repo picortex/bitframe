@@ -1,16 +1,10 @@
 package bitframe.authentication.client.users
 
-import bitframe.authentication.signin.SignInResult
-import bitframe.actors.users.RegisterUserParams
-import bitframe.actors.users.User
 import bitframe.actors.users.UsersService
-import bitframe.service.client.config.ServiceConfig
-import later.Later
+import bitframe.actors.users.usecases.RegisterUserUseCase
+import bitframe.authentication.service.daod.usecase.RegisterUserUseCaseImpl
+import bitframe.service.client.config.MockServiceConfig
 
 class UsersServiceMock(
-    private val config: ServiceConfig
-) : UsersService() {
-    override fun register(params: RegisterUserParams): Later<SignInResult> {
-        TODO("Not yet implemented")
-    }
-}
+    private val config: MockServiceConfig
+) : UsersService(), RegisterUserUseCase by RegisterUserUseCaseImpl(config)

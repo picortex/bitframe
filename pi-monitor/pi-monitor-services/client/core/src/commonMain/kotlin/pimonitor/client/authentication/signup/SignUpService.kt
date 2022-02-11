@@ -7,16 +7,22 @@ import bitframe.service.requests.RequestBody
 import later.Later
 import later.await
 import later.later
-import pimonitor.authentication.signup.SignUpParams
-import pimonitor.authentication.signup.SignUpResult
+import pimonitor.authentication.signup.*
 import pimonitor.authentication.signup.SignUpService
-import pimonitor.authentication.signup.SignUpUseCase
 import kotlin.js.JsExport
+import kotlin.js.JsName
 
 abstract class SignUpService(
     override val config: ServiceConfig
 ) : SignUpService(config), SignUpUseCase {
 
+    @JsName("signUpAsBusiness")
+    fun signUp(params: IRawBusinessSignUpParams) = signUp(params.toSignUpParams())
+
+    @JsName("signUpAsIndividual")
+    fun signUp(params: IRawIndividualSignUpParams) = signUp(params.toSignUpParams())
+
+    @JsName("_ignore_signUp")
     fun signUp(params: SignUpParams): Later<SignUpResult> = scope.later {
         val request = RequestBody.UnAuthorized(
             appId = config.appId,

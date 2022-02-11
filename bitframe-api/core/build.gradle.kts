@@ -20,5 +20,13 @@ kotlin {
                 api(kotlinx.coroutines.core)
             }
         }
+
+        val nonJsMain by creating {
+            dependsOn(commonMain)
+        }
+
+        val jvmMain by getting {
+            dependsOn(nonJsMain)
+        }
     }
 }

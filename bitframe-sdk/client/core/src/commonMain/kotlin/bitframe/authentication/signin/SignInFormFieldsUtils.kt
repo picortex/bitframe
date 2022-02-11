@@ -1,10 +1,8 @@
 package bitframe.authentication.signin
 
-internal fun SignInFormFields.copy(i: SignInIntent.Submit) = copy(
-    credentials = i.credentials
-)
+internal fun SignInFormFields.copy(i: SignInIntent.Submit) = copy(credentials = i.credentials)
 
-internal fun SignInFormFields.copy(credentials: SignInCredentials) = copy(
-    email = email.copy(value = credentials.identifier),
+internal fun SignInFormFields.copy(credentials: IRawSignInCredentials) = copy(
+    email = email.copy(value = credentials.email),
     password = password.copy(value = credentials.password)
 )

@@ -1,8 +1,8 @@
 @file:JsExport
 
-external interface SDKConfiguration {
-    var appId: String
-    var url: String?
-    var serviceLoggers: LoggingConfiguration?
-    var viewModel: ViewModelConfiguration?
+actual external interface SDKConfiguration {
+    actual var appId: String
+    actual var url: String?
+    actual var serviceLoggers: LoggingConfiguration?
+    actual var viewModel: ViewModelConfiguration?
 }
