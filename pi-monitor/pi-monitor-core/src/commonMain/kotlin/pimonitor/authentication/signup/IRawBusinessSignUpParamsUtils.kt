@@ -1,6 +1,6 @@
 package pimonitor.authentication.signup
 
-import bitframe.authentication.signin.RawSignInCredentials
+import bitframe.authentication.signin.SignInCredentials
 import validation.required
 
 fun IRawBusinessSignUpParams.toSignUpParams() = SignUpParams.Business(
@@ -10,7 +10,7 @@ fun IRawBusinessSignUpParams.toSignUpParams() = SignUpParams.Business(
     password = required(::password)
 )
 
-fun IRawBusinessSignUpParams.toRawCredentials() = RawSignInCredentials(
+fun IRawBusinessSignUpParams.toRawCredentials() = SignInCredentials(
     identifier = required(::individualEmail),
     password = required(::password)
 )

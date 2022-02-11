@@ -15,7 +15,7 @@ data class SignInFormFields(
     val submit: ButtonInputField = ButtonInputField("Sign In")
 ) {
     companion object {
-        internal fun with(credentials: RawSignInCredentials?) = SignInFormFields().apply {
+        internal fun with(credentials: SignInCredentials?) = SignInFormFields().apply {
             email.value = credentials?.email
             password.value = credentials?.password
         }

@@ -1,7 +1,7 @@
 package pimonitor.authentication.signup
 
 import bitframe.actors.users.RegisterUserParams
-import bitframe.authentication.signin.RawSignInCredentials
+import bitframe.authentication.signin.SignInCredentials
 import identifier.Name
 import pimonitor.spaces.SPACE_TYPE
 import pimonitor.users.USER_TYPE
@@ -30,6 +30,6 @@ fun SignUpParams.toRegisterUserParams(): RegisterUserParams = when (this) {
 }
 
 fun SignUpParams.toCredentials() = when (this) {
-    is SignUpParams.Individual -> RawSignInCredentials(email, password)
-    is SignUpParams.Business -> RawSignInCredentials(individualEmail, password)
+    is SignUpParams.Individual -> SignInCredentials(email, password)
+    is SignUpParams.Business -> SignInCredentials(individualEmail, password)
 }

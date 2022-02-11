@@ -1,13 +1,13 @@
 package bitframe.server.modules.authentication.controllers
 
-import bitframe.authentication.signin.RawSignInCredentials
+import bitframe.authentication.signin.SignInCredentials
 import response.response
 import bitframe.server.BitframeService
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.HttpResponse
 import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
-import bitframe.service.requests.RequestBody
+import bitframe.service.requests.RequestBody.UnAuthorized
 import bitframe.service.requests.map
 import io.ktor.http.*
 import kotlinx.serialization.decodeFromString
@@ -19,15 +19,15 @@ class AuthenticationControllerImpl(
 ) : AuthenticationController {
     override suspend fun signIn(req: HttpRequest): HttpResponse = response {
         val rb = try {
-            Json.decodeFromString<RequestBody.UnAuthorized<RawSignInCredentials>>(req.compulsoryBody())
+            Json.decodeFromString<UnAuthorized<SignInCredentials>>(req.compulsoryBody())
         } catch (err: Throwable) {
             null
         } ?: try {
-            Json.decodeFromString<RequestBody.UnAuthorized<RawEmailPasswordSignInCredential>>(req.compulsoryBody()).map { it.toRawSignInCredentials() }
+            Json.decodeFromString<UnAuthorized<RawEmailPasswordSignInCredential>>(req.compulsoryBody()).map { it.toRawSignInCredentials() }
         } catch (err: Throwable) {
             null
         } ?: try {
-            Json.decodeFromString<RequestBody.UnAuthorized<RawPhonePasswordSignInCredential>>(req.compulsoryBody()).map { it.toRawSignInCredentials() }
+            Json.decodeFromString<UnAuthorized<RawPhonePasswordSignInCredential>>(req.compulsoryBody()).map { it.toRawSignInCredentials() }
         } catch (err: Throwable) {
             null
         } ?: reject("Failed to get credentials from the body")

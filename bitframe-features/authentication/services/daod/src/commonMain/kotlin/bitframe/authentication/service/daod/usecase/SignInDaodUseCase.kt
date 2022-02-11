@@ -5,7 +5,7 @@ import bitframe.actors.users.User
 import bitframe.actors.users.UserEmail
 import bitframe.actors.users.UserPhone
 import bitframe.actors.users.UserSpaceInfo
-import bitframe.authentication.signin.RawSignInCredentials
+import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.signin.SignInResult
 import bitframe.authentication.signin.SignInUseCase
 import bitframe.authentication.users.UserCredentials
@@ -33,7 +33,7 @@ class SignInDaodUseCase(val config: DaodServiceConfig) : SignInUseCase {
         )
     }
 
-    override fun signIn(rb: RequestBody.UnAuthorized<RawSignInCredentials>) = scope.later {
+    override fun signIn(rb: RequestBody.UnAuthorized<SignInCredentials>) = scope.later {
         val contact = contactsDao.all("value" isEqualTo rb.data.identifier).await().firstOrNull() ?: throw EntityNotFoundException("identifier", rb.data.identifier)
         val user = usersDao.load(contact.userId).await()
         val credentials = credentialsDao.all(UserCredentials::userId isEqualTo user.uid).await().first()

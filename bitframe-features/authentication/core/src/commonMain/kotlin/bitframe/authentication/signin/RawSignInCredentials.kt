@@ -1,25 +1,31 @@
 package bitframe.authentication.signin
 
-import identifier.Email
-import identifier.Phone
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class RawSignInCredentials(
-    override val identifier: String,
-    override val password: String,
-) : IRawSignInCredentials {
-    override val email: String?
-        get() = try {
-            Email(identifier).value
-        } catch (err: Throwable) {
-            null
-        }
-
-    override val phone: String?
-        get() = try {
-            Phone(identifier).value
-        } catch (err: Throwable) {
-            null
-        }
+/**
+ * This accepts a raw identifier/password credentials.
+ *
+ * It is built to allow dynamic usage on platforms like javascript
+ * It can be uses as follow
+ * #### Usage
+ * ```
+ * const credentials = {
+ *      email: "test@email.com",
+ *      password: "password"
+ * }
+ * // or
+ * const credentials = {
+ *      phone: "255752748674",
+ *      password: "password"
+ * }
+ * // or. If you want to be universal
+ * const credentials = {
+ *      identifier: "test@email.com" // even phone will work
+ *      password: "password"
+ * }
+ * ```
+ */
+expect interface RawSignInCredentials {
+    val phone: String?
+    val email: String?
+    val identifier: String?
+    val password: String
 }

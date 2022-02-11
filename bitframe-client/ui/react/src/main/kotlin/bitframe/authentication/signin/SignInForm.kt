@@ -16,7 +16,7 @@ import styled.styledH1
 
 fun RBuilder.SignInForm(
     state: SignInState.Form,
-    onLoginButtonPressed: (IRawSignInCredentials) -> Unit
+    onLoginButtonPressed: (RawSignInCredentials) -> Unit
 ) = Grid {
     css {
         centerContent()
@@ -49,6 +49,6 @@ fun RBuilder.SignInForm(
     } onSubmit {
         val email by text()
         val password by text()
-        onLoginButtonPressed(RawSignInCredentials(email, password))
+        onLoginButtonPressed(SignInCredentials(email, password))
     }
 }

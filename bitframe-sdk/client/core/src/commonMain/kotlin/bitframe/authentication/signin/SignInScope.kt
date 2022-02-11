@@ -24,7 +24,7 @@ open class SignInScope(config: BitframeScopeConfig) : UIScope<Intent, State> {
         viewModel.post(Intent.InitForm)
     }
 
-    val submit = { cred: IRawSignInCredentials ->
+    val submit = { cred: RawSignInCredentials ->
         viewModel.post(Intent.Submit(cred))
     }
 

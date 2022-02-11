@@ -1,10 +1,6 @@
-@file:JsExport
-
 package bitframe.authentication.signin
 
-import kotlin.js.JsExport
-
-actual external interface IRawSignInCredentials {
+actual interface RawSignInCredentials {
     actual val email: String?
     actual val phone: String?
     actual val identifier: String?

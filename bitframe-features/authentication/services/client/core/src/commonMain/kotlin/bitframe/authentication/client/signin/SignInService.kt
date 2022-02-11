@@ -14,9 +14,7 @@ import later.await
 import later.later
 import live.MutableLive
 import kotlin.js.JsExport
-import kotlin.js.JsName
 import kotlin.jvm.JvmStatic
-import kotlin.jvm.JvmSynthetic
 import bitframe.authentication.signin.SignInService as SignInServiceCore
 
 abstract class SignInService(
@@ -54,7 +52,7 @@ abstract class SignInService(
         private fun SwithSpaceEvent(session: Session.SignedIn) = Event(session, SWITCH_SPACE_EVENT_TOPIC)
     }
 
-    fun signIn(cred: IRawSignInCredentials): Later<SignInResult> = scope.later {
+    fun signIn(cred: RawSignInCredentials): Later<SignInResult> = scope.later {
         val validCredentials = validate(cred).getOrThrow()
         val rb = RequestBody.UnAuthorized(
             appId = config.appId,
@@ -117,7 +115,7 @@ abstract class SignInService(
     }
 
     fun signInWithLastSession(): Later<Session.SignedIn?> = scope.later {
-        val cred = cache.load<RawSignInCredentials>(CREDENTIALS_CACHE_KEY).await()
+        val cred = cache.load<SignInCredentials>(CREDENTIALS_CACHE_KEY).await()
         val res = signIn(cred).await()
         if (res.spaces.size != 1) {
             val session = cache.load<Session.SignedIn>(SESSION_CACHE_KEY).await()
