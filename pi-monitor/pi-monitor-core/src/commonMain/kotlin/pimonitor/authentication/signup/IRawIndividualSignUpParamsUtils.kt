@@ -10,6 +10,6 @@ fun IRawIndividualSignUpParams.toSignUpParams() = SignUpParams.Individual(
 )
 
 fun IRawIndividualSignUpParams.toRawCredentials() = RawSignInCredentials(
-    email = required(::email),
+    identifier = required(::email),
     password = required(::password)
 )

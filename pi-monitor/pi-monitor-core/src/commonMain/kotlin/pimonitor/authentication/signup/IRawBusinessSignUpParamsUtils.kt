@@ -11,6 +11,6 @@ fun IRawBusinessSignUpParams.toSignUpParams() = SignUpParams.Business(
 )
 
 fun IRawBusinessSignUpParams.toRawCredentials() = RawSignInCredentials(
-    email = required(::individualEmail),
+    identifier = required(::individualEmail),
     password = required(::password)
 )

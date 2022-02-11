@@ -1,12 +1,11 @@
 package bitframe.authentication.client.signin
 
-import bitframe.authentication.signin.SignInCredentials
+import bitframe.authentication.signin.RawSignInCredentials
 import bitframe.authentication.signin.SignInResult
 import bitframe.service.client.MiniService
 import bitframe.service.client.config.KtorClientConfiguration
 import bitframe.service.client.utils.of
 import bitframe.service.requests.RequestBody
-import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.util.*
@@ -22,7 +21,7 @@ open class SignInServiceKtor(
     private val json get() = config.json
 
     @OptIn(InternalAPI::class)
-    override fun signIn(rb: RequestBody.UnAuthorized<SignInCredentials>): Later<SignInResult> = scope.later {
+    override fun signIn(rb: RequestBody.UnAuthorized<RawSignInCredentials>): Later<SignInResult> = scope.later {
         val resp = http.post(path) { body = json.of(rb) }
         json.decodeResponseFromString(SignInResult.serializer(), resp.bodyAsText()).response()
     }

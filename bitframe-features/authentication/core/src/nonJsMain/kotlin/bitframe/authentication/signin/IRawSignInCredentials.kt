@@ -1,6 +1,8 @@
 package bitframe.authentication.signin
 
 actual interface IRawSignInCredentials {
-    actual var email: String
-    actual var password: String
+    actual val email: String?
+    actual val phone: String?
+    actual val identifier: String?
+    actual val password: String
 }

@@ -5,7 +5,7 @@ import identifier.Phone as PrimitivePhone
 
 sealed class Identifier(open val primitive: Any, val value: String) {
     companion object {
-        fun from(value: String): Identifier = try {
+        fun fromOrNull(value: String): Identifier? = try {
             Email(PrimitiveEmail(value))
         } catch (cause: Throwable) {
             null
@@ -13,7 +13,9 @@ sealed class Identifier(open val primitive: Any, val value: String) {
             Phone(PrimitivePhone(value))
         } catch (cause: Throwable) {
             null
-        } ?: throw InvalidIdentifierException(value)
+        }
+
+        fun from(value: String): Identifier = fromOrNull(value) ?: throw InvalidIdentifierException(value)
     }
 
     data class Phone(

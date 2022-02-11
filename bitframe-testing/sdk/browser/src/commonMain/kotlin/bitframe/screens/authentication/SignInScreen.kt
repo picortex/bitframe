@@ -1,6 +1,5 @@
 package bitframe.screens.authentication
 
-import bitframe.authentication.signin.SignInCredentials
 import bitframe.screens.api.Screen
 import bitframe.screens.dashboard.DashboardScreen
 

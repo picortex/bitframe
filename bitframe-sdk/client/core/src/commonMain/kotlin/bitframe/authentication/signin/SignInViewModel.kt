@@ -31,7 +31,7 @@ class SignInViewModel(
         val state = State.Form(SignInFormFields(), null)
         flow<State> {
             emit(state.copy(status = Loading("Fetching your previous credentials")))
-            val cred = cache.load<SignInCredentials>(SignInService.CREDENTIALS_CACHE_KEY).await()
+            val cred = cache.load<RawSignInCredentials>(SignInService.CREDENTIALS_CACHE_KEY).await()
             emit(state.copy(fields = SignInFormFields.with(cred)))
         }.catch {
             emit(state)

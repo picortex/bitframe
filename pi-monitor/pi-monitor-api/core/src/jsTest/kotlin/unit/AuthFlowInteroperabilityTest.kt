@@ -1,6 +1,9 @@
 package unit
 
+import bitframe.api.globalThis
 import bitframe.api.jso
+import bitframe.authentication.signin.IRawSignInCredentials
+import bitframe.authentication.signin.RawSignInCredentials
 import expect.expect
 import expect.expectFailure
 import kotlinx.coroutines.test.runTest

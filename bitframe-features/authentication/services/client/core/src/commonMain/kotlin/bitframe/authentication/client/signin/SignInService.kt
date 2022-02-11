@@ -4,10 +4,7 @@ package bitframe.authentication.client.signin
 
 import bitframe.actors.apps.App
 import bitframe.actors.spaces.Space
-import bitframe.authentication.signin.IRawSignInCredentials
-import bitframe.authentication.signin.SignInCredentials
-import bitframe.authentication.signin.SignInResult
-import bitframe.authentication.signin.toSignInCredentials
+import bitframe.authentication.signin.*
 import bitframe.service.Session
 import bitframe.service.client.config.ServiceConfig
 import bitframe.service.requests.RequestBody
@@ -57,11 +54,7 @@ abstract class SignInService(
         private fun SwithSpaceEvent(session: Session.SignedIn) = Event(session, SWITCH_SPACE_EVENT_TOPIC)
     }
 
-    @JvmSynthetic
-    fun signIn(cred: IRawSignInCredentials) = signIn(cred.toSignInCredentials())
-
-    @JsName("_ignore_signIn")
-    fun signIn(cred: SignInCredentials): Later<SignInResult> = scope.later {
+    fun signIn(cred: IRawSignInCredentials): Later<SignInResult> = scope.later {
         val validCredentials = validate(cred).getOrThrow()
         val rb = RequestBody.UnAuthorized(
             appId = config.appId,
@@ -124,7 +117,7 @@ abstract class SignInService(
     }
 
     fun signInWithLastSession(): Later<Session.SignedIn?> = scope.later {
-        val cred = cache.load<SignInCredentials>(CREDENTIALS_CACHE_KEY).await()
+        val cred = cache.load<RawSignInCredentials>(CREDENTIALS_CACHE_KEY).await()
         val res = signIn(cred).await()
         if (res.spaces.size != 1) {
             val session = cache.load<Session.SignedIn>(SESSION_CACHE_KEY).await()
