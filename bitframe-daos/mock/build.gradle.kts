@@ -15,13 +15,11 @@ kotlin {
             dependencies {
                 api(projects.bitframeDaoCore)
                 api(asoft.kotlinx.serialization.mapper)
-                api(asoft.later.ktx)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(projects.bitframeAnnotationsCore)
                 implementation(asoft.expect.coroutines)
             }
         }

@@ -1,5 +1,7 @@
 package bitframe.authentication.signin
 
+import kotlin.js.JsExport
+
 /**
  * This accepts a raw identifier/password credentials.
  *
@@ -23,7 +25,8 @@ package bitframe.authentication.signin
  * }
  * ```
  */
-expect interface RawSignInCredentials {
+@JsExport
+interface RawSignInCredentials {
     val phone: String?
     val email: String?
     val identifier: String?

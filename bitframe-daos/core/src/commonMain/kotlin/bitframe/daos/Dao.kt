@@ -12,17 +12,17 @@ interface Dao<out T : Any> {
 
     val config: DaoConfig<@UnsafeVariance T>
 
-    fun create(input: @UnsafeVariance T): Later<out T>
+    fun create(input: @UnsafeVariance T): Later<T>
 
-    fun update(obj: @UnsafeVariance T): Later<out T>
+    fun update(obj: @UnsafeVariance T): Later<T>
 
     /**
      * Loads an entity by its uid and returns it
      * @throws [EntityNotFoundException] when the object is not found
      */
-    fun load(uid: String): Later<out T>
+    fun load(uid: String): Later<T>
 
-    fun loadOrNull(uid: String): Later<out T?> = config.scope.later {
+    fun loadOrNull(uid: String): Later<T?> = config.scope.later {
         try {
             load(uid).await()
         } catch (err: Throwable) {
@@ -30,7 +30,7 @@ interface Dao<out T : Any> {
         }
     }
 
-    fun delete(uid: String): Later<out T>
+    fun delete(uid: String): Later<T>
 
-    fun all(condition: Condition<*>? = null): Later<out List<T>>
+    fun all(condition: Condition<*>? = null): Later<List<T>>
 }
