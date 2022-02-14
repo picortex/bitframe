@@ -14,7 +14,6 @@ kotlin {
     sourceSets {
         val commonTest by getting {
             dependencies {
-                api(projects.bitframeAuthenticationApiCore)
                 api(projects.bitframeSdkClientCore)
                 api(projects.bitframeApiKtor)
                 api(asoft.cache.mock)

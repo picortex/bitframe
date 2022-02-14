@@ -1,6 +1,5 @@
 package integration.ktor.utils
 
-import bitframe.authentication.client.signin.SignInService
 import bitframe.client.signin.SignInServiceKtor
 import bitframe.client.spaces.SpacesServiceKtor
 import bitframe.client.users.UsersServiceKtor
@@ -9,6 +8,8 @@ import bitframe.core.users.UsersService
 import bitframe.client.BitframeApi
 import bitframe.client.BitframeApiKtorConfig
 import bitframe.authentication.client.signout.SignOutService
+import bitframe.client.signin.SignInService
+import bitframe.client.signout.SignOutService
 
 internal class BitframeTestKtorApi(
     override val config: BitframeApiKtorConfig

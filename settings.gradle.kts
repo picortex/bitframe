@@ -57,16 +57,16 @@ includeRoot(name = "response", path = "bitframe-utils/response")
 
 
 //<Bitframe Testing>
-includeSubs(base = "bitframe-testing", path = "bitframe-testing", "containers")
+//includeSubs(base = "bitframe-testing", path = "bitframe-testing", "containers")
 
-includeRoot(name = "bitframe-testing-instance-server", path = "bitframe-testing/instance/server")
+//includeRoot(name = "bitframe-testing-instance-server", path = "bitframe-testing/instance/server")
 
-includeSubs(base = "bitframe-testing-instance-client", path = "bitframe-testing/instance/client", "core", "browser")
+//includeSubs(base = "bitframe-testing-instance-client", path = "bitframe-testing/instance/client", "core", "browser")
 
-includeSubs(base = "bitframe-testing-sdk", path = "bitframe-testing/sdk", "browser")
+//includeSubs(base = "bitframe-testing-sdk", path = "bitframe-testing/sdk", "browser")
 //</Bitframe Testing>
 
-includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core", "processor")
+//includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core", "processor")
 
 includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mongo")
 
@@ -103,26 +103,30 @@ includeSubs(base = "bitframe-sdk-server", path = "bitframe-sdk/server", "core")
 
 includeSubs(base = "bitframe-ui", path = "bitframe-client/ui", "react")
 
-include(":pi-monitor")
+includeRoot(name = "pimonitor-core", "pimonitor/pimonitor-core")
+includeRoot(name = "pimonitor-daod", "pimonitor/pimonitor-daod")
+includeSubs(base = "pimonitor-api", "pimonitor/pimonitor-api", "core", "ktor", "mock", "public")
 
-includeRoot(name = "pi-monitor-core", path = "pi-monitor/pi-monitor-core")
-
-includeSubs(base = "pi-monitor-dashboard-integration", path = "pi-monitor/pi-monitor-features/dashboard-integrations", "core", "picortex")
-
-includeRoot(name = "pi-monitor-server", path = "pi-monitor/pi-monitor-server")
-
-includeSubs(base = "pi-monitor-service", path = "pi-monitor/pi-monitor-services", "core", "daod", "test")
-
-includeSubs(base = "pi-monitor-service-client", path = "pi-monitor/pi-monitor-services/client", "core", "ktor", "mock")
-
-includeSubs(base = "pi-monitor-service-server", path = "pi-monitor/pi-monitor-services/server", "core")
-
-includeSubs(base = "pi-monitor-api", path = "pi-monitor/pi-monitor-api", "core", "ktor", "mock")
-
-includeSubs(base = "pi-monitor-sdk-client", path = "pi-monitor/pi-monitor-sdk/client", "core", "react", "react-ktor")
-
-includeSubs(base = "pi-monitor-client", path = "pi-monitor/pi-monitor-client", "test")
-
-// includeSubs(base = "pi-monitor-test", path = "pi-monitor/pi-monitor-test", "testing")
-
-includeSubs(base = "pi-monitor-client-browser", path = "pi-monitor/pi-monitor-client/browser", "react")
+//include(":pi-monitor")
+//
+//includeRoot(name = "pi-monitor-core", path = "pi-monitor/pi-monitor-core")
+//
+//includeSubs(base = "pi-monitor-dashboard-integration", path = "pi-monitor/pi-monitor-features/dashboard-integrations", "core", "picortex")
+//
+//includeRoot(name = "pi-monitor-server", path = "pi-monitor/pi-monitor-server")
+//
+//includeSubs(base = "pi-monitor-service", path = "pi-monitor/pi-monitor-services", "core", "daod", "test")
+//
+//includeSubs(base = "pi-monitor-service-client", path = "pi-monitor/pi-monitor-services/client", "core", "ktor", "mock")
+//
+//includeSubs(base = "pi-monitor-service-server", path = "pi-monitor/pi-monitor-services/server", "core")
+//
+//includeSubs(base = "pi-monitor-api", path = "pi-monitor/pi-monitor-api", "core", "ktor", "mock")
+//
+//includeSubs(base = "pi-monitor-sdk-client", path = "pi-monitor/pi-monitor-sdk/client", "core", "react", "react-ktor")
+//
+//includeSubs(base = "pi-monitor-client", path = "pi-monitor/pi-monitor-client", "test")
+//
+//// includeSubs(base = "pi-monitor-test", path = "pi-monitor/pi-monitor-test", "testing")
+//
+//includeSubs(base = "pi-monitor-client-browser", path = "pi-monitor/pi-monitor-client/browser", "react")

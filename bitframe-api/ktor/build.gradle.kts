@@ -19,7 +19,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeApiCore)
-                api(projects.bitframeServiceConfigApiKtor)
+                api(projects.bitframeAuthenticationApiKtor)
             }
         }
 

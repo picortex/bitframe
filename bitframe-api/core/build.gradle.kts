@@ -24,5 +24,12 @@ kotlin {
         val jvmMain by getting {
             dependsOn(nonJsMain)
         }
+
+        val jsMain by getting {
+            dependencies {
+                api(asoft.cache.react.native)
+                api(asoft.cache.browser)
+            }
+        }
     }
 }
