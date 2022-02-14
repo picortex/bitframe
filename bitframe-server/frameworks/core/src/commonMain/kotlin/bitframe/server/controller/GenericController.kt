@@ -1,6 +1,6 @@
 package bitframe.server.controller
 
-import bitframe.actors.modal.Savable
+import bitframe.core.Savable
 import bitframe.server.http.HttpResponse
 import bitframe.server.http.toHttpResponse
 import kotlinx.collections.interoperable.List

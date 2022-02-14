@@ -4,7 +4,7 @@ import response.response
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
-import bitframe.service.requests.RequestBody
+import bitframe.core.service.requests.RequestBody
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
 import io.ktor.http.HttpStatusCode.Companion.Created
 import kotlinx.serialization.ExperimentalSerializationApi

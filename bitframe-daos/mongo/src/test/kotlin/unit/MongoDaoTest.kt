@@ -1,7 +1,7 @@
 package unit
 
-import bitframe.daos.MongoDao
-import bitframe.daos.MongoDaoConfig
+import bitframe.core.daos.MongoDao
+import bitframe.core.daos.MongoDaoConfig
 import expect.expect
 import expect.expectFailure
 import kotlinx.coroutines.test.runTest

@@ -1,6 +1,6 @@
 package pimonitor.service.daod.signup
 
-import bitframe.service.daod.config.DaodServiceConfig
+import bitframe.core.DaodServiceConfig
 import pimonitor.authentication.signup.SignUpUseCase
 import pimonitor.authentication.signup.SignUpService as CoreSignUpService
 

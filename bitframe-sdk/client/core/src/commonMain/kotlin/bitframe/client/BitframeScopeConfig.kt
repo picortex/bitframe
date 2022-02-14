@@ -3,7 +3,6 @@
 
 package bitframe.client
 
-import bitframe.api.BitframeService
 import kotlinx.coroutines.CoroutineScope
 import logging.Logger
 import viewmodel.ViewModelConfig
@@ -14,13 +13,13 @@ import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
 interface BitframeScopeConfig : ViewModelConfig {
-    val service: BitframeService
+    val api: BitframeApi
     val recoveryTime: Long
     val transitionTime: Long
 
     // accessors
-    val bus get() = service.config.bus
-    val cache get() = service.config.cache
+    val bus get() = api.config.bus
+    val cache get() = api.config.cache
 
     companion object {
 
@@ -38,13 +37,13 @@ interface BitframeScopeConfig : ViewModelConfig {
 
         @JvmSynthetic
         operator fun invoke(
-            service: BitframeService,
+            api: BitframeApi,
             recoveryTime: Long = DEFAULT_RECOVERY_TIME,
             transitionTime: Long = DEFAULT_TRANSITION_TIME,
             logger: Logger = DEFAULT_LOGGER,
             builder: () -> CoroutineScope = DEFAULT_SCOPE_BUILDER
         ): BitframeScopeConfig = object : BitframeScopeConfig {
-            override val service: BitframeService = service
+            override val api: BitframeApi = api
             override val recoveryTime: Long = recoveryTime
             override val transitionTime: Long = transitionTime
             override val logger: Logger = logger
@@ -54,11 +53,11 @@ interface BitframeScopeConfig : ViewModelConfig {
         @JvmStatic
         @JvmOverloads
         fun create(
-            service: BitframeService,
+            api: BitframeApi,
             recoveryTime: Long = DEFAULT_RECOVERY_TIME,
             transitionTime: Long = DEFAULT_TRANSITION_TIME,
             logger: Logger = DEFAULT_LOGGER,
             builder: () -> CoroutineScope = DEFAULT_SCOPE_BUILDER
-        ): BitframeScopeConfig = invoke(service, recoveryTime, transitionTime, logger, builder)
+        ): BitframeScopeConfig = invoke(api, recoveryTime, transitionTime, logger, builder)
     }
 }

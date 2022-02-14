@@ -3,10 +3,9 @@
 package bitframe.authentication.client.signout
 
 import bitframe.authentication.client.signin.SignInService
-import bitframe.service.Session
-import bitframe.service.client.config.ServiceConfig
+import bitframe.core.service.Session
+import bitframe.client.ServiceConfig
 import events.Event
-import kotlinx.coroutines.launch
 import later.await
 import kotlin.js.JsExport
 import kotlin.jvm.JvmStatic

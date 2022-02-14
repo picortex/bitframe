@@ -1,11 +1,11 @@
 package unit.utils
 
-import pimonitor.PiMonitorScope
+import pimonitor.PiMonitorAppScope
 import pimonitor.PiMonitorScopeConfig
-import pimonitor.api.PiMonitorServiceMock
+import pimonitor.api.PiMonitorApiMock
 
-fun PiMonitorMockScope(): PiMonitorScope {
-    val service = PiMonitorServiceMock()
+fun PiMonitorMockScope(): PiMonitorAppScope {
+    val service = PiMonitorApiMock()
     val config = PiMonitorScopeConfig(service)
-    return PiMonitorScope(config)
+    return PiMonitorAppScope(config)
 }

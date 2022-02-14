@@ -2,7 +2,7 @@
 
 package pimonitor.users
 
-import bitframe.actors.users.UserType
+import bitframe.core.actors.users.UserType
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 

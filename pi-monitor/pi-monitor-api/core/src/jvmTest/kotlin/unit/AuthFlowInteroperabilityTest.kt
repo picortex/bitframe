@@ -3,13 +3,13 @@ package unit
 import expect.expect
 import kotlinx.coroutines.test.runTest
 import later.await
-import pimonitor.api.PiMonitorService
-import pimonitor.api.PiMonitorServiceMock
+import pimonitor.api.PiMonitorApi
+import pimonitor.api.PiMonitorApiMock
 import pimonitor.authentication.signup.IRawIndividualSignUpParams
 import kotlin.test.Test
 
 class AuthFlowInteroperabilityTest {
-    val service: PiMonitorService = PiMonitorServiceMock()
+    val service: PiMonitorApi = PiMonitorApiMock()
 
     @Test
     fun should_register_a_monitor_as_a_valid_user() = runTest {

@@ -3,15 +3,15 @@ package unit.authentication.signup
 import kotlinx.coroutines.test.runTest
 import logging.Logger
 import pimonitor.PiMonitorScopeConfig
-import pimonitor.api.PiMonitorService
-import pimonitor.api.PiMonitorServiceMock
+import pimonitor.api.PiMonitorApi
+import pimonitor.api.PiMonitorApiMock
 import pimonitor.authentication.signup.*
 import presenters.feedbacks.FormFeedback
 import viewmodel.expect
 import kotlin.test.Test
 
 class SignUpViewModelTest {
-    val service: PiMonitorService = PiMonitorServiceMock()
+    val service: PiMonitorApi = PiMonitorApiMock()
     val config = PiMonitorScopeConfig(
         service = service,
         logger = Logger()

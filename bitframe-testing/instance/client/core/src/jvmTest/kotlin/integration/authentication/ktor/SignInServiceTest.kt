@@ -5,7 +5,6 @@ import bitframe.authentication.signin.SignInCredentials
 import expect.expect
 import integration.ktor.utils.IntegrationTest
 import kotlinx.coroutines.test.runTest
-import later.await
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.junit.jupiter.Testcontainers
 import kotlin.test.Ignore
@@ -15,7 +14,7 @@ import kotlin.test.Test
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 open class SignInServiceTest : IntegrationTest() {
-    private val service: SignInService get() = IntegrationTest.service.signIn
+    private val service: SignInService get() = IntegrationTest.API.signIn
 
     @Test
     fun should_give_a_user_with_valid_credentials_access() = runTest {

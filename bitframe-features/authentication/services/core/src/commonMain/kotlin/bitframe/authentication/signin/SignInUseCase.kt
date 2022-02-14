@@ -1,6 +1,6 @@
 package bitframe.authentication.signin
 
-import bitframe.service.requests.RequestBody
+import bitframe.core.service.requests.RequestBody
 import later.Later
 
 interface SignInUseCase {

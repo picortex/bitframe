@@ -1,6 +1,6 @@
 package pimonitor.server.comms.mailing
 
-import bitframe.service.config.ServiceConfig
+import bitframe.core.service.ServiceConfig
 import identifier.Email
 import mailer.Mailer
 

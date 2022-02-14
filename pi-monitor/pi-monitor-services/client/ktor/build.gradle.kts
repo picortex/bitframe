@@ -15,8 +15,7 @@ kotlin {
             dependencies {
                 api(projects.response)
                 api(projects.piMonitorServiceClientCore)
-                api(projects.bitframeServiceConfigClientKtor)
-                api(projects.bitframeAuthenticationServiceClientKtor)
+                api(projects.bitframeAuthenticationApiKtor)
             }
         }
 
@@ -24,7 +23,7 @@ kotlin {
             dependencies {
                 api(asoft.cache.mock)
                 api(asoft.expect.coroutines)
-                api(projects.piMonitorTestTesting)
+//                api(projects.piMonitorTestTesting)
             }
         }
     }

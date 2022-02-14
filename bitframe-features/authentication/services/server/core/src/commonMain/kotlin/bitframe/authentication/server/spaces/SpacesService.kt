@@ -1,10 +1,9 @@
 package bitframe.authentication.server.spaces
 
-import bitframe.actors.spaces.RegisterSpaceParams
-import bitframe.actors.spaces.SpacesService
-import bitframe.actors.users.User
-import bitframe.daos.conditions.isEqualTo
-import bitframe.daos.get
+import bitframe.core.actors.spaces.RegisterSpaceParams
+import bitframe.core.actors.spaces.SpacesService
+import bitframe.core.User
+import bitframe.core.daos.conditions.isEqualTo
 import bitframe.service.server.config.ServiceConfig
 import later.await
 import later.later

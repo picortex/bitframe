@@ -19,7 +19,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeAuthenticationServiceClientCore)
-                api(projects.bitframeServiceConfigClientKtor)
+                api(projects.bitframeServiceConfigApiKtor)
                 api(projects.response)
                 api(kotlinx.serialization.json)
                 api(asoft.later.ktx)
@@ -41,7 +41,7 @@ kotlin {
 
         val jvmTest by getting {
             dependencies {
-                implementation(project(":pi-monitor-test-testing"))
+//                implementation(projects.piMonitorTestTesting)
             }
         }
 

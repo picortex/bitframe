@@ -1,8 +1,7 @@
 package pimonitor.client.authentication.signup
 
-import bitframe.service.client.config.MockServiceConfig
+import bitframe.client.MockServiceConfig
 import pimonitor.authentication.signup.SignUpUseCase
-import pimonitor.client.authentication.signup.SignUpService
 import pimonitor.service.daod.signup.SignUpDaodUseCase
 
 class SignUpServiceMock(

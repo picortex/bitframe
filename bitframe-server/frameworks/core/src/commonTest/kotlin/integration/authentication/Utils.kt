@@ -2,7 +2,7 @@ package integration.authentication
 
 import events.EventBus
 import events.InMemoryEventBus
-import bitframe.service.config.ServiceConfig
+import bitframe.core.service.ServiceConfig
 import cache.Cache
 import cache.MockCache
 

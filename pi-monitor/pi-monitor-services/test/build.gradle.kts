@@ -11,8 +11,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":pi-monitor-service-client-ktor"))
-                api(project(":pi-monitor-test-testing"))
+                api(projects.piMonitorServiceClientKtor)
+//                implementation(projects.piMonitorTestTesting)
                 api(asoft.expect.coroutines)
             }
         }

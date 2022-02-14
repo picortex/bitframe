@@ -3,9 +3,9 @@ package bitframe.authentication.client.signin
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.signin.SignInResult
 import bitframe.service.client.MiniService
-import bitframe.service.client.config.KtorClientConfiguration
+import bitframe.client.KtorServiceConfig
 import bitframe.service.client.utils.of
-import bitframe.service.requests.RequestBody
+import bitframe.core.service.requests.RequestBody
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.util.*
@@ -14,7 +14,7 @@ import later.later
 import response.decodeResponseFromString
 
 open class SignInServiceKtor(
-    override val config: KtorClientConfiguration
+    override val config: KtorServiceConfig
 ) : SignInService(config), MiniService {
     private val path get() = config.url + "/api/authentication/sign-in"
     private val http get() = config.http

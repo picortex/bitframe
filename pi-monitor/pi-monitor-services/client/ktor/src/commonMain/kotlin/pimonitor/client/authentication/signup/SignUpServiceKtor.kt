@@ -1,18 +1,17 @@
 package pimonitor.client.authentication.signup
 
-import bitframe.service.client.config.KtorClientConfiguration
+import bitframe.client.KtorServiceConfig
 import bitframe.service.client.utils.of
-import bitframe.service.requests.RequestBody
+import bitframe.core.service.requests.RequestBody
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.util.*
-import later.later
 import pimonitor.authentication.signup.SignUpParams
 import pimonitor.authentication.signup.SignUpResult
 import response.decodeResponseFromString
 
 class SignUpServiceKtor(
-    override val config: KtorClientConfiguration
+    override val config: KtorServiceConfig
 ) : SignUpService(config) {
     private val client = config.http
     private val baseUrl = "${config.url}/api/authentication"

@@ -1,7 +1,7 @@
 package pimonitor.businesses
 
-import bitframe.actors.modal.HasId
-import bitframe.actors.modal.Savable
+import bitframe.core.actors.modal.HasId
+import bitframe.core.Savable
 import kotlinx.serialization.Serializable
 
 @Serializable

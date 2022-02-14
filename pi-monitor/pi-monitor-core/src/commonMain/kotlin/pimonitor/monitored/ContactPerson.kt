@@ -2,10 +2,8 @@
 
 package pimonitor.monitored
 
-import bitframe.actors.modal.HasId
-import bitframe.actors.modal.Savable
-import bitframe.actors.spaces.Space
-import bitframe.actors.users.UserContact
+import bitframe.core.actors.modal.HasId
+import bitframe.core.Savable
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 

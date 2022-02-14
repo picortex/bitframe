@@ -1,7 +1,7 @@
 package pimonitor
 
-import bitframe.daos.MongoDaoFactory
-import bitframe.daos.MongoDaoFactoryConfig
+import bitframe.server.MongoDaoFactory
+import bitframe.server.MongoDaoFactoryConfig
 import bitframe.server.bitframeApplication
 import bitframe.server.modules.GenericModule
 import bitframe.service.server.config.ServiceConfig

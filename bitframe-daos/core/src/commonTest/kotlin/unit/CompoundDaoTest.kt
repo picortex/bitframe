@@ -1,9 +1,9 @@
 package unit
 
-import bitframe.actors.modal.Savable
-import bitframe.daos.MockDaoFactory
-import bitframe.daos.CompoundDao
-import bitframe.daos.get
+import bitframe.core.actors.modal.Savable
+import bitframe.core.MockDaoFactory
+import bitframe.core.CompoundDao
+import bitframe.core.get
 import kotlin.test.Test
 
 class CompoundDaoTest {

@@ -8,7 +8,7 @@ import kotlinx.extensions.onDesktop
 import kotlinx.extensions.onMobile
 import kotlinx.extensions.text
 import kotlinx.html.InputType
-import pimonitor.PiMonitorReactScope
+import pimonitor.PiMonitorReactAppScope
 import pimonitor.authentication.signup.exports.SignUpReactScope
 import react.Props
 import react.RBuilder
@@ -107,6 +107,6 @@ private val SignUp = fc<SignUpProps> { props ->
     }
 }
 
-fun RBuilder.SignUp(scope: PiMonitorReactScope) = SignUp {
+fun RBuilder.SignUp(scope: PiMonitorReactAppScope) = SignUp {
     attrs.scope = scope.signUp
 }

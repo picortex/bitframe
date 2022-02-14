@@ -1,6 +1,6 @@
 package bitframe.server.testing
 
-import bitframe.daos.MockDaoFactory
+import bitframe.core.daos.MockDaoFactory
 import bitframe.server.*
 import bitframe.service.server.config.ServiceConfig
 import java.io.File

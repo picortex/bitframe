@@ -1,14 +1,15 @@
 @file:JsExport
 @file:Suppress("EXPERIMENTAL_API_USAGE", "NON_EXPORTABLE_TYPE")
 
+import bitframe.client.SDKConfiguration
 import kotlinext.js.jso
 import logging.Appender
 import logging.ConsoleAppender
 import logging.Logger
-import pimonitor.PiMonitorReactScope
+import pimonitor.PiMonitorReactAppScope
 import pimonitor.PiMonitorScopeConfig
 
-fun scope(config: SDKConfiguration): PiMonitorReactScope {
+fun scope(config: SDKConfiguration): PiMonitorReactAppScope {
 
     val serviceConfig = jso<ServiceConfiguration> {
         appId = config.appId
@@ -42,5 +43,5 @@ fun scope(config: SDKConfiguration): PiMonitorReactScope {
         logger = logger
     )
 
-    return PiMonitorReactScope(piMonitorViewModelConfig)
+    return PiMonitorReactAppScope(piMonitorViewModelConfig)
 }

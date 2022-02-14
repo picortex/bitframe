@@ -12,8 +12,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.response)
-                implementation(projects.bitframeAuthenticationServiceCore)
-                api(projects.bitframeAuthenticationServiceServerCore)
+                implementation(projects.bitframeAuthenticationCore)
+                api(projects.bitframeAuthenticationSdkServerCore)
                 api(projects.bitframeEventsInmemory)
                 api(projects.bitframeSdkServerCore)
                 api(asoft.cache.mock)

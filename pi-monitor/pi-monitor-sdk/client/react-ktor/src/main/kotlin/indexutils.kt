@@ -1,7 +1,8 @@
+import bitframe.client.SDKConfiguration
 import kotlinext.js.jso
-import pimonitor.PiMonitorReactScope
+import pimonitor.PiMonitorReactAppScope
 
 @JsName("_scope")
 fun scope(
     builder: SDKConfiguration.() -> Unit
-): PiMonitorReactScope = scope(config = jso(builder))
+): PiMonitorReactAppScope = scope(config = jso(builder))

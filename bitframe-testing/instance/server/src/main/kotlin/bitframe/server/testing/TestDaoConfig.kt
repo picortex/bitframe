@@ -1,6 +1,6 @@
 package bitframe.server.testing
 
-import bitframe.actors.spaces.Space
+import bitframe.core.actors.spaces.Space
 
 private val space = Space(
     uid = "space-1",

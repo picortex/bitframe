@@ -1,6 +1,6 @@
 package bitframe.server.modules
 
-import bitframe.actors.modal.Savable
+import bitframe.core.Savable
 import bitframe.server.actions.Action
 import bitframe.server.http.HttpRoute
 import io.ktor.http.*

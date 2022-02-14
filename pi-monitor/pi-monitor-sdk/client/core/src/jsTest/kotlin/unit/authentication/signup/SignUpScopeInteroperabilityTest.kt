@@ -1,6 +1,6 @@
 package unit.authentication.signup
 
-import bitframe.api.jso
+import bitframe.client.jso
 import kotlinx.coroutines.test.runTest
 import live.WatchMode
 import unit.utils.PiMonitorMockScope

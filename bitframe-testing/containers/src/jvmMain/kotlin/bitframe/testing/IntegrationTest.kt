@@ -1,7 +1,7 @@
 package bitframe.testing
 
-import bitframe.service.client.config.KtorClientConfiguration
-import bitframe.service.client.config.ServiceConfig
+import bitframe.client.KtorServiceConfig
+import bitframe.client.ServiceConfig
 import cache.MockCache
 
 actual open class IntegrationTest : ContainerTest() {
@@ -10,12 +10,12 @@ actual open class IntegrationTest : ContainerTest() {
 
     val configuration
         get() = when (mode) {
-            TestMode.DEV -> KtorClientConfiguration(
+            TestMode.DEV -> KtorServiceConfig(
                 url = "http://localhost:8080",
                 appId = APP_ID,
                 cache = MockCache()
             )
-            TestMode.CI -> KtorClientConfiguration(
+            TestMode.CI -> KtorServiceConfig(
                 url = urlUnderTest,
                 appId = APP_ID,
                 cache = MockCache()

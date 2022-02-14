@@ -2,8 +2,8 @@
 
 package bitframe.server
 
-import bitframe.actors.spaces.Space
-import bitframe.actors.users.User
+import bitframe.core.actors.spaces.Space
+import bitframe.core.User
 import bitframe.authentication.server.signin.SignInService
 import bitframe.authentication.server.spaces.SpacesService
 import bitframe.service.server.GenericService

@@ -1,9 +1,9 @@
 package bitframe.authentication.client.users
 
-import bitframe.actors.users.UsersService
-import bitframe.actors.users.usecases.RegisterUserUseCase
+import bitframe.core.actors.users.UsersService
+import bitframe.core.actors.users.usecases.RegisterUserUseCase
 import bitframe.authentication.service.daod.usecase.RegisterUserUseCaseImpl
-import bitframe.service.client.config.MockServiceConfig
+import bitframe.client.MockServiceConfig
 
 class UsersServiceMock(
     private val config: MockServiceConfig

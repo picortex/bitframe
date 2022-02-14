@@ -3,9 +3,8 @@
 
 package pimonitor.authentication.signup
 
-import bitframe.client.UIScope
 import pimonitor.PiMonitorScopeConfig
-import pimonitor.api.PiMonitorService
+import pimonitor.api.PiMonitorApi
 import viewmodel.ViewModel
 import kotlin.js.JsExport
 import pimonitor.authentication.signup.SignUpIntent as Intent
@@ -14,7 +13,7 @@ import pimonitor.authentication.signup.SignUpState as State
 open class SignUpScope(
     config: PiMonitorScopeConfig
 ) : UIScope<Intent, State> {
-    override val service: PiMonitorService = config.service
+    override val api: PiMonitorApi = config.api
 
     override val viewModel: ViewModel<Intent, State> by lazy { SignUpViewModel(config) }
 

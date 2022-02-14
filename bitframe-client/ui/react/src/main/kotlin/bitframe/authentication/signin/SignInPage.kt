@@ -1,7 +1,6 @@
 package bitframe.authentication.signin
 
-import bitframe.BitframeReactScope
-import bitframe.authentication.signin.exports.SignInReactScope
+import bitframe.client.BitframeReactAppScope
 import kotlinx.css.*
 import kotlinx.html.js.onClickFunction
 import react.Props
@@ -79,7 +78,7 @@ private val SignInPage = fc<SignInPageProps> { props ->
 }
 
 fun RBuilder.SignInPage(
-    scope: BitframeReactScope,
+    scope: BitframeReactAppScope,
     version: String
 ) = SignInPage {
     attrs.scope = scope.signIn

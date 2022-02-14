@@ -1,10 +1,9 @@
 package unit
 
-import bitframe.daos.MockDao
+import bitframe.core.MockDao
 import expect.expect
 import expect.expectFailure
 import kotlinx.coroutines.test.runTest
-import later.await
 import kotlin.test.Test
 
 class MockDaoTest {

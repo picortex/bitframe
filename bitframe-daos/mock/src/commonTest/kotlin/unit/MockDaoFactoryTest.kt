@@ -1,8 +1,8 @@
 package unit
 
-import bitframe.daos.DaoFactory
-import bitframe.daos.MockDaoFactory
-import bitframe.daos.get
+import bitframe.core.daos.DaoFactory
+import bitframe.core.daos.MockDaoFactory
+import bitframe.core.daos.get
 import expect.expect
 import kotlinx.coroutines.test.runTest
 import later.await

@@ -1,9 +1,9 @@
 package bitframe.authentication.client.spaces
 
-import bitframe.actors.spaces.RegisterSpaceParams
-import bitframe.actors.spaces.Space
-import bitframe.actors.spaces.SpacesService
-import bitframe.service.client.config.ServiceConfig
+import bitframe.core.actors.spaces.RegisterSpaceParams
+import bitframe.core.actors.spaces.Space
+import bitframe.core.actors.spaces.SpacesService
+import bitframe.client.ServiceConfig
 import later.Later
 
 class SpacesServiceMock(val config: ServiceConfig) : SpacesService() {

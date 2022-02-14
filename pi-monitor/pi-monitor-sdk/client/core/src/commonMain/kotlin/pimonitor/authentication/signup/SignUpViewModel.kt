@@ -19,8 +19,8 @@ import pimonitor.authentication.signup.SignUpState as State
 class SignUpViewModel(
     private val config: PiMonitorScopeConfig
 ) : ViewModel<Intent, State>(State.IndividualForm(IndividualFormFields(), null), config) {
-    private val signUpService get() = config.service.signUp
-    private val signInService get() = config.service.signIn
+    private val signUpService get() = config.api.signUp
+    private val signInService get() = config.api.signIn
     private val recoveryTime get() = config.recoveryTime
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {

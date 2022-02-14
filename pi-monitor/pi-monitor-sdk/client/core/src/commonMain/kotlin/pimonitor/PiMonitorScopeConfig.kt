@@ -3,7 +3,7 @@ package pimonitor
 import bitframe.client.BitframeScopeConfig
 import kotlinx.coroutines.CoroutineScope
 import logging.Logger
-import pimonitor.api.PiMonitorService
+import pimonitor.api.PiMonitorApi
 import viewmodel.ViewModelConfig
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
@@ -11,7 +11,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
 interface PiMonitorScopeConfig : BitframeScopeConfig {
-    override val service: PiMonitorService
+    override val api: PiMonitorApi
 
     companion object {
 
@@ -29,13 +29,13 @@ interface PiMonitorScopeConfig : BitframeScopeConfig {
 
         @JvmSynthetic
         operator fun invoke(
-            service: PiMonitorService,
+            service: PiMonitorApi,
             recoveryTime: Long = DEFAULT_RECOVERY_TIME,
             transitionTime: Long = DEFAULT_TRANSITION_TIME,
             logger: Logger = DEFAULT_LOGGER,
             builder: () -> CoroutineScope = DEFAULT_SCOPE_BUILDER
         ): PiMonitorScopeConfig = object : PiMonitorScopeConfig {
-            override val service = service
+            override val api = service
             override val recoveryTime: Long = recoveryTime
             override val transitionTime: Long = transitionTime
             override val logger: Logger = logger
@@ -45,7 +45,7 @@ interface PiMonitorScopeConfig : BitframeScopeConfig {
         @JvmStatic
         @JvmOverloads
         fun create(
-            service: PiMonitorService,
+            service: PiMonitorApi,
             recoveryTime: Long = DEFAULT_RECOVERY_TIME,
             transitionTime: Long = DEFAULT_TRANSITION_TIME,
             logger: Logger = DEFAULT_LOGGER,

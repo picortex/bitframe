@@ -3,15 +3,14 @@
 
 package pimonitor.portfolio
 
-import bitframe.client.UIScope
 import pimonitor.PiMonitorScopeConfig
-import pimonitor.api.PiMonitorService
+import pimonitor.api.PiMonitorApi
 import kotlin.js.JsExport
 import pimonitor.portfolio.PortfolioIntent as Intent
 import pimonitor.portfolio.PortfolioState as State
 
 open class PortfolioScope(config: PiMonitorScopeConfig) : UIScope<Intent, State> {
-    override val service: PiMonitorService = config.service
+    override val api: PiMonitorApi = config.api
     override val viewModel by lazy { PortfolioViewModel(config) }
 
     val loadPortfolio = { viewModel.post(Intent.LoadPortfolio) }

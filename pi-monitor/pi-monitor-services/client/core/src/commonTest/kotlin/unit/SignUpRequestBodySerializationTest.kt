@@ -1,6 +1,6 @@
 package unit
 
-import bitframe.service.requests.RequestBody
+import bitframe.core.service.requests.RequestBody
 import kotlinx.serialization.json.Json
 import pimonitor.authentication.signup.SignUpParams
 import kotlin.test.Test

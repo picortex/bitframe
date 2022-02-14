@@ -2,7 +2,7 @@
 
 package pimonitor.client.evaluation.businesses
 
-import bitframe.service.client.config.ServiceConfig
+import bitframe.client.ServiceConfig
 import pimonitor.evaluation.businesses.BusinessesService
 import kotlin.js.JsExport
 

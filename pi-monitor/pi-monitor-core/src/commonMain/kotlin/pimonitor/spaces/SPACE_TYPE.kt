@@ -2,7 +2,7 @@
 
 package pimonitor.spaces
 
-import bitframe.actors.spaces.SpaceType
+import bitframe.core.actors.spaces.SpaceType
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 

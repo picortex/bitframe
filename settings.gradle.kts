@@ -43,7 +43,7 @@ includeSubs("mailer", "bitframe-utils/mailer", "api", "mock", "smtp")
 
 includeRoot("templater", "bitframe-utils/templater")
 
-includeRoot("bitframe-actors", "bitframe-actors")
+includeSubs("bitframe-actor", "bitframe-actor", "core", "app", "user", "space")
 
 includeSubs(base = "bitframe-events", path = "bitframe-utils/events", "core", "inmemory", "react")
 
@@ -71,19 +71,27 @@ includeSubs(base = "bitframe-annotations", path = "bitframe-annotations", "core"
 includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mongo")
 
 // services
-includeSubs(base = "bitframe-service-config", path = "bitframe-features/service-config", "core", "daod")
+includeSubs(base = "bitframe-service-config", path = "bitframe-service/config", "core", "daod")
 
-includeSubs(base = "bitframe-service-config-client", path = "bitframe-features/service-config/client", "core", "ktor", "mock")
+includeSubs(base = "bitframe-service-config-api", path = "bitframe-service/config/api", "core", "ktor", "mock")
 
-includeSubs(base = "bitframe-service-config-server", path = "bitframe-features/service-config/server", "core")
+includeSubs(base = "bitframe-service-config-sdk-client", path = "bitframe-service/config/sdk/client", "core", "react")
 
-includeSubs(base = "bitframe-authentication", path = "bitframe-features/authentication", "core")
+includeSubs(base = "bitframe-service-config-sdk-server", path = "bitframe-service/config/sdk/server", "core")
 
-includeSubs(base = "bitframe-authentication-service", path = "bitframe-features/authentication/services", "core", "daod")
+includeSubs(base = "bitframe-service-generic", path = "bitframe-service/generic", "core", "daod")
 
-includeSubs(base = "bitframe-authentication-service-client", path = "bitframe-features/authentication/services/client", "core", "ktor", "mock")
+includeSubs(base = "bitframe-service-generic-api", path = "bitframe-service/generic/api", "core", "ktor", "mock")
 
-includeSubs(base = "bitframe-authentication-service-server", path = "bitframe-features/authentication/services/server", "core")
+includeSubs(base = "bitframe-service-generic-sdk-server", path = "bitframe-service/generic/sdk/server", "core")
+
+includeSubs(base = "bitframe-authentication", path = "bitframe-features/authentication", "core", "daod")
+
+includeSubs(base = "bitframe-authentication-api", path = "bitframe-features/authentication/api", "core", "ktor", "mock")
+
+includeSubs(base = "bitframe-authentication-sdk-client", path = "bitframe-features/authentication/sdk/client", "core", "react")
+
+includeSubs(base = "bitframe-authentication-sdk-server", path = "bitframe-features/authentication/sdk/server", "core")
 
 includeSubs(base = "bitframe-server-framework", path = "bitframe-server/frameworks", "core", "test", "ktor")
 
@@ -115,6 +123,6 @@ includeSubs(base = "pi-monitor-sdk-client", path = "pi-monitor/pi-monitor-sdk/cl
 
 includeSubs(base = "pi-monitor-client", path = "pi-monitor/pi-monitor-client", "test")
 
-includeSubs(base = "pi-monitor-test", path = "pi-monitor/pi-monitor-test", "testing")
+// includeSubs(base = "pi-monitor-test", path = "pi-monitor/pi-monitor-test", "testing")
 
 includeSubs(base = "pi-monitor-client-browser", path = "pi-monitor/pi-monitor-client/browser", "react")

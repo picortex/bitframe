@@ -2,9 +2,9 @@
 
 package pimonitor.authentication.signup
 
-import bitframe.actors.apps.App
-import bitframe.actors.spaces.Space
-import bitframe.actors.users.User
+import bitframe.core.App
+import bitframe.core.actors.spaces.Space
+import bitframe.core.User
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 

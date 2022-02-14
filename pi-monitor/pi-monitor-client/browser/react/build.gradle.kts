@@ -61,8 +61,8 @@ kotlin {
 
         val jvmTest by getting {
             dependencies {
-                implementation(project(":pi-monitor-client-test"))
-                implementation(project(":pi-monitor-test-testing"))
+                implementation(projects.piMonitorClientTest)
+//                implementation(projects.piMonitorTestTesting)
             }
         }
     }

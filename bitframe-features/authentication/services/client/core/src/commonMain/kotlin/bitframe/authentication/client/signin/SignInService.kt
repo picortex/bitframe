@@ -2,16 +2,15 @@
 
 package bitframe.authentication.client.signin
 
-import bitframe.actors.apps.App
-import bitframe.actors.spaces.Space
+import bitframe.core.App
+import bitframe.core.actors.spaces.Space
 import bitframe.authentication.signin.*
-import bitframe.service.Session
-import bitframe.service.client.config.ServiceConfig
-import bitframe.service.requests.RequestBody
+import bitframe.core.service.Session
+import bitframe.client.ServiceConfig
+import bitframe.core.service.requests.RequestBody
 import events.Event
 import later.Later
 import later.await
-import later.later
 import live.MutableLive
 import kotlin.js.JsExport
 import kotlin.jvm.JvmStatic

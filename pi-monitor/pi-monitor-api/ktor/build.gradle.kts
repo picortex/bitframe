@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.piMonitorApiCore)
-                api(projects.bitframeAuthenticationServiceClientKtor)
+                api(projects.bitframeAuthenticationApiKtor)
                 api(projects.piMonitorServiceClientKtor)
                 api(asoft.cache.mock)
                 api(asoft.logging.console)

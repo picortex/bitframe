@@ -3,7 +3,6 @@
 
 package pimonitor.portfolio
 
-import bitframe.client.ReactUIScope
 import pimonitor.PiMonitorScopeConfig
 import useViewModelState
 import pimonitor.portfolio.PortfolioIntent as Intent

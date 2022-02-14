@@ -1,6 +1,6 @@
 package pimonitor.authentication.signup
 
-import bitframe.service.requests.RequestBody
+import bitframe.core.service.requests.RequestBody
 import later.Later
 
 interface SignUpUseCase {

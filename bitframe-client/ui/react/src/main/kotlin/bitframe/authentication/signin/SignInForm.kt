@@ -1,6 +1,7 @@
 package bitframe.authentication.signin
 
 import bitframe.components.TextInput
+import bitframe.core.signin.RawSignInCredentials
 import presenters.feedbacks.FormFeedback
 import kotlinx.css.*
 import kotlinx.extensions.text

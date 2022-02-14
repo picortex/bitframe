@@ -1,17 +1,17 @@
 package unit
 
-import bitframe.api.globalThis
-import bitframe.api.jso
+import bitframe.client.globalThis
+import bitframe.client.jso
 import bitframe.authentication.signin.SignInResult
 import expect.expect
 import kotlinx.coroutines.test.TestResult
-import pimonitor.api.PiMonitorService
-import pimonitor.api.PiMonitorServiceMock
+import pimonitor.api.PiMonitorApi
+import pimonitor.api.PiMonitorApiMock
 import kotlin.js.Promise
 import kotlin.test.Test
 
 class SignInInteroperabilityTest {
-    val service: PiMonitorService = PiMonitorServiceMock()
+    val service: PiMonitorApi = PiMonitorApiMock()
 
     init {
         globalThis.signInService = service.signIn

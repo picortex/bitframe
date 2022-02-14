@@ -1,6 +1,6 @@
 package bitframe.testing
 
-import bitframe.service.client.config.ServiceConfig
+import bitframe.client.ServiceConfig
 import cache.MockCache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob

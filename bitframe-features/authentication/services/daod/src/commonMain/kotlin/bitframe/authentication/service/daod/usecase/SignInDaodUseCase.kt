@@ -1,23 +1,19 @@
 package bitframe.authentication.service.daod.usecase
 
-import bitframe.actors.spaces.Space
-import bitframe.actors.users.User
-import bitframe.actors.users.UserEmail
-import bitframe.actors.users.UserPhone
-import bitframe.actors.users.UserSpaceInfo
+import bitframe.core.actors.spaces.Space
+import bitframe.core.User
+import bitframe.core.UserEmail
+import bitframe.core.UserPhone
+import bitframe.core.actors.users.UserSpaceInfo
 import bitframe.authentication.signin.SignInCredentials
 import bitframe.authentication.signin.SignInResult
 import bitframe.authentication.signin.SignInUseCase
 import bitframe.authentication.users.UserCredentials
-import bitframe.daos.CompoundDao
-import bitframe.daos.conditions.isEqualTo
-import bitframe.daos.exceptions.EntityNotFoundException
-import bitframe.daos.get
-import bitframe.service.daod.config.DaodServiceConfig
-import bitframe.service.requests.RequestBody
-import kotlinx.collections.interoperable.toInteroperableList
-import later.await
-import later.later
+import bitframe.core.daos.CompoundDao
+import bitframe.core.daos.conditions.isEqualTo
+import bitframe.core.exceptions.EntityNotFoundException
+import bitframe.core.DaodServiceConfig
+import bitframe.core.service.requests.RequestBody
 
 class SignInDaodUseCase(val config: DaodServiceConfig) : SignInUseCase {
     private val scope get() = config.scope

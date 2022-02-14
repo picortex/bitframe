@@ -1,6 +1,6 @@
 package pimonitor.authentication.signup
 
-import bitframe.actors.users.RegisterUserParams
+import bitframe.core.users.RegisterUserParams
 import bitframe.authentication.signin.SignInCredentials
 import identifier.Name
 import pimonitor.spaces.SPACE_TYPE

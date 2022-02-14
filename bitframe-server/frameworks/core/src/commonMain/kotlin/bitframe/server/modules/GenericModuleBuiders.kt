@@ -1,6 +1,6 @@
 package bitframe.server.modules
 
-import bitframe.actors.modal.Savable
+import bitframe.core.Savable
 import bitframe.server.controller.GenericController
 import bitframe.server.controller.GenericControllerConfig
 import bitframe.service.server.GenericService

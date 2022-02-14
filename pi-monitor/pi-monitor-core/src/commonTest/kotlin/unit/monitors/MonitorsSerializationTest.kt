@@ -1,6 +1,6 @@
 package unit.monitors
 
-import bitframe.actors.users.User
+import bitframe.core.User
 import identifier.Email
 import kotlinx.collections.interoperable.listOf
 import kotlinx.serialization.json.Json

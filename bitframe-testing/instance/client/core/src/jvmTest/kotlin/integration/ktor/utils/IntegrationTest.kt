@@ -1,22 +1,22 @@
 package integration.ktor.utils
 
-import bitframe.api.BitframeService
-import bitframe.api.BitframeServiceKtorConfig
+import bitframe.client.BitframeApi
+import bitframe.client.BitframeApiKtorConfig
 import bitframe.testing.ContainerTest
 import cache.MockCache
 
 open class IntegrationTest : ContainerTest() {
     companion object {
         val DEV_KTOR_CLIENT_CONFIG by lazy {
-            BitframeServiceKtorConfig(
+            BitframeApiKtorConfig(
                 url = urlUnderTest,
                 appId = "<test>",
                 cache = MockCache()
             )
         }
 
-        val service: BitframeService by lazy {
-            BitframeTestKtorService(DEV_KTOR_CLIENT_CONFIG)
+        val API: BitframeApi by lazy {
+            BitframeTestKtorApi(DEV_KTOR_CLIENT_CONFIG)
         }
     }
 }

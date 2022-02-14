@@ -7,8 +7,8 @@ import bitframe.server.http.HttpRequest
 import bitframe.server.http.HttpResponse
 import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
-import bitframe.service.requests.RequestBody.UnAuthorized
-import bitframe.service.requests.map
+import bitframe.core.service.requests.RequestBody.UnAuthorized
+import bitframe.core.service.requests.map
 import io.ktor.http.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json

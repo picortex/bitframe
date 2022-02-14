@@ -14,7 +14,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeActors)
+                api(projects.bitframeActorCore)
                 api(kotlinx.serialization.core)
                 api(kotlinx.coroutines.core)
                 api(kotlinx.datetime)

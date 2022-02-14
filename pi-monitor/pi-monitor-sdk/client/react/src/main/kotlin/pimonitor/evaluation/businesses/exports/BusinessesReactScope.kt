@@ -3,7 +3,6 @@
 
 package pimonitor.evaluation.businesses.exports
 
-import bitframe.client.ReactUIScope
 import pimonitor.PiMonitorScopeConfig
 import pimonitor.evaluation.businesses.BusinessesScope
 import pimonitor.evaluation.businesses.BusinessesService

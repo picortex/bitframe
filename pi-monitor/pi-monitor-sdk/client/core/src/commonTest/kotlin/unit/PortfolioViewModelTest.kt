@@ -2,7 +2,7 @@ package unit
 
 import kotlinx.coroutines.test.runTest
 import pimonitor.PiMonitorScopeConfig
-import pimonitor.api.PiMonitorServiceMock
+import pimonitor.api.PiMonitorApiMock
 import pimonitor.portfolio.PortfolioViewModel
 import viewmodel.expect
 import kotlin.test.Ignore
@@ -11,7 +11,7 @@ import pimonitor.portfolio.PortfolioIntent as Intent
 import pimonitor.portfolio.PortfolioState as State
 
 class PortfolioViewModelTest {
-    val service = PiMonitorServiceMock()
+    val service = PiMonitorApiMock()
     val config = PiMonitorScopeConfig(service)
 
     val vm = PortfolioViewModel(config)

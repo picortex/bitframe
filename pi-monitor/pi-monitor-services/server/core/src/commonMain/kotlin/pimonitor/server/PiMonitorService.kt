@@ -1,6 +1,6 @@
 package pimonitor.server
 
-import bitframe.actors.users.UserEmail
+import bitframe.core.UserEmail
 import bitframe.server.BitframeService
 import bitframe.service.server.GenericService
 import bitframe.service.server.config.ServiceConfig

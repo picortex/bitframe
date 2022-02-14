@@ -1,8 +1,8 @@
 package unit
 
-import bitframe.actors.users.User
-import bitframe.actors.users.UserContact
-import bitframe.daos.MongoDaoConfig
+import bitframe.core.actors.users.User
+import bitframe.core.actors.users.UserContact
+import bitframe.core.daos.MongoDaoConfig
 import expect.expect
 import kotlin.test.Test
 

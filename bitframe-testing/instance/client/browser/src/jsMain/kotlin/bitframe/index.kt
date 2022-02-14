@@ -1,17 +1,16 @@
 package bitframe
 
 import applikation.konfig
-import bitframe.api.*
+import bitframe.client.*
 import bitframe.authentication.client.signin.SignInService
-import bitframe.authentication.client.signin.SignInServiceKtor
-import bitframe.authentication.client.spaces.SpacesServiceKtor
-import bitframe.authentication.client.users.UsersServiceKtor
-import bitframe.actors.spaces.SpacesService
-import bitframe.actors.users.UsersService
+import bitframe.client.signin.SignInServiceKtor
+import bitframe.client.spaces.SpacesServiceKtor
+import bitframe.client.users.UsersServiceKtor
+import bitframe.core.spaces.SpacesService
+import bitframe.core.users.UsersService
 import bitframe.authentication.client.signout.SignOutService
-import bitframe.authentication.signin.exports.SignInReactScope
 import bitframe.client.BitframeScopeConfig
-import bitframe.panel.PanelReactScope
+import bitframe.client.panel.PanelReactScope
 import cache.BrowserCache
 import kotlinx.browser.document
 import kotlinx.browser.window
@@ -23,14 +22,14 @@ import reakt.setContent
 fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
     val konfig = konfig()
 
-    val config = BitframeServiceKtorConfig(
+    val config = BitframeApiKtorConfig(
         appId = "test-client",
         url = konfig["url"]?.toString() ?: window.location.origin,
         cache = BrowserCache()
     )
 
-    val service = object : BitframeService {
-        override val config: BitframeServiceConfig = config
+    val service = object : BitframeApi {
+        override val config: BitframeApiConfig = config
         override val spaces: SpacesService = SpacesServiceKtor(config)
         override val users: UsersService = UsersServiceKtor(config)
         override val signIn: SignInService = SignInServiceKtor(config)
@@ -39,7 +38,7 @@ fun main() = document.get<HTMLDivElement>(By.id("root")).setContent {
 
     val vmConfig = BitframeScopeConfig(service)
 
-    val scope = object : BitframeReactScope, SessionAware by SessionAwareImpl(service) {
+    val scope = object : BitframeReactAppScope, SessionAware by SessionAwareImpl(service) {
         override val signIn = SignInReactScope(vmConfig)
         override val config: BitframeScopeConfig = vmConfig
         override val panel = PanelReactScope(vmConfig)

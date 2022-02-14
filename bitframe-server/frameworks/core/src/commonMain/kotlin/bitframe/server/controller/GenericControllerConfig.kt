@@ -1,6 +1,6 @@
 package bitframe.server.controller
 
-import bitframe.actors.modal.Savable
+import bitframe.core.Savable
 import bitframe.service.server.GenericService
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
