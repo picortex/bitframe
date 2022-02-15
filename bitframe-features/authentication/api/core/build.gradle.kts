@@ -27,6 +27,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
+                api(projects.bitframeAuthenticationApiMock)
                 api(asoft.expect.coroutines)
             }
         }

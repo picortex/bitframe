@@ -1,5 +1,3 @@
-@file:JsExport
-
 package bitframe.core.signin
 
 import kotlin.js.JsExport
@@ -27,6 +25,7 @@ import kotlin.js.JsExport
  * }
  * ```
  */
+@JsExport
 interface RawSignInCredentials {
     val phone: String?
     val email: String?

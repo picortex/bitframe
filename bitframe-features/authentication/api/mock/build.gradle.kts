@@ -27,7 +27,6 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-//                implementation(projects.piMonitorTestTesting)
                 implementation(asoft.expect.coroutines)
             }
         }

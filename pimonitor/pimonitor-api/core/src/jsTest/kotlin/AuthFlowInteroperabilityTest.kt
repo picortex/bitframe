@@ -1,5 +1,3 @@
-package unit
-
 import bitframe.client.jso
 import expect.expect
 import expect.expectFailure

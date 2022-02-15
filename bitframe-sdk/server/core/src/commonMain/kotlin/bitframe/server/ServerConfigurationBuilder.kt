@@ -1,6 +1,6 @@
 package bitframe.server
 
-import bitframe.core.daos.DaoFactory
+import bitframe.core.DaoFactory
 
 interface ServerConfigurationBuilder<S : BitframeService> {
     var daoFactoryBuilder: (() -> DaoFactory)?
