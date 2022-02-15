@@ -1,6 +1,9 @@
 package bitframe.core
 
-expect interface Savable {
+import kotlin.js.JsExport
+
+@JsExport
+interface Savable {
     val uid: String
     val deleted: Boolean
 
