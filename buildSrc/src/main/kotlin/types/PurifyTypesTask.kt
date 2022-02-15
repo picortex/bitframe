@@ -18,8 +18,13 @@ open class PurifyTypesTask : DefaultTask() {
     var directory: File = File(project.buildDir, DEFAULT_DIRECTORY)
 
     @get:Input
-    var contentsToBeRemoved = listOf(
-        "component", "_init_", "factory", "hashCode()", "toString", "copy", "equals", "serializer()", "descriptor: kotlinx."
+    var linesToBeRemoved = listOf(
+        "component", "_init_", "factory", "hashCode()", "toString", "copy", "equals", "serializer()", "descriptor: kotlinx.", "doNotUseIt"
+    )
+
+    @get:Input
+    var codeblocksToBeRemoved = listOf(
+        "static get Companion(): {"
     )
 
     @get:InputFile
@@ -36,7 +41,7 @@ open class PurifyTypesTask : DefaultTask() {
     fun process() {
         val lines = inputFile?.readLines() ?: error("Couldn't get files")
         val filteredLines = lines.filter { line ->
-            !contentsToBeRemoved.any { content -> line.contains(content) }
+            !linesToBeRemoved.any { content -> line.contains(content) }
         }.map {
             changeNullables(it)
         }

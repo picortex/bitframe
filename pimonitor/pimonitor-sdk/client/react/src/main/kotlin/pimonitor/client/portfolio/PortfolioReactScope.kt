@@ -1,18 +1,19 @@
-@file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client.portfolio
 
-import pimonitor.PiMonitorScopeConfig
-import pimonitor.portfolio.PortfolioScope
+import bitframe.client.ReactUIScope
+import bitframe.client.UIScopeConfig
+import pimonitor.client.PiMonitorApi
 import useViewModelState
-import pimonitor.portfolio.PortfolioIntent as Intent
-import pimonitor.portfolio.PortfolioState as State
+import pimonitor.client.portfolio.PortfolioIntent as Intent
+import pimonitor.client.portfolio.PortfolioState as State
 
+@JsExport
 class PortfolioReactScope(
-    config: PiMonitorScopeConfig
+    override val config: UIScopeConfig<PiMonitorApi>
 ) : PortfolioScope(config), ReactUIScope<Intent, State> {
-    override val useStateFromViewModel: () -> State = {
+    override val useScopeState: () -> State = {
         useViewModelState(viewModel)
     }
 }

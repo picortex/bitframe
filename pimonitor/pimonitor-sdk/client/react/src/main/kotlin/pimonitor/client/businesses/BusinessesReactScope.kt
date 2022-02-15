@@ -1,26 +1,28 @@
-@file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client.businesses
 
-import pimonitor.PiMonitorScopeConfig
-import pimonitor.evaluation.businesses.BusinessesScope
-import pimonitor.evaluation.businesses.BusinessesService
-import pimonitor.monitored.MonitoredBusiness
+import bitframe.client.ReactUIScope
+import bitframe.client.UIScopeConfig
+import pimonitor.client.PiMonitorApi
+import pimonitor.core.businesses.BusinessesService
+import pimonitor.core.monitored.MonitoredBusiness
 import useEventHandler
 import useViewModelState
-import pimonitor.evaluation.businesses.BusinessesIntent as Intent
-import pimonitor.evaluation.businesses.BusinessesState as State
+import pimonitor.client.businesses.BusinessesIntent as Intent
+import pimonitor.client.businesses.BusinessesState as State
 
-open class BusinessesReactScope internal constructor(
-    private val config: PiMonitorScopeConfig
+@JsExport
+class BusinessesReactScope internal constructor(
+    override val config: UIScopeConfig<PiMonitorApi>
 ) : BusinessesScope(config), ReactUIScope<Intent, State> {
 
-    override val useStateFromViewModel: () -> State = {
+    override val useScopeState: () -> State = {
         useViewModelState(viewModel)
     }
 
+    private val bus get() = config.service.config.bus
     val useBusinessAddedEvent: (callback: (MonitoredBusiness) -> Unit) -> Unit = { callback ->
-        useEventHandler(config.bus, BusinessesService.CREATE_BUSINESS_EVENT_TOPIC, callback)
+        useEventHandler(bus, BusinessesService.CREATE_BUSINESS_EVENT_TOPIC, callback)
     }
 }
