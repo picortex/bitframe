@@ -1,5 +1,5 @@
-@file:JsExport
 @file:UseSerializers(LongAsStringSerializer::class)
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package bitframe.core
 
@@ -9,6 +9,7 @@ import kotlinx.serialization.UseSerializers
 import kotlinx.serialization.builtins.LongAsStringSerializer
 import kotlin.js.JsExport
 
+@JsExport
 @Serializable
 data class User(
     val name: String,

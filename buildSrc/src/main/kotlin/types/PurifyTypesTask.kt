@@ -19,12 +19,20 @@ open class PurifyTypesTask : DefaultTask() {
 
     @get:Input
     var linesToBeRemoved = listOf(
-        "component", "_init_", "factory", "hashCode()", "toString", "copy", "equals", "serializer()", "descriptor: kotlinx.", "doNotUseIt"
+        "component", "_init_", "factory", "hashCode()", "toString", "copy", "equals", "serializer()", "descriptor: kotlinx.", "doNotUseIt", "**/> */", "_ignore_", "constructor", " config"
+    )
+
+    @get:Input
+    var codeToBeReplaced = listOf(
+        "abstract class" to "abstract_class",
+        "abstract " to "",
+        "abstract_class" to "abstract class",
+        "value?: Nullable" to "value: Nullable"
     )
 
     @get:Input
     var codeblocksToBeRemoved = listOf(
-        "static get Companion(): {"
+        "static get Companion(): {", "static get ${'$'}serializer(): {"
     )
 
     @get:InputFile
@@ -40,21 +48,56 @@ open class PurifyTypesTask : DefaultTask() {
     @TaskAction
     fun process() {
         val lines = inputFile?.readLines() ?: error("Couldn't get files")
-        val filteredLines = lines.filter { line ->
+
+        var linesWithRemovedCodeBlocks = lines
+        for (block in codeblocksToBeRemoved) {
+            linesWithRemovedCodeBlocks = removeCodeBlock(linesWithRemovedCodeBlocks, block)
+        }
+
+        val filteredLines = linesWithRemovedCodeBlocks.filter { line ->
             !linesToBeRemoved.any { content -> line.contains(content) }
         }.map {
             changeNullables(it)
         }
+
+        var replacedLines = filteredLines
+        for (pair in codeToBeReplaced) {
+            replacedLines = replacedLines.map { replace(it, pair) }
+        }
+
         outputFile.apply {
             delete()
             createNewFile()
-            filteredLines.forEach { appendText("$it\n") }
+            replacedLines.forEach { appendText("$it\n") }
         }
+    }
+
+    private fun replace(line: String, pair: Pair<String, String>): String {
+        if (!line.contains(pair.first)) return line
+        return line.replace(pair.first, pair.second)
     }
 
     private fun changeNullables(line: String): String {
         if (!line.contains(": Nullable<")) return line
         val stage1 = line.replace(": Nullable<", "?: Nullable<")
         return stage1.replace(")?: Nullable<", "): Nullable<")
+    }
+
+    private fun removeCodeBlock(lines: List<String>, block: String): List<String> {
+        val blocks = mutableListOf<String>()
+        var index = 0
+        while (index < lines.size) {
+            val line = lines[index]
+            if (line.contains(block)) {
+                while (true) {
+                    index++
+                    if (lines[index].contains("}")) break
+                }
+            } else {
+                blocks.add(line)
+            }
+            index++
+        }
+        return blocks
     }
 }

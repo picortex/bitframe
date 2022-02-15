@@ -9,8 +9,7 @@ import kotlin.js.JsExport
 
 interface BitframeAppScope {
     val config: BitframeAppScopeConfig
+    val session: SessionAware
     val signIn: SignInScope
     val panel: PanelScope
-
-    val session get() = config.api.session
 }

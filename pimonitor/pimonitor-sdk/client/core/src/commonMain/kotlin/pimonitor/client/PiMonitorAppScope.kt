@@ -3,6 +3,7 @@
 package pimonitor.client
 
 import bitframe.client.BitframeAppScope
+import bitframe.client.SessionAware
 import bitframe.client.panel.PanelScope
 import bitframe.client.signin.SignInScope
 import pimonitor.client.businesses.BusinessesScope
@@ -16,6 +17,7 @@ import kotlin.js.JsExport
 open class PiMonitorAppScope(
     override val config: PiMonitorAppScopeConfig,
 ) : BitframeAppScope {
+    override val session: SessionAware get() = api.session
     override val signIn by lazy { SignInScope(of(api.signIn)) }
     open val signUp by lazy { SignUpScope(of(api.register)) }
     override val panel by lazy { PanelScope(of(api.signIn)) }

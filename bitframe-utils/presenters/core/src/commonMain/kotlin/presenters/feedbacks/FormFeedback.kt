@@ -3,50 +3,84 @@
 
 package presenters.feedbacks
 
-import presenters.feedbacks.builders.FailureImpl
-import presenters.feedbacks.builders.LoadingImpl
-import presenters.feedbacks.builders.SuccessImpl
+//import presenters.feedbacks.builders.FailureImpl
+//import presenters.feedbacks.builders.SuccessImpl
 import kotlin.js.JsExport
-import kotlin.js.JsName
-import kotlin.jvm.JvmStatic
 
 sealed interface FormFeedback {
     val message: String
 
-    interface Loading : FormFeedback {
+    open class Loading(
+        override val message: String
+    ) : FormFeedback {
         val loading: Boolean get() = true
+        override fun hashCode(): Int = message.hashCode()
 
-        companion object {
-            operator fun invoke(message: String): Loading = LoadingImpl(message)
+        override fun equals(other: Any?): Boolean = when (other) {
+            is Loading -> other.message == message
+            else -> false
         }
+
+        override fun toString(): String = "Loading(message=$message)"
+//        companion object {
+//            operator fun invoke(message: String): Loading = LoadingImpl(message)
+//        }
     }
 
-    interface Failure : FormFeedback {
-        val cause: Throwable
-        val failure: Boolean get() = true
 
-        companion object {
-            @JvmStatic
-            val DEFAULT_MESSAGE = "Unknown error"
+    open class Failure(
+        open val cause: Throwable,
+        override val message: String = cause.message ?: "Unknown error"
+    ) : FormFeedback {
+        val failure: Boolean = true
+        override fun hashCode(): Int = message.hashCode()
 
-            @JsName("_init_")
-            operator fun invoke(
-                cause: Throwable
-            ): Failure = FailureImpl(cause, cause.message ?: DEFAULT_MESSAGE)
-
-            @JsName("_init_WithMessage")
-            operator fun invoke(
-                cause: Throwable,
-                message: String
-            ): Failure = FailureImpl(cause, message)
+        override fun equals(other: Any?): Boolean = when (other) {
+            is Loading -> other.message == message
+            else -> false
         }
+
+        override fun toString(): String = "Failure(message=$message)"
     }
+//    interface Failure : FormFeedback {
+//        val cause: Throwable
+//        val failure: Boolean get() = true
+//
+//        companion object {
+//            @JvmStatic
+//            val DEFAULT_MESSAGE = "Unknown error"
+//
+//            @JsName("_init_")
+//            operator fun invoke(
+//                cause: Throwable
+//            ): Failure = FailureImpl(cause, cause.message ?: DEFAULT_MESSAGE)
+//
+//            @JsName("_init_WithMessage")
+//            operator fun invoke(
+//                cause: Throwable,
+//                message: String
+//            ): Failure = FailureImpl(cause, message)
+//        }
+//    }
 
-    interface Success : FormFeedback {
-        val success: Boolean get() = true
+    open class Success(
+        override val message: String = "Success"
+    ) : FormFeedback {
+        val success = true
+        override fun hashCode(): Int = message.hashCode()
 
-        companion object {
-            operator fun invoke(message: String = "Success"): Success = SuccessImpl(message)
+        override fun equals(other: Any?): Boolean = when (other) {
+            is Loading -> other.message == message
+            else -> false
         }
+
+        override fun toString(): String = "Success(message=$message)"
     }
+//    interface Success : FormFeedback {
+//        val success: Boolean get() = true
+//
+//        companion object {
+//            operator fun invoke(message: String = "Success"): Success = SuccessImpl(message)
+//        }
+//    }
 }

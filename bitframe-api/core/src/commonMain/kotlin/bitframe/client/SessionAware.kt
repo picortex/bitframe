@@ -1,4 +1,4 @@
-@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package bitframe.client
 
@@ -9,6 +9,7 @@ import kotlinx.collections.interoperable.List
 import live.Live
 import kotlin.js.JsExport
 
+@JsExport
 interface SessionAware {
     val userLiveSession: Live<Session>
     val userSession: Session.SignedIn?
