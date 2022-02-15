@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm")
+    kotlin("plugin.serialization")
     id("tz.co.asoft.library")
     `picortex-publish`
 }
@@ -19,6 +20,7 @@ kotlin {
 
         val test by getting {
             dependencies {
+                implementation(projects.bitframeActorUser)
                 implementation(asoft.expect.coroutines)
             }
         }

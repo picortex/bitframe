@@ -1,14 +1,14 @@
-package unit
-
-import bitframe.core.daos.DaoFactory
-import bitframe.core.daos.MongoDaoFactory
-import bitframe.core.daos.MongoDaoFactoryConfig
-import bitframe.core.daos.get
+import bitframe.core.DaoFactory
+import bitframe.core.get
+import bitframe.server.MongoDaoFactory
+import bitframe.server.MongoDaoFactoryConfig
 import expect.expect
 import kotlinx.coroutines.test.runTest
 import later.await
+import kotlin.test.Ignore
 import kotlin.test.Test
 
+@Ignore
 class MongoDaoFactoryTest {
 
     val config = MongoDaoFactoryConfig(
@@ -21,9 +21,9 @@ class MongoDaoFactoryTest {
     private val factory: DaoFactory = MongoDaoFactory(config)
 
     @Test
-    fun can_easily_initiate_a_factory() {
+    fun can_easily_initiate_a_factory() = runTest {
         val dao = factory.get<Human>()
-        dao.create(Human(name = "Jane"))
+        dao.create(Human(name = "Jane")).await()
     }
 
     @Test

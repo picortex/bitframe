@@ -1,16 +1,17 @@
-package bitframe.authentication.server.spaces
+package bitframe.server.spaces
 
 import bitframe.core.spaces.RegisterSpaceParams
-import bitframe.core.spaces.SpacesService
+import bitframe.core.spaces.SpacesService as CoreSpacesService
 import bitframe.core.User
-import bitframe.core.daos.conditions.isEqualTo
-import bitframe.service.server.config.ServiceConfig
+import bitframe.core.get
+import bitframe.core.isEqualTo
+import bitframe.server.ServiceConfig
 import later.await
 import later.later
 
 class SpacesService(
     val config: ServiceConfig,
-) : SpacesService() {
+) : CoreSpacesService() {
     private val scope = config.scope
     private val usersDao = config.daoFactory.get<User>()
     override fun register(params: RegisterSpaceParams) = scope.later {

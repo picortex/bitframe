@@ -2,7 +2,7 @@ package bitframe.server
 
 import bitframe.core.Condition
 import bitframe.core.Dao
-import bitframe.core.actors.modal.HasId
+import bitframe.core.Savable
 import com.mongodb.client.model.Filters.eq
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
@@ -15,7 +15,7 @@ import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.eq
 import org.litote.kmongo.reactivestreams.KMongo
 
-class MongoDao<D : HasId>(
+class MongoDao<D : Savable>(
     override val config: MongoDaoConfig<D>
 ) : Dao<D> {
 
@@ -26,7 +26,7 @@ class MongoDao<D : HasId>(
 
     override fun create(input: D): Later<D> = scope.later {
         val id = ObjectId.get()
-        val output = input.copyId("${config.prefix}-$id") as D
+        val output = input.copySavable("${config.prefix}-$id", deleted = false) as D
         collection.insertOne(output)
         output
     }
