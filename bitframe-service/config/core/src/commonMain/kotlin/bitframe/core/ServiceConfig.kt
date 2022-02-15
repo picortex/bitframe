@@ -1,3 +1,5 @@
+@file:Suppress("WRONG_EXPORTED_DECLARATION")
+
 package bitframe.core
 
 import events.EventBus

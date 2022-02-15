@@ -24,7 +24,7 @@ fun ApiConfigurator.toApiMode(): ApiMode {
     }
 }
 
-fun ApiConfigurator.toValidConfigurator(): ApiConfiguratorImpl {
+fun ApiConfigurator.toValidApiConfigurator(): ApiConfiguratorImpl {
     val conf = ApiConfiguratorImpl()
     conf.appId = appId
     conf.url = url

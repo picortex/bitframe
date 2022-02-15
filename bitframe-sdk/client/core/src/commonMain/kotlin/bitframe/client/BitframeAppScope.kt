@@ -7,8 +7,10 @@ import bitframe.client.panel.PanelScope
 import bitframe.client.signin.SignInScope
 import kotlin.js.JsExport
 
-interface BitframeAppScope : SessionAware {
-    val config: BitframeScopeConfig
+interface BitframeAppScope {
+    val config: BitframeAppScopeConfig
     val signIn: SignInScope
     val panel: PanelScope
+
+    val session get() = config.api.session
 }

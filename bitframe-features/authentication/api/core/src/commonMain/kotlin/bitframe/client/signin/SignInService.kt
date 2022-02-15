@@ -1,4 +1,4 @@
-@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package bitframe.client.signin
 
@@ -19,6 +19,7 @@ import kotlin.js.JsExport
 import kotlin.jvm.JvmStatic
 import bitframe.core.signin.SignInService as CoreSignInService
 
+@JsExport
 abstract class SignInService(
     open val config: ServiceConfig
 ) : CoreSignInService() {

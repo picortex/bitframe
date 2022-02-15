@@ -1,6 +1,5 @@
 package pimonitor.client
 
-import bitframe.client.BitframeApiKtor
 import bitframe.client.BitframeApiKtorConfig
 import bitframe.client.SessionAware
 import bitframe.client.SessionAwareImpl

@@ -1,4 +1,4 @@
-@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client.signup
 
@@ -12,6 +12,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import pimonitor.core.signup.SignUpService as CoreSignUpService
 
+@JsExport
 abstract class SignUpService(
     override val config: ServiceConfig
 ) : CoreSignUpService(config), SignUpUseCase {

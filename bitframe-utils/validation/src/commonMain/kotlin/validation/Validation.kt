@@ -1,5 +1,4 @@
-@file:JsExport
-@file:Suppress("WRONG_EXPORTED_DECLARATION")
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package validation
 
@@ -7,6 +6,7 @@ import kotlin.js.JsExport
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
+@JsExport
 sealed interface Validation<out T> {
 
     fun throwIfInvalid() {
