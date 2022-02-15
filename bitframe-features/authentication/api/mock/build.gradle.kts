@@ -1,5 +1,3 @@
-import testing.testing
-
 plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
@@ -13,15 +11,8 @@ repositories {
 }
 
 kotlin {
-    jvm {
-        library()
-        testing("unit", "integration")
-    }
-
-    js(IR) {
-        library()
-        testing("unit", "integration")
-    }
+    jvm { library() }
+    js(IR) { library() }
 
     sourceSets {
         val commonMain by getting {
