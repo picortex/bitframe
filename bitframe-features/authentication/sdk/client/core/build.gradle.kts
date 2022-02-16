@@ -17,17 +17,10 @@ kotlin {
             }
         }
 
-        val nonJsMain by creating {
-            dependsOn(commonMain)
-        }
-
-        val jvmMain by getting {
-            dependsOn(nonJsMain)
-        }
-
         val commonTest by getting {
             dependencies {
                 implementation(projects.bitframeAuthenticationApiMock)
+                implementation(projects.bitframeServiceConfigSdkClientMock)
                 implementation(asoft.expect.coroutines)
                 implementation(asoft.viewmodel.test.expect)
             }

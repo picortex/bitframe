@@ -1,3 +1,5 @@
+package signin
+
 import bitframe.core.users.RegisterUserParams
 import bitframe.core.users.RegisterUserUseCaseImpl
 import bitframe.client.MockServiceConfig

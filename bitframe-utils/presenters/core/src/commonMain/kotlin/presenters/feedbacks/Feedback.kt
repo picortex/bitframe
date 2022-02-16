@@ -1,4 +1,3 @@
-@file:JsExport
 @file:Suppress("WRONG_EXPORTED_DECLARATION")
 
 package presenters.feedbacks
@@ -7,6 +6,7 @@ package presenters.feedbacks
 //import presenters.feedbacks.builders.SuccessImpl
 import kotlin.js.JsExport
 
+@JsExport
 sealed interface Feedback {
     val message: String
 

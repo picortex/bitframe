@@ -1,7 +1,11 @@
+package signin
+
 import bitframe.client.signin.SignInServiceMock
 import bitframe.core.signin.SignInResult
 import expect.expect
 import kotlinx.coroutines.test.TestResult
+import utils.globalThis
+import utils.jso
 import kotlin.js.Promise
 import kotlin.test.Ignore
 import kotlin.test.Test
