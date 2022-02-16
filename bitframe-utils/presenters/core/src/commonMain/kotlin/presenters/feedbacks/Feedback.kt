@@ -29,8 +29,8 @@ sealed interface Feedback {
 
 
     open class Failure(
-        open val cause: Throwable,
-        override val message: String = cause.message ?: "Unknown error"
+        open val cause: Throwable? = null,
+        override val message: String = cause?.message ?: "Unknown error"
     ) : Feedback {
         val failure: Boolean = true
         override fun hashCode(): Int = message.hashCode()

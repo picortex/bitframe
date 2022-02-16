@@ -1,3 +1,5 @@
 package bitframe.client.password
 
-data class ChangePasswordIntent(val params: Any)
+import bitframe.core.profile.params.RawChangePasswordParams
+
+data class ChangePasswordIntent(val params: RawChangePasswordParams)

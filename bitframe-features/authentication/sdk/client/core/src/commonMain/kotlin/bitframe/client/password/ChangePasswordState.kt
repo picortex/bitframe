@@ -7,7 +7,7 @@ import kotlin.js.JsExport
 @JsExport
 data class ChangePasswordState(
     val fields: Fields = Fields(),
-    val state: Feedback? = null
+    val status: Feedback? = null
 ) {
     data class Fields(
         val previous: PasswordInputField = PasswordInputField(
