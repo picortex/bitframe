@@ -12,10 +12,10 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.response)
-                implementation(projects.bitframeAuthenticationCore)
                 api(projects.bitframeAuthenticationSdkServerCore)
-                api(projects.bitframeEventsInmemory)
+                api(projects.bitframeServiceGenericSdkServerCore)
                 api(projects.bitframeSdkServerCore)
+                api(projects.bitframeEventsInmemory)
                 api(asoft.cache.mock)
                 api(asoft.kotlinx.serialization.mapper)
                 api(asoft.logging.console)

@@ -99,7 +99,7 @@ includeSubs(base = "bitframe-api", "bitframe-api", "core", "ktor", "mock")
 
 includeSubs(base = "bitframe-sdk-client", path = "bitframe-sdk/client", "core", "react")
 
-includeSubs(base = "bitframe-sdk-server", path = "bitframe-sdk/server", "core")
+includeSubs(base = "bitframe-sdk-server", path = "bitframe-sdk/server", "core", "ktor", "test")
 
 includeSubs(base = "bitframe-ui", path = "bitframe-client/ui", "react")
 
