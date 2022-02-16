@@ -8,5 +8,5 @@ import kotlin.js.JsExport
 
 open class BitframeService(open val config: ServiceConfig) {
     val spaces: SpacesService by lazy { SpacesService(config) }
-    val signIn: SignInService by lazy { SignInService(config) }
+    val signin: SignInService by lazy { SignInService(config) }
 }

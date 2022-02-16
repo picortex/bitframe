@@ -93,8 +93,6 @@ includeSubs(base = "bitframe-authentication-sdk-client", path = "bitframe-featur
 
 includeSubs(base = "bitframe-authentication-sdk-server", path = "bitframe-features/authentication/sdk/server", "core")
 
-includeSubs(base = "bitframe-server-framework", path = "bitframe-server/frameworks", "core", "test", "ktor")
-
 includeSubs(base = "bitframe-api", "bitframe-api", "core", "ktor", "mock")
 
 includeSubs(base = "bitframe-sdk-client", path = "bitframe-sdk/client", "core", "react")
@@ -107,6 +105,8 @@ includeRoot(name = "pimonitor-core", "pimonitor/pimonitor-core")
 includeRoot(name = "pimonitor-daod", "pimonitor/pimonitor-daod")
 includeSubs(base = "pimonitor-api", "pimonitor/pimonitor-api", "core", "ktor", "mock", "public")
 includeSubs(base = "pimonitor-sdk-client", "pimonitor/pimonitor-sdk/client", "core", "react")
+includeSubs(base = "pimonitor-sdk-server", "pimonitor/pimonitor-sdk/server", "core")
+includeSubs(base = "pimonitor-app", "pimonitor/pimonitor-app", "server")
 
 //include(":pi-monitor")
 //
