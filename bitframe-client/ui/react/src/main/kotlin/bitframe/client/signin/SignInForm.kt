@@ -1,11 +1,12 @@
-package bitframe.authentication.signin
+package bitframe.client.signin
 
-import bitframe.components.TextInput
+import bitframe.client.components.TextInput
 import bitframe.core.signin.RawSignInCredentials
-import presenters.feedbacks.FormFeedback
+import bitframe.core.signin.SignInCredentials
 import kotlinx.css.*
 import kotlinx.extensions.text
 import kotlinx.html.InputType
+import presenters.feedbacks.FormFeedback
 import react.RBuilder
 import reakt.ContainedButton
 import reakt.Form

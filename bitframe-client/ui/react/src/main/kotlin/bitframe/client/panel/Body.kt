@@ -1,7 +1,7 @@
 package bitframe.client.panel
 
 import bitframe.client.BitframeReactAppScope
-import bitframe.renderers.Renderer
+import bitframe.client.renderers.Renderer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.css.em
 import react.RBuilder
@@ -31,7 +31,7 @@ internal fun RBuilder.Body(
         right = {
             ContainedButton(
                 name = "Logout",
-                onClick = { scope.signOut() }
+                onClick = { scope.session.signOut() }
             )
         }
     )

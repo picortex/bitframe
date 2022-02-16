@@ -33,11 +33,10 @@ class CreateBusinessViewModelTest {
             password = "jane"
         )
         // signUp as a business
-        withContext(Dispatchers.Default) {
-            service.signUp.signUp(monitor).await()
-            service.signIn.signIn(monitor.toCredentials())
-            delay(100)
-        }
+        service.signUp.signUp(monitor).await()
+        service.signIn.signIn(monitor.toCredentials()).await()
+        delay(100)
+        
         vm.expect(Intent.ShowForm(null)).toBeIn<State.Form>()
         val params = CreateMonitoredBusinessParams(
             businessName = "PiCortext LLC",

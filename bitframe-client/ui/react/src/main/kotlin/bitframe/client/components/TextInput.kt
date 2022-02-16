@@ -1,4 +1,4 @@
-package bitframe.components
+package bitframe.client.components
 
 import presenters.fields.TextInputField
 import kotlinx.html.InputType

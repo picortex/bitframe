@@ -1,10 +1,10 @@
-package bitframe
+package bitframe.client
 
-import bitframe.authentication.signin.SignInPage
+import bitframe.client.signin.SignInPage
 import bitframe.client.BitframeReactAppScope
-import bitframe.landing.LandingPage
+import bitframe.client.landing.LandingPage
 import bitframe.client.panel.Panel
-import bitframe.renderers.Renderer
+import bitframe.client.renderers.Renderer
 import react.RBuilder
 import react.createElement
 import react.router.Route

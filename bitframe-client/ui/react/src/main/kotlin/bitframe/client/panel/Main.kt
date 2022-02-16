@@ -1,8 +1,8 @@
 package bitframe.client.panel
 
 import bitframe.client.BitframeReactAppScope
-import bitframe.authentication.signin.SignInPage
-import bitframe.renderers.Renderer
+import bitframe.client.signin.SignInPage
+import bitframe.client.renderers.Renderer
 import kotlinx.coroutines.flow.MutableStateFlow
 import react.Props
 import react.RBuilder

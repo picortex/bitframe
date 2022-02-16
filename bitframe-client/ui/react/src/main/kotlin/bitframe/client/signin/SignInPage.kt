@@ -1,4 +1,4 @@
-package bitframe.authentication.signin
+package bitframe.client.signin
 
 import bitframe.client.BitframeReactAppScope
 import kotlinx.css.*

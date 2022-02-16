@@ -3,6 +3,7 @@ import bitframe.core.signin.SignInResult
 import expect.expect
 import kotlinx.coroutines.test.TestResult
 import kotlin.js.Promise
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 class SignInInteroperabilityTest {
@@ -13,6 +14,7 @@ class SignInInteroperabilityTest {
     val signInService = globalThis.signInService
 
     @Test
+    @Ignore // TODO offer different methods for this
     fun should_take_in_raw_email_password_credentials(): TestResult {
         val promise = signInService.signIn(jso {
             email = "sign_in_john@doe.com"
@@ -25,6 +27,7 @@ class SignInInteroperabilityTest {
     }
 
     @Test
+    @Ignore // TODO offer different methods for this
     fun should_take_in_raw_phone_password_credentials(): TestResult {
         val promise = signInService.signIn(jso {
             phone = "752748674"

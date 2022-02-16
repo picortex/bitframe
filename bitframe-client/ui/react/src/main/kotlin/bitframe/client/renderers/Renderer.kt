@@ -1,4 +1,4 @@
-package bitframe.renderers
+package bitframe.client.renderers
 
 import react.RBuilder
 

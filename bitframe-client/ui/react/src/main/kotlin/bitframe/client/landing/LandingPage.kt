@@ -1,13 +1,16 @@
-package bitframe.landing
+package bitframe.client.landing
 
-import bitframe.SignInPageRoute
-import bitframe.SignUpPageRoute
+import bitframe.client.SignInPageRoute
+import bitframe.client.SignUpPageRoute
 import kotlinx.css.*
 import react.Props
 import react.RBuilder
 import react.fc
 import react.router.useNavigate
-import reakt.*
+import reakt.ContainedButton
+import reakt.FlexBox
+import reakt.Grid
+import reakt.centerContent
 import styled.css
 
 private external interface LandingPageProps : Props {
