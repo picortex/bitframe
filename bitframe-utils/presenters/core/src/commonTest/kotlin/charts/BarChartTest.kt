@@ -1,4 +1,4 @@
-package unit.charts
+package charts
 
 import kotlinx.collections.interoperable.listOf
 import presenters.charts.BarChart

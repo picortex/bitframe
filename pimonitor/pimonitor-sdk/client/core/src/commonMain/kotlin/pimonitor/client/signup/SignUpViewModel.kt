@@ -15,7 +15,7 @@ import pimonitor.client.register.RegisterService
 import pimonitor.client.signup.fields.BusinessFormFields
 import pimonitor.client.signup.fields.IndividualFormFields
 import pimonitor.core.signup.toRawCredentials
-import presenters.feedbacks.FormFeedback.*
+import presenters.feedbacks.Feedback.*
 import viewmodel.ViewModel
 import pimonitor.client.signup.SignUpIntent as Intent
 import pimonitor.client.signup.SignUpState as State

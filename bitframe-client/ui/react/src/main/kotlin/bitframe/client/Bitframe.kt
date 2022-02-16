@@ -17,7 +17,7 @@ const val PanelPageRoute = "/panel/*"
 const val HomeRoute = "/"
 
 private fun defaultRenderers(
-    scope: BitframeReactAppScope,
+    scope: BitframeReactAppScope<*>,
     moduleRenderers: Map<String, Renderer>,
     version: String
 ): Map<String, Renderer> = mapOf(
@@ -27,7 +27,7 @@ private fun defaultRenderers(
 )
 
 fun RBuilder.Bitframe(
-    scope: BitframeReactAppScope,
+    scope: BitframeReactAppScope<*>,
     pages: Map<String, Renderer> = mapOf(),
     sections: Map<String, Renderer> = mapOf(),
     version: String

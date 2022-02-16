@@ -8,8 +8,8 @@ import expect.expect
 import expect.toBe
 import kotlinx.coroutines.test.runTest
 import later.await
-import presenters.feedbacks.FormFeedback.Loading
-import presenters.feedbacks.FormFeedback.Success
+import presenters.feedbacks.Feedback.Loading
+import presenters.feedbacks.Feedback.Success
 import viewmodel.expect
 import kotlin.test.Ignore
 import kotlin.test.Test

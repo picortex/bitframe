@@ -1,7 +1,7 @@
 package pimonitor.client.businesses.forms
 
-import presenters.feedbacks.FormFeedback
+import presenters.feedbacks.Feedback
 
 data class InviteBusinessFormState(
-    val status: FormFeedback
+    val status: Feedback
 )

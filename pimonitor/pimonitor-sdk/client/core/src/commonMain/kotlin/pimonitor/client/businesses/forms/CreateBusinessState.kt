@@ -2,7 +2,7 @@
 
 package pimonitor.client.businesses.forms
 
-import presenters.feedbacks.FormFeedback
+import presenters.feedbacks.Feedback
 import kotlin.js.JsExport
 
 sealed class CreateBusinessState {
@@ -14,7 +14,7 @@ sealed class CreateBusinessState {
 
     data class Form(
         val fields: CreateBusinessFields,
-        val status: FormFeedback?
+        val status: Feedback?
     ) : CreateBusinessState()
 
     data class Failure(

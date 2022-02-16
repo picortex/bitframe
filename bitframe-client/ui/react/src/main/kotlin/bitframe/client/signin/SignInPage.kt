@@ -78,7 +78,7 @@ private val SignInPage = fc<SignInPageProps> { props ->
 }
 
 fun RBuilder.SignInPage(
-    scope: BitframeReactAppScope,
+    scope: BitframeReactAppScope<*>,
     version: String
 ) = SignInPage {
     attrs.scope = scope.signIn

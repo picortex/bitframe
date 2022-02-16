@@ -15,7 +15,7 @@ import pimonitor.client.portfolio.PortfolioReactScope
 
 class PiMonitorReactAppScope(
     override val config: BitframeAppScopeConfig<PiMonitorApi>,
-) : PiMonitorAppScope(config), BitframeReactAppScope {
+) : PiMonitorAppScope(config), BitframeReactAppScope<PiMonitorApi> {
     override val signIn by lazy { SignInReactScope(of(api.signIn)) }
     override val signUp by lazy { SignUpReactScope(of(api.register)) }
     override val panel by lazy { PanelReactScope(of(api.signIn)) }

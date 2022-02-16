@@ -7,12 +7,12 @@ package presenters.feedbacks
 //import presenters.feedbacks.builders.SuccessImpl
 import kotlin.js.JsExport
 
-sealed interface FormFeedback {
+sealed interface Feedback {
     val message: String
 
     open class Loading(
         override val message: String
-    ) : FormFeedback {
+    ) : Feedback {
         val loading: Boolean get() = true
         override fun hashCode(): Int = message.hashCode()
 
@@ -31,7 +31,7 @@ sealed interface FormFeedback {
     open class Failure(
         open val cause: Throwable,
         override val message: String = cause.message ?: "Unknown error"
-    ) : FormFeedback {
+    ) : Feedback {
         val failure: Boolean = true
         override fun hashCode(): Int = message.hashCode()
 
@@ -65,7 +65,7 @@ sealed interface FormFeedback {
 
     open class Success(
         override val message: String = "Success"
-    ) : FormFeedback {
+    ) : Feedback {
         val success = true
         override fun hashCode(): Int = message.hashCode()
 

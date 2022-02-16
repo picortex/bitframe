@@ -1,15 +1,15 @@
 package signup
 
+import expect.expect
+import expect.toBe
 import kotlinx.coroutines.test.runTest
-import pimonitor.client.signup.SignUpViewModel
 import pimonitor.client.signup.copy
 import pimonitor.client.signup.fields.BusinessFormFields
 import pimonitor.client.signup.fields.IndividualFormFields
 import pimonitor.client.signup.fields.copy
 import pimonitor.core.signup.RawBusinessSignUpParams
 import pimonitor.core.signup.RawIndividualSignUpParams
-import pimonitor.core.signup.SignUpParams
-import presenters.feedbacks.FormFeedback
+import presenters.feedbacks.Feedback
 import utils.PiMonitorMockScope
 import viewmodel.expect
 import kotlin.test.Ignore
@@ -36,7 +36,7 @@ class SignUpViewModelTest {
         viewModel.expect(intent)
         val finalState = initialState.copy(
             fields = initialFields.copy(intent),
-            status = FormFeedback.Success("Successfully signed in")
+            status = Feedback.Success("Successfully signed in")
         )
         expect(viewModel).toBeIn(finalState)
     }
@@ -59,13 +59,10 @@ class SignUpViewModelTest {
     @Test
     fun should_be_able_to_submit_an_individual_form() = runTest {
         viewModel.expect(Intent.ChangeRegistrationType(State.REGISTER_AS_INDIVIDUAL.value))
-        val state = State.IndividualForm(IndividualFormFields(), null)
         val intent = Intent.Submit.IndividualForm(testIndividualParams)
-        viewModel.expect(intent).toGoThrough(
-            state.copy(intent, FormFeedback.Loading("Creating your account, please wait . . .")),
-            state.copy(intent, FormFeedback.Loading("Success. Signing you in, please wait . . .")),
-            state.copy(intent, FormFeedback.Success("Successfully signed in"))
-        )
+        viewModel.expect(intent).toBeIn<State.IndividualForm>()
+        val state = viewModel.ui.value as State.IndividualForm
+        expect(state.status).toBe<Feedback.Success>()
     }
 
     @Test
@@ -75,10 +72,10 @@ class SignUpViewModelTest {
         val intent = Intent.Submit.IndividualForm(params)
         val status = viewModel.expect(intent).value.firstNotNullOfOrNull {
             val s = it as? State.IndividualForm
-            s?.status as? FormFeedback.Failure
+            s?.status as? Feedback.Failure
         } ?: throw AssertionError("Expected viewmodel to have error but did not")
-        expect.expect(status.message).toBe("Failed to create your account: Invalid email: johnemail.com")
-        expect.expect(status.cause.message).toBe("Invalid email: johnemail.com")
+        expect(status.message).toBe("Failed to create your account: Invalid email: johnemail.com")
+        expect(status.cause.message).toBe("Invalid email: johnemail.com")
     }
 
     @Test
@@ -88,21 +85,18 @@ class SignUpViewModelTest {
         val intent = Intent.Submit.IndividualForm(params)
         val status = viewModel.expect(intent).value.firstNotNullOfOrNull {
             val s = it as? State.IndividualForm
-            s?.status as? FormFeedback.Failure
+            s?.status as? Feedback.Failure
         } ?: throw AssertionError("Expected viewmodel to have error but did not")
-        expect.expect(status.message).toBe("Failed to create your account: Name must not be empty")
-        expect.expect(status.cause.message).toBe("Name must not be empty")
+        expect(status.message).toBe("Failed to create your account: Name must not be empty")
+        expect(status.cause.message).toBe("Name must not be empty")
     }
 
     @Test
     fun should_be_able_to_submit_a_business_form() = runTest {
         viewModel.expect(Intent.ChangeRegistrationType(State.REGISTER_AS_BUSINESS.value))
-        val state = State.BusinessForm(BusinessFormFields(), null)
         val intent = Intent.Submit.BusinessForm(testBusinessParams)
-        viewModel.expect(intent).toGoThrough(
-            state.copy(intent, FormFeedback.Loading("Creating your account, please wait . . .")),
-            state.copy(intent, FormFeedback.Loading("Success. Signing you in, please wait . . .")),
-            state.copy(intent, FormFeedback.Success("Successfully signed in"))
-        )
+        viewModel.expect(intent)
+        val state = viewModel.ui.value as State.BusinessForm
+        expect(state.status).toBe<Feedback.Success>()
     }
 }

@@ -1,4 +1,4 @@
-package unit.charts
+package charts
 
 import presenters.charts.BarChart
 

@@ -5,10 +5,10 @@ package bitframe.client.signin
 import bitframe.core.Space
 import bitframe.core.User
 import kotlinx.collections.interoperable.List
-import presenters.feedbacks.FormFeedback
-import presenters.feedbacks.FormFeedback.Failure
-import presenters.feedbacks.FormFeedback.Success
-import presenters.feedbacks.FormFeedback.Loading
+import presenters.feedbacks.Feedback
+import presenters.feedbacks.Feedback.Failure
+import presenters.feedbacks.Feedback.Success
+import presenters.feedbacks.Feedback.Loading
 
 import kotlin.js.JsExport
 
@@ -22,12 +22,12 @@ sealed class SignInState {
          * The status of a form whether it is [Loading], a [Success], or a [Failure].
          * if it is null, then there is no status to give and nothing is happening in the background
          */
-        val status: FormFeedback?
+        val status: Feedback?
     ) : SignInState()
 
     data class Conundrum(
         val user: User,
         val spaces: List<Space>,
-        val status: FormFeedback?
+        val status: Feedback?
     ) : SignInState()
 }

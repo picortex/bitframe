@@ -2,7 +2,7 @@ package bitframe.client.signin
 
 import bitframe.client.UIScopeConfig
 import bitframe.core.signin.SignInCredentials
-import presenters.feedbacks.FormFeedback.*
+import presenters.feedbacks.Feedback.*
 import cache.Cache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay

@@ -6,7 +6,7 @@ import bitframe.core.signin.SignInCredentials
 import kotlinx.css.*
 import kotlinx.extensions.text
 import kotlinx.html.InputType
-import presenters.feedbacks.FormFeedback
+import presenters.feedbacks.Feedback
 import react.RBuilder
 import reakt.ContainedButton
 import reakt.Form
@@ -37,9 +37,9 @@ fun RBuilder.SignInForm(
                 borderStyle = BorderStyle.solid
                 borderWidth = 2.px
                 borderColor = when (status) {
-                    is FormFeedback.Loading -> Color.blue
-                    is FormFeedback.Failure -> Color.red
-                    is FormFeedback.Success -> Color.green
+                    is Feedback.Loading -> Color.blue
+                    is Feedback.Failure -> Color.red
+                    is Feedback.Success -> Color.green
                     null -> Color.transparent
                 }
             }

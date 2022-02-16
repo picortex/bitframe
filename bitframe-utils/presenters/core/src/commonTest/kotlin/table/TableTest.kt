@@ -1,4 +1,4 @@
-package unit.table
+package table
 
 import presenters.collections.tableOf
 import kotlin.test.Test

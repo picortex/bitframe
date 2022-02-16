@@ -4,8 +4,8 @@ package pimonitor.client.portfolio
 
 import pimonitor.core.portfolio.PortfolioData
 import kotlin.js.JsExport
-import presenters.feedbacks.FormFeedback.Failure as FeedbackFailure
-import presenters.feedbacks.FormFeedback.Loading as FeedbackLoading
+import presenters.feedbacks.Feedback.Failure as FeedbackFailure
+import presenters.feedbacks.Feedback.Loading as FeedbackLoading
 
 @JsExport
 sealed interface PortfolioState {

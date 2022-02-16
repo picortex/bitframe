@@ -17,14 +17,14 @@ private external interface PanelProps : Props {
     var version: String
     var controller: MutableStateFlow<DrawerState>
     var moduleRenderers: Map<String, Renderer>
-    var scope: BitframeReactAppScope
+    var scope: BitframeReactAppScope<*>
 }
 
 private val Panel = fc<PanelProps> { props ->
     val controller = props.controller
     val scope = props.scope.panel
     useEffectOnce { scope.initPanel() }
-    when (val state = useViewModelState(scope.viewModel)) {
+    when (val state = scope.useScopeState()) {
         is PanelState.Loading -> LoadingBox(state.message, 80)
         is PanelState.Panel -> NavigationDrawer(
             drawerState = controller,
@@ -35,7 +35,7 @@ private val Panel = fc<PanelProps> { props ->
     }
 }
 
-fun RBuilder.Panel(scope: BitframeReactAppScope, moduleRenderers: Map<String, Renderer>, version: String) = child(Panel) {
+fun RBuilder.Panel(scope: BitframeReactAppScope<*>, moduleRenderers: Map<String, Renderer>, version: String) = child(Panel) {
     attrs.controller = MutableStateFlow(DrawerState.Opened)
     attrs.moduleRenderers = moduleRenderers
     attrs.scope = scope

@@ -1,4 +1,4 @@
-package unit.table
+package table
 
 import presenters.collections.Table
 import presenters.collections.table.Column

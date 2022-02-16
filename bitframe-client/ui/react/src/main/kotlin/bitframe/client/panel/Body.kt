@@ -20,7 +20,7 @@ private fun defaultRenderers(): Map<String, Renderer> = mapOf(
 
 internal fun RBuilder.Body(
     controller: MutableStateFlow<DrawerState>,
-    scope: BitframeReactAppScope,
+    scope: BitframeReactAppScope<*>,
     moduleRenderers: Map<String, Renderer>
 ) = styledDiv {
     NavigationAppBar(
