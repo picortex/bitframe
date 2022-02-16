@@ -48,14 +48,18 @@ jobs:
       - name: Download gradle
         run: ./gradlew --version
 
-      - name: Running jvm unit tests
-        run: ./gradlew jvmTest --tests unit.*
+      - name: Running jvm tests
+        run: ./gradlew jvmTest
         working-directory: .
 
-      - name: Running pi-monitor server unit tests
-        run: ./gradlew :pi-monitor-server:test --tests unit.*
+      - name: Running pimonitor-app-server unit tests
+        run: ./gradlew :pimonitor-app-server:test --tests unit.*
         working-directory: .
 
       - name: Running all unit tests
-        run: ./gradlew jsTest jvmTest --tests unit.*
+        run: ./gradlew jsTest jvmTest
+        working-directory: .
+
+      - name: Build project
+        run: ./gradlew build
         working-directory: .
