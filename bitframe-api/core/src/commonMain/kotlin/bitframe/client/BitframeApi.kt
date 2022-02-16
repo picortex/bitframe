@@ -1,5 +1,4 @@
-@file:JsExport
-@file:Suppress("WRONG_EXPORTED_DECLARATION")
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package bitframe.client
 
@@ -9,6 +8,7 @@ import bitframe.core.spaces.SpacesService
 import bitframe.core.users.UsersService
 import kotlin.js.JsExport
 
+@JsExport
 interface BitframeApi {
     val config: BitframeApiConfig
     val session: SessionAware

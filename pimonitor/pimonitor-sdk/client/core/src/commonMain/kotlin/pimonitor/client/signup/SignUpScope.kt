@@ -1,3 +1,4 @@
+@file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client.signup
@@ -12,7 +13,6 @@ import kotlin.js.JsExport
 import pimonitor.client.signup.SignUpIntent as Intent
 import pimonitor.client.signup.SignUpState as State
 
-@JsExport
 open class SignUpScope(
     override val config: UIScopeConfig<RegisterService>
 ) : UIScope<Intent, State> {

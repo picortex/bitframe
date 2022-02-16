@@ -19,7 +19,7 @@ import pimonitor.client.signup.SignUpState as State
 
 class SignUpViewModelTest {
     val scope = PiMonitorMockScope()
-    val viewModel = scope.signUp.viewModel as SignUpViewModel
+    val viewModel = scope.signUp.viewModel
 
     @Test
     @Ignore // TODO Fix this little bug here

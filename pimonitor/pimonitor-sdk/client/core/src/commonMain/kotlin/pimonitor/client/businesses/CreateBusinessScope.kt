@@ -1,3 +1,4 @@
+@file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client.businesses
@@ -11,7 +12,6 @@ import kotlin.js.JsExport
 import pimonitor.client.businesses.forms.CreateBusinessIntent as Intent
 import pimonitor.client.businesses.forms.CreateBusinessState as State
 
-@JsExport
 open class CreateBusinessScope(
     override val config: UIScopeConfig<PiMonitorApi>
 ) : UIScope<Intent, State> {

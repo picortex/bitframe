@@ -12,7 +12,7 @@ import pimonitor.client.signup.SignUpServiceKtor
 class PiMonitorApiKtor(
     override val config: BitframeApiKtorConfig,
 ) : PiMonitorApi {
-    override val session: SessionAware get() = SessionAwareImpl(this)
+    override val session by lazy { SessionAwareImpl(this) }
     override val spaces by lazy { SpacesServiceKtor(config) }
     override val users by lazy { UsersServiceKtor(config) }
     override val signIn by lazy { SignInServiceKtor(config) }

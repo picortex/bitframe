@@ -1,13 +1,11 @@
 package bitframe.client
 
-import kotlinx.coroutines.CoroutineScope
-import logging.Logger
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface BitframeAppScopeConfig {
-    val api: BitframeApi
+interface BitframeAppScopeConfig<A : BitframeApi> {
+    val api: A
     val viewModel: BitframeViewModelConfig
 
     // accessors
@@ -24,18 +22,18 @@ interface BitframeAppScopeConfig {
 
     companion object {
         @JvmSynthetic
-        operator fun invoke(
-            api: BitframeApi,
+        operator fun <A : BitframeApi> invoke(
+            api: A,
             viewModel: BitframeViewModelConfig = BitframeViewModelConfig()
-        ) = object : BitframeAppScopeConfig {
+        ) = object : BitframeAppScopeConfig<A> {
             override val api = api
             override val viewModel = viewModel
         }
 
         @JvmStatic
         @JvmOverloads
-        fun create(
-            api: BitframeApi,
+        fun <A : BitframeApi> create(
+            api: A,
             viewModel: BitframeViewModelConfig = BitframeViewModelConfig()
         ) = invoke(api, viewModel)
     }

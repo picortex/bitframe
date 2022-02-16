@@ -1,16 +1,19 @@
 package utils
 
+import bitframe.client.BitframeAppScopeConfig
 import bitframe.client.BitframeViewModelConfig
+import pimonitor.client.PiMonitorApi
 import pimonitor.client.PiMonitorApiMock
 import pimonitor.client.PiMonitorAppScope
-import pimonitor.client.PiMonitorAppScopeConfig
 
 fun PiMonitorMockScope(): PiMonitorAppScope {
-    val service = PiMonitorApiMock()
-    val config = PiMonitorAppScopeConfig(
-        service, BitframeViewModelConfig(
-            recoveryTime = 0L
+    val api: PiMonitorApi = PiMonitorApiMock()
+    return PiMonitorAppScope(
+        BitframeAppScopeConfig(
+            api = api,
+            viewModel = BitframeViewModelConfig(
+                recoveryTime = 0L
+            )
         )
     )
-    return PiMonitorAppScope(config)
 }

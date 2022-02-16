@@ -1,3 +1,4 @@
+@file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client.contacts
@@ -10,7 +11,6 @@ import kotlin.js.JsExport
 import pimonitor.client.contacts.ContactsIntent as Intent
 import pimonitor.client.contacts.ContactsState as State
 
-@JsExport
 open class ContactsScope(
     override val config: UIScopeConfig<PiMonitorApi>
 ) : UIScope<Intent, State> {

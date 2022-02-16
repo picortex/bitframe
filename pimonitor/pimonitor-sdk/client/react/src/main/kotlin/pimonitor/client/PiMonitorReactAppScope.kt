@@ -1,7 +1,9 @@
+@file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client
 
+import bitframe.client.BitframeAppScopeConfig
 import bitframe.client.BitframeReactAppScope
 import bitframe.client.panel.PanelReactScope
 import bitframe.client.signin.SignInReactScope
@@ -11,9 +13,8 @@ import pimonitor.client.businesses.CreateBusinessReactScope
 import pimonitor.client.contacts.ContactsReactScope
 import pimonitor.client.portfolio.PortfolioReactScope
 
-@JsExport
 class PiMonitorReactAppScope(
-    override val config: PiMonitorAppScopeConfig,
+    override val config: BitframeAppScopeConfig<PiMonitorApi>,
 ) : PiMonitorAppScope(config), BitframeReactAppScope {
     override val signIn by lazy { SignInReactScope(of(api.signIn)) }
     override val signUp by lazy { SignUpReactScope(of(api.register)) }

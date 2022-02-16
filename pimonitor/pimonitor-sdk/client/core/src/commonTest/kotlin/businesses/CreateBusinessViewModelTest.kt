@@ -1,10 +1,10 @@
 package businesses
 
-import kotlinx.coroutines.Dispatchers
+import bitframe.client.UIScopeConfig
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.withContext
 import later.await
+import pimonitor.client.PiMonitorApiMock
 import pimonitor.client.businesses.forms.CreateBusinessViewModel
 import pimonitor.core.monitored.CreateMonitoredBusinessParams
 import pimonitor.core.signup.SignUpParams
@@ -16,9 +16,8 @@ import pimonitor.client.businesses.forms.CreateBusinessIntent as Intent
 import pimonitor.client.businesses.forms.CreateBusinessState as State
 
 class CreateBusinessViewModelTest {
-    val scope = PiMonitorMockScope()
-    val service = scope.config.api
-    val vm = scope.createBusiness.viewModel as CreateBusinessViewModel
+    val api = PiMonitorApiMock()
+    val vm = CreateBusinessViewModel(UIScopeConfig(api, recoveryTime = 0L))
 
     @Test
     fun should_be_able_to_go_to_show_add_business_form_state() = runTest {
@@ -33,13 +32,13 @@ class CreateBusinessViewModelTest {
             password = "jane"
         )
         // signUp as a business
-        service.signUp.signUp(monitor).await()
-        service.signIn.signIn(monitor.toCredentials()).await()
+        api.signUp.signUp(monitor).await()
+        api.signIn.signIn(monitor.toCredentials()).await()
         delay(100)
-        
+
         vm.expect(Intent.ShowForm(null)).toBeIn<State.Form>()
         val params = CreateMonitoredBusinessParams(
-            businessName = "PiCortext LLC",
+            businessName = "PiCortex LLC",
             contactName = "Mohammed Majapa",
             contactEmail = "mmajapa@gmail.com",
             sendInvite = false

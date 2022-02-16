@@ -1,3 +1,4 @@
+@file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client.businesses
@@ -12,7 +13,6 @@ import useViewModelState
 import pimonitor.client.businesses.BusinessesIntent as Intent
 import pimonitor.client.businesses.BusinessesState as State
 
-@JsExport
 class BusinessesReactScope internal constructor(
     override val config: UIScopeConfig<PiMonitorApi>
 ) : BusinessesScope(config), ReactUIScope<Intent, State> {
