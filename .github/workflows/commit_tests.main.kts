@@ -13,8 +13,8 @@ import java.nio.file.Paths
 val commit = workflow(
     name = "Commit Test",
     on = listOf(Push(branches = listOf("master-dev-*"))),
-    sourceFile = Paths.get(".github/workflows/commit.main.kts"),
-    targetFile = Paths.get(".github/workflows/commit.yml")
+    sourceFile = Paths.get(".github/workflows/commit_tests.main.kts"),
+    targetFile = Paths.get(".github/workflows/commit_tests.yml")
 ) {
     job(name = "testing", runsOn = UbuntuLatest) {
         uses(name = "Check out", action = CheckoutV2())
