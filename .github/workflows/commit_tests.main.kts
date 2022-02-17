@@ -32,7 +32,7 @@ val commit = workflow(
         )
         run(
             name = "Downloading gradle",
-            command = "./gradle jvmTest"
+            command = "./gradlew jvmTest"
         )
         run(
             name = "Running jvm tests",
