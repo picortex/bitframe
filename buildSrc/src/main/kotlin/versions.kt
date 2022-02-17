@@ -11,7 +11,7 @@ object vers {
 
     val dokka = "1.5.0"
 
-    val npmPublish = "2.0.3"
+    val npmPublish = "2.1.2"
 
     val testContainers = "1.16.0"
 

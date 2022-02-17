@@ -19,7 +19,9 @@ open class PurifyTypesTask : DefaultTask() {
 
     @get:Input
     var linesToBeRemoved = listOf(
-        "component", "_init_", "factory", "hashCode()", "toString", "copy", "equals", "serializer()", "descriptor: kotlinx.", "doNotUseIt", "**/> */", "_ignore_", "constructor", " config"
+        "component", "_init_", "factory", "hashCode()", "toString",
+        "copy", "equals", "serializer()", "descriptor: kotlinx.",
+        "doNotUseIt", "**/> */", "_ignore_", "constructor", " config"
     )
 
     @get:Input
@@ -32,7 +34,9 @@ open class PurifyTypesTask : DefaultTask() {
 
     @get:Input
     var codeblocksToBeRemoved = listOf(
-        "static get Companion(): {", "static get ${'$'}serializer(): {"
+        "static get Companion(): {",
+        "static get ${'$'}serializer(): {",
+        "class ${'$'}serializer<"
     )
 
     @get:InputFile

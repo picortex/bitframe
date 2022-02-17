@@ -6,6 +6,7 @@ package pimonitor.core.businesses
 import bitframe.core.RequestBody
 import bitframe.core.ServiceConfig
 import events.Event
+import kotlinx.collections.interoperable.List
 import later.Later
 import logging.Logger
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
@@ -20,9 +21,6 @@ interface BusinessesService {
         const val CREATE_BUSINESS_EVENT_TOPIC = "pimonitor.evaluation.business.create"
         fun createBusinessEvent(business: MonitoredBusinessSummary) = Event(business, CREATE_BUSINESS_EVENT_TOPIC)
     }
-
-    val scope get() = config.scope
-    val bus get() = config.bus
 
     @JsName("_ignore_create")
     fun create(rb: RequestBody.Authorized<CreateBusinessParams>): Later<CreateBusinessParams>

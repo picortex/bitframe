@@ -2,6 +2,7 @@ package pimonitor.client.businesses
 
 import bitframe.client.KtorServiceConfig
 import bitframe.core.RequestBody
+import kotlinx.collections.interoperable.List
 import later.Later
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
