@@ -14,6 +14,12 @@ kotlin {
             }
         }
 
+        val jvmMain by getting {
+            dependencies {
+                api(ktor.client.cio)
+            }
+        }
+
         val commonTest by getting {
             dependencies {
                 api(asoft.expect.coroutines)

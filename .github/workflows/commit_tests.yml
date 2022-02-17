@@ -10,19 +10,8 @@ on:
       - 'master-dev-*'
 
 jobs:
-  "check_yaml_consistency":
-    runs-on: "ubuntu-latest"
-    steps:
-      - name: Check out
-        uses: actions/checkout@v2
-      - name: Install Kotlin
-        run: sudo snap install --classic kotlin
-      - name: Consistency check
-        run: diff -u '.github/workflows/commit_tests.yml' <('.github/workflows/commit_tests.main.kts')
   "testing":
     runs-on: "ubuntu-latest"
-    needs:
-      - "check_yaml_consistency"
     steps:
       - name: Check out
         uses: actions/checkout@v2

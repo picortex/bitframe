@@ -14,7 +14,7 @@ val commit = workflow(
     name = "Commit Test",
     on = listOf(Push(branches = listOf("master-dev-*"))),
     sourceFile = Paths.get(".github/workflows/commit_tests.main.kts"),
-    targetFile = Paths.get(".github/workflows/commit_tests.yml")
+    targetFile = Paths.get(".github/workflows/commit_tests.yml"),
 ) {
     job(name = "testing", runsOn = UbuntuLatest) {
         uses(name = "Check out", action = CheckoutV2())
@@ -53,4 +53,4 @@ val commit = workflow(
     }
 }
 
-println(commit.toYaml())
+println(commit.toYaml(addConsistencyCheck = false))
