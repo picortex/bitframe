@@ -1,14 +1,13 @@
-import com.bmuschko.gradle.docker.tasks.container.DockerCreateContainer
-import com.bmuschko.gradle.docker.tasks.container.DockerStartContainer
-import com.bmuschko.gradle.docker.tasks.container.DockerStopContainer
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import docker.DockerComposeFileTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
     id("com.bmuschko.docker-java-application")
     id("tz.co.asoft.applikation")
+    `docker-compose`
 }
 
 application {
@@ -53,35 +52,26 @@ kotlin {
 
 val createDockerfile by tasks.creating(Dockerfile::class) {
     dependsOn("installDistRelease")
-    dependsOn(":pi-monitor-client-browser-react:jsBrowserProductionWebpack")
-    dependsOn(":pi-monitor-client-browser-react:webpackJsRelease")
-    from("openjdk:16-jdk")
+    from("openjdk:17.0.2-jdk")
     runCommand("mkdir /app /app/public")
     destFile.set(file("build/binaries/Dockerfile"))
     copyFile("./release", "/app")
-    copyFile("./public", "/app/public")
+//    copyFile("./public", "/app/public")
     workingDir("/app")
     exposePort(8080)
-    defaultCommand("./bin/pi-monitor-server", "/app/public")
-    doLast {
-        copy {
-            from(rootProject.file("pi-monitor/pi-monitor-client/browser/react/build/websites/js/release"))
-            into(file("build/binaries/public"))
-            exclude("*.ts", "*.map")
-        }
-    }
+    defaultCommand("./bin/pimonitor-app-server", "/app/public")
 }
 
 val createDockerImage by tasks.creating(DockerBuildImage::class) {
     dependsOn(createDockerfile)
     inputDir.set(file("build/binaries"))
-    images.addAll("pi-monitor:${vers.bitframe.current}")
+    images.addAll("pimonitor:${vers.bitframe.current}")
 }
 
 fun dockerPushTo(remote: String) = tasks.creating(Exec::class) {
     dependsOn(createDockerImage)
-    val localTag = "pi-monitor:${vers.bitframe.current}"
-    val remoteName = "$remote/pi-monitor:${vers.bitframe.current}"
+    val localTag = "pimonitor:${vers.bitframe.current}"
+    val remoteName = "$remote/pimonitor:${vers.bitframe.current}"
     commandLine("docker", "tag", localTag, remoteName)
     doLast {
         exec { commandLine("docker", "push", remoteName) }
@@ -92,33 +82,56 @@ val dockerPushToAndylamax by dockerPushTo("localhost:1030")
 
 val dockerPushToPiCortex by dockerPushTo("${vars.dev.server.ip}:1030")
 
-val createDockerContainer by tasks.creating(DockerCreateContainer::class) {
-    dependsOn(createDockerImage)
-    targetImageId(createDockerImage.imageId)
-    hostConfig.portBindings.set(listOf("9090:8080"))
-    hostConfig.autoRemove.set(true)
-}
-
-val startDockerContainer by tasks.creating(DockerStartContainer::class) {
-    dependsOn(createDockerContainer)
-    targetContainerId(createDockerContainer.containerId)
-}
-
-val stopDockerContainer by tasks.creating(DockerStopContainer::class) {
-    targetContainerId(createDockerContainer.containerId)
-}
-
-//val acceptanceTestSetup by tasks.creating {
-//    dependsOn("clean")
-//    dependsOn(startDockerContainer)
-//    finalizedBy("test")
-//}
-//
-//val acceptanceTestTearDown by tasks.creating {
-//    finalizedBy(stopDockerContainer)
-//}
-
 val run by tasks.getting(JavaExec::class) {
     val public = properties.getOrDefault("public", "/default")
     args = listOf(public.toString())
+}
+
+fun DockerComposeFileTask.configure(port: Int) {
+    version(3.8)
+    service("database") {
+        image("mongo:5.0.6")
+        set("restart", "always")
+        set(
+            "environment", mapOf(
+                "MONGO_INITDB_ROOT_USERNAME" to "root",
+                "MONGO_INITDB_ROOT_PASSWORD" to "example"
+            )
+        )
+        ports((port - 1) to 27017)
+    }
+    service("server-app") {
+        image("${vars.dev.server.ip}:1030/pimonitor:${vers.bitframe.current}")
+        set("restart", "always")
+        set(
+            "depends_on", listOf(
+                "database"
+            )
+        )
+        ports(port to 8080)
+    }
+}
+
+val setVersions by tasks.creating {
+    fun writeVersion(name: String, value: String) {
+        val dir = file("build/versioning").apply { mkdirs() }
+        val file = File(dir, "$name.txt").apply { if (!exists()) createNewFile() }
+        val safe = File(dir, "${name}_safe.txt").apply { if (!exists()) createNewFile() }
+        file.writeText(value)
+        safe.writeText(value.replace(".", "_"))
+    }
+    doLast {
+        writeVersion("current", vers.bitframe.current)
+        writeVersion("previous", vers.bitframe.previous)
+    }
+}
+
+val createDockerComposeStagingFile by tasks.creating(DockerComposeFileTask::class) {
+    outputFilename = "docker-compose-staging.yml"
+    configure(port = 80)
+}
+
+val createDockerComposeProductionFile by tasks.creating(DockerComposeFileTask::class) {
+    outputFilename = "docker-compose-production.yml"
+    configure(port = 90)
 }
