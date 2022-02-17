@@ -2,6 +2,7 @@
 
 package pimonitor.client.businesses
 
+import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import presenters.collections.Table
 import kotlin.js.JsExport
 
@@ -11,7 +12,7 @@ sealed class BusinessesState {
     }
 
     data class Businesses(
-        val table: Table<MonitoredBusiness>,
+        val table: Table<MonitoredBusinessSummary>,
         val dialog: BusinessesDialog
     ) : BusinessesState()
 

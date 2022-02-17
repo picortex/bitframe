@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.businesses.BusinessesIntent.*
+import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import presenters.collections.tableOf
 import viewmodel.ViewModel
 import pimonitor.client.businesses.BusinessesIntent as Intent
@@ -70,7 +71,7 @@ class BusinessViewModel(
         }
     }
 
-    private fun businessTable(date: List<MonitoredBusiness>) = tableOf(date) {
+    private fun businessTable(date: List<MonitoredBusinessSummary>) = tableOf(date) {
         selectable()
         column("Name") { it.data.name }
         column("Reporting") { "" }

@@ -25,7 +25,7 @@ open class PiMonitorAppScope(
 
     override val session: SessionAware get() = config.api.session
     override val signIn by lazy { SignInScope(of(config.api.signIn)) }
-    open val signUp by lazy { SignUpScope(of(config.api.register)) }
+    open val signUp by lazy { SignUpScope(of(config.api)) }
     override val panel by lazy { PanelScope(of(config.api.signIn)) }
     open val businesses by lazy { BusinessesScope(of(config.api)) }
     open val createBusiness by lazy { CreateBusinessScope(of(config.api)) }

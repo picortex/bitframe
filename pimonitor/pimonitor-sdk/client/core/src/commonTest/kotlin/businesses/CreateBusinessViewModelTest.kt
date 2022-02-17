@@ -6,7 +6,7 @@ import kotlinx.coroutines.test.runTest
 import later.await
 import pimonitor.client.PiMonitorApiMock
 import pimonitor.client.businesses.forms.CreateBusinessViewModel
-import pimonitor.core.monitored.params.CreateMonitoredBusinessParams
+import pimonitor.core.businesses.params.CreateBusinessParams
 import pimonitor.core.signup.SignUpParams
 import pimonitor.core.signup.toCredentials
 import viewmodel.expect
@@ -36,7 +36,7 @@ class CreateBusinessViewModelTest {
         delay(100)
 
         vm.expect(Intent.ShowForm(null)).toBeIn<State.Form>()
-        val params = CreateMonitoredBusinessParams(
+        val params = CreateBusinessParams(
             businessName = "PiCortex LLC",
             contactName = "Mohammed Majapa",
             contactEmail = "mmajapa@gmail.com",

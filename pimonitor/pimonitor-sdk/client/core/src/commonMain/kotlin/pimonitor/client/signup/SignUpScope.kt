@@ -5,7 +5,7 @@ package pimonitor.client.signup
 
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
-import pimonitor.client.register.RegisterService
+import pimonitor.client.PiMonitorApi
 import pimonitor.core.signup.IRawBusinessSignUpParams
 import pimonitor.core.signup.IRawIndividualSignUpParams
 import viewmodel.ViewModel
@@ -14,7 +14,7 @@ import pimonitor.client.signup.SignUpIntent as Intent
 import pimonitor.client.signup.SignUpState as State
 
 open class SignUpScope(
-    override val config: UIScopeConfig<RegisterService>
+    override val config: UIScopeConfig<PiMonitorApi>
 ) : UIScope<Intent, State> {
 
     override val viewModel: ViewModel<Intent, State> by lazy { SignUpViewModel(config) }

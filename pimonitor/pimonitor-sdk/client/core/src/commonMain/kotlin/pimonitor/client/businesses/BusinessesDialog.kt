@@ -2,6 +2,7 @@
 
 package pimonitor.client.businesses
 
+import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import presenters.modal.Dialog
 import kotlin.js.JsExport
 
@@ -17,6 +18,6 @@ sealed class BusinessesDialog {
     data class InviteToShareReports(
         override val title: String = "Request information",
         override val subTitle: String = "Request business information by email",
-        val monitored: MonitoredBusiness
+        val monitored: MonitoredBusinessSummary
     ) : BusinessesDialog(), Dialog
 }

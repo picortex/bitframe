@@ -7,11 +7,11 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import pimonitor.client.PiMonitorApi
 import pimonitor.client.signup.SignUpIntent.Submit.BusinessForm
 import pimonitor.client.signup.SignUpIntent.Submit.IndividualForm
 import pimonitor.client.signup.SignUpState.Companion.REGISTER_AS_BUSINESS
 import pimonitor.client.signup.SignUpState.Companion.REGISTER_AS_INDIVIDUAL
-import pimonitor.client.register.RegisterService
 import pimonitor.client.signup.fields.BusinessFormFields
 import pimonitor.client.signup.fields.IndividualFormFields
 import pimonitor.core.signup.toRawCredentials
@@ -21,10 +21,10 @@ import pimonitor.client.signup.SignUpIntent as Intent
 import pimonitor.client.signup.SignUpState as State
 
 class SignUpViewModel(
-    private val config: UIScopeConfig<RegisterService>
+    private val config: UIScopeConfig<PiMonitorApi>
 ) : ViewModel<Intent, State>(State.IndividualForm(IndividualFormFields(), null), config.viewModel) {
-    private val signUpService get() = config.service.signup
-    private val signInService get() = config.service.signin
+    private val signUpService get() = config.service.signUp
+    private val signInService get() = config.service.signIn
     private val recoveryTime get() = config.viewModel.recoveryTime
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
