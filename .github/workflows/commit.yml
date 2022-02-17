@@ -31,6 +31,7 @@ jobs:
         with:
           distribution: zulu
           java-version: 17
+          cache: gradle
       - name: Make gradle executable
         run: chmod +x ./gradlew
       - name: Downloading gradle

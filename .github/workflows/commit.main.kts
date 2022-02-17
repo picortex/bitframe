@@ -2,13 +2,13 @@
 
 @file:DependsOn("it.krzeminski:github-actions-kotlin-dsl:0.6.0")
 
+import it.krzeminski.githubactions.actions.Action
 import it.krzeminski.githubactions.actions.actions.CheckoutV2
 import it.krzeminski.githubactions.actions.actions.SetupJavaV2
 import it.krzeminski.githubactions.domain.RunnerType.UbuntuLatest
 import it.krzeminski.githubactions.domain.triggers.Push
 import it.krzeminski.githubactions.dsl.workflow
 import it.krzeminski.githubactions.yaml.toYaml
-import it.krzeminski.githubactions.yaml.writeToFile
 import java.nio.file.Paths
 
 val commit = workflow(
@@ -23,7 +23,8 @@ val commit = workflow(
             name = "Set up JDk 17",
             action = SetupJavaV2(
                 distribution = SetupJavaV2.Distribution.Zulu,
-                javaVersion = "17"
+                javaVersion = "17",
+                cache = SetupJavaV2.BuildPlatform.Gradle
             )
         )
         run(
