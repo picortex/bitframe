@@ -7,6 +7,7 @@ import bitframe.core.RequestBody
 import bitframe.core.ServiceConfig
 import events.Event
 import later.Later
+import logging.Logger
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateBusinessParams
 import kotlin.js.JsExport
@@ -26,5 +27,6 @@ interface BusinessesService {
     @JsName("_ignore_create")
     fun create(rb: RequestBody.Authorized<CreateBusinessParams>): Later<CreateBusinessParams>
 
-    fun all(rb: RequestBody.Authorized<String>): Later<List<MonitoredBusinessSummary>>
+    @JsName("_ignore_all")
+    fun all(rb: RequestBody.Authorized<BusinessFilter>): Later<List<MonitoredBusinessSummary>>
 }

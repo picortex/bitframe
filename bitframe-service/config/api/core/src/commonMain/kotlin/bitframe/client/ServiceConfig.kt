@@ -1,3 +1,5 @@
+//@file:Suppress("NON_EXPORTABLE_TYPE", "WRONG_EXPORTED_DECLARATION")
+
 package bitframe.client
 
 import bitframe.core.Session

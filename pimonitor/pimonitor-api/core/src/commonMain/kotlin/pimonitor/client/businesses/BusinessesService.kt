@@ -8,6 +8,7 @@ import bitframe.core.RequestBody
 import bitframe.core.Session
 import later.await
 import later.later
+import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.params.RawCreateBusinessParams
 import pimonitor.core.businesses.params.toValidatedCreateBusinessParams
 import kotlin.js.JsExport
@@ -36,7 +37,7 @@ abstract class BusinessesService(
     fun all() = config.scope.later {
         val rb = RequestBody.Authorized(
             session = config.session.value as? Session.SignedIn ?: error("You must be signed in to query businesses"),
-            data = ""
+            data = BusinessFilter("")
         )
         all(rb).await()
     }

@@ -1,3 +1,4 @@
+@file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package bitframe.core
@@ -7,7 +8,6 @@ import platform.ExecutionEnvironment
 import platform.Platform
 import kotlin.js.JsExport
 
-@JsExport
 @Serializable
 sealed class RequestBody<out T> {
     abstract val data: T

@@ -6,6 +6,7 @@ import bitframe.core.users.RegisterUserUseCaseImpl
 import later.Later
 import later.await
 import later.later
+import logging.Logger
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateBusinessParams
 import pimonitor.core.businesses.params.toRegisterUserParams
@@ -20,6 +21,11 @@ open class BusinessesDaodService(
     private val contactPersonSpaceInfoDao by lazy {
         config.daoFactory.get<ContactPersonSpaceInfo>()
     }
+
+    private val logger
+        get() = config.logger.with(
+            "source" to this::class.simpleName
+        )
 
     override fun create(rb: RequestBody.Authorized<CreateBusinessParams>) = config.scope.later {
         val res1 = register(rb.data.toRegisterUserParams()).await()
@@ -40,9 +46,8 @@ open class BusinessesDaodService(
         rb.data
     }
 
-    override fun all(rb: RequestBody.Authorized<String>): Later<List<MonitoredBusinessSummary>> = config.scope.later {
-        businessDao.all(MonitoredBusinessBasicInfo::owningSpaceId isEqualTo rb.session.space.uid).await()
-            .map { summaryOf(it) }
+    override fun all(rb: RequestBody.Authorized<BusinessFilter>) = config.scope.later {
+        businessDao.all(MonitoredBusinessBasicInfo::owningSpaceId isEqualTo rb.session.space.uid).await().toTypedArray().map { summaryOf(it) }
     }
 
     private suspend fun summaryOf(business: MonitoredBusinessBasicInfo): MonitoredBusinessSummary {
