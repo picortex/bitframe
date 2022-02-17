@@ -4,11 +4,12 @@ import bitframe.client.MockServiceConfig
 import bitframe.client.MockUIScopeConfig
 import bitframe.client.password.ChangePasswordScope
 import bitframe.client.profile.ProfileService
+import bitframe.client.profile.ProfileServiceMock
 import bitframe.core.profile.params.ChangePasswordParams
 import kotlin.test.Test
 
 class PasswordScopeTest {
-    val service = ProfileService(MockServiceConfig())
+    val service: ProfileService = ProfileServiceMock()
     val scope = ChangePasswordScope(MockUIScopeConfig(service))
 
     @Test

@@ -1,3 +1,5 @@
+package signup
+
 import expect.expect
 import kotlinx.coroutines.test.runTest
 import later.await

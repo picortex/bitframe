@@ -9,6 +9,7 @@ class PiMonitorApiMock @JvmOverloads constructor(
     override val config: BitframeApiMockConfig = BitframeApiMockConfig()
 ) : PiMonitorApi, BitframeApiMock by BitframeApiMock(config) {
     override val signUp by lazy { SignUpServiceMock(config) }
+
 //    override val monitors by lazy { MonitorsServiceMock(config) }
 //    override val businesses by lazy { BusinessesServiceMock(config) }
 //    override val portfolio by lazy { PortfolioService(businesses) }

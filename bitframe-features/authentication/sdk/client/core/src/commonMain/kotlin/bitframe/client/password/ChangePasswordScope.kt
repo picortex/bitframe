@@ -5,7 +5,6 @@ package bitframe.client.password
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import bitframe.client.profile.ProfileService
-import bitframe.core.profile.params.ChangePasswordParams
 import bitframe.core.profile.params.RawChangePasswordParams
 import kotlin.js.JsExport
 import bitframe.client.password.ChangePasswordIntent as Intent

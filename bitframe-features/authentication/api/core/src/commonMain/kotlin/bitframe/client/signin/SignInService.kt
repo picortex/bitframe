@@ -28,7 +28,8 @@ abstract class SignInService(
     protected val scope get() = config.scope
     private val logger
         get() = config.logger.with(
-            "user" to currentSession.user,
+            "user" to currentSession.user?.name,
+            "space" to currentSession.space?.name,
             "source" to this::class.simpleName
         )
 
@@ -96,10 +97,11 @@ abstract class SignInService(
         }.also { finalizeSignIn(it) }
     }
 
-    private fun finalizeSignIn(s: Session.SignedIn) = scope.later {
+    private suspend fun finalizeSignIn(s: Session.SignedIn) {
         session.value = s
         cache.save(SESSION_CACHE_KEY, s).await()
         bus.dispatch(SignInEvent(s))
+        logger.info("Signed In")
     }
 
     /**

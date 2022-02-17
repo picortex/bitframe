@@ -34,11 +34,11 @@ class PortfolioService(
     private fun progress() = ProfileProgress(
         title = "Complete your profile",
         items = listOf(
-            BooleanInputField("Setup Account", true),
-            BooleanInputField("Complete Your Space", false),
-            BooleanInputField("Invite Team Members", false),
-            BooleanInputField("Add Payment Method", false),
-            BooleanInputField("Add Integrations", false)
+            BooleanInputField("Setup Account", value = true),
+            BooleanInputField("Complete Your Space", value = false),
+            BooleanInputField("Invite Team Members", value = false),
+            BooleanInputField("Add Payment Method", value = false),
+            BooleanInputField("Add Integrations", value = false)
         )
     )
 

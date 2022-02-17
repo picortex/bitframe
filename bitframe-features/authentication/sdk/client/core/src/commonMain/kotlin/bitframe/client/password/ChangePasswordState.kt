@@ -1,8 +1,10 @@
 package bitframe.client.password
 
+import bitframe.core.profile.params.RawChangePasswordParams
 import presenters.feedbacks.Feedback
 import presenters.fields.PasswordInputField
 import kotlin.js.JsExport
+import kotlin.js.JsName
 
 @JsExport
 data class ChangePasswordState(
@@ -20,5 +22,14 @@ data class ChangePasswordState(
             label = "New Password",
             hint = ""
         )
+    )
+
+    @JsName("copyRawParams")
+    fun copy(params: RawChangePasswordParams, status: Feedback? = this.status) = copy(
+        fields = fields.copy(
+            previous = fields.previous.copy(value = params.previous),
+            current = fields.current.copy(value = params.current)
+        ),
+        status = status
     )
 }

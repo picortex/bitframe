@@ -20,14 +20,14 @@ class ChangePasswordViewModel(
     override fun CoroutineScope.execute(i: Intent) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(status = Feedback.Loading("Changing your password, please wait . . .")))
+            emit(state.copy(params = i.params, status = Feedback.Loading("Changing your password, please wait . . .")))
             service.changePassword(i.params).await()
             delay(config.viewModel.transitionTime)
-            emit(state.copy(status = Feedback.Success("Password changed successfully")))
+            emit(State(status = Feedback.Success("Password changed successfully")))
         }.catch {
-            emit(state.copy(status = Feedback.Failure(it)))
+            emit(state.copy(params = i.params, status = Feedback.Failure(it)))
             delay(config.viewModel.recoveryTime)
-            emit(state)
+            emit(state.copy(params = i.params))
         }.collect {
             ui.value = it
         }

@@ -1,3 +1,5 @@
+package signup
+
 import bitframe.core.RequestBody
 import kotlinx.serialization.json.Json
 import pimonitor.core.signup.SignUpParams

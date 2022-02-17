@@ -6,6 +6,8 @@ plugins {
     `picortex-publish`
 }
 
+val tmp = 1
+
 kotlin {
     jvm { library() }
     js(IR) { library() }
@@ -15,14 +17,12 @@ kotlin {
             dependencies {
                 api(projects.pimonitorCore)
                 api(projects.bitframeSdkClientCore)
-//                api(projects.bitframeEventsInmemory)
             }
         }
 
         val commonTest by getting {
             dependencies {
                 api(asoft.expect.coroutines)
-//                api(kotlinx.serialization.json)
                 api(projects.pimonitorApiMock)
             }
         }

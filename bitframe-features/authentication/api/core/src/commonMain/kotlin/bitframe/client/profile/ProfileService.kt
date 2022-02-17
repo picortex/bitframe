@@ -15,9 +15,9 @@ import kotlin.js.JsExport
 import bitframe.core.profile.ProfileService as CoreProfileService
 
 @JsExport
-class ProfileService(
+abstract class ProfileService(
     private val config: ServiceConfig
-) : CoreProfileService(config) {
+) : CoreProfileService {
     private val scope get() = config.scope
 
     fun changePassword(params: RawChangePasswordParams): Later<ChangePasswordParams> = scope.later {
@@ -29,11 +29,7 @@ class ProfileService(
         changePassword(rb).await()
     }
 
-    override fun changePassword(rb: RequestBody.Authorized<ChangePasswordParams>): Later<ChangePasswordParams> {
-        TODO("Not yet implemented")
-    }
-
-    fun currentUserProfile(): Later<Any> {
+    open fun currentUserProfile(): Later<Any> {
         TODO()
     }
 }

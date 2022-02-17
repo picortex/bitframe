@@ -3,16 +3,13 @@
 package bitframe.core.profile
 
 import bitframe.core.RequestBody
-import bitframe.core.ServiceConfig
 import bitframe.core.profile.params.ChangePasswordParams
 import later.Later
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-abstract class ProfileService(
-    private val config: ServiceConfig
-) {
+interface ProfileService {
     @JsName("_ignore_changePassword")
-    abstract fun changePassword(rb: RequestBody.Authorized<ChangePasswordParams>): Later<ChangePasswordParams>
+    fun changePassword(rb: RequestBody.Authorized<ChangePasswordParams>): Later<ChangePasswordParams>
 }

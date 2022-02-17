@@ -1,5 +1,7 @@
 package bitframe.client
 
+import bitframe.client.profile.ProfileService
+import bitframe.client.profile.ProfileServiceKtor
 import bitframe.client.signin.SignInService
 import bitframe.client.signin.SignInServiceKtor
 import bitframe.client.signout.SignOutService
@@ -18,6 +20,7 @@ interface BitframeApiKtor : BitframeApi {
             override val session: SessionAware get() = SessionAwareImpl(this)
             override val users: UsersService by lazy { UsersServiceKtor(config) }
             override val signIn: SignInService by lazy { SignInServiceKtor(config) }
+            override val profile: ProfileService by lazy { ProfileServiceKtor(config) }
             override val signOut: SignOutService by lazy { SignOutService(config) }
         }
     }

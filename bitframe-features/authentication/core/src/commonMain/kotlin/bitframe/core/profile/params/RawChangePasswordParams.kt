@@ -1,6 +1,6 @@
 package bitframe.core.profile.params
 
-import validation.required
+import validation.requiredNotBlank
 import kotlin.js.JsExport
 
 @JsExport
@@ -10,6 +10,6 @@ interface RawChangePasswordParams {
 }
 
 fun RawChangePasswordParams.toValidatedChangePasswordParams() = ChangePasswordParams(
-    previous = required(::previous),
-    current = required(::current)
+    previous = requiredNotBlank(::previous),
+    current = requiredNotBlank(::current)
 )
