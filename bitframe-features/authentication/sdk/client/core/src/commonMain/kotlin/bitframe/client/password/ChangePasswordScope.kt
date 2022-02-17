@@ -1,3 +1,4 @@
+@file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package bitframe.client.password
@@ -10,12 +11,11 @@ import kotlin.js.JsExport
 import bitframe.client.password.ChangePasswordIntent as Intent
 import bitframe.client.password.ChangePasswordState as State
 
-@JsExport
 class ChangePasswordScope(
     override val config: UIScopeConfig<ProfileService>
 ) : UIScope<Intent, State> {
+    override val viewModel by lazy { ChangePasswordViewModel(config) }
     val changePassword = { params: RawChangePasswordParams ->
         viewModel.post(Intent(params))
     }
-    override val viewModel by lazy { ChangePasswordViewModel(config) }
 }

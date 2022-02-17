@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import later.await
 import presenters.feedbacks.Feedback
 import viewmodel.ViewModel
+import kotlin.js.JsExport
 import bitframe.client.password.ChangePasswordIntent as Intent
 import bitframe.client.password.ChangePasswordState as State
 

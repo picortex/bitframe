@@ -1,6 +1,5 @@
 package password
 
-import bitframe.client.MockServiceConfig
 import bitframe.client.MockUIScopeConfig
 import bitframe.client.password.ChangePasswordScope
 import bitframe.client.profile.ProfileService

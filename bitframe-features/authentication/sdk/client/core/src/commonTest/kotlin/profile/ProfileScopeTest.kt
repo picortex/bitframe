@@ -14,14 +14,7 @@ class ProfileScopeTest {
 
     @Test
     fun should_not_start_if_no_user_is_currently_logged_in() {
-        val state = vm.ui.value as ProfileState
-        expect(state.status?.message).toBe("Initializing your profile, please wait . . .")
-    }
-
-    @Test
-    fun should_fail_to_initialize_the_scope_if_there_is_no_user_logged_in() {
-        scope.initialize()
         val state = vm.ui.value
-        expect(state.status?.message).toBe("Can not initialize a profile of a user who is not signed in")
+        expect(state.status?.message).toBe("Initializing your profile, please wait . . .")
     }
 }
