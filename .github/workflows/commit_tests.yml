@@ -24,7 +24,7 @@ jobs:
       - name: Make gradle executable
         run: chmod +x ./gradlew
       - name: Downloading gradle
-        run: ./gradle jvmTest
+        run: ./gradlew --version
       - name: Running jvm tests
         run: ./gradlew jvmTest
       - name: Run pimonitor-app-server tests
