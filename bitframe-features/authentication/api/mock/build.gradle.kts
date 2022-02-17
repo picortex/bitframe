@@ -20,7 +20,7 @@ kotlin {
                 api(projects.bitframeAuthenticationApiCore)
                 api(projects.bitframeAuthenticationDaod)
                 api(projects.bitframeServiceConfigApiMock)
-                api(projects.bitframeEventsInmemory)
+                api(projects.eventsInmemory)
                 api(asoft.cache.mock)
             }
         }

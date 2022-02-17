@@ -13,7 +13,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-events-core"))
+                api(projects.eventsCore)
             }
         }
 

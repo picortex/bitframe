@@ -13,7 +13,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeEventsInmemory)
+                api(projects.eventsInmemory)
                 api(projects.bitframeActorUser)
                 api(projects.bitframeActorSpace)
                 api(projects.bitframeActorApp)

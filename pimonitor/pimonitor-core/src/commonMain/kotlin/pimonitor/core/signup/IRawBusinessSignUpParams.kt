@@ -1,8 +1,11 @@
 package pimonitor.core.signup
 
-expect interface IRawBusinessSignUpParams {
-    var businessName: String
-    var individualName: String
-    var individualEmail: String
-    var password: String
+import kotlin.js.JsExport
+
+@JsExport
+interface IRawBusinessSignUpParams {
+    val businessName: String
+    val individualName: String
+    val individualEmail: String
+    val password: String
 }

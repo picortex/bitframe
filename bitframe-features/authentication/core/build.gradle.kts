@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeServiceConfigCore)
-                api(projects.bitframeEventsCore)
+                api(projects.eventsCore)
                 api(projects.validation)
                 api(asoft.cache.api)
                 api(asoft.live.core)

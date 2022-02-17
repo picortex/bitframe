@@ -13,7 +13,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeServiceConfigApiCore)
-                api(projects.bitframePresenters)
+                api(projects.presenters)
                 api(asoft.viewmodel.coroutines)
             }
         }

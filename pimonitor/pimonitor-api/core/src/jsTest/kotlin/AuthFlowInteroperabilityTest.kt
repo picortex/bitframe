@@ -13,11 +13,11 @@ class AuthFlowInteroperabilityTest {
 
     @Test
     fun should_register_a_monitor_as_a_valid_user() = runTest {
-        val params = jso<IRawIndividualSignUpParams> {
+        val params = jso<dynamic> {
             name = "John Doe 1"
             email = "john@doe1.com"
             password = "john@doe1.com"
-        }
+        }.unsafeCast<IRawIndividualSignUpParams>()
         val res = service.signUp.signUp(params).await()
         expect(res.user.name).toBe("John Doe 1")
     }
@@ -25,10 +25,10 @@ class AuthFlowInteroperabilityTest {
     @Test
     fun should_fail_if_not_all_entries_where_entered() = runTest {
         val err = expectFailure {
-            val params = jso<IRawIndividualSignUpParams> {
+            val params = jso<dynamic> {
                 name = "John Doe 1"
                 email = "john@doe1.com"
-            }
+            }.unsafeCast<IRawIndividualSignUpParams>()
             service.signUp.signUp(params).await()
         }
         expect(err.message).toBe("Property password is required")

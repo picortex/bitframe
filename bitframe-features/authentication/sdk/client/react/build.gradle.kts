@@ -12,7 +12,7 @@ kotlin {
             dependencies {
                 api(projects.bitframeAuthenticationSdkClientCore)
                 api(projects.bitframeServiceConfigSdkClientReact)
-                api(projects.bitframeEventsReact)
+                api(projects.eventsReact)
                 api(asoft.viewmodel.react)
             }
         }

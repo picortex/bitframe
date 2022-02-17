@@ -40,17 +40,10 @@ rootProject.name = "bitframe"
 
 // <Bitframe Utils>
 includeSubs("mailer", "bitframe-utils/mailer", "api", "mock", "smtp")
-
 includeRoot("templater", "bitframe-utils/templater")
-
-includeSubs(base = "bitframe-events", path = "bitframe-utils/events", "core", "inmemory", "react")
-
-includeSubs(base = "bitframe-events", path = "bitframe-utils/events", "core", "inmemory", "react")
-
-includeRoot(name = "bitframe-presenters", path = "bitframe-utils/presenters/core")
-
+includeSubs(base = "events", path = "bitframe-utils/events", "core", "inmemory", "react")
+includeRoot(name = "presenters", path = "bitframe-utils/presenters/core")
 includeRoot(name = "validation", path = "bitframe-utils/validation")
-
 includeRoot(name = "response", path = "bitframe-utils/response")
 
 // Bitframe Core
@@ -81,6 +74,7 @@ includeSubs(base = "bitframe-ui", path = "bitframe-client/ui", "react")
 
 includeRoot(name = "pimonitor-core", "pimonitor/pimonitor-core")
 includeRoot(name = "pimonitor-daod", "pimonitor/pimonitor-daod")
+includeRoot(name = "pimonitor-test", "pimonitor/pimonitor-test")
 includeSubs(base = "pimonitor-api", "pimonitor/pimonitor-api", "core", "ktor", "mock", "public")
 includeSubs(base = "pimonitor-sdk-client", "pimonitor/pimonitor-sdk/client", "core", "react")
 includeSubs(base = "pimonitor-sdk-server", "pimonitor/pimonitor-sdk/server", "core")
