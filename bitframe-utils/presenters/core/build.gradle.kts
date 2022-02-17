@@ -17,6 +17,7 @@ kotlin {
             dependencies {
                 api(kotlinx.serialization.core)
                 api(asoft.viewmodel.core)
+                api(asoft.kash.core)
                 api(asoft.kotlinx.collections.interoperable)
             }
         }

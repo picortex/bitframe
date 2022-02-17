@@ -2,7 +2,6 @@
 
 package pimonitor.client.businesses
 
-import pimonitor.core.monitored.MonitoredBusiness
 import presenters.modal.Dialog
 import kotlin.js.JsExport
 

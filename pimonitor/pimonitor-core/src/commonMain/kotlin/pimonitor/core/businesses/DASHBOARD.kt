@@ -1,14 +1,15 @@
-@file:JsExport
+@file:Suppress("MayBeConstant")
 
 package pimonitor.core.businesses
 
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 
-object BUSINESS_TYPE {
+@JsExport
+object DASHBOARD {
     @JvmField
-    val MONITOR = "PIMONITOR_MONITOR"
+    val NONE = "NONE"
 
     @JvmField
-    val MONITORED = "PIMONITOR_MONITORED"
+    val PICORTEX = "PICORTEX"
 }

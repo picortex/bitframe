@@ -18,4 +18,10 @@ sealed class SignUpParams {
         val individualEmail: String,
         val password: String
     ) : SignUpParams()
+
+    val entity
+        get() = when (this) {
+            is Business -> businessName
+            is Individual -> name
+        }
 }

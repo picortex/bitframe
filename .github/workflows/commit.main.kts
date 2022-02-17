@@ -2,7 +2,6 @@
 
 @file:DependsOn("it.krzeminski:github-actions-kotlin-dsl:0.8.0")
 
-import it.krzeminski.githubactions.actions.Action
 import it.krzeminski.githubactions.actions.actions.CheckoutV2
 import it.krzeminski.githubactions.actions.actions.SetupJavaV2
 import it.krzeminski.githubactions.domain.RunnerType.UbuntuLatest
@@ -20,7 +19,7 @@ val commit = workflow(
     job(name = "testing", runsOn = UbuntuLatest) {
         uses(name = "Check out", action = CheckoutV2())
         uses(
-            name = "Set up JDk 17",
+            name = "Set up JDK 17",
             action = SetupJavaV2(
                 distribution = SetupJavaV2.Distribution.Zulu,
                 javaVersion = "17",
@@ -38,6 +37,10 @@ val commit = workflow(
         run(
             name = "Running jvm tests",
             command = "./gradlew jvmTest"
+        )
+        run(
+            name = "Run pimonitor-app-server tests",
+            command = "./gradlew :pimonitor-app-server:test"
         )
         run(
             name = "Running js tests",

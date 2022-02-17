@@ -2,10 +2,9 @@ package pimonitor.core.portfolio
 
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.listOf
-import later.await
 import later.later
 import pimonitor.core.businesses.BusinessesService
-import pimonitor.core.monitored.MonitoredBusiness
+import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import presenters.cards.ValueCard
 import presenters.fields.BooleanInputField
 import kotlin.random.Random
@@ -17,11 +16,11 @@ class PortfolioService(
     private val scope get() = config.scope
 
     fun getPortfolioData() = scope.later {
-        val businesses = businessesService.all().await()
+//        val businesses = businessesService.all().await()
         val data = PortfolioData(
             cards = listOf(
-                totalBusinessesCard(businesses),
-                contactsCard(businesses),
+                totalBusinessesCard(listOf()),//totalBusinessesCard(businesses),
+                contactsCard(listOf()),//contactsCard(businesses),
                 team(),
                 employees(),
                 aggregatedRevenue()
@@ -42,13 +41,13 @@ class PortfolioService(
         )
     )
 
-    private fun totalBusinessesCard(businesses: List<MonitoredBusiness>) = ValueCard(
+    private fun totalBusinessesCard(businesses: List<MonitoredBusinessBasicInfo>) = ValueCard(
         title = "Total businesses",
         value = businesses.size.toString(),
         details = "Last updated now"
     )
 
-    private fun contactsCard(businesses: List<MonitoredBusiness>) = ValueCard(
+    private fun contactsCard(businesses: List<MonitoredBusinessBasicInfo>) = ValueCard(
         title = "Contacts",
         value = "12", //businesses.flatMap { it.contacts }.size.toString(),
         details = "Last updated now"

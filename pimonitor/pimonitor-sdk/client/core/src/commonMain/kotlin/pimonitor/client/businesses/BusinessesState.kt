@@ -3,7 +3,6 @@
 package pimonitor.client.businesses
 
 import presenters.collections.Table
-import pimonitor.core.monitored.MonitoredBusiness
 import kotlin.js.JsExport
 
 sealed class BusinessesState {

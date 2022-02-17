@@ -6,10 +6,9 @@ import kotlinx.coroutines.test.runTest
 import later.await
 import pimonitor.client.PiMonitorApiMock
 import pimonitor.client.businesses.forms.CreateBusinessViewModel
-import pimonitor.core.monitored.CreateMonitoredBusinessParams
+import pimonitor.core.monitored.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.SignUpParams
 import pimonitor.core.signup.toCredentials
-import utils.PiMonitorMockScope
 import viewmodel.expect
 import kotlin.test.Test
 import pimonitor.client.businesses.forms.CreateBusinessIntent as Intent

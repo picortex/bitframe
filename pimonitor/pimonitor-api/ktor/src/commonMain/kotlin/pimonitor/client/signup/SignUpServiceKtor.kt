@@ -18,10 +18,6 @@ class SignUpServiceKtor(
     private val baseUrl = "${config.url}/api/authentication"
     private val json = config.json
 
-    val logger = config.logger.with(
-        "source" to this::class.simpleName
-    )
-
     @OptIn(InternalAPI::class)
     override fun signUp(rb: RequestBody.UnAuthorized<SignUpParams>) = scope.later {
         val resp = client.post("$baseUrl/sign-up") {

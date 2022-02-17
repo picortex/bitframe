@@ -58,6 +58,7 @@ abstract class SignInService(
 
     fun signIn(cred: RawSignInCredentials): Later<SignInResult> = scope.later {
         val validCredentials = validate(cred).getOrThrow()
+        logger.info("Signing `${validCredentials.identifier}` in")
         val rb = RequestBody.UnAuthorized(
             appId = config.appId,
             data = validCredentials

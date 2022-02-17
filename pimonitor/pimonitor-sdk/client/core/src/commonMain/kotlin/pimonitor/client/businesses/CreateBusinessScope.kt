@@ -19,7 +19,7 @@ open class CreateBusinessScope(
 
     val showForm = { uid: String? -> viewModel.post(Intent.ShowForm(uid)) }
 
-    val submitForm = { params: RawCreateBusinessFormParams ->
-        viewModel.post(Intent.SubmitForm(params.toParams()))
+    val submitForm = { params: RawCreateBusinessParams ->
+        viewModel.post(Intent.SubmitForm(params.toValidatedCreateBusinessParams()))
     }
 }

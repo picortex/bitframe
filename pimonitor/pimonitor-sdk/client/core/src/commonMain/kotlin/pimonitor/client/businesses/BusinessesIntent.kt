@@ -2,7 +2,6 @@
 
 package pimonitor.client.businesses
 
-import pimonitor.core.monitored.MonitoredBusiness
 import kotlin.js.JsExport
 
 sealed class BusinessesIntent {

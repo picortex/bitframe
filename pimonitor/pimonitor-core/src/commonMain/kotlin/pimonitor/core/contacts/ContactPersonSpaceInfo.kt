@@ -1,6 +1,6 @@
 @file:JsExport
 
-package pimonitor.core.monitored
+package pimonitor.core.contacts
 
 import bitframe.core.Savable
 import bitframe.core.UNSET

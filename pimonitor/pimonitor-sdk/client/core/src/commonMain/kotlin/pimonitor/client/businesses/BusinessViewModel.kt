@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.businesses.BusinessesIntent.*
-import pimonitor.core.monitored.MonitoredBusiness
 import presenters.collections.tableOf
 import viewmodel.ViewModel
 import pimonitor.client.businesses.BusinessesIntent as Intent

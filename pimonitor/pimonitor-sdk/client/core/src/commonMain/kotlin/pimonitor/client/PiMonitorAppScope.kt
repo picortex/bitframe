@@ -7,6 +7,7 @@ import bitframe.client.BitframeAppScope
 import bitframe.client.BitframeAppScopeConfig
 import bitframe.client.SessionAware
 import bitframe.client.panel.PanelScope
+import bitframe.client.password.ChangePasswordScope
 import bitframe.client.signin.SignInScope
 import pimonitor.client.businesses.BusinessesScope
 import pimonitor.client.businesses.CreateBusinessScope
@@ -30,4 +31,5 @@ open class PiMonitorAppScope(
     open val createBusiness by lazy { CreateBusinessScope(of(config.api)) }
     open val contacts by lazy { ContactsScope(of(config.api)) }
     open val portfolio by lazy { PortfolioScope(of(config.api)) }
+    open val password by lazy { ChangePasswordScope(of(config.api.profile)) }
 }

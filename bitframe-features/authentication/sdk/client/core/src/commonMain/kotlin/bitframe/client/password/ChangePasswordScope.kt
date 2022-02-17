@@ -11,7 +11,7 @@ import kotlin.js.JsExport
 import bitframe.client.password.ChangePasswordIntent as Intent
 import bitframe.client.password.ChangePasswordState as State
 
-class ChangePasswordScope(
+open class ChangePasswordScope(
     override val config: UIScopeConfig<ProfileService>
 ) : UIScope<Intent, State> {
     override val viewModel by lazy { ChangePasswordViewModel(config) }

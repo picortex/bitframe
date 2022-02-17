@@ -1,13 +1,13 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
-package presenters.cards
+package presenters.containers
 
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @Serializable
-data class ValueCard(
-    val title: String,
-    val value: String,
+data class DetailBox<T>(
+    val value: T,
     val details: String
 )

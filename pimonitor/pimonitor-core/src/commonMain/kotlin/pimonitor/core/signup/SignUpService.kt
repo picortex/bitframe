@@ -15,6 +15,9 @@ abstract class SignUpService(
 ) : SignUpUseCase {
     protected val scope get() = config.scope
     protected val bus get() = config.bus
+    protected open val logger get() = config.logger.with(
+        "source" to this::class.simpleName
+    )
 
     companion object {
         const val SIGN_UP_EVENT_TOPIC = "pimonitor.authentication.signup"

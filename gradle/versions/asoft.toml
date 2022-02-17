@@ -10,6 +10,8 @@ cache-browser = { module = "tz.co.asoft:cache-browser", version.ref = "foundatio
 cache-mock = { module = "tz.co.asoft:cache-mock", version.ref = "foundation" }
 cache-react-native = { module = "tz.co.asoft:cache-react-native", version.ref = "foundation" }
 
+kash-core = { module = "tz.co.asoft:kash-core", version.ref = "stdlib" }
+
 expect-core = { module = "tz.co.asoft:expect-core", version.ref = "foundation" }
 expect-coroutines = { module = "tz.co.asoft:expect-coroutines", version.ref = "foundation" }
 
