@@ -75,7 +75,7 @@ class SignUpViewModelTest {
             s?.status as? Feedback.Failure
         } ?: throw AssertionError("Expected viewmodel to have error but did not")
         expect(status.message).toBe("Failed to create your account: Invalid email: johnemail.com")
-        expect(status.cause.message).toBe("Invalid email: johnemail.com")
+        expect(status.cause?.message).toBe("Invalid email: johnemail.com")
     }
 
     @Test
@@ -88,7 +88,7 @@ class SignUpViewModelTest {
             s?.status as? Feedback.Failure
         } ?: throw AssertionError("Expected viewmodel to have error but did not")
         expect(status.message).toBe("Failed to create your account: Name must not be empty")
-        expect(status.cause.message).toBe("Name must not be empty")
+        expect(status.cause?.message).toBe("Name must not be empty")
     }
 
     @Test

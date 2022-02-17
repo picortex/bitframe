@@ -9,40 +9,25 @@ internal fun AddBusinessFormFields() = CreateBusinessFields(
     inviterIntroduction = null,
     title = "Add a business",
     businessName = TextInputField(
+        name = "businessName",
         label = "Business name",
         hint = "PiCortex LLC"
     ),
     contactName = TextInputField(
+        name = "contactName",
         label = "Contact Name",
         hint = "John Doe"
     ),
     contactEmail = TextInputField(
+        name = "contactEmail",
         label = "Contact Email",
         hint = "john@doe.com"
     ),
     sendInvite = BooleanInputField(
+        name = "sendInvite",
         label = "Ask to share reports",
         value = true
     ),
-    submitButton = ButtonInputField(text = "Submit")
-)
-
-internal fun InviteBusinessFormFields(name: String) = CreateBusinessFields(
-    inviterIntroduction = "$name has invited to you to share your info with them",
-    title = "Enter your business info",
-    businessName = TextInputField(
-        label = "Business name",
-        hint = "PiCortex LLC"
-    ),
-    contactName = TextInputField(
-        label = "Your Name",
-        hint = "John Doe"
-    ),
-    contactEmail = TextInputField(
-        label = "Your Email",
-        hint = "john@doe.com"
-    ),
-    sendInvite = null,
     submitButton = ButtonInputField(text = "Submit")
 )
 
