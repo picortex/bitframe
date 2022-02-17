@@ -29,8 +29,8 @@ jobs:
       - name: Set up JDk 17
         uses: actions/setup-java@v2
         with:
-          distribution: zulu
           java-version: 17
+          distribution: zulu
           cache: gradle
       - name: Make gradle executable
         run: chmod +x ./gradlew
