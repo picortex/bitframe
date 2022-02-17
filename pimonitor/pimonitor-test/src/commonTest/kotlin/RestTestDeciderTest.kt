@@ -14,7 +14,7 @@ class RestTestDeciderTest {
 
     @Test
     fun should_choose_integration_test_when_the_url_can_be_reached() = runTest {
-        val decider: TestDecider = RestTestDecider("https://google.com")
+        val decider: TestDecider = RestTestDecider("https://www.typescriptlang.org")
         expect(decider.decide()).toBe(TestType.INTEGRATION)
     }
 }
