@@ -4,5 +4,5 @@ import bitframe.core.profile.ProfileDaodService
 import bitframe.server.ServiceConfig
 
 class ProfileService(
-    private val config: ServiceConfig
+    override val config: ServiceConfig
 ) : ProfileDaodService(config)
