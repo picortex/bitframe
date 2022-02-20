@@ -7,6 +7,7 @@ import bitframe.core.GenericDaodServiceConfig
 import cache.Cache
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.serialization.json.Json
 import live.MutableLive
 import logging.Logger
 import kotlin.jvm.JvmField
@@ -33,6 +34,9 @@ interface GenericMockServiceConfig<T : Any> : GenericDaodServiceConfig<T>, MockS
         val DEFAULT_LOGGER = DaodServiceConfig.DEFAULT_LOGGER
 
         @JvmField
+        val DEFAULT_JSON = DaodServiceConfig.DEFAULT_JSON
+
+        @JvmField
         val DEFAULT_SCOPE = DaodServiceConfig.DEFAULT_SCOPE
 
         operator fun <D : Any> invoke(
@@ -43,8 +47,9 @@ interface GenericMockServiceConfig<T : Any> : GenericDaodServiceConfig<T>, MockS
             daoFactory: DaoFactory = DEFAULT_DAO_FACTORY,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): GenericMockServiceConfig<D> = object : GenericMockServiceConfig<D>, MockServiceConfig by MockServiceConfig(appId, cache, session, daoFactory, bus, logger, scope) {
+        ): GenericMockServiceConfig<D> = object : GenericMockServiceConfig<D>, MockServiceConfig by MockServiceConfig(appId, cache, session, daoFactory, bus, logger, json, scope) {
             override val clazz: KClass<D> = clazz
         }
 
@@ -55,7 +60,8 @@ interface GenericMockServiceConfig<T : Any> : GenericDaodServiceConfig<T>, MockS
             daoFactory: DaoFactory = DEFAULT_DAO_FACTORY,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): GenericMockServiceConfig<D> = invoke(D::class, appId, cache, session, daoFactory, bus, logger, scope)
+        ): GenericMockServiceConfig<D> = invoke(D::class, appId, cache, session, daoFactory, bus, logger, json, scope)
     }
 }

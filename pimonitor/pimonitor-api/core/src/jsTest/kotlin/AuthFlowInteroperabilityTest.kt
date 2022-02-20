@@ -2,13 +2,16 @@ import bitframe.client.jso
 import expect.expect
 import expect.expectFailure
 import kotlinx.coroutines.test.runTest
+import later.await
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.PiMonitorApiMock
-import pimonitor.core.signup.IRawIndividualSignUpParams
+import pimonitor.client.PiMonitorApiTest
+import pimonitor.core.signup.params.BusinessSignUpParams
+import pimonitor.core.signup.params.IndividualSignUpRawParams
 import kotlin.test.Test
 
 class AuthFlowInteroperabilityTest {
-    val service: PiMonitorApi = PiMonitorApiMock()
+    val service: PiMonitorApi = PiMonitorApiTest()
 
     @Test
     fun should_register_a_monitor_as_a_valid_user() = runTest {
@@ -16,8 +19,8 @@ class AuthFlowInteroperabilityTest {
             name = "John Doe 1"
             email = "john@doe1.com"
             password = "john@doe1.com"
-        }.unsafeCast<IRawIndividualSignUpParams>()
-        val res = service.signUp.signUpAsBusiness(params).await()
+        }.unsafeCast<IndividualSignUpRawParams>()
+        val res = service.signUp.signUp(params).await()
         expect(res.user.name).toBe("John Doe 1")
     }
 
@@ -27,8 +30,8 @@ class AuthFlowInteroperabilityTest {
             val params = jso<dynamic> {
                 name = "John Doe 1"
                 email = "john@doe1.com"
-            }.unsafeCast<IRawIndividualSignUpParams>()
-            service.signUp.signUpAsBusiness(params).await()
+            }.unsafeCast<BusinessSignUpParams>()
+            service.signUp.signUp(params).await()
         }
         expect(err.message).toBe("Property password is required")
     }
