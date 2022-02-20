@@ -10,6 +10,8 @@ import later.later
 import pimonitor.core.signup.*
 import pimonitor.core.signup.params.BusinessSignUpRawParams
 import pimonitor.core.signup.params.IndividualSignUpRawParams
+import pimonitor.core.signup.params.toBusinessSignUpParams
+import pimonitor.core.signup.params.toIndividualSignUpParams
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import pimonitor.core.signup.SignUpService as CoreSignUpService

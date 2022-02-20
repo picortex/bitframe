@@ -30,7 +30,7 @@ class AuthFlowInteroperabilityTest {
             val params = jso<dynamic> {
                 name = "John Doe 1"
                 email = "john@doe1.com"
-            }.unsafeCast<BusinessSignUpParams>()
+            }.unsafeCast<IndividualSignUpRawParams>()
             service.signUp.signUp(params).await()
         }
         expect(err.message).toBe("Property password is required")

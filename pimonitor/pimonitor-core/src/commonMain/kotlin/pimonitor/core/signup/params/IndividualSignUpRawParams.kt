@@ -10,10 +10,10 @@ interface IndividualSignUpRawParams : SignUpRawParams {
     val name: String
     val email: String
     val password: String
-
-    fun toIndividualSignUpParams() = IndividualSignUpParams(
-        name = requiredNotBlank(::name),
-        email = requiredNotBlank(::email),
-        password = requiredNotBlank(::password),
-    )
 }
+
+fun IndividualSignUpRawParams.toIndividualSignUpParams() = IndividualSignUpParams(
+    name = requiredNotBlank(::name),
+    email = requiredNotBlank(::email),
+    password = requiredNotBlank(::password),
+)

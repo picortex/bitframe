@@ -11,11 +11,11 @@ interface BusinessSignUpRawParams : SignUpRawParams {
     val individualName: String
     val individualEmail: String
     val password: String
-
-    fun toBusinessSignUpParams() = BusinessSignUpParams(
-        businessName = requiredNotBlank(::businessName),
-        individualName = requiredNotBlank(::individualName),
-        individualEmail = requiredNotBlank(::individualEmail),
-        password = requiredNotBlank(::password),
-    )
 }
+
+fun BusinessSignUpRawParams.toBusinessSignUpParams() = BusinessSignUpParams(
+    businessName = requiredNotBlank(::businessName),
+    individualName = requiredNotBlank(::individualName),
+    individualEmail = requiredNotBlank(::individualEmail),
+    password = requiredNotBlank(::password),
+)
