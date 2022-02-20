@@ -2,6 +2,7 @@ package bitframe.core
 
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.serialization.json.Json
 import logging.Logger
 import kotlin.jvm.JvmField
 import kotlin.reflect.KClass
@@ -19,13 +20,17 @@ interface GenericDaodServiceConfig<D : Any> : DaodServiceConfig {
         @JvmField
         val DEFAULT_SCOPE = DaodServiceConfig.DEFAULT_SCOPE
 
+        @JvmField
+        val DEFAULT_JSON = DaodServiceConfig.DEFAULT_JSON
+
         operator fun <D : Any> invoke(
             clazz: KClass<D>,
             daoFactory: DaoFactory,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): GenericDaodServiceConfig<D> = object : GenericDaodServiceConfig<D>, DaodServiceConfig by DaodServiceConfig(daoFactory, bus, logger, scope) {
+        ): GenericDaodServiceConfig<D> = object : GenericDaodServiceConfig<D>, DaodServiceConfig by DaodServiceConfig(daoFactory, bus, logger, json, scope) {
             override val clazz: KClass<D> = clazz
         }
 
@@ -33,7 +38,8 @@ interface GenericDaodServiceConfig<D : Any> : DaodServiceConfig {
             daoFactory: DaoFactory,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): GenericDaodServiceConfig<D> = invoke(D::class, daoFactory, bus, logger, scope)
+        ): GenericDaodServiceConfig<D> = invoke(D::class, daoFactory, bus, logger, json, scope)
     }
 }

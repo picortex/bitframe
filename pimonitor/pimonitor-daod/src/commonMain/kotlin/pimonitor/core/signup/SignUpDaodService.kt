@@ -14,7 +14,7 @@ open class SignUpDaodService(
     private val scope get() = config.scope
     private val businessDao by lazy { config.daoFactory.get<MonitorBusinessBasicInfo>() }
 
-    override fun signUpAsBusiness(rb: RequestBody.UnAuthorized<BusinessSignUpRawParams>) = scope.later {
+    override fun signUpAsBusiness(rb: RequestBody.UnAuthorized<BusinessSignUpParams>) = scope.later {
         val params = rb.data.toBusinessSignUpParams()
         val result = register(params.toRegisterUserParams()).await()
         val space = result.spaces.first()
@@ -24,7 +24,7 @@ open class SignUpDaodService(
         )
     }
 
-    override fun signUpAsIndividual(rb: RequestBody.UnAuthorized<IndividualSignUpRawParams>) = scope.later {
+    override fun signUpAsIndividual(rb: RequestBody.UnAuthorized<IndividualSignUpParams>) = scope.later {
         val params = rb.data.toIndividualSignUpParams()
         val result = register(params.toRegisterUserParams()).await()
         val space = result.spaces.first()
@@ -34,7 +34,7 @@ open class SignUpDaodService(
     }
 
     fun signUp(rb: RequestBody.UnAuthorized<SignUpRawParams>) = when (val params = rb.data) {
-        is BusinessSignUpRawParams -> signUpAsBusiness(rb.map { params })
-        is IndividualSignUpRawParams -> signUpAsIndividual(rb.map { params })
+        is BusinessSignUpRawParams -> signUpAsBusiness(rb.map { params.toBusinessSignUpParams() })
+        is IndividualSignUpRawParams -> signUpAsIndividual(rb.map { params.toIndividualSignUpParams() })
     }
 }

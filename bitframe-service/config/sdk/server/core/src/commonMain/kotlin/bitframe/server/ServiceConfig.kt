@@ -4,6 +4,7 @@ import bitframe.core.DaoFactory
 import bitframe.core.DaodServiceConfig
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.serialization.json.Json
 import logging.Logger
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
@@ -21,13 +22,17 @@ interface ServiceConfig : DaodServiceConfig {
         @JvmField
         val DEFAULT_LOGGER = DaodServiceConfig.DEFAULT_LOGGER
 
+        @JvmField
+        val DEFAULT_JSON = DaodServiceConfig.DEFAULT_JSON
+
         @JvmSynthetic
         operator fun invoke(
             daoFactory: DaoFactory,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): ServiceConfig = object : ServiceConfig, DaodServiceConfig by DaodServiceConfig(daoFactory, bus, logger, scope) {}
+        ): ServiceConfig = object : ServiceConfig, DaodServiceConfig by DaodServiceConfig(daoFactory, bus, logger, json, scope) {}
 
         @JvmOverloads
         @JvmStatic
@@ -35,7 +40,8 @@ interface ServiceConfig : DaodServiceConfig {
             daoFactory: DaoFactory,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ) = invoke(daoFactory, bus, logger, scope)
+        ) = invoke(daoFactory, bus, logger, json, scope)
     }
 }

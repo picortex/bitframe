@@ -7,7 +7,9 @@ import bitframe.core.ServiceConfig
 import events.Event
 import identifier.Email
 import later.Later
+import pimonitor.core.signup.params.BusinessSignUpParams
 import pimonitor.core.signup.params.BusinessSignUpRawParams
+import pimonitor.core.signup.params.IndividualSignUpParams
 import pimonitor.core.signup.params.IndividualSignUpRawParams
 import validation.validate
 import kotlin.js.JsExport
@@ -17,8 +19,8 @@ import kotlin.jvm.JvmName
 @JsExport
 interface SignUpService {
     @JsName("_ignore_signUpAsIndividual")
-    fun signUpAsIndividual(rb: RequestBody.UnAuthorized<IndividualSignUpRawParams>): Later<SignUpResult>
+    fun signUpAsIndividual(rb: RequestBody.UnAuthorized<IndividualSignUpParams>): Later<SignUpResult>
 
     @JsName("_ignore_signUpAsBusiness")
-    fun signUpAsBusiness(rb: RequestBody.UnAuthorized<BusinessSignUpRawParams>): Later<SignUpResult>
+    fun signUpAsBusiness(rb: RequestBody.UnAuthorized<BusinessSignUpParams>): Later<SignUpResult>
 }

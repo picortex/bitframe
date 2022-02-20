@@ -4,25 +4,20 @@ import bitframe.core.RequestBody
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
-import io.ktor.http.HttpStatusCode.Companion.BadRequest
 import io.ktor.http.HttpStatusCode.Companion.Created
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
 import later.await
-import pimonitor.core.signup.SignUpService
+import pimonitor.core.signup.SignUpDaodService
 import pimonitor.core.signup.params.BusinessSignUpParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import response.response
 
-private val json = Json {
-    encodeDefaults = true
-    ignoreUnknownKeys = true
-}
-
 class SignUpController(
-    private val service: SignUpService
+    private val service: SignUpDaodService
 ) {
+    val json get() = service.config.json
+
     @OptIn(ExperimentalSerializationApi::class)
     suspend fun signUpAsIndividual(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.UnAuthorized<IndividualSignUpParams>>(req.compulsoryBody())

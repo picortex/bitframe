@@ -8,8 +8,8 @@ import io.ktor.client.statement.*
 import io.ktor.util.*
 import later.later
 import pimonitor.core.signup.SignUpResult
-import pimonitor.core.signup.params.BusinessSignUpRawParams
-import pimonitor.core.signup.params.IndividualSignUpRawParams
+import pimonitor.core.signup.params.BusinessSignUpParams
+import pimonitor.core.signup.params.IndividualSignUpParams
 import response.decodeResponseFromString
 
 class SignUpServiceKtor(
@@ -20,7 +20,7 @@ class SignUpServiceKtor(
     private val json = config.json
 
     @OptIn(InternalAPI::class)
-    override fun signUpAsIndividual(rb: RequestBody.UnAuthorized<IndividualSignUpRawParams>) = config.scope.later {
+    override fun signUpAsIndividual(rb: RequestBody.UnAuthorized<IndividualSignUpParams>) = config.scope.later {
         val resp = client.post("$baseUrl/sign-up/individual") {
             body = json.of(rb)
         }
@@ -28,7 +28,7 @@ class SignUpServiceKtor(
     }
 
     @OptIn(InternalAPI::class)
-    override fun signUpAsBusiness(rb: RequestBody.UnAuthorized<BusinessSignUpRawParams>) = config.scope.later {
+    override fun signUpAsBusiness(rb: RequestBody.UnAuthorized<BusinessSignUpParams>) = config.scope.later {
         val resp = client.post("$baseUrl/sign-up/business") {
             body = json.of(rb)
         }
