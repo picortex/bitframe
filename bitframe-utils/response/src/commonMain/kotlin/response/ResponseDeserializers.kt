@@ -12,9 +12,10 @@ fun <D> Json.decodeResponseFromString(
     decodeSuccessFromString(dataSerializer, json)
 } catch (cause: Throwable) {
     try {
-        cause.printStackTrace()
         decodeFailureFromString(json)
     } catch (err: Throwable) {
+        cause.printStackTrace()
+        err.printStackTrace()
         responseOf(Throwable("Failed to decode the response", cause))
     }
 }

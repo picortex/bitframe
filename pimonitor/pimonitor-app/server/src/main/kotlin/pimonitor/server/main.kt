@@ -5,6 +5,8 @@ import bitframe.server.MongoDaoFactory
 import bitframe.server.MongoDaoFactoryConfig
 import bitframe.server.ServiceConfig
 import bitframe.server.bitframeApplication
+import pimonitor.server.businesses.BusinessController
+import pimonitor.server.businesses.BusinessModule
 import pimonitor.server.signup.SignUpController
 import pimonitor.server.signup.SignUpModule
 import java.io.File
@@ -31,6 +33,9 @@ fun main(args: Array<String>) {
 
         install { ser ->
             SignUpModule(SignUpController(ser.signup))
+        }
+        install { ser ->
+            BusinessModule(BusinessController(ser.businesses))
         }
 
         onStart { populateTestEntities() }
