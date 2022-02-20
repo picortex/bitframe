@@ -6,12 +6,13 @@ import kotlinx.coroutines.test.runTest
 import later.await
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.PiMonitorApiMock
+import pimonitor.client.PiMonitorApiTest
 import pimonitor.core.businesses.params.CreateBusinessParams
 import pimonitor.core.signup.RawIndividualSignUpParams
 import kotlin.test.Test
 
 class CreateBusinessFlowTest {
-    val api: PiMonitorApi = PiMonitorApiMock()
+    val api: PiMonitorApi = PiMonitorApiTest()
 
     @Test
     fun should_successfully_create_a_business() = runTest {

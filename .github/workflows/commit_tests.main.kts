@@ -36,19 +36,19 @@ val commit = workflow(
         )
         run(
             name = "Running jvm tests",
-            command = "./gradlew jvmTest"
+            command = """API_MODE="MOCK" ./gradlew jvmTest"""
         )
         run(
             name = "Run pimonitor-app-server tests",
-            command = "./gradlew :pimonitor-app-server:test"
+            command = """API_MODE="MOCK" ./gradlew :pimonitor-app-server:test"""
         )
         run(
             name = "Running js tests",
-            command = "./gradlew jsTest"
+            command = """API_MODE="MOCK" ./gradlew jsTest"""
         )
         run(
             name = "Build project",
-            command = "./gradlew build"
+            command = """API_MODE="MOCK" ./gradlew build"""
         )
     }
 }

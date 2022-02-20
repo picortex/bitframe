@@ -26,10 +26,10 @@ jobs:
       - name: Downloading gradle
         run: ./gradlew --version
       - name: Running jvm tests
-        run: ./gradlew jvmTest
+        run: API_MODE="MOCK" ./gradlew jvmTest
       - name: Run pimonitor-app-server tests
-        run: ./gradlew :pimonitor-app-server:test
+        run: API_MODE="MOCK" ./gradlew :pimonitor-app-server:test
       - name: Running js tests
-        run: ./gradlew jsTest
+        run: API_MODE="MOCK" ./gradlew jsTest
       - name: Build project
-        run: ./gradlew build
+        run: API_MODE="MOCK" ./gradlew build

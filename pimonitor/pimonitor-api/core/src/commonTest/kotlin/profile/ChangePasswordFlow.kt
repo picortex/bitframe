@@ -7,11 +7,12 @@ import kotlinx.coroutines.test.runTest
 import later.await
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.PiMonitorApiMock
+import pimonitor.client.PiMonitorApiTest
 import pimonitor.core.signup.RawIndividualSignUpParams
 import kotlin.test.Test
 
 class ChangePasswordFlow {
-    val api: PiMonitorApi = PiMonitorApiMock()
+    val api: PiMonitorApi = PiMonitorApiTest()
 
     @Test
     fun should_be_to_successfully_change_password() = runTest {

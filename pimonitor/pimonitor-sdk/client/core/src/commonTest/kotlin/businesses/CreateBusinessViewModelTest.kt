@@ -4,18 +4,18 @@ import bitframe.client.UIScopeConfig
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
 import later.await
-import pimonitor.client.PiMonitorApiMock
 import pimonitor.client.businesses.forms.CreateBusinessViewModel
 import pimonitor.core.businesses.params.CreateBusinessParams
 import pimonitor.core.signup.SignUpParams
 import pimonitor.core.signup.toCredentials
+import utils.PiMonitorApiTest
 import viewmodel.expect
 import kotlin.test.Test
 import pimonitor.client.businesses.forms.CreateBusinessIntent as Intent
 import pimonitor.client.businesses.forms.CreateBusinessState as State
 
 class CreateBusinessViewModelTest {
-    val api = PiMonitorApiMock()
+    val api = PiMonitorApiTest()
     val vm = CreateBusinessViewModel(UIScopeConfig(api, recoveryTime = 0L))
 
     @Test
