@@ -3,7 +3,6 @@ package businesses
 import bitframe.client.UIScopeConfig
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
-import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.businesses.forms.CreateBusinessViewModel
 import pimonitor.core.businesses.params.CreateBusinessParams
@@ -31,7 +30,7 @@ class CreateBusinessViewModelTest {
             password = "jane"
         )
         // signUp as a business
-        api.signUp.signUp(monitor).await()
+        api.signUp.signUpAsBusiness(monitor).await()
         api.signIn.signIn(monitor.toCredentials()).await()
         delay(100)
 

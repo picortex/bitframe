@@ -6,9 +6,8 @@ import expect.expect
 import kotlinx.coroutines.test.runTest
 import later.await
 import pimonitor.client.PiMonitorApi
-import pimonitor.client.PiMonitorApiMock
 import pimonitor.client.PiMonitorApiTest
-import pimonitor.core.signup.RawIndividualSignUpParams
+import pimonitor.core.signup.params.IndividualSignUpParams
 import kotlin.test.Test
 
 class ChangePasswordFlow {
@@ -17,7 +16,7 @@ class ChangePasswordFlow {
     @Test
     fun should_be_to_successfully_change_password() = runTest {
         // STEP 1. If not registered, register into the application
-        val params1 = RawIndividualSignUpParams(
+        val params1 = IndividualSignUpParams(
             name = "individual01",
             email = "test@individual.com",
             password = "password1"

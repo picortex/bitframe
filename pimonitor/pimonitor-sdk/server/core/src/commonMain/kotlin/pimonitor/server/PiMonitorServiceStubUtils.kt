@@ -25,7 +25,7 @@ private val TEST_PARAMS = listOf(
 
 suspend fun PiMonitorService.populateTestEntities() {
     println(">>>> Populating test data")
-    val res = TEST_PARAMS.map { signup.signUp(RequestBody.UnAuthorized("test", it)).await() }.last()
+    val res = TEST_PARAMS.map { signup.signUpAsBusiness(RequestBody.UnAuthorized("test", it)).await() }.last()
 //    listOf("PiCortex", "Mitikaz").map {
 //        val ref = res.user.ref()
 //        println("Setting up $it for ${ref.name}")

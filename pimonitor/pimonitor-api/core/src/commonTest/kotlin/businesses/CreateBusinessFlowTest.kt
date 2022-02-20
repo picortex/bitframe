@@ -7,7 +7,7 @@ import later.await
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.core.businesses.params.CreateBusinessParams
-import pimonitor.core.signup.RawIndividualSignUpParams
+import pimonitor.core.signup.params.BusinessSignUpParams
 import kotlin.test.Test
 
 class CreateBusinessFlowTest {
@@ -16,13 +16,14 @@ class CreateBusinessFlowTest {
     @Test
     fun should_successfully_create_a_business() = runTest {
         // STEP 1. If not registered, signup as business or individual
-        val params1 = RawIndividualSignUpParams(
-            name = "Business Tester One",
-            email = "business@tester1.com",
+        val params1 = BusinessSignUpParams(
+            businessName = "Business Tester One",
+            individualName = "Business Owner One",
+            individualEmail = "business@tester1.com",
             password = "business@tester1.com"
         )
         val res1 = api.signUp.signUp(params1).await()
-        expect(res1.user.name).toBe("Business Tester One")
+        expect(res1.user.name).toBe("Business Owner One")
 
         // STEP 2. Sign in with your registered account
         val params2 = SignInCredentials(
@@ -30,7 +31,7 @@ class CreateBusinessFlowTest {
             password = "business@tester1.com"
         )
         val res2 = api.signIn.signIn(params2).await()
-        expect(res2.user.name).toBe("Business Tester One")
+        expect(res2.user.name).toBe("Business Owner One")
 
         // STEP 3. Create a business
         val params3 = CreateBusinessParams(

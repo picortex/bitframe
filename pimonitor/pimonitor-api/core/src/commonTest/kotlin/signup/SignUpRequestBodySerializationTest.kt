@@ -1,8 +1,9 @@
 package signup
 
 import bitframe.core.RequestBody
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import pimonitor.core.signup.SignUpParams
+import pimonitor.core.signup.params.IndividualSignUpParams
 import kotlin.test.Test
 
 class SignUpRequestBodySerializationTest {
@@ -13,9 +14,9 @@ class SignUpRequestBodySerializationTest {
     fun should_serialize_request_body_without_question() {
         val rb = RequestBody.UnAuthorized(
             appId = "test",
-            data = SignUpParams.Individual("test", "test@test.com", "password")
+            data = IndividualSignUpParams("test", "test@test.com", "password")
         )
-        val output = json.encodeToString(RequestBody.UnAuthorized.serializer(SignUpParams.serializer()), rb)
+        val output = json.encodeToString(rb)
         println(output)
     }
 }
