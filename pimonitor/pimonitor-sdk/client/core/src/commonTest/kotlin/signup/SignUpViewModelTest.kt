@@ -73,8 +73,8 @@ class SignUpViewModelTest {
             val s = it as? State.IndividualForm
             s?.status as? Feedback.Failure
         } ?: throw AssertionError("Expected viewmodel to have error but did not")
-        expect(status.message).toBe("Failed to create your account: Invalid email: johnemail.com")
-        expect(status.cause?.message).toBe("Invalid email: johnemail.com")
+        expect(status.message).toBe("Failed to create your account: Identifier with value johnemail.com is neither a valid email or a valid phone number")
+        expect(status.cause?.message).toBe("Identifier with value johnemail.com is neither a valid email or a valid phone number")
     }
 
     @Test
@@ -86,8 +86,8 @@ class SignUpViewModelTest {
             val s = it as? State.IndividualForm
             s?.status as? Feedback.Failure
         } ?: throw AssertionError("Expected viewmodel to have error but did not")
-        expect(status.message).toBe("Failed to create your account: Name must not be empty")
-        expect(status.cause?.message).toBe("Name must not be empty")
+        expect(status.message).toBe("Failed to create your account: Property name must not be empty/blank")
+        expect(status.cause?.message).toBe("Property name must not be empty/blank")
     }
 
     @Test
