@@ -18,12 +18,7 @@ abstract class SignUpService(
     override val config: ServiceConfig
 ) : CoreSignUpService(config), SignUpUseCase {
 
-    override val logger
-        get() = config.logger.with(
-            "user" to config.session.value.user?.name,
-            "space" to config.session.value.space?.name,
-            "source" to this::class.simpleName
-        )
+    override val logger get() = config.logger.with("source" to this::class.simpleName)
 
     @JsName("signUpAsBusiness")
     fun signUp(params: IRawBusinessSignUpParams) = signUp(params.toSignUpParams())
