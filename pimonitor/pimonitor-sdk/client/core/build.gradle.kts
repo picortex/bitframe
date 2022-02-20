@@ -28,3 +28,11 @@ kotlin {
         }
     }
 }
+
+afterEvaluate {
+    file("src/commonTest/kotlin/TestConfig.kt").apply {
+        if (!exists()) createNewFile()
+        writeText("""val API_MODE = "${System.getenv("API_MODE") ?: "MOCK"}"${"\n"}""")
+        appendText("""val API_URL = "${System.getenv("API_URL") ?: ""}"${"\n"}""")
+    }
+}
