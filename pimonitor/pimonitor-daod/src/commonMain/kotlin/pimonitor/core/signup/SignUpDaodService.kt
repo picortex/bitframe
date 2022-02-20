@@ -1,16 +1,12 @@
 package pimonitor.core.signup
 
-import bitframe.core.App
-import bitframe.core.DaodServiceConfig
-import bitframe.core.RequestBody
-import bitframe.core.get
+import bitframe.core.*
 import bitframe.core.users.RegisterUserUseCase
 import bitframe.core.users.RegisterUserUseCaseImpl
 import later.await
 import later.later
 import pimonitor.core.businesses.MonitorBusinessBasicInfo
-import pimonitor.core.signup.params.BusinessSignUpRawParams
-import pimonitor.core.signup.params.IndividualSignUpRawParams
+import pimonitor.core.signup.params.*
 
 open class SignUpDaodService(
     open val config: DaodServiceConfig
@@ -35,5 +31,10 @@ open class SignUpDaodService(
         SignUpResult(
             app = App(rb.appId), space = space, user = result.user
         )
+    }
+
+    fun signUp(rb: RequestBody.UnAuthorized<SignUpRawParams>) = when (val params = rb.data) {
+        is BusinessSignUpRawParams -> signUpAsBusiness(rb.map { params })
+        is IndividualSignUpRawParams -> signUpAsIndividual(rb.map { params })
     }
 }

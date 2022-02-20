@@ -14,7 +14,7 @@ data class BusinessSignUpParams(
     override val individualName: String,
     override val individualEmail: String,
     override val password: String
-) : SignUpParams(), BusinessSignUpRawParams {
+) : BusinessSignUpRawParams {
     override fun toSignInCredentials() = SignInCredentials(
         identifier = requiredNotBlank(::individualEmail),
         password = requiredNotBlank(::password)

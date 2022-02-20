@@ -6,7 +6,7 @@ import validation.requiredNotBlank
 import kotlin.js.JsExport
 
 @JsExport
-interface IndividualSignUpRawParams {
+interface IndividualSignUpRawParams : SignUpRawParams {
     val name: String
     val email: String
     val password: String

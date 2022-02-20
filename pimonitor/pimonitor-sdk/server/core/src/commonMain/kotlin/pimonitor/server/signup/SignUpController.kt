@@ -1,18 +1,19 @@
 package pimonitor.server.signup
 
-import response.response
+import bitframe.core.RequestBody
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
-import bitframe.core.RequestBody
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
 import io.ktor.http.HttpStatusCode.Companion.Created
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import later.await
-import pimonitor.core.signup.SignUpParams
 import pimonitor.core.signup.SignUpService
+import pimonitor.core.signup.params.BusinessSignUpParams
+import pimonitor.core.signup.params.IndividualSignUpParams
+import response.response
 
 private val json = Json {
     encodeDefaults = true
@@ -23,21 +24,13 @@ class SignUpController(
     private val service: SignUpService
 ) {
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun signUp(req: HttpRequest) = response {
-        val params = try {
-            json.decodeFromString<RequestBody.UnAuthorized<SignUpParams>>(req.compulsoryBody())
-        } catch (err: Throwable) {
-            null
-        } ?: try {
-            json.decodeFromString<RequestBody.UnAuthorized<SignUpParams.Business>>(req.compulsoryBody())
-        } catch (err: Throwable) {
-            null
-        } ?: try {
-            json.decodeFromString<RequestBody.UnAuthorized<SignUpParams.Individual>>(req.compulsoryBody())
-        } catch (err: Throwable) {
-            reject(BadRequest, "Make sure you have the proper sign up params")
-        }
-        val conundrum = service.signUp(params).await()
-        resolve(conundrum, Created)
+    suspend fun signUpAsIndividual(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.UnAuthorized<IndividualSignUpParams>>(req.compulsoryBody())
+        resolve(service.signUpAsIndividual(rb).await(), Created)
+    }.toHttpResponse()
+
+    suspend fun signUpAsBusiness(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.UnAuthorized<BusinessSignUpParams>>(req.compulsoryBody())
+        resolve(service.signUpAsBusiness(rb).await(), Created)
     }.toHttpResponse()
 }
