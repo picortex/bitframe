@@ -1,6 +1,6 @@
 [versions]
 foundation = "1.4.62"
-stdlib = "0.2.28"
+stdlib = "0.2.29"
 
 [libraries]
 applikation-runtime = { module = "tz.co.asoft:applikation-runtime", version.ref = "foundation" }

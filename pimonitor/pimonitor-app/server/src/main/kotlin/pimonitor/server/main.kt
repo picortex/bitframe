@@ -1,5 +1,6 @@
 package pimonitor.server
 
+import bitframe.core.MockDaoFactory
 import bitframe.server.MongoDaoFactory
 import bitframe.server.MongoDaoFactoryConfig
 import bitframe.server.ServiceConfig
@@ -12,16 +13,16 @@ fun main(args: Array<String>) {
     bitframeApplication<PiMonitorService> {
         public = File(args.getOrNull(0) ?: "/default")
         database {
-//            MockDaoFactory()
-            MongoDaoFactory(
-                config = MongoDaoFactoryConfig(
-//                    host = "127.0.0.1:27017",
-                    host = "database:27017",
-                    username = "root",
-                    password = "example",
-                    database = "pi"
-                )
-            )
+            MockDaoFactory()
+//            MongoDaoFactory(
+//                config = MongoDaoFactoryConfig(
+////                    host = "127.0.0.1:27017",
+//                    host = "database:27017",
+//                    username = "root",
+//                    password = "example",
+//                    database = "pi"
+//                )
+//            )
         }
 
         service { factory ->

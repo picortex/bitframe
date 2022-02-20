@@ -11,8 +11,8 @@ import kotlin.js.JsExport
 
 @JsExport
 interface SessionAware {
-    val userLiveSession: Live<Session>
-    val userSession: Session.SignedIn?
+    val live: Live<Session>
+    val signedIn: Session.SignedIn?
     val userSpaces: List<Space>?
     val currentUser: User?
     val currentSpace: Space?

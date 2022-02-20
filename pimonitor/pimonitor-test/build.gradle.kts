@@ -3,6 +3,8 @@ plugins {
     id("tz.co.asoft.library")
 }
 
+val tmp = 1
+
 kotlin {
     jvm { library() }
     js(IR) { library() }

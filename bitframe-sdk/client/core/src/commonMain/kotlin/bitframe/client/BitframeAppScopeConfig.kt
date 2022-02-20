@@ -12,6 +12,12 @@ interface BitframeAppScopeConfig<A : BitframeApi> {
     val bus get() = api.config.bus
     val cache get() = api.config.cache
 
+    operator fun invoke() = toConfig(api)
+
+    operator fun <S : Any> invoke(
+        builder: BitframeAppScopeConfig<A>.() -> S
+    ) = toConfig(this.builder())
+
     fun <S : Any> toConfig(service: S) = UIScopeConfig(
         service = service,
         recoveryTime = viewModel.recoveryTime,

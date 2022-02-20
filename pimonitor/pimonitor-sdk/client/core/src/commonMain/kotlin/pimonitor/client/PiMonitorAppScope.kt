@@ -24,12 +24,12 @@ open class PiMonitorAppScope(
     protected fun <S : Any> of(service: S) = config.toConfig(service)
 
     override val session: SessionAware get() = config.api.session
-    override val signIn by lazy { SignInScope(of(config.api.signIn)) }
-    open val signUp by lazy { SignUpScope(of(config.api)) }
-    override val panel by lazy { PanelScope(of(config.api.signIn)) }
-    open val businesses by lazy { BusinessesScope(of(config.api)) }
-    open val createBusiness by lazy { CreateBusinessScope(of(config.api)) }
-    open val contacts by lazy { ContactsScope(of(config.api)) }
-    open val portfolio by lazy { PortfolioScope(of(config.api)) }
-    open val password by lazy { ChangePasswordScope(of(config.api.profile)) }
+    override val signIn by lazy { SignInScope(config { api.signIn }) }
+    open val signUp by lazy { SignUpScope(config()) }
+    override val panel by lazy { PanelScope(config { api.signIn }) }
+    open val businesses by lazy { BusinessesScope(config()) }
+    open val createBusiness by lazy { CreateBusinessScope(config()) }
+    open val contacts by lazy { ContactsScope(config()) }
+    open val portfolio by lazy { PortfolioScope(config()) }
+    open val password by lazy { ChangePasswordScope(config { api.profile }) }
 }
