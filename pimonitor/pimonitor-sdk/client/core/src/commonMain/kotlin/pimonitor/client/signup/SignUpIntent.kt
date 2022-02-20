@@ -2,8 +2,8 @@
 
 package pimonitor.client.signup
 
-import pimonitor.core.signup.IRawBusinessSignUpParams
-import pimonitor.core.signup.IRawIndividualSignUpParams
+import pimonitor.core.signup.params.BusinessSignUpRawParams
+import pimonitor.core.signup.params.IndividualSignUpRawParams
 import kotlin.js.JsExport
 
 sealed class SignUpIntent {
@@ -14,7 +14,7 @@ sealed class SignUpIntent {
     data class ChangeRegistrationType(val type: SignUpType) : SignUpIntent()
 
     sealed class Submit : SignUpIntent() {
-        data class IndividualForm(val params: IRawIndividualSignUpParams) : Submit()
-        data class BusinessForm(val params: IRawBusinessSignUpParams) : Submit()
+        data class IndividualForm(val params: IndividualSignUpRawParams) : Submit()
+        data class BusinessForm(val params: BusinessSignUpRawParams) : Submit()
     }
 }

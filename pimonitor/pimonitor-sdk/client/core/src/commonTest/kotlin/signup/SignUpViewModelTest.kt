@@ -3,12 +3,11 @@ package signup
 import expect.expect
 import expect.toBe
 import kotlinx.coroutines.test.runTest
-import pimonitor.client.signup.copy
 import pimonitor.client.signup.fields.BusinessFormFields
 import pimonitor.client.signup.fields.IndividualFormFields
 import pimonitor.client.signup.fields.copy
-import pimonitor.core.signup.RawBusinessSignUpParams
-import pimonitor.core.signup.RawIndividualSignUpParams
+import pimonitor.core.signup.params.BusinessSignUpParams
+import pimonitor.core.signup.params.IndividualSignUpParams
 import presenters.feedbacks.Feedback
 import utils.PiMonitorMockScope
 import viewmodel.expect
@@ -24,7 +23,7 @@ class SignUpViewModelTest {
     @Test
     @Ignore // TODO Fix this little bug here
     fun should_register_successfully() = runTest {
-        val params = RawIndividualSignUpParams(
+        val params = IndividualSignUpParams(
             name = "John Doe",
             email = "john@doe.com",
             password = "john@doe.com"
@@ -41,11 +40,11 @@ class SignUpViewModelTest {
         expect(viewModel).toBeIn(finalState)
     }
 
-    private val testIndividualParams = RawIndividualSignUpParams(
+    private val testIndividualParams = IndividualSignUpParams(
         name = "John Doe", email = "john@email.com", password = "john@email.com"
     )
 
-    private val testBusinessParams = RawBusinessSignUpParams(
+    private val testBusinessParams = BusinessSignUpParams(
         businessName = "John Doe Inc", individualName = "John Doe", individualEmail = "john@doe.com", "1234"
     )
 

@@ -26,7 +26,7 @@ class SignUpReactScope internal constructor(
     private val bus get() = config.service.config.bus
 
     val useSignUpEvent: (callback: (SignUpResult) -> Unit) -> Unit = {
-        useEventHandler(bus, SignUpService.SIGN_UP_EVENT_TOPIC, it)
+        useEventHandler(bus, SignUpEvent.TOPIC, it)
     }
 
     val useSignInEvent: (callback: (Session.SignedIn) -> Unit) -> Unit = {

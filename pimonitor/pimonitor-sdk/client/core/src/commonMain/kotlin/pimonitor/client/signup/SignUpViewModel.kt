@@ -14,7 +14,6 @@ import pimonitor.client.signup.SignUpState.Companion.REGISTER_AS_BUSINESS
 import pimonitor.client.signup.SignUpState.Companion.REGISTER_AS_INDIVIDUAL
 import pimonitor.client.signup.fields.BusinessFormFields
 import pimonitor.client.signup.fields.IndividualFormFields
-import pimonitor.core.signup.toRawCredentials
 import presenters.feedbacks.Feedback.*
 import viewmodel.ViewModel
 import pimonitor.client.signup.SignUpIntent as Intent
@@ -53,8 +52,8 @@ class SignUpViewModel(
             }.await()
             emit(state.copy(i, Loading("Success. Signing you in, please wait . . .")))
             when (i) {
-                is IndividualForm -> signInService.signIn(i.params.toRawCredentials()).await()
-                is BusinessForm -> signInService.signIn(i.params.toRawCredentials()).await()
+                is IndividualForm -> signInService.signIn(i.params.toSignInCredentials()).await()
+                is BusinessForm -> signInService.signIn(i.params.toSignInCredentials()).await()
             }
             emit(state.copy(i, Success("Successfully signed in")))
         }.catch {
