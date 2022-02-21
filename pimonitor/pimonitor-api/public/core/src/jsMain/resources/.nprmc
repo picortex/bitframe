@@ -1,0 +1,2 @@
+@picortex:registry=http://localhost:1040/
+always-auth=true

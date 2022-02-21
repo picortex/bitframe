@@ -34,12 +34,12 @@ npmPublishing {
 
         repository("andylamax") {
             registry = uri("http://localhost:1040")
-            authToken = ""
+            authToken = "andylamax"
         }
 
         repository("piCortex") {
             registry = uri("http://${vars.dev.server.ip}:1040")
-            authToken = ""
+            authToken = "andylamax"
         }
     }
 

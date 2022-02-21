@@ -43,12 +43,12 @@ npmPublishing {
 
         repository("andylamax") {
             registry = uri("http://localhost:1040")
-            authToken = ""
+            authToken = "andylamax"
         }
 
         repository("piCortex") {
             registry = uri("http://${vars.dev.server.ip}:1040")
-            authToken = ""
+            authToken = "andylamax"
         }
     }
 
@@ -57,9 +57,11 @@ npmPublishing {
             organization = "picortex"
             version = "${project.version}"
             moduleName = "monitor-api"
-            readme = file("README.md")
+            readme = file("ReadMe.md")
+
             packageJson {
                 types = "index.d.ts"
+
                 dependencies {
                     "platform" to "1.3.6"
                     "@js-joda/core" to "4.0.0"
