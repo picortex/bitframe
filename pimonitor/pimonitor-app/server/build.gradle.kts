@@ -91,7 +91,6 @@ fun DockerComposeFileTask.configure(port: Int) {
     version(3.8)
     service("database") {
         image("mongo:5.0.6")
-        set("restart", "always")
         set(
             "environment", mapOf(
                 "MONGO_INITDB_ROOT_USERNAME" to "root",
@@ -112,7 +111,18 @@ fun DockerComposeFileTask.configure(port: Int) {
     }
 }
 
-val setVersions by tasks.creating {
+val createDockerComposeStagingFile by tasks.creating(DockerComposeFileTask::class) {
+    outputFilename = "docker-compose-staging.yml"
+    configure(port = 90)
+}
+
+val createDockerComposeProductionFile by tasks.creating(DockerComposeFileTask::class) {
+    outputFilename = "docker-compose-production.yml"
+    configure(port = 80)
+}
+
+// set versions fro github-actions
+afterEvaluate {
     fun writeVersion(name: String, value: String) {
         val dir = file("build/versioning").apply { mkdirs() }
         val file = File(dir, "$name.txt").apply { if (!exists()) createNewFile() }
@@ -120,18 +130,6 @@ val setVersions by tasks.creating {
         file.writeText(value)
         safe.writeText(value.replace(".", "_"))
     }
-    doLast {
-        writeVersion("current", vers.bitframe.current)
-        writeVersion("previous", vers.bitframe.previous)
-    }
-}
-
-val createDockerComposeStagingFile by tasks.creating(DockerComposeFileTask::class) {
-    outputFilename = "docker-compose-staging.yml"
-    configure(port = 80)
-}
-
-val createDockerComposeProductionFile by tasks.creating(DockerComposeFileTask::class) {
-    outputFilename = "docker-compose-production.yml"
-    configure(port = 90)
+    writeVersion("current", vers.bitframe.current)
+    writeVersion("previous", vers.bitframe.previous)
 }

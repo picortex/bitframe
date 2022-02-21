@@ -1,61 +1,129 @@
-name: Integration & Acceptance Testing
+# This file was generated using Kotlin DSL (.github/workflows/commit_tests.main.kts).
+# If you want to modify the workflow, please change the Kotlin file and regenerate this YAML file.
+# Generated with https://github.com/krzema12/github-actions-kotlin-dsl
+
+name: Integration Testing
 
 on:
   pull_request:
-    branches: [ master-dev ]
+    branches:
+      - 'master-dev-*'
+
+env:
+  REMOTE_HOST: 65.21.254.230
+  REMOTE_USER: root
+  REMOTE_PASS: bitframe
+  GH_TOKEN: ${{ github.token}} # ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  "publish-staging-environment":
+    runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 16
-        uses: actions/setup-java@v1
+      - name: Check out
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
         with:
-          java-version: 16
+          java-version: 17
+          distribution: zulu
+          cache: gradle
 
-      - uses: browser-actions/setup-chrome@latest
+      - name: Configure & restart docker daemon
+        run: chmod +x ./devops/dockerd.sh && sudo ./devops/dockerd.sh
 
-      - name: Cache Gradle
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-            ~/.gradle/yarn
-            ~/.gradle/nodejs
-          key: ${{ runner.os }}-gradle-${{ hashFiles('gradle/gradle-wrapper.*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Cache konan
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.konan/dependencies
-            ~/.konan/kotlin-native-macos*
-          key: ${{ runner.os }}-konan-
-          restore-keys: ${{ runner.os }}-konan-
-
-      - name: Making gradlew executable
+      - name: Make gradle executable
         run: chmod +x ./gradlew
-        working-directory: .
 
-      - name: Download gradle
+      - name: Downloading gradle
         run: ./gradlew --version
 
-      - name: Prepare bitframe test containers
-        run: TEST_MODE=CI ./gradlew :bitframe-testing-instance-server:createDockerfile
-        working-directory: .
+      - name: set versions
+        id: versions
+        run: |
+          echo "::set-output name=current::$(cat ./pi-monitor/build/versioning/current.txt)"
+          echo "::set-output name=current_safe::$(cat ./pi-monitor/build/versioning/current_safe.txt)"
+          echo "::set-output name=previous::$(cat ./pi-monitor/build/versioning/previous.txt)"
+          echo "::set-output name=previous_safe::$(cat ./pi-monitor/build/versioning/previous_safe.txt)"
 
-      - name: Prepare pimonitor test containers
-        run: TEST_MODE=CI ./gradlew :pi-monitor-server:createDockerfile
-        working-directory: .
+      - name: Create Pi Monitor Docker Compose Staging File
+        run: ./gradlew :pimonitor-app-server:createDockerComposeStagingFile
 
-      - name: Running integration tests
-        run: TEST_MODE=CI ./gradlew jvmTest --tests integration.*
-        working-directory: .
+      - name: Push pimonitor-app-server docker image to picortex docker registry
+        run: ./gradlew :pimonitor-app-server:dockerPushToPicortex
 
-      - name: Running acceptance tests
-        run: TEST_MODE=CI HEADLESS=true ./gradlew jvmTest --tests acceptance.*
-        working-directory: .
+      - name: Copy DockerCompose file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ env.REMOTE_HOST }}
+          username: ${{ env.REMOTE_USER }}
+          password: ${{ env.REMOTE_PASS }}
+          source: "pimonitor/pimonitor-app-server/build/docker/docker-compose-staging.yml"
+          rm: true
+          target: /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/staging
+
+      - name: Deploy Staging Stack
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.REMOTE_HOST }}
+          username: ${{ env.REMOTE_USER }}
+          password: ${{ env.REMOTE_PASS }}
+          script: |
+            mkdir /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/staging -p
+            mv /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/staging/pimonitor/pimonitor-app-server/build/docker/docker-compose-staging.yml /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/staging/docker-compose.yml
+            cd /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/staging
+            rm pi-monitor -rf
+            docker-compose pull
+            docker stack rm pimonitor-staging-${{ steps.versions.outputs.current_safe }}
+            docker stack deploy -c docker-compose.yml pimonitor-staging-${{ steps.versions.outputs.current_safe }}
+
+  "unit-testing":
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: zulu
+          cache: gradle
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+      - name: Downloading gradle
+        run: ./gradlew --version
+      - name: Running jvm tests
+        run: API_MODE="MOCK" ./gradlew jvmTest
+      - name: Run pimonitor-app-server tests
+        run: API_MODE="MOCK" ./gradlew :pimonitor-app-server:test
+      - name: Running js tests
+        run: API_MODE="MOCK" ./gradlew jsTest
+      - name: Build project
+        run: API_MODE="MOCK" ./gradlew build
+
+  "integration-testing":
+    runs-on: "ubuntu-latest"
+    needs:
+      - "publish-staging-environment"
+      - "unit-testing"
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: zulu
+          cache: gradle
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+      - name: Downloading gradle
+        run: ./gradlew --version
+      - name: Running jvm tests
+        run: API_MODE="LIVE" API_URL="http://65.21.254.230:90" ./gradlew jvmTest
+      - name: Run pimonitor-app-server tests
+        run: API_MODE="LIVE" API_URL="http://65.21.254.230:90" ./gradlew :pimonitor-app-server:test
+      - name: Running js tests
+        run: API_MODE="LIVE" API_URL="http://65.21.254.230:90" ./gradlew jsTest
+      - name: Build project
+        run: API_MODE="LIVE" API_URL="http://65.21.254.230:90" ./gradlew build
