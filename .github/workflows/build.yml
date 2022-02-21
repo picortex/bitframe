@@ -55,6 +55,16 @@ jobs:
       - name: Push pimonitor-app-server docker image to picortex docker registry
         run: ./gradlew :pimonitor-app-server:dockerPushToPicortex
 
+      - name: Remove previous staging environments
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.REMOTE_HOST }}
+          username: ${{ env.REMOTE_USER }}
+          password: ${{ env.REMOTE_PASS }}
+          script: |
+            docker stack rm pimonitor-staging-${{ steps.versions.outputs.previous_safe }}
+            docker stack rm pimonitor-staging-${{ steps.versions.outputs.current_safe }}
+
       - name: Copy DockerCompose file via ssh password
         uses: appleboy/scp-action@master
         with:
@@ -77,8 +87,6 @@ jobs:
             cd /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/staging
             rm pimonitor -rf
             docker-compose pull
-            docker stack rm pimonitor-staging-${{ steps.versions.outputs.previous_safe }}
-            docker stack rm pimonitor-staging-${{ steps.versions.outputs.current_safe }}
             docker stack deploy -c docker-compose.yml pimonitor-staging-${{ steps.versions.outputs.current_safe }}
 
   "integration-testing":
