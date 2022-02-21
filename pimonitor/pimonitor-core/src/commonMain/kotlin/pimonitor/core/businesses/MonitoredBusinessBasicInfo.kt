@@ -16,6 +16,6 @@ data class MonitoredBusinessBasicInfo(
     override val logo: String? = "",
     override val uid: String = UNSET,
     override val deleted: Boolean = false
-) : Business {
+) : Business() {
     override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
 }

@@ -1,13 +1,16 @@
+@file:JsExport
+
 package pimonitor.core.businesses
 
 import bitframe.core.Savable
+import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
-@JsExport
-sealed interface Business : Savable {
-    val spaceId: String
-    val owningSpaceId: String
-    val email: String
-    val address: String
-    val logo: String?
+@Serializable
+sealed class Business : Savable {
+    abstract val spaceId: String
+    abstract val owningSpaceId: String
+    abstract val email: String
+    abstract val address: String
+    abstract val logo: String?
 }

@@ -17,7 +17,7 @@ fun main(args: Array<String>) {
     bitframeApplication<PiMonitorService> {
         public = File(args.getOrNull(0) ?: "/default")
         database {
-//            MockDaoFactory()
+            MockDaoFactory()
             MongoDaoFactory(
                 config = MongoDaoFactoryConfig(
 //                    host = "127.0.0.1:27017",

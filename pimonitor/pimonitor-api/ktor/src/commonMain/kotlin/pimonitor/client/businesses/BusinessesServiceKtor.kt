@@ -28,6 +28,7 @@ class BusinessesServiceKtor(
         val req = client.post("${config.url}$baseUrl/create") {
             body = json.of(rb)
         }
+        println(req.bodyAsText())
         json.decodeResponseFromString(CreateBusinessParams.serializer(), req.bodyAsText()).response()
     }
 
