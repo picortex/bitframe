@@ -38,6 +38,9 @@ jobs:
       - name: Downloading gradle
         run: ./gradlew --version
 
+      - name: Create pimonitor-app-server docker image
+        run: ./gradlew :pimonitor-app-server:createDockerImage
+
       - name: set versions
         id: versions
         run: |
