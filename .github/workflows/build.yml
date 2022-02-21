@@ -41,10 +41,10 @@ jobs:
       - name: set versions
         id: versions
         run: |
-          echo "::set-output name=current::$(cat ./pi-monitor/build/versioning/current.txt)"
-          echo "::set-output name=current_safe::$(cat ./pi-monitor/build/versioning/current_safe.txt)"
-          echo "::set-output name=previous::$(cat ./pi-monitor/build/versioning/previous.txt)"
-          echo "::set-output name=previous_safe::$(cat ./pi-monitor/build/versioning/previous_safe.txt)"
+          echo "::set-output name=current::$(cat ./pimonitor/pimonitor-app/server/build/versioning/current.txt)"
+          echo "::set-output name=current_safe::$(cat ./pimonitor/pimonitor-app/server/build/versioning/current_safe.txt)"
+          echo "::set-output name=previous::$(cat ./pimonitor/pimonitor-app/server/build/versioning/previous.txt)"
+          echo "::set-output name=previous_safe::$(cat ./pimonitor/pimonitor-app/server/build/versioning/previous_safe.txt)"
 
       - name: Create Pi Monitor Docker Compose Staging File
         run: ./gradlew :pimonitor-app-server:createDockerComposeStagingFile
@@ -58,7 +58,7 @@ jobs:
           host: ${{ env.REMOTE_HOST }}
           username: ${{ env.REMOTE_USER }}
           password: ${{ env.REMOTE_PASS }}
-          source: "pimonitor/pimonitor-app-server/build/docker/docker-compose-staging.yml"
+          source: "pimonitor/pimonitor-app/server/build/docker/docker-compose-staging.yml"
           rm: true
           target: /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/staging
 
@@ -70,9 +70,9 @@ jobs:
           password: ${{ env.REMOTE_PASS }}
           script: |
             mkdir /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/staging -p
-            mv /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/staging/pimonitor/pimonitor-app-server/build/docker/docker-compose-staging.yml /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/staging/docker-compose.yml
+            mv /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/staging/pimonitor/pimonitor-app/server/build/docker/docker-compose-staging.yml /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/staging/docker-compose.yml
             cd /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/staging
-            rm pi-monitor -rf
+            rm pimonitor -rf
             docker-compose pull
             docker stack rm pimonitor-staging-${{ steps.versions.outputs.current_safe }}
             docker stack deploy -c docker-compose.yml pimonitor-staging-${{ steps.versions.outputs.current_safe }}
