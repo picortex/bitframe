@@ -3,6 +3,7 @@ package signup
 import expect.expect
 import expect.toBe
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.Clock
 import pimonitor.client.signup.fields.BusinessFormFields
 import pimonitor.client.signup.fields.IndividualFormFields
 import pimonitor.client.signup.fields.copy
@@ -21,11 +22,12 @@ class SignUpViewModelTest {
     val viewModel = scope.signUp.viewModel
 
     @Test
-    @Ignore // TODO Fix this little bug here
+    @Ignore
     fun should_register_successfully() = runTest {
+        val time = Clock.System.now()
         val params = IndividualSignUpParams(
-            name = "John Doe",
-            email = "john@doe.com",
+            name = "John $time Doe",
+            email = "john@doe$time.com",
             password = "john@doe.com"
         )
         val initialFields = IndividualFormFields()
@@ -40,14 +42,6 @@ class SignUpViewModelTest {
         expect(viewModel).toBeIn(finalState)
     }
 
-    private val testIndividualParams = IndividualSignUpParams(
-        name = "John Doe", email = "john@email.com", password = "john@email.com"
-    )
-
-    private val testBusinessParams = BusinessSignUpParams(
-        businessName = "John Doe Inc", individualName = "John Doe", individualEmail = "john@doe.com", "1234"
-    )
-
     @Test
     fun should_change_to_business_form_when_intent_is_initiated() = runTest {
         viewModel.expect(Intent.ChangeRegistrationType(State.REGISTER_AS_BUSINESS.value)).toGoThrough(
@@ -56,9 +50,15 @@ class SignUpViewModelTest {
     }
 
     @Test
-    fun should_be_able_to_submit_an_individual_form() = runTest {
+    fun should_be_able_to_sign_up_with_with_an_individual_form() = runTest {
+        val time = Clock.System.now()
+        val params = IndividualSignUpParams(
+            name = "John $time Doe",
+            email = "john@email$time.com",
+            password = "john@email.com"
+        )
         viewModel.expect(Intent.ChangeRegistrationType(State.REGISTER_AS_INDIVIDUAL.value))
-        val intent = Intent.Submit.IndividualForm(testIndividualParams)
+        val intent = Intent.Submit.IndividualForm(params)
         viewModel.expect(intent).toBeIn<State.IndividualForm>()
         val state = viewModel.ui.value as State.IndividualForm
         expect(state.status).toBe<Feedback.Success>()
@@ -66,8 +66,12 @@ class SignUpViewModelTest {
 
     @Test
     fun should_fail_to_submit_with_invalid_email() = runTest {
+        val params = IndividualSignUpParams(
+            name = "John Doe",
+            email = "johnemail.com",
+            password = "john@email.com"
+        )
         viewModel.expect(Intent.ChangeRegistrationType(State.REGISTER_AS_INDIVIDUAL.value))
-        val params = testIndividualParams.copy(email = "johnemail.com")
         val intent = Intent.Submit.IndividualForm(params)
         val status = viewModel.expect(intent).value.firstNotNullOfOrNull {
             val s = it as? State.IndividualForm
@@ -79,8 +83,12 @@ class SignUpViewModelTest {
 
     @Test
     fun should_fail_to_submit_with_empty_name() = runTest {
+        val params = IndividualSignUpParams(
+            name = "",
+            email = "john@email.com",
+            password = "john@email.com"
+        )
         viewModel.expect(Intent.ChangeRegistrationType(State.REGISTER_AS_INDIVIDUAL.value))
-        val params = testIndividualParams.copy(name = "")
         val intent = Intent.Submit.IndividualForm(params)
         val status = viewModel.expect(intent).value.firstNotNullOfOrNull {
             val s = it as? State.IndividualForm
@@ -92,8 +100,15 @@ class SignUpViewModelTest {
 
     @Test
     fun should_be_able_to_submit_a_business_form() = runTest {
+        val time = Clock.System.now()
+        val params = BusinessSignUpParams(
+            businessName = "John Doe $time Inc",
+            individualName = "John $time Doe",
+            individualEmail = "john@doe$time.com",
+            password = "1234"
+        )
         viewModel.expect(Intent.ChangeRegistrationType(State.REGISTER_AS_BUSINESS.value))
-        val intent = Intent.Submit.BusinessForm(testBusinessParams)
+        val intent = Intent.Submit.BusinessForm(params)
         viewModel.expect(intent)
         val state = viewModel.ui.value as State.BusinessForm
         expect(state.status).toBe<Feedback.Success>()

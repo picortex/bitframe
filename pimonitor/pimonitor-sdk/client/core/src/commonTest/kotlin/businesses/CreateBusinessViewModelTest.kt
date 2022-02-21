@@ -3,6 +3,7 @@ package businesses
 import bitframe.client.UIScopeConfig
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.Clock
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.businesses.forms.CreateBusinessViewModel
@@ -24,9 +25,10 @@ class CreateBusinessViewModelTest {
 
     @Test
     fun should_be_able_to_submit_add_business_form() = runTest {
+        val time = Clock.System.now()
         val monitor = IndividualSignUpParams(
-            name = "Jane Doe",
-            email = "jane@doe.com",
+            name = "Jane $time Doe",
+            email = "jane@doe$time.com",
             password = "jane"
         )
         // signUp as a business
@@ -38,7 +40,7 @@ class CreateBusinessViewModelTest {
         val params = CreateBusinessParams(
             businessName = "PiCortex LLC",
             contactName = "Mohammed Majapa",
-            contactEmail = "mmajapa@gmail.com",
+            contactEmail = "mmajapa@gmail$time.com",
             sendInvite = false
         )
         vm.expect(Intent.SubmitForm(params)).toGoThrough(
