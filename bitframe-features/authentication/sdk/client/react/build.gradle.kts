@@ -16,5 +16,12 @@ kotlin {
                 api(asoft.viewmodel.react)
             }
         }
+
+        val test by getting {
+            dependencies {
+                implementation(asoft.expect.core)
+                implementation(projects.bitframeAuthenticationApiMock)
+            }
+        }
     }
 }
