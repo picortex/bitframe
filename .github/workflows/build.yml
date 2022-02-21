@@ -7,7 +7,7 @@ name: Integration Testing
 on:
   pull_request:
     branches:
-      - 'master-dev-*'
+      - 'master-dev'
 
 env:
   REMOTE_HOST: 65.21.254.230
