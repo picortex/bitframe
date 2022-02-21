@@ -124,8 +124,8 @@ jobs:
 
   "deploy-artifacts":
     runs-on: "ubuntu-latest"
-    needs:
-      - "integration-testing"
+    #    needs:
+    #      - "integration-testing"
     steps:
       - name: Check out
         uses: actions/checkout@v2
@@ -142,9 +142,6 @@ jobs:
 
       - name: Downloading gradle
         run: ./gradlew --version
-
-      - name: Publish pimonitor js artifacts to npm registry
-        run: ./gradlew publishJsNpmPublicationToPiCortex
 
       - name: Publish pimonitor api & sdk artifacts to picortex npm registry
         run: ./gradlew publishJsNpmPublicationToPiCortex
