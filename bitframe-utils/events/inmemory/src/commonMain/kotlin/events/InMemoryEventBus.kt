@@ -1,7 +1,8 @@
 package events
 
-import live.value
 import live.MutableLive
+import live.WatchMode
+import live.mutableLiveOf
 
 class InMemoryEventBus : EventBus() {
     private val dispatchers = mutableMapOf<String, MutableLive<Any>>()
@@ -10,9 +11,9 @@ class InMemoryEventBus : EventBus() {
     override fun <D> dispatch(event: Event<D>) {
         val live: MutableLive<out Any>? = dispatchers[event.topic]
         if (live == null) {
-            val l = MutableLive(event.data)
+            val l = mutableLiveOf(event.data)
             dispatchers[event.topic] = l as MutableLive<Any>
-            l.watch { value ->
+            l.watch(WatchMode.EAGERLY) { value ->
                 subscribers[event.topic]?.forEach { it.invoke(value) }
             }
         } else {

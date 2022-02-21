@@ -1,12 +1,10 @@
-@file:JsExport
-
 package presenters.fields
 
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
-@Serializable
+@JsExport
 data class BooleanInputField(
-    val label: String,
+    override val name: String,
+    val label: String = name,
     var value: Boolean? = null
-)
+) : InputField

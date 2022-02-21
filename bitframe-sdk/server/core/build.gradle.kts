@@ -13,14 +13,15 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":bitframe-service-core"))
-                api(project(":bitframe-authentication-service-server-core"))
+                api(projects.bitframeServiceConfigCore)
+                api(projects.bitframeAuthenticationSdkServerCore)
                 api(asoft.platform.core)
             }
         }
 
         val commonTest by getting {
             dependencies {
+                implementation(projects.bitframeDaoMock)
                 implementation(asoft.expect.core)
             }
         }

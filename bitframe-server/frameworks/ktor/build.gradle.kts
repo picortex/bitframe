@@ -10,8 +10,9 @@ kotlin {
     sourceSets {
         val main by getting {
             dependencies {
-                api(project(":bitframe-server-framework-core"))
+                api(projects.bitframeServerFrameworkCore)
                 api(ktor.server.cio)
+                api(ktor.server.cors)
             }
         }
     }

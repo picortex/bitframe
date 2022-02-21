@@ -1,13 +1,11 @@
-@file:JsExport
-
 package presenters.fields
 
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
-@Serializable
+@JsExport
 data class TextInputField(
-    val label: String,
-    val hint: String = label,
-    var value: String? = null
-)
+    override val name: String,
+    override val label: String = name,
+    override val hint: String = label,
+    override var value: String? = null
+) : RawTextInputField

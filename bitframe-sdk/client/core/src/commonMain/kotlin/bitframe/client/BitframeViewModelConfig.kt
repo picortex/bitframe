@@ -1,28 +1,23 @@
-@file:JsExport
-@file:Suppress("WRONG_EXPORTED_DECLARATION")
-
 package bitframe.client
 
-import bitframe.api.BitframeService
 import kotlinx.coroutines.CoroutineScope
 import logging.Logger
 import viewmodel.ViewModelConfig
-import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
 interface BitframeViewModelConfig : ViewModelConfig {
-    val service: BitframeService
     val recoveryTime: Long
     val transitionTime: Long
 
-    // accessors
-    val bus get() = service.config.bus
-    val cache get() = service.config.cache
-
     companion object {
+        @JvmField
+        val DEFAULT_RECOVERY_TIME = 3000L
+
+        @JvmField
+        val DEFAULT_TRANSITION_TIME = 3000L
 
         @JvmField
         val DEFAULT_LOGGER = ViewModelConfig.DEFAULT_LOGGER
@@ -30,35 +25,26 @@ interface BitframeViewModelConfig : ViewModelConfig {
         @JvmField
         val DEFAULT_SCOPE_BUILDER = ViewModelConfig.DEFAULT_SCOPE_BUILDER
 
-        @JvmField
-        val DEFAULT_RECOVERY_TIME = 3000L
-
-        @JvmField
-        val DEFAULT_TRANSITION_TIME = 3000L
-
         @JvmSynthetic
         operator fun invoke(
-            service: BitframeService,
             recoveryTime: Long = DEFAULT_RECOVERY_TIME,
             transitionTime: Long = DEFAULT_TRANSITION_TIME,
             logger: Logger = DEFAULT_LOGGER,
-            builder: () -> CoroutineScope = DEFAULT_SCOPE_BUILDER
-        ): BitframeViewModelConfig = object : BitframeViewModelConfig {
-            override val service: BitframeService = service
-            override val recoveryTime: Long = recoveryTime
-            override val transitionTime: Long = transitionTime
+            scopeBuilder: () -> CoroutineScope = DEFAULT_SCOPE_BUILDER
+        ) = object : BitframeViewModelConfig {
+            override val recoveryTime = recoveryTime
+            override val transitionTime = transitionTime
             override val logger: Logger = logger
-            override val scopeBuilder: () -> CoroutineScope = builder
+            override val scopeBuilder: () -> CoroutineScope = scopeBuilder
         }
 
         @JvmStatic
         @JvmOverloads
         fun create(
-            service: BitframeService,
             recoveryTime: Long = DEFAULT_RECOVERY_TIME,
             transitionTime: Long = DEFAULT_TRANSITION_TIME,
             logger: Logger = DEFAULT_LOGGER,
-            builder: () -> CoroutineScope = DEFAULT_SCOPE_BUILDER
-        ): BitframeViewModelConfig = invoke(service, recoveryTime, transitionTime, logger, builder)
+            scopeBuilder: () -> CoroutineScope = DEFAULT_SCOPE_BUILDER
+        ) = invoke(recoveryTime, transitionTime, logger, scopeBuilder)
     }
 }

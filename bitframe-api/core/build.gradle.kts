@@ -12,12 +12,31 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(asoft.cache.api)
-                api(projects.bitframeCore)
-                api(projects.bitframeAuthenticationServiceClientCore)
-                api(asoft.platform.core)
-                api(asoft.later.ktx)
-                api(kotlinx.coroutines.core)
+                api(projects.bitframeAuthenticationApiCore)
+                api(kotlinx.serialization.json)
+                api(asoft.cache.mock)
+            }
+        }
+
+        val commonTest by getting {
+            dependencies {
+                implementation(projects.bitframeApiMock)
+                implementation(asoft.expect.coroutines)
+            }
+        }
+
+        val nonJsMain by creating {
+            dependsOn(commonMain)
+        }
+
+        val jvmMain by getting {
+            dependsOn(nonJsMain)
+        }
+
+        val jsMain by getting {
+            dependencies {
+                api(asoft.cache.react.native)
+                api(asoft.cache.browser)
             }
         }
     }
