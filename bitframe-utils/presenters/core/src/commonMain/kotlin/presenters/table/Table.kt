@@ -1,40 +1,24 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
-package presenters.collections
+package presenters.table
 
-import presenters.collections.table.Column
-import presenters.collections.table.Row
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import live.*
+import presenters.feedbacks.Feedback
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
 class Table<D>(
-    columns: List<Column<D>>,
-    rows: List<Row<D>>,
-) {
-    data class State<D>(
-        val columns: List<Column<D>>,
-        val rows: List<Row<D>>
-    ) {
-        val isEmpty = rows.isEmpty()
-
-        val areAllRowsSelected = rows.all { it.selected }
-
-        val areNoRowsSelected = rows.all { !it.selected }
-
-        val allSelectedRows = rows.filter { it.selected }
-
-        val areSomeRowsSelected = !areNoRowsSelected && rows.size != allSelectedRows.size
-
-        val rowActions
-            get() = columns.filterIsInstance<Column.Action<*>>().flatMap {
-                it.actions
-            }.toInteroperableList()
-    }
-
-    val live = mutableLiveOf(State(columns, rows))
+    private val live: MutableLive<TableState<D>>
+) : TableLike<D> {
+    @JsName("from")
+    constructor(
+        columns: List<Column<D>>,
+        rows: List<Row<D>>,
+        actions: List<TableAction<D>>
+    ) : this(mutableLiveOf(TableState(Feedback.None, columns, rows, actions)))
 
     fun toggleAllSelected() = changeAllSelection(!areAllRowsSelected)
 
@@ -66,35 +50,37 @@ class Table<D>(
         )
     }
 
+    @JsName("selectRow")
     fun select(row: Row<D>) = changeSelection(row, selected = true)
 
     @JsName("selectRowNumber")
-    fun select(number: Int) = select(rows[number - 1])
+    fun select(rowNumber: Int) = select(rows[rowNumber - 1])
 
+    @JsName("unSelectRow")
     fun unSelect(row: Row<D>) = changeSelection(row, selected = false)
 
     @JsName("unSelectRowNumber")
-    fun unSelect(number: Int) = unSelect(rows[number - 1])
+    fun unSelect(rowNumber: Int) = unSelect(rows[rowNumber - 1])
 
-    val columns get() = live.value.columns
-    val rows get() = live.value.rows
-    val isEmpty get() = live.value.isEmpty
-
-    val areAllRowsSelected get() = live.value.areAllRowsSelected
-
-    val areNoRowsSelected get() = live.value.areNoRowsSelected
-
-    val allSelectedRows get() = live.value.allSelectedRows
-
-    val areSomeRowsSelected get() = live.value.areSomeRowsSelected
-
-    val rowActions get() = live.value.rowActions
+    override val columns get() = live.value.columns
+    override val rows get() = live.value.rows
+    override val isEmpty get() = rows.isEmpty()
+    override val areAllRowsSelected get() = rows.all { it.selected }
+    override val areNoRowsSelected get() = rows.all { !it.selected }
+    override val allSelectedRows get() = rows.filter { it.selected }.toInteroperableList()
+    override val areSomeRowsSelected get() = !areNoRowsSelected && rows.size != allSelectedRows.size
+    override val rowActions
+        get() = columns.filterIsInstance<Column.Action<D>>().flatMap {
+            it.actions
+        }.toInteroperableList()
+    override val actions: List<TableAction<D>> get() = live.value.actions
 
     companion object {
         fun <D> of(
             columns: List<Column<D>>,
-            data: List<D>
-        ): Table<D> = Table(columns, List(data.size) { Row(it, data[it]) }.toInteroperableList())
+            data: List<D>,
+            actions: List<TableAction<D>>
+        ): Table<D> = Table(columns, List(data.size) { Row(it, data[it]) }.toInteroperableList(), actions)
     }
 
     override fun equals(other: Any?): Boolean = when (other) {

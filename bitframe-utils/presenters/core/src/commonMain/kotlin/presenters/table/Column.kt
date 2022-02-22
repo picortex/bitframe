@@ -1,6 +1,7 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
-package presenters.collections.table
+package presenters.table
 
 import kotlinx.collections.interoperable.List
 import kotlin.js.JsExport

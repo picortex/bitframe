@@ -6,6 +6,8 @@ plugins {
     `picortex-publish`
 }
 
+val tmp = 0
+
 kotlin {
     jvm { library() }
     js(IR) { library() }
@@ -13,22 +15,13 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeAuthenticationCore)
                 api(projects.presentersCore)
             }
         }
 
-        val nonJsMain by creating {
-            dependsOn(commonMain)
-        }
-
-        val jvmMain by getting {
-            dependsOn(nonJsMain)
-        }
-
         val commonTest by getting {
             dependencies {
-                api(asoft.expect.coroutines)
+                implementation(asoft.expect.coroutines)
             }
         }
     }

@@ -1,16 +1,19 @@
 package pimonitor.client.businesses
 
 import bitframe.client.UIScopeConfig
+import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import pimonitor.client.PiMonitorApi
 import pimonitor.client.businesses.BusinessesIntent.*
+import pimonitor.core.businesses.DASHBOARD
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
-import presenters.collections.tableOf
 import presenters.feedbacks.Feedback
+import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 import pimonitor.client.businesses.BusinessesIntent as Intent
 import pimonitor.client.businesses.BusinessesState as State
@@ -26,6 +29,51 @@ class BusinessesViewModel(
         ShowCreateBusinessForm -> showBusinessForm()
         is ShowInviteToShareReportsForm -> inviteToShareReports(i)
         ExitDialog -> exitDialog()
+        is CaptureInvestment -> captureInvestment(i)
+        is Delete -> delete(i)
+        is DeleteAll -> deleteAll(i)
+        is Intervene -> intervene(i)
+        is UpdateInvestment -> updateInvestment(i)
+    }
+
+    private fun CoroutineScope.updateInvestment(i: UpdateInvestment) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(status = Feedback.Loading("Capturing investment")))
+            error("Implement update investment for ${i.monitored}")
+        }.catchAndCollectToUI(state)
+    }
+
+    private fun CoroutineScope.intervene(i: Intervene) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(status = Feedback.Loading("Intervening")))
+            error("Implement intervene for ${i.monitored.name}")
+        }.catchAndCollectToUI(state)
+    }
+
+    private fun CoroutineScope.deleteAll(i: DeleteAll) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(status = Feedback.Loading("Deleting All")))
+            error("Implement delete all for ${i.data.joinToString(",") { it.name }}")
+        }.catchAndCollectToUI(state)
+    }
+
+    private fun CoroutineScope.delete(i: Delete) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(status = Feedback.Loading("Deleting")))
+            error("Implement delete for ${i.monitored}")
+        }.catchAndCollectToUI(state)
+    }
+
+    private fun CoroutineScope.captureInvestment(i: CaptureInvestment) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(status = Feedback.Loading("Capturing investment")))
+            error("Implement capture investment for ${i.monitored}")
+        }.catchAndCollectToUI(state)
     }
 
     private fun exitDialog() {
@@ -70,20 +118,48 @@ class BusinessesViewModel(
         }.catchAndCollectToUI(state)
     }
 
-    private fun businessTable(date: List<MonitoredBusinessSummary>) = tableOf(date) {
+    internal fun businessTable(date: List<MonitoredBusinessSummary>) = tableOf(date) {
+        primaryAction("Add Business") {
+            post(ShowCreateBusinessForm)
+        }
+        singleAction("Intervene") {
+            post(Intervene(it.data))
+        }
+        singleAction("Capture Investment") {
+            post(CaptureInvestment(it.data))
+        }
+        singleAction("Update Investment") {
+            post(UpdateInvestment(it.data))
+        }
+        multiAction("Delete All") { selected ->
+            post(DeleteAll(selected.map { it.data }.toInteroperableList()))
+        }
         selectable()
         column("Name") { it.data.name }
-        column("Reporting") { "" }
+        column("Reporting") {
+            when (val data = it.data) {
+                is MonitoredBusinessSummary.ConnectedDashboard -> data.dashboard
+                is MonitoredBusinessSummary.UnConnectedDashboard -> DASHBOARD.NONE
+            }
+        }
         column("Revenue") { "" }
         column("Expenses") { "" }
         column("GP") { "" }
         column("Velocity") { "" }
         column("NCF") { "" }
         column("V/day") { "" }
-        actions("Actions") {
+        actionsColumn("Actions") {
             action("Invite to share reports") { post(ShowInviteToShareReportsForm(it.data)) }
-//            action("Delete") { tree.log("Deleting: ${it.data.name}") }
-//            action("View") { tree.log("Viewing: ${it.data.name}") }
+            action("Intervene") {
+                post(Intervene(it.data))
+            }
+            action("Capture Investment") {
+                post(CaptureInvestment(it.data))
+            }
+            action("Update Investment") {
+                post(UpdateInvestment(it.data))
+            }
+            action("Delete") { post(Delete(it.data)) }
         }
     }
 }

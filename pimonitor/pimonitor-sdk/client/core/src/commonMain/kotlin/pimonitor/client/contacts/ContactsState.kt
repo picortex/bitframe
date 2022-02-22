@@ -2,7 +2,6 @@
 
 package pimonitor.client.contacts
 
-import presenters.collections.Table
 import kotlin.js.JsExport
 
 sealed class ContactsState {
