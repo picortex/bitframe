@@ -14,7 +14,7 @@ import pimonitor.client.businesses.BusinessesIntent as Intent
 import pimonitor.client.businesses.BusinessesState as State
 
 class BusinessesReactScope internal constructor(
-    override val config: UIScopeConfig<PiMonitorApi>
+    override val config: UIScopeConfig<BusinessesService>
 ) : BusinessesScope(config), ReactUIScope<Intent, State> {
     override val useScopeState: () -> State = { viewModel.asState() }
     private val bus get() = config.service.config.bus

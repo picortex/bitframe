@@ -23,7 +23,7 @@ class PiMonitorReactAppScope(
     override val signIn by lazy { SignInReactScope(of(api.signIn)) }
     override val signUp by lazy { SignUpReactScope(of(api)) }
     override val panel by lazy { PanelReactScope(of(api.signIn)) }
-    override val businesses by lazy { BusinessesReactScope(of(api)) }
+    override val businesses by lazy { BusinessesReactScope(config { api.businesses }) }
     override val createBusiness by lazy { CreateBusinessReactScope(of(api)) }
     override val contacts by lazy { ContactsReactScope(of(api)) }
     override val portfolio by lazy { PortfolioReactScope(of(api)) }
