@@ -4,12 +4,12 @@ import validation.requiredNotBlank
 import kotlin.js.JsExport
 
 @JsExport
-interface RawChangePasswordParams {
+interface ChangePasswordRawParams {
     val previous: String
     val current: String
 }
 
-fun RawChangePasswordParams.toValidatedChangePasswordParams() = ChangePasswordParams(
+fun ChangePasswordRawParams.toValidatedChangePasswordParams() = ChangePasswordParams(
     previous = requiredNotBlank(::previous),
     current = requiredNotBlank(::current)
 )

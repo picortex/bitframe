@@ -6,14 +6,12 @@ import bitframe.core.RequestBody
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.util.*
-import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.collections.interoperable.toInteroperableList
-import later.Later
 import later.later
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
-import pimonitor.core.businesses.params.CreateBusinessParams
+import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import response.decodeResponseFromString
 
 class BusinessesServiceKtor(
@@ -24,12 +22,12 @@ class BusinessesServiceKtor(
     val json get() = config.json
 
     @OptIn(InternalAPI::class)
-    override fun create(rb: RequestBody.Authorized<CreateBusinessParams>) = config.scope.later {
+    override fun create(rb: RequestBody.Authorized<CreateMonitoredBusinessParams>) = config.scope.later {
         val req = client.post("${config.url}$baseUrl/create") {
             body = json.of(rb)
         }
         println(req.bodyAsText())
-        json.decodeResponseFromString(CreateBusinessParams.serializer(), req.bodyAsText()).response()
+        json.decodeResponseFromString(CreateMonitoredBusinessParams.serializer(), req.bodyAsText()).response()
     }
 
     @OptIn(InternalAPI::class)

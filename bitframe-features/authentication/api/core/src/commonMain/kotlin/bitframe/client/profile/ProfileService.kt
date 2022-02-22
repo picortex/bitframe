@@ -6,7 +6,7 @@ import bitframe.client.ServiceConfig
 import bitframe.core.RequestBody
 import bitframe.core.Session
 import bitframe.core.profile.params.ChangePasswordParams
-import bitframe.core.profile.params.RawChangePasswordParams
+import bitframe.core.profile.params.ChangePasswordRawParams
 import bitframe.core.profile.params.toValidatedChangePasswordParams
 import later.Later
 import later.await
@@ -20,7 +20,7 @@ abstract class ProfileService(
 ) : CoreProfileService {
     private val scope get() = config.scope
 
-    fun changePassword(params: RawChangePasswordParams): Later<ChangePasswordParams> = scope.later {
+    fun changePassword(params: ChangePasswordRawParams): Later<ChangePasswordParams> = scope.later {
         val session = config.session.value as? Session.SignedIn ?: error("You need to be signed in first in order to change your password")
         val rb = RequestBody.Authorized(
             session = session,

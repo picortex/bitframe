@@ -7,7 +7,7 @@ import kotlinx.datetime.Clock
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.businesses.forms.CreateBusinessViewModel
-import pimonitor.core.businesses.params.CreateBusinessParams
+import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import viewmodel.expect
 import kotlin.test.Test
@@ -37,7 +37,7 @@ class CreateBusinessViewModelTest {
         delay(100)
 
         vm.expect(Intent.ShowForm(null)).toBeIn<State.Form>()
-        val params = CreateBusinessParams(
+        val params = CreateMonitoredBusinessParams(
             businessName = "PiCortex LLC",
             contactName = "Mohammed Majapa",
             contactEmail = "mmajapa@gmail$time.com",

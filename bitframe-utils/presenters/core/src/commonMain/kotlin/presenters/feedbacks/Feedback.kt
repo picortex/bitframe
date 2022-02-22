@@ -12,13 +12,6 @@ sealed class Feedback {
         override val message: String
     ) : Feedback() {
         val loading: Boolean = true
-        override fun hashCode(): Int = message.hashCode()
-        override fun equals(other: Any?): Boolean = when (other) {
-            is Loading -> other.message == message
-            else -> false
-        }
-
-        override fun toString(): String = "Loading(message=$message)"
     }
 
     class Failure(
@@ -26,26 +19,25 @@ sealed class Feedback {
         override val message: String = cause?.message ?: "Unknown error"
     ) : Feedback() {
         val failure: Boolean = true
-        override fun hashCode(): Int = message.hashCode()
-        override fun equals(other: Any?): Boolean = when (other) {
-            is Failure -> other.message == message
-            else -> false
-        }
-
-        override fun toString(): String = "Failure(message=$message)"
     }
 
     class Success(
         override val message: String = "Success"
     ) : Feedback() {
         val success = true
-        override fun hashCode(): Int = message.hashCode()
-
-        override fun equals(other: Any?): Boolean = when (other) {
-            is Success -> other.message == message
-            else -> false
-        }
-
-        override fun toString(): String = "Success(message=$message)"
     }
+
+    object None : Feedback() {
+        override val message = "No Feedback"
+        override fun toString(): String = "NoFeedback"
+    }
+
+    override fun hashCode(): Int = message.hashCode()
+
+    override fun equals(other: Any?): Boolean = when (other) {
+        is Feedback -> other.message == message && this::class == other::class
+        else -> false
+    }
+
+    override fun toString(): String = "${this::class.simpleName}(message=$message)"
 }

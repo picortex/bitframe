@@ -1,4 +1,5 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client.businesses
 
@@ -8,7 +9,7 @@ import kotlin.js.JsExport
 
 sealed class BusinessesDialog {
 
-    data class None(val ordinal: Int = 1) : BusinessesDialog()
+    object None : BusinessesDialog()
 
     data class CreateBusiness(
         override val title: String = "Add Business",

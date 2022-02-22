@@ -7,7 +7,7 @@ import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.businesses.forms.CreateBusinessViewModel
-import pimonitor.core.businesses.params.RawCreateBusinessParams
+import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import viewmodel.ViewModel
 import kotlin.js.JsExport
 import pimonitor.client.businesses.forms.CreateBusinessIntent as Intent
@@ -20,7 +20,7 @@ open class CreateBusinessScope(
 
     val showForm = { uid: String? -> viewModel.post(Intent.ShowForm(uid)) }
 
-    val submitForm = { params: RawCreateBusinessParams ->
+    val submitForm = { params: CreateMonitoredBusinessRawParams ->
         viewModel.post(Intent.SubmitForm(params))
     }
 }

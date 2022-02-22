@@ -6,15 +6,24 @@ import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
 import validation.required
 import validation.requiredNotBlank
+import kotlin.js.JsExport
 
-fun RawCreateBusinessParams.toValidatedCreateBusinessParams() = CreateBusinessParams(
+@JsExport
+interface CreateMonitoredBusinessRawParams {
+    val businessName: String
+    val contactName: String
+    val contactEmail: String
+    val sendInvite: Boolean
+}
+
+fun CreateMonitoredBusinessRawParams.toValidatedCreateBusinessParams() = CreateMonitoredBusinessParams(
     businessName = requiredNotBlank(::businessName),
     contactName = requiredNotBlank(::contactName),
     contactEmail = requiredNotBlank(::contactEmail),
     sendInvite = required(::sendInvite)
 )
 
-fun RawCreateBusinessParams.toRegisterUserParams() = RegisterUserParams(
+fun CreateMonitoredBusinessRawParams.toRegisterUserParams() = RegisterUserParams(
     userName = contactName,
     userIdentifier = contactEmail,
     userType = USER_TYPE.CONTACT,

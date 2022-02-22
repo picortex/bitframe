@@ -1,18 +1,18 @@
 package pimonitor.core.portfolio
 
+import bitframe.core.ServiceConfig
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.listOf
 import later.later
-import pimonitor.core.businesses.BusinessesService
+import pimonitor.core.businesses.BusinessesServiceCore
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import presenters.cards.ValueCard
 import presenters.fields.BooleanInputField
 import kotlin.random.Random
 
 class PortfolioService(
-    private val businessesService: BusinessesService
+    val config: ServiceConfig
 ) {
-    private val config get() = businessesService.config
     private val scope get() = config.scope
 
     fun getPortfolioData() = scope.later {
