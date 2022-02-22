@@ -22,7 +22,7 @@ open class ContactsDaodService(
         val session = rb.session
         val condition = MonitoredBusinessBasicInfo::owningSpaceId isEqualTo session.space.uid
         businessDao.all(condition).await().flatMap { info ->
-            userSpaceInfoDao.all(UserSpaceInfo::spaceId isEqualTo info.spaceId).await().map {
+            userSpaceInfoDao.all(UserSpaceInfo::spaceId isEqualTo info.spaceId).await().toTypedArray().map {
                 it.toContactPersonSummary(info)
             }
         }.toInteroperableList()
