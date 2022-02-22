@@ -5,7 +5,6 @@ import expect.expect
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.PiMonitorReactAppScope
-import kotlin.reflect.typeOf
 import kotlin.test.Test
 
 class PiMonitorReactScopeInteroperabilityTest {
@@ -19,9 +18,6 @@ class PiMonitorReactScopeInteroperabilityTest {
     @Test
     fun should_have_a_non_null_session_object() {
         val session = scope.session.unsafeCast<SessionAware>()
-        console.log(js("""typeof scope.api"""))
-        console.log(js("""typeof "session""""))
-        console.log(js("typeof session"))
         expect(session).toBeNonNull()
     }
 

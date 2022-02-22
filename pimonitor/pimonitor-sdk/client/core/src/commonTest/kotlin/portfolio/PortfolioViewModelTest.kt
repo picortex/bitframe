@@ -17,7 +17,7 @@ class PortfolioViewModelTest {
 
     @Test
     fun should_start_in_a_loading_tate() = runTest {
-        expect(vm).toBeIn<State.Loading>()
+        expect(vm).toBeIn<State.Status>()
     }
 
     @Ignore // cover this quickly mate
