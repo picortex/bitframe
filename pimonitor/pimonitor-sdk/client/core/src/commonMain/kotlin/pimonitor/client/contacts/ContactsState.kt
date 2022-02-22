@@ -1,12 +1,15 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client.contacts
 
+import pimonitor.core.contacts.ContactPersonSummary
+import presenters.feedbacks.Feedback
+import presenters.table.Table
+import presenters.table.builders.tableOf
 import kotlin.js.JsExport
 
-sealed class ContactsState {
-    data class Loading(val message: String) : ContactsState()
-
-    //    data class Contacts(val table: Table<ContactModel>) : ContactsState()
-    data class Failure(val cause: Throwable, val message: String? = cause.message) : ContactsState()
-}
+data class ContactsState(
+    val status: Feedback = Feedback.Loading("Loading contacts, please wait. . ."),
+    val table: Table<ContactPersonSummary> = tableOf(emptyList()) {}
+)

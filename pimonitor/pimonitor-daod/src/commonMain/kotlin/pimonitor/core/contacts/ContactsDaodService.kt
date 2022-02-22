@@ -14,9 +14,15 @@ open class ContactsDaodService(
 ) : ContactsServiceCore {
     val businessDao by lazy { config.daoFactory.get<MonitoredBusinessBasicInfo>() }
     val usersDao by lazy { config.daoFactory.get<User>() }
+    val contactsDao by lazy {
+        CompoundDao(
+            config.daoFactory.get<UserPhone>(),
+            config.daoFactory.get<UserEmail>()
+        )
+    }
     val userSpaceInfoDao by lazy { config.daoFactory.get<UserSpaceInfo>() }
     val spacesDao by lazy { config.daoFactory.get<Space>() }
-    val contactsDao by lazy { config.daoFactory.get<ContactPersonSpaceInfo>() }
+    val contactSpaceInfoDao by lazy { config.daoFactory.get<ContactPersonSpaceInfo>() }
 
     override fun all(rb: RequestBody.Authorized<ContactsFilter>): Later<List<ContactPersonSummary>> = config.scope.later {
         val session = rb.session
@@ -32,11 +38,14 @@ open class ContactsDaodService(
         business: MonitoredBusinessBasicInfo
     ): ContactPersonSummary {
         val user = usersDao.load(userId).await()
-        val info = contactsDao.all(ContactPersonSpaceInfo::userId isEqualTo userId).await().first()
+        val contacts = contactsDao.all(UserContact::userId isEqualTo user.uid).await()
+        val info = contactSpaceInfoDao.all(ContactPersonSpaceInfo::userId isEqualTo userId).await().first()
         val space = spacesDao.load(business.spaceId).await()
         return ContactPersonSummary(
             userId = userId,
             name = user.name,
+            email = contacts.filterIsInstance<UserEmail>().firstOrNull()?.value ?: "",
+            phone = contacts.filterIsInstance<UserPhone>().firstOrNull()?.value ?: "",
             position = info.position,
             business = business.toMonitoredBusinessRef(space.name)
         )

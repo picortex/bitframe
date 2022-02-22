@@ -2,39 +2,51 @@ package pimonitor.client.contacts
 
 import bitframe.client.UIScopeConfig
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import later.await
 import pimonitor.client.PiMonitorApi
+import pimonitor.core.contacts.ContactPersonSummary
+import presenters.feedbacks.Feedback
+import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 import pimonitor.client.contacts.ContactsIntent as Intent
 import pimonitor.client.contacts.ContactsState as State
 
 class ContactsViewModel(
-    private val config: UIScopeConfig<PiMonitorApi>
-) : ViewModel<Intent, State>(State.Loading("Loading contacts, please wait"), config.viewModel) {
-    private val service: PiMonitorApi = config.service
+    private val config: UIScopeConfig<ContactsService>
+) : ViewModel<Intent, State>(State(), config.viewModel) {
+    private val service get() = config.service
     override fun CoroutineScope.execute(i: Intent) = when (i) {
         Intent.LoadContacts -> loadContacts()
     }
 
     private fun CoroutineScope.loadContacts() = launch {
-        flow<State> {
-            emit(State.Loading("Fetching contacts, please wait"))
-//            val model = service.businesses.all().await().flatMap { it.contacts.map { contact -> ContactModel(it, contact) } }
-//            emit(State.Contacts(createContactsTable(model)))
+        val state = ui.value
+        flow {
+            emit(state.copy(status = Feedback.Loading("Fetching contacts, please wait . . .")))
+            emit(
+                state.copy(
+                    status = Feedback.None,
+                    table = contactsTableOf(service.all().await())
+                )
+            )
         }.catch {
-            emit(State.Failure(it))
+            emit(state.copy(status = Feedback.Failure(it, "Failed to fetch contacts")))
+            delay(config.viewModel.recoveryTime)
+            emit(state)
         }.collect {
             ui.value = it
         }
     }
 
-//    private fun createContactsTable(contacts: List<ContactModel>) = tableOf(contacts) {
-//        selectable()
-//        column("Name") { it.data.contact.name }
-//        column("Position") { it.data.contact.position }
-//        column("Business") { it.data.business.name }
-//        column("Email") { it.data.contact.email.value }
-//    }
+    internal fun contactsTableOf(contacts: List<ContactPersonSummary>) = tableOf(contacts) {
+        selectable()
+        column("Name") { it.data.name }
+        column("Position") { it.data.position }
+        column("Business") { it.data.business.name }
+        column("Email") { it.data.email }
+    }
 }
