@@ -5,6 +5,8 @@ package pimonitor.client
 
 import bitframe.client.BitframeAppScopeConfig
 import bitframe.client.BitframeReactAppScope
+import bitframe.client.SessionAware
+import bitframe.client.SessionAwareImpl
 import bitframe.client.panel.PanelReactScope
 import bitframe.client.password.ChangePasswordReactScope
 import bitframe.client.password.ChangePasswordScope
