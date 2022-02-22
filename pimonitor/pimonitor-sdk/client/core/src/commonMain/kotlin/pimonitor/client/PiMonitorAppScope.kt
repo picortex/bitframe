@@ -6,6 +6,7 @@ package pimonitor.client
 import bitframe.client.BitframeAppScope
 import bitframe.client.BitframeAppScopeConfig
 import bitframe.client.SessionAware
+import bitframe.client.SessionAwareImpl
 import bitframe.client.panel.PanelScope
 import bitframe.client.password.ChangePasswordScope
 import bitframe.client.signin.SignInScope
@@ -20,10 +21,11 @@ open class PiMonitorAppScope(
     override val config: BitframeAppScopeConfig<PiMonitorApi>,
 ) : BitframeAppScope<PiMonitorApi> {
 
-    protected val api get() = config.api
+    open val api get() = config.api
     protected fun <S : Any> of(service: S) = config.toConfig(service)
 
     override val session: SessionAware get() = config.api.session
+
     override val signIn by lazy { SignInScope(config { api.signIn }) }
     open val signUp by lazy { SignUpScope(config()) }
     override val panel by lazy { PanelScope(config { api.signIn }) }

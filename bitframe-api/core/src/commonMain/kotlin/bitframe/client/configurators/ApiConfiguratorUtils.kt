@@ -6,7 +6,8 @@ import logging.Logger
 
 fun ApiConfigurator.toApiMode(): ApiMode {
     val appenders = buildList<Appender> {
-        if (logging?.console == true) add(ConsoleAppender())
+        val l = logging ?: LoggingConfiguratorImpl()
+        if (l.console == true) add(ConsoleAppender())
     }
     val logger = Logger(*appenders.toTypedArray())
     return if (appId?.isNotEmpty() == true && url?.isNotEmpty() == true) {

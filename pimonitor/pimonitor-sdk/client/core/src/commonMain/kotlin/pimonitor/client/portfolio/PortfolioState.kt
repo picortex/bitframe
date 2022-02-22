@@ -1,24 +1,16 @@
-@file:Suppress("WRONG_EXPORTED_DECLARATION")
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client.portfolio
 
 import pimonitor.core.portfolio.PortfolioData
+import presenters.feedbacks.Feedback
 import kotlin.js.JsExport
 import presenters.feedbacks.Feedback.Failure as FeedbackFailure
 import presenters.feedbacks.Feedback.Loading as FeedbackLoading
 
-@JsExport
-sealed interface PortfolioState {
-    data class Loading(
-        override val message: String
-    ) : FeedbackLoading(message), PortfolioState
+sealed class PortfolioState {
+    data class Status(val value: Feedback) : PortfolioState()
 
-    data class Portfolio(
-        val data: PortfolioData
-    ) : PortfolioState
-
-    data class Failure(
-        override val cause: Throwable,
-        override val message: String = cause.message ?: "Unknown error",
-    ) : FeedbackFailure(cause, message), PortfolioState
+    data class Portfolio(val data: PortfolioData) : PortfolioState()
 }

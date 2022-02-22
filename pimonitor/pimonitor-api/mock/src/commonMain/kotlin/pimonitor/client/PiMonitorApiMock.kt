@@ -2,6 +2,8 @@ package pimonitor.client
 
 import bitframe.client.BitframeApiMock
 import bitframe.client.BitframeApiMockConfig
+import bitframe.client.SessionAware
+import bitframe.client.SessionAwareImpl
 import pimonitor.client.businesses.BusinessesService
 import pimonitor.client.businesses.BusinessesServiceMock
 import pimonitor.client.signup.SignUpServiceMock

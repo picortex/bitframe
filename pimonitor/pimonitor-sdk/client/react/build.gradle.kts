@@ -22,6 +22,13 @@ kotlin {
                 api(projects.bitframeSdkClientReact)
             }
         }
+
+        val test by getting {
+            dependencies {
+                implementation(projects.pimonitorApiPublicTest)
+                implementation(asoft.expect.coroutines)
+            }
+        }
     }
 }
 
