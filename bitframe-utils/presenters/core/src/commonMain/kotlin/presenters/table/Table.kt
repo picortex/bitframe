@@ -11,7 +11,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 class Table<D>(
-    private val live: MutableLive<TableState<D>>
+    val live: MutableLive<TableState<D>>
 ) : TableLike<D> {
     @JsName("from")
     constructor(
