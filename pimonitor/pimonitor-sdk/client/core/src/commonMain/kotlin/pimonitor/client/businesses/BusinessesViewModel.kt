@@ -26,8 +26,14 @@ class BusinessesViewModel(
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         LoadBusinesses -> loadBusiness()
-        ShowCreateBusinessForm -> showBusinessForm()
-        is ShowInviteToShareReportsForm -> inviteToShareReports(i)
+        ShowCreateBusinessForm -> ui.value = ui.value.copy(
+            status = Feedback.None,
+            dialog = BusinessesDialog.CreateBusiness()
+        )
+        is ShowInviteToShareReportsForm -> ui.value = ui.value.copy(
+            status = Feedback.None,
+            dialog = BusinessesDialog.InviteToShareReports(monitored = i.monitored)
+        )
         ExitDialog -> exitDialog()
         is CaptureInvestment -> captureInvestment(i)
         is Delete -> delete(i)
@@ -84,33 +90,25 @@ class BusinessesViewModel(
     }
 
     private suspend fun Flow<State>.catchAndCollectToUI(state: State) = catch {
-        emit(state.copy(status = Feedback.Failure(it)))
+        emit(state.copy(status = Feedback.Failure(it), dialog = BusinessesDialog.None))
         delay(config.viewModel.recoveryTime)
         emit(state)
     }.collect {
         ui.value = it
     }
 
-    private fun CoroutineScope.inviteToShareReports(i: ShowInviteToShareReportsForm) = launch {
-        val state = ui.value
-        flow {
-            emit(state.copy(dialog = BusinessesDialog.InviteToShareReports(monitored = i.monitored)))
-        }.catchAndCollectToUI(state)
-    }
-
-    private fun CoroutineScope.showBusinessForm() = launch {
-        val state = ui.value
-        flow {
-            emit(state.copy(dialog = BusinessesDialog.CreateBusiness()))
-        }.catchAndCollectToUI(state)
-    }
-
     private fun CoroutineScope.loadBusiness() = launch {
         val state = ui.value
         flow {
-            emit(state.copy(status = Feedback.Loading("Loading your businesses, please wait . . .")))
             emit(
                 state.copy(
+                    status = Feedback.Loading("Loading your businesses, please wait . . ."),
+                    dialog = BusinessesDialog.None
+                )
+            )
+            emit(
+                state.copy(
+                    status = Feedback.None,
                     table = businessTable(service.all().await()),
                     dialog = BusinessesDialog.None
                 )

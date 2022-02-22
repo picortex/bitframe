@@ -14,7 +14,7 @@ import pimonitor.client.portfolio.PortfolioState as State
 class PortfolioViewModel(
     private val config: UIScopeConfig<PiMonitorApi>
 ) : ViewModel<Intent, State>(State.Status(Feedback.Loading("Loading portfolio . . ")), config.viewModel) {
-//    private val service get() = config.service.portfolio
+//    private val service get() = config.service.businesses
 
     override fun CoroutineScope.execute(i: Intent) = when (i) {
         Intent.LoadPortfolio -> loadPortfolio()
