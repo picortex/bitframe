@@ -5,8 +5,6 @@ package pimonitor.client.portfolio
 
 import bitframe.client.ReactUIScope
 import bitframe.client.UIScopeConfig
-import pimonitor.client.PiMonitorApi
-import pimonitor.core.portfolio.PortfolioService
 import useViewModelState
 import pimonitor.client.portfolio.PortfolioIntent as Intent
 import pimonitor.client.portfolio.PortfolioState as State

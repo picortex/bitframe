@@ -17,12 +17,11 @@ import pimonitor.client.portfolio.PortfolioState as State
 
 class PortfolioViewModelTest {
 
-    val scope = PiMonitorMockScope()
-    val api = scope.api
-    val vm = scope.portfolio.viewModel
+    private val scope = PiMonitorMockScope()
+    private val api = scope.api
+    private val vm = scope.portfolio.viewModel
 
     @Test
-    @Ignore // Publish contacts first then proceed with this shit
     fun should_load_portfolio_data() = runTest {
         val time = Clock.System.now()
         // STEP 1: SignUp as a monitor
@@ -36,19 +35,27 @@ class PortfolioViewModelTest {
         //STEP 2: Sign In as the registered monitor
         api.signIn.signIn(monitor.toSignInCredentials()).await()
 
-        // STEP 3: Create a monitored business
+        // STEP 3: Ensure viewmodel has gone through the expected states and has an empty portfolio data
+        val state3 = State()
+        vm.expect(Intent.LoadPortfolioData).toGoThrough(
+            state3.copy(status = Feedback.Loading(message = "Loading your portfolio data, please wait . . .")),
+            state3.copy(status = Feedback.None, data = api.portfolio.load().await())
+        )
+
+        // STEP 4: Create a monitored business
         val params = CreateMonitoredBusinessParams(
             businessName = "PiCortex LLC",
             contactName = "Mohammed Majapa",
-            contactEmail = "",
+            contactEmail = "contact@exp$time.com",
             sendInvite = false
         )
+        api.businesses.create(params).await()
 
-        // STEP 4: Ensure viewmodel has gone through the expected states
+        // STEP 5: Ensure viewmodel has gone through the expected states and has 1 business
         val state = State()
         vm.expect(Intent.LoadPortfolioData).toGoThrough(
             state.copy(status = Feedback.Loading(message = "Loading your portfolio data, please wait . . .")),
-            state.copy(status = Feedback.None, data = PortfolioData())
+            state.copy(status = Feedback.None, data = api.portfolio.load().await())
         )
     }
 }

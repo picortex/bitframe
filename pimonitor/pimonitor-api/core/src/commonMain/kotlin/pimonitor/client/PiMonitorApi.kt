@@ -5,8 +5,8 @@ package pimonitor.client
 import bitframe.client.BitframeApi
 import pimonitor.client.businesses.BusinessesService
 import pimonitor.client.contacts.ContactsService
+import pimonitor.client.portfolio.PortfolioService
 import pimonitor.client.signup.SignUpService
-import pimonitor.core.portfolio.PortfolioService
 import kotlin.js.JsExport
 
 @JsExport
