@@ -7,6 +7,7 @@ import pimonitor.client.businesses.BusinessesServiceKtor
 import pimonitor.client.contacts.ContactsService
 import pimonitor.client.contacts.ContactsServiceKtor
 import pimonitor.client.signup.SignUpServiceKtor
+import pimonitor.core.portfolio.PortfolioService
 
 class PiMonitorApiKtor(
     override val config: BitframeApiKtorConfig,
@@ -14,4 +15,5 @@ class PiMonitorApiKtor(
     override val signUp by lazy { SignUpServiceKtor(config) }
     override val businesses by lazy { BusinessesServiceKtor(config) }
     override val contacts by lazy { ContactsServiceKtor(config) }
+    override val portfolio by lazy { PortfolioService(config) }
 }

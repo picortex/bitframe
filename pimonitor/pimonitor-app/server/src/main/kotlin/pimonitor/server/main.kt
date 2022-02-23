@@ -7,6 +7,8 @@ import bitframe.server.ServiceConfig
 import bitframe.server.bitframeApplication
 import pimonitor.server.businesses.BusinessController
 import pimonitor.server.businesses.BusinessModule
+import pimonitor.server.contacts.ContactsController
+import pimonitor.server.contacts.ContactsModule
 import pimonitor.server.profile.ProfileController
 import pimonitor.server.profile.ProfileModule
 import pimonitor.server.signup.SignUpController
@@ -20,8 +22,8 @@ fun main(args: Array<String>) {
             MockDaoFactory()
             MongoDaoFactory(
                 config = MongoDaoFactoryConfig(
-//                    host = "127.0.0.1:27017",
-                    host = "database:27017",
+                    host = "127.0.0.1:27017",
+//                    host = "database:27017",
                     username = "root",
                     password = "example",
                     database = "pi"
@@ -38,6 +40,9 @@ fun main(args: Array<String>) {
         }
         install { ser ->
             BusinessModule(BusinessController(ser.businesses))
+        }
+        install { ser ->
+            ContactsModule(ContactsController(ser.contacts))
         }
         install { ser ->
             ProfileModule(ProfileController(ser.profile))

@@ -32,6 +32,6 @@ open class PiMonitorAppScope(
     open val businesses by lazy { BusinessesScope(config { api.businesses }) }
     open val createBusiness by lazy { CreateBusinessScope(config()) }
     open val contacts by lazy { ContactsScope(config { api.contacts }) }
-    open val portfolio by lazy { PortfolioScope(config()) }
+    open val portfolio by lazy { PortfolioScope(config {api.portfolio}) }
     open val password by lazy { ChangePasswordScope(config { api.profile }) }
 }

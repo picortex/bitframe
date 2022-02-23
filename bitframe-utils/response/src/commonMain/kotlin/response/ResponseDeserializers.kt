@@ -20,7 +20,7 @@ fun <D> Json.decodeResponseFromString(
     }
 }
 
-fun <D, I : Any> Json.decodeResponseFromString(
+fun <D, I : Any> Json.decodeResponseWithInfoFromString(
     dataSerializer: KSerializer<D>,
     infoSerializer: KSerializer<I>,
     json: String,

@@ -5,6 +5,7 @@ import bitframe.client.BitframeApiMockConfig
 import pimonitor.client.businesses.BusinessesServiceMock
 import pimonitor.client.contacts.ContactsServiceMock
 import pimonitor.client.signup.SignUpServiceMock
+import pimonitor.core.portfolio.PortfolioService
 import kotlin.jvm.JvmOverloads
 
 class PiMonitorApiMock @JvmOverloads constructor(
@@ -13,6 +14,7 @@ class PiMonitorApiMock @JvmOverloads constructor(
     override val signUp by lazy { SignUpServiceMock(config) }
     override val businesses by lazy { BusinessesServiceMock(config) }
     override val contacts by lazy { ContactsServiceMock(config) }
-    
+    override val portfolio by lazy { PortfolioService(config) }
+
 //    override val portfolio by lazy { PortfolioService(businesses) }
 }
