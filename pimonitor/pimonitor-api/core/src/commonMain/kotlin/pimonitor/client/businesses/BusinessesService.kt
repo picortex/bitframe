@@ -34,6 +34,7 @@ abstract class BusinessesService(
         )
         config.bus.dispatch(event)
         logger.info("Registration completed")
+        result
     }
 
     fun all() = config.scope.later {
