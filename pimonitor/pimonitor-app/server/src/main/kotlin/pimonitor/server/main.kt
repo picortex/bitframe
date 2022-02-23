@@ -9,6 +9,8 @@ import pimonitor.server.businesses.BusinessController
 import pimonitor.server.businesses.BusinessModule
 import pimonitor.server.contacts.ContactsController
 import pimonitor.server.contacts.ContactsModule
+import pimonitor.server.portfolio.PortfolioController
+import pimonitor.server.portfolio.PortfolioModule
 import pimonitor.server.profile.ProfileController
 import pimonitor.server.profile.ProfileModule
 import pimonitor.server.signup.SignUpController
@@ -46,6 +48,10 @@ fun main(args: Array<String>) {
         }
         install { ser ->
             ProfileModule(ProfileController(ser.profile))
+        }
+
+        install { ser ->
+            PortfolioModule(PortfolioController(ser.portfolio))
         }
 
         onStart { populateTestEntities() }
