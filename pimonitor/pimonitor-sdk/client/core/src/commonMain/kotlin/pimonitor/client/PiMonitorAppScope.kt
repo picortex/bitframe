@@ -31,7 +31,7 @@ open class PiMonitorAppScope(
     override val panel by lazy { PanelScope(config { api.signIn }) }
     open val businesses by lazy { BusinessesScope(config { api.businesses }) }
     open val createBusiness by lazy { CreateBusinessScope(config()) }
-    open val contacts by lazy { ContactsScope(config()) }
+    open val contacts by lazy { ContactsScope(config { api.contacts }) }
     open val portfolio by lazy { PortfolioScope(config()) }
     open val password by lazy { ChangePasswordScope(config { api.profile }) }
 }

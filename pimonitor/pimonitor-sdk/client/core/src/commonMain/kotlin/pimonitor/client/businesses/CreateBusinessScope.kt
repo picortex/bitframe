@@ -18,8 +18,6 @@ open class CreateBusinessScope(
 ) : UIScope<Intent, State> {
     override val viewModel: ViewModel<Intent, State> by lazy { CreateBusinessViewModel(config) }
 
-    val showForm = { uid: String? -> viewModel.post(Intent.ShowForm(uid)) }
-
     val submitForm = { params: CreateMonitoredBusinessRawParams ->
         viewModel.post(Intent.SubmitForm(params))
     }

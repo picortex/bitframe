@@ -8,49 +8,32 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
+import presenters.feedbacks.Feedback
 import viewmodel.ViewModel
 import pimonitor.client.businesses.forms.CreateBusinessIntent as Intent
 import pimonitor.client.businesses.forms.CreateBusinessState as State
 
 class CreateBusinessViewModel(
     private val config: UIScopeConfig<PiMonitorApi>
-) : ViewModel<Intent, State>(State.Loading("Preparing form, please wait . . ."), config.viewModel) {
-    //    private val monitorService: MonitorsService = config.service.monitors
+) : ViewModel<Intent, State>(State(), config.viewModel) {
     private val businessService by lazy { config.service.businesses }
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
-        is Intent.ShowForm -> when (val uid = i.inviteId) {
-            null -> showAddBusinessForm()
-            else -> showInviteForm(uid)
-        }
         is Intent.SubmitForm -> submitForm(i)
     }
 
     private fun CoroutineScope.submitForm(i: Intent.SubmitForm) = launch {
-        val state = ui.value
+        val state = ui.value.copy(
+            fields = ui.value.fields.copy(i.params)
+        )
         flow {
-            emit(State.Loading("Adding business, please wait . . ."))
+            emit(state.copy(status = Feedback.Loading("Adding ${i.params.businessName}, please wait . . .")))
             businessService.create(i.params).await()
-            emit(State.Success("Business Added"))
+            emit(state.copy(status = Feedback.Success("${i.params.businessName} has successfully been added")))
         }.catch {
-            emit(State.Failure(it))
+            emit(state.copy(status = Feedback.Failure(it)))
             delay(config.viewModel.recoveryTime)
-            emit(state.copy(i))
-        }.collect { ui.value = it }
-    }
-
-    private fun showAddBusinessForm() {
-        ui.value = State.Form(AddBusinessFormFields(), null)
-    }
-
-    private fun CoroutineScope.showInviteForm(uid: String) = launch {
-        flow<State> {
-            emit(State.Loading("Fetching invite information, please wait . . ."))
-//            val monitor = monitorService.load(uid).await() ?: throw RuntimeException("Failed to load inviter(uid=$uid) information")
-//            val fields = InviteBusinessFormFields(monitor)
-//            emit(State.Form(fields, null))
-        }.catch {
-            emit(State.Failure(it))
+            emit(state.copy(status = Feedback.None))
         }.collect { ui.value = it }
     }
 }
