@@ -14,11 +14,6 @@ import kotlin.js.JsName
 
 @JsExport
 interface BusinessesServiceCore {
-    companion object {
-        const val CREATE_BUSINESS_EVENT_TOPIC = "pimonitor.evaluation.business.create"
-        fun createBusinessEvent(business: MonitoredBusinessSummary) = Event(business, CREATE_BUSINESS_EVENT_TOPIC)
-    }
-
     @JsName("_ignore_create")
     fun create(rb: RequestBody.Authorized<CreateMonitoredBusinessParams>): Later<CreateMonitoredBusinessParams>
 

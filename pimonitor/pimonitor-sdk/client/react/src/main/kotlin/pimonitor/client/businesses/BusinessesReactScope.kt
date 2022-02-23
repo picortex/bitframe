@@ -5,8 +5,6 @@ package pimonitor.client.businesses
 
 import bitframe.client.ReactUIScope
 import bitframe.client.UIScopeConfig
-import pimonitor.client.PiMonitorApi
-import pimonitor.core.businesses.BusinessesServiceCore
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import useEventHandler
 import viewmodel.asState
@@ -17,8 +15,12 @@ class BusinessesReactScope internal constructor(
     override val config: UIScopeConfig<BusinessesService>
 ) : BusinessesScope(config), ReactUIScope<Intent, State> {
     override val useScopeState: () -> State = { viewModel.asState() }
-    private val bus get() = config.service.config.bus
-    val useBusinessAddedEvent: (callback: (CreateMonitoredBusinessParams) -> Unit) -> Unit = { callback ->
-        useEventHandler(bus, BusinessesServiceCore.CREATE_BUSINESS_EVENT_TOPIC, callback)
+    val useBusinessAddedEvent: (callback: (CreateMonitoredBusinessParams) -> Unit) -> Unit = { handler ->
+        val conf = config.service.config
+        useEventHandler(
+            bus = conf.bus,
+            BusinessAddedEvent.topic(conf.session.value.space?.uid ?: ""),
+            callback = handler
+        )
     }
 }
