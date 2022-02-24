@@ -4,18 +4,16 @@ import bitframe.core.*
 import bitframe.core.users.RegisterUserUseCase
 import bitframe.core.users.RegisterUserUseCaseImpl
 import kotlinx.collections.interoperable.toInteroperableList
-import later.Later
 import later.await
 import later.later
-import logging.Logger
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
-import pimonitor.core.businesses.params.CreateBusinessParams
+import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.toRegisterUserParams
 import pimonitor.core.contacts.ContactPersonSpaceInfo
 
 open class BusinessesDaodService(
-    override val config: DaodServiceConfig
-) : BusinessesService, RegisterUserUseCase by RegisterUserUseCaseImpl(config) {
+    open val config: DaodServiceConfig
+) : BusinessesServiceCore, RegisterUserUseCase by RegisterUserUseCaseImpl(config) {
 
     private val businessDao by lazy { config.daoFactory.get<MonitoredBusinessBasicInfo>() }
     private val spacesDao by lazy { config.daoFactory.get<Space>() }
@@ -28,7 +26,7 @@ open class BusinessesDaodService(
             "source" to this::class.simpleName
         )
 
-    override fun create(rb: RequestBody.Authorized<CreateBusinessParams>) = config.scope.later {
+    override fun create(rb: RequestBody.Authorized<CreateMonitoredBusinessParams>) = config.scope.later {
         val res1 = register(rb.data.toRegisterUserParams()).await()
         val task2_1 = businessDao.create(
             MonitoredBusinessBasicInfo(

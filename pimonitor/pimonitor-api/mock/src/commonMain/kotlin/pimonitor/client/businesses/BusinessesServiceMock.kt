@@ -2,7 +2,7 @@ package pimonitor.client.businesses
 
 import bitframe.client.MockServiceConfig
 import pimonitor.core.businesses.BusinessesDaodService
-import pimonitor.core.businesses.BusinessesService as CoreBusinessesService
+import pimonitor.core.businesses.BusinessesServiceCore as CoreBusinessesService
 
 class BusinessesServiceMock(
     override val config: MockServiceConfig

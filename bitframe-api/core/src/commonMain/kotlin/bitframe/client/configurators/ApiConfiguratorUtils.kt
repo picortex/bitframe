@@ -29,6 +29,6 @@ fun ApiConfigurator.toValidApiConfigurator(): ApiConfiguratorImpl {
     val conf = ApiConfiguratorImpl()
     conf.appId = appId
     conf.url = url
-    conf.logging = logging
+    conf.logging = logging ?: LoggingConfiguratorImpl()
     return conf
 }

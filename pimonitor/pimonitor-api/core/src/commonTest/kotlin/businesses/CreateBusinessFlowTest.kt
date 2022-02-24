@@ -7,7 +7,7 @@ import kotlinx.datetime.Clock
 import later.await
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.PiMonitorApiTest
-import pimonitor.core.businesses.params.CreateBusinessParams
+import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.BusinessSignUpParams
 import kotlin.test.Test
 
@@ -37,7 +37,7 @@ class CreateBusinessFlowTest {
         expect(res2.user.name).toBe("Business Owner $time")
 
         // STEP 3. Create a business
-        val params3 = CreateBusinessParams(
+        val params3 = CreateMonitoredBusinessParams(
             businessName = "Test Monitored Business $time",
             contactName = "Test Contact $time",
             contactEmail = "contact@business$time.com"

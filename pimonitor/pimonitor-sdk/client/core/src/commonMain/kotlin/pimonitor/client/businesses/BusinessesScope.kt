@@ -5,7 +5,6 @@ package pimonitor.client.businesses
 
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
-import pimonitor.client.PiMonitorApi
 import pimonitor.core.businesses.DASHBOARD
 import viewmodel.ViewModel
 import kotlin.js.JsExport
@@ -13,12 +12,12 @@ import pimonitor.client.businesses.BusinessesIntent as Intent
 import pimonitor.client.businesses.BusinessesState as State
 
 open class BusinessesScope(
-    override val config: UIScopeConfig<PiMonitorApi>
+    override val config: UIScopeConfig<BusinessesService>
 ) : UIScope<Intent, State> {
 
-    override val viewModel: ViewModel<Intent, State> by lazy { BusinessViewModel(config) }
+    override val viewModel: ViewModel<Intent, State> by lazy { BusinessesViewModel(config) }
 
-    val Dashboard = DASHBOARD
+    val Dashboard get() = DASHBOARD
 
     val loadBusinesses: () -> Unit = { viewModel.post(Intent.LoadBusinesses) }
 

@@ -1,7 +1,13 @@
 package portfolio
 
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.Clock
+import later.await
 import pimonitor.client.portfolio.PortfolioViewModel
+import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
+import pimonitor.core.portfolio.PortfolioData
+import pimonitor.core.signup.params.IndividualSignUpParams
+import presenters.feedbacks.Feedback
 import utils.PiMonitorMockScope
 import viewmodel.expect
 import kotlin.test.Ignore
@@ -11,19 +17,45 @@ import pimonitor.client.portfolio.PortfolioState as State
 
 class PortfolioViewModelTest {
 
-    val scope = PiMonitorMockScope()
+    private val scope = PiMonitorMockScope()
+    private val api = scope.api
+    private val vm = scope.portfolio.viewModel
 
-    val vm = scope.portfolio.viewModel as PortfolioViewModel
-
-    @Test
-    fun should_start_in_a_loading_tate() = runTest {
-        expect(vm).toBeIn<State.Status>()
-    }
-
-    @Ignore // cover this quickly mate
     @Test
     fun should_load_portfolio_data() = runTest {
-        TODO()
-        vm.expect(Intent.LoadPortfolio).toBeIn<State.Portfolio>()
+        val time = Clock.System.now()
+        // STEP 1: SignUp as a monitor
+        val monitor = IndividualSignUpParams(
+            name = "Jane $time Doe",
+            email = "jane@doe$time.com",
+            password = "jane"
+        )
+        api.signUp.signUp(monitor).await()
+
+        //STEP 2: Sign In as the registered monitor
+        api.signIn.signIn(monitor.toSignInCredentials()).await()
+
+        // STEP 3: Ensure viewmodel has gone through the expected states and has an empty portfolio data
+        val state3 = State()
+        vm.expect(Intent.LoadPortfolioData).toGoThrough(
+            state3.copy(status = Feedback.Loading(message = "Loading your portfolio data, please wait . . .")),
+            state3.copy(status = Feedback.None, data = api.portfolio.load().await())
+        )
+
+        // STEP 4: Create a monitored business
+        val params = CreateMonitoredBusinessParams(
+            businessName = "PiCortex LLC",
+            contactName = "Mohammed Majapa",
+            contactEmail = "contact@exp$time.com",
+            sendInvite = false
+        )
+        api.businesses.create(params).await()
+
+        // STEP 5: Ensure viewmodel has gone through the expected states and has 1 business
+        val state = State()
+        vm.expect(Intent.LoadPortfolioData).toGoThrough(
+            state.copy(status = Feedback.Loading(message = "Loading your portfolio data, please wait . . .")),
+            state.copy(status = Feedback.None, data = api.portfolio.load().await())
+        )
     }
 }

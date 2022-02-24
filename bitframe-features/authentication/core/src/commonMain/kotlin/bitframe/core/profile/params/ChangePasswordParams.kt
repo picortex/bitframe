@@ -6,4 +6,4 @@ import kotlinx.serialization.Serializable
 data class ChangePasswordParams(
     override val previous: String,
     override val current: String
-) : RawChangePasswordParams
+) : ChangePasswordRawParams

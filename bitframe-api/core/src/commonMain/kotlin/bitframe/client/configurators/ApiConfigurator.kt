@@ -16,6 +16,6 @@ interface ApiConfigurator {
         val DEFAULT_NAMESPACE: String = "app"
     }
 
-    @JsName("${'$'}logging_ignore_")
+    @JsName("_ignore_logging")
     fun logging(configurator: LoggingConfigurator.() -> Unit)
 }

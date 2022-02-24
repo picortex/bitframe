@@ -9,7 +9,7 @@ import kotlinx.serialization.decodeFromString
 import later.await
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.BusinessesDaodService
-import pimonitor.core.businesses.params.CreateBusinessParams
+import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import response.response
 
 class BusinessController(
@@ -17,7 +17,7 @@ class BusinessController(
 ) {
     val json get() = service.config.json
     suspend fun create(req: HttpRequest): HttpResponse = response {
-        val rb = json.decodeFromString<RequestBody.Authorized<CreateBusinessParams>>(req.compulsoryBody())
+        val rb = json.decodeFromString<RequestBody.Authorized<CreateMonitoredBusinessParams>>(req.compulsoryBody())
         resolve(service.create(rb).await())
     }.toHttpResponse()
 

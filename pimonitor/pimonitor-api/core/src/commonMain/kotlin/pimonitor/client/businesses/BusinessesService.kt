@@ -9,29 +9,32 @@ import bitframe.core.Session
 import later.await
 import later.later
 import pimonitor.core.businesses.BusinessFilter
-import pimonitor.core.businesses.params.RawCreateBusinessParams
+import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import pimonitor.core.businesses.params.toValidatedCreateBusinessParams
 import kotlin.js.JsExport
-import pimonitor.core.businesses.BusinessesService as CoreBusinessesService
+import pimonitor.core.businesses.BusinessesServiceCore
 
 abstract class BusinessesService(
-    override val config: ServiceConfig
-) : CoreBusinessesService {
+    open val config: ServiceConfig
+) : BusinessesServiceCore {
 
     val logger get() = config.logger
 
-    companion object {
-        const val CREATE_BUSINESS_EVENT_ID = "pimonitor.evaluation.business.create"
-//        fun createBusinessEvent(business: MonitoredBusiness) = Event(business,CREATE_BUSINESS_EVENT_ID )
-    }
-
-    fun create(params: RawCreateBusinessParams) = config.scope.later {
+    fun create(params: CreateMonitoredBusinessRawParams) = config.scope.later {
         logger.info("Registering business ${params.businessName}")
+        val validatedParams = params.toValidatedCreateBusinessParams()
         val rb = RequestBody.Authorized(
             session = config.session.value as? Session.SignedIn ?: error("You must be signed in to be able to create a business"),
-            data = params.toValidatedCreateBusinessParams()
+            data = validatedParams
         )
-        create(rb).await().also { logger.info("Registration completed") }
+        val result = create(rb).await()
+        val event = BusinessAddedEvent(
+            data = result,
+            spaceId = rb.session.space.uid
+        )
+        config.bus.dispatch(event)
+        logger.info("Registration completed")
+        result
     }
 
     fun all() = config.scope.later {

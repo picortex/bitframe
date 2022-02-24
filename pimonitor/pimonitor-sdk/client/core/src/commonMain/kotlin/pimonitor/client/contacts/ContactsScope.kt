@@ -12,7 +12,7 @@ import pimonitor.client.contacts.ContactsIntent as Intent
 import pimonitor.client.contacts.ContactsState as State
 
 open class ContactsScope(
-    override val config: UIScopeConfig<PiMonitorApi>
+    override val config: UIScopeConfig<ContactsService>
 ) : UIScope<Intent, State> {
 
     override val viewModel: ViewModel<Intent, State> by lazy { ContactsViewModel(config) }

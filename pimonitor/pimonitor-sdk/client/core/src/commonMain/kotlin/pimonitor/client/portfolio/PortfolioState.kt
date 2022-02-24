@@ -6,11 +6,14 @@ package pimonitor.client.portfolio
 import pimonitor.core.portfolio.PortfolioData
 import presenters.feedbacks.Feedback
 import kotlin.js.JsExport
-import presenters.feedbacks.Feedback.Failure as FeedbackFailure
-import presenters.feedbacks.Feedback.Loading as FeedbackLoading
+import kotlin.jvm.JvmField
 
-sealed class PortfolioState {
-    data class Status(val value: Feedback) : PortfolioState()
-
-    data class Portfolio(val data: PortfolioData) : PortfolioState()
+data class PortfolioState(
+    val status: Feedback = INITIAL_LOADING_STATUS,
+    val data: PortfolioData = PortfolioData()
+) {
+    companion object {
+        @JvmField
+        val INITIAL_LOADING_STATUS = Feedback.Loading("Loading your portfolio data, please wait . . .")
+    }
 }

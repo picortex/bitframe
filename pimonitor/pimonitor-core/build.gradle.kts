@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeAuthenticationCore)
-                api(projects.presenters)
+                api(projects.presentersCore)
             }
         }
 
