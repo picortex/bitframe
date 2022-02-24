@@ -14,6 +14,8 @@ import pimonitor.client.businesses.BusinessesScope
 import pimonitor.client.businesses.CreateBusinessScope
 import pimonitor.client.contacts.ContactsScope
 import pimonitor.client.portfolio.PortfolioScope
+import pimonitor.client.search.SearchScope
+import pimonitor.client.search.SearchViewModel
 import pimonitor.client.signup.SignUpScope
 import kotlin.js.JsExport
 
@@ -32,6 +34,7 @@ open class PiMonitorAppScope(
     open val businesses by lazy { BusinessesScope(config { api.businesses }) }
     open val createBusiness by lazy { CreateBusinessScope(config()) }
     open val contacts by lazy { ContactsScope(config { api.contacts }) }
-    open val portfolio by lazy { PortfolioScope(config {api.portfolio}) }
+    open val portfolio by lazy { PortfolioScope(config { api.portfolio }) }
     open val password by lazy { ChangePasswordScope(config { api.profile }) }
+    open val search by lazy { SearchScope(config { api.search }) }
 }

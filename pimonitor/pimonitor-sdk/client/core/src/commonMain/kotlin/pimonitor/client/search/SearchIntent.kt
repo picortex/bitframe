@@ -1,6 +1,6 @@
 package pimonitor.client.search
 
 sealed class SearchIntent {
-    object ClearResults : SearchIntent()
+    object ClearSearch : SearchIntent()
     data class Search(val key: String) : SearchIntent()
 }

@@ -16,6 +16,8 @@ import pimonitor.client.businesses.BusinessesReactScope
 import pimonitor.client.businesses.CreateBusinessReactScope
 import pimonitor.client.contacts.ContactsReactScope
 import pimonitor.client.portfolio.PortfolioReactScope
+import pimonitor.client.search.SearchReactScope
+import pimonitor.client.search.SearchScope
 
 class PiMonitorReactAppScope(
     override val config: BitframeAppScopeConfig<PiMonitorApi>,
@@ -28,4 +30,5 @@ class PiMonitorReactAppScope(
     override val contacts by lazy { ContactsReactScope(config { api.contacts }) }
     override val portfolio by lazy { PortfolioReactScope(config { api.portfolio }) }
     override val password by lazy { ChangePasswordReactScope(of(api.profile)) }
+    override val search by lazy { SearchReactScope(config { api.search }) }
 }
