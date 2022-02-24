@@ -8,7 +8,7 @@ kotlin {
     jvm { library() }
 
     js(IR) {
-        library()
+        library(testTimeout = 20000)
     }
 
     sourceSets {
