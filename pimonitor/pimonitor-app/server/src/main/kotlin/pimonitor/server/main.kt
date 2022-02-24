@@ -13,6 +13,8 @@ import pimonitor.server.portfolio.PortfolioController
 import pimonitor.server.portfolio.PortfolioModule
 import pimonitor.server.profile.ProfileController
 import pimonitor.server.profile.ProfileModule
+import pimonitor.server.search.SearchController
+import pimonitor.server.search.SearchModule
 import pimonitor.server.signup.SignUpController
 import pimonitor.server.signup.SignUpModule
 import java.io.File
@@ -52,6 +54,10 @@ fun main(args: Array<String>) {
 
         install { ser ->
             PortfolioModule(PortfolioController(ser.portfolio))
+        }
+
+        install { ser ->
+            SearchModule(SearchController(ser.search))
         }
 
         onStart { populateTestEntities() }

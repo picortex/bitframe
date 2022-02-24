@@ -38,6 +38,7 @@ open class BusinessesDaodService(
             ContactPersonSpaceInfo(
                 userId = res1.user.uid,
                 spaceId = res1.spaces.first().uid,
+                owningSpaceId = rb.session.space.uid,
                 position = ""
             )
         )

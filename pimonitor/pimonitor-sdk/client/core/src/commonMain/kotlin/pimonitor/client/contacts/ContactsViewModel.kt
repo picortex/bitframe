@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
-import pimonitor.core.contacts.ContactPersonSummary
 import presenters.feedbacks.Feedback
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel

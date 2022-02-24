@@ -11,6 +11,7 @@ import kotlin.js.JsExport
 data class ContactPersonSpaceInfo(
     val userId: String,
     val spaceId: String,
+    val owningSpaceId: String,
     val position: String,
     override val uid: String = UNSET,
     override val deleted: Boolean = false

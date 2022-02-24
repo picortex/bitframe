@@ -3,7 +3,6 @@
 
 package pimonitor.client.contacts
 
-import pimonitor.core.contacts.ContactPersonSummary
 import presenters.feedbacks.Feedback
 import presenters.table.Table
 import presenters.table.builders.tableOf
