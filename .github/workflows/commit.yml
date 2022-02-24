@@ -1,61 +1,35 @@
-name: Unit Testing
+# This file was generated using Kotlin DSL (.github/workflows/commit.main.kts).
+# If you want to modify the workflow, please change the Kotlin file and regenerate this YAML file.
+# Generated with https://github.com/krzema12/github-actions-kotlin-dsl
+
+name: Commit Test
 
 on:
   push:
-    branches: [ master-dev-* ]
+    branches:
+      - 'master-dev-*'
 
 jobs:
-  testing:
-    runs-on: ubuntu-latest
+  "Testing":
+    runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 16
-        uses: actions/setup-java@v1
+      - name: Check out
+        uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
         with:
-          java-version: 16
-
-      - name: Cache Gradle
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-            ~/.gradle/yarn
-            ~/.gradle/nodejs
-          key: ${{ runner.os }}-gradle-${{ hashFiles('gradle/gradle-wrapper.*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Cache Node Modules
-        uses: actions/cache@v2
-        with:
-          path: build/js
-          key: ${{ runner.os }}-node-modules
-          restore-keys: |
-            ${{ runner.os }}-node-modules
-      - name: Cache konan
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.konan/dependencies
-            ~/.konan/kotlin-native-macos*
-          key: ${{ runner.os }}-konan-
-          restore-keys: ${{ runner.os }}-konan-
-      - name: Making gradlew executable
+          java-version: 17
+          distribution: zulu
+          cache: gradle
+      - name: Make gradle executable
         run: chmod +x ./gradlew
-        working-directory: .
-
-      - name: Download gradle
+      - name: Downloading gradle
         run: ./gradlew --version
-
-      - name: Running jvm unit tests
-        run: ./gradlew jvmTest --tests unit.*
-        working-directory: .
-
-      - name: Running pi-monitor server unit tests
-        run: ./gradlew :pi-monitor-server:test --tests unit.*
-        working-directory: .
-
-      - name: Running all unit tests
-        run: ./gradlew jsTest jvmTest --tests unit.*
-        working-directory: .
+      - name: Running jvm tests
+        run: API_MODE="MOCK" ./gradlew jvmTest
+      - name: Run pimonitor-app-server tests
+        run: API_MODE="MOCK" ./gradlew :pimonitor-app-server:test
+      - name: Running js tests
+        run: API_MODE="MOCK" ./gradlew jsTest
+      - name: Build project
+        run: API_MODE="MOCK" ./gradlew build

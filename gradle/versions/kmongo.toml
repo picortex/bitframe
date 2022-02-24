@@ -1,0 +1,5 @@
+[versions]
+kmongo = "4.4.0"
+
+[libraries]
+coroutines-serialization = { module = "org.litote.kmongo:kmongo-coroutine-serialization", version.ref = "kmongo" }

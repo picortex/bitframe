@@ -1,6 +1,6 @@
 @file:JsExport
 
-external interface LoggingConfiguration {
-    var console: Boolean?
-    var sentry: Boolean?
+actual external interface LoggingConfiguration {
+    actual var console: Boolean?
+    actual var sentry: Boolean?
 }

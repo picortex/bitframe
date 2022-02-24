@@ -11,7 +11,7 @@ kotlin {
     sourceSets {
         val main by getting {
             dependencies {
-                api(project(":bitframe-events-core"))
+                api(projects.eventsCore)
                 api(asoft.reakt.core)
             }
         }

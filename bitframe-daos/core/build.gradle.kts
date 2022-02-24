@@ -14,15 +14,17 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(projects.bitframeActorCore)
                 api(kotlinx.serialization.core)
-                api(asoft.kotlinx.serialization.mapper)
                 api(kotlinx.coroutines.core)
-                api(asoft.later.core)
+                api(kotlinx.datetime)
+                api(asoft.later.ktx)
             }
         }
 
         val commonTest by getting {
             dependencies {
+                implementation(projects.bitframeDaoMock)
                 implementation(asoft.expect.core)
             }
         }

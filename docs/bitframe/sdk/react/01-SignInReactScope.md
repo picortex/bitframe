@@ -54,7 +54,7 @@ const {
 To make it easier to get a hold of the SignInScope's state, we will get to the top level namespace and call it `State`
 
 ```typescript
-const State = SDK.bitframe.authentication.signin.SignInState
+const State = SDK.bitframe.client.signin.SignInState
 
 function SignInPage() {
   const state = useStateFromViewModel()

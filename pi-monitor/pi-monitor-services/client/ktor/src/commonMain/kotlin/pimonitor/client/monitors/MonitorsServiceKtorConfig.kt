@@ -1,6 +1,0 @@
-package pimonitor.client.monitors
-
-import bitframe.service.client.config.KtorClientConfiguration
-import pimonitor.client.monitors.MonitorsServiceConfig
-
-interface MonitorsServiceKtorConfig : MonitorsServiceConfig, KtorClientConfiguration

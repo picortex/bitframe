@@ -1,7 +1,7 @@
 @file:JsExport
 
-external interface ServiceConfiguration {
-    var appId: String
-    var url: String?
-    var logging: LoggingConfiguration?
+actual external interface ServiceConfiguration {
+    actual var appId: String
+    actual var url: String?
+    actual var logging: LoggingConfiguration?
 }

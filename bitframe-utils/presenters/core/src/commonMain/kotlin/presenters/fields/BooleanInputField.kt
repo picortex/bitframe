@@ -7,6 +7,7 @@ import kotlin.js.JsExport
 
 @Serializable
 data class BooleanInputField(
-    val label: String,
+    override val name: String,
+    val label: String = name,
     var value: Boolean? = null
-)
+) : InputField

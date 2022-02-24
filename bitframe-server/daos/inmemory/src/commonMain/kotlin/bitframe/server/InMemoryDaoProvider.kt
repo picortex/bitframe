@@ -1,6 +1,0 @@
-package bitframe.server
-
-import bitframe.authentication.AuthenticationDaoProvider
-import bitframe.authentication.InMemoryAuthenticationDaoProvider
-
-open class InMemoryDaoProvider : BitframeDaoProvider, AuthenticationDaoProvider by InMemoryAuthenticationDaoProvider()
