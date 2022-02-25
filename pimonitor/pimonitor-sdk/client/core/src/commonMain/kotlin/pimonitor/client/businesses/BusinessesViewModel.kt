@@ -129,6 +129,9 @@ class BusinessesViewModel(
         singleAction("Update Investment") {
             post(UpdateInvestment(it.data))
         }
+        singleAction("Delete") {
+            post(Delete(it.data))
+        }
         multiAction("Delete All") { selected ->
             post(DeleteAll(selected.map { it.data }.toInteroperableList()))
         }

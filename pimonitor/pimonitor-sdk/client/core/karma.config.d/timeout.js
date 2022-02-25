@@ -1,8 +1,8 @@
 config.set({
   "client": {
     "mocha": {
-      "timeout": 10000
+      "timeout": 20000
     },
   },
-  "browserDisconnectTimeout": 10000
+  "browserDisconnectTimeout": 20000
 });
