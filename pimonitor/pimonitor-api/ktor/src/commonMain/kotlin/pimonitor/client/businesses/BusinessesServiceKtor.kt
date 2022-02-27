@@ -6,8 +6,10 @@ import bitframe.core.RequestBody
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.util.*
+import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.collections.interoperable.toInteroperableList
+import later.Later
 import later.later
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
@@ -37,5 +39,9 @@ class BusinessesServiceKtor(
         }
         val resp = json.decodeResponseFromString(ListSerializer(MonitoredBusinessSummary.serializer()), req.bodyAsText())
         resp.response().toInteroperableList()
+    }
+
+    override fun delete(rb: RequestBody.Authorized<Array<out String>>): Later<List<String>> {
+        TODO("Delete Not yet implemented in ktor business service")
     }
 }

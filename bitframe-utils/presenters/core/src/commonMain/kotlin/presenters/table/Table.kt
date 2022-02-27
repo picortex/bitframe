@@ -10,7 +10,7 @@ import presenters.feedbacks.Feedback
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-class Table<D>(
+open class Table<D>(
     val live: MutableLive<TableState<D>>
 ) : TableLike<D> {
     @JsName("from")

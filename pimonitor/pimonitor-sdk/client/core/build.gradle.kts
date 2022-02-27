@@ -23,6 +23,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(projects.pimonitorApiPublicTest)
+                implementation(projects.presentersMock)
                 implementation(asoft.viewmodel.test.expect)
                 implementation(asoft.expect.core)
             }

@@ -1,11 +1,14 @@
-@file:Suppress("WRONG_EXPORTED_DECLARATION")
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package presenters.modal
 
+import kotlinx.collections.interoperable.List
 import kotlin.js.JsExport
 
-@JsExport
-interface Dialog {
-    val title: String
-    val subTitle: String
-}
+data class Dialog<out T>(
+    val heading: String,
+    val details: String,
+    val content: T,
+    val actions: List<Action>
+)
