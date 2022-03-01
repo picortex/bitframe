@@ -36,33 +36,33 @@ class BusinessesViewModel(
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         LoadBusinesses -> loadBusiness()
         ShowCreateBusinessForm -> ui.value = ui.value.copy(
-            dialog = createBusinessDialog { onCancel { start(ExitDialog) } }
+            dialog = createBusinessDialog { onCancel { post(ExitDialog) } }
         )
         is ShowInviteToShareReportsForm -> ui.value = ui.value.copy(
-            dialog = inviteToShareDialog(i.monitored) { onCancel { start(ExitDialog) } }
+            dialog = inviteToShareDialog(i.monitored) { onCancel { post(ExitDialog) } }
         )
         is ShowInterveneForm -> ui.value = ui.value.copy(
             dialog = interveneDialog(i.monitored) {
-                onCancel { start(ExitDialog) }
-                onSubmit {  }
+                onCancel { post(ExitDialog) }
+                onSubmit { }
             }
         )
         is ShowCaptureInvestmentForm -> ui.value = ui.value.copy(
-            dialog = captureInvestmentDialog(i.monitored) { onCancel { start(ExitDialog) } }
+            dialog = captureInvestmentDialog(i.monitored) { onCancel { post(ExitDialog) } }
         )
         is ShowUpdateInvestmentForm -> ui.value = ui.value.copy(
-            dialog = updateInvestmentDialog(i.monitored) { onCancel { start(ExitDialog) } }
+            dialog = updateInvestmentDialog(i.monitored) { onCancel { post(ExitDialog) } }
         )
         is ShowDeleteMultipleConfirmationDialog -> ui.value = ui.value.copy(
             dialog = deleteManyDialog(i.data) {
-                onCancel { start(ExitDialog) }
-                onConfirm { start(DeleteAll(i.data.map { it.data }.toTypedArray())) }
+                onCancel { post(ExitDialog) }
+                onConfirm { post(DeleteAll(i.data.map { it.data }.toTypedArray())) }
             }
         )
         is ShowDeleteSingleConfirmationDialog -> ui.value = ui.value.copy(
             dialog = deleteSingleDialog(i.monitored) {
-                onCancel { start(ExitDialog) }
-                onConfirm { start(Delete(i.monitored)) }
+                onCancel { post(ExitDialog) }
+                onConfirm { post(Delete(i.monitored)) }
             }
         )
         ExitDialog -> exitDialog()
@@ -94,7 +94,7 @@ class BusinessesViewModel(
             emit(state.copy(status = Feedback.Success("${i.data.size} businesses deleted successfully"), dialog = null))
         }.catchAndCollectToUI(state)
         delay(config.viewModel.transitionTime)
-        start(LoadBusinesses)
+        post(LoadBusinesses)
     }
 
     private fun CoroutineScope.delete(i: Delete) = launch {
@@ -105,7 +105,7 @@ class BusinessesViewModel(
             emit(state.copy(status = Feedback.Success("Successfully delete ${i.monitored.name}"), dialog = null))
         }.catchAndCollectToUI(state)
         delay(config.viewModel.transitionTime)
-        start(LoadBusinesses)
+        post(LoadBusinesses)
     }
 
     private fun CoroutineScope.captureInvestment(i: ShowCaptureInvestmentForm) = launch {
@@ -148,13 +148,13 @@ class BusinessesViewModel(
         }.catchAndCollectToUI(state)
     }
 
-    private fun CoroutineScope.businessTable(data: List<MonitoredBusinessSummary>) = tableOf(data) {
-        primaryAction("Add Business") { start(ShowCreateBusinessForm) }
-        singleAction("Intervene") { start(ShowInterveneForm(it.data)) }
-        singleAction("Capture Investment") { start(ShowCaptureInvestmentForm(it.data)) }
-        singleAction("Update Investment") { start(ShowUpdateInvestmentForm(it.data)) }
-        singleAction("Delete") { start(ShowDeleteSingleConfirmationDialog(it.data)) }
-        multiAction("Delete All") { start(ShowDeleteMultipleConfirmationDialog(it)) }
+    private fun businessTable(data: List<MonitoredBusinessSummary>) = tableOf(data) {
+        primaryAction("Add Business") { post(ShowCreateBusinessForm) }
+        singleAction("Intervene") { post(ShowInterveneForm(it.data)) }
+        singleAction("Capture Investment") { post(ShowCaptureInvestmentForm(it.data)) }
+        singleAction("Update Investment") { post(ShowUpdateInvestmentForm(it.data)) }
+        singleAction("Delete") { post(ShowDeleteSingleConfirmationDialog(it.data)) }
+        multiAction("Delete All") { post(ShowDeleteMultipleConfirmationDialog(it)) }
         selectable()
         column("Name") { it.data.name }
         column("Reporting") {
@@ -170,11 +170,11 @@ class BusinessesViewModel(
         column("NCF") { "" }
         column("V/day") { "" }
         actionsColumn("Actions") {
-            action("Invite to share reports") { start(ShowInviteToShareReportsForm(it.data)) }
-            action("Intervene") { start(ShowInterveneForm(it.data)) }
-            action("Capture Investment") { start(ShowCaptureInvestmentForm(it.data)) }
-            action("Update Investment") { start(ShowUpdateInvestmentForm(it.data)) }
-            action("Delete") { start(ShowDeleteSingleConfirmationDialog(it.data)) }
+            action("Invite to share reports") { post(ShowInviteToShareReportsForm(it.data)) }
+            action("Intervene") { post(ShowInterveneForm(it.data)) }
+            action("Capture Investment") { post(ShowCaptureInvestmentForm(it.data)) }
+            action("Update Investment") { post(ShowUpdateInvestmentForm(it.data)) }
+            action("Delete") { post(ShowDeleteSingleConfirmationDialog(it.data)) }
         }
     }
 }

@@ -24,6 +24,10 @@ pluginManagement {
     }
 }
 
+rootDir.resolve("gradle.properties").copyTo(
+    target = rootDir.
+)
+
 fun includeRoot(name: String, path: String) {
     include(":$name")
     project(":$name").projectDir = File(path)
