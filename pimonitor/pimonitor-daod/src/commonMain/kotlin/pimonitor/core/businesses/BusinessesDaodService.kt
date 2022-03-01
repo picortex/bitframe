@@ -56,9 +56,9 @@ open class BusinessesDaodService(
         }.toInteroperableList()
     }
 
-    override fun delete(rb: RequestBody.Authorized<Array<out String>>): Later<List<String>> = config.scope.later {
-        val list = mutableListOf<String>()
-        for (bus in rb.data) list.add(businessDao.delete(bus).await().uid)
+    override fun delete(rb: RequestBody.Authorized<Array<out String>>): Later<List<MonitoredBusinessBasicInfo>> = config.scope.later {
+        val list = mutableListOf<MonitoredBusinessBasicInfo>()
+        for (business in rb.data) list.add(businessDao.delete(business).await())
         list
     }
 

@@ -12,14 +12,5 @@ class EmptyTable<D>(
     columns: List<Column<D>> = emptyList(),
     actions: List<TableAction<D>> = emptyList()
 ) : Table<D>(columns, emptyList(), actions) {
-    override fun equals(other: Any?): Boolean = when (other) {
-        is Table<*> -> columns == other.columns
-        else -> false
-    }
-
-    override fun toString(): String {
-        return "EmptyTable(cols=${columns.size})"
-    }
-
-    override fun hashCode(): Int = toString().hashCode()
+    override fun toString() = "EmptyTable(cols=${columns.size})"
 }

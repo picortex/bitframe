@@ -25,4 +25,9 @@ class BusinessController(
         val rb = json.decodeFromString<RequestBody.Authorized<BusinessFilter>>(req.compulsoryBody())
         resolve(service.all(rb).await())
     }.toHttpResponse()
+
+    suspend fun delete(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.Authorized<Array<String>>>(req.compulsoryBody())
+        resolve(service.delete(rb).await())
+    }.toHttpResponse()
 }

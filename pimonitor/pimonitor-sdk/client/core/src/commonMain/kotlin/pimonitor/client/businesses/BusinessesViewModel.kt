@@ -1,7 +1,6 @@
 package pimonitor.client.businesses
 
 import bitframe.client.UIScopeConfig
-import io.ktor.util.Identity.decode
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -9,15 +8,18 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import live.WatchMode
+import live.Watcher
 import pimonitor.client.businesses.BusinessesIntent.*
 import pimonitor.client.businesses.BusinessesDialogContent.createBusinessDialog
-import pimonitor.client.businesses.BusinessesDialogContent.deleteDialog
+import pimonitor.client.businesses.BusinessesDialogContent.deleteManyDialog
+import pimonitor.client.businesses.BusinessesDialogContent.deleteSingleDialog
 import pimonitor.client.businesses.BusinessesDialogContent.interveneDialog
 import pimonitor.client.businesses.BusinessesDialogContent.inviteToShareDialog
 import pimonitor.core.businesses.DASHBOARD
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import presenters.feedbacks.Feedback
-import presenters.modal.Dialog
+import presenters.table.TableState
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 import pimonitor.client.businesses.BusinessesIntent as Intent
@@ -42,9 +44,14 @@ class BusinessesViewModel(
         )
         is ShowUpdateInvestmentForm -> TODO()
         is ShowCaptureInvestmentForm -> TODO()
-        is ShowDeleteMultipleConfirmationDialog -> TODO()
+        is ShowDeleteMultipleConfirmationDialog -> ui.value = ui.value.copy(
+            dialog = deleteManyDialog(i.data) {
+                onCancel { start(ExitDialog) }
+                onConfirm { start(DeleteAll(i.data.map { it.data }.toTypedArray())) }
+            }
+        )
         is ShowDeleteSingleConfirmationDialog -> ui.value = ui.value.copy(
-            dialog = deleteDialog(i.monitored) {
+            dialog = deleteSingleDialog(i.monitored) {
                 onCancel { start(ExitDialog) }
                 onConfirm { start(Delete(i.monitored)) }
             }
@@ -53,11 +60,6 @@ class BusinessesViewModel(
         is Delete -> delete(i)
         is DeleteAll -> deleteAll(i)
     }
-
-    private fun State.copy(dialog: Dialog<String>) = copy(
-        status = Feedback.None,
-        dialog = dialog
-    )
 
     private fun CoroutineScope.updateInvestment(i: ShowUpdateInvestmentForm) = launch {
         val state = ui.value
@@ -78,9 +80,12 @@ class BusinessesViewModel(
     private fun CoroutineScope.deleteAll(i: DeleteAll) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(status = Feedback.Loading("Deleting All")))
-            error("Implement delete all for ${i.data.joinToString(",") { it.name }}")
+            emit(state.copy(status = Feedback.Loading("Deleting ${i.data.size} businesses")))
+            service.delete(*i.data.map { it.uid }.toTypedArray()).await()
+            emit(state.copy(status = Feedback.Success("${i.data.size} businesses deleted successfully"), dialog = null))
         }.catchAndCollectToUI(state)
+        delay(config.viewModel.transitionTime)
+        start(LoadBusinesses)
     }
 
     private fun CoroutineScope.delete(i: Delete) = launch {
@@ -134,18 +139,18 @@ class BusinessesViewModel(
         }.catchAndCollectToUI(state)
     }
 
-    private fun CoroutineScope.businessTable(date: List<MonitoredBusinessSummary>) = tableOf(date) {
+    private fun CoroutineScope.businessTable(data: List<MonitoredBusinessSummary>) = tableOf(data) {
         primaryAction("Add Business") { start(ShowCreateBusinessForm) }
         singleAction("Intervene") { start(ShowInterveneForm(it.data)) }
         singleAction("Capture Investment") { start(ShowCaptureInvestmentForm(it.data)) }
         singleAction("Update Investment") { start(ShowUpdateInvestmentForm(it.data)) }
         singleAction("Delete") { start(ShowDeleteSingleConfirmationDialog(it.data)) }
-        multiAction("Delete All") { start(ShowDeleteMultipleConfirmationDialog(it)) }
+        multiAction("Delete ${data.size}") { start(ShowDeleteMultipleConfirmationDialog(it)) }
         selectable()
         column("Name") { it.data.name }
         column("Reporting") {
-            when (val data = it.data) {
-                is MonitoredBusinessSummary.ConnectedDashboard -> data.dashboard
+            when (val business = it.data) {
+                is MonitoredBusinessSummary.ConnectedDashboard -> business.dashboard
                 is MonitoredBusinessSummary.UnConnectedDashboard -> DASHBOARD.NONE
             }
         }

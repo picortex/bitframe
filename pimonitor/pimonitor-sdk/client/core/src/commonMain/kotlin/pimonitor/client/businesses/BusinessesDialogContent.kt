@@ -6,6 +6,7 @@ package pimonitor.client.businesses
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import presenters.modal.DialogBuilder
 import presenters.modal.dialog
+import presenters.table.Row
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 
@@ -59,12 +60,22 @@ object BusinessesDialogContent {
 //        details =
 //    )
 
-    internal fun deleteDialog(
+    internal fun deleteSingleDialog(
         monitored: MonitoredBusinessSummary,
         block: DialogBuilder.() -> Unit
     ) = dialog(
         heading = "Delete Business",
         details = "Completely delete ${monitored.name} from your list of businesses",
+        content = Confirm,
+        block
+    )
+
+    internal fun deleteManyDialog(
+        monitored: Array<Row<MonitoredBusinessSummary>>,
+        block: DialogBuilder.() -> Unit
+    ) = dialog(
+        heading = "Delete Businesses",
+        details = "Completely delete ${monitored.size} from your list of businesses",
         content = Confirm,
         block
     )
