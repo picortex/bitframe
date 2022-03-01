@@ -19,4 +19,7 @@ interface BusinessesServiceCore {
 
     @JsName("_ignore_all")
     fun all(rb: RequestBody.Authorized<BusinessFilter>): Later<List<MonitoredBusinessSummary>>
+
+    @JsName("_ignore_delete")
+    fun delete(rb: RequestBody.Authorized<Array<out String>>): Later<List<MonitoredBusinessBasicInfo>>
 }

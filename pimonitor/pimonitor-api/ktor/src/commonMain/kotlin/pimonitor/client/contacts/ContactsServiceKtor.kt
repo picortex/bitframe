@@ -8,8 +8,8 @@ import io.ktor.client.statement.*
 import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.collections.interoperable.toInteroperableList
 import later.later
-import pimonitor.core.contacts.ContactPersonSummary
 import pimonitor.core.contacts.ContactsFilter
+import pimonitor.core.search.SearchResult
 import response.decodeResponseFromString
 import response.decodeResponseWithInfoFromString
 
@@ -24,7 +24,7 @@ class ContactsServiceKtor(
             setBody(json.of(rb))
         }
         json.decodeResponseFromString(
-            dataSerializer = ListSerializer(ContactPersonSummary.serializer()),
+            dataSerializer = ListSerializer(SearchResult.ContactPersonSummary.serializer()),
             json = result.bodyAsText()
         ).response().toInteroperableList()
     }

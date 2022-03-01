@@ -3,7 +3,10 @@ package pimonitor.core.businesses
 import bitframe.core.*
 import bitframe.core.users.RegisterUserUseCase
 import bitframe.core.users.RegisterUserUseCaseImpl
+import kotlinx.collections.interoperable.List
+import kotlinx.collections.interoperable.mutableListOf
 import kotlinx.collections.interoperable.toInteroperableList
+import later.Later
 import later.await
 import later.later
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
@@ -38,6 +41,7 @@ open class BusinessesDaodService(
             ContactPersonSpaceInfo(
                 userId = res1.user.uid,
                 spaceId = res1.spaces.first().uid,
+                owningSpaceId = rb.session.space.uid,
                 position = ""
             )
         )
@@ -47,9 +51,15 @@ open class BusinessesDaodService(
 
     override fun all(rb: RequestBody.Authorized<BusinessFilter>) = config.scope.later {
         val condition = MonitoredBusinessBasicInfo::owningSpaceId isEqualTo rb.session.space.uid
-        businessDao.all(condition).await().toTypedArray().map {
+        businessDao.all(condition).await().filter { !it.deleted }.toTypedArray().map {
             summaryOf(it)
         }.toInteroperableList()
+    }
+
+    override fun delete(rb: RequestBody.Authorized<Array<out String>>): Later<List<MonitoredBusinessBasicInfo>> = config.scope.later {
+        val list = mutableListOf<MonitoredBusinessBasicInfo>()
+        for (business in rb.data) list.add(businessDao.delete(business).await())
+        list
     }
 
     private suspend fun summaryOf(business: MonitoredBusinessBasicInfo): MonitoredBusinessSummary {

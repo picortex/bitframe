@@ -16,6 +16,9 @@ class BusinessModule(
         }),
         Action("all", mapOf(), HttpRoute(HttpMethod.Post, "$basePath/all") {
             controller.all(it)
+        }),
+        Action("delete", mapOf(), HttpRoute(HttpMethod.Post, "$basePath/delete") {
+            controller.delete(it)
         })
     )
 }

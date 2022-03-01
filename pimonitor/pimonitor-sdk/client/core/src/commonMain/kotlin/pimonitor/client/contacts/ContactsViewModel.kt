@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
-import pimonitor.core.contacts.ContactPersonSummary
+import pimonitor.core.search.SearchResult
 import presenters.feedbacks.Feedback
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
@@ -42,7 +42,7 @@ class ContactsViewModel(
         }
     }
 
-    internal fun contactsTableOf(contacts: List<ContactPersonSummary>) = tableOf(contacts) {
+    internal fun contactsTableOf(contacts: List<SearchResult.ContactPersonSummary>) = tableOf(contacts) {
         selectable()
         column("Name") { it.data.name }
         column("Position") { it.data.position }

@@ -50,7 +50,7 @@ class MongoDao<D : Savable>(
 
     override fun delete(uid: String): Later<D> = scope.later {
         val item = load(uid).await()
-        item
+        update(item.copySavable(uid = uid, deleted = true) as D).await()
     }
 
     @OptIn(InternalSerializationApi::class)

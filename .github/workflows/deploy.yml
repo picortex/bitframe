@@ -60,7 +60,7 @@ jobs:
           rm: true
           target: /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/production
 
-      - name: Deploy Staging Stack
+      - name: Deploy Production Stack
         uses: appleboy/ssh-action@master
         with:
           host: ${{ env.REMOTE_HOST }}

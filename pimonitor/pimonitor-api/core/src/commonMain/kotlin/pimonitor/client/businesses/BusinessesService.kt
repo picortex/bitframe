@@ -4,6 +4,7 @@
 package pimonitor.client.businesses
 
 import bitframe.client.ServiceConfig
+import bitframe.client.getSignedInSessionTo
 import bitframe.core.RequestBody
 import bitframe.core.Session
 import later.await
@@ -24,7 +25,7 @@ abstract class BusinessesService(
         logger.info("Registering business ${params.businessName}")
         val validatedParams = params.toValidatedCreateBusinessParams()
         val rb = RequestBody.Authorized(
-            session = config.session.value as? Session.SignedIn ?: error("You must be signed in to be able to create a business"),
+            session = config.getSignedInSessionTo("create a business"),
             data = validatedParams
         )
         val result = create(rb).await()
@@ -39,9 +40,17 @@ abstract class BusinessesService(
 
     fun all() = config.scope.later {
         val rb = RequestBody.Authorized(
-            session = config.session.value as? Session.SignedIn ?: error("You must be signed in to query businesses"),
+            session = config.getSignedInSessionTo("query businesses"),
             data = BusinessFilter("")
         )
         all(rb).await()
+    }
+
+    fun delete(vararg monitorIds: String) = config.scope.later {
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("delete business(es)"),
+            data = monitorIds
+        )
+        delete(rb).await()
     }
 }
