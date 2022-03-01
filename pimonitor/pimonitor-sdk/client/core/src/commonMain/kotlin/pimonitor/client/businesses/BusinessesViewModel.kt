@@ -10,12 +10,14 @@ import kotlinx.coroutines.launch
 import later.await
 import live.WatchMode
 import live.Watcher
+import pimonitor.client.businesses.BusinessesDialogContent.captureInvestmentDialog
 import pimonitor.client.businesses.BusinessesIntent.*
 import pimonitor.client.businesses.BusinessesDialogContent.createBusinessDialog
 import pimonitor.client.businesses.BusinessesDialogContent.deleteManyDialog
 import pimonitor.client.businesses.BusinessesDialogContent.deleteSingleDialog
 import pimonitor.client.businesses.BusinessesDialogContent.interveneDialog
 import pimonitor.client.businesses.BusinessesDialogContent.inviteToShareDialog
+import pimonitor.client.businesses.BusinessesDialogContent.updateInvestmentDialog
 import pimonitor.core.businesses.DASHBOARD
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import presenters.feedbacks.Feedback
@@ -40,10 +42,17 @@ class BusinessesViewModel(
             dialog = inviteToShareDialog(i.monitored) { onCancel { start(ExitDialog) } }
         )
         is ShowInterveneForm -> ui.value = ui.value.copy(
-            dialog = interveneDialog(i.monitored) { onCancel { start(ExitDialog) } }
+            dialog = interveneDialog(i.monitored) {
+                onCancel { start(ExitDialog) }
+                onSubmit {  }
+            }
         )
-        is ShowUpdateInvestmentForm -> TODO()
-        is ShowCaptureInvestmentForm -> TODO()
+        is ShowCaptureInvestmentForm -> ui.value = ui.value.copy(
+            dialog = captureInvestmentDialog(i.monitored) { onCancel { start(ExitDialog) } }
+        )
+        is ShowUpdateInvestmentForm -> ui.value = ui.value.copy(
+            dialog = updateInvestmentDialog(i.monitored) { onCancel { start(ExitDialog) } }
+        )
         is ShowDeleteMultipleConfirmationDialog -> ui.value = ui.value.copy(
             dialog = deleteManyDialog(i.data) {
                 onCancel { start(ExitDialog) }

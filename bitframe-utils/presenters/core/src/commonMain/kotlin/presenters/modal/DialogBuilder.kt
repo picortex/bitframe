@@ -18,4 +18,6 @@ class DialogBuilder {
     fun onNo(handler: () -> Unit) = on("No", handler)
 
     fun onConfirm(handler: () -> Unit) = on("Confirm", handler)
+
+    fun onSubmit(handler: () -> Unit) = on("Submit", handler)
 }

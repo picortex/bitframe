@@ -20,6 +20,10 @@ object BusinessesDialogContent {
     @JvmField
     val InviteToShareReports = "DIALOG_INVITE_TO_SHARE_REPORTS"
 
+    val CaptureInvestmentDialog = "DIALOG_CAPTURE_INVESTMENT"
+
+    val UpdateInvestmentDialog = "DIALOG_UPDATE_INVESTMENT"
+
     @JvmField
     val Intervene = "DIALOG_INTERVENE"
 
@@ -52,13 +56,25 @@ object BusinessesDialogContent {
         block
     )
 
-//    internal fun captureInvestementDialog(
-//        monitored: MonitoredBusinessSummary,
-//        block: DialogBuilder.() -> Unit
-//    ) = dialog(
-//        heading = "Capture Investment",
-//        details =
-//    )
+    internal fun updateInvestmentDialog(
+        monitored: MonitoredBusinessSummary,
+        block: DialogBuilder.() -> Unit
+    ) = dialog(
+        heading = "Update Investment",
+        details = "Update investment for ${monitored.name}",
+        content = CaptureInvestmentDialog,
+        block
+    )
+
+    internal fun captureInvestmentDialog(
+        monitored: MonitoredBusinessSummary,
+        block: DialogBuilder.() -> Unit
+    ) = dialog(
+        heading = "Capture Investment",
+        details = "Capturing investment for ${monitored.name}",
+        content = CaptureInvestmentDialog,
+        block
+    )
 
     internal fun deleteSingleDialog(
         monitored: MonitoredBusinessSummary,
