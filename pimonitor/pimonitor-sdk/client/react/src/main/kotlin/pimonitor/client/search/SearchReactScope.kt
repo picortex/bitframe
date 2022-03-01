@@ -1,3 +1,6 @@
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
+
 package pimonitor.client.search
 
 import bitframe.client.ReactUIScope

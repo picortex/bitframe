@@ -15,6 +15,7 @@ import presenters.modal.click
 import presenters.table.EmptyTable
 import presenters.table.action
 import presenters.table.click
+import presenters.table.tabulateToConsole
 import utils.PiMonitorMockScope
 import viewmodel.expect
 import kotlin.test.Test
@@ -109,10 +110,10 @@ class BusinessesViewModelDeleteActionTest {
 
         // Step 5: Click delete all
         state.table.selectAll()
+        state.table.tabulateToConsole()
         state.table.action("Delete All")
         expect(state.dialog?.content).toBe(BusinessesDialogContent.Confirm)
         expect(state.dialog?.heading).toBe("Delete Businesses")
-
 
         // Step 6: Confirm Delete
         // Emulate clicking confirm dialog. Which triggers the delete all intent: vm.ui.value.dialog?.click("Confirm")

@@ -91,10 +91,14 @@ class BusinessesViewModel(
         flow {
             emit(state.copy(status = Feedback.Loading("Deleting ${i.data.size} businesses")))
             service.delete(*i.data.map { it.uid }.toTypedArray()).await()
-            emit(state.copy(status = Feedback.Success("${i.data.size} businesses deleted successfully"), dialog = null))
+            emit(state.copy(status = Feedback.Success("${i.data.size} businesses deleted successfully, Loading remaining businesses . . ."), dialog = null))
+            val phase = state.copy(
+                status = Feedback.None,
+                table = businessTable(service.all().await()),
+                dialog = null
+            )
+            emit(phase)
         }.catchAndCollectToUI(state)
-        delay(config.viewModel.transitionTime)
-        post(LoadBusinesses)
     }
 
     private fun CoroutineScope.delete(i: Delete) = launch {
@@ -102,10 +106,14 @@ class BusinessesViewModel(
         flow {
             emit(state.copy(status = Feedback.Loading("Deleting ${i.monitored.name}"), dialog = null))
             service.delete(i.monitored.uid).await()
-            emit(state.copy(status = Feedback.Success("Successfully delete ${i.monitored.name}"), dialog = null))
+            emit(state.copy(status = Feedback.Success("Successfully delete ${i.monitored.name}, Loading remaining businesses . . ."), dialog = null))
+            val phase = state.copy(
+                status = Feedback.None,
+                table = businessTable(service.all().await()),
+                dialog = null
+            )
+            emit(phase)
         }.catchAndCollectToUI(state)
-        delay(config.viewModel.transitionTime)
-        post(LoadBusinesses)
     }
 
     private fun CoroutineScope.captureInvestment(i: ShowCaptureInvestmentForm) = launch {

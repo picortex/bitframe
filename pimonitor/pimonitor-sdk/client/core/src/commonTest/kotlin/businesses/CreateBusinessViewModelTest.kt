@@ -53,7 +53,8 @@ class CreateBusinessViewModelTest {
         val state = State(fields = CreateBusinessFields().copy(params))
         vm.expect(Intent.SubmitForm(params)).toGoThrough(
             state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
-            state.copy(status = Feedback.Success("${params.businessName} has successfully been added"))
+            state.copy(status = Feedback.Success("${params.businessName} has successfully been added")),
+            State()
         )
     }
 
@@ -86,5 +87,39 @@ class CreateBusinessViewModelTest {
             state.copy(status = Feedback.Failure(message = "Property contactEmail must not be empty/blank")),
             state.copy(status = Feedback.None)
         )
+    }
+
+    @Test
+    fun should_be_in_a_fillable_state_after_success_of_previous_business() = runTest {
+        val time = Clock.System.now()
+        // STEP 1: SignUp as a monitor
+        val monitor = IndividualSignUpParams(
+            name = "Jane $time Doe",
+            email = "jane@doe$time.com",
+            password = "jane"
+        )
+        api.signUp.signUp(monitor).await()
+
+        //STEP 2: Sign In as the registered monitor
+        api.signIn.signIn(monitor.toSignInCredentials()).await()
+
+        // STEP 3: Create a monitored business
+        val params = CreateMonitoredBusinessParams(
+            businessName = "PiCortex LLC",
+            contactName = "Mohammed Majapa",
+            contactEmail = "mmajapa@gmail$time.com",
+            sendInvite = false
+        )
+
+        // STEP 4: Ensure the view model went through the expected states
+        val state = State(fields = CreateBusinessFields().copy(params))
+        vm.expect(Intent.SubmitForm(params)).toGoThrough(
+            state.copy(status = Feedback.Loading(message = "Adding ${params.businessName}, please wait . . .")),
+            state.copy(status = Feedback.Success("${params.businessName} has successfully been added")),
+            State()
+        )
+
+        // STEP 5: Ensure that the viewmodel is a state where people can input data
+        expect(vm.ui.value).toBe(State())
     }
 }

@@ -29,11 +29,9 @@ class CreateBusinessViewModel(
         flow {
             emit(state.copy(status = Feedback.Loading("Adding ${i.params.businessName}, please wait . . .")))
             businessService.create(i.params).await()
-            val phase2 = state.copy(
-                status = Feedback.Success("${i.params.businessName} has successfully been added"),
-                fields = CreateBusinessFields()
-            )
-            emit(phase2)
+            emit(state.copy(status = Feedback.Success("${i.params.businessName} has successfully been added")))
+            delay(config.viewModel.transitionTime)
+            emit(State())
         }.catch {
             emit(state.copy(status = Feedback.Failure(it)))
             delay(config.viewModel.recoveryTime)
