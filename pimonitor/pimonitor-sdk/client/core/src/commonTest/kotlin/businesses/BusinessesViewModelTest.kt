@@ -28,11 +28,12 @@ class BusinessesViewModelTest {
 
     @Test
     fun should_fail_to_load_businesses_when_there_is_no_signed_in_user() = runTest {
+        api.session.signOut()
         val state = State()
         vm.expect(Intent.LoadBusinesses).toGoThrough(
             state.copy(status = Feedback.Loading(message = "Loading your businesses, please wait . . .")),
             state.copy(status = Feedback.Failure(message = "You must be signed in to query businesses")),
-            state
+            state.copy(status = Feedback.None)
         )
     }
 

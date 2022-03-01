@@ -145,7 +145,7 @@ class BusinessesViewModel(
         singleAction("Capture Investment") { start(ShowCaptureInvestmentForm(it.data)) }
         singleAction("Update Investment") { start(ShowUpdateInvestmentForm(it.data)) }
         singleAction("Delete") { start(ShowDeleteSingleConfirmationDialog(it.data)) }
-        multiAction("Delete ${data.size}") { start(ShowDeleteMultipleConfirmationDialog(it)) }
+        multiAction("Delete All") { start(ShowDeleteMultipleConfirmationDialog(it)) }
         selectable()
         column("Name") { it.data.name }
         column("Reporting") {

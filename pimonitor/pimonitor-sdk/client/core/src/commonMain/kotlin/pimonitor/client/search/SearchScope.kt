@@ -12,8 +12,12 @@ open class SearchScope(
 ) : UIScope<SearchIntent, SearchState> {
     override val viewModel by lazy { SearchViewModel(config) }
 
-    val search = { key: String ->
-        viewModel.post(SearchIntent.Search(key))
+    val searchDebouncing = { key: String ->
+        viewModel.post(SearchIntent.SearchDebouncing(key))
+    }
+
+    val searchImmediately = { key: String ->
+        viewModel.post(SearchIntent.SearchImmediately(key))
     }
 
     val clearResults = {

@@ -9,7 +9,6 @@ import kotlinx.coroutines.withContext
 import pimonitor.client.search.SearchIntent
 import pimonitor.client.search.SearchState
 import utils.PiMonitorMockScope
-import viewmodel.expect
 import kotlin.test.Test
 
 class SearchViewModelTest {
@@ -27,11 +26,11 @@ class SearchViewModelTest {
         withContext(Dispatchers.Default) {
             var counts = 0
             vm.ui.watch { counts++ }
-            vm.post(SearchIntent.Search("t"))
+            vm.post(SearchIntent.SearchDebouncing("t"))
             delay(100)
-            vm.post(SearchIntent.Search("te"))
+            vm.post(SearchIntent.SearchDebouncing("te"))
             delay(100)
-            vm.post(SearchIntent.Search("tes"))
+            vm.post(SearchIntent.SearchDebouncing("tes"))
             delay(6000)
             expect(counts).toBe(4)
         }
@@ -42,12 +41,12 @@ class SearchViewModelTest {
         withContext(Dispatchers.Default) {
             var counts = 0
             vm.ui.watch { counts++ }
-            vm.post(SearchIntent.Search("t"))
+            vm.post(SearchIntent.SearchDebouncing("t"))
             delay(6000)
             expect(counts).toBe(2)
-            vm.post(SearchIntent.Search("te"))
+            vm.post(SearchIntent.SearchDebouncing("te"))
             delay(100)
-            vm.post(SearchIntent.Search("tes"))
+            vm.post(SearchIntent.SearchDebouncing("tes"))
             delay(6000)
             expect(counts).toBe(5)
         }

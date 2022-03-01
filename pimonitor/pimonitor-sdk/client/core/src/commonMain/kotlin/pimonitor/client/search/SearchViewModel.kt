@@ -4,9 +4,6 @@ import bitframe.client.UIScopeConfig
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.emptyList
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
-import kotlinx.datetime.Clock
 import later.await
 import pimonitor.core.search.SearchParams
 import pimonitor.core.search.SearchResult
@@ -23,7 +20,8 @@ class SearchViewModel(
 
     override fun CoroutineScope.execute(i: SearchIntent): Any = when (i) {
         SearchIntent.ClearSearch -> clearSearch()
-        is SearchIntent.Search -> search(i)
+        is SearchIntent.SearchDebouncing -> search(SearchMode.DEBOUNCING, i.key)
+        is SearchIntent.SearchImmediately -> search(SearchMode.IMMEDIATELY, i.key)
     }
 
     private fun clearSearch() {
@@ -31,23 +29,27 @@ class SearchViewModel(
         ui.value = SearchState(loading = null, results = emptyList())
     }
 
-    private fun CoroutineScope.search(i: SearchIntent.Search) {
+    enum class SearchMode {
+        IMMEDIATELY, DEBOUNCING
+    }
+
+    private fun CoroutineScope.search(mode: SearchMode, key: String) {
         currentSearchJob?.cancel()
         ui.value = SearchState(
-            loading = Feedback.Loading("Searching for ${i.key}"),
-            results = searchCache[i.key] ?: emptyList()
+            loading = Feedback.Loading("Searching for $key"),
+            results = searchCache[key] ?: emptyList()
         )
         currentSearchJob = launch {
-            delay(debounceTime)
+            if (mode == SearchMode.DEBOUNCING) delay(debounceTime)
             ui.value = SearchState(
                 loading = null,
                 results = try {
-                    service.search(SearchParams(i.key)).await()
+                    service.search(SearchParams(key)).await()
                 } catch (err: Throwable) {
                     emptyList()
                 }
             )
-            searchCache[i.key] = ui.value.results
+            searchCache[key] = ui.value.results
         }
     }
 }
