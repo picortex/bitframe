@@ -106,6 +106,7 @@ class BusinessesViewModel(
                 emit(phase3)
             } else {
                 delay(config.viewModel.transitionTime)
+                emit(state.copy(status = Feedback.Loading("Loading your businesses, please wait . . ."), dialog = null))
                 emit(state.copy(status = Feedback.None, table = businessTable(service.all().await()), dialog = null))
             }
         }.catchAndCollectToUI(state)
