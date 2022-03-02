@@ -30,6 +30,8 @@ class CreateBusinessViewModel(
             emit(state.copy(status = Feedback.Loading("Adding ${i.params.businessName}, please wait . . .")))
             businessService.create(i.params).await()
             emit(state.copy(status = Feedback.Success("${i.params.businessName} has successfully been added")))
+            delay(config.viewModel.transitionTime)
+            emit(State())
         }.catch {
             emit(state.copy(status = Feedback.Failure(it)))
             delay(config.viewModel.recoveryTime)

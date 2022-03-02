@@ -24,6 +24,11 @@ pluginManagement {
     }
 }
 
+rootDir.resolve("gradle.properties").copyTo(
+    target = rootDir.resolve("buildSrc").resolve("gradle.properties"),
+    overwrite = true
+)
+
 fun includeRoot(name: String, path: String) {
     include(":$name")
     project(":$name").projectDir = File(path)

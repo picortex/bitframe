@@ -1,23 +1,31 @@
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
+
 package presenters.modal
 
-fun <T> dialog(
-    heading: String,
-    details: String,
-    content: T,
-    initializer: DialogBuilder.() -> Unit
-): Dialog<T> {
-    val builder = DialogBuilder().apply(initializer)
-    return Dialog(heading, details, content, builder.actions)
-}
+import presenters.modal.builders.ConfirmDialogBuilder
+import presenters.modal.builders.FormDialogBuilder
+import kotlin.experimental.ExperimentalTypeInference
+import kotlin.js.JsExport
 
-fun alertDialog(
+@OptIn(ExperimentalTypeInference::class)
+fun <F, P> formDialog(
     heading: String,
     details: String,
-    initializer: DialogBuilder.() -> Unit
-) = dialog(heading, details, Alert, initializer)
+    fields: F,
+    @BuilderInference initializer: FormDialogBuilder<P>.() -> SubmitAction<P>
+): Dialog.Form<F, P> {
+    val builder = FormDialogBuilder<P>().apply { initializer() }
+    val submitAction = builder.submitAction ?: error("Submit action is missing in dialog $heading")
+    return Dialog.Form(heading, details, fields, builder.actions, submitAction)
+}
 
 fun confirmDialog(
     heading: String,
     details: String,
-    initializer: DialogBuilder.() -> Unit
-) = dialog(heading, details, Confirm, initializer)
+    initializer: ConfirmDialogBuilder.() -> ConfirmAction
+): Dialog.Confirm {
+    val builder = ConfirmDialogBuilder().apply { initializer() }
+    val confirm = builder.confirmAction ?: error("Confirm action is not set in dialog $heading")
+    return Dialog.Confirm(heading, details, builder.actions, confirm)
+}
