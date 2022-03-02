@@ -3,6 +3,7 @@
 package pimonitor.client.businesses.forms
 
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
+import presenters.fields.ButtonInputField
 import presenters.fields.EmailInputField
 import presenters.fields.TextInputField
 import kotlin.js.JsExport
@@ -25,6 +26,10 @@ data class InviteToShareFormFields(
         label = "Message",
         hint = "Enter invite message here",
         value = "We welcome you to invite"
+    ),
+    val sendInvite: ButtonInputField = ButtonInputField(
+        name = "send",
+        text = "Send Invite"
     )
 ) {
     @JsName("_ignore_copy")

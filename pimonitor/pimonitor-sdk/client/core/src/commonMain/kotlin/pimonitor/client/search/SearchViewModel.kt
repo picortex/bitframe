@@ -7,49 +7,47 @@ import kotlinx.coroutines.*
 import later.await
 import pimonitor.core.search.SearchParams
 import pimonitor.core.search.SearchResult
-import presenters.feedbacks.Feedback
 import viewmodel.ViewModel
 
 class SearchViewModel(
     private val config: UIScopeConfig<SearchService>
 ) : ViewModel<SearchIntent, SearchState>(SearchState(), config.viewModel) {
     private val service get() = config.service
-    private val debounceTime = 3000L
+    private val debounceTime = 2000L
     private val searchCache = mutableMapOf<String, List<SearchResult>>()
     private var currentSearchJob: Job? = null
 
     override fun CoroutineScope.execute(i: SearchIntent): Any = when (i) {
         SearchIntent.ClearSearch -> clearSearch()
-        is SearchIntent.SearchDebouncing -> search(SearchMode.DEBOUNCING, i.key)
-        is SearchIntent.SearchImmediately -> search(SearchMode.IMMEDIATELY, i.key)
+        is SearchIntent.Search -> search(i)
     }
 
     private fun clearSearch() {
         currentSearchJob?.cancel()
-        ui.value = SearchState(loading = null, results = emptyList())
+        ui.value = SearchState()
     }
 
-    enum class SearchMode {
-        IMMEDIATELY, DEBOUNCING
-    }
-
-    private fun CoroutineScope.search(mode: SearchMode, key: String) {
+    private fun CoroutineScope.search(i: SearchIntent.Search) {
+        if (i.key.isBlank()) return
         currentSearchJob?.cancel()
-        ui.value = SearchState(
-            loading = Feedback.Loading("Searching for $key"),
-            results = searchCache[key] ?: emptyList()
+        val state = ui.value.copy(
+            field = ui.value.field.copy(value = i.key),
+        )
+        ui.value = state.copy(
+            status = SearchFeedback.Searching,
+            results = searchCache[i.key] ?: emptyList()
         )
         currentSearchJob = launch {
-            if (mode == SearchMode.DEBOUNCING) delay(debounceTime)
-            ui.value = SearchState(
-                loading = null,
+            if (i.mode == SearchMode.DEBOUNCING) delay(debounceTime)
+            ui.value = state.copy(
+                status = SearchFeedback.Completed,
                 results = try {
-                    service.search(SearchParams(key)).await()
+                    service.search(SearchParams(i.key)).await()
                 } catch (err: Throwable) {
                     emptyList()
                 }
             )
-            searchCache[key] = ui.value.results
+            searchCache[i.key] = ui.value.results
         }
     }
 }

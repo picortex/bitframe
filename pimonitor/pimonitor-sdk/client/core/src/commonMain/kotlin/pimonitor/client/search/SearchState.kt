@@ -6,10 +6,16 @@ package pimonitor.client.search
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.emptyList
 import pimonitor.core.search.SearchResult
-import presenters.feedbacks.Feedback
+import presenters.fields.TextInputField
 import kotlin.js.JsExport
 
 data class SearchState(
-    val loading: Feedback.Loading? = null,
+    val status: SearchFeedback = SearchFeedback.Pending,
+    val field: TextInputField = TextInputField(
+        name = "search",
+        label = "Search . . .",
+        hint = "Search everywhere",
+        value = ""
+    ),
     val results: List<SearchResult> = emptyList()
 )
