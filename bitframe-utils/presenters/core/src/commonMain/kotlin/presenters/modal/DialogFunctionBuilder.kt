@@ -5,13 +5,15 @@ package presenters.modal
 
 import presenters.modal.builders.ConfirmDialogBuilder
 import presenters.modal.builders.FormDialogBuilder
+import kotlin.experimental.ExperimentalTypeInference
 import kotlin.js.JsExport
 
+@OptIn(ExperimentalTypeInference::class)
 fun <F, P> formDialog(
     heading: String,
     details: String,
     fields: F,
-    initializer: FormDialogBuilder<P>.() -> SubmitAction<P>
+    @BuilderInference initializer: FormDialogBuilder<P>.() -> SubmitAction<P>
 ): Dialog.Form<F, P> {
     val builder = FormDialogBuilder<P>().apply { initializer() }
     val submitAction = builder.submitAction ?: error("Submit action is missing in dialog $heading")
