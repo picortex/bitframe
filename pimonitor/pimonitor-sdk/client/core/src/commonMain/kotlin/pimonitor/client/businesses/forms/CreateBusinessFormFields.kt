@@ -11,7 +11,7 @@ import presenters.fields.TextInputField
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-data class CreateBusinessFields internal constructor(
+data class CreateBusinessFormFields internal constructor(
     val title: String = "Add a business",
     val businessName: TextInputField = TextInputField(
         name = "businessName",

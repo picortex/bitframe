@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import logging.console
 import pimonitor.client.businesses.BusinessesDialogContent.captureInvestmentDialog
 import pimonitor.client.businesses.BusinessesDialogContent.createBusinessDialog
 import pimonitor.client.businesses.BusinessesDialogContent.deleteManyDialog
@@ -18,6 +19,7 @@ import pimonitor.client.businesses.BusinessesIntent.*
 import pimonitor.core.businesses.DASHBOARD
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
+import pimonitor.core.businesses.params.InviteToShareReportsRawParams
 import presenters.feedbacks.Feedback
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
@@ -39,13 +41,14 @@ class BusinessesViewModel(
                 }
             }
         )
-        is SubmitCreateBusinessForm -> TODO()
+        is SubmitCreateBusinessForm -> submitCreateBusinessForm(i)
         is ShowInviteToShareReportsForm -> ui.value = ui.value.copy(
-            dialog = inviteToShareDialog(i.monitored) {
+            dialog = inviteToShareDialog(i.monitored.name) {
                 onCancel { post(ExitDialog) }
                 onSubmit { params: Unit -> TODO() }
             }
         )
+        is SubmitInviteToShareReportsForm -> submitInviteToShare(i)
         is ShowInterveneForm -> ui.value = ui.value.copy(
             dialog = interveneDialog(i.monitored) {
                 onCancel { post(ExitDialog) }
@@ -76,10 +79,42 @@ class BusinessesViewModel(
         is DeleteAll -> deleteAll(i)
     }
 
+    private fun CoroutineScope.submitInviteToShare(i: SubmitInviteToShareReportsForm) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(status = Feedback.Success("Invite sent")))
+            logger.log("Check to see why messages are not being sent")
+            delay(config.viewModel.transitionTime)
+            emit(state.copy(status = Feedback.None, dialog = null))
+        }.catchAndCollectToUI(ui.value)
+    }
+
+    private fun CoroutineScope.submitCreateBusinessForm(i: SubmitCreateBusinessForm) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(status = Feedback.Loading("Adding ${i.params.businessName}, please wait . . ."), dialog = null))
+            service.create(i.params).await()
+            emit(state.copy(status = Feedback.Success("${i.params.businessName} has successfully been added"), dialog = null))
+            if (i.params.sendInvite) {
+                val phase3 = state.copy(
+                    status = Feedback.None,
+                    dialog = inviteToShareDialog(i.params) {
+                        onCancel { post(ExitDialog) }
+                        onSubmit { params: InviteToShareReportsRawParams -> post(SubmitInviteToShareReportsForm(params)) }
+                    }
+                )
+                emit(phase3)
+            } else {
+                delay(config.viewModel.transitionTime)
+                emit(state.copy(status = Feedback.None, table = businessTable(service.all().await()), dialog = null))
+            }
+        }.catchAndCollectToUI(state)
+    }
+
     private fun CoroutineScope.intervene(i: ShowInterveneForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(status = Feedback.Loading("Intervening")))
+            emit(state.copy(status = Feedback.Loading("Intervening"), dialog = null))
             error("Implement intervene for ${i.monitored.name}")
         }.catchAndCollectToUI(state)
     }

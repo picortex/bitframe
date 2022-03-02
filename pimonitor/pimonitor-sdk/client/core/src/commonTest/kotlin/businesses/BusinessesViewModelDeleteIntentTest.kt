@@ -22,7 +22,7 @@ import kotlin.test.Test
 import pimonitor.client.businesses.BusinessesIntent as Intent
 import pimonitor.client.businesses.BusinessesState as State
 
-class BusinessesViewModelDeleteActionTest {
+class BusinessesViewModelDeleteIntentTest {
 
     val scope = PiMonitorMockScope()
     val api = scope.api

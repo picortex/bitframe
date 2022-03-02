@@ -8,5 +8,5 @@ import kotlin.js.JsExport
 
 data class CreateBusinessState(
     val status: Feedback = Feedback.None,
-    val fields: CreateBusinessFields = CreateBusinessFields()
+    val fields: CreateBusinessFormFields = CreateBusinessFormFields()
 )

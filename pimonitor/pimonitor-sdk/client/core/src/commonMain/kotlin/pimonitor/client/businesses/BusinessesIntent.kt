@@ -4,6 +4,7 @@ package pimonitor.client.businesses
 
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
+import pimonitor.core.businesses.params.InviteToShareReportsRawParams
 import presenters.table.Row
 import kotlin.js.JsExport
 
@@ -20,6 +21,7 @@ sealed class BusinessesIntent {
     data class ShowDeleteMultipleConfirmationDialog(val data: Array<Row<MonitoredBusinessSummary>>) : BusinessesIntent()
 
     data class SubmitCreateBusinessForm(val params: CreateMonitoredBusinessRawParams) : BusinessesIntent()
+    data class SubmitInviteToShareReportsForm(val params: InviteToShareReportsRawParams) : BusinessesIntent()
 
     data class Delete(val monitored: MonitoredBusinessSummary) : BusinessesIntent()
     data class DeleteAll(val data: Array<MonitoredBusinessSummary>) : BusinessesIntent()

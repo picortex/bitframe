@@ -4,8 +4,10 @@
 
 package pimonitor.client.businesses
 
-import pimonitor.client.businesses.forms.CreateBusinessFields
+import pimonitor.client.businesses.forms.CreateBusinessFormFields
+import pimonitor.client.businesses.forms.InviteToShareFormFields
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
+import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import presenters.modal.ConfirmAction
 import presenters.modal.SubmitAction
 import presenters.modal.builders.ConfirmDialogBuilder
@@ -38,17 +40,27 @@ object BusinessesDialogContent {
     ) = formDialog(
         heading = CreateBusiness,
         details = "Adding a new business to PiMonitor lets you monitor all its operational and financial data in one place. You can always add more details later.",
-        fields = CreateBusinessFields(),
+        fields = CreateBusinessFormFields(),
         block
     )
 
     internal fun <T> inviteToShareDialog(
-        monitored: MonitoredBusinessSummary,
+        monitored: String,
         @BuilderInference block: FormDialogBuilder<T>.() -> SubmitAction<T>
     ) = formDialog(
         heading = InviteToShareReports,
-        details = "Request ${monitored.name} business information by email",
-        fields = CreateBusinessFields(),
+        details = "Request $monitored information by email",
+        fields = InviteToShareFormFields(),
+        block
+    )
+
+    internal fun <T> inviteToShareDialog(
+        params: CreateMonitoredBusinessRawParams,
+        @BuilderInference block: FormDialogBuilder<T>.() -> SubmitAction<T>
+    ) = formDialog(
+        heading = InviteToShareReports,
+        details = "Request ${params.businessName} information by email",
+        fields = InviteToShareFormFields().copy(params),
         block
     )
 
@@ -58,7 +70,7 @@ object BusinessesDialogContent {
     ) = formDialog(
         heading = Intervene,
         details = "Perform an intervention to ${monitored.name} pronto",
-        fields = CreateBusinessFields(),
+        fields = CreateBusinessFormFields(),
         block
     )
 
@@ -68,7 +80,7 @@ object BusinessesDialogContent {
     ) = formDialog(
         heading = CaptureInvestment,
         details = "Capturing investment for ${monitored.name}",
-        fields = CreateBusinessFields(),
+        fields = CreateBusinessFormFields(),
         block
     )
 
