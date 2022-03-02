@@ -6,6 +6,8 @@ package pimonitor.client.businesses
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.core.businesses.DASHBOARD
+import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
+import pimonitor.core.businesses.params.InviteToShareReportsRawParams
 import viewmodel.ViewModel
 import kotlin.js.JsExport
 import pimonitor.client.businesses.BusinessesIntent as Intent
@@ -20,6 +22,14 @@ open class BusinessesScope(
     val Dashboard get() = DASHBOARD
 
     val loadBusinesses: () -> Unit = { viewModel.post(Intent.LoadBusinesses) }
+
+    val submitCreateBusinessForm = { params: CreateMonitoredBusinessRawParams ->
+        post(Intent.SubmitCreateBusinessForm(params))
+    }
+
+    val submitInviteToShareReportsForm = { params: InviteToShareReportsRawParams ->
+        post(Intent.SubmitInviteToShareReportsForm(params))
+    }
 
     val exitDialog: () -> Unit = { viewModel.post(Intent.ExitDialog) }
 
