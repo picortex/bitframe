@@ -1,6 +1,7 @@
 package search
 
 import expect.expect
+import expect.toBe
 import kotlinx.collections.interoperable.emptyList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -20,7 +21,7 @@ class SearchViewModelTest {
     @Test
     fun should_start_with_a_empty_results_and_a_pending_searh_state() = runTest {
         val state = vm.ui.value
-        expect(state).toBe(SearchState(status = SearchFeedback.Pending, results = emptyList()))
+        expect(state).toBe<SearchState.Pending>()
     }
 
     @Test
@@ -33,7 +34,7 @@ class SearchViewModelTest {
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "te"))
             delay(100)
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "tes"))
-            delay(6000)
+            delay(2500)
             expect(counts).toBe(4)
         }
     }
@@ -44,12 +45,12 @@ class SearchViewModelTest {
             var counts = 0
             vm.ui.watch { counts++ }
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "t"))
-            delay(6000)
+            delay(2500)
             expect(counts).toBe(2)
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "te"))
-            delay(100)
+            delay(10)
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "tes"))
-            delay(6000)
+            delay(2500)
             expect(counts).toBe(5)
         }
     }
