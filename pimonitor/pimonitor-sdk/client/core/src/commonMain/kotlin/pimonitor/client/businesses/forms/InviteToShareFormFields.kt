@@ -1,8 +1,12 @@
+@file:JsExport
+
 package pimonitor.client.businesses.forms
 
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import presenters.fields.EmailInputField
 import presenters.fields.TextInputField
+import kotlin.js.JsExport
+import kotlin.js.JsName
 
 data class InviteToShareFormFields(
     val to: EmailInputField = EmailInputField(
@@ -23,6 +27,7 @@ data class InviteToShareFormFields(
         value = "We welcome you to invite"
     )
 ) {
+    @JsName("_ignore_copy")
     fun copy(params: CreateMonitoredBusinessRawParams) = copy(
         to = to.copy(value = params.contactEmail),
         message = message.copy(value = "We would like to invite you to share your financial and technical reports with us")
