@@ -8,20 +8,17 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import live.WatchMode
-import live.Watcher
 import pimonitor.client.businesses.BusinessesDialogContent.captureInvestmentDialog
-import pimonitor.client.businesses.BusinessesIntent.*
 import pimonitor.client.businesses.BusinessesDialogContent.createBusinessDialog
 import pimonitor.client.businesses.BusinessesDialogContent.deleteManyDialog
 import pimonitor.client.businesses.BusinessesDialogContent.deleteSingleDialog
 import pimonitor.client.businesses.BusinessesDialogContent.interveneDialog
 import pimonitor.client.businesses.BusinessesDialogContent.inviteToShareDialog
-import pimonitor.client.businesses.BusinessesDialogContent.updateInvestmentDialog
+import pimonitor.client.businesses.BusinessesIntent.*
 import pimonitor.core.businesses.DASHBOARD
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
+import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import presenters.feedbacks.Feedback
-import presenters.table.TableState
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 import pimonitor.client.businesses.BusinessesIntent as Intent
@@ -36,22 +33,30 @@ class BusinessesViewModel(
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         LoadBusinesses -> loadBusiness()
         ShowCreateBusinessForm -> ui.value = ui.value.copy(
-            dialog = createBusinessDialog { onCancel { post(ExitDialog) } }
+            dialog = createBusinessDialog {
+                onCancel { post(ExitDialog) }
+                onSubmit { params: CreateMonitoredBusinessRawParams ->
+                }
+            }
         )
+        is SubmitCreateBusinessForm -> TODO()
         is ShowInviteToShareReportsForm -> ui.value = ui.value.copy(
-            dialog = inviteToShareDialog(i.monitored) { onCancel { post(ExitDialog) } }
+            dialog = inviteToShareDialog(i.monitored) {
+                onCancel { post(ExitDialog) }
+                onSubmit { params: Unit -> TODO() }
+            }
         )
         is ShowInterveneForm -> ui.value = ui.value.copy(
             dialog = interveneDialog(i.monitored) {
                 onCancel { post(ExitDialog) }
-                onSubmit { }
+                onSubmit { params: Unit -> TODO() }
             }
         )
         is ShowCaptureInvestmentForm -> ui.value = ui.value.copy(
-            dialog = captureInvestmentDialog(i.monitored) { onCancel { post(ExitDialog) } }
-        )
-        is ShowUpdateInvestmentForm -> ui.value = ui.value.copy(
-            dialog = updateInvestmentDialog(i.monitored) { onCancel { post(ExitDialog) } }
+            dialog = captureInvestmentDialog(i.monitored) {
+                onCancel { post(ExitDialog) }
+                onSubmit { params: Unit -> TODO() }
+            }
         )
         is ShowDeleteMultipleConfirmationDialog -> ui.value = ui.value.copy(
             dialog = deleteManyDialog(i.data) {
@@ -65,17 +70,10 @@ class BusinessesViewModel(
                 onConfirm { post(Delete(i.monitored)) }
             }
         )
+
         ExitDialog -> exitDialog()
         is Delete -> delete(i)
         is DeleteAll -> deleteAll(i)
-    }
-
-    private fun CoroutineScope.updateInvestment(i: ShowUpdateInvestmentForm) = launch {
-        val state = ui.value
-        flow {
-            emit(state.copy(status = Feedback.Loading("Capturing investment")))
-            error("Implement update investment for ${i.monitored}")
-        }.catchAndCollectToUI(state)
     }
 
     private fun CoroutineScope.intervene(i: ShowInterveneForm) = launch {
@@ -160,7 +158,6 @@ class BusinessesViewModel(
         primaryAction("Add Business") { post(ShowCreateBusinessForm) }
         singleAction("Intervene") { post(ShowInterveneForm(it.data)) }
         singleAction("Capture Investment") { post(ShowCaptureInvestmentForm(it.data)) }
-        singleAction("Update Investment") { post(ShowUpdateInvestmentForm(it.data)) }
         singleAction("Delete") { post(ShowDeleteSingleConfirmationDialog(it.data)) }
         multiAction("Delete All") { post(ShowDeleteMultipleConfirmationDialog(it)) }
         selectable()
@@ -181,7 +178,6 @@ class BusinessesViewModel(
             action("Invite to share reports") { post(ShowInviteToShareReportsForm(it.data)) }
             action("Intervene") { post(ShowInterveneForm(it.data)) }
             action("Capture Investment") { post(ShowCaptureInvestmentForm(it.data)) }
-            action("Update Investment") { post(ShowUpdateInvestmentForm(it.data)) }
             action("Delete") { post(ShowDeleteSingleConfirmationDialog(it.data)) }
         }
     }

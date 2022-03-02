@@ -1,6 +1,8 @@
 package presenters.modal
 
-fun <T> Dialog<T>.click(name: String) {
+fun Dialog.Confirm.click(name: String) {
+    if (confirm.name == name) return confirm.handler()
+
     val action = actions.firstOrNull {
         it.name == name
     } ?: error(

@@ -13,5 +13,5 @@ import kotlin.js.JsExport
 data class BusinessesState(
     val status: Feedback = Feedback.Loading("Loading your businesses, please wait . . ."),
     val table: Table<MonitoredBusinessSummary> = tableOf(emptyList()) {},
-    val dialog: Dialog<String>? = null
+    val dialog: Dialog? = null
 )
