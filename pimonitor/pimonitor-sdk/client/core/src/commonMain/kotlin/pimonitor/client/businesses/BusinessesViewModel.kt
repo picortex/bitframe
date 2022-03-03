@@ -33,59 +33,82 @@ class BusinessesViewModel(
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         LoadBusinesses -> loadBusiness()
-        ShowCreateBusinessForm -> ui.value = ui.value.copy(
-            dialog = createBusinessDialog {
-                onCancel { post(ExitDialog) }
-                onSubmit { params: CreateMonitoredBusinessRawParams ->
-                }
-            }
-        )
+
+        ShowCreateBusinessForm -> showCreateBusinessForm()
         is SubmitCreateBusinessForm -> submitCreateBusinessForm(i)
+
         is ShowInviteToShareReportsForm -> showInviteToShareReportsForm(i)
         is SubmitInviteToShareReportsForm -> submitInviteToShareReportsForm(i)
-        is ShowInterveneForm -> ui.value = ui.value.copy(
-            dialog = interveneDialog(i.monitored) {
-                onCancel { post(ExitDialog) }
-                onSubmit { params: Unit -> TODO() }
-            }
-        )
-        is ShowCaptureInvestmentForm -> ui.value = ui.value.copy(
-            dialog = captureInvestmentDialog(i.monitored) {
-                onCancel { post(ExitDialog) }
-                onSubmit { params: Unit -> TODO() }
-            }
-        )
-        is ShowDeleteMultipleConfirmationDialog -> ui.value = ui.value.copy(
-            dialog = deleteManyDialog(i.data) {
-                onCancel { post(ExitDialog) }
-                onConfirm { post(DeleteAll(i.data.map { it.data }.toTypedArray())) }
-            }
-        )
-        is ShowDeleteSingleConfirmationDialog -> ui.value = ui.value.copy(
-            dialog = deleteSingleDialog(i.monitored) {
-                onCancel { post(ExitDialog) }
-                onConfirm { post(Delete(i.monitored)) }
-            }
-        )
+
+        is ShowInterveneForm -> showInterveneForm(i)
+        is ShowCaptureInvestmentForm -> showCaptureInvestmentForm(i)
+        is ShowDeleteSingleConfirmationDialog -> showDeleteSingleConfirmationDialog(i)
+        is ShowDeleteMultipleConfirmationDialog -> showDeleteMultipleConfirmationDialog(i)
 
         ExitDialog -> exitDialog()
         is Delete -> delete(i)
         is DeleteAll -> deleteAll(i)
     }
 
-    private fun CoroutineScope.showInviteToShareReportsForm(i: ShowInviteToShareReportsForm) = launch {
-        val state = ui.value
-        flow {
-            emit(state.copy(status = Loading("Preparing invite to share reports form for ${i.monitored.name}, please wait . . ."), dialog = null))
-            val dialog = inviteToShareReportsDialog(
-                businessName = i.monitored.name,
-                contactEmail = i.monitored.contacts.filterIsInstance<UserEmail>().firstOrNull()?.value ?: error("There are no registered contact's with email in ${i.monitored.name}")
-            ) {
+    private fun showDeleteMultipleConfirmationDialog(i: ShowDeleteMultipleConfirmationDialog) {
+        ui.value = ui.value.copy(
+            status = None,
+            dialog = deleteManyDialog(i.data) {
                 onCancel { post(ExitDialog) }
-                onSubmit { params -> post(SubmitInviteToShareReportsForm(params)) }
+                onConfirm { post(DeleteAll(i.data.map { it.data }.toTypedArray())) }
             }
-            emit(state.copy(status = None, dialog = dialog))
-        }.catchAndCollectToUI(state)
+        )
+    }
+
+    private fun showDeleteSingleConfirmationDialog(i: ShowDeleteSingleConfirmationDialog) {
+        ui.value = ui.value.copy(
+            status = None,
+            dialog = deleteSingleDialog(i.monitored) {
+                onCancel { post(ExitDialog) }
+                onConfirm { post(Delete(i.monitored)) }
+            }
+        )
+    }
+
+    private fun showCaptureInvestmentForm(i: ShowCaptureInvestmentForm) {
+        ui.value = ui.value.copy(
+            status = None,
+            dialog = captureInvestmentDialog(i.monitored) {
+                onCancel { post(ExitDialog) }
+                onSubmit { params: Unit -> TODO() }
+            }
+        )
+    }
+
+    private fun showInterveneForm(i: ShowInterveneForm) {
+        ui.value = ui.value.copy(
+            status = None,
+            dialog = interveneDialog(i.monitored) {
+                onCancel { post(ExitDialog) }
+                onSubmit { params: Unit -> TODO() }
+            }
+        )
+    }
+
+    private fun showCreateBusinessForm() {
+        ui.value = ui.value.copy(
+            status = None,
+            dialog = createBusinessDialog {
+                onCancel { post(ExitDialog) }
+                onSubmit { params -> post(SubmitCreateBusinessForm(params)) }
+            }
+        )
+    }
+
+    private fun showInviteToShareReportsForm(i: ShowInviteToShareReportsForm) {
+        val dialog = inviteToShareReportsDialog(
+            businessName = i.monitored.name,
+            contactEmail = i.monitored.contacts.filterIsInstance<UserEmail>().firstOrNull()?.value ?: error("There are no registered contact's with email in ${i.monitored.name}")
+        ) {
+            onCancel { post(ExitDialog) }
+            onSubmit { params -> post(SubmitInviteToShareReportsForm(params)) }
+        }
+        ui.value = ui.value.copy(status = None, dialog = dialog)
     }
 
     private fun CoroutineScope.submitInviteToShareReportsForm(i: SubmitInviteToShareReportsForm) = launch {
@@ -150,12 +173,7 @@ class BusinessesViewModel(
             emit(state.copy(status = Loading("Deleting ${i.monitored.name}"), dialog = null))
             service.delete(i.monitored.uid).await()
             emit(state.copy(status = Success("Successfully delete ${i.monitored.name}, Loading remaining businesses . . ."), dialog = null))
-            val phase = state.copy(
-                status = None,
-                table = businessTable(service.all().await()),
-                dialog = null
-            )
-            emit(phase)
+            emit(state.copy(status = None, table = businessTable(service.all().await()), dialog = null))
         }.catchAndCollectToUI(state)
     }
 
@@ -170,7 +188,7 @@ class BusinessesViewModel(
     private fun exitDialog() {
         val state = ui.value
         if (state.dialog != null) {
-            ui.value = state.copy(dialog = null)
+            ui.value = state.copy(status = None, dialog = null)
         }
     }
 

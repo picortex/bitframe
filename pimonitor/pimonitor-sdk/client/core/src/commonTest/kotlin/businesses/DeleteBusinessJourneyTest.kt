@@ -101,7 +101,7 @@ class DeleteBusinessJourneyTest {
                 sendInvite = true
             )
             api.businesses.create(params3).await()
-            delay(10)
+            delay(20)
         }
 
         // Step 4: Load Businesses in the viewmodel

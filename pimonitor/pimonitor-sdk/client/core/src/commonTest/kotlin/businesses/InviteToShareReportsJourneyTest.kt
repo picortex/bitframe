@@ -1,14 +1,20 @@
 package businesses
 
+import bitframe.core.UserContact
+import bitframe.core.UserEmail
 import bitframe.core.signin.SignInCredentials
 import expect.expect
 import later.await
 import pimonitor.client.businesses.BusinessesDialogContent
+import pimonitor.client.businesses.BusinessesDialogContent.InviteToShareReports
+import pimonitor.client.businesses.forms.InviteToShareFormFields
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
+import pimonitor.core.businesses.params.InviteToShareReportsRawParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import presenters.feedbacks.Feedback
+import presenters.modal.Dialog
 import utils.PiMonitorMockScope
 import utils.toContain
 import viewmodel.expect
@@ -24,7 +30,6 @@ class InviteToShareReportsJourneyTest {
     val vm = scope.businesses.viewModel
 
     @Test
-    @Ignore
     fun should_invite_to_share_reports_for_a_loaded_business() = runSequence {
         step("Sign Up as a Monitor") {
             val monitor = IndividualSignUpParams(
@@ -60,7 +65,10 @@ class InviteToShareReportsJourneyTest {
 
         step("Should launch an invite to share reports dialog") {
             val business = api.businesses.all().await().first()
-            vm.expect(Intent.ShowInviteToShareReportsForm(business)).toGoThrough()
+            vm.expect(Intent.ShowInviteToShareReportsForm(business))
+            val dialog = vm.ui.value.dialog as Dialog.Form<InviteToShareFormFields, InviteToShareReportsRawParams>
+            expect(dialog.heading).toBe(InviteToShareReports)
+            expect(dialog.fields.to.value).toBe(business.contacts.first { it is UserEmail }.value)
         }
     }
 }

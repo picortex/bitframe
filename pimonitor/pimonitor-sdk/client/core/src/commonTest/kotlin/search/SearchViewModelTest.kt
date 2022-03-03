@@ -30,11 +30,11 @@ class SearchViewModelTest {
             var counts = 0
             vm.ui.watch { counts++ }
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "t"))
-            delay(100)
+            delay(50)
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "te"))
-            delay(100)
+            delay(50)
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "tes"))
-            delay(2500)
+            delay(2050)
             expect(counts).toBe(4)
         }
     }
@@ -45,12 +45,12 @@ class SearchViewModelTest {
             var counts = 0
             vm.ui.watch { counts++ }
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "t"))
-            delay(2500)
+            delay(2050)
             expect(counts).toBe(2)
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "te"))
-            delay(10)
+            delay(50)
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "tes"))
-            delay(2500)
+            delay(2050)
             expect(counts).toBe(5)
         }
     }
