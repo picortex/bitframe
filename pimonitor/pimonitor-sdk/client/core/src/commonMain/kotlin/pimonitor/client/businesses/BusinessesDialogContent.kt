@@ -7,6 +7,7 @@ package pimonitor.client.businesses
 import pimonitor.client.businesses.forms.CreateBusinessFormFields
 import pimonitor.client.businesses.forms.InviteToShareFormFields
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
+import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import pimonitor.core.businesses.params.InviteToShareReportsRawParams
 import presenters.modal.*
 import presenters.modal.builders.ConfirmDialogBuilder
@@ -31,8 +32,8 @@ object BusinessesDialogContent {
     @JvmField
     val CaptureInvestment = "Capture Investment"
 
-    internal fun <T> createBusinessDialog(
-        @BuilderInference block: FormDialogBuilder<T>.() -> SubmitAction<T>
+    internal fun createBusinessDialog(
+        block: FormDialogBuildingBlock<CreateMonitoredBusinessRawParams>
     ) = formDialog(
         heading = CreateBusiness,
         details = "Adding a new business to PiMonitor lets you monitor all its operational and financial data in one place. You can always add more details later.",

@@ -14,6 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeServiceConfigCore)
+                api(asoft.later.ktx)
             }
         }
 

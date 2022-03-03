@@ -79,7 +79,7 @@ includeSubs(base = "bitframe-sdk-server", path = "bitframe-sdk/server", "core", 
 
 includeRoot(name = "pimonitor-core", "pimonitor/pimonitor-core")
 includeRoot(name = "pimonitor-daod", "pimonitor/pimonitor-daod")
-includeRoot(name = "pimonitor-test", "pimonitor/pimonitor-test")
+//includeRoot(name = "pimonitor-test", "pimonitor/pimonitor-test")
 includeSubs(base = "pimonitor-api", "pimonitor/pimonitor-api", "core", "ktor", "mock")
 includeSubs(base = "pimonitor-api-public", "pimonitor/pimonitor-api/public", "core", "test")
 includeSubs(base = "pimonitor-sdk-client", "pimonitor/pimonitor-sdk/client", "core", "react")

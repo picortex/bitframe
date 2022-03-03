@@ -10,26 +10,27 @@ import presenters.fields.EmailInputField
 import presenters.fields.TextInputField
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import pimonitor.core.businesses.params.CreateMonitoredBusinessParams as Params
 
 data class CreateBusinessFormFields internal constructor(
     val title: String = "Add a business",
     val businessName: TextInputField = TextInputField(
-        name = "businessName",
+        name = Params::businessName.name,
         label = "Business name",
         hint = "PiCortex LLC"
     ),
     val contactName: TextInputField = TextInputField(
-        name = "contactName",
+        name = Params::contactName.name,
         label = "Contact Name",
         hint = "John Doe"
     ),
     val contactEmail: EmailInputField = EmailInputField(
-        name = "contactEmail",
+        name = Params::contactEmail.name,
         label = "Contact Email",
         hint = "john@doe.com"
     ),
     val sendInvite: BooleanInputField = BooleanInputField(
-        name = "sendInvite",
+        name = Params::sendInvite.name,
         label = "Ask to share reports",
         value = true
     ),
