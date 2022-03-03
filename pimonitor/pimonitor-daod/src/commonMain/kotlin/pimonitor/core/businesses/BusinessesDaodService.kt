@@ -19,6 +19,8 @@ import pimonitor.core.businesses.params.toRegisterUserParams
 import pimonitor.core.contacts.ContactPersonSpaceInfo
 import pimonitor.core.invites.Invite
 import pimonitor.core.invites.InviteStatus
+import pimonitor.core.spaces.SPACE_TYPE
+import pimonitor.core.users.USER_TYPE
 
 open class BusinessesDaodService(
     open val config: DaodServiceConfig
@@ -27,6 +29,7 @@ open class BusinessesDaodService(
     private val businessDao by lazy { config.daoFactory.get<MonitoredBusinessBasicInfo>() }
     private val spacesDao by lazy { config.daoFactory.get<Space>() }
     private val invitesDao by lazy { config.daoFactory.get<Invite>() }
+    private val userSpaceInfoDao by lazy { config.daoFactory.get<UserSpaceInfo>() }
     private val userContactsDao by lazy {
         CompoundDao(
             config.daoFactory.get<UserEmail>(),
@@ -43,22 +46,38 @@ open class BusinessesDaodService(
         )
 
     override fun create(rb: RequestBody.Authorized<CreateMonitoredBusinessParams>) = config.scope.later {
-        val res1 = register(rb.data.toRegisterUserParams()).await()
+        val registered = userContactsDao.all(
+            condition = UserContact::value isEqualTo rb.data.contactEmail
+        ).await().firstOrNull()
+
+        val (userId, spaceId) = if (registered == null) {
+            val res1 = register(rb.data.toRegisterUserParams()).await()
+            res1.user.uid to res1.spaces.first().uid
+        } else {
+            val space = spacesDao.create(Space(name = rb.data.businessName, type = SPACE_TYPE.MONITORED)).await()
+            val usi = UserSpaceInfo(
+                userId = registered.userId,
+                spaceId = space.uid,
+                type = USER_TYPE.CONTACT
+            )
+            userSpaceInfoDao.create(usi).await()
+            registered.userId to space.uid
+        }
+
         val task2_1 = businessDao.create(
             MonitoredBusinessBasicInfo(
-                spaceId = res1.spaces.first().uid,
+                spaceId = spaceId,
                 owningSpaceId = rb.session.space.uid
             )
         )
         val task2_2 = contactPersonSpaceInfoDao.create(
             ContactPersonSpaceInfo(
-                userId = res1.user.uid,
-                spaceId = res1.spaces.first().uid,
+                userId = userId,
+                spaceId = spaceId,
                 owningSpaceId = rb.session.space.uid,
                 position = ""
             )
         )
-        rb.data
         CreateMonitoredBusinessResult(
             params = rb.data,
             business = task2_1.await(),

@@ -22,11 +22,11 @@ class SignInDaodUseCase(val config: DaodServiceConfig) : SignInUseCase {
     }
 
     override fun signIn(rb: RequestBody.UnAuthorized<SignInCredentials>) = scope.later {
-        val contact = contactsDao.all("value" isEqualTo rb.data.identifier).await().firstOrNull() ?: throw EntityNotFoundException("identifier", rb.data.identifier)
+        val contact = contactsDao.all(UserContact::value isEqualTo rb.data.identifier).await().firstOrNull() ?: throw EntityNotFoundException("identifier", rb.data.identifier)
         val user = usersDao.load(contact.userId).await()
         val credentials = credentialsDao.all(UserCredentials::userId isEqualTo user.uid).await().first()
         if (credentials.credential != rb.data.password) throw RuntimeException("Incorrect password")
-        val info = userSpaceInfoDao.all("userId" isEqualTo user.uid).await()
+        val info = userSpaceInfoDao.all(UserSpaceInfo::userId isEqualTo user.uid).await()
         val spaces = buildList {
             for (infoX in info) add(spacesDao.load(infoX.spaceId))
         }.map { it.await() }

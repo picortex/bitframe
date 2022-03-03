@@ -31,7 +31,7 @@ class RegisterUserUseCaseImpl(
 
     override fun register(params: RegisterUserParams): Later<SignInResult> = config.scope.later {
         val input = validate(params).getOrThrow()
-        val registered = contactsDao.all("value" isEqualTo input.userIdentifier).await()
+        val registered = contactsDao.all(UserContact::value isEqualTo input.userIdentifier).await()
         if (registered.isNotEmpty()) throw UserFoundException(input.userIdentifier)
 
         val userOutput = usersDao.create(input.toUserInput()).await()
