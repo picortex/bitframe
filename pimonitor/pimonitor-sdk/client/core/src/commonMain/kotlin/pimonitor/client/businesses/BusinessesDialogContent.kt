@@ -4,6 +4,7 @@
 
 package pimonitor.client.businesses
 
+import pimonitor.client.businesses.forms.CaptureInvestmentFields
 import pimonitor.client.businesses.forms.CreateBusinessFormFields
 import pimonitor.client.businesses.forms.InviteToShareFormFields
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
@@ -68,7 +69,7 @@ object BusinessesDialogContent {
     ) = formDialog(
         heading = CaptureInvestment,
         details = "Capturing investment for ${monitored.name}",
-        fields = CreateBusinessFormFields(),
+        fields = CaptureInvestmentFields(),
         block
     )
 
