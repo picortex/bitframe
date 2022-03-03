@@ -6,6 +6,7 @@ import events.EventBus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
 import logging.Logger
+import mailer.Mailer
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
@@ -23,6 +24,9 @@ interface ServiceConfig : DaodServiceConfig {
         val DEFAULT_LOGGER = DaodServiceConfig.DEFAULT_LOGGER
 
         @JvmField
+        val DEFAULT_MAILER = DaodServiceConfig.DEFAULT_MAILER
+
+        @JvmField
         val DEFAULT_JSON = DaodServiceConfig.DEFAULT_JSON
 
         @JvmSynthetic
@@ -30,9 +34,10 @@ interface ServiceConfig : DaodServiceConfig {
             daoFactory: DaoFactory,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            mailer: Mailer = DEFAULT_MAILER,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): ServiceConfig = object : ServiceConfig, DaodServiceConfig by DaodServiceConfig(daoFactory, bus, logger, json, scope) {}
+        ): ServiceConfig = object : ServiceConfig, DaodServiceConfig by DaodServiceConfig(daoFactory, bus, logger, mailer, json, scope) {}
 
         @JvmOverloads
         @JvmStatic
@@ -40,8 +45,9 @@ interface ServiceConfig : DaodServiceConfig {
             daoFactory: DaoFactory,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            mailer: Mailer = DEFAULT_MAILER,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ) = invoke(daoFactory, bus, logger, json, scope)
+        ) = invoke(daoFactory, bus, logger, mailer, json, scope)
     }
 }

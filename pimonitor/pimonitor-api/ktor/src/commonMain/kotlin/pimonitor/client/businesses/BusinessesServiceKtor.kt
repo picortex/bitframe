@@ -16,6 +16,9 @@ import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
+import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
+import pimonitor.core.businesses.params.InviteToShareReportsParams
+import pimonitor.core.invites.Invite
 import response.decodeResponseFromString
 
 class BusinessesServiceKtor(
@@ -29,7 +32,7 @@ class BusinessesServiceKtor(
         val req = client.post("${config.url}$baseUrl/create") {
             setBody(json.of(rb))
         }
-        json.decodeResponseFromString(CreateMonitoredBusinessParams.serializer(), req.bodyAsText()).response()
+        json.decodeResponseFromString(CreateMonitoredBusinessResult.serializer(), req.bodyAsText()).response()
     }
 
     override fun all(rb: RequestBody.Authorized<BusinessFilter>) = config.scope.later {
@@ -38,6 +41,13 @@ class BusinessesServiceKtor(
         }
         val resp = json.decodeResponseFromString(ListSerializer(MonitoredBusinessSummary.serializer()), req.bodyAsText())
         resp.response().toInteroperableList()
+    }
+
+    override fun invite(rb: RequestBody.Authorized<InviteToShareReportsParams>) = config.scope.later {
+        val req = client.post("${config.url}$baseUrl/invite") {
+            setBody(json.of(rb))
+        }
+        json.decodeResponseFromString(Invite.serializer(), req.bodyAsText()).response()
     }
 
     override fun delete(rb: RequestBody.Authorized<Array<out String>>) = config.scope.later {

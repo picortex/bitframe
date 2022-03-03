@@ -14,7 +14,7 @@ import kotlin.test.Test
 import pimonitor.client.businesses.BusinessesIntent as Intent
 import pimonitor.client.businesses.BusinessesState as State
 
-class BusinessesViewModelTest {
+class LoadBusinessesJourneyTest {
 
     val scope = PiMonitorMockScope()
     val api = scope.api

@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
 import live.MutableLive
 import logging.Logger
+import mailer.Mailer
 import kotlin.jvm.JvmField
 import kotlin.reflect.KClass
 
@@ -34,6 +35,9 @@ interface GenericMockServiceConfig<T : Any> : GenericDaodServiceConfig<T>, MockS
         val DEFAULT_LOGGER = DaodServiceConfig.DEFAULT_LOGGER
 
         @JvmField
+        val DEFAULT_MAILER = DaodServiceConfig.DEFAULT_MAILER
+
+        @JvmField
         val DEFAULT_JSON = DaodServiceConfig.DEFAULT_JSON
 
         @JvmField
@@ -47,9 +51,10 @@ interface GenericMockServiceConfig<T : Any> : GenericDaodServiceConfig<T>, MockS
             daoFactory: DaoFactory = DEFAULT_DAO_FACTORY,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            mailer: Mailer = DEFAULT_MAILER,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): GenericMockServiceConfig<D> = object : GenericMockServiceConfig<D>, MockServiceConfig by MockServiceConfig(appId, cache, session, daoFactory, bus, logger, json, scope) {
+        ): GenericMockServiceConfig<D> = object : GenericMockServiceConfig<D>, MockServiceConfig by MockServiceConfig(appId, cache, session, daoFactory, bus, logger, mailer, json, scope) {
             override val clazz: KClass<D> = clazz
         }
 
@@ -60,8 +65,9 @@ interface GenericMockServiceConfig<T : Any> : GenericDaodServiceConfig<T>, MockS
             daoFactory: DaoFactory = DEFAULT_DAO_FACTORY,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            mailer: Mailer = DEFAULT_MAILER,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): GenericMockServiceConfig<D> = invoke(D::class, appId, cache, session, daoFactory, bus, logger, json, scope)
+        ): GenericMockServiceConfig<D> = invoke(D::class, appId, cache, session, daoFactory, bus, logger, mailer, json, scope)
     }
 }

@@ -44,7 +44,7 @@ class SearchServiceTest {
             contactEmail = "contact@business$time.com"
         )
         val res3 = api.businesses.create(params3).await()
-        expect(res3.businessName).toBe("Test Search Monitored Business $time")
+        expect(res3.params.businessName).toBe("Test Search Monitored Business $time")
 
         //STEP 4: Search with search key "test" and see if a business with that key can be found
         val res4 = api.search.search(SearchParams("test")).await().filterIsInstance<SearchResult.MonitoredBusiness>()
@@ -81,7 +81,7 @@ class SearchServiceTest {
             contactEmail = "contact@business$time.com"
         )
         val res3 = api.businesses.create(params3).await()
-        expect(res3.businessName).toBe("Test Search Monitored Business $time")
+        expect(res3.params.businessName).toBe("Test Search Monitored Business $time")
 
         //STEP 4: Search with search key "test" and see if a contact with that key can be found
         val res4 = api.search.search(SearchParams("test")).await().filterIsInstance<SearchResult.ContactPersonSummary>()

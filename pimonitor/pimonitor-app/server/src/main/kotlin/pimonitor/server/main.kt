@@ -5,6 +5,8 @@ import bitframe.server.MongoDaoFactory
 import bitframe.server.MongoDaoFactoryConfig
 import bitframe.server.ServiceConfig
 import bitframe.server.bitframeApplication
+import mailer.SmtpMailer
+import mailer.SmtpMailerConfig
 import pimonitor.server.businesses.BusinessController
 import pimonitor.server.businesses.BusinessModule
 import pimonitor.server.contacts.ContactsController
@@ -18,6 +20,8 @@ import pimonitor.server.search.SearchModule
 import pimonitor.server.signup.SignUpController
 import pimonitor.server.signup.SignUpModule
 import java.io.File
+import java.io.FileInputStream
+import java.util.*
 
 fun main(args: Array<String>) {
     bitframeApplication<PiMonitorService> {
@@ -26,8 +30,8 @@ fun main(args: Array<String>) {
 //            MockDaoFactory()
             MongoDaoFactory(
                 config = MongoDaoFactoryConfig(
-//                    host = "127.0.0.1:27017",
-                    host = "database:27017",
+                    host = "127.0.0.1:27017",
+//                    host = "database:27017",
                     username = "root",
                     password = "example",
                     database = "pi"
@@ -36,7 +40,13 @@ fun main(args: Array<String>) {
         }
 
         service { factory ->
-            PiMonitorService(ServiceConfig(factory))
+            val inputStream = ClassLoader.getSystemResourceAsStream("sendgrid.properties") ?: error("Failed to get sendgrid.properties.file")
+            val props = Properties().apply { load(inputStream) }
+            val config = ServiceConfig(
+                daoFactory = factory,
+                mailer = SmtpMailer(SmtpMailerConfig(props))
+            )
+            PiMonitorService(config)
         }
 
         install { ser ->

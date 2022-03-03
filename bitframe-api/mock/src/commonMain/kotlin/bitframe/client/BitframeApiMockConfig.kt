@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
 import live.MutableLive
 import logging.Logger
+import mailer.Mailer
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
@@ -27,6 +28,9 @@ interface BitframeApiMockConfig : BitframeApiConfig, MockServiceConfig {
 
         @JvmField
         val DEFAULT_LOGGER = MockServiceConfig.DEFAULT_LOGGER
+
+        @JvmField
+        val DEFAULT_MAILER = MockServiceConfig.DEFAULT_MAILER
 
         @JvmField
         val DEFAULT_CACHE = MockServiceConfig.DEFAULT_CACHE
@@ -48,9 +52,10 @@ interface BitframeApiMockConfig : BitframeApiConfig, MockServiceConfig {
             daoFactory: DaoFactory = DEFAULT_DAO_FACTORY,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            mailer: Mailer = DEFAULT_MAILER,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): BitframeApiMockConfig = object : BitframeApiMockConfig, MockServiceConfig by MockServiceConfig(appId, cache, session, daoFactory, bus, logger, json, scope) {}
+        ): BitframeApiMockConfig = object : BitframeApiMockConfig, MockServiceConfig by MockServiceConfig(appId, cache, session, daoFactory, bus, logger, mailer, json, scope) {}
 
         @JvmStatic
         @JvmOverloads
@@ -61,8 +66,9 @@ interface BitframeApiMockConfig : BitframeApiConfig, MockServiceConfig {
             daoFactory: DaoFactory = DEFAULT_DAO_FACTORY,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            mailer: Mailer = DEFAULT_MAILER,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): BitframeApiMockConfig = invoke(appId, cache, session, daoFactory, bus, logger, json, scope)
+        ): BitframeApiMockConfig = invoke(appId, cache, session, daoFactory, bus, logger, mailer, json, scope)
     }
 }

@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
 import live.MutableLive
 import logging.Logger
+import mailer.Mailer
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
@@ -40,6 +41,9 @@ interface MockServiceConfig : ServiceConfig, DaodServiceConfig {
         val DEFAULT_LOGGER = ServiceConfig.DEFAULT_LOGGER
 
         @JvmField
+        val DEFAULT_MAILER = DaodServiceConfig.DEFAULT_MAILER
+
+        @JvmField
         val DEFAULT_JSON = DaodServiceConfig.DEFAULT_JSON
 
         @JvmSynthetic
@@ -50,6 +54,7 @@ interface MockServiceConfig : ServiceConfig, DaodServiceConfig {
             daoFactory: DaoFactory = DEFAULT_DAO_FACTORY,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            mailer: Mailer = DEFAULT_MAILER,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
         ): MockServiceConfig = object : MockServiceConfig {
@@ -58,6 +63,7 @@ interface MockServiceConfig : ServiceConfig, DaodServiceConfig {
             override val session: MutableLive<Session> = session
             override val cache: Cache = cache
             override val bus = bus
+            override val mailer = mailer
             override val logger: Logger = logger
             override val json = json
             override val scope = scope
@@ -72,8 +78,9 @@ interface MockServiceConfig : ServiceConfig, DaodServiceConfig {
             daoFactory: DaoFactory = DEFAULT_DAO_FACTORY,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
+            mailer: Mailer = DEFAULT_MAILER,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ) = invoke(appId, cache, session, daoFactory, bus, logger, json, scope)
+        ) = invoke(appId, cache, session, daoFactory, bus, logger, mailer, json, scope)
     }
 }

@@ -13,6 +13,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(projects.mailerMock)
                 api(projects.bitframeServiceConfigCore)
                 api(projects.bitframeDaoCore)
                 api(kotlinx.serialization.json)

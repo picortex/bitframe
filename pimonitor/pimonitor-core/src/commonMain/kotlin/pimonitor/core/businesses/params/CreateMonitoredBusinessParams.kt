@@ -1,6 +1,9 @@
+@file:JsExport
+
 package pimonitor.core.businesses.params
 
 import kotlinx.serialization.Serializable
+import kotlin.js.JsExport
 
 @Serializable
 class CreateMonitoredBusinessParams(

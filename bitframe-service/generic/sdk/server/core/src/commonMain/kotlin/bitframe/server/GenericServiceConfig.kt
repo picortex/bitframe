@@ -7,6 +7,7 @@ import events.EventBus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
 import logging.Logger
+import mailer.Mailer
 import kotlin.reflect.KClass
 
 interface GenericServiceConfig<D : Any> : GenericDaodServiceConfig<D>, ServiceConfig {
@@ -16,16 +17,18 @@ interface GenericServiceConfig<D : Any> : GenericDaodServiceConfig<D>, ServiceCo
             daoFactory: DaoFactory,
             bus: EventBus = ServiceConfig.DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
+            mailer: Mailer = ServiceConfig.DEFAULT_MAILER,
             json: Json = DaodServiceConfig.DEFAULT_JSON,
             scope: CoroutineScope = ServiceConfig.DEFAULT_SCOPE
-        ): GenericServiceConfig<D> = object : GenericServiceConfig<D>, GenericDaodServiceConfig<D> by GenericDaodServiceConfig(clazz, daoFactory, bus, logger, json, scope) {}
+        ): GenericServiceConfig<D> = object : GenericServiceConfig<D>, GenericDaodServiceConfig<D> by GenericDaodServiceConfig(clazz, daoFactory, bus, logger, mailer, json, scope) {}
 
         inline operator fun <reified D : Any> invoke(
             daoFactory: DaoFactory,
             bus: EventBus = ServiceConfig.DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
+            mailer: Mailer = ServiceConfig.DEFAULT_MAILER,
             json: Json = DaodServiceConfig.DEFAULT_JSON,
             scope: CoroutineScope = ServiceConfig.DEFAULT_SCOPE
-        ): GenericServiceConfig<D> = invoke(D::class, daoFactory, bus, logger, json, scope)
+        ): GenericServiceConfig<D> = invoke(D::class, daoFactory, bus, logger, mailer, json, scope)
     }
 }

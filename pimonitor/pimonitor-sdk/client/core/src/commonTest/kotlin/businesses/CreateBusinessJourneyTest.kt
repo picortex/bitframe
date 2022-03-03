@@ -17,7 +17,7 @@ import kotlin.test.Test
 import pimonitor.client.businesses.BusinessesIntent as Intent
 import pimonitor.client.businesses.BusinessesState as State
 
-class BusinessesViewModelCreateBusinessIntentTest {
+class CreateBusinessJourneyTest {
 
     val scope = PiMonitorMockScope()
     val api = scope.api
@@ -59,7 +59,6 @@ class BusinessesViewModelCreateBusinessIntentTest {
     }
 
     @Test
-    @Ignore
     fun should_create_a_business_then_send_an_invite_afterwards() = runSequence {
         step("Sign Up as a Monitor") {
             val monitor = IndividualSignUpParams(

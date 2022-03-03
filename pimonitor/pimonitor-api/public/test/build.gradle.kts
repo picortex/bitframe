@@ -11,13 +11,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.pimonitorApiPublicCore)
-            }
-        }
-
-        val commonTest by getting {
-            dependencies {
                 api(asoft.expect.coroutines)
+                api(projects.pimonitorApiPublicCore)
             }
         }
     }

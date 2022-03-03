@@ -10,6 +10,7 @@ import later.await
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.BusinessesDaodService
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
+import pimonitor.core.businesses.params.InviteToShareReportsParams
 import response.response
 
 class BusinessController(
@@ -29,5 +30,10 @@ class BusinessController(
     suspend fun delete(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.Authorized<Array<String>>>(req.compulsoryBody())
         resolve(service.delete(rb).await())
+    }.toHttpResponse()
+
+    suspend fun invite(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.Authorized<InviteToShareReportsParams>>(req.compulsoryBody())
+        resolve(service.invite(rb).await())
     }.toHttpResponse()
 }

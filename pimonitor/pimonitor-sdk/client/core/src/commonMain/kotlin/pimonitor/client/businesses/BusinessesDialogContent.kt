@@ -7,22 +7,18 @@ package pimonitor.client.businesses
 import pimonitor.client.businesses.forms.CreateBusinessFormFields
 import pimonitor.client.businesses.forms.InviteToShareFormFields
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
-import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
-import presenters.modal.ConfirmAction
-import presenters.modal.SubmitAction
+import pimonitor.core.businesses.params.InviteToShareReportsRawParams
+import presenters.modal.*
 import presenters.modal.builders.ConfirmDialogBuilder
+import presenters.modal.builders.ConfirmDialogBuildingBlock
 import presenters.modal.builders.FormDialogBuilder
-import presenters.modal.confirmDialog
-import presenters.modal.formDialog
+import presenters.modal.builders.FormDialogBuildingBlock
 import presenters.table.Row
 import kotlin.experimental.ExperimentalTypeInference
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 
 object BusinessesDialogContent {
-    @JvmField
-    val Confirm = presenters.modal.Confirm
-
     @JvmField
     val CreateBusiness = "Add Business"
 
@@ -44,29 +40,20 @@ object BusinessesDialogContent {
         block
     )
 
-    internal fun <T> inviteToShareDialog(
-        monitored: String,
-        @BuilderInference block: FormDialogBuilder<T>.() -> SubmitAction<T>
+    internal fun inviteToShareReportsDialog(
+        businessName: String,
+        contactEmail: String,
+        block: FormDialogBuildingBlock<InviteToShareReportsRawParams>
     ) = formDialog(
         heading = InviteToShareReports,
-        details = "Request $monitored information by email",
-        fields = InviteToShareFormFields(),
-        block
-    )
-
-    internal fun <T> inviteToShareDialog(
-        params: CreateMonitoredBusinessRawParams,
-        @BuilderInference block: FormDialogBuilder<T>.() -> SubmitAction<T>
-    ) = formDialog(
-        heading = InviteToShareReports,
-        details = "Request ${params.businessName} information by email",
-        fields = InviteToShareFormFields().copy(params),
+        details = "Request $businessName information by email",
+        fields = InviteToShareFormFields().copy(contactEmail),
         block
     )
 
     internal fun <T> interveneDialog(
         monitored: MonitoredBusinessSummary,
-        @BuilderInference block: FormDialogBuilder<T>.() -> SubmitAction<T>
+        @BuilderInference block: FormDialogBuildingBlock<T>
     ) = formDialog(
         heading = Intervene,
         details = "Perform an intervention to ${monitored.name} pronto",
@@ -76,7 +63,7 @@ object BusinessesDialogContent {
 
     internal fun <T> captureInvestmentDialog(
         monitored: MonitoredBusinessSummary,
-        @BuilderInference block: FormDialogBuilder<T>.() -> SubmitAction<T>
+        @BuilderInference block: FormDialogBuildingBlock<T>
     ) = formDialog(
         heading = CaptureInvestment,
         details = "Capturing investment for ${monitored.name}",
@@ -86,7 +73,7 @@ object BusinessesDialogContent {
 
     internal fun deleteSingleDialog(
         monitored: MonitoredBusinessSummary,
-        block: ConfirmDialogBuilder.() -> ConfirmAction
+        block: ConfirmDialogBuildingBlock
     ) = confirmDialog(
         heading = "Delete Business",
         details = "Completely delete ${monitored.name} from your list of businesses",
@@ -95,7 +82,7 @@ object BusinessesDialogContent {
 
     internal fun deleteManyDialog(
         monitored: Array<Row<MonitoredBusinessSummary>>,
-        block: ConfirmDialogBuilder.() -> ConfirmAction
+        block: ConfirmDialogBuildingBlock
     ) = confirmDialog(
         heading = "Delete Businesses",
         details = "Completely delete ${monitored.size} from your list of businesses",

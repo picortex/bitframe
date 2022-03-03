@@ -19,7 +19,7 @@ class SearchViewModelTest {
     val vm = scope.search.viewModel
 
     @Test
-    fun should_start_with_a_empty_results_and_a_pending_searh_state() = runTest {
+    fun should_start_with_a_empty_results_and_a_pending_search_state() = runTest {
         val state = vm.ui.value
         expect(state).toBe<SearchState.Pending>()
     }

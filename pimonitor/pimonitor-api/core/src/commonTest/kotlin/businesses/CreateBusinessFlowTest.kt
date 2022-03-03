@@ -43,7 +43,7 @@ class CreateBusinessFlowTest {
             contactEmail = "contact@business$time.com"
         )
         val res3 = api.businesses.create(params3).await()
-        expect(res3.businessName).toBe("Test Monitored Business $time")
+        expect(res3.params.businessName).toBe("Test Monitored Business $time")
 
         // STEP 4. Ensure business is registered
         val res4 = api.businesses.all().await().firstOrNull()
