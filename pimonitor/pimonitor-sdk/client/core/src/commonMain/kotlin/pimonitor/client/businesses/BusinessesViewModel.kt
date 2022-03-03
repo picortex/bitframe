@@ -102,7 +102,7 @@ class BusinessesViewModel(
         val state = ui.value
         flow {
             emit(state.copy(status = Loading("Adding ${i.params.businessName}, please wait . . ."), dialog = null))
-            val result = service.create(i.params).await()
+            val result = service.create(i.params).await().params
             emit(state.copy(status = Success("${i.params.businessName} has successfully been added"), dialog = null))
             if (result.sendInvite) {
                 val dialog = inviteToShareReportsDialog(

@@ -4,12 +4,12 @@ import bitframe.core.signin.SignInCredentials
 import expect.expect
 import later.await
 import pimonitor.client.businesses.BusinessesDialogContent
+import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import presenters.feedbacks.Feedback
 import utils.PiMonitorMockScope
-import utils.runSequence
 import utils.toContain
 import viewmodel.expect
 import kotlin.test.Ignore
@@ -24,6 +24,7 @@ class InviteToShareReportsJourneyTest {
     val vm = scope.businesses.viewModel
 
     @Test
+    @Ignore
     fun should_invite_to_share_reports_for_a_loaded_business() = runSequence {
         step("Sign Up as a Monitor") {
             val monitor = IndividualSignUpParams(
