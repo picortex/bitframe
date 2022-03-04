@@ -13,18 +13,11 @@ interface MockDaoConfig<D : Any> : DaoConfig<D> {
     val prefix: String
 
     companion object {
-
-        /**
-         * The safe minimum simulation time for an InMemory Dao which is usually by a [List]
-         */
-        @JvmField
-        val MIN_SIMULATION_TIME = 0L
-
         /**
          * The time (in milliseconds) for simulating data operations to get
          */
         @JvmField
-        val DEFAULT_SIMULATION_TIME = MIN_SIMULATION_TIME
+        val DEFAULT_SIMULATION_TIME = 10L
 
         @JvmField
         val DEFAULT_LOCK = Mutex()
