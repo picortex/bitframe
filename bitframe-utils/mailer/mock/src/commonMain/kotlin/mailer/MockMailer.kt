@@ -10,19 +10,18 @@ class MockMailer(val config: MockMailerConfig = MockMailerConfig()) : Mailer {
     override fun send(draft: EmailDraft, from: Email, to: List<Email>): Later<EmailMessage> = config.scope.later {
         delay(config.simulationTime)
         if (config.printToConsole) {
-            println(
-                """
-                ${config.separator}
-                Mock Email
-                ${config.separator} 
-                subject: ${draft.subject}
-                from:    ${from.value}
-                to:      ${to.joinToString(separator = ";") { it.value }}
-                ${config.separator}
-                ${draft.body}
-                ${config.separator}
-                """.trimIndent()
-            )
+            val message = buildString {
+                appendLine(config.separator)
+                appendLine("Mock Email [Bitframe Mock Mailer]")
+                appendLine(config.separator)
+                appendLine("Subject: ${draft.subject}")
+                appendLine("From:    ${from.value}")
+                appendLine("To:      ${to.joinToString(separator = ";") { it.value }}")
+                appendLine(config.separator)
+                appendLine(draft.body)
+                appendLine(config.separator)
+            }
+            println(message)
         }
         draft.toMessage(from, to)
     }

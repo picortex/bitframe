@@ -15,7 +15,7 @@ kotlin {
             dependencies {
                 api(projects.bitframeServiceGenericApiCore)
                 api(projects.bitframeServiceGenericDaod)
-                api(projects.bitframeServiceConfigApiMock)
+                api(projects.bitframeServiceBuilderApiMock)
             }
         }
 

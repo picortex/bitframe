@@ -10,7 +10,7 @@ kotlin {
     sourceSets {
         val main by getting {
             dependencies {
-                api(projects.bitframeServiceConfigSdkClientCore)
+                api(projects.bitframeServiceBuilderSdkClientCore)
                 api(asoft.viewmodel.react)
             }
         }

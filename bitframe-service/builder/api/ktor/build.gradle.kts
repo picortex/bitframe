@@ -13,10 +13,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeServiceConfigApiCore)
-                api(projects.bitframeServiceConfigDaod)
-                api(projects.bitframeDaoMock)
-                api(asoft.cache.mock)
+                api(projects.bitframeServiceBuilderApiCore)
+                api(kotlinx.serialization.json)
+                api(ktor.client.core)
             }
         }
 

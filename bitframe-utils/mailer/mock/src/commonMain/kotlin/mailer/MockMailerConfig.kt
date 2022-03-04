@@ -24,7 +24,7 @@ interface MockMailerConfig {
         val DEFAULT_SCOPE = CoroutineScope(SupervisorJob())
 
         @JvmField
-        val DEFAULT_SEPERATOR = "- - - - - - - - - - - - -"
+        val DEFAULT_SEPERATOR = "- - - - - - - - - - - - - - - - - - - - - - - - - -"
 
         @JvmSynthetic
         operator fun invoke(

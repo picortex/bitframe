@@ -12,7 +12,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeServiceConfigApiCore)
+                api(projects.bitframeServiceBuilderApiCore)
                 api(projects.presentersCore)
                 api(asoft.viewmodel.coroutines)
             }
@@ -28,7 +28,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(projects.bitframeServiceConfigApiCore)
+                implementation(projects.bitframeServiceBuilderApiCore)
                 implementation(asoft.expect.coroutines)
                 implementation(asoft.viewmodel.test.expect)
             }

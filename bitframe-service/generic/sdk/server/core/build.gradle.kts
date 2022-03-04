@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeServiceGenericDaod)
-                api(projects.bitframeServiceConfigSdkServerCore)
+                api(projects.bitframeServiceBuilderSdkServerCore)
             }
         }
 

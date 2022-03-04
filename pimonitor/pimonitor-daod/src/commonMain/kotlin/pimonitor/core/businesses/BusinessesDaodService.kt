@@ -134,7 +134,7 @@ open class BusinessesDaodService(
             it.spaceId == contactSpaceInfo.spaceId
         }
 
-        val invite = Invite(
+        val inviteParams = Invite(
             invitorUserId = rb.session.user.uid,
             invitorSpaceId = rb.session.space.uid,
             invitedBusinessId = business.uid,
@@ -144,12 +144,12 @@ open class BusinessesDaodService(
                 InviteStatus.Sent(params = rb.data)
             )
         )
-
+        val invite = invitesDao.create(inviteParams).await()
         val draft = EmailDraft(
             subject = rb.data.subject,
-            body = rb.data.message
+            body = "${rb.data.message}\n\nGoto https://react-client.vercel.app/connect?inviteId=${invite.uid}"
         )
         config.mailer.send(draft = draft, from = "support@picortex.com", to = rb.data.to).await()
-        invitesDao.create(invite).await()
+        invite
     }
 }

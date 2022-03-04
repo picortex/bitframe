@@ -39,7 +39,7 @@ abstract class BusinessesService(
 
     fun invite(params: InviteToShareReportsRawParams) = config.scope.later {
         val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("query businesses"),
+            session = config.getSignedInSessionTo("send an invite to ${params.to}"),
             data = params.toValidatedInviteToShareReportParams()
         )
         invite(rb).await()

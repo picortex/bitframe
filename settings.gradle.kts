@@ -56,10 +56,10 @@ includeSubs("bitframe-actor", "bitframe-actor", "core", "app", "user", "space")
 includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mongo")
 
 // Bitframe Service
-includeSubs(base = "bitframe-service-config", path = "bitframe-service/config", "core", "daod")
-includeSubs(base = "bitframe-service-config-api", path = "bitframe-service/config/api", "core", "ktor", "mock")
-includeSubs(base = "bitframe-service-config-sdk-client", path = "bitframe-service/config/sdk/client", "core", "mock", "react")
-includeSubs(base = "bitframe-service-config-sdk-server", path = "bitframe-service/config/sdk/server", "core")
+includeSubs(base = "bitframe-service-builder", path = "bitframe-service/builder", "core", "daod")
+includeSubs(base = "bitframe-service-builder-api", path = "bitframe-service/builder/api", "core", "ktor", "mock")
+includeSubs(base = "bitframe-service-builder-sdk-client", path = "bitframe-service/builder/sdk/client", "core", "mock", "react")
+includeSubs(base = "bitframe-service-builder-sdk-server", path = "bitframe-service/builder/sdk/server", "core")
 
 includeSubs(base = "bitframe-service-generic", path = "bitframe-service/generic", "core", "daod")
 includeSubs(base = "bitframe-service-generic-api", path = "bitframe-service/generic/api", "core", "ktor", "mock")
@@ -70,16 +70,15 @@ includeSubs(base = "bitframe-authentication-api", path = "bitframe-features/auth
 includeSubs(base = "bitframe-authentication-sdk-client", path = "bitframe-features/authentication/sdk/client", "core", "react")
 includeSubs(base = "bitframe-authentication-sdk-server", path = "bitframe-features/authentication/sdk/server", "core")
 
+includeSubs(base = "bitframe-dashboard", path = "bitframe-features/dashboard", "core", "picortex")
+
 includeSubs(base = "bitframe-api", "bitframe-api", "core", "ktor", "mock")
 
 includeSubs(base = "bitframe-sdk-client", path = "bitframe-sdk/client", "core", "react")
 includeSubs(base = "bitframe-sdk-server", path = "bitframe-sdk/server", "core", "ktor", "test")
 
-//includeSubs(base = "bitframe-ui", path = "bitframe-client/ui", "react")
-
 includeRoot(name = "pimonitor-core", "pimonitor/pimonitor-core")
 includeRoot(name = "pimonitor-daod", "pimonitor/pimonitor-daod")
-//includeRoot(name = "pimonitor-test", "pimonitor/pimonitor-test")
 includeSubs(base = "pimonitor-api", "pimonitor/pimonitor-api", "core", "ktor", "mock")
 includeSubs(base = "pimonitor-api-public", "pimonitor/pimonitor-api/public", "core", "test")
 includeSubs(base = "pimonitor-sdk-client", "pimonitor/pimonitor-sdk/client", "core", "react")

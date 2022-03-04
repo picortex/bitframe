@@ -13,7 +13,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeServiceConfigApiCore)
+                api(projects.bitframeServiceBuilderApiCore)
                 api(kotlinx.serialization.json)
                 api(ktor.client.core)
             }

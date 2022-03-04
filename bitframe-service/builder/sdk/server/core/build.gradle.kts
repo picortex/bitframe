@@ -13,8 +13,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeServiceGenericCore)
                 api(projects.bitframeServiceBuilderDaod)
+                api(projects.response)
+                api(ktor.http)
             }
         }
 
