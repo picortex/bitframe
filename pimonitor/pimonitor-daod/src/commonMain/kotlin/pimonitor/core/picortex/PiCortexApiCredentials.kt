@@ -2,7 +2,9 @@ package pimonitor.core.picortex
 
 import bitframe.core.Savable
 import bitframe.core.UNSET
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class PiCortexApiCredentials(
     val businessId: String,
     val subdomain: String,

@@ -6,7 +6,7 @@ package pimonitor.core.invites
 import kotlinx.datetime.Clock
 import kotlinx.serialization.Serializable
 import pimonitor.core.accounting.Accounting
-import pimonitor.core.businesses.Dashboard
+import pimonitor.core.businesses.DashboardOperational
 import pimonitor.core.businesses.params.InviteToShareReportsParams
 import kotlin.js.JsExport
 
@@ -19,7 +19,7 @@ sealed class InviteStatus(val on: Long) {
 
     @Serializable
     data class AcceptedDashboard(
-        val name: Dashboard
+        val name: DashboardOperational
     ) : InviteStatus(Clock.System.now().toEpochMilliseconds())
 
     @Serializable

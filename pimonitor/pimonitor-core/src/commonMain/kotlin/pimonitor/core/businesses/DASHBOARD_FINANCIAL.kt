@@ -6,10 +6,10 @@ import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 
 @JsExport
-object DASHBOARD {
+object DASHBOARD_FINANCIAL {
     @JvmField
     val NONE = "NONE"
 
     @JvmField
-    val PICORTEX = "PICORTEX"
+    val SAGE = "SAGE"
 }

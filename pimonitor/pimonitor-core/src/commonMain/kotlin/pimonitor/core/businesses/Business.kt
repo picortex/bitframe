@@ -12,5 +12,5 @@ sealed class Business : Savable {
     abstract val owningSpaceId: String
     abstract val email: String
     abstract val address: String
-    abstract val logo: String?
+    abstract val logoUrl: String?
 }

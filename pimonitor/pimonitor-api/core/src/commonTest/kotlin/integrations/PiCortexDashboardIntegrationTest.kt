@@ -5,6 +5,7 @@ import expect.expect
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
+import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
@@ -68,8 +69,8 @@ class PiCortexDashboardIntegrationTest {
         }
 
         step("Load businesses and make sure they come with picortex data") {
-            val business = api.businesses.all().await().first() as MonitoredBusinessSummary.ConnectedDashboard
-            expect(business.revenue)
+            val business = api.businesses.all().await().first()
+            expect(business.operationalBoard).toBe(DASHBOARD_OPERATIONAL.PICORTEX)
         }
     }
 }

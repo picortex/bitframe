@@ -5,7 +5,7 @@ package pimonitor.client.businesses
 
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
-import pimonitor.core.businesses.DASHBOARD
+import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import pimonitor.core.businesses.params.InviteToShareReportsRawParams
 import viewmodel.ViewModel
@@ -19,7 +19,7 @@ open class BusinessesScope(
 
     override val viewModel: ViewModel<Intent, State> by lazy { BusinessesViewModel(config) }
 
-    val Dashboard get() = DASHBOARD
+    val Dashboard get() = DASHBOARD_OPERATIONAL
 
     val loadBusinesses: () -> Unit = { viewModel.post(Intent.LoadBusinesses) }
 

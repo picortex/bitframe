@@ -22,6 +22,7 @@ import pimonitor.core.picortex.PiCortexDashboardProvider
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig
 import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
+import presenters.containers.ChangeBox
 
 open class BusinessesDaodService(
     open val config: ServiceConfigDaod
@@ -104,28 +105,22 @@ open class BusinessesDaodService(
         }.toInteroperableList()
         val invites = invitesDao.all(Invite::invitedBusinessId isEqualTo business.uid).await()
         return when (business.dashboard) {
-            DASHBOARD.NONE -> MonitoredBusinessSummary.UnConnectedDashboard(
+            DASHBOARD_OPERATIONAL.NONE -> MonitoredBusinessSummary(
                 uid = business.uid,
                 name = business.name,
                 contacts = contacts,
                 invites = invites,
                 interventions = "0 of 0"
             )
-            DASHBOARD.PICORTEX -> {
-                val cred = piCortexCredentialsDao.all(
-                    condition = PiCortexApiCredentials::businessId isEqualTo business.uid
-                ).await().first()
-                val dashboard = piCortexDashboardProvider.technicalDashboardOf(cred).await()
-                TODO()
-//                MonitoredBusinessSummary.ConnectedDashboard(
-//                    uid = business.uid,
-//                    name = space.name,
-//                    dashboard = DASHBOARD.PICORTEX,
-//                    contacts = contacts,
-//                    invites = invites,
-//                    revenue = ChangeBox(),
-//                    interventions = "0 of 0"
-//                )
+            DASHBOARD_OPERATIONAL.PICORTEX -> {
+                MonitoredBusinessSummary(
+                    uid = business.uid,
+                    name = business.name,
+                    operationalBoard = DASHBOARD_OPERATIONAL.PICORTEX,
+                    contacts = contacts,
+                    invites = invites,
+                    interventions = "0 of 0"
+                )
             }
             else -> {
                 TODO()
@@ -138,9 +133,6 @@ open class BusinessesDaodService(
             condition = UserContact::value isEqualTo rb.data.to
         ).await().firstOrNull() ?: error("Business contact with email ${rb.data.to} is not found in pimonitor")
 
-//        val contactBusinessInfo = contactPersonBusinessInfoDao.all(
-//            condition = ContactPersonBusinessInfo::userId isEqualTo userContact.userId
-//        ).await().firstOrNull() ?: error("User with email ${rb.data.to} not found as a contact in PiMonitor")
         val business = businessDao.load(rb.data.business.uid).await()
         val senderSpace = spacesDao.load(business.owningSpaceId).await()
 

@@ -12,7 +12,7 @@ data class MonitorBusinessBasicInfo(
     override val owningSpaceId: String,
     override val email: String = "",
     override val address: String = "",
-    override val logo: String? = "",
+    override val logoUrl: String? = "",
     override val uid: String = UNSET,
     override val deleted: Boolean = false
 ) : Business() {

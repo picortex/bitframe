@@ -16,10 +16,8 @@ import pimonitor.client.businesses.BusinessesDialogContent.deleteSingleDialog
 import pimonitor.client.businesses.BusinessesDialogContent.interveneDialog
 import pimonitor.client.businesses.BusinessesDialogContent.inviteToShareReportsDialog
 import pimonitor.client.businesses.BusinessesIntent.*
-import pimonitor.core.businesses.DASHBOARD
+import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
-import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
-import presenters.feedbacks.Feedback
 import presenters.feedbacks.Feedback.*
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
@@ -218,12 +216,7 @@ class BusinessesViewModel(
         multiAction("Delete All") { post(ShowDeleteMultipleConfirmationDialog(it)) }
         selectable()
         column("Name") { it.data.name }
-        column("Reporting") {
-            when (val business = it.data) {
-                is MonitoredBusinessSummary.ConnectedDashboard -> business.dashboard
-                is MonitoredBusinessSummary.UnConnectedDashboard -> DASHBOARD.NONE
-            }
-        }
+        column("Reporting") { it.data.operationalBoard }
         column("Revenue") { "" }
         column("Expenses") { "" }
         column("GP") { "" }
