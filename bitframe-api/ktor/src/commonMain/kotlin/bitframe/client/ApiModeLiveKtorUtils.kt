@@ -2,7 +2,7 @@ package bitframe.client
 
 import bitframe.client.configurators.ApiMode
 
-fun ApiMode.Live.toKtorApiConfig() = BitframeApiKtorConfig(
+fun ApiMode.Live.toApiConfigKtor() = BitframeApiKtorConfig(
     appId = appId,
     url = url,
     cache = cache,

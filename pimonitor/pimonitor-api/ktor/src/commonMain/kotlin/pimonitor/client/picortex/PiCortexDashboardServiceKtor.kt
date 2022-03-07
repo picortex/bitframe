@@ -1,14 +1,15 @@
 package pimonitor.client.picortex
 
-import bitframe.client.KtorServiceConfig
+import bitframe.client.ServiceConfigKtor
+import bitframe.core.RequestBody
 import later.Later
 import pimonitor.core.picortex.AcceptPicortexInviteParams
 import pimonitor.core.picortex.AcceptPicortexInviteRawParams
 
 class PiCortexDashboardServiceKtor(
-    val config: KtorServiceConfig
-) : PiCortexDashboardService {
-    override fun acceptInvite(params: AcceptPicortexInviteRawParams): Later<AcceptPicortexInviteParams> {
+    override val config: ServiceConfigKtor
+) : PiCortexDashboardService(config) {
+    override fun acceptInvite(rb: RequestBody.UnAuthorized<AcceptPicortexInviteRawParams>): Later<AcceptPicortexInviteParams> {
         TODO("Not yet implemented")
     }
 }

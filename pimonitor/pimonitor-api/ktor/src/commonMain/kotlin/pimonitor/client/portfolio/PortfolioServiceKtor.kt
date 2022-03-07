@@ -1,18 +1,17 @@
 package pimonitor.client.portfolio
 
-import bitframe.client.KtorServiceConfig
+import bitframe.client.ServiceConfigKtor
 import bitframe.client.of
 import bitframe.core.RequestBody
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import later.Later
 import later.later
 import pimonitor.core.portfolio.PortfolioData
 import pimonitor.core.portfolio.PortfolioFilter
 import response.decodeResponseFromString
 
 class PortfolioServiceKtor(
-    override val config: KtorServiceConfig
+    override val config: ServiceConfigKtor
 ) : PortfolioService {
     val client get() = config.http
     val json get() = config.json

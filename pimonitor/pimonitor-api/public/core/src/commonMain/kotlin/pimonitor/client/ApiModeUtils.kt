@@ -1,10 +1,10 @@
 package pimonitor.client
 
 import bitframe.client.configurators.ApiMode
-import bitframe.client.toKtorApiConfig
-import bitframe.client.toMockApiConfig
+import bitframe.client.toApiConfigKtor
+import bitframe.client.toApiConfigMock
 
 fun ApiMode.toPiMonitorApi(): PiMonitorApi = when (this) {
-    is ApiMode.Live -> PiMonitorApiKtor(toKtorApiConfig())
-    is ApiMode.Mock -> PiMonitorApiMock(toMockApiConfig())
+    is ApiMode.Live -> PiMonitorApiKtor(toApiConfigKtor())
+    is ApiMode.Mock -> PiMonitorApiMock(toApiConfigMock())
 }

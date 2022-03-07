@@ -1,16 +1,12 @@
 package pimonitor.client.businesses
 
-import bitframe.client.KtorServiceConfig
+import bitframe.client.ServiceConfigKtor
 import bitframe.client.of
 import bitframe.core.RequestBody
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import io.ktor.util.*
-import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.collections.interoperable.toInteroperableList
-import kotlinx.serialization.builtins.serializer
-import later.Later
 import later.later
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
@@ -22,7 +18,7 @@ import pimonitor.core.invites.Invite
 import response.decodeResponseFromString
 
 class BusinessesServiceKtor(
-    override val config: KtorServiceConfig
+    override val config: ServiceConfigKtor
 ) : BusinessesService(config) {
     private val baseUrl = "/api/businesses"
     val client get() = config.http

@@ -1,9 +1,9 @@
 package pimonitor.client.picortex
 
-import bitframe.core.ServiceConfigDaod
+import bitframe.client.ServiceConfigMock
 import pimonitor.core.picortex.PiCortexDashboardDaodService
 import pimonitor.core.picortex.PiCortexDashboardServiceCore
 
 class PiCortexDashboardServiceMock(
-    val config: ServiceConfigDaod
-) : PiCortexDashboardService, PiCortexDashboardServiceCore by PiCortexDashboardDaodService(config)
+    override val config: ServiceConfigMock
+) : PiCortexDashboardService(config), PiCortexDashboardServiceCore by PiCortexDashboardDaodService(config)

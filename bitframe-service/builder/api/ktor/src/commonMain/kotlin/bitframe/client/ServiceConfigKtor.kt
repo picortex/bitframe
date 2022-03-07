@@ -13,7 +13,7 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface KtorServiceConfig : ServiceConfig {
+interface ServiceConfigKtor : ServiceConfig {
     val url: String
     val http: HttpClient
     val json: Json
@@ -47,7 +47,7 @@ interface KtorServiceConfig : ServiceConfig {
             http: HttpClient = DEFAULT_HTTP_CLIENT,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE,
-        ): KtorServiceConfig = object : KtorServiceConfig, ServiceConfig by ServiceConfig(appId, cache, bus, logger, session, scope) {
+        ): ServiceConfigKtor = object : ServiceConfigKtor, ServiceConfig by ServiceConfig(appId, cache, bus, logger, session, scope) {
             override val url: String = url
             override val http: HttpClient = http
             override val json: Json = json

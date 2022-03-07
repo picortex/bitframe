@@ -1,6 +1,6 @@
 package pimonitor.client.contacts
 
-import bitframe.client.KtorServiceConfig
+import bitframe.client.ServiceConfigKtor
 import bitframe.client.of
 import bitframe.core.RequestBody
 import io.ktor.client.request.*
@@ -11,10 +11,9 @@ import later.later
 import pimonitor.core.contacts.ContactsFilter
 import pimonitor.core.search.SearchResult
 import response.decodeResponseFromString
-import response.decodeResponseWithInfoFromString
 
 class ContactsServiceKtor(
-    override val config: KtorServiceConfig
+    override val config: ServiceConfigKtor
 ) : ContactsService(config) {
     private val client get() = config.http
     private val json get() = config.json

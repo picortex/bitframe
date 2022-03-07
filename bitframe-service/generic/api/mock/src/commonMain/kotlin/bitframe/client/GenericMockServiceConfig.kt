@@ -14,22 +14,22 @@ import mailer.Mailer
 import kotlin.jvm.JvmField
 import kotlin.reflect.KClass
 
-interface GenericMockServiceConfig<T : Any> : GenericDaodServiceConfig<T>, MockServiceConfig {
+interface GenericMockServiceConfig<T : Any> : GenericDaodServiceConfig<T>, ServiceConfigMock {
     companion object {
         @JvmField
-        val DEFAULT_APP_ID = MockServiceConfig.DEFAULT_APP_ID
+        val DEFAULT_APP_ID = ServiceConfigMock.DEFAULT_APP_ID
 
         @JvmField
-        val DEFAULT_DAO_FACTORY = MockServiceConfig.DEFAULT_DAO_FACTORY
+        val DEFAULT_DAO_FACTORY = ServiceConfigMock.DEFAULT_DAO_FACTORY
 
         @JvmField
         val DEFAULT_BUS = ServiceConfigDaod.DEFAULT_BUS
 
         @JvmField
-        val DEFAULT_CACHE = MockServiceConfig.DEFAULT_CACHE
+        val DEFAULT_CACHE = ServiceConfigMock.DEFAULT_CACHE
 
         @JvmField
-        val DEFAULT_LIVE_SESSION = MockServiceConfig.DEFAULT_LIVE_SESSION
+        val DEFAULT_LIVE_SESSION = ServiceConfigMock.DEFAULT_LIVE_SESSION
 
         @JvmField
         val DEFAULT_LOGGER = ServiceConfigDaod.DEFAULT_LOGGER
@@ -54,7 +54,7 @@ interface GenericMockServiceConfig<T : Any> : GenericDaodServiceConfig<T>, MockS
             mailer: Mailer = DEFAULT_MAILER,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): GenericMockServiceConfig<D> = object : GenericMockServiceConfig<D>, MockServiceConfig by MockServiceConfig(appId, cache, session, daoFactory, bus, logger, mailer, json, scope) {
+        ): GenericMockServiceConfig<D> = object : GenericMockServiceConfig<D>, ServiceConfigMock by ServiceConfigMock(appId, cache, session, daoFactory, bus, logger, mailer, json, scope) {
             override val clazz: KClass<D> = clazz
         }
 

@@ -1,3 +1,5 @@
+@file:Suppress("WRONG_EXPORTED_DECLARATION", "NON_EXPORTABLE_TYPE")
+
 package bitframe.client
 
 import bitframe.core.Session
@@ -8,12 +10,14 @@ import kotlinx.coroutines.CoroutineScope
 import live.MutableLive
 import live.mutableLiveOf
 import logging.Logger
+import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 import bitframe.core.ServiceConfig as CoreServiceConfig
 
+@JsExport
 interface ServiceConfig : CoreServiceConfig {
     val appId: String
     val session: MutableLive<Session>

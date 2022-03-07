@@ -17,7 +17,7 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface MockServiceConfig : ServiceConfig, ServiceConfigDaod {
+interface ServiceConfigMock : ServiceConfig, ServiceConfigDaod {
     companion object {
         @JvmField
         val DEFAULT_APP_ID = "<mock-app>"
@@ -57,7 +57,7 @@ interface MockServiceConfig : ServiceConfig, ServiceConfigDaod {
             mailer: Mailer = DEFAULT_MAILER,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): MockServiceConfig = object : MockServiceConfig {
+        ): ServiceConfigMock = object : ServiceConfigMock {
             override val daoFactory: DaoFactory = daoFactory
             override val appId: String = appId
             override val session: MutableLive<Session> = session

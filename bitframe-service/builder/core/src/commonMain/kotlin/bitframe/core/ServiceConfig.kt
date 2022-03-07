@@ -1,4 +1,4 @@
-@file:Suppress("WRONG_EXPORTED_DECLARATION")
+@file:Suppress("WRONG_EXPORTED_DECLARATION", "NON_EXPORTABLE_TYPE")
 
 package bitframe.core
 
@@ -8,11 +8,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import logging.ConsoleAppender
 import logging.Logger
+import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
+@JsExport
 interface ServiceConfig {
     val bus: EventBus
     val logger: Logger

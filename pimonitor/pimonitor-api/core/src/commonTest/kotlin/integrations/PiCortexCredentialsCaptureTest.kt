@@ -19,7 +19,7 @@ class PiCortexCredentialsCaptureTest {
     fun should_capture_picortex_credentials_after_invite_has_been_sent() = runSequence {
         step("If not registered, signup as business or individual") {
             val params = BusinessSignUpParams(
-                businessName = "Test Business $time",
+                businessName = "PiCortex Int Ltd",
                 individualName = "Business Owner $time",
                 individualEmail = "business.owner@business$time.com",
                 password = "business.owner@business$time.com",
