@@ -18,7 +18,7 @@ open class SignUpDaodService(
         val params = rb.data.toBusinessSignUpParams()
         val result = register(params.toRegisterUserParams()).await()
         val space = result.spaces.first()
-        businessDao.create(MonitorBusinessBasicInfo(spaceId = space.uid, owningSpaceId = space.uid))
+        businessDao.create(MonitorBusinessBasicInfo(name = params.businessName, owningSpaceId = space.uid)).await()
         SignUpResult(
             app = App(rb.appId), space = space, user = result.user
         )

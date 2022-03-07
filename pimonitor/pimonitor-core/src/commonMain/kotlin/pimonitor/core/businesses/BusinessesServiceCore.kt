@@ -15,18 +15,23 @@ import pimonitor.core.businesses.params.InviteToShareReportsRawParams
 import pimonitor.core.invites.Invite
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlin.jvm.JvmSynthetic
 
 @JsExport
 interface BusinessesServiceCore {
     @JsName("_ignore_create")
+    @JvmSynthetic
     fun create(rb: RequestBody.Authorized<CreateMonitoredBusinessParams>): Later<CreateMonitoredBusinessResult>
 
     @JsName("_ignore_invite")
+    @JvmSynthetic
     fun invite(rb: RequestBody.Authorized<InviteToShareReportsParams>): Later<Invite>
 
     @JsName("_ignore_all")
+    @JvmSynthetic
     fun all(rb: RequestBody.Authorized<BusinessFilter>): Later<List<MonitoredBusinessSummary>>
 
     @JsName("_ignore_delete")
+    @JvmSynthetic
     fun delete(rb: RequestBody.Authorized<Array<out String>>): Later<List<MonitoredBusinessBasicInfo>>
 }

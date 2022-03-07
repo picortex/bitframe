@@ -1,13 +1,7 @@
-@file:JsExport
-
 package pimonitor.core.businesses
 
-import kotlin.js.JsExport
-
-fun MonitoredBusinessBasicInfo.toMonitoredBusinessRef(name: String) = MonitoredBusinessRef(
+fun MonitoredBusinessBasicInfo.toMonitoredBusinessRef() = MonitoredBusinessRef(
     uid = uid,
-    spaceId = spaceId,
-    owningSpaceId = owningSpaceId,
     address = address,
     name = name
 )

@@ -20,4 +20,21 @@ public class ApiInstantiationTest {
         PiMonitorApi api = new PiMonitorApiBuilder().build();
         Assertions.assertTrue(api instanceof PiMonitorApiMock);
     }
+
+    @Test
+    public void should_instantiate_ktor_api_with_callback_api() {
+        PiMonitorApi api = PiMonitorApiBuilder.build(config -> {
+            config.setAppId("Test-app");
+            config.setUrl("Test url");
+            config.setNamespace("test.namespace");
+        });
+        Assertions.assertTrue(api instanceof PiMonitorApiKtor);
+    }
+
+    @Test
+    public void should_instantiate_mock_api_with_callback_api() {
+        PiMonitorApi api = PiMonitorApiBuilder.build(config -> {
+        });
+        Assertions.assertTrue(api instanceof PiMonitorApiMock);
+    }
 }

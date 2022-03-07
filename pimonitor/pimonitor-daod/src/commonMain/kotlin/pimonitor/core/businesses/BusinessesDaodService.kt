@@ -13,49 +13,49 @@ import later.later
 import mailer.AddressInfo
 import mailer.EmailDraft
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
-import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
-import pimonitor.core.businesses.params.InviteToShareReportsParams
-import pimonitor.core.businesses.params.toRegisterUserParams
-import pimonitor.core.contacts.ContactPersonSpaceInfo
+import pimonitor.core.businesses.params.*
+import pimonitor.core.contacts.ContactPersonBusinessInfo
 import pimonitor.core.invites.Invite
 import pimonitor.core.invites.InviteStatus
+import pimonitor.core.picortex.PiCortexApiCredentials
+import pimonitor.core.picortex.PiCortexDashboardProvider
+import pimonitor.core.picortex.PiCortexDashboardProviderConfig
 import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
 
 open class BusinessesDaodService(
     open val config: ServiceConfigDaod
-) : BusinessesServiceCore, RegisterUserUseCase by RegisterUserUseCaseImpl(config) {
+) : BusinessesServiceCore,
+    RegisterUserUseCase by RegisterUserUseCaseImpl(config) {
 
-    private val businessDao by lazy { config.daoFactory.get<MonitoredBusinessBasicInfo>() }
-    private val spacesDao by lazy { config.daoFactory.get<Space>() }
-    private val invitesDao by lazy { config.daoFactory.get<Invite>() }
-    private val userSpaceInfoDao by lazy { config.daoFactory.get<UserSpaceInfo>() }
-    private val userContactsDao by lazy {
-        CompoundDao(
-            config.daoFactory.get<UserEmail>(),
-            config.daoFactory.get<UserPhone>()
-        )
+    private val factory get() = config.daoFactory
+    private val businessDao by lazy { factory.get<MonitoredBusinessBasicInfo>() }
+    private val spacesDao by lazy { factory.get<Space>() }
+    private val invitesDao by lazy { factory.get<Invite>() }
+    private val userSpaceInfoDao by lazy { factory.get<UserSpaceInfo>() }
+    private val userContactsDao by lazy { CompoundDao(factory.get<UserEmail>(), factory.get<UserPhone>()) }
+    private val contactPersonBusinessInfoDao by lazy { factory.get<ContactPersonBusinessInfo>() }
+    private val piCortexCredentialsDao by lazy { factory.get<PiCortexApiCredentials>() }
+    private val piCortexDashboardProvider by lazy {
+        val cfg = PiCortexDashboardProviderConfig(json = config.json, scope = config.scope)
+        PiCortexDashboardProvider(cfg)
     }
-    private val contactPersonSpaceInfoDao by lazy {
-        config.daoFactory.get<ContactPersonSpaceInfo>()
-    }
-
     private val logger
         get() = config.logger.with(
             "source" to this::class.simpleName
         )
 
     override fun create(rb: RequestBody.Authorized<CreateMonitoredBusinessParams>) = config.scope.later {
+        val params = rb.data.toValidatedCreateBusinessParams()
         val registered = userContactsDao.all(
-            condition = UserContact::value isEqualTo rb.data.contactEmail
+            condition = UserContact::value isEqualTo params.contactEmail
         ).await().firstOrNull()
 
         val (userId, spaceId) = if (registered == null) {
-            val res1 = register(rb.data.toRegisterUserParams()).await()
+            val res1 = register(params.toRegisterUserParams()).await()
             res1.user.uid to res1.spaces.first().uid
         } else {
-            val space = spacesDao.create(Space(name = rb.data.businessName, type = SPACE_TYPE.MONITORED)).await()
+            val space = spacesDao.create(Space(name = params.businessName, type = SPACE_TYPE.MONITORED)).await()
             val usi = UserSpaceInfo(
                 userId = registered.userId,
                 spaceId = space.uid,
@@ -65,24 +65,23 @@ open class BusinessesDaodService(
             registered.userId to space.uid
         }
 
-        val task2_1 = businessDao.create(
+        val business = businessDao.create(
             MonitoredBusinessBasicInfo(
-                spaceId = spaceId,
+                name = params.businessName,
                 owningSpaceId = rb.session.space.uid
             )
-        )
-        val task2_2 = contactPersonSpaceInfoDao.create(
-            ContactPersonSpaceInfo(
+        ).await()
+        val cpbi = contactPersonBusinessInfoDao.create(
+            ContactPersonBusinessInfo(
                 userId = userId,
-                spaceId = spaceId,
-                owningSpaceId = rb.session.space.uid,
+                businessId = business.uid,
                 position = ""
             )
-        )
+        ).await()
         CreateMonitoredBusinessResult(
-            params = rb.data,
-            business = task2_1.await(),
-            contact = task2_2.await()
+            params = params,
+            business = business,
+            contact = cpbi
         )
     }
 
@@ -100,49 +99,56 @@ open class BusinessesDaodService(
     }
 
     private suspend fun summaryOf(business: MonitoredBusinessBasicInfo): MonitoredBusinessSummary {
-        val space = spacesDao.load(business.spaceId).await()
-        val contacts = contactPersonSpaceInfoDao.all(ContactPersonSpaceInfo::spaceId isEqualTo space.uid).await().flatMap {
+        val contacts = contactPersonBusinessInfoDao.all(ContactPersonBusinessInfo::businessId isEqualTo business.uid).await().flatMap {
             userContactsDao.all(UserContact::userId isEqualTo it.userId).await()
         }.toInteroperableList()
         val invites = invitesDao.all(Invite::invitedBusinessId isEqualTo business.uid).await()
-        return if (business.dashboard == DASHBOARD.NONE) {
-            MonitoredBusinessSummary.UnConnectedDashboard(
+        return when (business.dashboard) {
+            DASHBOARD.NONE -> MonitoredBusinessSummary.UnConnectedDashboard(
                 uid = business.uid,
-                name = space.name,
+                name = business.name,
                 contacts = contacts,
                 invites = invites,
                 interventions = "0 of 0"
             )
-        } else {
-            TODO()
+            DASHBOARD.PICORTEX -> {
+                val cred = piCortexCredentialsDao.all(
+                    condition = PiCortexApiCredentials::businessId isEqualTo business.uid
+                ).await().first()
+                val dashboard = piCortexDashboardProvider.technicalDashboardOf(cred).await()
+                TODO()
+//                MonitoredBusinessSummary.ConnectedDashboard(
+//                    uid = business.uid,
+//                    name = space.name,
+//                    dashboard = DASHBOARD.PICORTEX,
+//                    contacts = contacts,
+//                    invites = invites,
+//                    revenue = ChangeBox(),
+//                    interventions = "0 of 0"
+//                )
+            }
+            else -> {
+                TODO()
+            }
         }
     }
 
     override fun invite(rb: RequestBody.Authorized<InviteToShareReportsParams>): Later<Invite> = config.scope.later {
-        val contact = userContactsDao.all(
+        val userContact = userContactsDao.all(
             condition = UserContact::value isEqualTo rb.data.to
         ).await().firstOrNull() ?: error("Business contact with email ${rb.data.to} is not found in pimonitor")
 
-        val contactSpaceInfo = contactPersonSpaceInfoDao.all(
-            condition = ContactPersonSpaceInfo::owningSpaceId isEqualTo rb.session.space.uid
-        ).await().firstOrNull {
-            it.userId == contact.userId
-        } ?: error("User with email ${rb.data.to} not found as a contact in PiMonitor")
-
-        val business = businessDao.all(
-            condition = MonitoredBusinessBasicInfo::owningSpaceId isEqualTo rb.session.space.uid
-        ).await().first {
-            it.spaceId == contactSpaceInfo.spaceId
-        }
-
+//        val contactBusinessInfo = contactPersonBusinessInfoDao.all(
+//            condition = ContactPersonBusinessInfo::userId isEqualTo userContact.userId
+//        ).await().firstOrNull() ?: error("User with email ${rb.data.to} not found as a contact in PiMonitor")
+        val business = businessDao.load(rb.data.business.uid).await()
         val senderSpace = spacesDao.load(business.owningSpaceId).await()
 
         val inviteParams = Invite(
             invitorUserId = rb.session.user.uid,
             invitorSpaceId = rb.session.space.uid,
             invitedBusinessId = business.uid,
-            invitedBusinessSpaceId = business.spaceId,
-            invitedContactUserId = contact.userId,
+            invitedContactUserId = userContact.userId,
             status = listOf(
                 InviteStatus.Sent(params = rb.data)
             )

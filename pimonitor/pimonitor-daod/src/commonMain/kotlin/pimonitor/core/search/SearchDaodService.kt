@@ -17,7 +17,6 @@ open class SearchDaodService(
 ) : SearchServiceCore, LoadContactsUseCase by LoadContactsUseCaseImpl(config) {
 
     private val monitoredBusinessDao by lazy { config.daoFactory.get<MonitoredBusinessBasicInfo>() }
-    private val spacesDao by lazy { config.daoFactory.get<Space>() }
 
     override fun search(rb: RequestBody.Authorized<SearchParams>): Later<List<SearchResult>> = config.scope.later {
         val businesses = searchBusinesses(rb)
@@ -30,18 +29,16 @@ open class SearchDaodService(
         val params = rb.data
         monitoredBusinessDao.all(
             MonitoredBusinessBasicInfo::owningSpaceId isEqualTo session.space.uid
-        ).await().toTypedArray().map {
-            it to spacesDao.load(it.spaceId).await()
-        }.filter {
-            it.first.address.contains(params.key, ignoreCase = true)
-                    || it.first.email.contains(params.key, ignoreCase = true)
-                    || it.second.name.contains(params.key, ignoreCase = true)
+        ).await().toTypedArray().filter {
+            it.address.contains(params.key, ignoreCase = true)
+                    || it.email.contains(params.key, ignoreCase = true)
+                    || it.name.contains(params.key, ignoreCase = true)
         }.map {
             SearchResult.MonitoredBusiness(
-                name = it.second.name,
-                address = it.first.address,
-                spaceId = it.second.uid,
-                email = it.first.email
+                name = it.name,
+                address = it.address,
+                email = it.email,
+                uid = it.uid
             )
         }
     }

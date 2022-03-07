@@ -19,6 +19,7 @@ import pimonitor.client.businesses.BusinessesIntent.*
 import pimonitor.core.businesses.DASHBOARD
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
+import presenters.feedbacks.Feedback
 import presenters.feedbacks.Feedback.*
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
@@ -114,8 +115,9 @@ class BusinessesViewModel(
     private fun CoroutineScope.submitInviteToShareReportsForm(i: SubmitInviteToShareReportsForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(status = Success("Invite sent")))
-            logger.log("Check to see why messages are not being sent")
+            emit(state.copy(status = Loading("Sending invite to ${i.params.business.name}, Please wait . . ."), dialog = null))
+            service.invite(i.params).await()
+            emit(state.copy(status = Success("Invite Sent"), dialog = null))
             delay(config.viewModel.transitionTime)
             emit(state.copy(status = None, dialog = null))
         }.catchAndCollectToUI(ui.value)
@@ -132,7 +134,7 @@ class BusinessesViewModel(
                     businessName = result.businessName,
                     contactEmail = result.contactEmail
                 ) {
-                    onCancel { post(ExitDialog) }
+                    onCancel { post(LoadBusinesses) }
                     onSubmit { params -> post(SubmitInviteToShareReportsForm(params)) }
                 }
                 emit(state.copy(status = None, dialog = dialog))

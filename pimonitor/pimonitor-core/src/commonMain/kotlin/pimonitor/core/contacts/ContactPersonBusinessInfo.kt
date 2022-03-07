@@ -8,10 +8,9 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @Serializable
-data class ContactPersonSpaceInfo(
+data class ContactPersonBusinessInfo(
     val userId: String,
-    val spaceId: String,
-    val owningSpaceId: String,
+    val businessId: String,
     val position: String,
     override val uid: String = UNSET,
     override val deleted: Boolean = false
