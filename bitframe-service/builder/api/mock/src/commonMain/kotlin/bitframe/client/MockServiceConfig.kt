@@ -1,7 +1,7 @@
 package bitframe.client
 
 import bitframe.core.DaoFactory
-import bitframe.core.DaodServiceConfig
+import bitframe.core.ServiceConfigDaod
 import bitframe.core.MockDaoFactory
 import bitframe.core.Session
 import cache.Cache
@@ -17,7 +17,7 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface MockServiceConfig : ServiceConfig, DaodServiceConfig {
+interface MockServiceConfig : ServiceConfig, ServiceConfigDaod {
     companion object {
         @JvmField
         val DEFAULT_APP_ID = "<mock-app>"
@@ -41,10 +41,10 @@ interface MockServiceConfig : ServiceConfig, DaodServiceConfig {
         val DEFAULT_LOGGER = ServiceConfig.DEFAULT_LOGGER
 
         @JvmField
-        val DEFAULT_MAILER = DaodServiceConfig.DEFAULT_MAILER
+        val DEFAULT_MAILER = ServiceConfigDaod.DEFAULT_MAILER
 
         @JvmField
-        val DEFAULT_JSON = DaodServiceConfig.DEFAULT_JSON
+        val DEFAULT_JSON = ServiceConfigDaod.DEFAULT_JSON
 
         @JvmSynthetic
         operator fun invoke(

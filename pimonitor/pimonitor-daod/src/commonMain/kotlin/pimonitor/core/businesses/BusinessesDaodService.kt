@@ -23,7 +23,7 @@ import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
 
 open class BusinessesDaodService(
-    open val config: DaodServiceConfig
+    open val config: ServiceConfigDaod
 ) : BusinessesServiceCore, RegisterUserUseCase by RegisterUserUseCaseImpl(config) {
 
     private val businessDao by lazy { config.daoFactory.get<MonitoredBusinessBasicInfo>() }

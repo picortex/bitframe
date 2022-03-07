@@ -5,6 +5,8 @@ import kotlinx.coroutines.test.TestResult
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
 
 class TestStep<out O : Any>(
     val index: Int,
@@ -40,6 +42,11 @@ fun runSequence(block: suspend TestSequence.() -> Unit): TestResult = runTest {
     for (step in sequence.steps) try {
         step.execute(this)
     } catch (err: Throwable) {
-        throw Throwable("STEP ${step.index} FAILED: ${step.name}", err)
+        val message = buildString {
+            appendLine("[SEQUENCE FAILURE]")
+            appendLine("STEP ${step.index}: ${step.name}")
+            appendLine("CAUSE : ${err.message}")
+        }
+        throw Throwable(message, err)
     }
 }

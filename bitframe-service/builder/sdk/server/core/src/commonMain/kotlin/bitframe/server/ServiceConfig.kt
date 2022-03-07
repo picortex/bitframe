@@ -1,7 +1,7 @@
 package bitframe.server
 
 import bitframe.core.DaoFactory
-import bitframe.core.DaodServiceConfig
+import bitframe.core.ServiceConfigDaod
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
@@ -12,22 +12,22 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface ServiceConfig : DaodServiceConfig {
+interface ServiceConfig : ServiceConfigDaod {
     companion object {
         @JvmField
-        val DEFAULT_SCOPE = DaodServiceConfig.DEFAULT_SCOPE
+        val DEFAULT_SCOPE = ServiceConfigDaod.DEFAULT_SCOPE
 
         @JvmField
-        val DEFAULT_BUS = DaodServiceConfig.DEFAULT_BUS
+        val DEFAULT_BUS = ServiceConfigDaod.DEFAULT_BUS
 
         @JvmField
-        val DEFAULT_LOGGER = DaodServiceConfig.DEFAULT_LOGGER
+        val DEFAULT_LOGGER = ServiceConfigDaod.DEFAULT_LOGGER
 
         @JvmField
-        val DEFAULT_MAILER = DaodServiceConfig.DEFAULT_MAILER
+        val DEFAULT_MAILER = ServiceConfigDaod.DEFAULT_MAILER
 
         @JvmField
-        val DEFAULT_JSON = DaodServiceConfig.DEFAULT_JSON
+        val DEFAULT_JSON = ServiceConfigDaod.DEFAULT_JSON
 
         @JvmSynthetic
         operator fun invoke(
@@ -37,7 +37,7 @@ interface ServiceConfig : DaodServiceConfig {
             mailer: Mailer = DEFAULT_MAILER,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): ServiceConfig = object : ServiceConfig, DaodServiceConfig by DaodServiceConfig(daoFactory, bus, logger, mailer, json, scope) {}
+        ): ServiceConfig = object : ServiceConfig, ServiceConfigDaod by ServiceConfigDaod(daoFactory, bus, logger, mailer, json, scope) {}
 
         @JvmOverloads
         @JvmStatic

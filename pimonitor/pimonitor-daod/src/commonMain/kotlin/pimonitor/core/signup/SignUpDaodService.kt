@@ -9,7 +9,7 @@ import pimonitor.core.businesses.MonitorBusinessBasicInfo
 import pimonitor.core.signup.params.*
 
 open class SignUpDaodService(
-    open val config: DaodServiceConfig
+    open val config: ServiceConfigDaod
 ) : SignUpService, RegisterUserUseCase by RegisterUserUseCaseImpl(config) {
     private val scope get() = config.scope
     private val businessDao by lazy { config.daoFactory.get<MonitorBusinessBasicInfo>() }

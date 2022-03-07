@@ -11,7 +11,7 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface DaodServiceConfig : ServiceConfig {
+interface ServiceConfigDaod : ServiceConfig {
     val json: Json
     val daoFactory: DaoFactory
     val mailer: Mailer
@@ -44,7 +44,7 @@ interface DaodServiceConfig : ServiceConfig {
             mailer: Mailer = DEFAULT_MAILER,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): DaodServiceConfig = object : DaodServiceConfig {
+        ): ServiceConfigDaod = object : ServiceConfigDaod {
             override val daoFactory: DaoFactory = daoFactory
             override val bus = bus
             override val mailer = mailer

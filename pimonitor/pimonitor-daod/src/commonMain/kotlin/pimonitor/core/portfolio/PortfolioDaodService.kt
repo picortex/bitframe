@@ -1,6 +1,6 @@
 package pimonitor.core.portfolio
 
-import bitframe.core.DaodServiceConfig
+import bitframe.core.ServiceConfigDaod
 import bitframe.core.RequestBody
 import bitframe.core.get
 import bitframe.core.isEqualTo
@@ -11,10 +11,9 @@ import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.contacts.ContactPersonSpaceInfo
 import presenters.cards.ValueCard
 import presenters.fields.BooleanInputField
-import kotlin.random.Random
 
 open class PortfolioDaodService(
-    override val config: DaodServiceConfig
+    override val config: ServiceConfigDaod
 ) : PortfolioServiceCore {
 
     val businessBasicInfoDao by lazy { config.daoFactory.get<MonitoredBusinessBasicInfo>() }

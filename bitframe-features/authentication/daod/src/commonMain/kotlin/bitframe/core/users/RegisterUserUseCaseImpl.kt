@@ -10,7 +10,7 @@ import later.later
 import validation.validate
 
 class RegisterUserUseCaseImpl(
-    private val config: DaodServiceConfig
+    private val config: ServiceConfigDaod
 ) : RegisterUserUseCase {
     private val usersDao by lazy { config.daoFactory.get<User>() }
     private val spacesDao by lazy { config.daoFactory.get<Space>() }

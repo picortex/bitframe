@@ -1,0 +1,5 @@
+package pimonitor.client.picortex
+
+import pimonitor.core.picortex.PiCortexDashboardServiceCore
+
+interface PiCortexDashboardService : PiCortexDashboardServiceCore

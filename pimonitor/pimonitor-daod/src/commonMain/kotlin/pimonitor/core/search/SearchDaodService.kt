@@ -8,13 +8,12 @@ import later.Later
 import later.await
 import later.later
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
-import pimonitor.core.contacts.ContactPersonSpaceInfo
 import pimonitor.core.contacts.ContactsFilter
 import pimonitor.core.contacts.LoadContactsUseCase
 import pimonitor.core.contacts.LoadContactsUseCaseImpl
 
 open class SearchDaodService(
-    open val config: DaodServiceConfig
+    open val config: ServiceConfigDaod
 ) : SearchServiceCore, LoadContactsUseCase by LoadContactsUseCaseImpl(config) {
 
     private val monitoredBusinessDao by lazy { config.daoFactory.get<MonitoredBusinessBasicInfo>() }

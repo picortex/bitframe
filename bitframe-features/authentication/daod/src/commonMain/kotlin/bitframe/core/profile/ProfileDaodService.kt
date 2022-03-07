@@ -8,7 +8,7 @@ import later.await
 import later.later
 
 open class ProfileDaodService(
-    open val config: DaodServiceConfig
+    open val config: ServiceConfigDaod
 ) : ProfileService {
     val scope get() = config.scope
     val usersCredentialsDao by lazy { config.daoFactory.get<UserCredentials>() }

@@ -11,16 +11,19 @@ import pimonitor.core.businesses.params.InviteToShareReportsParams
 import kotlin.js.JsExport
 
 @Serializable
-sealed class InviteStatus {
+sealed class InviteStatus(val on: Long) {
     @Serializable
     data class Sent(
-        val params: InviteToShareReportsParams,
-        val on: Long = Clock.System.now().toEpochMilliseconds()
-    ) : InviteStatus()
+        val params: InviteToShareReportsParams
+    ) : InviteStatus(Clock.System.now().toEpochMilliseconds())
 
     @Serializable
-    data class AcceptedDashboard(val name: Dashboard) : InviteStatus()
+    data class AcceptedDashboard(
+        val name: Dashboard
+    ) : InviteStatus(Clock.System.now().toEpochMilliseconds())
 
     @Serializable
-    data class AcceptedAccounting(val name: Accounting) : InviteStatus()
+    data class AcceptedAccounting(
+        val name: Accounting
+    ) : InviteStatus(Clock.System.now().toEpochMilliseconds())
 }

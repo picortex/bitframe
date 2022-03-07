@@ -1,7 +1,6 @@
 package bitframe.client
 
 import bitframe.core.DaoFactory
-import bitframe.core.DaodServiceConfig
 import bitframe.core.Session
 import cache.Cache
 import events.EventBus

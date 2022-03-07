@@ -2,7 +2,7 @@ package bitframe.client
 
 import bitframe.core.DaoFactory
 import bitframe.core.Session
-import bitframe.core.DaodServiceConfig
+import bitframe.core.ServiceConfigDaod
 import bitframe.core.GenericDaodServiceConfig
 import cache.Cache
 import events.EventBus
@@ -23,7 +23,7 @@ interface GenericMockServiceConfig<T : Any> : GenericDaodServiceConfig<T>, MockS
         val DEFAULT_DAO_FACTORY = MockServiceConfig.DEFAULT_DAO_FACTORY
 
         @JvmField
-        val DEFAULT_BUS = DaodServiceConfig.DEFAULT_BUS
+        val DEFAULT_BUS = ServiceConfigDaod.DEFAULT_BUS
 
         @JvmField
         val DEFAULT_CACHE = MockServiceConfig.DEFAULT_CACHE
@@ -32,16 +32,16 @@ interface GenericMockServiceConfig<T : Any> : GenericDaodServiceConfig<T>, MockS
         val DEFAULT_LIVE_SESSION = MockServiceConfig.DEFAULT_LIVE_SESSION
 
         @JvmField
-        val DEFAULT_LOGGER = DaodServiceConfig.DEFAULT_LOGGER
+        val DEFAULT_LOGGER = ServiceConfigDaod.DEFAULT_LOGGER
 
         @JvmField
-        val DEFAULT_MAILER = DaodServiceConfig.DEFAULT_MAILER
+        val DEFAULT_MAILER = ServiceConfigDaod.DEFAULT_MAILER
 
         @JvmField
-        val DEFAULT_JSON = DaodServiceConfig.DEFAULT_JSON
+        val DEFAULT_JSON = ServiceConfigDaod.DEFAULT_JSON
 
         @JvmField
-        val DEFAULT_SCOPE = DaodServiceConfig.DEFAULT_SCOPE
+        val DEFAULT_SCOPE = ServiceConfigDaod.DEFAULT_SCOPE
 
         operator fun <D : Any> invoke(
             clazz: KClass<D>,

@@ -12,7 +12,7 @@ class MockMailer(val config: MockMailerConfig = MockMailerConfig()) : Mailer {
         if (config.printToConsole) {
             val message = buildString {
                 appendLine(config.separator)
-                appendLine("Mock Email [Bitframe Mock Mailer]")
+                appendLine("Mock Email [Mock Mailer]")
                 appendLine(config.separator)
                 appendLine("Subject: ${draft.subject}")
                 appendLine("From:    ${from.value}")

@@ -8,11 +8,10 @@ import later.await
 import later.later
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.toMonitoredBusinessRef
-import pimonitor.core.search.SearchResult
 import pimonitor.core.search.SearchResult.ContactPersonSummary
 
 class LoadContactsUseCaseImpl(
-    private val config: DaodServiceConfig
+    private val config: ServiceConfigDaod
 ) : LoadContactsUseCase {
     val businessDao by lazy { config.daoFactory.get<MonitoredBusinessBasicInfo>() }
     val usersDao by lazy { config.daoFactory.get<User>() }

@@ -7,7 +7,7 @@ import kotlinx.collections.interoperable.toInteroperableList
 import later.await
 import later.later
 
-class SignInDaodUseCase(val config: DaodServiceConfig) : SignInUseCase {
+class SignInDaodUseCase(val config: ServiceConfigDaod) : SignInUseCase {
     private val scope get() = config.scope
     private val usersDao by lazy { config.daoFactory.get<User>() }
     private val spacesDao by lazy { config.daoFactory.get<Space>() }

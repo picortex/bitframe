@@ -1,7 +1,7 @@
 package bitframe.server
 
 import bitframe.core.DaoFactory
-import bitframe.core.DaodServiceConfig
+import bitframe.core.ServiceConfigDaod
 import bitframe.core.GenericDaodServiceConfig
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
@@ -18,7 +18,7 @@ interface GenericServiceConfig<D : Any> : GenericDaodServiceConfig<D>, ServiceCo
             bus: EventBus = ServiceConfig.DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             mailer: Mailer = ServiceConfig.DEFAULT_MAILER,
-            json: Json = DaodServiceConfig.DEFAULT_JSON,
+            json: Json = ServiceConfigDaod.DEFAULT_JSON,
             scope: CoroutineScope = ServiceConfig.DEFAULT_SCOPE
         ): GenericServiceConfig<D> = object : GenericServiceConfig<D>, GenericDaodServiceConfig<D> by GenericDaodServiceConfig(clazz, daoFactory, bus, logger, mailer, json, scope) {}
 
@@ -27,7 +27,7 @@ interface GenericServiceConfig<D : Any> : GenericDaodServiceConfig<D>, ServiceCo
             bus: EventBus = ServiceConfig.DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
             mailer: Mailer = ServiceConfig.DEFAULT_MAILER,
-            json: Json = DaodServiceConfig.DEFAULT_JSON,
+            json: Json = ServiceConfigDaod.DEFAULT_JSON,
             scope: CoroutineScope = ServiceConfig.DEFAULT_SCOPE
         ): GenericServiceConfig<D> = invoke(D::class, daoFactory, bus, logger, mailer, json, scope)
     }
