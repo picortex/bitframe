@@ -1,13 +1,18 @@
 package mailer
 
-import identifier.Email
 import kotlinx.collections.interoperable.List
 import kotlinx.coroutines.delay
 import later.Later
 import later.later
 
 class MockMailer(val config: MockMailerConfig = MockMailerConfig()) : Mailer {
-    override fun send(draft: EmailDraft, from: Email, to: List<Email>): Later<EmailMessage> = config.scope.later {
+    fun AddressInfo.toDetailsString() = if (name == null) {
+        email.value
+    } else {
+        "$name <${email.value}>"
+    }
+
+    override fun send(draft: EmailDraft, from: AddressInfo, to: List<AddressInfo>): Later<EmailMessage> = config.scope.later {
         delay(config.simulationTime)
         if (config.printToConsole) {
             val message = buildString {
@@ -15,8 +20,8 @@ class MockMailer(val config: MockMailerConfig = MockMailerConfig()) : Mailer {
                 appendLine("Mock Email [Mock Mailer]")
                 appendLine(config.separator)
                 appendLine("Subject: ${draft.subject}")
-                appendLine("From:    ${from.value}")
-                appendLine("To:      ${to.joinToString(separator = ";") { it.value }}")
+                appendLine("From:    ${from.toDetailsString()}")
+                appendLine("To:      ${to.joinToString(separator = ";") { it.toDetailsString() }}")
                 appendLine(config.separator)
                 appendLine(draft.body)
                 appendLine(config.separator)

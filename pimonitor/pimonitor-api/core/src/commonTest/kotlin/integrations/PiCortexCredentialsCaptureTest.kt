@@ -58,7 +58,9 @@ class PiCortexCredentialsCaptureTest {
         step("Accept invite by capturing picortex credentials") {
             val i = invite ?: error("Invite is found")
             val params = AcceptPicortexInviteParams(
-                inviteId = i.uid
+                inviteId = i.uid,
+                subdomain = "test",
+                secret = "test"
             )
             val res = api.picortex.acceptInvite(params).await()
             expect(res.inviteId).toBe(i.uid)

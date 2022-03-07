@@ -17,7 +17,7 @@ class SendInviteJourneyTest {
     fun should_send_invite_to_contact() = runSequence {
         step("If not registered, signup as business or individual") {
             val params = BusinessSignUpParams(
-                businessName = "Test Business $time",
+                businessName = "Invitor LLC",
                 individualName = "Business Owner $time",
                 individualEmail = "business.owner@business$time.com",
                 password = "business.owner@business$time.com",
@@ -35,11 +35,21 @@ class SendInviteJourneyTest {
             expect(res.user.name).toBe("Business Owner $time")
         }
 
+//        step("Create a business to monitored") {
+//            val params = CreateMonitoredBusinessParams(
+//                businessName = "PiCortex LLC",
+//                contactName = "Steven Sajja",
+//                contactEmail = "ssajja@picortex.com"
+//            )
+//            val res = api.businesses.create(params).await()
+//            expect(res.params.businessName).toBe("PiCortex LLC")
+//        }
+
         step("Create a business to monitored") {
             val params = CreateMonitoredBusinessParams(
                 businessName = "aSoft Ltd",
                 contactName = "Anderson Lameck",
-                contactEmail = "andylamax@programmer.net"
+                contactEmail = "andylamax@programmer.net",
             )
             val res = api.businesses.create(params).await()
             expect(res.params.businessName).toBe("aSoft Ltd")

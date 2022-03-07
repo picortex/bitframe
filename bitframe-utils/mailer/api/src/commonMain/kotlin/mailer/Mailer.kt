@@ -3,6 +3,7 @@ package mailer
 import identifier.Email
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.listOf
+import kotlinx.collections.interoperable.toInteroperableList
 import later.Later
 
 /**
@@ -11,9 +12,15 @@ import later.Later
 interface Mailer {
     fun send(
         draft: EmailDraft,
-        from: Email,
-        to: List<Email>,
+        from: AddressInfo,
+        to: List<AddressInfo>,
     ): Later<EmailMessage>
+
+    fun send(
+        draft: EmailDraft,
+        from: AddressInfo,
+        to: AddressInfo,
+    ) = send(draft, from, listOf(to))
 
     fun send(
         draft: EmailDraft,
@@ -25,5 +32,5 @@ interface Mailer {
         draft: EmailDraft,
         from: Email,
         to: Email,
-    ) = send(draft, from, listOf(to))
+    ) = send(draft, AddressInfo(from), listOf(AddressInfo(to)))
 }

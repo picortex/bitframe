@@ -10,6 +10,7 @@ import kotlinx.collections.interoperable.toInteroperableList
 import later.Later
 import later.await
 import later.later
+import mailer.AddressInfo
 import mailer.EmailDraft
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
@@ -134,6 +135,8 @@ open class BusinessesDaodService(
             it.spaceId == contactSpaceInfo.spaceId
         }
 
+        val senderSpace = spacesDao.load(business.owningSpaceId).await()
+
         val inviteParams = Invite(
             invitorUserId = rb.session.user.uid,
             invitorSpaceId = rb.session.space.uid,
@@ -149,7 +152,14 @@ open class BusinessesDaodService(
             subject = rb.data.subject,
             body = "${rb.data.message}\n\nGoto https://react-client.vercel.app/connect?inviteId=${invite.uid}"
         )
-        config.mailer.send(draft = draft, from = "support@picortex.com", to = rb.data.to).await()
+        config.mailer.send(
+            draft = draft,
+            from = AddressInfo(
+                name = senderSpace.name,
+                email = "support@picortex.com"
+            ),
+            to = AddressInfo(rb.data.to)
+        ).await()
         invite
     }
 }
