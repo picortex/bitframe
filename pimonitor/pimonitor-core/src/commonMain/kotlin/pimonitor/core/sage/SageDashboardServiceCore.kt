@@ -1,6 +1,6 @@
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.core.picortex
+package pimonitor.core.sage
 
 import bitframe.core.RequestBody
 import later.Later
@@ -10,7 +10,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-interface PiCortexDashboardServiceCore {
+interface SageDashboardServiceCore {
     @JsName("_ignore_acceptInvite")
-    fun acceptInvite(rb: RequestBody.UnAuthorized<AcceptPicortexInviteParams>): Later<AcceptPicortexInviteParams>
+    fun acceptInvite(rb: RequestBody.UnAuthorized<AcceptSageOneInviteParams>): Later<AcceptSageOneInviteParams>
 }

@@ -1,4 +1,4 @@
-package pimonitor.core.picortex
+package pimonitor.core.sage
 
 import bitframe.core.RequestBody
 import bitframe.core.ServiceConfigDaod
@@ -10,25 +10,21 @@ import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.invites.Invite
 import pimonitor.core.invites.InviteStatus
-import pimonitor.core.sage.toValidatedInviteParams
+import pimonitor.core.picortex.PICORTEX_DASHBOARD
 
-open class PiCortexDashboardDaodService(
+open class SageDashboardDaodService(
     private val config: ServiceConfigDaod
-) : PiCortexDashboardServiceCore {
+) : SageDashboardServiceCore {
     private val factory get() = config.daoFactory
     private val businessesDao by lazy { factory.get<MonitoredBusinessBasicInfo>() }
     private val invitesDao by lazy { factory.get<Invite>() }
-    private val credentialsDao by lazy { factory.get<PiCortexApiCredentials>() }
-    override fun acceptInvite(rb: RequestBody.UnAuthorized<AcceptPicortexInviteParams>) = config.scope.later {
+    private val credentialsDao by lazy { factory.get<SageApiCredentials>() }
+    override fun acceptInvite(rb: RequestBody.UnAuthorized<AcceptSageOneInviteParams>) = config.scope.later {
         val params = rb.data.toValidatedInviteParams()
         val invite = invitesDao.load(params.inviteId).await()
         val business = businessesDao.load(invite.invitedBusinessId).await()
         val status = InviteStatus.AcceptedDashboard(PICORTEX_DASHBOARD)
-        val cred = PiCortexApiCredentials(
-            businessId = business.uid,
-            subdomain = params.subdomain,
-            secret = params.secret
-        )
+        val cred = SageApiCredentials()
         val credPromise = credentialsDao.create(cred)
         val invitePromise = invitesDao.update(invite.copy(status = (invite.status + status).toInteroperableList()))
         val businessPromise = businessesDao.update(business.copy(dashboard = DASHBOARD_OPERATIONAL.PICORTEX))

@@ -6,10 +6,9 @@ import pimonitor.client.businesses.BusinessesServiceMock
 import pimonitor.client.contacts.ContactsServiceMock
 import pimonitor.client.picortex.PiCortexDashboardServiceMock
 import pimonitor.client.portfolio.PortfolioServiceMock
-import pimonitor.client.search.SearchService
+import pimonitor.client.sage.SageDashboardService
 import pimonitor.client.search.SearchServiceMock
 import pimonitor.client.signup.SignUpServiceMock
-import pimonitor.core.picortex.PiCortexDashboardServiceCore
 import kotlin.jvm.JvmOverloads
 
 class PiMonitorApiMock @JvmOverloads constructor(
@@ -21,4 +20,5 @@ class PiMonitorApiMock @JvmOverloads constructor(
     override val portfolio by lazy { PortfolioServiceMock(config) }
     override val search by lazy { SearchServiceMock(config) }
     override val picortex by lazy { PiCortexDashboardServiceMock(config) }
+    override val sage by lazy { Sage }
 }

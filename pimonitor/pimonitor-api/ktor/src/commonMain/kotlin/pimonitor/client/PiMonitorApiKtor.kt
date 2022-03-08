@@ -5,11 +5,8 @@ import pimonitor.client.businesses.BusinessesServiceKtor
 import pimonitor.client.contacts.ContactsServiceKtor
 import pimonitor.client.picortex.PiCortexDashboardServiceKtor
 import pimonitor.client.portfolio.PortfolioServiceKtor
-import pimonitor.client.search.SearchService
 import pimonitor.client.search.SearchServiceKtor
 import pimonitor.client.signup.SignUpServiceKtor
-import pimonitor.core.picortex.PiCortexDashboardServiceCore
-import pimonitor.core.portfolio.PortfolioServiceCore
 
 class PiMonitorApiKtor(
     override val config: BitframeApiKtorConfig,
