@@ -29,7 +29,7 @@ logging-console = { module = "tz.co.asoft:logging-console", version.ref = "found
 
 platform-core = { module = "tz.co.asoft:platform-core", version.ref = "foundation" }
 
-payments-requests-core = { module = "tz.co.asoft:payments-requests", version.ref = "foundation" }
+payments-requests-core = { module = "tz.co.asoft:payments-requests-core", version.ref = "stdlib" }
 
 reakt-core = { module = "tz.co.asoft:reakt-core", version.ref = "stdlib" }
 reakt-icons = { module = "tz.co.asoft:reakt-icons", version.ref = "stdlib" }

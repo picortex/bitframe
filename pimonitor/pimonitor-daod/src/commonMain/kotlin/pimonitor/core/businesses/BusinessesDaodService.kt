@@ -1,5 +1,7 @@
 package pimonitor.core.businesses
 
+import akkounts.sage.SageOneZAService
+import akkounts.sage.SageOneZAUserCompany
 import bitframe.core.*
 import bitframe.core.users.RegisterUserUseCase
 import bitframe.core.users.RegisterUserUseCaseImpl
@@ -20,6 +22,7 @@ import pimonitor.core.invites.InviteStatus
 import pimonitor.core.picortex.PiCortexApiCredentials
 import pimonitor.core.picortex.PiCortexDashboardProvider
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig
+import pimonitor.core.sage.SageApiCredentials
 import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
 
@@ -36,10 +39,12 @@ open class BusinessesDaodService(
     private val userContactsDao by lazy { CompoundDao(factory.get<UserEmail>(), factory.get<UserPhone>()) }
     private val contactPersonBusinessInfoDao by lazy { factory.get<ContactPersonBusinessInfo>() }
     private val piCortexCredentialsDao by lazy { factory.get<PiCortexApiCredentials>() }
+    private val sageCredentialsDao by lazy { factory.get<SageApiCredentials>() }
     private val piCortexDashboardProvider by lazy {
         val cfg = PiCortexDashboardProviderConfig(json = config.json, scope = config.scope)
         PiCortexDashboardProvider(cfg)
     }
+    private val sage by lazy { SageOneZAService("{C7542EBF-4657-484C-B79E-E3D90DB0F0D1}") }
     private val logger
         get() = config.logger.with(
             "source" to this::class.simpleName
@@ -112,6 +117,19 @@ open class BusinessesDaodService(
             financialBoard = business.financialBoard,
             interventions = "0 of 0"
         )
+        if (business.financialBoard == DASHBOARD_FINANCIAL.SAGE_ONE) {
+            val cred = sageCredentialsDao.all(SageApiCredentials::businessId isEqualTo business.uid).await().first()
+            val company = SageOneZAUserCompany(
+                uid = business.uid,
+                name = business.name,
+                username = cred.username,
+                password = cred.password,
+                companyId = cred.companyId
+            )
+            val ap = sage.offeredTo(company)
+
+            ap.invoices
+        }
         return bus
     }
 
