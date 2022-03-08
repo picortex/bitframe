@@ -23,7 +23,7 @@ data class MonitoredBusinessSummary(
     val name: String,
     val interventions: String,
     val operationalBoard: DashboardOperational = DASHBOARD_OPERATIONAL.NONE,
-    val financialDashboard: DashboardFinancial = DASHBOARD_FINANCIAL.NONE,
+    val financialBoard: DashboardFinancial = DASHBOARD_FINANCIAL.NONE,
     val contacts: List<UserContact> = emptyList(),
     val invites: List<Invite> = emptyList(),
     val revenue: ChangeBox<Money>? = null,

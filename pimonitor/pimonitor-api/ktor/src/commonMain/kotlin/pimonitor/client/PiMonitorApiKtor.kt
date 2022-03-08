@@ -5,6 +5,8 @@ import pimonitor.client.businesses.BusinessesServiceKtor
 import pimonitor.client.contacts.ContactsServiceKtor
 import pimonitor.client.picortex.PiCortexDashboardServiceKtor
 import pimonitor.client.portfolio.PortfolioServiceKtor
+import pimonitor.client.sage.SageDashboardService
+import pimonitor.client.sage.SageDashboardServiceKtor
 import pimonitor.client.search.SearchServiceKtor
 import pimonitor.client.signup.SignUpServiceKtor
 
@@ -17,4 +19,5 @@ class PiMonitorApiKtor(
     override val portfolio by lazy { PortfolioServiceKtor(config) }
     override val search by lazy { SearchServiceKtor(config) }
     override val picortex by lazy { PiCortexDashboardServiceKtor(config) }
+    override val sage by lazy { SageDashboardServiceKtor(config) }
 }

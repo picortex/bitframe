@@ -6,11 +6,10 @@ import bitframe.core.get
 import kotlinx.collections.interoperable.toInteroperableList
 import later.await
 import later.later
-import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
+import pimonitor.core.businesses.DASHBOARD_FINANCIAL
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.invites.Invite
 import pimonitor.core.invites.InviteStatus
-import pimonitor.core.picortex.PICORTEX_DASHBOARD
 
 open class SageDashboardDaodService(
     private val config: ServiceConfigDaod
@@ -23,12 +22,16 @@ open class SageDashboardDaodService(
         val params = rb.data.toValidatedInviteParams()
         val invite = invitesDao.load(params.inviteId).await()
         val business = businessesDao.load(invite.invitedBusinessId).await()
-        val status = InviteStatus.AcceptedDashboard(PICORTEX_DASHBOARD)
-        val cred = SageApiCredentials()
-        val credPromise = credentialsDao.create(cred)
-        val invitePromise = invitesDao.update(invite.copy(status = (invite.status + status).toInteroperableList()))
-        val businessPromise = businessesDao.update(business.copy(dashboard = DASHBOARD_OPERATIONAL.PICORTEX))
-        credPromise.await(); invitePromise.await(); businessPromise.await();
+        val status = InviteStatus.AcceptedFinancialDashboard(DASHBOARD_FINANCIAL.SAGE_ONE)
+        val cred = SageApiCredentials(
+            businessId = business.uid,
+            companyId = params.companyId,
+            username = params.username,
+            password = params.password
+        )
+        credentialsDao.create(cred).await()
+        invitesDao.update(invite.copy(status = (invite.status + status).toInteroperableList())).await()
+        businessesDao.update(business.copy(financialBoard = DASHBOARD_FINANCIAL.SAGE_ONE)).await()
         params
     }
 }

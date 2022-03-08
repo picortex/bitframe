@@ -22,7 +22,6 @@ import pimonitor.core.picortex.PiCortexDashboardProvider
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig
 import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
-import presenters.containers.ChangeBox
 
 open class BusinessesDaodService(
     open val config: ServiceConfigDaod
@@ -104,28 +103,16 @@ open class BusinessesDaodService(
             userContactsDao.all(UserContact::userId isEqualTo it.userId).await()
         }.toInteroperableList()
         val invites = invitesDao.all(Invite::invitedBusinessId isEqualTo business.uid).await()
-        return when (business.dashboard) {
-            DASHBOARD_OPERATIONAL.NONE -> MonitoredBusinessSummary(
-                uid = business.uid,
-                name = business.name,
-                contacts = contacts,
-                invites = invites,
-                interventions = "0 of 0"
-            )
-            DASHBOARD_OPERATIONAL.PICORTEX -> {
-                MonitoredBusinessSummary(
-                    uid = business.uid,
-                    name = business.name,
-                    operationalBoard = DASHBOARD_OPERATIONAL.PICORTEX,
-                    contacts = contacts,
-                    invites = invites,
-                    interventions = "0 of 0"
-                )
-            }
-            else -> {
-                TODO()
-            }
-        }
+        val bus = MonitoredBusinessSummary(
+            uid = business.uid,
+            name = business.name,
+            contacts = contacts,
+            invites = invites,
+            operationalBoard = business.operationalBoard,
+            financialBoard = business.financialBoard,
+            interventions = "0 of 0"
+        )
+        return bus
     }
 
     override fun invite(rb: RequestBody.Authorized<InviteToShareReportsParams>): Later<Invite> = config.scope.later {

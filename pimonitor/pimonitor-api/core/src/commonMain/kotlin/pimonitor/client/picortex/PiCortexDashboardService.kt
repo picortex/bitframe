@@ -9,6 +9,7 @@ import later.await
 import later.later
 import pimonitor.core.picortex.AcceptPicortexInviteRawParams
 import pimonitor.core.picortex.PiCortexDashboardServiceCore
+import pimonitor.core.picortex.toValidatedInviteParams
 import pimonitor.core.sage.toValidatedInviteParams
 import kotlin.js.JsExport
 

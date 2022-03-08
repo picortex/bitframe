@@ -11,5 +11,5 @@ object DASHBOARD_FINANCIAL {
     val NONE = "NONE"
 
     @JvmField
-    val SAGE = "SAGE"
+    val SAGE_ONE = "SAGE ONE"
 }

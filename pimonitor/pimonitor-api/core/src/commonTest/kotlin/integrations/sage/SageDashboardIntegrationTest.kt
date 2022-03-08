@@ -1,10 +1,11 @@
-package integrations
+package integrations.sage
 
 import bitframe.core.signin.SignInCredentials
 import expect.expect
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
+import pimonitor.core.businesses.DASHBOARD_FINANCIAL
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.invites.Invite
@@ -12,11 +13,11 @@ import pimonitor.core.sage.AcceptSageOneInviteParams
 import pimonitor.core.signup.params.BusinessSignUpParams
 import kotlin.test.Test
 
-class PiCortexCredentialsCaptureTest {
+class SageDashboardIntegrationTest {
     val api = PiMonitorApiTest()
 
     @Test
-    fun should_capture_picortex_credentials_after_invite_has_been_sent() = runSequence {
+    fun should_capture_sage_credentials_after_sent_invite_has_been_accepted() = runSequence {
         step("If not registered, signup as business or individual") {
             val params = BusinessSignUpParams(
                 businessName = "PiCortex Int Ltd",
@@ -55,15 +56,23 @@ class PiCortexCredentialsCaptureTest {
             expect(invite?.invitedBusinessId).toBe(business.uid)
         }
 
-        step("Accept invite by capturing picortex credentials") {
-            val i = invite ?: error("Invite is found")
+        step("Accept invite by capturing sage credentials") {
+            val i = invite ?: error("Invite not is found")
             val params = AcceptSageOneInviteParams(
                 inviteId = i.uid,
-                subdomain = "test",
-                secret = "test"
+                username = "mmajapa@gmail.com",
+                password = "Rondebosch2016@",
+                companyId = "468271",
             )
-            val res = api.picortex.acceptInvite(params).await()
+            val res = api.sage.acceptInvite(params).await()
             expect(res.inviteId).toBe(i.uid)
+        }
+
+        step("Load businesses and make sure they come with sage data") {
+            val business = api.businesses.all().await()
+            println(business)
+            expect(business).toBeOfSize(1)
+            expect(business.first().financialBoard).toBe(DASHBOARD_FINANCIAL.SAGE_ONE)
         }
     }
 }
