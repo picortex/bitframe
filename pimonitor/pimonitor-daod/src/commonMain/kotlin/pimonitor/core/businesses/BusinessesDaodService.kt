@@ -1,14 +1,18 @@
 package pimonitor.core.businesses
 
+import akkounts.reports.utils.CategoryEntry
 import akkounts.sage.SageOneZAService
 import akkounts.sage.SageOneZAUserCompany
 import bitframe.core.*
 import bitframe.core.users.RegisterUserUseCase
 import bitframe.core.users.RegisterUserUseCaseImpl
+import kash.Currency
+import kash.Money
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.listOf
 import kotlinx.collections.interoperable.mutableListOf
 import kotlinx.collections.interoperable.toInteroperableList
+import kotlinx.datetime.*
 import later.Later
 import later.await
 import later.later
@@ -25,6 +29,9 @@ import pimonitor.core.picortex.PiCortexDashboardProviderConfig
 import pimonitor.core.sage.SageApiCredentials
 import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
+import presenters.containers.ChangeBox
+import presenters.containers.ChangeRemark
+import kotlin.time.Duration.Companion.days
 
 open class BusinessesDaodService(
     open val config: ServiceConfigDaod
@@ -103,6 +110,8 @@ open class BusinessesDaodService(
         list
     }
 
+    private fun CategoryEntry.toMoney(currency: Currency) = Money.of(total * currency.lowestDenomination, currency)
+
     private suspend fun summaryOf(business: MonitoredBusinessBasicInfo): MonitoredBusinessSummary {
         val contacts = contactPersonBusinessInfoDao.all(ContactPersonBusinessInfo::businessId isEqualTo business.uid).await().flatMap {
             userContactsDao.all(UserContact::userId isEqualTo it.userId).await()
@@ -117,7 +126,7 @@ open class BusinessesDaodService(
             financialBoard = business.financialBoard,
             interventions = "0 of 0"
         )
-        if (business.financialBoard == DASHBOARD_FINANCIAL.SAGE_ONE) {
+        return if (business.financialBoard == DASHBOARD_FINANCIAL.SAGE_ONE) {
             val cred = sageCredentialsDao.all(SageApiCredentials::businessId isEqualTo business.uid).await().first()
             val company = SageOneZAUserCompany(
                 uid = business.uid,
@@ -127,10 +136,37 @@ open class BusinessesDaodService(
                 companyId = cred.companyId
             )
             val ap = sage.offeredTo(company)
-
-            ap.invoices
+            try {
+                val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+                val earlyIncomeStatement = ap.reports.incomeStatement(
+                    start = now.date - DatePeriod(months = 2),
+                    end = now.date - DatePeriod(months = 1)
+                ).await()
+                val laterIncomeStatement = ap.reports.incomeStatement(
+                    start = now.date - DatePeriod(months = 1),
+                    end = now.date
+                ).await()
+                val currency = earlyIncomeStatement.header.currency
+                bus.copy(
+                    revenue = ChangeBox(
+                        precursor = earlyIncomeStatement.body.income.toMoney(currency),
+                        successor = laterIncomeStatement.body.income.toMoney(currency),
+                        details = "Updated now",
+                        remark = ChangeRemark.CONSTANT
+                    ),
+                    grossProfit = ChangeBox(
+                        precursor = Money.of(earlyIncomeStatement.body.grossProfit*currency.lowestDenomination,currency),
+                        successor = Money.of(laterIncomeStatement.body.grossProfit*currency.lowestDenomination,currency),
+                        details = "Updated now",
+                        remark = ChangeRemark.CONSTANT
+                    )
+                )
+            } catch (exp: Throwable) {
+                bus
+            }
+        } else {
+            bus
         }
-        return bus
     }
 
     override fun invite(rb: RequestBody.Authorized<InviteToShareReportsParams>): Later<Invite> = config.scope.later {

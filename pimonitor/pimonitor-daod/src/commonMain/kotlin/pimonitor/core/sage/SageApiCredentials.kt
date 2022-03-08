@@ -2,7 +2,9 @@ package pimonitor.core.sage
 
 import bitframe.core.Savable
 import bitframe.core.UNSET
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class SageApiCredentials(
     val businessId: String,
     val companyId: String,
