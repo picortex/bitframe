@@ -68,7 +68,7 @@ class SageDashboardIntegrationTest {
             expect(res.inviteId).toBe(i.uid)
         }
 
-        xstep("Load businesses and make sure they come with sage data") {
+        step("Load businesses and make sure they come with sage data") {
             val businesses = api.businesses.all().await()
             expect(businesses).toBeOfSize(1)
             val business = businesses.first()

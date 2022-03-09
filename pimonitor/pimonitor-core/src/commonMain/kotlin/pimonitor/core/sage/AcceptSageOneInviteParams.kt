@@ -1,5 +1,8 @@
 package pimonitor.core.sage
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 class AcceptSageOneInviteParams(
     override val inviteId: String,
     override val companyId: String,

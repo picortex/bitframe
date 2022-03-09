@@ -12,6 +12,8 @@ import pimonitor.server.businesses.BusinessController
 import pimonitor.server.businesses.BusinessModule
 import pimonitor.server.contacts.ContactsController
 import pimonitor.server.contacts.ContactsModule
+import pimonitor.server.invites.InvitesController
+import pimonitor.server.invites.InvitesModule
 import pimonitor.server.portfolio.PortfolioController
 import pimonitor.server.portfolio.PortfolioModule
 import pimonitor.server.profile.ProfileController
@@ -67,6 +69,10 @@ fun main(args: Array<String>) {
 
         install { ser ->
             SearchModule(SearchController(ser.search))
+        }
+
+        install { ser ->
+            InvitesModule(InvitesController(ser))
         }
 
         onStart { populateTestEntities() }
