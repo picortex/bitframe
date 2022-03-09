@@ -10,21 +10,30 @@ import kotlin.js.JsExport
 
 @JsExport
 interface InviteToShareReportsRawParams {
-    val business: MonitoredBusinessSummary
+    val businessId: String
     val to: String
     val subject: String
     val message: String
 }
 
 fun InviteToShareReportsParams(monitored: MonitoredBusinessSummary) = InviteToShareReportsParams(
-    business = monitored,
+    businessId = monitored.uid,
     to = monitored.contacts.filterIsInstance<UserEmail>().firstOrNull()?.value ?: error("There are no registered contact's with email in ${monitored.name}"),
     subject = InviteToShareReportsParams.DEFAULT_INVITE_SUBJECT,
     message = InviteToShareReportsParams.DEFAULT_INVITE_MESSAGE
 )
 
 fun InviteToShareReportsRawParams.toValidatedInviteToShareReportParams() = InviteToShareReportsParams(
-    business = business,
+    businessId = businessId,
+    to = requiredNotBlank(::to).let { Email(it).value },
+    subject = requiredNotBlank(::subject),
+    message = requiredNotBlank(::message)
+)
+
+fun InviteToShareReportsRawParams.copy(
+    businessId: String
+): InviteToShareReportsRawParams = InviteToShareReportsParams(
+    businessId = businessId,
     to = requiredNotBlank(::to).let { Email(it).value },
     subject = requiredNotBlank(::subject),
     message = requiredNotBlank(::message)

@@ -7,12 +7,14 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.collections.interoperable.toInteroperableList
+import later.Later
 import later.later
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
+import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.invites.Invite
 import response.decodeResponseFromString
@@ -44,6 +46,10 @@ class BusinessesServiceKtor(
             setBody(json.of(rb))
         }
         json.decodeResponseFromString(Invite.serializer(), req.bodyAsText()).response()
+    }
+
+    override fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>): Later<String> {
+        TODO("Not yet implemented")
     }
 
     override fun delete(rb: RequestBody.Authorized<Array<out String>>) = config.scope.later {

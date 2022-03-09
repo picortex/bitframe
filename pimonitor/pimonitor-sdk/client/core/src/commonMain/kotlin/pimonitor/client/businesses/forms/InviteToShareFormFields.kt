@@ -33,8 +33,9 @@ data class InviteToShareFormFields(
         text = "Send Invite"
     )
 ) {
-    @JsName("_ignore_copyContactEmail")
-    fun copy(contactEmail: String) = copy(
+    @JsName("_ignore_copyContactEmailAndMessage")
+    fun copy(contactEmail: String, message: String) = copy(
         to = to.copy(value = contactEmail),
+        message = this.message.copy(value = message)
     )
 }

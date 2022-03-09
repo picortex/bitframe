@@ -45,11 +45,12 @@ object BusinessesDialogContent {
     internal fun inviteToShareReportsDialog(
         businessName: String,
         contactEmail: String,
+        message: String,
         block: FormDialogBuildingBlock<InviteToShareReportsRawParams>
     ) = formDialog(
         heading = InviteToShareReports,
-        details = "Request $businessName information by email",
-        fields = InviteToShareFormFields().copy(contactEmail),
+        details = "Request $businessName's information by email",
+        fields = InviteToShareFormFields().copy(contactEmail,message),
         block
     )
 

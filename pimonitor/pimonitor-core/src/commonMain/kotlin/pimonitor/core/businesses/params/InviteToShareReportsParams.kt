@@ -6,7 +6,7 @@ import kotlin.jvm.JvmField
 
 @Serializable
 data class InviteToShareReportsParams(
-    override val business: MonitoredBusinessSummary,
+    override val businessId: String,
     override val to: String,
     override val subject: String,
     override val message: String

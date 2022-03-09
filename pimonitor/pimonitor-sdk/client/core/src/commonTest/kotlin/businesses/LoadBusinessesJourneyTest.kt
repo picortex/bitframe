@@ -16,9 +16,9 @@ import pimonitor.client.businesses.BusinessesState as State
 
 class LoadBusinessesJourneyTest {
 
-    val scope = PiMonitorMockScope()
-    val api = scope.api
-    val vm = scope.businesses.viewModel
+    private val scope = PiMonitorMockScope()
+    private val api = scope.api
+    private val vm = scope.businesses.viewModel
 
     @Test
     fun should_start_in_a_loading_state() {

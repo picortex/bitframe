@@ -11,12 +11,9 @@ import later.Later
 import later.await
 import later.later
 import pimonitor.core.businesses.BusinessFilter
-import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
-import pimonitor.core.businesses.params.toValidatedCreateBusinessParams
 import kotlin.js.JsExport
 import pimonitor.core.businesses.BusinessesServiceCore
-import pimonitor.core.businesses.params.InviteToShareReportsRawParams
-import pimonitor.core.businesses.params.toValidatedInviteToShareReportParams
+import pimonitor.core.businesses.params.*
 
 abstract class BusinessesService(
     open val config: ServiceConfig
@@ -59,5 +56,13 @@ abstract class BusinessesService(
             data = monitorIds
         )
         delete(rb).await()
+    }
+
+    fun defaultInviteMessage(params: InviteMessageRawParams): Later<String> = config.scope.later {
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("prepare invite form"),
+            data = params.toValidatedInviteMessageParams()
+        )
+        defaultInviteMessage(rb).await()
     }
 }

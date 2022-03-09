@@ -52,7 +52,7 @@ class InviteToShareReportsJourneyTest {
                 sendInvite = false
             )
             val state = State()
-            vm.expect(Intent.SubmitCreateBusinessForm(params)).toContain(
+            vm.expect(Intent.SendCreateBusinessForm(params)).toContain(
                 state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
                 state.copy(status = Feedback.Success("${params.businessName} has successfully been added")),
             )

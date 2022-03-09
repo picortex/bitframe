@@ -8,10 +8,7 @@ import events.Event
 import kotlinx.collections.interoperable.List
 import later.Later
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
-import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
-import pimonitor.core.businesses.params.InviteToShareReportsParams
-import pimonitor.core.businesses.params.InviteToShareReportsRawParams
+import pimonitor.core.businesses.params.*
 import pimonitor.core.invites.Invite
 import kotlin.js.JsExport
 import kotlin.js.JsName
@@ -26,6 +23,10 @@ interface BusinessesServiceCore {
     @JsName("_ignore_invite")
     @JvmSynthetic
     fun invite(rb: RequestBody.Authorized<InviteToShareReportsParams>): Later<Invite>
+
+    @JsName("_ignore_inviteMessage")
+    @JvmSynthetic
+    fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>): Later<String>
 
     @JsName("_ignore_all")
     @JvmSynthetic

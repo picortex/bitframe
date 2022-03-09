@@ -31,7 +31,6 @@ import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
 import presenters.containers.ChangeBox
 import presenters.containers.ChangeRemark
-import kotlin.time.Duration.Companion.days
 
 open class BusinessesDaodService(
     open val config: ServiceConfigDaod
@@ -39,7 +38,8 @@ open class BusinessesDaodService(
     RegisterUserUseCase by RegisterUserUseCaseImpl(config) {
 
     private val factory get() = config.daoFactory
-    private val businessDao by lazy { factory.get<MonitoredBusinessBasicInfo>() }
+    private val monitorBusinessesDao by lazy { factory.get<MonitorBusinessBasicInfo>() }
+    private val monitoredBusinessesDao by lazy { factory.get<MonitoredBusinessBasicInfo>() }
     private val spacesDao by lazy { factory.get<Space>() }
     private val invitesDao by lazy { factory.get<Invite>() }
     private val userSpaceInfoDao by lazy { factory.get<UserSpaceInfo>() }
@@ -77,7 +77,7 @@ open class BusinessesDaodService(
             registered.userId to space.uid
         }
 
-        val business = businessDao.create(
+        val business = monitoredBusinessesDao.create(
             MonitoredBusinessBasicInfo(
                 name = params.businessName,
                 owningSpaceId = rb.session.space.uid
@@ -99,14 +99,14 @@ open class BusinessesDaodService(
 
     override fun all(rb: RequestBody.Authorized<BusinessFilter>) = config.scope.later {
         val condition = MonitoredBusinessBasicInfo::owningSpaceId isEqualTo rb.session.space.uid
-        businessDao.all(condition).await().filter { !it.deleted }.toTypedArray().map {
+        monitoredBusinessesDao.all(condition).await().filter { !it.deleted }.toTypedArray().map {
             summaryOf(it)
         }.toInteroperableList()
     }
 
     override fun delete(rb: RequestBody.Authorized<Array<out String>>): Later<List<MonitoredBusinessBasicInfo>> = config.scope.later {
         val list = mutableListOf<MonitoredBusinessBasicInfo>()
-        for (business in rb.data) list.add(businessDao.delete(business).await())
+        for (business in rb.data) list.add(monitoredBusinessesDao.delete(business).await())
         list
     }
 
@@ -155,8 +155,8 @@ open class BusinessesDaodService(
                         remark = ChangeRemark.CONSTANT
                     ),
                     grossProfit = ChangeBox(
-                        precursor = Money.of(earlyIncomeStatement.body.grossProfit*currency.lowestDenomination,currency),
-                        successor = Money.of(laterIncomeStatement.body.grossProfit*currency.lowestDenomination,currency),
+                        precursor = Money.of(earlyIncomeStatement.body.grossProfit * currency.lowestDenomination, currency),
+                        successor = Money.of(laterIncomeStatement.body.grossProfit * currency.lowestDenomination, currency),
                         details = "Updated now",
                         remark = ChangeRemark.CONSTANT
                     )
@@ -174,7 +174,7 @@ open class BusinessesDaodService(
             condition = UserContact::value isEqualTo rb.data.to
         ).await().firstOrNull() ?: error("Business contact with email ${rb.data.to} is not found in pimonitor")
 
-        val business = businessDao.load(rb.data.business.uid).await()
+        val business = monitoredBusinessesDao.load(rb.data.businessId).await()
         val senderSpace = spacesDao.load(business.owningSpaceId).await()
 
         val inviteParams = Invite(
@@ -200,5 +200,17 @@ open class BusinessesDaodService(
             to = AddressInfo(rb.data.to)
         ).await()
         invite
+    }
+
+    override fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>): Later<String> = config.scope.later {
+        val space = spacesDao.load(rb.session.space.uid).await()
+        if (space.type == SPACE_TYPE.COOPERATE_MONITOR) {
+            val business = monitorBusinessesDao.all(
+                MonitorBusinessBasicInfo::owningSpaceId isEqualTo space.uid
+            ).await().first()
+            "${business.name} would like to invite you to share your operational & financial reports with them through PiMonitor"
+        } else {
+            "${rb.session.user.name} would like to invite you to share your operational & financial reports with them through PiMonitor"
+        }
     }
 }

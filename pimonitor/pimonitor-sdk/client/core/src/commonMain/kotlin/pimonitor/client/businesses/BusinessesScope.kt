@@ -24,11 +24,11 @@ open class BusinessesScope(
     val loadBusinesses: () -> Unit = { viewModel.post(Intent.LoadBusinesses) }
 
     val submitCreateBusinessForm = { params: CreateMonitoredBusinessRawParams ->
-        post(Intent.SubmitCreateBusinessForm(params))
+        post(Intent.SendCreateBusinessForm(params))
     }
 
     val submitInviteToShareReportsForm = { params: InviteToShareReportsRawParams ->
-        post(Intent.SubmitInviteToShareReportsForm(params))
+        post(Intent.SendInviteToShareReportsForm(params))
     }
 
     val exitDialog: () -> Unit = { viewModel.post(Intent.ExitDialog) }

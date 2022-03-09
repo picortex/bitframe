@@ -16,8 +16,9 @@ import pimonitor.client.businesses.BusinessesDialogContent.deleteSingleDialog
 import pimonitor.client.businesses.BusinessesDialogContent.interveneDialog
 import pimonitor.client.businesses.BusinessesDialogContent.inviteToShareReportsDialog
 import pimonitor.client.businesses.BusinessesIntent.*
-import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
+import pimonitor.core.businesses.params.InviteMessageParams
+import pimonitor.core.businesses.params.copy
 import presenters.feedbacks.Feedback.*
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
@@ -34,10 +35,10 @@ class BusinessesViewModel(
         LoadBusinesses -> loadBusiness()
 
         ShowCreateBusinessForm -> showCreateBusinessForm()
-        is SubmitCreateBusinessForm -> submitCreateBusinessForm(i)
+        is SendCreateBusinessForm -> sendCreateBusinessForm(i)
 
         is ShowInviteToShareReportsForm -> showInviteToShareReportsForm(i)
-        is SubmitInviteToShareReportsForm -> submitInviteToShareReportsForm(i)
+        is SendInviteToShareReportsForm -> sendInviteToShareReportsForm(i)
 
         is ShowInterveneForm -> showInterveneForm(i)
         is ShowCaptureInvestmentForm -> showCaptureInvestmentForm(i)
@@ -52,6 +53,7 @@ class BusinessesViewModel(
     private fun showDeleteMultipleConfirmationDialog(i: ShowDeleteMultipleConfirmationDialog) {
         ui.value = ui.value.copy(
             status = None,
+            focus = null,
             dialog = deleteManyDialog(i.data) {
                 onCancel { post(ExitDialog) }
                 onConfirm { post(DeleteAll(i.data.map { it.data }.toTypedArray())) }
@@ -62,6 +64,7 @@ class BusinessesViewModel(
     private fun showDeleteSingleConfirmationDialog(i: ShowDeleteSingleConfirmationDialog) {
         ui.value = ui.value.copy(
             status = None,
+            focus = i.monitored,
             dialog = deleteSingleDialog(i.monitored) {
                 onCancel { post(ExitDialog) }
                 onConfirm { post(Delete(i.monitored)) }
@@ -72,6 +75,7 @@ class BusinessesViewModel(
     private fun showCaptureInvestmentForm(i: ShowCaptureInvestmentForm) {
         ui.value = ui.value.copy(
             status = None,
+            focus = i.monitored,
             dialog = captureInvestmentDialog(i.monitored) {
                 onCancel { post(ExitDialog) }
                 onSubmit { params: Unit -> TODO() }
@@ -82,6 +86,7 @@ class BusinessesViewModel(
     private fun showInterveneForm(i: ShowInterveneForm) {
         ui.value = ui.value.copy(
             status = None,
+            focus = i.monitored,
             dialog = interveneDialog(i.monitored) {
                 onCancel { post(ExitDialog) }
                 onSubmit { params: Unit -> TODO() }
@@ -92,51 +97,62 @@ class BusinessesViewModel(
     private fun showCreateBusinessForm() {
         ui.value = ui.value.copy(
             status = None,
+            focus = null,
             dialog = createBusinessDialog {
                 onCancel { post(ExitDialog) }
-                onSubmit { params -> post(SubmitCreateBusinessForm(params)) }
+                onSubmit { params -> post(SendCreateBusinessForm(params)) }
             }
         )
     }
 
-    private fun showInviteToShareReportsForm(i: ShowInviteToShareReportsForm) {
-        val dialog = inviteToShareReportsDialog(
-            businessName = i.monitored.name,
-            contactEmail = i.monitored.contacts.filterIsInstance<UserEmail>().firstOrNull()?.value ?: error("There are no registered contact's with email in ${i.monitored.name}")
-        ) {
-            onCancel { post(ExitDialog) }
-            onSubmit { params -> post(SubmitInviteToShareReportsForm(params)) }
-        }
-        ui.value = ui.value.copy(status = None, dialog = dialog)
-    }
-
-    private fun CoroutineScope.submitInviteToShareReportsForm(i: SubmitInviteToShareReportsForm) = launch {
+    private fun CoroutineScope.showInviteToShareReportsForm(i: ShowInviteToShareReportsForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(status = Loading("Sending invite to ${i.params.business.name}, Please wait . . ."), dialog = null))
-            service.invite(i.params).await()
+            emit(state.copy(status = Loading("Preparing invite form, please wait . . ."), focus = i.monitored, dialog = null))
+            val message = service.defaultInviteMessage(InviteMessageParams(i.monitored.uid)).await()
+            val dialog = inviteToShareReportsDialog(
+                businessName = i.monitored.name,
+                contactEmail = i.monitored.contacts.filterIsInstance<UserEmail>().firstOrNull()?.value ?: error("There are no registered contact's with email in ${i.monitored.name}"),
+                message
+            ) {
+                onCancel { post(ExitDialog) }
+                onSubmit { params -> post(SendInviteToShareReportsForm(params)) }
+            }
+            emit(state.copy(status = None, focus = i.monitored, dialog = dialog))
+        }.catchAndCollectToUI(state)
+    }
+
+    private fun CoroutineScope.sendInviteToShareReportsForm(i: SendInviteToShareReportsForm) = launch {
+        val state = ui.value
+        flow {
+            val focused = state.focus ?: error("There is no business that is currently focused on")
+            emit(state.copy(status = Loading("Sending invite to ${focused.name}, Please wait . . ."), dialog = null))
+            service.invite(i.params.copy(focused.uid)).await()
             emit(state.copy(status = Success("Invite Sent"), dialog = null))
             delay(config.viewModel.transitionTime)
             emit(state.copy(status = None, dialog = null))
         }.catchAndCollectToUI(ui.value)
     }
 
-    private fun CoroutineScope.submitCreateBusinessForm(i: SubmitCreateBusinessForm) = launch {
+    private fun CoroutineScope.sendCreateBusinessForm(i: SendCreateBusinessForm) = launch {
         val state = ui.value
         flow {
             emit(state.copy(status = Loading("Adding ${i.params.businessName}, please wait . . ."), dialog = null))
-            val result = service.create(i.params).await().params
-            emit(state.copy(status = Success("${i.params.businessName} has successfully been added"), dialog = null))
-            if (result.sendInvite) {
+            val result = service.create(i.params).await()
+            if (result.params.sendInvite) {
+                emit(state.copy(status = Success("${i.params.businessName} has successfully been added. Preparing invite form, please wait . . ."), dialog = null))
+                val message = service.defaultInviteMessage(InviteMessageParams(result.business.uid)).await()
                 val dialog = inviteToShareReportsDialog(
-                    businessName = result.businessName,
-                    contactEmail = result.contactEmail
+                    businessName = result.params.businessName,
+                    contactEmail = result.params.contactEmail,
+                    message
                 ) {
                     onCancel { post(LoadBusinesses) }
-                    onSubmit { params -> post(SubmitInviteToShareReportsForm(params)) }
+                    onSubmit { params -> post(SendInviteToShareReportsForm(params)) }
                 }
                 emit(state.copy(status = None, dialog = dialog))
             } else {
+                emit(state.copy(status = Success("${i.params.businessName} has successfully been added"), dialog = null))
                 delay(config.viewModel.transitionTime)
                 emit(state.copy(status = Loading("Loading your businesses, please wait . . ."), dialog = null))
                 emit(state.copy(status = None, table = businessTable(service.all().await()), dialog = null))
@@ -180,7 +196,7 @@ class BusinessesViewModel(
     private fun CoroutineScope.captureInvestment(i: ShowCaptureInvestmentForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(status = Loading("Capturing investment")))
+            emit(state.copy(status = Loading("Capturing investment"), focus = null, dialog = null))
             error("Implement capture investment for ${i.monitored}")
         }.catchAndCollectToUI(state)
     }
@@ -188,7 +204,7 @@ class BusinessesViewModel(
     private fun exitDialog() {
         val state = ui.value
         if (state.dialog != null) {
-            ui.value = state.copy(status = None, dialog = null)
+            ui.value = state.copy(status = None, dialog = null, focus = null)
         }
     }
 
@@ -216,7 +232,7 @@ class BusinessesViewModel(
         multiAction("Delete All") { post(ShowDeleteMultipleConfirmationDialog(it)) }
         selectable()
         column("Name") { it.data.name }
-        column("Reporting") { it.data.operationalBoard }
+        column("Operations") { it.data.operationalBoard }
         column("Accounting") { it.data.financialBoard }
         column("Revenue") { "" }
         column("Expenses") { "" }
