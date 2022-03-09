@@ -4,6 +4,7 @@ package pimonitor.client.businesses
 
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
+import pimonitor.core.businesses.params.InviteToShareReportsRawFormParams
 import pimonitor.core.businesses.params.InviteToShareReportsRawParams
 import presenters.table.Row
 import kotlin.js.JsExport
@@ -19,7 +20,7 @@ sealed class BusinessesIntent {
     data class ShowInterveneForm(val monitored: MonitoredBusinessSummary) : BusinessesIntent()
 
     data class ShowInviteToShareReportsForm(val monitored: MonitoredBusinessSummary) : BusinessesIntent()
-    data class SendInviteToShareReportsForm(val params: InviteToShareReportsRawParams) : BusinessesIntent()
+    data class SendInviteToShareReportsForm(val params: InviteToShareReportsRawFormParams) : BusinessesIntent()
 
     data class ShowCaptureInvestmentForm(val monitored: MonitoredBusinessSummary) : BusinessesIntent()
 

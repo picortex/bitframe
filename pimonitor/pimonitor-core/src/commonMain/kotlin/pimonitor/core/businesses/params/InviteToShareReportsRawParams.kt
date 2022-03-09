@@ -9,11 +9,8 @@ import validation.requiredNotBlank
 import kotlin.js.JsExport
 
 @JsExport
-interface InviteToShareReportsRawParams {
+interface InviteToShareReportsRawParams : InviteToShareReportsRawFormParams {
     val businessId: String
-    val to: String
-    val subject: String
-    val message: String
 }
 
 fun InviteToShareReportsParams(monitored: MonitoredBusinessSummary) = InviteToShareReportsParams(
@@ -24,15 +21,6 @@ fun InviteToShareReportsParams(monitored: MonitoredBusinessSummary) = InviteToSh
 )
 
 fun InviteToShareReportsRawParams.toValidatedInviteToShareReportParams() = InviteToShareReportsParams(
-    businessId = businessId,
-    to = requiredNotBlank(::to).let { Email(it).value },
-    subject = requiredNotBlank(::subject),
-    message = requiredNotBlank(::message)
-)
-
-fun InviteToShareReportsRawParams.copy(
-    businessId: String
-): InviteToShareReportsRawParams = InviteToShareReportsParams(
     businessId = businessId,
     to = requiredNotBlank(::to).let { Email(it).value },
     subject = requiredNotBlank(::subject),

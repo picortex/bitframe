@@ -7,7 +7,7 @@ import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
-import pimonitor.core.businesses.params.InviteToShareReportsRawParams
+import pimonitor.core.businesses.params.InviteToShareReportsRawFormParams
 import viewmodel.ViewModel
 import kotlin.js.JsExport
 import pimonitor.client.businesses.BusinessesIntent as Intent
@@ -27,7 +27,7 @@ open class BusinessesScope(
         post(Intent.SendCreateBusinessForm(params))
     }
 
-    val submitInviteToShareReportsForm = { params: InviteToShareReportsRawParams ->
+    val submitInviteToShareReportsForm = { params: InviteToShareReportsRawFormParams ->
         post(Intent.SendInviteToShareReportsForm(params))
     }
 
