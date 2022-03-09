@@ -11,6 +11,7 @@ import bitframe.client.password.ChangePasswordScope
 import bitframe.client.signin.SignInScope
 import pimonitor.client.businesses.BusinessesScope
 import pimonitor.client.contacts.ContactsScope
+import pimonitor.client.integrations.IntegrationsScope
 import pimonitor.client.portfolio.PortfolioScope
 import pimonitor.client.search.SearchScope
 import pimonitor.client.signup.SignUpScope
@@ -33,4 +34,5 @@ open class PiMonitorAppScope(
     open val portfolio by lazy { PortfolioScope(config { api.portfolio }) }
     open val password by lazy { ChangePasswordScope(config { api.profile }) }
     open val search by lazy { SearchScope(config { api.search }) }
+    open val integrations by lazy { IntegrationsScope(config()) }
 }

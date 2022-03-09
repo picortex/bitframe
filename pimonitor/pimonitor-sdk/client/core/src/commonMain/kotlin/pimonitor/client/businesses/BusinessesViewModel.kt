@@ -217,6 +217,7 @@ class BusinessesViewModel(
         selectable()
         column("Name") { it.data.name }
         column("Reporting") { it.data.operationalBoard }
+        column("Accounting") { it.data.financialBoard }
         column("Revenue") { "" }
         column("Expenses") { "" }
         column("GP") { "" }

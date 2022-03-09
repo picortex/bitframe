@@ -11,6 +11,8 @@ import bitframe.client.signin.SignInReactScope
 import pimonitor.client.signup.SignUpReactScope
 import pimonitor.client.businesses.BusinessesReactScope
 import pimonitor.client.contacts.ContactsReactScope
+import pimonitor.client.integrations.IntegrationsReactScope
+import pimonitor.client.integrations.IntegrationsScope
 import pimonitor.client.portfolio.PortfolioReactScope
 import pimonitor.client.search.SearchReactScope
 
@@ -25,4 +27,5 @@ class PiMonitorReactAppScope(
     override val portfolio by lazy { PortfolioReactScope(config { api.portfolio }) }
     override val password by lazy { ChangePasswordReactScope(of(api.profile)) }
     override val search by lazy { SearchReactScope(config { api.search }) }
+    override val integrations by lazy { IntegrationsReactScope(config()) }
 }
