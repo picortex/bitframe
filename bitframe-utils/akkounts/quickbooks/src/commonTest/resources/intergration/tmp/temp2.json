@@ -1,0 +1,20 @@
+{
+  "TaxCode": "Test Invoice Tax - 1623990315",
+  "TaxCodeId": "22",
+  "TaxRateDetails": [
+    {
+      "TaxRateName": "Test Invoice Taxing Agency-Test Invoice Tax - 1623990315 (Sales)",
+      "TaxRateId": "33",
+      "RateValue": 12,
+      "TaxAgencyId": "10",
+      "TaxApplicableOn": "Sales"
+    },
+    {
+      "TaxRateName": "Test Invoice Taxing Agency-Test Invoice Tax - 1623990315 (Purchase)",
+      "TaxRateId": "32",
+      "RateValue": 12,
+      "TaxAgencyId": "10",
+      "TaxApplicableOn": "Purchase"
+    }
+  ]
+}
