@@ -154,6 +154,12 @@ open class BusinessesDaodService(
                         details = "Updated now",
                         remark = ChangeRemark.CONSTANT
                     ),
+                    expenses = ChangeBox(
+                        precursor = earlyIncomeStatement.body.expenses.toMoney(currency),
+                        successor = laterIncomeStatement.body.expenses.toMoney(currency),
+                        details = "Updated now",
+                        remark = ChangeRemark.CONSTANT
+                    ),
                     grossProfit = ChangeBox(
                         precursor = Money.of(earlyIncomeStatement.body.grossProfit * currency.lowestDenomination, currency),
                         successor = Money.of(laterIncomeStatement.body.grossProfit * currency.lowestDenomination, currency),

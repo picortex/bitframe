@@ -19,6 +19,7 @@ import pimonitor.client.businesses.BusinessesIntent.*
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.copy
+import presenters.containers.toString
 import presenters.feedbacks.Feedback.*
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
@@ -234,12 +235,12 @@ class BusinessesViewModel(
         column("Name") { it.data.name }
         column("Operations") { it.data.operationalBoard }
         column("Accounting") { it.data.financialBoard }
-        column("Revenue") { "" }
-        column("Expenses") { "" }
-        column("GP") { "" }
-        column("Velocity") { "" }
-        column("NCF") { "" }
-        column("V/day") { "" }
+        column("Revenue") { it.data.revenue.toString() }
+        column("Expenses") { it.data.expenses.toString() }
+        column("GP") { it.data.grossProfit.toString() }
+        column("Velocity") { it.data.velocity.toString() }
+        column("NCF") { it.data.netCashFlow.toString() }
+        column("V/day") { it.data.velocity.toString() }
         actionsColumn("Actions") {
             action("Invite to share reports") { post(ShowInviteToShareReportsForm(it.data)) }
             action("Intervene") { post(ShowInterveneForm(it.data)) }

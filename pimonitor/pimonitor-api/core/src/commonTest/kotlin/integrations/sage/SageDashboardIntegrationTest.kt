@@ -73,6 +73,9 @@ class SageDashboardIntegrationTest {
             expect(businesses).toBeOfSize(1)
             val business = businesses.first()
             expect(business.financialBoard).toBe(DASHBOARD_FINANCIAL.SAGE_ONE)
+            println(business.revenue)
+            expect(business.revenue).toBeNonNull()
+            expect(business.expenses).toBeNonNull()
             expect(business.grossProfit).toBeNonNull()
         }
     }
