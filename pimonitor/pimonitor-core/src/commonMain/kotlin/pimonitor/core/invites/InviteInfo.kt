@@ -9,6 +9,5 @@ import kotlin.js.JsExport
 data class InviteInfo(
     val inviteId: String,
     val invitorName: String,
-    val inviteeName: String,
     val sentInviteMessage: String
 )

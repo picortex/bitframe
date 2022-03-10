@@ -7,6 +7,7 @@ import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
+import pimonitor.core.invites.Invite
 import pimonitor.core.signup.params.BusinessSignUpParams
 import kotlin.test.Test
 
@@ -55,16 +56,22 @@ class SendInviteJourneyTest {
             expect(res.params.businessName).toBe("aSoft Ltd")
         }
 
+        var invite: Invite? = null
         step("Send an invite to the newly created business") {
             val business = api.businesses.all().await().first()
             val params = InviteToShareReportsParams(business)
-            val res = api.businesses.invite(params).await()
-            expect(res.invitedBusinessId).toBe(business.uid)
+            invite = api.invites.send(params).await()
+            expect(invite?.invitedBusinessId).toBe(business.uid)
         }
 
         step("Ensure invite is sent") {
             val res = api.businesses.all().await().first()
             expect(res.invites).toContainElements()
+        }
+
+        step("Load invite to see if it has the correct details") {
+            val i = api.invites.load(invite?.uid ?: error("Invite was not created")).await()
+            expect(i.invitorName).toBe("Invitor LLC")
         }
     }
 }

@@ -29,6 +29,7 @@ open class InvitesDaodService(
     private val factory get() = config.daoFactory
     private val monitorBusinessesDao by lazy { factory.get<MonitorBusinessBasicInfo>() }
     private val monitoredBusinessesDao by lazy { factory.get<MonitoredBusinessBasicInfo>() }
+    private val usersDao by lazy { factory.get<User>() }
     private val spacesDao by lazy { factory.get<Space>() }
     private val invitesDao by lazy { factory.get<Invite>() }
     private val userSpaceInfoDao by lazy { factory.get<UserSpaceInfo>() }
@@ -71,20 +72,28 @@ open class InvitesDaodService(
         invite
     }
 
-    override fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>): Later<String> = config.scope.later {
-        val space = spacesDao.load(rb.session.space.uid).await()
-        if (space.type == SPACE_TYPE.COOPERATE_MONITOR) {
-            val business = monitorBusinessesDao.all(
+    private suspend fun business(spaceId: String): MonitorBusinessBasicInfo? {
+        val space = spacesDao.load(spaceId).await()
+        return if (space.type == SPACE_TYPE.COOPERATE_MONITOR) {
+            monitorBusinessesDao.all(
                 MonitorBusinessBasicInfo::owningSpaceId isEqualTo space.uid
-            ).await().first()
-            "${business.name} would like to invite you to share your operational & financial reports with them through PiMonitor"
-        } else {
-            "${rb.session.user.name} would like to invite you to share your operational & financial reports with them through PiMonitor"
-        }
+            ).await().firstOrNull()
+        } else null
     }
 
-    override fun load(rb: RequestBody.UnAuthorized<String>): Later<InviteInfo> {
-        TODO("Not yet implemented")
+    override fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>): Later<String> = config.scope.later {
+        val name = business(rb.session.space.uid)?.name ?: rb.session.user.name
+        "$name would like to invite you to share your operational & financial reports with them through PiMonitor"
+    }
+
+    override fun load(rb: RequestBody.UnAuthorized<String>): Later<InviteInfo> = config.scope.later {
+        val invite = invitesDao.load(rb.data).await()
+        val name = business(invite.invitorSpaceId)?.name ?: usersDao.load(invite.invitorUserId).await().name
+        InviteInfo(
+            inviteId = invite.uid,
+            invitorName = name,
+            sentInviteMessage = invite.sentInviteMessage
+        )
     }
 
     override fun acceptSageInvite(rb: RequestBody.UnAuthorized<AcceptSageOneInviteParams>) = config.scope.later {

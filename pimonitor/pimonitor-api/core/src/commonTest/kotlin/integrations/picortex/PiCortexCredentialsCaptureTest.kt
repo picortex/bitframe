@@ -51,7 +51,7 @@ class PiCortexCredentialsCaptureTest {
         step("Send an invite to the newly created business") {
             val business = api.businesses.all().await().first()
             val params = InviteToShareReportsParams(business)
-            invite = api.businesses.invite(params).await()
+            invite = api.invites.send(params).await()
             expect(invite?.invitedBusinessId).toBe(business.uid)
         }
 
