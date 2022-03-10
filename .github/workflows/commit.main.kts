@@ -34,8 +34,8 @@ fun JobBuilder.setupRepo() {
         command = "chmod +x ./gradlew"
     )
     run(
-        name = "Downloading gradle",
-        command = gradlew("--version")
+        name = "Check SDK Dependencies",
+        command = gradlew(":pimonitor-sdk-client-react:dependencies")
     )
 }
 

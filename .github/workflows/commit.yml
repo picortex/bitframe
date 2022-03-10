@@ -23,8 +23,8 @@ jobs:
           cache: gradle
       - name: Make gradle executable
         run: chmod +x ./gradlew
-      - name: Downloading gradle
-        run: ./gradlew --version
+      - name: Check SDK Dependencies
+        run: ./gradlew :pimonitor-sdk-client-react:dependencies
       - name: Running jvm tests
         run: API_MODE="MOCK" ./gradlew jvmTest
       - name: Run pimonitor-app-server tests
