@@ -1,13 +1,14 @@
 package pimonitor.client
 
-import bitframe.client.*
+import bitframe.client.BitframeApi
+import bitframe.client.BitframeApiKtor
+import bitframe.client.BitframeApiKtorConfig
 import pimonitor.client.businesses.BusinessesServiceKtor
 import pimonitor.client.contacts.ContactsServiceKtor
+import pimonitor.client.invites.InvitesServiceKtor
 import pimonitor.client.portfolio.PortfolioServiceKtor
-import pimonitor.client.search.SearchService
 import pimonitor.client.search.SearchServiceKtor
 import pimonitor.client.signup.SignUpServiceKtor
-import pimonitor.core.portfolio.PortfolioServiceCore
 
 class PiMonitorApiKtor(
     override val config: BitframeApiKtorConfig,
@@ -17,4 +18,5 @@ class PiMonitorApiKtor(
     override val contacts by lazy { ContactsServiceKtor(config) }
     override val portfolio by lazy { PortfolioServiceKtor(config) }
     override val search by lazy { SearchServiceKtor(config) }
+    override val invites by lazy { InvitesServiceKtor(config) }
 }

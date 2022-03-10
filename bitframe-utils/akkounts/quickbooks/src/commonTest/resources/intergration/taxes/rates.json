@@ -1,0 +1,707 @@
+{
+  "QueryResponse": {
+    "TaxRate": [
+      {
+        "Name": "Anderson Tax Rate",
+        "Description": "Sales Tax",
+        "Active": true,
+        "RateValue": 10,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 10,
+            "EffectiveDate": "1970-01-01T00:00:00-08:00"
+          }
+        ],
+        "SpecialTaxType": "NONE",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "22",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-06-17T19:36:00-07:00",
+          "LastUpdatedTime": "2021-06-17T19:36:00-07:00"
+        }
+      },
+      {
+        "Name": "Anderson Tax Rate -1623984281515",
+        "Description": "Sales Tax",
+        "Active": true,
+        "RateValue": 10,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 10,
+            "EffectiveDate": "1970-01-01T00:00:00-08:00"
+          }
+        ],
+        "SpecialTaxType": "NONE",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "23",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-06-17T19:44:43-07:00",
+          "LastUpdatedTime": "2021-06-17T19:44:43-07:00"
+        }
+      },
+      {
+        "Name": "Anderson Tax Rate -1623987973534",
+        "Description": "Sales Tax",
+        "Active": true,
+        "RateValue": 10,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 10,
+            "EffectiveDate": "1970-01-01T00:00:00-08:00"
+          }
+        ],
+        "SpecialTaxType": "NONE",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "27",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-06-17T20:46:15-07:00",
+          "LastUpdatedTime": "2021-06-17T20:46:15-07:00"
+        }
+      },
+      {
+        "Name": "Credit From FBT Instalment",
+        "Description": "GST",
+        "Active": true,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "54"
+        },
+        "EffectiveTaxRate": [
+          {
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ADJUSTMENT_RATE",
+        "DisplayType": "HideInAll",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "12",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      },
+      {
+        "Name": "Credit From PAYG Income Tax Instalment",
+        "Description": "GST",
+        "Active": true,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "53"
+        },
+        "EffectiveTaxRate": [
+          {
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ADJUSTMENT_RATE",
+        "DisplayType": "HideInAll",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "11",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      },
+      {
+        "Name": "FBT Instalment",
+        "Description": "GST",
+        "Active": true,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "46"
+        },
+        "EffectiveTaxRate": [
+          {
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ADJUSTMENT_RATE",
+        "DisplayType": "HideInAll",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "18",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:55-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:55-08:00"
+        }
+      },
+      {
+        "Name": "Fuel Tax",
+        "Description": "GST",
+        "Active": true,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "47"
+        },
+        "EffectiveTaxRate": [
+          {
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ADJUSTMENT_RATE",
+        "DisplayType": "HideInAll",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "19",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:55-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:55-08:00"
+        }
+      },
+      {
+        "Name": "Fuel Tax Credit",
+        "Description": "GST",
+        "Active": true,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "55"
+        },
+        "EffectiveTaxRate": [
+          {
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ADJUSTMENT_RATE",
+        "DisplayType": "HideInAll",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "13",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      },
+      {
+        "Name": "GST (sales)",
+        "Description": "GST",
+        "Active": true,
+        "RateValue": 10,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "4"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 10,
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "NONE",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "20",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:55-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:55-08:00"
+        }
+      },
+      {
+        "Name": "GST free (sales)",
+        "Description": "GST",
+        "Active": true,
+        "RateValue": 0,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 0,
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ZERO_RATE",
+        "DisplayType": "ReadOnly",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "4",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      },
+      {
+        "Name": "GST free exports (Sales)",
+        "Description": "GST",
+        "Active": true,
+        "RateValue": 0,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 0,
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ZERO_RATE",
+        "DisplayType": "ReadOnly",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "8",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      },
+      {
+        "Name": "GST on capital (purchases)",
+        "Description": "GST",
+        "Active": true,
+        "RateValue": 10,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "12"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 10,
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "NONE",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "3",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      },
+      {
+        "Name": "GST on non-capital (purchases)",
+        "Description": "GST",
+        "Active": true,
+        "RateValue": 10,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "17"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 10,
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "NONE",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "1",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:53-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:53-08:00"
+        }
+      },
+      {
+        "Name": "GST-free capital (purchases)",
+        "Description": "GST",
+        "Active": true,
+        "RateValue": 0,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 0,
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ZERO_RATE",
+        "DisplayType": "ReadOnly",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "7",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      },
+      {
+        "Name": "GST-free non-capital (purchases)",
+        "Description": "GST",
+        "Active": true,
+        "RateValue": 0,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 0,
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ZERO_RATE",
+        "DisplayType": "ReadOnly",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "2",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      },
+      {
+        "Name": "Input tax (purchases)",
+        "Description": "GST",
+        "Active": true,
+        "RateValue": 0,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 0,
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ZERO_RATE",
+        "DisplayType": "ReadOnly",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "5",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      },
+      {
+        "Name": "Input tax (sales)",
+        "Description": "GST",
+        "Active": true,
+        "RateValue": 0,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 0,
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ZERO_RATE",
+        "DisplayType": "ReadOnly",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "6",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      },
+      {
+        "Name": "Luxury Car Tax",
+        "Description": "GST",
+        "Active": true,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "43"
+        },
+        "EffectiveTaxRate": [
+          {
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ADJUSTMENT_RATE",
+        "DisplayType": "HideInAll",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "15",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      },
+      {
+        "Name": "Luxury Car Tax Refundable",
+        "Description": "GST",
+        "Active": true,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "52"
+        },
+        "EffectiveTaxRate": [
+          {
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ADJUSTMENT_RATE",
+        "DisplayType": "HideInAll",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "10",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      },
+      {
+        "Name": "MJ Tax (Sales)",
+        "Description": "GST",
+        "Active": true,
+        "RateValue": 15,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "44"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 15,
+            "EffectiveDate": "1970-01-01T00:00:00-08:00"
+          }
+        ],
+        "SpecialTaxType": "NONE",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "21",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-06-11T00:58:20-07:00",
+          "LastUpdatedTime": "2021-06-11T00:58:20-07:00"
+        }
+      },
+      {
+        "Name": "PAYG Income Tax Instalment",
+        "Description": "GST",
+        "Active": true,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "45"
+        },
+        "EffectiveTaxRate": [
+          {
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ADJUSTMENT_RATE",
+        "DisplayType": "HideInAll",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "17",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:55-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:55-08:00"
+        }
+      },
+      {
+        "Name": "PAYG Tax Withheld",
+        "Description": "GST",
+        "Active": true,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "44"
+        },
+        "EffectiveTaxRate": [
+          {
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ADJUSTMENT_RATE",
+        "DisplayType": "HideInAll",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "16",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:55-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:55-08:00"
+        }
+      },
+      {
+        "Name": "Test Revenue Authority-Testing Tax",
+        "Description": "Sales Tax",
+        "Active": true,
+        "RateValue": 15,
+        "AgencyRef": {
+          "value": "8"
+        },
+        "TaxReturnLineRef": {
+          "value": "127"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 15,
+            "EffectiveDate": "1970-01-01T00:00:00-08:00"
+          }
+        ],
+        "SpecialTaxType": "NONE",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "24",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-06-17T20:42:03-07:00",
+          "LastUpdatedTime": "2021-06-17T20:42:03-07:00"
+        }
+      },
+      {
+        "Name": "Test Revenue Authority-Testing Tax - 1623987821738",
+        "Description": "Sales Tax",
+        "Active": true,
+        "RateValue": 15,
+        "AgencyRef": {
+          "value": "8"
+        },
+        "TaxReturnLineRef": {
+          "value": "127"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 15,
+            "EffectiveDate": "1970-01-01T00:00:00-08:00"
+          }
+        ],
+        "SpecialTaxType": "NONE",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "25",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-06-17T20:43:45-07:00",
+          "LastUpdatedTime": "2021-06-17T20:43:45-07:00"
+        }
+      },
+      {
+        "Name": "Test Revenue Authority-Testing Tax - 1623987839661",
+        "Description": "Sales Tax",
+        "Active": true,
+        "RateValue": 15,
+        "AgencyRef": {
+          "value": "8"
+        },
+        "TaxReturnLineRef": {
+          "value": "127"
+        },
+        "EffectiveTaxRate": [
+          {
+            "RateValue": 15,
+            "EffectiveDate": "1970-01-01T00:00:00-08:00"
+          }
+        ],
+        "SpecialTaxType": "NONE",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "26",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-06-17T20:44:03-07:00",
+          "LastUpdatedTime": "2021-06-17T20:44:03-07:00"
+        }
+      },
+      {
+        "Name": "Wine Equalisation Tax",
+        "Description": "GST",
+        "Active": true,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "42"
+        },
+        "EffectiveTaxRate": [
+          {
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ADJUSTMENT_RATE",
+        "DisplayType": "HideInAll",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "14",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      },
+      {
+        "Name": "Wine Tax Refundable",
+        "Description": "GST",
+        "Active": true,
+        "AgencyRef": {
+          "value": "1"
+        },
+        "TaxReturnLineRef": {
+          "value": "51"
+        },
+        "EffectiveTaxRate": [
+          {
+            "EffectiveDate": "1976-06-01T00:00:00-07:00"
+          }
+        ],
+        "SpecialTaxType": "ADJUSTMENT_RATE",
+        "DisplayType": "HideInAll",
+        "domain": "QBO",
+        "sparse": false,
+        "Id": "9",
+        "SyncToken": "0",
+        "MetaData": {
+          "CreateTime": "2021-01-10T19:52:54-08:00",
+          "LastUpdatedTime": "2021-01-10T19:52:54-08:00"
+        }
+      }
+    ],
+    "startPosition": 1,
+    "maxResults": 27,
+    "totalCount": 27
+  },
+  "time": "2021-06-17T20:46:18.838-07:00"
+}

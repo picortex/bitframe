@@ -1,6 +1,6 @@
 package bitframe.client.profile
 
-import bitframe.client.KtorServiceConfig
+import bitframe.client.ServiceConfigKtor
 import bitframe.client.of
 import bitframe.core.RequestBody
 import bitframe.core.profile.params.ChangePasswordParams
@@ -11,7 +11,7 @@ import later.later
 import response.decodeResponseFromString
 
 class ProfileServiceKtor(
-    private val config: KtorServiceConfig
+    private val config: ServiceConfigKtor
 ) : ProfileService(config) {
     val basePath = "/api/user/profile"
     val json get() = config.json

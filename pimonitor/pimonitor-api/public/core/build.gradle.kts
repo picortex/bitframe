@@ -10,7 +10,10 @@ plugins {
 apply<types.PostProcessTypescriptTypesPlugin>()
 
 kotlin {
-    jvm { library() }
+    jvm {
+        withJava()
+        library()
+    }
     js(IR) {
         val main by compilations
         main.outputModuleName = "pimonitor-api"

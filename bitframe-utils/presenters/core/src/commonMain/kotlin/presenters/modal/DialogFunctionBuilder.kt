@@ -4,7 +4,9 @@
 package presenters.modal
 
 import presenters.modal.builders.ConfirmDialogBuilder
+import presenters.modal.builders.ConfirmDialogBuildingBlock
 import presenters.modal.builders.FormDialogBuilder
+import presenters.modal.builders.FormDialogBuildingBlock
 import kotlin.experimental.ExperimentalTypeInference
 import kotlin.js.JsExport
 
@@ -13,7 +15,7 @@ fun <F, P> formDialog(
     heading: String,
     details: String,
     fields: F,
-    @BuilderInference initializer: FormDialogBuilder<P>.() -> SubmitAction<P>
+    @BuilderInference initializer: FormDialogBuildingBlock<P>
 ): Dialog.Form<F, P> {
     val builder = FormDialogBuilder<P>().apply { initializer() }
     val submitAction = builder.submitAction ?: error("Submit action is missing in dialog $heading")
@@ -23,7 +25,7 @@ fun <F, P> formDialog(
 fun confirmDialog(
     heading: String,
     details: String,
-    initializer: ConfirmDialogBuilder.() -> ConfirmAction
+    initializer: ConfirmDialogBuildingBlock
 ): Dialog.Confirm {
     val builder = ConfirmDialogBuilder().apply { initializer() }
     val confirm = builder.confirmAction ?: error("Confirm action is not set in dialog $heading")

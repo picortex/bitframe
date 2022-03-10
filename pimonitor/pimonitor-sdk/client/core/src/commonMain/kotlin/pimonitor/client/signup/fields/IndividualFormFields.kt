@@ -1,4 +1,5 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client.signup.fields
 
@@ -10,6 +11,7 @@ import kotlin.js.JsExport
 data class IndividualFormFields(
     val select: DropDownInputField = DropDownInputField(
         name = "registerAs",
+        label = "Register As",
         REGISTER_AS_BUSINESS,
         REGISTER_AS_INDIVIDUAL.copy(selected = true)
     ),

@@ -19,7 +19,7 @@ kotlin {
             dependencies {
                 api(projects.bitframeAuthenticationApiCore)
                 api(projects.bitframeAuthenticationDaod)
-                api(projects.bitframeServiceConfigApiMock)
+                api(projects.bitframeServiceBuilderApiMock)
                 api(projects.eventsInmemory)
                 api(asoft.cache.mock)
             }

@@ -5,10 +5,10 @@ import bitframe.server.BitframeService
 import bitframe.server.ServiceConfig
 import pimonitor.core.businesses.BusinessesDaodService
 import pimonitor.core.contacts.ContactsDaodService
+import pimonitor.core.invites.InvitesDaodService
 import pimonitor.core.portfolio.PortfolioDaodService
 import pimonitor.core.search.SearchDaodService
 import pimonitor.core.signup.SignUpDaodService
-import pimonitor.core.signup.SignUpService
 
 class PiMonitorService(config: ServiceConfig) : BitframeService(config) {
     val signup by lazy { SignUpDaodService(config) }
@@ -17,4 +17,5 @@ class PiMonitorService(config: ServiceConfig) : BitframeService(config) {
     val contacts by lazy { ContactsDaodService(config) }
     val portfolio by lazy { PortfolioDaodService(config) }
     val search by lazy { SearchDaodService(config) }
+    val invites by lazy { InvitesDaodService(config) }
 }

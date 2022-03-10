@@ -21,9 +21,9 @@ sealed class SearchResult {
 
     @Serializable
     data class MonitoredBusiness(
+        val uid: String,
         val name: String,
         val address: String,
-        val email: String,
-        val spaceId: String
+        val email: String
     ) : SearchResult()
 }

@@ -13,7 +13,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeServiceConfigCore)
+                api(projects.bitframeServiceBuilderCore)
+                api(asoft.later.ktx)
             }
         }
 

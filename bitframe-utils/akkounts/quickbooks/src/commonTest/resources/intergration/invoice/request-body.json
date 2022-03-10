@@ -1,0 +1,26 @@
+{
+  "CustomerRef": {
+    "value": "102"
+  },
+  "CurrencyRef": {
+    "value": "ZAR"
+  },
+  "Line": [
+    {
+      "Id": "221",
+      "DetailType": "SalesItemLineDetail",
+      "Amount": 2000.0,
+      "SalesItemLineDetail": {
+        "ItemRef": {
+          "name": "A Test Service - 1626076241046",
+          "value": "221"
+        },
+        "UnitPrice": 2000.0,
+        "Qty": 1,
+        "TaxCodeRef": {
+          "value": "14"
+        }
+      }
+    }
+  ]
+}

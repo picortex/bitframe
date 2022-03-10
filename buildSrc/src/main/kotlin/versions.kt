@@ -1,9 +1,9 @@
 object vers {
-    val kotlin = "1.6.10"
+//    val kotlin = "1.6.10"
 
-    val ksp = "1.6.10-1.0.2"
+//    val ksp = "1.6.10-1.0.2"
 
-    val kotlinpoet = "1.12.1"
+//    val kotlinpoet = "1.12.1"
 
     val docker = "7.1.0"
 
@@ -12,7 +12,7 @@ object vers {
     val npmPublish = "2.1.2"
 
     object bitframe {
-        val current = "0.0.85"
-        val previous = "0.0.84"
+        val current = "0.0.87"
+        val previous = "0.0.86"
     }
 }

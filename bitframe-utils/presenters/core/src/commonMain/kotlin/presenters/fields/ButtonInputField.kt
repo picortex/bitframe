@@ -5,6 +5,5 @@ import kotlin.js.JsExport
 @JsExport
 data class ButtonInputField(
     val text: String,
-    override val name: String = text,
-    var handler: (() -> Unit)? = null
+    override val name: String = text
 ) : InputField

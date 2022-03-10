@@ -1,3 +1,5 @@
+@file:Suppress("NON_EXPORTABLE_TYPE")
+
 package pimonitor.core.contacts
 
 import bitframe.core.RequestBody

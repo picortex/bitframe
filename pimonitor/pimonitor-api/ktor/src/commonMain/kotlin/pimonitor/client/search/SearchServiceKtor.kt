@@ -1,6 +1,6 @@
 package pimonitor.client.search
 
-import bitframe.client.KtorServiceConfig
+import bitframe.client.ServiceConfigKtor
 import bitframe.client.of
 import bitframe.core.RequestBody
 import io.ktor.client.request.*
@@ -15,7 +15,7 @@ import pimonitor.core.search.SearchResult
 import response.decodeResponseFromString
 
 class SearchServiceKtor(
-    override val config: KtorServiceConfig
+    override val config: ServiceConfigKtor
 ) : SearchService(config) {
     val client get() = config.http
     val json get() = config.json

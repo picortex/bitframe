@@ -1,25 +1,26 @@
 package pimonitor.client.businesses
 
-import bitframe.client.KtorServiceConfig
+import bitframe.client.ServiceConfigKtor
 import bitframe.client.of
 import bitframe.core.RequestBody
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import io.ktor.util.*
-import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.collections.interoperable.toInteroperableList
-import kotlinx.serialization.builtins.serializer
 import later.Later
 import later.later
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
+import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
+import pimonitor.core.businesses.params.InviteMessageParams
+import pimonitor.core.businesses.params.InviteToShareReportsParams
+import pimonitor.core.invites.Invite
 import response.decodeResponseFromString
 
 class BusinessesServiceKtor(
-    override val config: KtorServiceConfig
+    override val config: ServiceConfigKtor
 ) : BusinessesService(config) {
     private val baseUrl = "/api/businesses"
     val client get() = config.http
@@ -29,7 +30,7 @@ class BusinessesServiceKtor(
         val req = client.post("${config.url}$baseUrl/create") {
             setBody(json.of(rb))
         }
-        json.decodeResponseFromString(CreateMonitoredBusinessParams.serializer(), req.bodyAsText()).response()
+        json.decodeResponseFromString(CreateMonitoredBusinessResult.serializer(), req.bodyAsText()).response()
     }
 
     override fun all(rb: RequestBody.Authorized<BusinessFilter>) = config.scope.later {

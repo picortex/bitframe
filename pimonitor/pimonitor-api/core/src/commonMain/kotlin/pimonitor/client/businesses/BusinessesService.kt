@@ -7,13 +7,13 @@ import bitframe.client.ServiceConfig
 import bitframe.client.getSignedInSessionTo
 import bitframe.core.RequestBody
 import bitframe.core.Session
+import later.Later
 import later.await
 import later.later
 import pimonitor.core.businesses.BusinessFilter
-import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
-import pimonitor.core.businesses.params.toValidatedCreateBusinessParams
 import kotlin.js.JsExport
 import pimonitor.core.businesses.BusinessesServiceCore
+import pimonitor.core.businesses.params.*
 
 abstract class BusinessesService(
     open val config: ServiceConfig
@@ -29,11 +29,7 @@ abstract class BusinessesService(
             data = validatedParams
         )
         val result = create(rb).await()
-        val event = BusinessAddedEvent(
-            data = result,
-            spaceId = rb.session.space.uid
-        )
-        config.bus.dispatch(event)
+        config.bus.dispatch(BusinessAddedEvent(data = result, spaceId = rb.session.space.uid))
         logger.info("Registration completed")
         result
     }

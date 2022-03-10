@@ -17,7 +17,6 @@ import pimonitor.core.search.toSearchParams
 import kotlin.js.JsExport
 
 abstract class SearchService(open val config: ServiceConfig) : SearchServiceCore {
-
     fun search(params: SearchRawParams): Later<List<SearchResult>> = config.scope.later {
         val rb = RequestBody.Authorized(
             session = config.session.value as? Session.SignedIn ?: error("You must be logged in to search"),

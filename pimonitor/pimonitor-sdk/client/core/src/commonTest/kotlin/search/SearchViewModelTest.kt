@@ -1,13 +1,14 @@
 package search
 
 import expect.expect
-import kotlinx.collections.interoperable.emptyList
+import expect.toBe
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withContext
 import pimonitor.client.search.SearchIntent
 import pimonitor.client.search.SearchState
+import pimonitor.client.search.SearchMode
 import utils.PiMonitorMockScope
 import kotlin.test.Test
 
@@ -16,9 +17,9 @@ class SearchViewModelTest {
     val vm = scope.search.viewModel
 
     @Test
-    fun should_start_with_an_empty_state_and_no_loading() = runTest {
+    fun should_start_with_a_empty_results_and_a_pending_search_state() = runTest {
         val state = vm.ui.value
-        expect(state).toBe(SearchState(loading = null, results = emptyList()))
+        expect(state).toBe<SearchState.Pending>()
     }
 
     @Test
@@ -26,12 +27,16 @@ class SearchViewModelTest {
         withContext(Dispatchers.Default) {
             var counts = 0
             vm.ui.watch { counts++ }
-            vm.post(SearchIntent.SearchDebouncing("t"))
-            delay(100)
-            vm.post(SearchIntent.SearchDebouncing("te"))
-            delay(100)
-            vm.post(SearchIntent.SearchDebouncing("tes"))
-            delay(6000)
+            vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "t"))
+            delay(50)
+            expect(counts).toBe(1)
+            vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "te"))
+            delay(10)
+            expect(counts).toBe(2)
+            vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "tes"))
+            delay(15)
+            expect(counts).toBe(3)
+            delay(2600)
             expect(counts).toBe(4)
         }
     }
@@ -39,16 +44,21 @@ class SearchViewModelTest {
     @Test
     fun should_search_after_debounce() = runTest {
         withContext(Dispatchers.Default) {
-            var counts = 0
-            vm.ui.watch { counts++ }
-            vm.post(SearchIntent.SearchDebouncing("t"))
-            delay(6000)
-            expect(counts).toBe(2)
-            vm.post(SearchIntent.SearchDebouncing("te"))
-            delay(100)
-            vm.post(SearchIntent.SearchDebouncing("tes"))
-            delay(6000)
-            expect(counts).toBe(5)
+            var count = 0
+            vm.ui.watch { count++ }
+            vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "t"))
+            delay(10)
+            expect(count).toBe(1)
+            delay(2600)
+            expect(count).toBe(2)
+            vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "te"))
+            delay(10)
+            expect(count).toBe(3)
+            vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "tes"))
+            delay(10)
+            expect(count).toBe(4)
+            delay(2600)
+            expect(count).toBe(5)
         }
     }
 }

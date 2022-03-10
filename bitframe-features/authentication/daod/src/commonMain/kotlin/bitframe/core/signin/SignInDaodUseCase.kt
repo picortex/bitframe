@@ -7,26 +7,21 @@ import kotlinx.collections.interoperable.toInteroperableList
 import later.await
 import later.later
 
-class SignInDaodUseCase(val config: DaodServiceConfig) : SignInUseCase {
+class SignInDaodUseCase(val config: ServiceConfigDaod) : SignInUseCase {
     private val scope get() = config.scope
-    private val usersDao by lazy { config.daoFactory.get<User>() }
-    private val spacesDao by lazy { config.daoFactory.get<Space>() }
-    private val userSpaceInfoDao by lazy { config.daoFactory.get<UserSpaceInfo>() }
-    private val credentialsDao by lazy { config.daoFactory.get<UserCredentials>() }
-
-    private val contactsDao by lazy {
-        CompoundDao(
-            config.daoFactory.get<UserEmail>(),
-            config.daoFactory.get<UserPhone>(),
-        )
-    }
+    private val factory get() = config.daoFactory
+    private val usersDao by lazy { factory.get<User>() }
+    private val spacesDao by lazy { factory.get<Space>() }
+    private val userSpaceInfoDao by lazy { factory.get<UserSpaceInfo>() }
+    private val credentialsDao by lazy { factory.get<UserCredentials>() }
+    private val contactsDao by lazy { CompoundDao(factory.get<UserEmail>(), factory.get<UserPhone>()) }
 
     override fun signIn(rb: RequestBody.UnAuthorized<SignInCredentials>) = scope.later {
-        val contact = contactsDao.all("value" isEqualTo rb.data.identifier).await().firstOrNull() ?: throw EntityNotFoundException("identifier", rb.data.identifier)
+        val contact = contactsDao.all(UserContact::value isEqualTo rb.data.identifier).await().firstOrNull() ?: throw EntityNotFoundException("identifier", rb.data.identifier)
         val user = usersDao.load(contact.userId).await()
         val credentials = credentialsDao.all(UserCredentials::userId isEqualTo user.uid).await().first()
         if (credentials.credential != rb.data.password) throw RuntimeException("Incorrect password")
-        val info = userSpaceInfoDao.all("userId" isEqualTo user.uid).await()
+        val info = userSpaceInfoDao.all(UserSpaceInfo::userId isEqualTo user.uid).await()
         val spaces = buildList {
             for (infoX in info) add(spacesDao.load(infoX.spaceId))
         }.map { it.await() }

@@ -8,18 +8,23 @@ import events.Event
 import kotlinx.collections.interoperable.List
 import later.Later
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
-import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
+import pimonitor.core.businesses.params.*
+import pimonitor.core.invites.Invite
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlin.jvm.JvmSynthetic
 
 @JsExport
 interface BusinessesServiceCore {
     @JsName("_ignore_create")
-    fun create(rb: RequestBody.Authorized<CreateMonitoredBusinessParams>): Later<CreateMonitoredBusinessParams>
+    @JvmSynthetic
+    fun create(rb: RequestBody.Authorized<CreateMonitoredBusinessParams>): Later<CreateMonitoredBusinessResult>
 
     @JsName("_ignore_all")
+    @JvmSynthetic
     fun all(rb: RequestBody.Authorized<BusinessFilter>): Later<List<MonitoredBusinessSummary>>
 
     @JsName("_ignore_delete")
+    @JvmSynthetic
     fun delete(rb: RequestBody.Authorized<Array<out String>>): Later<List<MonitoredBusinessBasicInfo>>
 }

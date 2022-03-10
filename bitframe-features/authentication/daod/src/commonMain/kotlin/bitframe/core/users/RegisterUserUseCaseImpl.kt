@@ -10,19 +10,14 @@ import later.later
 import validation.validate
 
 class RegisterUserUseCaseImpl(
-    private val config: DaodServiceConfig
+    private val config: ServiceConfigDaod
 ) : RegisterUserUseCase {
-    private val usersDao by lazy { config.daoFactory.get<User>() }
-    private val spacesDao by lazy { config.daoFactory.get<Space>() }
-    private val userSpaceInfoDao by lazy { config.daoFactory.get<UserSpaceInfo>() }
-
-    private val contactsDao by lazy {
-        CompoundDao(
-            config.daoFactory.get<UserPhone>(),
-            config.daoFactory.get<UserEmail>(),
-        )
-    }
-    private val credentialsDao by lazy { config.daoFactory.get<UserCredentials>() }
+    private val factory get() = config.daoFactory
+    private val usersDao by lazy { factory.get<User>() }
+    private val spacesDao by lazy { factory.get<Space>() }
+    private val userSpaceInfoDao by lazy { factory.get<UserSpaceInfo>() }
+    private val contactsDao by lazy { CompoundDao(factory.get<UserPhone>(), factory.get<UserEmail>()) }
+    private val credentialsDao by lazy { factory.get<UserCredentials>() }
 
     fun validate(params: RegisterUserParams) = validate {
         Identifier.from(params.userIdentifier)
@@ -31,7 +26,7 @@ class RegisterUserUseCaseImpl(
 
     override fun register(params: RegisterUserParams): Later<SignInResult> = config.scope.later {
         val input = validate(params).getOrThrow()
-        val registered = contactsDao.all("value" isEqualTo input.userIdentifier).await()
+        val registered = contactsDao.all(UserContact::value isEqualTo input.userIdentifier).await()
         if (registered.isNotEmpty()) throw UserFoundException(input.userIdentifier)
 
         val userOutput = usersDao.create(input.toUserInput()).await()
