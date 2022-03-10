@@ -17,6 +17,7 @@ data class Invite(
     val invitorSpaceId: String,
     val invitedBusinessId: String,
     val invitedContactUserId: String,
+    val sentInviteMessage: String,
     val status: List<InviteStatus>,
     override val uid: String = UNSET,
     override val deleted: Boolean = false

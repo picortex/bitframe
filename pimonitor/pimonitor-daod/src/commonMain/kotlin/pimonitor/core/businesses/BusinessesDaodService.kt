@@ -174,49 +174,4 @@ open class BusinessesDaodService(
             bus
         }
     }
-
-    override fun invite(rb: RequestBody.Authorized<InviteToShareReportsParams>): Later<Invite> = config.scope.later {
-        val userContact = userContactsDao.all(
-            condition = UserContact::value isEqualTo rb.data.to
-        ).await().firstOrNull() ?: error("Business contact with email ${rb.data.to} is not found in pimonitor")
-
-        val business = monitoredBusinessesDao.load(rb.data.businessId).await()
-        val senderSpace = spacesDao.load(business.owningSpaceId).await()
-
-        val inviteParams = Invite(
-            invitorUserId = rb.session.user.uid,
-            invitorSpaceId = rb.session.space.uid,
-            invitedBusinessId = business.uid,
-            invitedContactUserId = userContact.userId,
-            status = listOf(
-                InviteStatus.Sent(params = rb.data)
-            )
-        )
-        val invite = invitesDao.create(inviteParams).await()
-        val draft = EmailDraft(
-            subject = rb.data.subject,
-            body = "${rb.data.message}\n\nGoto https://react-client.vercel.app/connect?inviteId=${invite.uid}"
-        )
-        config.mailer.send(
-            draft = draft,
-            from = AddressInfo(
-                name = senderSpace.name,
-                email = "support@picortex.com"
-            ),
-            to = AddressInfo(rb.data.to)
-        ).await()
-        invite
-    }
-
-    override fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>): Later<String> = config.scope.later {
-        val space = spacesDao.load(rb.session.space.uid).await()
-        if (space.type == SPACE_TYPE.COOPERATE_MONITOR) {
-            val business = monitorBusinessesDao.all(
-                MonitorBusinessBasicInfo::owningSpaceId isEqualTo space.uid
-            ).await().first()
-            "${business.name} would like to invite you to share your operational & financial reports with them through PiMonitor"
-        } else {
-            "${rb.session.user.name} would like to invite you to share your operational & financial reports with them through PiMonitor"
-        }
-    }
 }

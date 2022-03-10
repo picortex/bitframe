@@ -9,7 +9,6 @@ import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.invites.Invite
 import pimonitor.core.picortex.AcceptPicortexInviteParams
-import pimonitor.core.sage.AcceptSageOneInviteParams
 import pimonitor.core.signup.params.BusinessSignUpParams
 import kotlin.test.Test
 
@@ -63,7 +62,7 @@ class PiCortexCredentialsCaptureTest {
                 subdomain = "test",
                 secret = "test"
             )
-            val res = api.picortex.acceptInvite(params).await()
+            val res = api.invites.accept(params).await()
             expect(res.inviteId).toBe(i.uid)
         }
     }

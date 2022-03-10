@@ -5,6 +5,7 @@ package pimonitor.client
 import bitframe.client.BitframeApi
 import pimonitor.client.businesses.BusinessesService
 import pimonitor.client.contacts.ContactsService
+import pimonitor.client.invites.InvitesService
 import pimonitor.client.picortex.PiCortexDashboardService
 import pimonitor.client.sage.SageDashboardService
 import pimonitor.client.portfolio.PortfolioService
@@ -20,6 +21,5 @@ interface PiMonitorApi : BitframeApi {
     val contacts: ContactsService
     val portfolio: PortfolioService
     val search: SearchService
-    val picortex: PiCortexDashboardService
-    val sage: SageDashboardService
+    val invites: InvitesService
 }

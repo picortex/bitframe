@@ -5,6 +5,7 @@ package pimonitor.client.businesses
 
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
+import pimonitor.client.PiMonitorApi
 import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import pimonitor.core.businesses.params.InviteToShareReportsRawFormParams
@@ -14,7 +15,7 @@ import pimonitor.client.businesses.BusinessesIntent as Intent
 import pimonitor.client.businesses.BusinessesState as State
 
 open class BusinessesScope(
-    override val config: UIScopeConfig<BusinessesService>
+    override val config: UIScopeConfig<PiMonitorApi>
 ) : UIScope<Intent, State> {
 
     override val viewModel: ViewModel<Intent, State> by lazy { BusinessesViewModel(config) }

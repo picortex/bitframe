@@ -11,7 +11,7 @@ import bitframe.client.password.ChangePasswordScope
 import bitframe.client.signin.SignInScope
 import pimonitor.client.businesses.BusinessesScope
 import pimonitor.client.contacts.ContactsScope
-import pimonitor.client.integrations.IntegrationsScope
+import pimonitor.client.invites.InvitesScope
 import pimonitor.client.portfolio.PortfolioScope
 import pimonitor.client.search.SearchScope
 import pimonitor.client.signup.SignUpScope
@@ -29,10 +29,10 @@ open class PiMonitorAppScope(
     override val signIn by lazy { SignInScope(config { api.signIn }) }
     open val signUp by lazy { SignUpScope(config()) }
     override val panel by lazy { PanelScope(config { api.signIn }) }
-    open val businesses by lazy { BusinessesScope(config { api.businesses }) }
+    open val businesses by lazy { BusinessesScope(config()) }
     open val contacts by lazy { ContactsScope(config { api.contacts }) }
     open val portfolio by lazy { PortfolioScope(config { api.portfolio }) }
     open val password by lazy { ChangePasswordScope(config { api.profile }) }
     open val search by lazy { SearchScope(config { api.search }) }
-    open val integrations by lazy { IntegrationsScope(config()) }
+    open val integrations by lazy { InvitesScope(config()) }
 }

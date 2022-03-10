@@ -64,7 +64,7 @@ class SageDashboardIntegrationTest {
                 password = "Rondebosch2016@",
                 companyId = "468271",
             )
-            val res = api.sage.acceptInvite(params).await()
+            val res = api.invites.accept(params).await()
             expect(res.inviteId).toBe(i.uid)
         }
 

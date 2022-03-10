@@ -1,13 +1,14 @@
 @file:JsExport
 
-package pimonitor.client.integrations
+package pimonitor.client.invites
 
+import pimonitor.client.invites.fields.SageOneAcceptInviteFields
 import pimonitor.core.sage.AcceptSageOneInviteRawParams
 import presenters.modal.builders.FormDialogBuildingBlock
 import presenters.modal.formDialog
 import kotlin.js.JsExport
 
-object IntegrationsDialog {
+object InvitesDialog {
     val SageIntegration = "Sage Integration"
 
     internal fun sageIntegrationDialog(
@@ -15,7 +16,7 @@ object IntegrationsDialog {
     ) = formDialog(
         heading = SageIntegration,
         details = "Share your financial information by integrating PiMonitor directly to sage",
-        fields = Any(),
+        fields = SageOneAcceptInviteFields(),
         block
     )
 }

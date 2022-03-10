@@ -20,14 +20,6 @@ interface BusinessesServiceCore {
     @JvmSynthetic
     fun create(rb: RequestBody.Authorized<CreateMonitoredBusinessParams>): Later<CreateMonitoredBusinessResult>
 
-    @JsName("_ignore_invite")
-    @JvmSynthetic
-    fun invite(rb: RequestBody.Authorized<InviteToShareReportsParams>): Later<Invite>
-
-    @JsName("_ignore_inviteMessage")
-    @JvmSynthetic
-    fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>): Later<String>
-
     @JsName("_ignore_all")
     @JvmSynthetic
     fun all(rb: RequestBody.Authorized<BusinessFilter>): Later<List<MonitoredBusinessSummary>>

@@ -1,17 +1,17 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.client.integrations
+package pimonitor.client.invites
 
 import bitframe.client.ReactUIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.client.PiMonitorApi
 import viewmodel.asState
-import pimonitor.client.integrations.IntegrationsIntent as Intent
-import pimonitor.client.integrations.IntegrationsState as State
+import pimonitor.client.invites.InvitesIntent as Intent
+import pimonitor.client.invites.InvitesState as State
 
-class IntegrationsReactScope(
+class InvitesReactScope(
     override val config: UIScopeConfig<PiMonitorApi>
-) : IntegrationsScope(config), ReactUIScope<Intent, State> {
+) : InvitesScope(config), ReactUIScope<Intent, State> {
     override val useScopeState: () -> State = { viewModel.asState() }
 }

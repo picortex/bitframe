@@ -34,14 +34,6 @@ abstract class BusinessesService(
         result
     }
 
-    fun invite(params: InviteToShareReportsRawParams) = config.scope.later {
-        val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("send an invite to ${params.to}"),
-            data = params.toValidatedInviteToShareReportParams()
-        )
-        invite(rb).await()
-    }
-
     fun all() = config.scope.later {
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("query businesses"),
@@ -56,13 +48,5 @@ abstract class BusinessesService(
             data = monitorIds
         )
         delete(rb).await()
-    }
-
-    fun defaultInviteMessage(params: InviteMessageRawParams): Later<String> = config.scope.later {
-        val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("prepare invite form"),
-            data = params.toValidatedInviteMessageParams()
-        )
-        defaultInviteMessage(rb).await()
     }
 }

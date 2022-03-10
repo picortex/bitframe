@@ -1,4 +1,4 @@
-package pimonitor.client.integrations
+package pimonitor.client.invites
 
 import bitframe.client.UIScopeConfig
 import kotlinx.coroutines.CoroutineScope
@@ -7,16 +7,17 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
+import pimonitor.core.sage.copy
 import presenters.feedbacks.Feedback
 import viewmodel.ViewModel
-import pimonitor.client.integrations.IntegrationsIntent as Intent
-import pimonitor.client.integrations.IntegrationsState as State
+import pimonitor.client.invites.InvitesIntent as Intent
+import pimonitor.client.invites.InvitesState as State
 
-class IntegrationsViewModel(
+class InvitesViewModel(
     private val config: UIScopeConfig<PiMonitorApi>
 ) : ViewModel<Intent, State>(State(), config.viewModel) {
     val api get() = config.service
-    override fun CoroutineScope.execute(i: Intent) = when (i) {
+    override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         is Intent.ExitDialog -> exitDialog()
         is Intent.LoadIntegrationInfo -> loadIntegrationInfo(i)
         is Intent.ShowSageOneInviteForm -> showSageOneInviteForm()
@@ -30,7 +31,7 @@ class IntegrationsViewModel(
     private fun showSageOneInviteForm() {
         ui.value = ui.value.copy(
             status = Feedback.None,
-            dialog = IntegrationsDialog.sageIntegrationDialog {
+            dialog = InvitesDialog.sageIntegrationDialog {
                 onCancel { post(Intent.ExitDialog) }
                 onSubmit { params -> post(Intent.SubmitSageOneInviteForm(params)) }
             }
@@ -41,9 +42,8 @@ class IntegrationsViewModel(
         val state = ui.value.copy(dialog = null)
         flow {
             emit(state.copy(status = Feedback.Loading("Preparing invite information, please wait . . .")))
-            logger.warn("Please, provide concrete info about the one requesting integration")
-            delay(config.viewModel.transitionTime)
-            emit(state.copy(status = Feedback.None, info = "PiMonitor will be used to share your information"))
+            val invite = api.invites.load(i.inviteId).await()
+            emit(state.copy(status = Feedback.None, title = "${invite.invitorName} is requesting you to share your reports", info = invite))
         }.collect {
             ui.value = it
         }
@@ -52,9 +52,12 @@ class IntegrationsViewModel(
     private fun CoroutineScope.acceptSageOneInvite(i: Intent.SubmitSageOneInviteForm) = launch {
         val state = ui.value.copy(dialog = null)
         flow {
+            val inviteId = state.info?.inviteId ?: error("Couldn't get invite id. Make sure you have loaded the viewModel with a new invite id")
             emit(state.copy(status = Feedback.Loading("Saving your integration information, please wait . . .")))
-            api.sage.acceptInvite(i.params).await()
+            api.invites.accept(i.params.copy(inviteId)).await()
             emit(state.copy(status = Feedback.Success("Successfully integrated with sage")))
+            delay(config.viewModel.transitionTime)
+            emit(state.copy(status = Feedback.None))
         }.collect {
             ui.value = state
         }

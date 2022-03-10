@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import pimonitor.client.PiMonitorApi
 import pimonitor.client.businesses.BusinessesDialogContent.captureInvestmentDialog
 import pimonitor.client.businesses.BusinessesDialogContent.createBusinessDialog
 import pimonitor.client.businesses.BusinessesDialogContent.deleteManyDialog
@@ -27,10 +28,10 @@ import pimonitor.client.businesses.BusinessesIntent as Intent
 import pimonitor.client.businesses.BusinessesState as State
 
 class BusinessesViewModel(
-    private val config: UIScopeConfig<BusinessesService>
+    private val config: UIScopeConfig<PiMonitorApi>
 ) : ViewModel<Intent, State>(State(), config.viewModel) {
 
-    private val service: BusinessesService = config.service
+    private val api get() = config.service
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         LoadBusinesses -> loadBusiness()
@@ -110,7 +111,7 @@ class BusinessesViewModel(
         val state = ui.value
         flow {
             emit(state.copy(status = Loading("Preparing invite form, please wait . . ."), focus = i.monitored, dialog = null))
-            val message = service.defaultInviteMessage(InviteMessageParams(i.monitored.uid)).await()
+            val message = api.invites.defaultInviteMessage(InviteMessageParams(i.monitored.uid)).await()
             val dialog = inviteToShareReportsDialog(
                 businessName = i.monitored.name,
                 contactEmail = i.monitored.contacts.filterIsInstance<UserEmail>().firstOrNull()?.value ?: error("There are no registered contact's with email in ${i.monitored.name}"),
@@ -128,7 +129,7 @@ class BusinessesViewModel(
         flow {
             val focused = state.focus ?: error("There is no business that is currently focused on")
             emit(state.copy(status = Loading("Sending invite to ${focused.name}, Please wait . . ."), dialog = null))
-            service.invite(i.params.copy(focused.uid)).await()
+            api.invites.send(i.params.copy(focused.uid)).await()
             emit(state.copy(status = Success("Invite Sent"), dialog = null))
             delay(config.viewModel.transitionTime)
             emit(state.copy(status = None, dialog = null))
@@ -139,10 +140,10 @@ class BusinessesViewModel(
         val state = ui.value
         flow {
             emit(state.copy(status = Loading("Adding ${i.params.businessName}, please wait . . ."), dialog = null))
-            val result = service.create(i.params).await()
+            val result = api.businesses.create(i.params).await()
             if (result.params.sendInvite) {
                 emit(state.copy(status = Success("${i.params.businessName} has successfully been added. Preparing invite form, please wait . . ."), dialog = null))
-                val message = service.defaultInviteMessage(InviteMessageParams(result.business.uid)).await()
+                val message = api.invites.defaultInviteMessage(InviteMessageParams(result.business.uid)).await()
                 val dialog = inviteToShareReportsDialog(
                     businessName = result.params.businessName,
                     contactEmail = result.params.contactEmail,
@@ -156,7 +157,7 @@ class BusinessesViewModel(
                 emit(state.copy(status = Success("${i.params.businessName} has successfully been added"), dialog = null))
                 delay(config.viewModel.transitionTime)
                 emit(state.copy(status = Loading("Loading your businesses, please wait . . ."), dialog = null))
-                emit(state.copy(status = None, table = businessTable(service.all().await()), dialog = null))
+                emit(state.copy(status = None, table = businessTable(api.businesses.all().await()), dialog = null))
             }
         }.catchAndCollectToUI(state)
     }
@@ -173,11 +174,11 @@ class BusinessesViewModel(
         val state = ui.value
         flow {
             emit(state.copy(status = Loading("Deleting ${i.data.size} businesses")))
-            service.delete(*i.data.map { it.uid }.toTypedArray()).await()
+            api.businesses.delete(*i.data.map { it.uid }.toTypedArray()).await()
             emit(state.copy(status = Success("${i.data.size} businesses deleted successfully, Loading remaining businesses . . ."), dialog = null))
             val phase = state.copy(
                 status = None,
-                table = businessTable(service.all().await()),
+                table = businessTable(api.businesses.all().await()),
                 dialog = null
             )
             emit(phase)
@@ -188,9 +189,9 @@ class BusinessesViewModel(
         val state = ui.value
         flow {
             emit(state.copy(status = Loading("Deleting ${i.monitored.name}"), dialog = null))
-            service.delete(i.monitored.uid).await()
+            api.businesses.delete(i.monitored.uid).await()
             emit(state.copy(status = Success("Successfully delete ${i.monitored.name}, Loading remaining businesses . . ."), dialog = null))
-            emit(state.copy(status = None, table = businessTable(service.all().await()), dialog = null))
+            emit(state.copy(status = None, table = businessTable(api.businesses.all().await()), dialog = null))
         }.catchAndCollectToUI(state)
     }
 
@@ -221,7 +222,7 @@ class BusinessesViewModel(
         val state = ui.value
         flow {
             emit(state.copy(status = Loading("Loading your businesses, please wait . . ."), dialog = null))
-            emit(state.copy(status = None, table = businessTable(service.all().await()), dialog = null))
+            emit(state.copy(status = None, table = businessTable(api.businesses.all().await()), dialog = null))
         }.catchAndCollectToUI(state)
     }
 

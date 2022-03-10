@@ -63,7 +63,7 @@ class PiCortexDashboardIntegrationTest {
                 subdomain = "b2bdemo",
                 secret = "89aqiclvjktp0aa4bgfqpbppf6"
             )
-            val res = api.picortex.acceptInvite(params).await()
+            val res = api.invites.accept(params).await()
             expect(res.inviteId).toBe(i.uid)
         }
 

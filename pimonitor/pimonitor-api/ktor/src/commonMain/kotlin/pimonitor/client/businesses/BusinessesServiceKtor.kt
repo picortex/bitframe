@@ -41,17 +41,6 @@ class BusinessesServiceKtor(
         resp.response().toInteroperableList()
     }
 
-    override fun invite(rb: RequestBody.Authorized<InviteToShareReportsParams>) = config.scope.later {
-        val req = client.post("${config.url}$baseUrl/invite") {
-            setBody(json.of(rb))
-        }
-        json.decodeResponseFromString(Invite.serializer(), req.bodyAsText()).response()
-    }
-
-    override fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>): Later<String> {
-        TODO("Not yet implemented")
-    }
-
     override fun delete(rb: RequestBody.Authorized<Array<out String>>) = config.scope.later {
         val req = client.post("${config.url}$baseUrl/delete") {
             setBody(json.of(rb))
