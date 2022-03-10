@@ -111,11 +111,11 @@ class BusinessesViewModel(
         val state = ui.value
         flow {
             emit(state.copy(status = Loading("Preparing invite form, please wait . . ."), focus = i.monitored, dialog = null))
-            val message = api.invites.defaultInviteMessage(InviteMessageParams(i.monitored.uid)).await()
+            val inviteInfo = api.invites.defaultInviteMessage(InviteMessageParams(i.monitored.uid)).await()
             val dialog = inviteToShareReportsDialog(
                 businessName = i.monitored.name,
                 contactEmail = i.monitored.contacts.filterIsInstance<UserEmail>().firstOrNull()?.value ?: error("There are no registered contact's with email in ${i.monitored.name}"),
-                message
+                message = inviteInfo.inviteMessage
             ) {
                 onCancel { post(ExitDialog) }
                 onSubmit { params -> post(SendInviteToShareReportsForm(params)) }
@@ -143,11 +143,11 @@ class BusinessesViewModel(
             val result = api.businesses.create(i.params).await()
             if (result.params.sendInvite) {
                 emit(state.copy(status = Success("${i.params.businessName} has successfully been added. Preparing invite form, please wait . . ."), dialog = null))
-                val message = api.invites.defaultInviteMessage(InviteMessageParams(result.business.uid)).await()
+                val inviteInfo = api.invites.defaultInviteMessage(InviteMessageParams(result.business.uid)).await()
                 val dialog = inviteToShareReportsDialog(
                     businessName = result.params.businessName,
                     contactEmail = result.params.contactEmail,
-                    message
+                    message = inviteInfo.inviteMessage
                 ) {
                     onCancel { post(LoadBusinesses) }
                     onSubmit { params -> post(SendInviteToShareReportsForm(params)) }

@@ -21,7 +21,7 @@ interface InvitesServiceCore {
 
     @JsName("_ignore_inviteMessage")
     @JvmSynthetic
-    fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>): Later<String>
+    fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>): Later<PreInviteInfo>
 
     @JsName("_ignore_loadInvite")
     @JvmSynthetic

@@ -34,7 +34,7 @@ abstract class InvitesService(
         send(rb).await()
     }
 
-    fun defaultInviteMessage(params: InviteMessageRawParams): Later<String> = config.scope.later {
+    fun defaultInviteMessage(params: InviteMessageRawParams) = config.scope.later {
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("retrieve the default message"),
             data = params.toValidatedInviteMessageParams()
@@ -42,7 +42,7 @@ abstract class InvitesService(
         defaultInviteMessage(rb).await()
     }
 
-    fun load(uid: String): Later<InviteInfo> = config.scope.later {
+    fun load(uid: String) = config.scope.later {
         val rb = RequestBody.UnAuthorized(
             appId = config.appId,
             data = uid
@@ -51,7 +51,7 @@ abstract class InvitesService(
     }
 
     @JsName("acceptSageOneInvite")
-    fun accept(params: AcceptSageOneInviteRawParams): Later<AcceptSageOneInviteParams> = config.scope.later {
+    fun accept(params: AcceptSageOneInviteRawParams) = config.scope.later {
         val rb = RequestBody.UnAuthorized(
             appId = config.appId,
             data = params.toValidatedInviteParams()
@@ -60,7 +60,7 @@ abstract class InvitesService(
     }
 
     @JsName("acceptPiCortexInvite")
-    fun accept(params: AcceptPicortexInviteRawParams): Later<AcceptPicortexInviteParams> = config.scope.later {
+    fun accept(params: AcceptPicortexInviteRawParams) = config.scope.later {
         val rb = RequestBody.UnAuthorized(
             appId = config.appId,
             data = params.toValidatedInviteParams()

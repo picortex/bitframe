@@ -81,9 +81,12 @@ open class InvitesDaodService(
         } else null
     }
 
-    override fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>): Later<String> = config.scope.later {
+    override fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>) = config.scope.later {
         val name = business(rb.session.space.uid)?.name ?: rb.session.user.name
-        "$name would like to invite you to share your operational & financial reports with them through PiMonitor"
+        PreInviteInfo(
+            invitorName = name,
+            inviteMessage = "$name would like to invite you to share your operational & financial reports with them through PiMonitor"
+        )
     }
 
     override fun load(rb: RequestBody.UnAuthorized<String>): Later<InviteInfo> = config.scope.later {
