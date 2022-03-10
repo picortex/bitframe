@@ -36,7 +36,7 @@ class SearchViewModelTest {
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "tes"))
             delay(15)
             expect(counts).toBe(3)
-            delay(2200)
+            delay(2600)
             expect(counts).toBe(4)
         }
     }
@@ -49,7 +49,7 @@ class SearchViewModelTest {
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "t"))
             delay(10)
             expect(count).toBe(1)
-            delay(2200)
+            delay(2600)
             expect(count).toBe(2)
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "te"))
             delay(10)
@@ -57,7 +57,7 @@ class SearchViewModelTest {
             vm.post(SearchIntent.Search(SearchMode.DEBOUNCING, "tes"))
             delay(10)
             expect(count).toBe(4)
-            delay(2200)
+            delay(2600)
             expect(count).toBe(5)
         }
     }
