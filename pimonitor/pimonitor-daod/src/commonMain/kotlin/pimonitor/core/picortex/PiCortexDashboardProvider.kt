@@ -14,16 +14,18 @@ class PiCortexDashboardProvider(
     private val scope get() = config.scope
     private val client get() = config.client
     private val parser get() = config.parser
-
+    private val domain get() = config.environment.domain
+    
     fun technicalDashboardOf(credentials: PiCortexApiCredentials) = scope.later<OperationalDashboard> {
-        val map = mapOf(
+        val params = mapOf(
             "secret" to credentials.secret,
             "userType" to "DataConsoleUser"
         )
-        val res = client.post("https://${credentials.subdomain}.picortex.com/api/reporting") {
+        val url = "https://${credentials.subdomain}.$domain/api/reporting"
+        val res = client.post(url) {
             setBody(
                 TextContent(
-                    text = Mapper.encodeToString(map),
+                    text = Mapper.encodeToString(params),
                     contentType = ContentType.Application.Json
                 )
             )

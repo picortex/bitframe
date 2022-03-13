@@ -11,7 +11,7 @@ sealed class Dialog {
     abstract val details: String
     abstract val actions: List<DialogAction>
 
-    data class Form<out F, in P>(
+    open class Form<out F, in P>(
         override val heading: String,
         override val details: String,
         val fields: F,
@@ -19,7 +19,7 @@ sealed class Dialog {
         val submit: SubmitAction<P>
     ) : Dialog()
 
-    data class Confirm(
+    open class Confirm(
         override val heading: String,
         override val details: String,
         override val actions: List<DialogAction>,

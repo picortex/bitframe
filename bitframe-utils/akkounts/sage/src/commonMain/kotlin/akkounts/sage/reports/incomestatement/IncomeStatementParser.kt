@@ -27,9 +27,13 @@ class IncomeStatementParser(val entries: List<Map<String, *>>) {
             it["Name"].toString().containsAny(incomeAccountNames)
         }
         val primary = incomeEntries.map {
+            val amount = it["Credit"].toMoney() - it["Debit"].toMoney()
+            println("${it["Name"]} ${it["Credit"]}")
+            println("${it["Name"]} ${it["Debit"]}")
+            println("${it["Name"]} $amount")
             StatementEntryItem(
                 details = it["Name"].toString(),
-                amount = it["Credit"].toMoney() - it["Debit"].toMoney()
+                amount = amount
             )
         }
         return CategoryEntry(primary.toInteroperableList())

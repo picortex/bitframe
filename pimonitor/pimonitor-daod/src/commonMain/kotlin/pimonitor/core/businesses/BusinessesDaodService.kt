@@ -9,20 +9,16 @@ import bitframe.core.users.RegisterUserUseCaseImpl
 import kash.Currency
 import kash.Money
 import kotlinx.collections.interoperable.List
-import kotlinx.collections.interoperable.listOf
 import kotlinx.collections.interoperable.mutableListOf
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.datetime.*
 import later.Later
 import later.await
 import later.later
-import mailer.AddressInfo
-import mailer.EmailDraft
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.*
 import pimonitor.core.contacts.ContactPersonBusinessInfo
 import pimonitor.core.invites.Invite
-import pimonitor.core.invites.InviteStatus
 import pimonitor.core.picortex.PiCortexApiCredentials
 import pimonitor.core.picortex.PiCortexDashboardProvider
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig
@@ -110,7 +106,7 @@ open class BusinessesDaodService(
         list
     }
 
-    private fun CategoryEntry.toMoney(currency: Currency) = Money.of(total * currency.lowestDenomination, currency)
+    private fun CategoryEntry.toMoney(currency: Currency) = Money.of(total.toDouble() / currency.lowestDenomination, currency)
 
     private suspend fun summaryOf(business: MonitoredBusinessBasicInfo): MonitoredBusinessSummary {
         val contacts = contactPersonBusinessInfoDao.all(ContactPersonBusinessInfo::businessId isEqualTo business.uid).await().flatMap {
@@ -149,22 +145,22 @@ open class BusinessesDaodService(
                 val currency = earlyIncomeStatement.header.currency
                 bus.copy(
                     revenue = ChangeBox(
-                        precursor = earlyIncomeStatement.body.income.toMoney(currency),
-                        successor = laterIncomeStatement.body.income.toMoney(currency),
+                        previous = earlyIncomeStatement.body.income.toMoney(currency),
+                        current = laterIncomeStatement.body.income.toMoney(currency),
                         details = "Updated now",
-                        remark = ChangeRemark.CONSTANT
+                        change = ChangeRemark.CONSTANT
                     ),
                     expenses = ChangeBox(
-                        precursor = earlyIncomeStatement.body.expenses.toMoney(currency),
-                        successor = laterIncomeStatement.body.expenses.toMoney(currency),
+                        previous = earlyIncomeStatement.body.expenses.toMoney(currency),
+                        current = laterIncomeStatement.body.expenses.toMoney(currency),
                         details = "Updated now",
-                        remark = ChangeRemark.CONSTANT
+                        change = ChangeRemark.CONSTANT
                     ),
                     grossProfit = ChangeBox(
-                        precursor = Money.of(earlyIncomeStatement.body.grossProfit * currency.lowestDenomination, currency),
-                        successor = Money.of(laterIncomeStatement.body.grossProfit * currency.lowestDenomination, currency),
+                        previous = Money.of(earlyIncomeStatement.body.grossProfit / currency.lowestDenomination, currency),
+                        current = Money.of(laterIncomeStatement.body.grossProfit / currency.lowestDenomination, currency),
                         details = "Updated now",
-                        remark = ChangeRemark.CONSTANT
+                        change = ChangeRemark.CONSTANT
                     )
                 )
             } catch (exp: Throwable) {

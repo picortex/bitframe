@@ -7,9 +7,9 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @Serializable
-data class ChangeBox<D>(
-    val precursor: D,
-    val successor: D,
+data class ChangeBox<out D>(
+    val previous: D,
+    val current: D,
     val details: String,
-    val remark: ChangeRemark
+    val change: ChangeRemark
 )
