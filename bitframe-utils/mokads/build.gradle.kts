@@ -11,7 +11,7 @@ val tmp = 1
 kotlin {
     jvm { library() }
     js(IR) { library() }
-    val nativeTargets = nativeTargets(true)
+    val nativeTargets = listOf(linuxX64()) //linuxTargets(true)
 
     sourceSets {
         val commonMain by getting {
@@ -43,21 +43,21 @@ kotlin {
 //            dependsOn(nonJsTest)
 //        }
 
-        val nativeMain by creating {
-            dependsOn(commonMain)
+//        val nativeMain by creating {
+//            dependsOn(commonMain)
 //            dependsOn(nonJsMain)
-        }
+//        }
 
-        val nativeTest by creating {
+//        val nativeTest by creating {
 //            dependsOn(nonJsTest)
-        }
+//        }
 
-        for (target in nativeTargets) {
-            val main by target.compilations
-            main.defaultSourceSet { dependsOn(nativeMain) }
-
-            val test by target.compilations
-            test.defaultSourceSet { dependsOn(nativeTest) }
-        }
+//        for (target in nativeTargets) {
+//            val main by target.compilations
+//            main.defaultSourceSet { dependsOn(nativeMain) }
+//
+//            val test by target.compilations
+//            test.defaultSourceSet { dependsOn(nativeTest) }
+//        }
     }
 }
