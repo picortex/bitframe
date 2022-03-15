@@ -96,6 +96,8 @@ class CreateBusinessJourneyTest {
             expect(dialog.fields.message.value).toBe(
                 "Jane Doe would like to invite you to share your operational & financial reports with them through PiMonitor"
             )
+            expect(vm.ui.value.focus).toBeNonNull()
+            expect(vm.ui.value.focus?.name).toBe("PiCortex LLC")
         }
     }
 

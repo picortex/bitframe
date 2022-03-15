@@ -5,6 +5,7 @@ package pimonitor.core.businesses.params
 
 import kotlinx.serialization.Serializable
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
+import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.contacts.ContactPersonBusinessInfo
 import kotlin.js.JsExport
 
@@ -12,5 +13,6 @@ import kotlin.js.JsExport
 class CreateMonitoredBusinessResult(
     val params: CreateMonitoredBusinessParams,
     val business: MonitoredBusinessBasicInfo,
+    val summary: MonitoredBusinessSummary,
     val contact: ContactPersonBusinessInfo
 )
