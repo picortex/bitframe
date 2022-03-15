@@ -23,6 +23,9 @@ class BusinessModule(
         }),
         Action("operational dashboard", mapOf(), HttpRoute(HttpMethod.Post, path.businessesDashboardOperational) {
             controller.dashboard(it)
+        }),
+        Action("income statements", mapOf(), HttpRoute(HttpMethod.Post, path.businessesIncomeStatement) {
+            controller.incomeStatement(it)
         })
     )
 }

@@ -70,10 +70,10 @@ class PiCortexOperationalDashboardUserJourneyTest {
             api.invites.accept(params).await()
         }
 
-        step("View Financial Dashboard of ${result?.business?.name}") {
+        step("View PiCortex Operations Dashboard of ${result?.business?.name}") {
             val state = State()
-            vm.expect(Intent.LoadFinancialDashboard(invite!!.invitedBusinessId)).toContain(
-                state.copy(status = Feedback.Loading("Loading financial dashboard, please wait . . .")),
+            vm.expect(Intent.LoadOperationDashboard(invite!!.invitedBusinessId)).toContain(
+                state.copy(status = Feedback.Loading("Loading operational dashboard, please wait . . .")),
             )
             expect(vm.ui.value.operationDashboard).toBeNonNull()
         }

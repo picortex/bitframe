@@ -3,6 +3,7 @@ package business
 import bitframe.core.signin.SignInCredentials
 import expect.expect
 import later.await
+import pimonitor.client.TestSequence
 import pimonitor.client.business.Intent
 import pimonitor.client.business.State
 import pimonitor.client.runSequence
@@ -26,7 +27,7 @@ class SageFinancialDashboardUserJourneyTest {
     private val vm get() = scope.business.viewModel
 
     @Test
-    fun should_load_financial_dashboard_of_a_business_with_sage_integration() = runSequence {
+    fun should_load_income_statement_of_a_business_with_sage_integration() = runSequence {
         step("Sign Up as a Monitor") {
             val monitor = IndividualSignUpParams(
                 name = "Jane Doe",
@@ -56,15 +57,14 @@ class SageFinancialDashboardUserJourneyTest {
         }
 
         var invite: Invite? = null
-        step("Invite ${result?.business?.name} to share reports") {
+        step("Invite Business to share reports") {
             val params = InviteToShareReportsParams(result!!.summary)
             invite = api.invites.send(params).await()
         }
 
-        step("Accept invite to share picortex reports params") {
-            val i = invite ?: error("Invite not is found")
+        step("Accept invite to share sage reports params") {
             val params = AcceptSageOneInviteParams(
-                inviteId = i.uid,
+                inviteId = invite!!.uid,
                 username = "mmajapa@gmail.com",
                 password = "Rondebosch2016@",
                 companyId = "468271",
@@ -72,12 +72,12 @@ class SageFinancialDashboardUserJourneyTest {
             api.invites.accept(params).await()
         }
 
-        step("View PiCortex Operations Dashboard of ${result?.business?.name}") {
+        step("View Income Statement of the business under test") {
             val state = State()
-            vm.expect(Intent.LoadOperationDashboard(invite!!.invitedBusinessId)).toContain(
-                state.copy(status = Feedback.Loading("Loading operational dashboard, please wait . . .")),
+            vm.expect(Intent.LoadIncomeStatement(invite!!.invitedBusinessId)).toContain(
+                state.copy(status = Feedback.Loading("Loading income statement, please wait . . .")),
             )
-            expect(vm.ui.value.operationDashboard).toBeNonNull()
+            expect(vm.ui.value.incomeStatement).toBeNonNull()
         }
     }
 }

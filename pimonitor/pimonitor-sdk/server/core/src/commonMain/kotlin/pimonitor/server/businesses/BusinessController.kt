@@ -36,4 +36,9 @@ class BusinessController(
         val rb = json.decodeFromString<RequestBody.Authorized<String>>(req.compulsoryBody())
         resolve(service.operationalDashboard(rb).await())
     }.toHttpResponse()
+
+    suspend fun incomeStatement(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.Authorized<String>>(req.compulsoryBody())
+        resolve(service.incomeStatement(rb).await())
+    }.toHttpResponse()
 }
