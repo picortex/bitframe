@@ -14,4 +14,8 @@ open class BusinessDetailsScope(
     override val config: UIScopeConfig<BusinessesService>
 ) : UIScope<Intent, State> {
     override val viewModel by lazy { BusinessDetailsViewModel(config) }
+
+    val loadOperationalDashboard = { businessId: String ->
+        viewModel.post(Intent.LoadOperationDashboard(businessId))
+    }
 }
