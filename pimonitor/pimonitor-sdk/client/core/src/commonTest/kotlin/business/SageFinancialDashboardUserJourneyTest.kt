@@ -11,6 +11,7 @@ import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
 import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.invites.Invite
 import pimonitor.core.picortex.AcceptPicortexInviteParams
+import pimonitor.core.sage.AcceptSageOneInviteParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import presenters.feedbacks.Feedback
 import utils.PiMonitorTestScope
@@ -18,14 +19,14 @@ import utils.toContain
 import viewmodel.expect
 import kotlin.test.Test
 
-class PiCortexOperationalDashboardUserJourneyTest {
+class SageFinancialDashboardUserJourneyTest {
 
     private val scope = PiMonitorTestScope()
     private val api get() = scope.api
     private val vm get() = scope.business.viewModel
 
     @Test
-    fun should_load_picortex_dashboard_of_a_business_with_picortex_integration() = runSequence {
+    fun should_load_financial_dashboard_of_a_business_with_sage_integration() = runSequence {
         step("Sign Up as a Monitor") {
             val monitor = IndividualSignUpParams(
                 name = "Jane Doe",
@@ -62,18 +63,19 @@ class PiCortexOperationalDashboardUserJourneyTest {
 
         step("Accept invite to share picortex reports params") {
             val i = invite ?: error("Invite not is found")
-            val params = AcceptPicortexInviteParams(
+            val params = AcceptSageOneInviteParams(
                 inviteId = i.uid,
-                subdomain = "b2bdemo",
-                secret = "89aqiclvjktp0aa4bgfqpbppf6"
+                username = "mmajapa@gmail.com",
+                password = "Rondebosch2016@",
+                companyId = "468271",
             )
             api.invites.accept(params).await()
         }
 
-        step("View Financial Dashboard of ${result?.business?.name}") {
+        step("View PiCortex Operations Dashboard of ${result?.business?.name}") {
             val state = State()
-            vm.expect(Intent.LoadFinancialDashboard(invite!!.invitedBusinessId)).toContain(
-                state.copy(status = Feedback.Loading("Loading financial dashboard, please wait . . .")),
+            vm.expect(Intent.LoadOperationDashboard(invite!!.invitedBusinessId)).toContain(
+                state.copy(status = Feedback.Loading("Loading operational dashboard, please wait . . .")),
             )
             expect(vm.ui.value.operationDashboard).toBeNonNull()
         }

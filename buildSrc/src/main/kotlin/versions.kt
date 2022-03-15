@@ -12,7 +12,9 @@ object vers {
     val npmPublish = "2.1.2"
 
     object bitframe {
-        val current = "0.0.88"
-        val previous = "0.0.87"
+        val stagingCurrent = "0.0.88"
+        val stagingPrevious = "0.0.87"
+        val productionCurrent = "0.0.88"
+        val productionPrevious = "0.0.80"
     }
 }

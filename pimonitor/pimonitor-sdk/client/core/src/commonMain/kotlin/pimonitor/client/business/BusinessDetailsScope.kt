@@ -18,4 +18,8 @@ open class BusinessDetailsScope(
     val loadOperationalDashboard = { businessId: String ->
         viewModel.post(Intent.LoadOperationDashboard(businessId))
     }
+
+    val loadFinancialDashboard = { businessId: String ->
+        viewModel.post(Intent.LoadFinancialDashboard(businessId))
+    }
 }

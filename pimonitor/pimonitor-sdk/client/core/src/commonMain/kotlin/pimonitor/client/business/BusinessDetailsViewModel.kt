@@ -17,6 +17,11 @@ class BusinessDetailsViewModel(
     private val service get() = config.service
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         is Intent.LoadOperationDashboard -> loadOperationDashboard(i)
+        is Intent.LoadFinancialDashboard -> loadFinancialDashboard(i)
+    }
+
+    private fun CoroutineScope.loadFinancialDashboard(i: Intent.LoadFinancialDashboard) = launch {
+        TODO()
     }
 
     private fun CoroutineScope.loadOperationDashboard(i: Intent.LoadOperationDashboard) = launch {
@@ -29,7 +34,7 @@ class BusinessDetailsViewModel(
             emit(state.copy(status = Feedback.Failure(it)))
             delay(config.viewModel.recoveryTime)
             emit(state.copy(status = Feedback.None))
-        }.collect{
+        }.collect {
             ui.value = it
         }
     }
