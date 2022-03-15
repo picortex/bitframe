@@ -26,6 +26,9 @@ class BusinessModule(
         }),
         Action("income statements", mapOf(), HttpRoute(HttpMethod.Post, path.businessesIncomeStatement) {
             controller.incomeStatement(it)
+        }),
+        Action("balance sheet", mapOf(), HttpRoute(HttpMethod.Post, path.businessesBalanceSheet) {
+            controller.balanceSheet(it)
         })
     )
 }

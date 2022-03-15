@@ -22,4 +22,8 @@ open class BusinessDetailsScope(
     val loadFinancialDashboard = { businessId: String ->
         viewModel.post(Intent.LoadIncomeStatement(businessId))
     }
+
+    val loadBalanceSheet = { businessId: String ->
+        viewModel.post(Intent.LoadBalanceSheet(businessId))
+    }
 }

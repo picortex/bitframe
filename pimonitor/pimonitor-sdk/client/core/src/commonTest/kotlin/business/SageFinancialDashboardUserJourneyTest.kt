@@ -80,4 +80,59 @@ class SageFinancialDashboardUserJourneyTest {
             expect(vm.ui.value.incomeStatement).toBeNonNull()
         }
     }
+
+    @Test
+    fun should_load_balance_sheet_statement_of_a_business_with_sage_integration() = runSequence {
+        step("Sign Up as a Monitor") {
+            val monitor = IndividualSignUpParams(
+                name = "Jane Doe",
+                email = "jane@doe$time.com",
+                password = "jane@doe$time.com"
+            )
+            api.signUp.signUp(monitor).await()
+        }
+
+        step("Sign in as the registered monitor") {
+            val cred = SignInCredentials(
+                identifier = "jane@doe$time.com",
+                password = "jane@doe$time.com"
+            )
+            api.signIn.signIn(cred).await()
+        }
+
+        var result: CreateMonitoredBusinessResult? = null
+        step("Create a monitored business") {
+            val params = CreateMonitoredBusinessParams(
+                businessName = "aSoft Ltd",
+                contactName = "Anderson Lameck",
+                contactEmail = "andylamax@programmer.net",
+                sendInvite = true
+            )
+            result = api.businesses.create(params).await()
+        }
+
+        var invite: Invite? = null
+        step("Invite Business to share reports") {
+            val params = InviteToShareReportsParams(result!!.summary)
+            invite = api.invites.send(params).await()
+        }
+
+        step("Accept invite to share sage reports params") {
+            val params = AcceptSageOneInviteParams(
+                inviteId = invite!!.uid,
+                username = "mmajapa@gmail.com",
+                password = "Rondebosch2016@",
+                companyId = "468271",
+            )
+            api.invites.accept(params).await()
+        }
+
+        step("View Balance Sheet of the business under test") {
+            val state = State()
+            vm.expect(Intent.LoadBalanceSheet(invite!!.invitedBusinessId)).toContain(
+                state.copy(status = Feedback.Loading("Loading balance sheet, please wait . . .")),
+            )
+            expect(vm.ui.value.balanceSheet).toBeNonNull()
+        }
+    }
 }

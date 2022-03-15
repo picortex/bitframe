@@ -5,7 +5,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
@@ -20,6 +19,7 @@ class BusinessDetailsViewModel(
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         is Intent.LoadOperationDashboard -> loadOperationDashboard(i)
         is Intent.LoadIncomeStatement -> loadIncomeStatement(i)
+        is Intent.LoadBalanceSheet -> loadBalanceSheet(i)
     }
 
     private suspend fun Flow<State>.catchAndCollectToUI(state: State) = catch {
@@ -28,6 +28,15 @@ class BusinessDetailsViewModel(
         emit(state.copy(status = Feedback.None))
     }.collect {
         ui.value = it
+    }
+
+    private fun CoroutineScope.loadBalanceSheet(i: Intent.LoadBalanceSheet) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(status = Feedback.Loading("Loading balance sheet, please wait . . .")))
+            val bs = service.balanceSheet(i.businessId).await()
+            emit(state.copy(status = Feedback.None, balanceSheet = bs))
+        }.catchAndCollectToUI(state)
     }
 
     private fun CoroutineScope.loadIncomeStatement(i: Intent.LoadIncomeStatement) = launch {

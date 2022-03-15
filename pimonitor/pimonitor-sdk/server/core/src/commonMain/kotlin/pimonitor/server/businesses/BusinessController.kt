@@ -16,7 +16,8 @@ import response.response
 class BusinessController(
     val service: BusinessesDaodService
 ) {
-    val json get() = service.config.json
+    private val json get() = service.config.json
+
     suspend fun create(req: HttpRequest): HttpResponse = response {
         val rb = json.decodeFromString<RequestBody.Authorized<CreateMonitoredBusinessParams>>(req.compulsoryBody())
         resolve(service.create(rb).await())
@@ -40,5 +41,10 @@ class BusinessController(
     suspend fun incomeStatement(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.Authorized<String>>(req.compulsoryBody())
         resolve(service.incomeStatement(rb).await())
+    }.toHttpResponse()
+
+    suspend fun balanceSheet(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.Authorized<String>>(req.compulsoryBody())
+        resolve(service.balanceSheet(rb).await())
     }.toHttpResponse()
 }

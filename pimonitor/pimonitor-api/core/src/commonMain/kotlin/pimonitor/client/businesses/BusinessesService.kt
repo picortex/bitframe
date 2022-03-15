@@ -3,6 +3,7 @@
 
 package pimonitor.client.businesses
 
+import akkounts.reports.balancesheet.BalanceSheet
 import akkounts.reports.incomestatement.IncomeStatement
 import bitframe.client.ServiceConfig
 import bitframe.client.getSignedInSessionTo
@@ -69,5 +70,13 @@ abstract class BusinessesService(
             data = businessId
         )
         incomeStatement(rb).await()
+    }
+
+    fun balanceSheet(businessId: String): Later<BalanceSheet?> = config.scope.later {
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("load income statement"),
+            data = businessId
+        )
+        balanceSheet(rb).await()
     }
 }

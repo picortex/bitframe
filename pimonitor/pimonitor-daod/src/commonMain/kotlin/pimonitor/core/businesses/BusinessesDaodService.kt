@@ -1,5 +1,6 @@
 package pimonitor.core.businesses
 
+import akkounts.reports.balancesheet.BalanceSheet
 import akkounts.reports.incomestatement.IncomeStatement
 import akkounts.reports.utils.CategoryEntry
 import akkounts.sage.SageOneZAService
@@ -106,6 +107,32 @@ open class BusinessesDaodService(
         }
     }
 
+    private fun SageApiCredentials.toCompany(business: MonitoredBusinessBasicInfo) = SageOneZAUserCompany(
+        uid = business.uid,
+        name = business.name,
+        username = username,
+        password = password,
+        companyId = companyId
+    )
+
+    override fun balanceSheet(rb: RequestBody.Authorized<String>): Later<BalanceSheet?> = config.scope.later {
+        val businessId = rb.data
+
+        val business = monitoredBusinessesDao.loadOrNull(businessId).await()?.takeIf {
+            it.financialBoard == DASHBOARD_FINANCIAL.SAGE_ONE
+        } ?: return@later null
+
+        try {
+            val cred = sageCredentialsDao.all(condition = SageApiCredentials::businessId isEqualTo business.uid).await().first()
+            val company = cred.toCompany(business)
+            val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
+            sage.offeredTo(company).reports.balanceSheet(at = today).await()
+        } catch (e: Throwable) {
+            logger.error(e)
+            null
+        }
+    }
+
     override fun incomeStatement(rb: RequestBody.Authorized<String>): Later<IncomeStatement?> = config.scope.later {
         val businessId = rb.data
 
@@ -115,13 +142,7 @@ open class BusinessesDaodService(
 
         try {
             val cred = sageCredentialsDao.all(condition = SageApiCredentials::businessId isEqualTo business.uid).await().first()
-            val company = SageOneZAUserCompany(
-                uid = business.uid,
-                name = business.name,
-                username = cred.username,
-                password = cred.password,
-                companyId = cred.companyId
-            )
+            val company = cred.toCompany(business)
             val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
             val lastMonth = today - DatePeriod(months = 1)
             sage.offeredTo(company).reports.incomeStatement(start = lastMonth, end = today).await()
