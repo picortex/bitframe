@@ -13,7 +13,7 @@ data class InviteToShareReportsParams(
 ) : InviteToShareReportsRawParams {
     companion object {
         @JvmField
-        val DEFAULT_INVITE_SUBJECT = "Invite to your share reports"
+        val DEFAULT_INVITE_SUBJECT = "Invite to share your reports"
 
         @JvmField
         val DEFAULT_INVITE_MESSAGE = "We would like to invite you to share your financial and technical reports with us"

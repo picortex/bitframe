@@ -64,7 +64,9 @@ class SageOneZAReportsService @JvmOverloads constructor(
     }
 
     override fun incomeStatement(start: LocalDate, end: LocalDate) = scope.later {
-        val isp = IncomeStatementParser(trialBalance(start, end).await())
+        val tb = trialBalance(start, end).await()
+        println(Mapper.encodeToString(tb))
+        val isp = IncomeStatementParser(tb)
         val header = IncomeStatement.Header(
             vendor = SageOneZAService.VENDOR,
             currency = Currency.ZAR,
@@ -77,6 +79,7 @@ class SageOneZAReportsService @JvmOverloads constructor(
 
         val rawIncome = isp.income()
 
+        println(rawIncome)
         val income = rawIncome.items.map {
             if (it.details == "Sales") {
                 it.copy(amount = it.amount + taxes.total)
@@ -84,6 +87,7 @@ class SageOneZAReportsService @JvmOverloads constructor(
                 it
             }
         }.toInteroperableList()
+        println(income)
 
         val data = IncomeStatement.Data(
             income = CategoryEntry(income),

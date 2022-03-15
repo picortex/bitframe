@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @Serializable
-data class ValueCard<T>(
+data class ValueCard<out T>(
     val title: String,
     val value: T,
     val details: String

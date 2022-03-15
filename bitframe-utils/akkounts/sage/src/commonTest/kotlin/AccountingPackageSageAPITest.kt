@@ -7,6 +7,7 @@ import akkounts.sage.SageOneZAUserCompany
 import expect.expect
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import later.await
 import kotlin.test.Test
@@ -25,9 +26,10 @@ class AccountingPackageSageAPITest {
 
     @Test
     fun should_fetch_income_statement_report() = runTest {
-        val start = LocalDate(2021, 9, 1)
-        val end = LocalDate(2021, 10, 1)
+        val start = LocalDate(2022, 2, 11)
+        val end = LocalDate(2022, 3, 11)
         val statement: IncomeStatement = ap.reports.incomeStatement(start, end).await()
+        println(Json.encodeToString(statement))
         expect(statement).toBeNonNull()
     }
 

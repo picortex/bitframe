@@ -1,7 +1,7 @@
 @file:JsExport
 @file:Suppress("WRONG_EXPORTED_DECLARATION")
 
-package pimonitor.core.picortex
+package pimonitor.core.dashboards
 
 import kotlin.js.JsExport
 

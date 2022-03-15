@@ -9,7 +9,7 @@ plugins {
     id("org.jetbrains.dokka") version vers.dokka
 }
 
-subprojects {
+allprojects {
     repositories {
         publicRepos()
     }

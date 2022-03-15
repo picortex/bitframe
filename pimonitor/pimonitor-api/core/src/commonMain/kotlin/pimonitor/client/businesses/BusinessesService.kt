@@ -6,14 +6,15 @@ package pimonitor.client.businesses
 import bitframe.client.ServiceConfig
 import bitframe.client.getSignedInSessionTo
 import bitframe.core.RequestBody
-import bitframe.core.Session
 import later.Later
 import later.await
 import later.later
 import pimonitor.core.businesses.BusinessFilter
-import kotlin.js.JsExport
 import pimonitor.core.businesses.BusinessesServiceCore
-import pimonitor.core.businesses.params.*
+import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
+import pimonitor.core.businesses.params.toValidatedCreateBusinessParams
+import pimonitor.core.dashboards.OperationalDashboard
+import kotlin.js.JsExport
 
 abstract class BusinessesService(
     open val config: ServiceConfig
@@ -48,5 +49,13 @@ abstract class BusinessesService(
             data = monitorIds
         )
         delete(rb).await()
+    }
+
+    fun operationalDashboard(businessId: String): Later<OperationalDashboard?> = config.scope.later {
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("load operational dashboard info for business with id=$businessId "),
+            data = businessId
+        )
+        operationalDashboard(rb).await()
     }
 }

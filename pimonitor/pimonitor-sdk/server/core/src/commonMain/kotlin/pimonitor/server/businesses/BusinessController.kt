@@ -31,4 +31,9 @@ class BusinessController(
         val rb = json.decodeFromString<RequestBody.Authorized<Array<String>>>(req.compulsoryBody())
         resolve(service.delete(rb).await())
     }.toHttpResponse()
+
+    suspend fun dashboard(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.Authorized<String>>(req.compulsoryBody())
+        resolve(service.operationalDashboard(rb).await())
+    }.toHttpResponse()
 }

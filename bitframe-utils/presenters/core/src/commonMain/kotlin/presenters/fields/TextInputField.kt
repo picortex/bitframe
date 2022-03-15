@@ -1,8 +1,9 @@
+@file:JsExport
+
 package presenters.fields
 
 import kotlin.js.JsExport
 
-@JsExport
 data class TextInputField(
     override val name: String,
     override val label: String = name,

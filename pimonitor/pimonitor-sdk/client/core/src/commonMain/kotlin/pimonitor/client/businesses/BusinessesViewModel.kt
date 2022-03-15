@@ -53,58 +53,38 @@ class BusinessesViewModel(
     }
 
     private fun showDeleteMultipleConfirmationDialog(i: ShowDeleteMultipleConfirmationDialog) {
-        ui.value = ui.value.copy(
-            status = None,
-            focus = null,
-            dialog = deleteManyDialog(i.data) {
-                onCancel { post(ExitDialog) }
-                onConfirm { post(DeleteAll(i.data.map { it.data }.toTypedArray())) }
-            }
-        )
+        ui.value = ui.value.copy(status = None, focus = null, dialog = deleteManyDialog(i.data) {
+            onCancel { post(ExitDialog) }
+            onConfirm { post(DeleteAll(i.data.map { it.data }.toTypedArray())) }
+        })
     }
 
     private fun showDeleteSingleConfirmationDialog(i: ShowDeleteSingleConfirmationDialog) {
-        ui.value = ui.value.copy(
-            status = None,
-            focus = i.monitored,
-            dialog = deleteSingleDialog(i.monitored) {
-                onCancel { post(ExitDialog) }
-                onConfirm { post(Delete(i.monitored)) }
-            }
-        )
+        ui.value = ui.value.copy(status = None, focus = i.monitored, dialog = deleteSingleDialog(i.monitored) {
+            onCancel { post(ExitDialog) }
+            onConfirm { post(Delete(i.monitored)) }
+        })
     }
 
     private fun showCaptureInvestmentForm(i: ShowCaptureInvestmentForm) {
-        ui.value = ui.value.copy(
-            status = None,
-            focus = i.monitored,
-            dialog = captureInvestmentDialog(i.monitored) {
-                onCancel { post(ExitDialog) }
-                onSubmit { params: Unit -> TODO() }
-            }
-        )
+        ui.value = ui.value.copy(status = None, focus = i.monitored, dialog = captureInvestmentDialog(i.monitored) {
+            onCancel { post(ExitDialog) }
+            onSubmit { params: Unit -> TODO() }
+        })
     }
 
     private fun showInterveneForm(i: ShowInterveneForm) {
-        ui.value = ui.value.copy(
-            status = None,
-            focus = i.monitored,
-            dialog = interveneDialog(i.monitored) {
-                onCancel { post(ExitDialog) }
-                onSubmit { params: Unit -> TODO() }
-            }
-        )
+        ui.value = ui.value.copy(status = None, focus = i.monitored, dialog = interveneDialog(i.monitored) {
+            onCancel { post(ExitDialog) }
+            onSubmit { params: Unit -> TODO() }
+        })
     }
 
     private fun showCreateBusinessForm() {
-        ui.value = ui.value.copy(
-            status = None,
-            focus = null,
-            dialog = createBusinessDialog {
-                onCancel { post(ExitDialog) }
-                onSubmit { params -> post(SendCreateBusinessForm(params)) }
-            }
-        )
+        ui.value = ui.value.copy(status = None, focus = null, dialog = createBusinessDialog {
+            onCancel { post(ExitDialog) }
+            onSubmit { params -> post(SendCreateBusinessForm(params)) }
+        })
     }
 
     private fun CoroutineScope.showInviteToShareReportsForm(i: ShowInviteToShareReportsForm) = launch {
@@ -145,14 +125,12 @@ class BusinessesViewModel(
                 emit(state.copy(status = Success("${i.params.businessName} has successfully been added. Preparing invite form, please wait . . ."), dialog = null))
                 val inviteInfo = api.invites.defaultInviteMessage(InviteMessageParams(result.business.uid)).await()
                 val dialog = inviteToShareReportsDialog(
-                    businessName = result.params.businessName,
-                    contactEmail = result.params.contactEmail,
-                    message = inviteInfo.inviteMessage
+                    businessName = result.params.businessName, contactEmail = result.params.contactEmail, message = inviteInfo.inviteMessage
                 ) {
                     onCancel { post(LoadBusinesses) }
                     onSubmit { params -> post(SendInviteToShareReportsForm(params)) }
                 }
-                emit(state.copy(status = None, dialog = dialog))
+                emit(state.copy(status = None, dialog = dialog, focus = result.summary))
             } else {
                 emit(state.copy(status = Success("${i.params.businessName} has successfully been added"), dialog = null))
                 delay(config.viewModel.transitionTime)
@@ -177,9 +155,7 @@ class BusinessesViewModel(
             api.businesses.delete(*i.data.map { it.uid }.toTypedArray()).await()
             emit(state.copy(status = Success("${i.data.size} businesses deleted successfully, Loading remaining businesses . . ."), dialog = null))
             val phase = state.copy(
-                status = None,
-                table = businessTable(api.businesses.all().await()),
-                dialog = null
+                status = None, table = businessTable(api.businesses.all().await()), dialog = null
             )
             emit(phase)
         }.catchAndCollectToUI(state)

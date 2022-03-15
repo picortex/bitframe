@@ -30,15 +30,10 @@ open class SearchDaodService(
         monitoredBusinessDao.all(
             MonitoredBusinessBasicInfo::owningSpaceId isEqualTo session.space.uid
         ).await().toTypedArray().filter {
-            it.address.contains(params.key, ignoreCase = true)
-                    || it.email.contains(params.key, ignoreCase = true)
-                    || it.name.contains(params.key, ignoreCase = true)
+            it.address.contains(params.key, ignoreCase = true) || it.email.contains(params.key, ignoreCase = true) || it.name.contains(params.key, ignoreCase = true)
         }.map {
             SearchResult.MonitoredBusiness(
-                name = it.name,
-                address = it.address,
-                email = it.email,
-                uid = it.uid
+                name = it.name, address = it.address, email = it.email, uid = it.uid
             )
         }
     }

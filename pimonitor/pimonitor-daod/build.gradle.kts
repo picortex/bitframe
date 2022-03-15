@@ -18,8 +18,6 @@ kotlin {
                 api(projects.pimonitorCore)
                 api(projects.bitframeAuthenticationDaod)
                 api(projects.akkountsSage) // we are integrating with sage one
-                api(asoft.kotlinx.serialization.mapper) // PiMonitor API Needs to be parsed
-                api(ktor.client.core) // We need to make rest calls to picortex server
             }
         }
 

@@ -10,7 +10,7 @@ import pimonitor.client.signup.fields.copy
 import pimonitor.core.signup.params.BusinessSignUpParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import presenters.feedbacks.Feedback
-import utils.PiMonitorMockScope
+import utils.PiMonitorTestScope
 import viewmodel.expect
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -18,7 +18,7 @@ import pimonitor.client.signup.SignUpIntent as Intent
 import pimonitor.client.signup.SignUpState as State
 
 class SignUpViewModelTest {
-    val scope = PiMonitorMockScope()
+    val scope = PiMonitorTestScope()
     val viewModel = scope.signUp.viewModel
 
     @Test

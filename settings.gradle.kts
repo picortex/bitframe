@@ -50,6 +50,7 @@ includeSubs(base = "events", path = "bitframe-utils/events", "core", "inmemory",
 includeSubs(base = "presenters", path = "bitframe-utils/presenters", "core", "mock")
 includeRoot(name = "validation", path = "bitframe-utils/validation")
 includeRoot(name = "response", path = "bitframe-utils/response")
+includeRoot(name = "mokads", path = "bitframe-utils/mokads")
 includeSubs(base = "akkounts", path = "bitframe-utils/akkounts", "core", "quickbooks", "sage")
 
 // Bitframe Core

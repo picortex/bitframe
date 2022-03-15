@@ -7,24 +7,20 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import later.await
-import pimonitor.client.businesses.BusinessesDialogContent
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.IndividualSignUpParams
-import presenters.feedbacks.Feedback
-import presenters.modal.click
 import presenters.table.EmptyTable
 import presenters.table.action
 import presenters.table.click
 import presenters.table.tabulateToConsole
-import utils.PiMonitorMockScope
+import utils.PiMonitorTestScope
 import viewmodel.expect
 import kotlin.test.Test
 import pimonitor.client.businesses.BusinessesIntent as Intent
-import pimonitor.client.businesses.BusinessesState as State
 
 class DeleteBusinessJourneyTest {
 
-    val scope = PiMonitorMockScope()
+    val scope = PiMonitorTestScope()
     val api = scope.api
     val vm = scope.businesses.viewModel
 

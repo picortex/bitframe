@@ -6,19 +6,19 @@ package presenters.charts
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.listOf
 import kotlinx.collections.interoperable.toInteroperableList
+import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
-data class BarChart<D : Number>(
+@Serializable
+data class Chart<out D>(
     val title: String,
     val description: String,
-    val entries: List<Entry<D>> = listOf(),
+    val labels: List<String>,
+    val datasets: List<DataSet<D>>,
 ) {
-    val labels
-        get() = entries.map { it.label }.toInteroperableList()
-    val data get() = entries.map { it.value }.toInteroperableList()
-
-    data class Entry<D : Number>(
-        val label: String,
-        val value: D
+    @Serializable
+    data class DataSet<out D>(
+        val name: String,
+        val values: List<D>
     )
 }

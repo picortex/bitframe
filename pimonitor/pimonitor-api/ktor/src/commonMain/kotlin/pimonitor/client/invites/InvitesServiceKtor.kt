@@ -31,7 +31,9 @@ class InvitesServiceKtor(
         val res = client.post(config.path.invitesSend) {
             setBody(json.of(rb))
         }
-        json.decodeResponseFromString(Invite.serializer(), res.bodyAsText()).response()
+        val text = res.bodyAsText()
+        println(text)
+        json.decodeResponseFromString(Invite.serializer(), text).response()
     }
 
     override fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>) = config.scope.later {

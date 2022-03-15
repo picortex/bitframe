@@ -3,6 +3,7 @@ package pimonitor.client.invites
 import bitframe.client.UIScopeConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
@@ -44,6 +45,8 @@ class InvitesViewModel(
             emit(state.copy(status = Feedback.Loading("Preparing invite information, please wait . . .")))
             val invite = api.invites.load(i.inviteId).await()
             emit(state.copy(status = Feedback.None, title = "${invite.invitorName} is requesting you to share your reports", info = invite))
+        }.catch {
+            emit(state.copy(status = Feedback.Failure(it)))
         }.collect {
             ui.value = it
         }
