@@ -1,9 +1,9 @@
 package charts
 
-import presenters.charts.BarChart
+import presenters.charts.Chart
 
-fun show(chart: BarChart<*>) {
-    val entries = chart.entries
+fun show(chart: Chart<*>) {
+    val entries = chart.datasets
     val max = entries.maxOfOrNull { it.value.toInt() } ?: 10
     println("- ".repeat(max / 2) + chart.title + " -".repeat(max / 2))
     for (entry in entries) {

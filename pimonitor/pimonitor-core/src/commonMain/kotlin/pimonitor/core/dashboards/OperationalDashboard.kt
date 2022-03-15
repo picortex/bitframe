@@ -10,5 +10,5 @@ import kotlin.js.JsExport
 
 @Serializable
 data class OperationalDashboard(
-    val charts: List<Chart>
+    val charts: List<Chart<Double>>
 )

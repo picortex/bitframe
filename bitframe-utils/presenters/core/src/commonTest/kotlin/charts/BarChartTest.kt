@@ -1,18 +1,18 @@
 package charts
 
 import kotlinx.collections.interoperable.listOf
-import presenters.charts.BarChart
+import presenters.charts.Chart
 import kotlin.test.Test
 
 class BarChartTest {
     @Test
     fun should_easily_create_with_values() {
-        val chart = BarChart(
+        val chart = Chart(
             title = "Chart Test",
             description = "A chart for testing",
-            entries = listOf(
-                BarChart.Entry("Papaya", 11),
-                BarChart.Entry("Warm Bread", 10)
+            datasets = listOf(
+                Chart.Entry("Papaya", 11),
+                Chart.Entry("Warm Bread", 10)
             )
         )
         show(chart)

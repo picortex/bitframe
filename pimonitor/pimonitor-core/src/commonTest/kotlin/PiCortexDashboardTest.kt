@@ -5,6 +5,7 @@ import pimonitor.core.picortex.PiCortexDashboardProvider
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Production
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Staging
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 class PiCortexDashboardTest {
@@ -18,6 +19,7 @@ class PiCortexDashboardTest {
         val cred = PiCortexApiCredentials(
             businessId = "testBuz",
             subdomain = "b2bdemo",
+//            subdomain = "b2b",
             secret = "89aqiclvjktp0aa4bgfqpbppf6"
         )
         val dashboard = provider.technicalDashboardOf(cred).await()

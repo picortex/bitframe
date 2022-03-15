@@ -1,42 +1,40 @@
 package pimonitor.core.picortex
 
-import kotlinx.collections.interoperable.emptyList
-import kotlinx.collections.interoperable.mutableListOf
+import kotlinx.collections.interoperable.listOf
+import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.mapper.Mapper
 import pimonitor.core.dashboards.OperationalDashboard
-import presenters.charts.BarChart
+import presenters.charts.Chart
+import kotlin.collections.List
+import kotlin.collections.Map
+import kotlin.collections.filter
+import kotlin.collections.firstOrNull
+import kotlin.collections.map
+import kotlin.collections.mapOf
 import kotlinx.collections.interoperable.List as IList
 
 internal class PiCortexDashboardParser(val mapper: Mapper) {
     constructor(json: Json = PiCortexDashboardProviderConfig.DEFAULT_JSON) : this(Mapper(json))
 
-    companion object {
-        const val NUMBER_OF_CLIENT = "Number of Clients"
-        const val NUMBER_OF_EMPLOYEES = "Number of Employees"
-        const val NUMBER_OF_JOBS = "Jobs this Month"
-        const val NUMBER_OF_QUOTATIONS = "Quotations this Month"
-        const val NUMBER_OF_INVOICES = "Revenue this Month"
-
-        // values
-        const val EXPENSES_VALUE = "Expenses this Month"
-        const val OUTSTANDING_PAYMENTS_TO_SUPPLIERS = "Outstanding Payments To Suppliers"
-        const val OUTSTANDING_PAYMENTS_FROM_CUSTOMERS = "Outstanding Payments From Customers"
-
-        //charts
-        const val PRODUCTS_SOLD = "Products Sold"
-        const val JOBS_PER_CLIENT = "Jobs per Client"
-        const val HOURS_WORKED_PER_EMPLOYEE = "Hours worked per employee"
-    }
-
-    private fun entries(json: String): List<Map<String, Any>> {
+    private fun reports(json: String): List<Map<String, Any>> {
         val map = mapper.decodeFromString(json)
         return map["reports"] as List<Map<String, Any>>
     }
 
-    private val Map<String, Any>.config get() = this["config"] as Map<String, Any>
+    private inline val Map<String, *>.config get() = this["config"] as Map<String, *>
+    private inline val Map<String, *>.description get() = this["description"] as String
+    private inline val Map<String, *>.name get() = this["name"] as String
+    private inline val Map<String, *>.chartType get() = this["chartType"] as? String
+    private inline val Map<String, *>.datasets get() = this["datasets"] as? List<Map<String, *>>
+    private inline val Map<String, *>.labels get() = this["labels"] as List<String>
+    private inline val Map<String, *>.label get() = this["label"] as String
+    private inline val Map<String, *>.data get() = this["data"] as Map<String, Number>
+    private inline val Map<String, *>.tabularData get() = this["tabularData"] as? Map<String, Map<String, Double>>
+    private inline val Map<String, *>.all get() = this["All"]?.toString()?.toDouble() ?: 0.0
 
-    private fun searchEntryWith(json: String, description: String): Map<String, Any> = entries(json).firstOrNull {
+
+    private fun searchEntryWith(json: String, description: String): Map<String, Any> = reports(json).firstOrNull {
         it.config["description"] == description
     } ?: mapOf()
 
@@ -45,84 +43,51 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
         return entry["singleValueString"].toString()
     }
 
-    fun parseNumberOfJobs(json: String): String = parseSingleValueOf(
-        description = NUMBER_OF_JOBS,
-        from = json
-    )
-
-    fun parseNumberOfClients(json: String): String = parseSingleValueOf(
-        description = NUMBER_OF_CLIENT,
-        from = json
-    )
-
-    fun parseNumberOfEmployees(json: String): String = parseSingleValueOf(
-        description = NUMBER_OF_EMPLOYEES,
-        from = json
-    )
-
-    fun parseExpenses(json: String) = parseSingleValueOf(
-        description = EXPENSES_VALUE,
-        from = json
-    )
-
-    fun parseNumberOfQuotations(json: String) = parseSingleValueOf(
-        description = NUMBER_OF_QUOTATIONS,
-        from = json
-    )
-
-    fun parseNumberOfInvoices(json: String) = ""
-
-    fun parseOutstandingPaymentsToSuppliers(json: String) = parseSingleValueOf(
-        description = OUTSTANDING_PAYMENTS_TO_SUPPLIERS,
-        from = json
-    )
-
-    fun parseOutstandingPaymentsFromCustomers(json: String) = parseSingleValueOf(
-        description = OUTSTANDING_PAYMENTS_FROM_CUSTOMERS,
-        from = json
-    )
-
-    fun parseBarChartEntriesOf(type: String, from: String): IList<BarChart.Entry<Double>> {
-        val entries = searchEntryWith(from, type)
-        val data = entries["tabularData"] as Map<String, Map<String, Any>>
-
-        val entry = mutableListOf<BarChart.Entry<Double>>()
-        for ((key, value) in data) {
-            entry.add(BarChart.Entry(key, value["All"]?.toString()?.toDouble() ?: 0.0))
-        }
-        return entry
+    private fun parseBarChartsWithDataSets(reports: List<Map<String, *>>): List<Chart<Double>> = reports.filter {
+        it.config.chartType == "bar" && it.datasets != null
+    }.map {
+        val config = it.config
+        val datasets = it.datasets ?: listOf()
+        val labels = it.labels.toInteroperableList()
+        Chart(
+            title = config.name,
+            description = config.description,
+            labels = labels,
+            datasets = datasets.map { dataset ->
+                val data = dataset.data
+                Chart.DataSet(
+                    name = dataset.label,
+                    values = labels.map { label -> data[label]?.toDouble() ?: 0.0 }.toInteroperableList()
+                )
+            }.toInteroperableList()
+        )
     }
 
-    fun parseProductsSoldChart(json: String) = BarChart(
-        title = "Products sold",
-        description = "Products sold this month",
-        entries = parseBarChartEntriesOf(
-            type = PRODUCTS_SOLD,
-            from = json
+    private fun parseBarChartsWithTabularData(reports: List<Map<String, *>>): List<Chart<Double>> = reports.filter {
+        it.config.chartType == "bar" && it.tabularData != null
+    }.map {
+        val data = it.tabularData!!
+        val labels = data.keys.toInteroperableList()
+        Chart(
+            title = it.config.name,
+            description = it.config.description,
+            labels = labels,
+            datasets = listOf(
+                Chart.DataSet(
+                    name = it.config.name,
+                    values = labels.map { label -> data[label]?.all ?: 0.0 }.toInteroperableList()
+                )
+            )
         )
-    )
-
-    fun parseJobsPerClientChart(json: String) = BarChart(
-        title = "Jobs per client",
-        description = "Jobs fulfilled in the last month",
-        entries = parseBarChartEntriesOf(
-            type = JOBS_PER_CLIENT,
-            from = json
-        )
-    )
-
-    fun parseHoursPerEmployee(json: String) = BarChart(
-        title = "Hours per employee",
-        description = "Hours worked in the last month",
-        entries = parseBarChartEntriesOf(
-            type = HOURS_WORKED_PER_EMPLOYEE,
-            from = json
-        )
-    )
+    }
 
     fun parseTechnicalDashboard(json: String): OperationalDashboard {
-        println(json)
-        val board = OperationalDashboard(emptyList())
+        val reports = reports(json)
+        val barCharts = parseBarChartsWithDataSets(reports)
+        val tabularCharts = parseBarChartsWithTabularData(reports)
+        val board = OperationalDashboard(
+            charts = (barCharts + tabularCharts).toInteroperableList()
+        )
         return board.copy()
     }
 }
