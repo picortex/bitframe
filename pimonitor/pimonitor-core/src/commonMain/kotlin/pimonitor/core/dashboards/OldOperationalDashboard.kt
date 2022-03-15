@@ -1,12 +1,14 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.core.picortex
+package pimonitor.core.dashboards
 
+import kotlinx.serialization.Serializable
 import presenters.charts.BarChart
 import kotlin.js.JsExport
 
-data class OperationalDashboard(
+@Serializable
+data class OldOperationalDashboard(
     val clients: DashboardEntry = DashboardEntry("Clients"),
     val employees: DashboardEntry = DashboardEntry("Employees"),
     val jobs: DashboardEntry = DashboardEntry("Jobs"),

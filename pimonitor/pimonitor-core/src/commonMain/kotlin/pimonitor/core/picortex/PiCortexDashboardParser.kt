@@ -1,8 +1,10 @@
 package pimonitor.core.picortex
 
+import kotlinx.collections.interoperable.emptyList
 import kotlinx.collections.interoperable.mutableListOf
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.mapper.Mapper
+import pimonitor.core.dashboards.OperationalDashboard
 import presenters.charts.BarChart
 import kotlinx.collections.interoperable.List as IList
 
@@ -119,19 +121,8 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
     )
 
     fun parseTechnicalDashboard(json: String): OperationalDashboard {
-        val board = OperationalDashboard()
-        return board.copy(
-            clients = board.clients.copy(value = parseNumberOfClients(json)),
-            employees = board.employees.copy(value = parseNumberOfEmployees(json)),
-            jobs = board.jobs.copy(value = parseNumberOfJobs(json)),
-            expenses = board.expenses.copy(value = parseExpenses(json)),
-            quotations = board.quotations.copy(value = parseNumberOfQuotations(json)),
-            invoices = board.invoices.copy(value = parseNumberOfInvoices(json)),
-            paymentsToSuppliers = board.paymentsToSuppliers.copy(value = parseOutstandingPaymentsToSuppliers(json)),
-            paymentsFromCustomers = board.paymentsFromCustomers.copy(value = parseOutstandingPaymentsFromCustomers(json)),
-            sales = parseProductsSoldChart(json),
-            jobsPerClient = parseJobsPerClientChart(json),
-            hoursPerEmployee = parseHoursPerEmployee(json)
-        )
+        println(json)
+        val board = OperationalDashboard(emptyList())
+        return board.copy()
     }
 }

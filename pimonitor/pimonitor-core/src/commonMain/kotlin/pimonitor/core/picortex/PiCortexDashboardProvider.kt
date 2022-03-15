@@ -6,6 +6,8 @@ import io.ktor.http.*
 import io.ktor.http.content.*
 import kotlinx.serialization.mapper.Mapper
 import later.later
+import pimonitor.core.dashboards.DashboardProvider
+import pimonitor.core.dashboards.OperationalDashboard
 
 class PiCortexDashboardProvider(
     val config: PiCortexDashboardProviderConfig = PiCortexDashboardProviderConfig()
@@ -15,13 +17,15 @@ class PiCortexDashboardProvider(
     private val client get() = config.client
     private val parser get() = config.parser
     private val domain get() = config.environment.domain
-    
+
     fun technicalDashboardOf(credentials: PiCortexApiCredentials) = scope.later<OperationalDashboard> {
         val params = mapOf(
             "secret" to credentials.secret,
             "userType" to "DataConsoleUser"
         )
         val url = "https://${credentials.subdomain}.$domain/api/reporting"
+        println(url)
+        println(params)
         val res = client.post(url) {
             setBody(
                 TextContent(

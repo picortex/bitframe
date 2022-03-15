@@ -9,11 +9,11 @@ import kotlinx.coroutines.withContext
 import pimonitor.client.search.SearchIntent
 import pimonitor.client.search.SearchState
 import pimonitor.client.search.SearchMode
-import utils.PiMonitorMockScope
+import utils.PiMonitorTestScope
 import kotlin.test.Test
 
 class SearchViewModelTest {
-    val scope = PiMonitorMockScope()
+    val scope = PiMonitorTestScope()
     val vm = scope.search.viewModel
 
     @Test

@@ -8,7 +8,7 @@ import later.await
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import presenters.feedbacks.Feedback
-import utils.PiMonitorMockScope
+import utils.PiMonitorTestScope
 import viewmodel.expect
 import kotlin.test.Test
 import pimonitor.client.businesses.BusinessesIntent as Intent
@@ -16,7 +16,7 @@ import pimonitor.client.businesses.BusinessesState as State
 
 class LoadBusinessesJourneyTest {
 
-    private val scope = PiMonitorMockScope()
+    private val scope = PiMonitorTestScope()
     private val api = scope.api
     private val vm = scope.businesses.viewModel
 

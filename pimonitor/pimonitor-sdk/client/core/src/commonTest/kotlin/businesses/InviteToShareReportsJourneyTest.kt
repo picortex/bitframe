@@ -12,7 +12,7 @@ import pimonitor.core.businesses.params.InviteToShareReportsRawParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import presenters.feedbacks.Feedback
 import presenters.modal.Dialog
-import utils.PiMonitorMockScope
+import utils.PiMonitorTestScope
 import utils.toContain
 import viewmodel.expect
 import kotlin.test.Test
@@ -21,7 +21,7 @@ import pimonitor.client.businesses.BusinessesState as State
 
 class InviteToShareReportsJourneyTest {
 
-    val scope = PiMonitorMockScope()
+    val scope = PiMonitorTestScope()
     val api = scope.api
     val vm = scope.businesses.viewModel
 

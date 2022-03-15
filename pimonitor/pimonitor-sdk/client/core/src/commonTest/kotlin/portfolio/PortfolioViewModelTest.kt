@@ -3,21 +3,18 @@ package portfolio
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import later.await
-import pimonitor.client.portfolio.PortfolioViewModel
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.portfolio.PortfolioData
 import pimonitor.core.signup.params.IndividualSignUpParams
 import presenters.feedbacks.Feedback
-import utils.PiMonitorMockScope
+import utils.PiMonitorTestScope
 import viewmodel.expect
-import kotlin.test.Ignore
 import kotlin.test.Test
 import pimonitor.client.portfolio.PortfolioIntent as Intent
 import pimonitor.client.portfolio.PortfolioState as State
 
 class PortfolioViewModelTest {
 
-    private val scope = PiMonitorMockScope()
+    private val scope = PiMonitorTestScope()
     private val api = scope.api
     private val vm = scope.portfolio.viewModel
 

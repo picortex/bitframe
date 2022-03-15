@@ -18,6 +18,7 @@ import later.later
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.*
 import pimonitor.core.contacts.ContactPersonBusinessInfo
+import pimonitor.core.dashboards.OperationalDashboard
 import pimonitor.core.invites.Invite
 import pimonitor.core.picortex.PiCortexApiCredentials
 import pimonitor.core.picortex.PiCortexDashboardProvider
@@ -86,6 +87,17 @@ open class BusinessesDaodService(
         CreateMonitoredBusinessResult(
             params = params, business = business, contact = cpbi, summary = summaryOf(business)
         )
+    }
+
+    override fun operationalDashboard(rb: RequestBody.Authorized<String>): Later<OperationalDashboard?> = config.scope.later {
+        val businessId = rb.data
+
+        val business = monitoredBusinessesDao.loadOrNull(businessId).await()?.takeIf {
+            it.operationalBoard == DASHBOARD_OPERATIONAL.PICORTEX
+        } ?: return@later null
+        
+        val cred = piCortexCredentialsDao.all(condition = PiCortexApiCredentials::businessId isEqualTo business.uid).await().first()
+        piCortexDashboardProvider.technicalDashboardOf(cred).await()
     }
 
     override fun all(rb: RequestBody.Authorized<BusinessFilter>) = config.scope.later {
