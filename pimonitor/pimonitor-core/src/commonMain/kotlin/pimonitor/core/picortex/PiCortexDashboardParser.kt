@@ -20,6 +20,8 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
 
     companion object {
         private const val REPORT_TYPE_SINGLE_VALUE = "SINGLE_VALUE"
+
+        private const val CHART_TYPE_BAR = "bar"
     }
 
     private fun reports(json: String): List<Map<String, Any>> {
@@ -40,18 +42,8 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
     private inline val Map<String, *>.all get() = this["All"]?.toString()?.toDouble() ?: 0.0
     private inline val Map<String, *>.singleValueString get() = this["singleValueString"] as String
 
-
-    private fun searchEntryWith(json: String, description: String): Map<String, Any> = reports(json).firstOrNull {
-        it.config["description"] == description
-    } ?: mapOf()
-
-    private fun parseSingleValueOf(description: String, from: String): String {
-        val entry = searchEntryWith(from, description = description)
-        return entry["singleValueString"].toString()
-    }
-
     private fun parseBarChartsWithDataSets(reports: List<Map<String, *>>): List<Chart<Double>> = reports.filter {
-        it.config.chartType == "bar" && it.datasets != null
+        it.config.chartType == CHART_TYPE_BAR && it.datasets != null
     }.map {
         val config = it.config
         val datasets = it.datasets ?: listOf()
@@ -71,7 +63,7 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
     }
 
     private fun parseBarChartsWithTabularData(reports: List<Map<String, *>>): List<Chart<Double>> = reports.filter {
-        it.config.chartType == "bar" && it.tabularData != null
+        it.config.chartType == CHART_TYPE_BAR && it.tabularData != null
     }.map {
         val data = it.tabularData!!
         val labels = data.keys.toInteroperableList()
@@ -102,10 +94,9 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
         val reports = reports(json)
         val barCharts = parseBarChartsWithDataSets(reports)
         val tabularCharts = parseBarChartsWithTabularData(reports)
-        val board = OperationalDashboard(
+        return OperationalDashboard(
             cards = parseSingleValues(reports),
             charts = (barCharts + tabularCharts).toInteroperableList()
         )
-        return board.copy()
     }
 }

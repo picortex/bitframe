@@ -14,7 +14,7 @@ data class Chart<out D>(
     val title: String,
     val description: String,
     val labels: List<String>,
-    val datasets: List<DataSet<D>> = listOf(),
+    val datasets: List<DataSet<D>>,
 ) {
     @Serializable
     data class DataSet<out D>(
