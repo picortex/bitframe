@@ -72,8 +72,8 @@ class PiCortexOperationalDashboardUserJourneyTest {
 
         step("View PiCortex Operations Dashboard of ${result?.business?.name}") {
             val state = State()
-            vm.expect(Intent.LoadOperationDashboard(invite!!.uid)).toContain(
-                state.copy(status = Feedback.Loading("Loading Operation Data For ${result!!.business.name}")),
+            vm.expect(Intent.LoadOperationDashboard(invite!!.invitedBusinessId)).toContain(
+                state.copy(status = Feedback.Loading("Loading operational dashboard, please wait . . .")),
             )
             expect(vm.ui.value.operationDashboard).toBeNonNull()
         }

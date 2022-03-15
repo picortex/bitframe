@@ -23,6 +23,7 @@ import pimonitor.core.invites.Invite
 import pimonitor.core.picortex.PiCortexApiCredentials
 import pimonitor.core.picortex.PiCortexDashboardProvider
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig
+import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Production
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Staging
 import pimonitor.core.sage.SageApiCredentials
 import pimonitor.core.spaces.SPACE_TYPE
@@ -46,7 +47,7 @@ open class BusinessesDaodService(
     private val sageCredentialsDao by lazy { factory.get<SageApiCredentials>() }
     private val piCortexDashboardProvider by lazy {
         val cfg = PiCortexDashboardProviderConfig(
-            json = config.json, scope = config.scope, environment = Staging
+            json = config.json, scope = config.scope, environment = Production
         )
         PiCortexDashboardProvider(cfg)
     }
@@ -95,9 +96,14 @@ open class BusinessesDaodService(
         val business = monitoredBusinessesDao.loadOrNull(businessId).await()?.takeIf {
             it.operationalBoard == DASHBOARD_OPERATIONAL.PICORTEX
         } ?: return@later null
-        
-        val cred = piCortexCredentialsDao.all(condition = PiCortexApiCredentials::businessId isEqualTo business.uid).await().first()
-        piCortexDashboardProvider.technicalDashboardOf(cred).await()
+
+        try {
+            val cred = piCortexCredentialsDao.all(condition = PiCortexApiCredentials::businessId isEqualTo business.uid).await().first()
+            piCortexDashboardProvider.technicalDashboardOf(cred).await()
+        } catch (e: Throwable) {
+            logger.error(e)
+            null
+        }
     }
 
     override fun all(rb: RequestBody.Authorized<BusinessFilter>) = config.scope.later {

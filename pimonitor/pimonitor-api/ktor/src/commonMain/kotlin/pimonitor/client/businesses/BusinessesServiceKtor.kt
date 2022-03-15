@@ -16,10 +16,7 @@ import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
-import pimonitor.core.businesses.params.InviteMessageParams
-import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.dashboards.OperationalDashboard
-import pimonitor.core.invites.Invite
 import response.decodeResponseFromString
 
 class BusinessesServiceKtor(
@@ -53,7 +50,7 @@ class BusinessesServiceKtor(
     }
 
     override fun operationalDashboard(rb: RequestBody.Authorized<String>): Later<OperationalDashboard?> = config.scope.later {
-        val req = client.post(path.businessesDashboard) {
+        val req = client.post(path.businessesDashboardOperational) {
             setBody(json.of(rb))
         }
         json.decodeResponseFromString(OperationalDashboard.serializer().nullable, req.bodyAsText()).response()
