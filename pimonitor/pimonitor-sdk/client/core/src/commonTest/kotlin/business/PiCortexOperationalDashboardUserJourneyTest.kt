@@ -46,9 +46,9 @@ class PiCortexOperationalDashboardUserJourneyTest {
         var result: CreateMonitoredBusinessResult? = null
         step("Create a monitored business") {
             val params = CreateMonitoredBusinessParams(
-                businessName = "PiCortex LLC",
-                contactName = "Mohammed Majapa",
-                contactEmail = "mmajapa@gmail$time.com",
+                businessName = "aSoft Ltd",
+                contactName = "Anderson Lameck",
+                contactEmail = "andylamax@programmer.net",
                 sendInvite = true
             )
             result = api.businesses.create(params).await()
