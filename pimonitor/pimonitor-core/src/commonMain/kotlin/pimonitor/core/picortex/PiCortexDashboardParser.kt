@@ -5,6 +5,7 @@ import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.mapper.Mapper
 import pimonitor.core.dashboards.OperationalDashboard
+import presenters.cards.ValueCard
 import presenters.charts.Chart
 import kotlin.collections.List
 import kotlin.collections.Map
@@ -17,12 +18,17 @@ import kotlinx.collections.interoperable.List as IList
 internal class PiCortexDashboardParser(val mapper: Mapper) {
     constructor(json: Json = PiCortexDashboardProviderConfig.DEFAULT_JSON) : this(Mapper(json))
 
+    companion object {
+        private const val REPORT_TYPE_SINGLE_VALUE = "SINGLE_VALUE"
+    }
+
     private fun reports(json: String): List<Map<String, Any>> {
         val map = mapper.decodeFromString(json)
         return map["reports"] as List<Map<String, Any>>
     }
 
     private inline val Map<String, *>.config get() = this["config"] as Map<String, *>
+    private inline val Map<String, *>.reportType get() = this["reportType"] as? String
     private inline val Map<String, *>.description get() = this["description"] as String
     private inline val Map<String, *>.name get() = this["name"] as String
     private inline val Map<String, *>.chartType get() = this["chartType"] as? String
@@ -32,6 +38,7 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
     private inline val Map<String, *>.data get() = this["data"] as Map<String, Number>
     private inline val Map<String, *>.tabularData get() = this["tabularData"] as? Map<String, Map<String, Double>>
     private inline val Map<String, *>.all get() = this["All"]?.toString()?.toDouble() ?: 0.0
+    private inline val Map<String, *>.singleValueString get() = this["singleValueString"] as String
 
 
     private fun searchEntryWith(json: String, description: String): Map<String, Any> = reports(json).firstOrNull {
@@ -81,11 +88,22 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
         )
     }
 
+    private fun parseSingleValues(reports: List<Map<String, *>>): IList<ValueCard<String>> = reports.filter {
+        it.config.reportType == REPORT_TYPE_SINGLE_VALUE
+    }.map {
+        ValueCard(
+            title = it.config.name,
+            value = it.singleValueString,
+            details = it.config.description
+        )
+    }.toInteroperableList()
+
     fun parseTechnicalDashboard(json: String): OperationalDashboard {
         val reports = reports(json)
         val barCharts = parseBarChartsWithDataSets(reports)
         val tabularCharts = parseBarChartsWithTabularData(reports)
         val board = OperationalDashboard(
+            cards = parseSingleValues(reports),
             charts = (barCharts + tabularCharts).toInteroperableList()
         )
         return board.copy()
