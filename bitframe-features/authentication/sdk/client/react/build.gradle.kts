@@ -11,7 +11,7 @@ kotlin {
         val main by getting {
             dependencies {
                 api(projects.bitframeAuthenticationSdkClientCore)
-                api(projects.bitframeServiceConfigSdkClientReact)
+                api(projects.bitframeServiceBuilderSdkClientReact)
                 api(projects.eventsReact)
                 api(asoft.viewmodel.react)
             }

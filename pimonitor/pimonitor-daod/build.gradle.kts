@@ -6,6 +6,8 @@ plugins {
     `picortex-publish`
 }
 
+val tmp = 1
+
 kotlin {
     jvm { library() }
     js(IR) { library() }
@@ -15,6 +17,7 @@ kotlin {
             dependencies {
                 api(projects.pimonitorCore)
                 api(projects.bitframeAuthenticationDaod)
+                api(projects.akkountsSage) // we are integrating with sage one
             }
         }
 

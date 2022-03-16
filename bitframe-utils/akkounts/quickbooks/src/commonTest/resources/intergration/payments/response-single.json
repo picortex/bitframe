@@ -1,0 +1,30 @@
+{
+  "Payment": {
+    "CustomerRef": {
+      "value": "20",
+      "name": "Karna Nisewaner"
+    },
+    "DepositToAccountRef": {
+      "value": "110"
+    },
+    "TotalAmt": 25.0,
+    "UnappliedAmt": 25.0,
+    "ProcessPayment": false,
+    "domain": "QBO",
+    "sparse": false,
+    "Id": "227",
+    "SyncToken": "0",
+    "MetaData": {
+      "CreateTime": "2021-07-12T15:15:40-07:00",
+      "LastUpdatedTime": "2021-07-12T15:15:40-07:00"
+    },
+    "TxnDate": "2021-07-13",
+    "CurrencyRef": {
+      "value": "AUD",
+      "name": "Australian Dollar"
+    },
+    "ExchangeRate": 1,
+    "Line": []
+  },
+  "time": "2021-07-12T15:15:40.152-07:00"
+}

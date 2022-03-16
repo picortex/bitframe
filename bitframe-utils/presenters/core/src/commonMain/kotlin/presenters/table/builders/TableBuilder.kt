@@ -1,11 +1,7 @@
 package presenters.table.builders
 
-import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
-import presenters.table.Column
-import presenters.table.Row
-import presenters.table.Table
-import presenters.table.TableAction
+import presenters.table.*
 import kotlin.jvm.JvmSynthetic
 
 class TableBuilder<D> {
@@ -43,9 +39,14 @@ fun <D> tableOf(
     block: TableBuilder<D>.() -> Unit
 ): Table<D> {
     val builder = TableBuilder<D>().apply(block)
-    return Table.of(
-        columns = builder.columns.toInteroperableList(),
+    val columns = builder.columns.toInteroperableList()
+    val actions = builder.actions.toInteroperableList()
+    return if (data.isEmpty()) EmptyTable(
+        columns = columns,
+        actions = actions
+    ) else Table.of(
+        columns = columns,
         data = data.toList().toInteroperableList(),
-        actions = builder.actions.toInteroperableList()
+        actions = actions
     )
 }

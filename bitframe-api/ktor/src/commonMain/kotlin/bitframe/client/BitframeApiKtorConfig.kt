@@ -9,7 +9,7 @@ import kotlinx.serialization.json.Json
 import live.MutableLive
 import logging.Logger
 
-interface BitframeApiKtorConfig : BitframeApiConfig, KtorServiceConfig {
+interface BitframeApiKtorConfig : BitframeApiConfig, ServiceConfigKtor {
     companion object {
         operator fun invoke(
             appId: String,
@@ -18,8 +18,8 @@ interface BitframeApiKtorConfig : BitframeApiConfig, KtorServiceConfig {
             session: MutableLive<Session> = ServiceConfig.DEFAULT_LIVE_SESSION,
             bus: EventBus = ServiceConfig.DEFAULT_BUS,
             logger: Logger = ServiceConfig.DEFAULT_LOGGER,
-            http: HttpClient = KtorServiceConfig.DEFAULT_HTTP_CLIENT,
-            json: Json = KtorServiceConfig.DEFAULT_JSON,
+            http: HttpClient = ServiceConfigKtor.DEFAULT_HTTP_CLIENT,
+            json: Json = ServiceConfigKtor.DEFAULT_JSON,
             scope: CoroutineScope = ServiceConfig.DEFAULT_SCOPE
         ) = object : BitframeApiKtorConfig {
             override val session: MutableLive<Session> = session

@@ -4,7 +4,7 @@ import bitframe.client.BitframeAppScopeConfig
 import bitframe.client.BitframeViewModelConfig
 import pimonitor.client.*
 
-fun PiMonitorMockScope() = PiMonitorAppScope(
+fun PiMonitorTestScope() = PiMonitorAppScope(
     BitframeAppScopeConfig(
         api = PiMonitorApiTest(),
         viewModel = BitframeViewModelConfig(

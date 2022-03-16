@@ -1,28 +1,32 @@
 package mailer
 
-import identifier.Email
 import kotlinx.collections.interoperable.List
 import kotlinx.coroutines.delay
 import later.Later
 import later.later
 
 class MockMailer(val config: MockMailerConfig = MockMailerConfig()) : Mailer {
-    override fun send(draft: EmailDraft, from: Email, to: List<Email>): Later<EmailMessage> = config.scope.later {
+    fun AddressInfo.toDetailsString() = if (name == null) {
+        email.value
+    } else {
+        "$name <${email.value}>"
+    }
+
+    override fun send(draft: EmailDraft, from: AddressInfo, to: List<AddressInfo>): Later<EmailMessage> = config.scope.later {
         delay(config.simulationTime)
         if (config.printToConsole) {
-            println(
-                """
-                ${config.separator}
-                Mock Email
-                ${config.separator} 
-                subject: ${draft.subject}
-                from:    ${from.value}
-                to:      ${to.joinToString(separator = ";") { it.value }}
-                ${config.separator}
-                ${draft.body}
-                ${config.separator}
-                """.trimIndent()
-            )
+            val message = buildString {
+                appendLine(config.separator)
+                appendLine("Mock Email [Mock Mailer]")
+                appendLine(config.separator)
+                appendLine("Subject: ${draft.subject}")
+                appendLine("From:    ${from.toDetailsString()}")
+                appendLine("To:      ${to.joinToString(separator = ";") { it.toDetailsString() }}")
+                appendLine(config.separator)
+                appendLine(draft.body)
+                appendLine(config.separator)
+            }
+            println(message)
         }
         draft.toMessage(from, to)
     }

@@ -2,7 +2,6 @@
 
 package mailer
 
-import identifier.Email
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.listOf
 import kotlin.js.JsExport
@@ -13,8 +12,8 @@ data class EmailDraft(
     val attachments: List<EmailAttachment> = listOf()
 ) {
     fun toMessage(
-        from: Email,
-        to: List<Email>
+        from: AddressInfo,
+        to: List<AddressInfo>
     ) = EmailMessage(
         subject = subject,
         from = from,

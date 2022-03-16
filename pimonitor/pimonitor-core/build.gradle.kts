@@ -15,20 +15,22 @@ kotlin {
             dependencies {
                 api(projects.bitframeAuthenticationCore)
                 api(projects.presentersCore)
+                api(projects.akkountsCore) // we need to return balance sheets and income statements
+                api(asoft.kotlinx.serialization.mapper) // PiMonitor API Needs to be parsed
+                api(ktor.client.core) // We need to make rest calls to picortex server
             }
-        }
-
-        val nonJsMain by creating {
-            dependsOn(commonMain)
-        }
-
-        val jvmMain by getting {
-            dependsOn(nonJsMain)
         }
 
         val commonTest by getting {
             dependencies {
                 api(asoft.expect.coroutines)
+                api(projects.presentersCore)
+            }
+        }
+
+        val jvmTest by getting {
+            dependencies {
+                implementation(ktor.client.cio)
             }
         }
     }

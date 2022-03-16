@@ -107,6 +107,12 @@ interface SmtpMailerConfig {
             properties: Properties,
             scope: CoroutineScope = DEFAULT_SCOPE
         ) = invoke(properties, scope)
+
+        fun fromProperties(path: String): SmtpMailerConfig {
+            val inputStream = ClassLoader.getSystemResourceAsStream(path) ?: error("Failed to get sendgrid.properties.file")
+            val props = Properties().apply { load(inputStream) }
+            return invoke(props)
+        }
     }
 
     fun toProperties(): Properties {

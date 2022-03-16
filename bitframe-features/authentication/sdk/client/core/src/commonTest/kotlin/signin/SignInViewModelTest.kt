@@ -2,7 +2,7 @@ package signin
 
 import bitframe.core.users.RegisterUserParams
 import bitframe.core.users.RegisterUserUseCaseImpl
-import bitframe.client.MockServiceConfig
+import bitframe.client.ServiceConfigMock
 import bitframe.client.UIScopeConfig
 import bitframe.client.signin.*
 import bitframe.core.signin.SignInCredentials
@@ -17,7 +17,7 @@ import kotlin.test.Ignore
 import kotlin.test.Test
 
 class SignInViewModelTest {
-    val config = MockServiceConfig()
+    val config = ServiceConfigMock()
     val service: SignInService = SignInServiceMock(config)
     val register = RegisterUserUseCaseImpl(config)
     private val vm = SignInViewModel(UIScopeConfig(service, recoveryTime = 0L))

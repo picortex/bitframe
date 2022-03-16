@@ -1,6 +1,5 @@
 package mailer
 
-import identifier.Email
 import kotlinx.collections.interoperable.List
 import later.Later
 import later.later
@@ -20,10 +19,16 @@ class SmtpMailer(val config: SmtpMailerConfig) : Mailer {
 
     val session by lazy { Session.getDefaultInstance(config.toProperties(), authenticator) }
 
-    override fun send(draft: EmailDraft, from: Email, to: List<Email>): Later<EmailMessage> = config.scope.later {
+    fun AddressInfo.toInternetAddress() = if (name == null) {
+        InternetAddress(email.value)
+    } else {
+        InternetAddress(email.value, name)
+    }
+
+    override fun send(draft: EmailDraft, from: AddressInfo, to: List<AddressInfo>): Later<EmailMessage> = config.scope.later {
         val message = MimeMessage(session).apply {
-            setFrom(InternetAddress(from.value))
-            addRecipients(Message.RecipientType.TO, to.map { InternetAddress(it.value) }.toTypedArray())
+            setFrom(from.toInternetAddress())
+            addRecipients(Message.RecipientType.TO, to.map { it.toInternetAddress() }.toTypedArray())
             subject = draft.subject
             setText(draft.body)
         }

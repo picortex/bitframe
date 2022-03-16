@@ -1,0 +1,17 @@
+{
+  "TaxCode": "Tanzania Revenue Authority-Value Added Tax",
+  "TaxRateDetails": [
+    {
+      "RateValue": "15",
+      "TaxApplicableOn": "Purchase",
+      "TaxAgencyId": "20",
+      "TaxRateName": "Tanzania Revenue Authority-Value Added Tax (Purchase)"
+    },
+    {
+      "RateValue": "15",
+      "TaxApplicableOn": "Sales",
+      "TaxAgencyId": "20",
+      "TaxRateName": "Tanzania Revenue Authority-Value Added Tax (Sales)"
+    }
+  ]
+}

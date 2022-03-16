@@ -4,18 +4,31 @@ import bitframe.server.Action
 import bitframe.server.Module
 import bitframe.server.http.HttpRoute
 import io.ktor.http.*
+import pimonitor.server.utils.path
 
 class BusinessModule(
     private val controller: BusinessController
 ) : Module {
-    val basePath = "/api/businesses"
+    val path = controller.service.config.path
     override val name = "Businesses"
     override val actions: List<Action> = listOf(
-        Action("create", mapOf(), HttpRoute(HttpMethod.Post, "$basePath/create") {
+        Action("create", mapOf(), HttpRoute(HttpMethod.Post, path.businessesCreate) {
             controller.create(it)
         }),
-        Action("all", mapOf(), HttpRoute(HttpMethod.Post, "$basePath/all") {
+        Action("all", mapOf(), HttpRoute(HttpMethod.Post, path.businessesAll) {
             controller.all(it)
+        }),
+        Action("delete", mapOf(), HttpRoute(HttpMethod.Post, path.businessesDelete) {
+            controller.delete(it)
+        }),
+        Action("operational dashboard", mapOf(), HttpRoute(HttpMethod.Post, path.businessesDashboardOperational) {
+            controller.dashboard(it)
+        }),
+        Action("income statements", mapOf(), HttpRoute(HttpMethod.Post, path.businessesIncomeStatement) {
+            controller.incomeStatement(it)
+        }),
+        Action("balance sheet", mapOf(), HttpRoute(HttpMethod.Post, path.businessesBalanceSheet) {
+            controller.balanceSheet(it)
         })
     )
 }

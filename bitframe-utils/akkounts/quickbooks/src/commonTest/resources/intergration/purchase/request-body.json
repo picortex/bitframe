@@ -1,0 +1,19 @@
+{
+  "PaymentType": "Cash",
+  "AccountRef": {
+    "name": "Test Account",
+    "value": "<unset>"
+  },
+  "Line": [
+    {
+      "DetailType": "AccountBasedExpenseLineDetail",
+      "Amount": 1000,
+      "AccountBasedExpenseLineDetail": {
+        "AccountRef": {
+          "name": "Test Account",
+          "value": "<unset>"
+        }
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 package bitframe.client.signin
 
-import bitframe.client.KtorServiceConfig
+import bitframe.client.ServiceConfigKtor
 import bitframe.client.of
 import bitframe.core.RequestBody
 import bitframe.core.signin.SignInCredentials
@@ -13,7 +13,7 @@ import later.later
 import response.decodeResponseFromString
 
 open class SignInServiceKtor(
-    override val config: KtorServiceConfig
+    override val config: ServiceConfigKtor
 ) : SignInService(config) {
     private val path get() = config.url + "/api/authentication/sign-in"
     private val http get() = config.http

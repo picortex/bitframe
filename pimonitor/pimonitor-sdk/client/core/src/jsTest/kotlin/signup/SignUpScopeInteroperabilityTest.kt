@@ -3,12 +3,12 @@ package signup
 import bitframe.client.jso
 import kotlinx.coroutines.test.runTest
 import live.WatchMode
-import utils.PiMonitorMockScope
+import utils.PiMonitorTestScope
 import kotlin.test.Test
 
 class SignUpScopeInteroperabilityTest {
 
-    val appScope = PiMonitorMockScope()
+    val appScope = PiMonitorTestScope()
 
     @Test
     fun can_send_intents_easily() = runTest {

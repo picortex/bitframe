@@ -1,4 +1,5 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client.signup.fields
 
@@ -11,6 +12,7 @@ data class BusinessFormFields(
     val title: String = "Create Your Account",
     val select: DropDownInputField = DropDownInputField(
         name = "registerAs",
+        label = "Register As",
         REGISTER_AS_BUSINESS.copy(selected = true),
         REGISTER_AS_INDIVIDUAL
     ),

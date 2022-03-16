@@ -39,10 +39,10 @@ jobs:
       - name: set versions
         id: versions
         run: |
-          echo "::set-output name=current::$(cat ./pimonitor/pimonitor-app/server/build/versioning/current.txt)"
-          echo "::set-output name=current_safe::$(cat ./pimonitor/pimonitor-app/server/build/versioning/current_safe.txt)"
-          echo "::set-output name=previous::$(cat ./pimonitor/pimonitor-app/server/build/versioning/previous.txt)"
-          echo "::set-output name=previous_safe::$(cat ./pimonitor/pimonitor-app/server/build/versioning/previous_safe.txt)"
+          echo "::set-output name=current::$(cat ./pimonitor/pimonitor-app/server/build/versioning/production_current.txt)"
+          echo "::set-output name=current_safe::$(cat ./pimonitor/pimonitor-app/server/build/versioning/production_current_safe.txt)"
+          echo "::set-output name=previous::$(cat ./pimonitor/pimonitor-app/server/build/versioning/production_previous.txt)"
+          echo "::set-output name=previous_safe::$(cat ./pimonitor/pimonitor-app/server/build/versioning/production_previous_safe.txt)"
 
       - name: Create Pi Monitor Docker Compose Production File
         run: ./gradlew :pimonitor-app-server:createDockerComposeProductionFile
@@ -60,7 +60,7 @@ jobs:
           rm: true
           target: /picortex/apps/pimonitor/${{ steps.versions.outputs.current }}/production
 
-      - name: Deploy Staging Stack
+      - name: Deploy Production Stack
         uses: appleboy/ssh-action@master
         with:
           host: ${{ env.REMOTE_HOST }}

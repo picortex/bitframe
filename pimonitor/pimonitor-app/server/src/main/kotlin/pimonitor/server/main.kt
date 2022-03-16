@@ -5,17 +5,26 @@ import bitframe.server.MongoDaoFactory
 import bitframe.server.MongoDaoFactoryConfig
 import bitframe.server.ServiceConfig
 import bitframe.server.bitframeApplication
+import mailer.MockMailer
+import mailer.SmtpMailer
+import mailer.SmtpMailerConfig
 import pimonitor.server.businesses.BusinessController
 import pimonitor.server.businesses.BusinessModule
 import pimonitor.server.contacts.ContactsController
 import pimonitor.server.contacts.ContactsModule
+import pimonitor.server.invites.InvitesController
+import pimonitor.server.invites.InvitesModule
 import pimonitor.server.portfolio.PortfolioController
 import pimonitor.server.portfolio.PortfolioModule
 import pimonitor.server.profile.ProfileController
 import pimonitor.server.profile.ProfileModule
+import pimonitor.server.search.SearchController
+import pimonitor.server.search.SearchModule
 import pimonitor.server.signup.SignUpController
 import pimonitor.server.signup.SignUpModule
 import java.io.File
+import java.io.FileInputStream
+import java.util.*
 
 fun main(args: Array<String>) {
     bitframeApplication<PiMonitorService> {
@@ -34,7 +43,11 @@ fun main(args: Array<String>) {
         }
 
         service { factory ->
-            PiMonitorService(ServiceConfig(factory))
+            val config = ServiceConfig(
+                daoFactory = factory,
+                mailer = SmtpMailer(SmtpMailerConfig.fromProperties("sendgrid.properties"))
+            )
+            PiMonitorService(config)
         }
 
         install { ser ->
@@ -52,6 +65,14 @@ fun main(args: Array<String>) {
 
         install { ser ->
             PortfolioModule(PortfolioController(ser.portfolio))
+        }
+
+        install { ser ->
+            SearchModule(SearchController(ser.search))
+        }
+
+        install { ser ->
+            InvitesModule(InvitesController(ser))
         }
 
         onStart { populateTestEntities() }

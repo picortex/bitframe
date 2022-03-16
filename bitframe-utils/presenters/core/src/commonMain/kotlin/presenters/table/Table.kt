@@ -10,7 +10,7 @@ import presenters.feedbacks.Feedback
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-class Table<D>(
+open class Table<D>(
     val live: MutableLive<TableState<D>>
 ) : TableLike<D> {
     @JsName("from")
@@ -84,13 +84,11 @@ class Table<D>(
     }
 
     override fun equals(other: Any?): Boolean = when (other) {
-        is Table<*> -> columns == other.columns
+        is Table<*> -> columns == other.columns && rows == rows
         else -> false
     }
 
-    override fun toString(): String {
-        return "Table(cols=${columns.size},rows=${rows.size})"
-    }
+    override fun toString() = "Table(cols=${columns.size},rows=${rows.size})"
 
     override fun hashCode(): Int = toString().hashCode()
 }

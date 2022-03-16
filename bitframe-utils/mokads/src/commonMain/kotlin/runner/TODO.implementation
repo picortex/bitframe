@@ -1,0 +1,9 @@
+Change this runner.
+
+Create a RunnerService that is configurable differently on every platform,
+
+A single service itself, can take a block of code and execute in different ways as follows
+
+run         : Runs the code synchronously
+launch      : Fires the code in a new thread and forgets
+start/async : Runs the code asynchronously in a new thread and awaits for a response by return a Later/Future

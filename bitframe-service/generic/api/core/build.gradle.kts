@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeServiceGenericCore)
-                api(projects.bitframeServiceConfigApiCore)
+                api(projects.bitframeServiceBuilderApiCore)
             }
         }
 

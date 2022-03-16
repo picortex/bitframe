@@ -5,10 +5,11 @@ plugins {
 }
 
 kotlin {
+
     jvm { library() }
 
     js(IR) {
-        library()
+        library(testTimeout = 20000)
     }
 
     sourceSets {
@@ -22,6 +23,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(projects.pimonitorApiPublicTest)
+                implementation(projects.presentersMock)
                 implementation(asoft.viewmodel.test.expect)
                 implementation(asoft.expect.core)
             }

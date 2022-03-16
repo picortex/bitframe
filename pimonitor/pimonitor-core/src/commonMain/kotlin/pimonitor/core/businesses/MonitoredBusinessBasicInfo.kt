@@ -8,12 +8,14 @@ import kotlin.js.JsExport
 
 @Serializable
 data class MonitoredBusinessBasicInfo(
-    override val spaceId: String, // space of this business
-    override val owningSpaceId: String, // space of the monitor monitoring this business
-    val dashboard: Dashboard = DASHBOARD.NONE,
+    override val name: String,
+    override val owningSpaceId: String,
+    val operationalBoard: DashboardOperational = DASHBOARD_OPERATIONAL.NONE,
+    val financialBoard: DashboardFinancial = DASHBOARD_FINANCIAL.NONE,
     override val email: String = "",
     override val address: String = "",
-    override val logo: String? = "",
+    val industry: String = "",
+    override val logoUrl: String? = null,
     override val uid: String = UNSET,
     override val deleted: Boolean = false
 ) : Business() {

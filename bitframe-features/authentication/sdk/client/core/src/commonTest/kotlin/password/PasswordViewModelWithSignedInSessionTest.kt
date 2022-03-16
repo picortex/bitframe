@@ -1,6 +1,6 @@
 package password
 
-import bitframe.client.MockServiceConfig
+import bitframe.client.ServiceConfigMock
 import bitframe.client.MockUIScopeConfig
 import bitframe.client.password.ChangePasswordIntent
 import bitframe.client.password.ChangePasswordScope
@@ -21,7 +21,7 @@ import kotlin.test.Test
 
 class PasswordViewModelWithSignedInSessionTest {
     val service: ProfileService = ProfileServiceMock(
-        MockServiceConfig(
+        ServiceConfigMock(
             session = mutableLiveOf(
                 Session.SignedIn(
                     app = App("test-app"),
