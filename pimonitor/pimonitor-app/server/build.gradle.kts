@@ -65,13 +65,13 @@ val createDockerfile by tasks.creating(Dockerfile::class) {
 val createDockerImage by tasks.creating(DockerBuildImage::class) {
     dependsOn(createDockerfile)
     inputDir.set(file("build/binaries"))
-    images.addAll("pimonitor:${vers.bitframe.current}")
+    images.addAll("pimonitor:${vers.bitframe.stagingCurrent}")
 }
 
 fun dockerPushTo(remote: String) = tasks.creating(Exec::class) {
     dependsOn(createDockerImage)
-    val localTag = "pimonitor:${vers.bitframe.current}"
-    val remoteName = "$remote/pimonitor:${vers.bitframe.current}"
+    val localTag = "pimonitor:${vers.bitframe.stagingCurrent}"
+    val remoteName = "$remote/pimonitor:${vers.bitframe.stagingCurrent}"
     commandLine("docker", "tag", localTag, remoteName)
     doLast {
         exec { commandLine("docker", "push", remoteName) }
@@ -100,7 +100,7 @@ fun DockerComposeFileTask.configure(port: Int) {
         ports((port - 1) to 27017)
     }
     service("server-app") {
-        image("${vars.dev.server.ip}:1030/pimonitor:${vers.bitframe.current}")
+        image("${vars.dev.server.ip}:1030/pimonitor:${vers.bitframe.stagingCurrent}")
         set("restart", "always")
         set(
             "depends_on", listOf(
@@ -130,6 +130,8 @@ afterEvaluate {
         file.writeText(value)
         safe.writeText(value.replace(".", "_"))
     }
-    writeVersion("current", vers.bitframe.current)
-    writeVersion("previous", vers.bitframe.previous)
+    writeVersion("staging_current", vers.bitframe.stagingCurrent)
+    writeVersion("staging_previous", vers.bitframe.stagingPrevious)
+    writeVersion("production_current", vers.bitframe.productionCurrent)
+    writeVersion("production_previous", vers.bitframe.productionPrevious)
 }

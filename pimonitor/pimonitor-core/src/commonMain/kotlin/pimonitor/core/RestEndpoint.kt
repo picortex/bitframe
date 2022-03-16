@@ -11,6 +11,8 @@ sealed class RestEndpoint(private val root: String) {
     val businessesDelete = "$businesses/delete"
     private val businessesDashboard = "$businesses/dashboard"
     val businessesDashboardOperational = "$businessesDashboard/operational"
+    val businessesIncomeStatement = "$businesses/income-statement"
+    val businessesBalanceSheet = "$businesses/balance-sheet"
 
     // invites
     val invitesAcceptSage = "$root/invites/accept/sage"

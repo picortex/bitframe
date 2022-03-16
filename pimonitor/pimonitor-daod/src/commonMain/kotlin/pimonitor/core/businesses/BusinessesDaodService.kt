@@ -1,5 +1,7 @@
 package pimonitor.core.businesses
 
+import akkounts.reports.balancesheet.BalanceSheet
+import akkounts.reports.incomestatement.IncomeStatement
 import akkounts.reports.utils.CategoryEntry
 import akkounts.sage.SageOneZAService
 import akkounts.sage.SageOneZAUserCompany
@@ -24,7 +26,6 @@ import pimonitor.core.picortex.PiCortexApiCredentials
 import pimonitor.core.picortex.PiCortexDashboardProvider
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Production
-import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Staging
 import pimonitor.core.sage.SageApiCredentials
 import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
@@ -100,6 +101,51 @@ open class BusinessesDaodService(
         try {
             val cred = piCortexCredentialsDao.all(condition = PiCortexApiCredentials::businessId isEqualTo business.uid).await().first()
             piCortexDashboardProvider.technicalDashboardOf(cred).await()
+        } catch (e: Throwable) {
+            logger.error(e)
+            null
+        }
+    }
+
+    private fun SageApiCredentials.toCompany(business: MonitoredBusinessBasicInfo) = SageOneZAUserCompany(
+        uid = business.uid,
+        name = business.name,
+        username = username,
+        password = password,
+        companyId = companyId
+    )
+
+    override fun balanceSheet(rb: RequestBody.Authorized<String>): Later<BalanceSheet?> = config.scope.later {
+        val businessId = rb.data
+
+        val business = monitoredBusinessesDao.loadOrNull(businessId).await()?.takeIf {
+            it.financialBoard == DASHBOARD_FINANCIAL.SAGE_ONE
+        } ?: return@later null
+
+        try {
+            val cred = sageCredentialsDao.all(condition = SageApiCredentials::businessId isEqualTo business.uid).await().first()
+            val company = cred.toCompany(business)
+            val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
+            sage.offeredTo(company).reports.balanceSheet(at = today).await()
+        } catch (e: Throwable) {
+            logger.error(e)
+            null
+        }
+    }
+
+    override fun incomeStatement(rb: RequestBody.Authorized<String>): Later<IncomeStatement?> = config.scope.later {
+        val businessId = rb.data
+
+        val business = monitoredBusinessesDao.loadOrNull(businessId).await()?.takeIf {
+            it.financialBoard == DASHBOARD_FINANCIAL.SAGE_ONE
+        } ?: return@later null
+
+        try {
+            val cred = sageCredentialsDao.all(condition = SageApiCredentials::businessId isEqualTo business.uid).await().first()
+            val company = cred.toCompany(business)
+            val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
+            val lastMonth = today - DatePeriod(months = 1)
+            sage.offeredTo(company).reports.incomeStatement(start = lastMonth, end = today).await()
         } catch (e: Throwable) {
             logger.error(e)
             null

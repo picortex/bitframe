@@ -10,13 +10,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
-import pimonitor.client.businesses.BusinessesDialogContent.captureInvestmentDialog
-import pimonitor.client.businesses.BusinessesDialogContent.createBusinessDialog
-import pimonitor.client.businesses.BusinessesDialogContent.deleteManyDialog
-import pimonitor.client.businesses.BusinessesDialogContent.deleteSingleDialog
-import pimonitor.client.businesses.BusinessesDialogContent.interveneDialog
-import pimonitor.client.businesses.BusinessesDialogContent.inviteToShareReportsDialog
 import pimonitor.client.businesses.BusinessesIntent.*
+import pimonitor.client.businesses.dialogs.*
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.copy
@@ -53,35 +48,35 @@ class BusinessesViewModel(
     }
 
     private fun showDeleteMultipleConfirmationDialog(i: ShowDeleteMultipleConfirmationDialog) {
-        ui.value = ui.value.copy(status = None, focus = null, dialog = deleteManyDialog(i.data) {
+        ui.value = ui.value.copy(status = None, focus = null, dialog = DeleteManyDialog(i.data) {
             onCancel { post(ExitDialog) }
             onConfirm { post(DeleteAll(i.data.map { it.data }.toTypedArray())) }
         })
     }
 
     private fun showDeleteSingleConfirmationDialog(i: ShowDeleteSingleConfirmationDialog) {
-        ui.value = ui.value.copy(status = None, focus = i.monitored, dialog = deleteSingleDialog(i.monitored) {
+        ui.value = ui.value.copy(status = None, focus = i.monitored, dialog = DeleteSingleDialog(i.monitored) {
             onCancel { post(ExitDialog) }
             onConfirm { post(Delete(i.monitored)) }
         })
     }
 
     private fun showCaptureInvestmentForm(i: ShowCaptureInvestmentForm) {
-        ui.value = ui.value.copy(status = None, focus = i.monitored, dialog = captureInvestmentDialog(i.monitored) {
+        ui.value = ui.value.copy(status = None, focus = i.monitored, dialog = CaptureInvestmentDialog(i.monitored) {
             onCancel { post(ExitDialog) }
-            onSubmit { params: Unit -> TODO() }
+            onSubmit { params: Any -> TODO() }
         })
     }
 
     private fun showInterveneForm(i: ShowInterveneForm) {
-        ui.value = ui.value.copy(status = None, focus = i.monitored, dialog = interveneDialog(i.monitored) {
+        ui.value = ui.value.copy(status = None, focus = i.monitored, dialog = InterveneDialog(i.monitored) {
             onCancel { post(ExitDialog) }
-            onSubmit { params: Unit -> TODO() }
+            onSubmit { params: Any -> TODO() }
         })
     }
 
     private fun showCreateBusinessForm() {
-        ui.value = ui.value.copy(status = None, focus = null, dialog = createBusinessDialog {
+        ui.value = ui.value.copy(status = None, focus = null, dialog = CreateBusinessDialog {
             onCancel { post(ExitDialog) }
             onSubmit { params -> post(SendCreateBusinessForm(params)) }
         })
@@ -92,7 +87,7 @@ class BusinessesViewModel(
         flow {
             emit(state.copy(status = Loading("Preparing invite form, please wait . . ."), focus = i.monitored, dialog = null))
             val inviteInfo = api.invites.defaultInviteMessage(InviteMessageParams(i.monitored.uid)).await()
-            val dialog = inviteToShareReportsDialog(
+            val dialog = InviteToShareReportsDialog(
                 businessName = i.monitored.name,
                 contactEmail = i.monitored.contacts.filterIsInstance<UserEmail>().firstOrNull()?.value ?: error("There are no registered contact's with email in ${i.monitored.name}"),
                 message = inviteInfo.inviteMessage
@@ -124,7 +119,7 @@ class BusinessesViewModel(
             if (result.params.sendInvite) {
                 emit(state.copy(status = Success("${i.params.businessName} has successfully been added. Preparing invite form, please wait . . ."), dialog = null))
                 val inviteInfo = api.invites.defaultInviteMessage(InviteMessageParams(result.business.uid)).await()
-                val dialog = inviteToShareReportsDialog(
+                val dialog = InviteToShareReportsDialog(
                     businessName = result.params.businessName, contactEmail = result.params.contactEmail, message = inviteInfo.inviteMessage
                 ) {
                     onCancel { post(LoadBusinesses) }

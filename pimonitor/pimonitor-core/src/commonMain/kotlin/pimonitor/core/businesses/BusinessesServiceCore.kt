@@ -2,6 +2,8 @@
 
 package pimonitor.core.businesses
 
+import akkounts.reports.balancesheet.BalanceSheet
+import akkounts.reports.incomestatement.IncomeStatement
 import bitframe.core.RequestBody
 import bitframe.core.ServiceConfig
 import events.Event
@@ -35,4 +37,18 @@ interface BusinessesServiceCore {
     @JvmSynthetic
     @JsName("_ignore_operationalDashboard")
     fun operationalDashboard(rb: RequestBody.Authorized<String>): Later<OperationalDashboard?>
+
+    /**
+     * @param rb - [RequestBody.Authorized]<BusinessId> where BusinessId is a string
+     */
+    @JvmSynthetic
+    @JsName("_ignore_incomeStatement")
+    fun incomeStatement(rb: RequestBody.Authorized<String>): Later<IncomeStatement?>
+
+    /**
+     * @param rb - [RequestBody.Authorized]<BusinessId> where BusinessId is a string
+     */
+    @JvmSynthetic
+    @JsName("_ignore_balanceSheet")
+    fun balanceSheet(rb: RequestBody.Authorized<String>): Later<BalanceSheet?>
 }

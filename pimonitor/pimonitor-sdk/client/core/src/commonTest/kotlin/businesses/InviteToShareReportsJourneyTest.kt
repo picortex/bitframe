@@ -4,14 +4,11 @@ import bitframe.core.UserEmail
 import bitframe.core.signin.SignInCredentials
 import expect.expect
 import later.await
-import pimonitor.client.businesses.BusinessesDialogContent.InviteToShareReports
-import pimonitor.client.businesses.forms.InviteToShareFormFields
+import pimonitor.client.businesses.dialogs.InviteToShareReportsDialog
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.businesses.params.InviteToShareReportsRawParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import presenters.feedbacks.Feedback
-import presenters.modal.Dialog
 import utils.PiMonitorTestScope
 import utils.toContain
 import viewmodel.expect
@@ -62,8 +59,7 @@ class InviteToShareReportsJourneyTest {
         step("Should launch an invite to share reports dialog") {
             val business = api.businesses.all().await().first()
             vm.expect(Intent.ShowInviteToShareReportsForm(business))
-            val dialog = vm.ui.value.dialog as Dialog.Form<InviteToShareFormFields, InviteToShareReportsRawParams>
-            expect(dialog.heading).toBe(InviteToShareReports)
+            val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
             expect(dialog.fields.to.value).toBe(business.contacts.first { it is UserEmail }.value)
         }
     }

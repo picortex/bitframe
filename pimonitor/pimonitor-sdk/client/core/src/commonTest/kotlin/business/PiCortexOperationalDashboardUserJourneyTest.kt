@@ -20,9 +20,9 @@ import kotlin.test.Test
 
 class PiCortexOperationalDashboardUserJourneyTest {
 
-    val scope = PiMonitorTestScope()
-    val api get() = scope.api
-    val vm get() = scope.business.viewModel
+    private val scope = PiMonitorTestScope()
+    private val api get() = scope.api
+    private val vm get() = scope.business.viewModel
 
     @Test
     fun should_load_picortex_dashboard_of_a_business_with_picortex_integration() = runSequence {

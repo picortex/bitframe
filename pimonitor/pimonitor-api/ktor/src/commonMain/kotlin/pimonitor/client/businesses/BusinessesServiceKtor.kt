@@ -1,5 +1,7 @@
 package pimonitor.client.businesses
 
+import akkounts.reports.balancesheet.BalanceSheet
+import akkounts.reports.incomestatement.IncomeStatement
 import bitframe.client.ServiceConfigKtor
 import bitframe.client.of
 import bitframe.core.RequestBody
@@ -54,5 +56,19 @@ class BusinessesServiceKtor(
             setBody(json.of(rb))
         }
         json.decodeResponseFromString(OperationalDashboard.serializer().nullable, req.bodyAsText()).response()
+    }
+
+    override fun incomeStatement(rb: RequestBody.Authorized<String>): Later<IncomeStatement?> = config.scope.later {
+        val req = client.post(path.businessesIncomeStatement) {
+            setBody(json.of(rb))
+        }
+        json.decodeResponseFromString(IncomeStatement.serializer().nullable, req.bodyAsText()).response()
+    }
+
+    override fun balanceSheet(rb: RequestBody.Authorized<String>): Later<BalanceSheet?> = config.scope.later {
+        val req = client.post(path.businessesBalanceSheet) {
+            setBody(json.of(rb))
+        }
+        json.decodeResponseFromString(BalanceSheet.serializer().nullable, req.bodyAsText()).response()
     }
 }

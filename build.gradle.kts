@@ -14,7 +14,7 @@ allprojects {
         publicRepos()
     }
     group = "com.picortex"
-    version = vers.bitframe.current
+    version = vers.bitframe.stagingCurrent
 }
 
 val dokkaHtmlMultiModule by tasks.getting(DokkaMultiModuleTask::class) {

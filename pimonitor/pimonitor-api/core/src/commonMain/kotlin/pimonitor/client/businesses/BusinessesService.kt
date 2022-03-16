@@ -3,6 +3,8 @@
 
 package pimonitor.client.businesses
 
+import akkounts.reports.balancesheet.BalanceSheet
+import akkounts.reports.incomestatement.IncomeStatement
 import bitframe.client.ServiceConfig
 import bitframe.client.getSignedInSessionTo
 import bitframe.core.RequestBody
@@ -20,7 +22,10 @@ abstract class BusinessesService(
     open val config: ServiceConfig
 ) : BusinessesServiceCore {
 
-    val logger get() = config.logger
+    val logger
+        get() = config.logger.with(
+            "source" to this::class.simpleName
+        )
 
     fun create(params: CreateMonitoredBusinessRawParams) = config.scope.later {
         logger.info("Registering business ${params.businessName}")
@@ -57,5 +62,21 @@ abstract class BusinessesService(
             data = businessId
         )
         operationalDashboard(rb).await()
+    }
+
+    fun incomeStatement(businessId: String): Later<IncomeStatement?> = config.scope.later {
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("load income statement"),
+            data = businessId
+        )
+        incomeStatement(rb).await()
+    }
+
+    fun balanceSheet(businessId: String): Later<BalanceSheet?> = config.scope.later {
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("load income statement"),
+            data = businessId
+        )
+        balanceSheet(rb).await()
     }
 }

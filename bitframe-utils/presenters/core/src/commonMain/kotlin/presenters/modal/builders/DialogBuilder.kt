@@ -4,7 +4,7 @@ import kotlinx.collections.interoperable.mutableListOf
 import presenters.modal.DialogAction
 
 abstract class DialogBuilder {
-    internal val actions = mutableListOf<DialogAction>()
+    val actions = mutableListOf<DialogAction>()
 
     fun on(action: String, handler: () -> Unit) {
         actions.add(DialogAction(action, handler))
