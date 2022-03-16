@@ -24,6 +24,7 @@ class PiCortexDashboardProvider(
             "userType" to "DataConsoleUser"
         )
         val url = "https://${credentials.subdomain}.$domain/api/reporting"
+        println(credentials)
         println(url)
         println(params)
         val res = client.post(url) {
@@ -34,6 +35,7 @@ class PiCortexDashboardProvider(
                 )
             )
         }
+        println(res.bodyAsText())
         parser.parseTechnicalDashboard(res.bodyAsText())
     }
 }
