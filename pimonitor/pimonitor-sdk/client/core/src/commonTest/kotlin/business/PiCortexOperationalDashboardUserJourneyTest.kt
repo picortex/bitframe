@@ -64,8 +64,8 @@ class PiCortexOperationalDashboardUserJourneyTest {
             val i = invite ?: error("Invite not is found")
             val params = AcceptPicortexInviteParams(
                 inviteId = i.uid,
-                subdomain = "b2bdemo",
-                secret = "89aqiclvjktp0aa4bgfqpbppf6"
+                subdomain = "b2b",
+                secret = "f225ela32hovtvo4s1bj466j1p"
             )
             api.invites.accept(params).await()
         }
