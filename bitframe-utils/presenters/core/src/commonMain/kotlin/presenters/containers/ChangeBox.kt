@@ -11,5 +11,5 @@ data class ChangeBox<out D>(
     val previous: D,
     val current: D,
     val details: String,
-    val change: ChangeRemark
+    val change: ChangeRemark<D>
 )

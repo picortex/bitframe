@@ -34,10 +34,7 @@ sealed class Feedback {
 
     override fun hashCode(): Int = message.hashCode()
 
-    override fun equals(other: Any?): Boolean = when (other) {
-        is Feedback -> other.message == message && this::class == other::class
-        else -> false
-    }
+    override fun equals(other: Any?): Boolean = other is Feedback && other.message == message && this::class == other::class
 
     override fun toString(): String = "${this::class.simpleName}(message=$message)"
 }

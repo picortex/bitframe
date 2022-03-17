@@ -32,6 +32,7 @@ import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
 import presenters.containers.ChangeBox
 import presenters.containers.ChangeRemark
+import presenters.containers.changeBoxOf
 
 open class BusinessesDaodService(
     open val config: ServiceConfigDaod
@@ -198,21 +199,15 @@ open class BusinessesDaodService(
                 ).await()
                 val currency = earlyIncomeStatement.header.currency
                 bus.copy(
-                    revenue = ChangeBox(
+                    revenue = changeBoxOf(
                         previous = earlyIncomeStatement.body.income.toMoney(currency),
                         current = laterIncomeStatement.body.income.toMoney(currency),
-                        details = "Updated now",
-                        change = ChangeRemark.CONSTANT
-                    ), expenses = ChangeBox(
+                    ), expenses = changeBoxOf(
                         previous = earlyIncomeStatement.body.expenses.toMoney(currency),
                         current = laterIncomeStatement.body.expenses.toMoney(currency),
-                        details = "Updated now",
-                        change = ChangeRemark.CONSTANT
-                    ), grossProfit = ChangeBox(
+                    ), grossProfit = changeBoxOf(
                         previous = Money.of(earlyIncomeStatement.body.grossProfit / currency.lowestDenomination, currency),
                         current = Money.of(laterIncomeStatement.body.grossProfit / currency.lowestDenomination, currency),
-                        details = "Updated now",
-                        change = ChangeRemark.CONSTANT
                     )
                 )
             } catch (exp: Throwable) {

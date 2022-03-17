@@ -14,15 +14,17 @@ import viewmodel.ViewModel
 
 class BusinessDetailsViewModel(
     private val config: UIScopeConfig<BusinessesService>
-) : ViewModel<Intent, State>(State(), config.viewModel) {
+) : ViewModel<BusinessDetailsIntent, BusinessDetailsState>(BusinessDetailsState(), config.viewModel) {
+
     private val service get() = config.service
-    override fun CoroutineScope.execute(i: Intent): Any = when (i) {
-        is Intent.LoadOperationDashboard -> loadOperationDashboard(i)
-        is Intent.LoadIncomeStatement -> loadIncomeStatement(i)
-        is Intent.LoadBalanceSheet -> loadBalanceSheet(i)
+
+    override fun CoroutineScope.execute(i: BusinessDetailsIntent): Any = when (i) {
+        is BusinessDetailsIntent.LoadOperationDashboard -> loadOperationDashboard(i)
+        is BusinessDetailsIntent.LoadIncomeStatement -> loadIncomeStatement(i)
+        is BusinessDetailsIntent.LoadBalanceSheet -> loadBalanceSheet(i)
     }
 
-    private suspend fun Flow<State>.catchAndCollectToUI(state: State) = catch {
+    private suspend fun Flow<BusinessDetailsState>.catchAndCollectToUI(state: BusinessDetailsState) = catch {
         emit(state.copy(status = Feedback.Failure(it)))
         delay(config.viewModel.recoveryTime)
         emit(state.copy(status = Feedback.None))
@@ -30,7 +32,7 @@ class BusinessDetailsViewModel(
         ui.value = it
     }
 
-    private fun CoroutineScope.loadBalanceSheet(i: Intent.LoadBalanceSheet) = launch {
+    private fun CoroutineScope.loadBalanceSheet(i: BusinessDetailsIntent.LoadBalanceSheet) = launch {
         val state = ui.value
         flow {
             emit(state.copy(status = Feedback.Loading("Loading balance sheet, please wait . . .")))
@@ -39,7 +41,7 @@ class BusinessDetailsViewModel(
         }.catchAndCollectToUI(state)
     }
 
-    private fun CoroutineScope.loadIncomeStatement(i: Intent.LoadIncomeStatement) = launch {
+    private fun CoroutineScope.loadIncomeStatement(i: BusinessDetailsIntent.LoadIncomeStatement) = launch {
         val state = ui.value
         flow {
             emit(state.copy(status = Feedback.Loading("Loading income statement, please wait . . .")))
@@ -48,7 +50,7 @@ class BusinessDetailsViewModel(
         }.catchAndCollectToUI(state)
     }
 
-    private fun CoroutineScope.loadOperationDashboard(i: Intent.LoadOperationDashboard) = launch {
+    private fun CoroutineScope.loadOperationDashboard(i: BusinessDetailsIntent.LoadOperationDashboard) = launch {
         val state = ui.value
         flow {
             emit(state.copy(status = Feedback.Loading("Loading operational dashboard, please wait . . .")))

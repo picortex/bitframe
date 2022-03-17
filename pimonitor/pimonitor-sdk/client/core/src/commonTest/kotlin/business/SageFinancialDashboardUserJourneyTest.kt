@@ -3,18 +3,15 @@ package business
 import bitframe.core.signin.SignInCredentials
 import expect.expect
 import later.await
-import pimonitor.client.TestSequence
-import pimonitor.client.business.Intent
-import pimonitor.client.business.State
+import pimonitor.client.business.BusinessDetailsIntent
+import pimonitor.client.business.BusinessDetailsState
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
 import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.invites.Invite
-import pimonitor.core.picortex.AcceptPicortexInviteParams
 import pimonitor.core.sage.AcceptSageOneInviteParams
 import pimonitor.core.signup.params.IndividualSignUpParams
-import presenters.feedbacks.Feedback
 import presenters.feedbacks.Feedback.Loading
 import utils.PiMonitorTestScope
 import utils.toContain
@@ -74,8 +71,8 @@ class SageFinancialDashboardUserJourneyTest {
         }
 
         step("View Income Statement of the business under test") {
-            val state = State()
-            vm.expect(Intent.LoadIncomeStatement(invite!!.invitedBusinessId)).toContain(
+            val state = BusinessDetailsState()
+            vm.expect(BusinessDetailsIntent.LoadIncomeStatement(invite!!.invitedBusinessId)).toContain(
                 state.copy(status = Loading("Loading income statement, please wait . . .")),
             )
             expect(vm.ui.value.incomeStatement).toBeNonNull()
@@ -129,8 +126,8 @@ class SageFinancialDashboardUserJourneyTest {
         }
 
         step("View Balance Sheet of the business under test") {
-            val state = State()
-            vm.expect(Intent.LoadBalanceSheet(invite!!.invitedBusinessId)).toContain(
+            val state = BusinessDetailsState()
+            vm.expect(BusinessDetailsIntent.LoadBalanceSheet(invite!!.invitedBusinessId)).toContain(
                 state.copy(status = Loading("Loading balance sheet, please wait . . .")),
             )
             expect(vm.ui.value.balanceSheet).toBeNonNull()

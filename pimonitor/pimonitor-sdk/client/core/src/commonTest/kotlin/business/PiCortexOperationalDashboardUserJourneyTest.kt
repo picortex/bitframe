@@ -3,8 +3,8 @@ package business
 import bitframe.core.signin.SignInCredentials
 import expect.expect
 import later.await
-import pimonitor.client.business.Intent
-import pimonitor.client.business.State
+import pimonitor.client.business.BusinessDetailsIntent
+import pimonitor.client.business.BusinessDetailsState
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
@@ -71,8 +71,8 @@ class PiCortexOperationalDashboardUserJourneyTest {
         }
 
         step("View PiCortex Operations Dashboard of ${result?.business?.name}") {
-            val state = State()
-            vm.expect(Intent.LoadOperationDashboard(invite!!.invitedBusinessId)).toContain(
+            val state = BusinessDetailsState()
+            vm.expect(BusinessDetailsIntent.LoadOperationDashboard(invite!!.invitedBusinessId)).toContain(
                 state.copy(status = Feedback.Loading("Loading operational dashboard, please wait . . .")),
             )
             expect(vm.ui.value.operationDashboard).toBeNonNull()

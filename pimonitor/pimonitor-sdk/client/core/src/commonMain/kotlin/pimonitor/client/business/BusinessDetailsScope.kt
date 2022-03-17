@@ -7,8 +7,8 @@ import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.client.businesses.BusinessesService
 import kotlin.js.JsExport
-import pimonitor.client.business.State as State
-import pimonitor.client.business.Intent as Intent
+import pimonitor.client.business.BusinessDetailsState as State
+import pimonitor.client.business.BusinessDetailsIntent as Intent
 
 open class BusinessDetailsScope(
     override val config: UIScopeConfig<BusinessesService>
@@ -19,11 +19,15 @@ open class BusinessDetailsScope(
         viewModel.post(Intent.LoadOperationDashboard(businessId))
     }
 
-    val loadFinancialDashboard = { businessId: String ->
+    val loadIncomeStatement = { businessId: String ->
         viewModel.post(Intent.LoadIncomeStatement(businessId))
     }
 
     val loadBalanceSheet = { businessId: String ->
         viewModel.post(Intent.LoadBalanceSheet(businessId))
     }
+
+    /*
+    TODO: Identify available reports first before querying
+     */
 }
