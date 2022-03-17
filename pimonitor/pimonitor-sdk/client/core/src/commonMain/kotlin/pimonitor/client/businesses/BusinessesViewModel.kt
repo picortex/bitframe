@@ -105,9 +105,8 @@ class BusinessesViewModel(
             val focused = state.focus ?: error("There is no business that is currently focused on")
             emit(state.copy(status = Loading("Sending invite to ${focused.name}, Please wait . . ."), dialog = null))
             api.invites.send(i.params.copy(focused.uid)).await()
-            emit(state.copy(status = Success("Invite Sent"), dialog = null))
-            delay(config.viewModel.transitionTime)
-            emit(state.copy(status = None, dialog = null))
+            emit(state.copy(status = Success("Invite Sent. Loading your businesses, please wait . . ."), dialog = null))
+            emit(state.copy(status = None, table = businessTable(api.businesses.all().await()), dialog = null))
         }.catchAndCollectToUI(ui.value)
     }
 

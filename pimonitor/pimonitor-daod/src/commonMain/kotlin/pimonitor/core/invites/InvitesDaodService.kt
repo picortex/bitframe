@@ -59,7 +59,7 @@ open class InvitesDaodService(
         val invite = invitesDao.create(inviteParams).await()
         val draft = EmailDraft(
             subject = rb.data.subject,
-            body = "${rb.data.message}\n\nGoto https://pimonitor.vercel.app/connect?inviteId=${invite.uid}"
+            body = "${rb.data.message}\n\nGoto https://pimonitor.vercel.app/connect/${invite.uid}"
         )
         config.mailer.send(
             draft = draft,

@@ -26,6 +26,7 @@ import pimonitor.core.picortex.PiCortexApiCredentials
 import pimonitor.core.picortex.PiCortexDashboardProvider
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Production
+import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Staging
 import pimonitor.core.sage.SageApiCredentials
 import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
@@ -48,7 +49,7 @@ open class BusinessesDaodService(
     private val sageCredentialsDao by lazy { factory.get<SageApiCredentials>() }
     private val piCortexDashboardProvider by lazy {
         val cfg = PiCortexDashboardProviderConfig(
-            json = config.json, scope = config.scope, environment = Production
+            json = config.json, scope = config.scope, environment = Staging
         )
         PiCortexDashboardProvider(cfg)
     }

@@ -15,6 +15,7 @@ import pimonitor.core.picortex.AcceptPicortexInviteParams
 import pimonitor.core.sage.AcceptSageOneInviteParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import presenters.feedbacks.Feedback
+import presenters.feedbacks.Feedback.Loading
 import utils.PiMonitorTestScope
 import utils.toContain
 import viewmodel.expect
@@ -75,7 +76,7 @@ class SageFinancialDashboardUserJourneyTest {
         step("View Income Statement of the business under test") {
             val state = State()
             vm.expect(Intent.LoadIncomeStatement(invite!!.invitedBusinessId)).toContain(
-                state.copy(status = Feedback.Loading("Loading income statement, please wait . . .")),
+                state.copy(status = Loading("Loading income statement, please wait . . .")),
             )
             expect(vm.ui.value.incomeStatement).toBeNonNull()
         }
@@ -130,7 +131,7 @@ class SageFinancialDashboardUserJourneyTest {
         step("View Balance Sheet of the business under test") {
             val state = State()
             vm.expect(Intent.LoadBalanceSheet(invite!!.invitedBusinessId)).toContain(
-                state.copy(status = Feedback.Loading("Loading balance sheet, please wait . . .")),
+                state.copy(status = Loading("Loading balance sheet, please wait . . .")),
             )
             expect(vm.ui.value.balanceSheet).toBeNonNull()
         }
