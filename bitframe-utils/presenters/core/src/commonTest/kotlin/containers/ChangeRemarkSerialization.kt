@@ -62,7 +62,7 @@ class ChangeRemarkSerialization {
     fun should_deserialize_indeterminate_money() {
         val change = changeRemarkOf(4000.TZS, 4000.USD)
         println("Before decode")
-        val decoded = Json.decodeFromString(ChangeRemark.serializer(Money.serializer()), """{"me":false}""")
+        val decoded = Json.decodeFromString<ChangeRemark<Money>>("""{"me":false}""")
         println("After decode")
         expect(decoded).toBe<ChangeRemark.Indeterminate>()
         expect(decoded).toBe(change)
