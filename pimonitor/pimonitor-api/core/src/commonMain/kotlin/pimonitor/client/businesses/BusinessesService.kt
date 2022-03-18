@@ -13,6 +13,7 @@ import later.await
 import later.later
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.BusinessesServiceCore
+import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import pimonitor.core.businesses.params.toValidatedCreateBusinessParams
 import pimonitor.core.dashboards.OperationalDashboard
@@ -56,7 +57,7 @@ abstract class BusinessesService(
         delete(rb).await()
     }
 
-    fun operationalDashboard(businessId: String): Later<OperationalDashboard?> = config.scope.later {
+    fun operationalDashboard(businessId: String) = config.scope.later {
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("load operational dashboard info for business with id=$businessId "),
             data = businessId
@@ -64,7 +65,7 @@ abstract class BusinessesService(
         operationalDashboard(rb).await()
     }
 
-    fun incomeStatement(businessId: String): Later<IncomeStatement?> = config.scope.later {
+    fun incomeStatement(businessId: String) = config.scope.later {
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("load income statement"),
             data = businessId
@@ -72,11 +73,27 @@ abstract class BusinessesService(
         incomeStatement(rb).await()
     }
 
-    fun balanceSheet(businessId: String): Later<BalanceSheet?> = config.scope.later {
+    fun balanceSheet(businessId: String) = config.scope.later {
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("load income statement"),
             data = businessId
         )
         balanceSheet(rb).await()
+    }
+
+    fun load(businessId: String): Later<MonitoredBusinessBasicInfo> = config.scope.later {
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("load business"),
+            data = businessId
+        )
+        load(rb).await()
+    }
+
+    fun availableReports(businessId: String) = config.scope.later {
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("load available reports"),
+            data = businessId
+        )
+        availableReports(rb).await()
     }
 }

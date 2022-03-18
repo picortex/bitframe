@@ -1,10 +1,13 @@
-package business
+package business.financials
 
+import akkounts.reports.balancesheet.BalanceSheet
+import akkounts.reports.incomestatement.IncomeStatement
 import bitframe.core.signin.SignInCredentials
 import expect.expect
+import expect.toBe
 import later.await
-import pimonitor.client.business.BusinessDetailsIntent
-import pimonitor.client.business.BusinessDetailsState
+import pimonitor.client.business.financials.BusinessFinancialIntent
+import pimonitor.client.business.financials.BusinessFinancialsContent
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
@@ -12,7 +15,7 @@ import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.invites.Invite
 import pimonitor.core.sage.AcceptSageOneInviteParams
 import pimonitor.core.signup.params.IndividualSignUpParams
-import presenters.feedbacks.Feedback.Loading
+import presenters.state.State
 import utils.PiMonitorTestScope
 import utils.toContain
 import viewmodel.expect
@@ -22,7 +25,7 @@ class SageFinancialDashboardUserJourneyTest {
 
     private val scope = PiMonitorTestScope()
     private val api get() = scope.api
-    private val vm get() = scope.business.viewModel
+    private val vm get() = scope.businessFinancials.viewModel
 
     @Test
     fun should_load_income_statement_of_a_business_with_sage_integration() = runSequence {
@@ -71,11 +74,13 @@ class SageFinancialDashboardUserJourneyTest {
         }
 
         step("View Income Statement of the business under test") {
-            val state = BusinessDetailsState()
-            vm.expect(BusinessDetailsIntent.LoadIncomeStatement(invite!!.invitedBusinessId)).toContain(
-                state.copy(status = Loading("Loading income statement, please wait . . .")),
+            val businessId = invite!!.invitedBusinessId
+            vm.expect(BusinessFinancialIntent.LoadAvailableReports(businessId))
+            vm.expect(BusinessFinancialIntent.LoadIncomeStatement(businessId)).toContain(
+                State.Loading("Loading income statement, please wait . . ."),
             )
-            expect(vm.ui.value.incomeStatement).toBeNonNull()
+            val state = vm.ui.value as State.Content<BusinessFinancialsContent.Report>
+            expect(state.value.data).toBe<IncomeStatement>()
         }
     }
 
@@ -126,11 +131,13 @@ class SageFinancialDashboardUserJourneyTest {
         }
 
         step("View Balance Sheet of the business under test") {
-            val state = BusinessDetailsState()
-            vm.expect(BusinessDetailsIntent.LoadBalanceSheet(invite!!.invitedBusinessId)).toContain(
-                state.copy(status = Loading("Loading balance sheet, please wait . . .")),
+            val businessId = invite!!.invitedBusinessId
+            vm.expect(BusinessFinancialIntent.LoadAvailableReports(businessId))
+            vm.expect(BusinessFinancialIntent.LoadBalanceSheet(businessId)).toContain(
+                State.Loading("Loading balance sheet, please wait . . ."),
             )
-            expect(vm.ui.value.balanceSheet).toBeNonNull()
+            val state = vm.ui.value as State.Content<BusinessFinancialsContent.Report>
+            expect(state.value.data).toBe<BalanceSheet>()
         }
     }
 }

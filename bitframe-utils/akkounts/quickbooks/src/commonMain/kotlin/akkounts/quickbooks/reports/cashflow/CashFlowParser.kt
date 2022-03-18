@@ -27,7 +27,7 @@ class CashFlowParser(map: Map<String, Any?>) : GenericParser(map) {
         return (amount * 100).toInt()
     }
 
-    fun parseBody() = CashFlow.Data(
+    fun parseBody() = CashFlow.Body(
         startAmount = parseStartingAmount(),
         operating = getEntriesFrom(map, "OperatingActivities"),
         investing = getEntriesFrom(map, "InvestingActivities"),

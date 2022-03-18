@@ -13,7 +13,7 @@ import bitframe.client.password.ChangePasswordState as State
 
 open class ChangePasswordScope(
     override val config: UIScopeConfig<ProfileService>
-) : UIScope<Intent, State> {
+) : UIScope<State> {
     override val viewModel by lazy { ChangePasswordViewModel(config) }
     val changePassword = { params: ChangePasswordRawParams ->
         viewModel.post(Intent(params))

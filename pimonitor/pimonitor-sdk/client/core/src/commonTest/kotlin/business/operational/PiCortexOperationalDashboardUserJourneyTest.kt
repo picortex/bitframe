@@ -1,18 +1,22 @@
-package business
+package business.operational
 
 import bitframe.core.signin.SignInCredentials
 import expect.expect
 import later.await
 import pimonitor.client.business.BusinessDetailsIntent
-import pimonitor.client.business.BusinessDetailsState
+import pimonitor.client.business.financials.BusinessFinancialIntent
+import pimonitor.client.business.operations.BusinessOperationsIntent
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
 import pimonitor.core.businesses.params.InviteToShareReportsParams
+import pimonitor.core.dashboards.OperationalDashboard
+import pimonitor.core.invites.InfoResults
 import pimonitor.core.invites.Invite
 import pimonitor.core.picortex.AcceptPicortexInviteParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import presenters.feedbacks.Feedback
+import presenters.state.State
 import utils.PiMonitorTestScope
 import utils.toContain
 import viewmodel.expect
@@ -22,7 +26,7 @@ class PiCortexOperationalDashboardUserJourneyTest {
 
     private val scope = PiMonitorTestScope()
     private val api get() = scope.api
-    private val vm get() = scope.business.viewModel
+    private val vm get() = scope.businessOperations.viewModel
 
     @Test
     fun should_load_picortex_dashboard_of_a_business_with_picortex_integration() = runSequence {
@@ -71,11 +75,11 @@ class PiCortexOperationalDashboardUserJourneyTest {
         }
 
         step("View PiCortex Operations Dashboard of ${result?.business?.name}") {
-            val state = BusinessDetailsState()
-            vm.expect(BusinessDetailsIntent.LoadOperationDashboard(invite!!.invitedBusinessId)).toContain(
-                state.copy(status = Feedback.Loading("Loading operational dashboard, please wait . . .")),
+            vm.expect(BusinessOperationsIntent.LoadOperationalDashboard(invite!!.invitedBusinessId)).toContain(
+                State.Loading("Loading operational dashboard, please wait . . ."),
             )
-            expect(vm.ui.value.operationDashboard).toBeNonNull()
+            val state = vm.ui.value as State.Content<InfoResults.Shared<OperationalDashboard>>
+            expect(state.value.data).toBeNonNull()
         }
     }
 }

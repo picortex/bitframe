@@ -17,7 +17,7 @@ sealed class ChangeRemark<out T> {
 
     @Serializable
     data class Decrease<out T>(
-        val pct: Percentage,
+        val pct: Percentage,    
         val value: T
     ) : ChangeRemark<T>()
 

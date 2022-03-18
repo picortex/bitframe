@@ -19,7 +19,7 @@ class IncomeStatementParser(map: Map<String, Any?>) : GenericParser(map) {
         owner = Owner.UNSET
     )
 
-    fun parseBody() = IncomeStatement.Data(
+    fun parseBody() = IncomeStatement.Body(
         income = getEntriesFrom(map, "Income"),
         otherIncome = CategoryEntry(listOf()),
         costOfSales = getEntriesFrom(map, "COGS"),

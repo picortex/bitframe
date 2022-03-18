@@ -13,7 +13,7 @@ import pimonitor.client.invites.InvitesState as State
 
 open class InvitesScope(
     override val config: UIScopeConfig<PiMonitorApi>
-) : UIScope<Intent, State> {
+) : UIScope<State> {
     override val viewModel by lazy { InvitesViewModel(config) }
 
     val loadInviteInfo = { inviteId: String ->

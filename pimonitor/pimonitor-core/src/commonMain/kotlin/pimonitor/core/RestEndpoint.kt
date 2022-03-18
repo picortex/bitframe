@@ -8,9 +8,10 @@ sealed class RestEndpoint(private val root: String) {
     private val businesses = "$root/businesses"
     val businessesAll = "$businesses/all"
     val businessesCreate = "$businesses/create"
+    val businessesLoad = "$businesses/load"
+    val businessesAvailableReports = "$businesses/available-reports"
     val businessesDelete = "$businesses/delete"
-    private val businessesDashboard = "$businesses/dashboard"
-    val businessesDashboardOperational = "$businessesDashboard/operational"
+    val businessesDashboardOperational = "$businesses/dashboard/operational"
     val businessesIncomeStatement = "$businesses/income-statement"
     val businessesBalanceSheet = "$businesses/balance-sheet"
 

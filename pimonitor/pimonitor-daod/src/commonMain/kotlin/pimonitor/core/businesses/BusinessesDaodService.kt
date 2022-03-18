@@ -1,7 +1,5 @@
 package pimonitor.core.businesses
 
-import akkounts.reports.balancesheet.BalanceSheet
-import akkounts.reports.incomestatement.IncomeStatement
 import akkounts.reports.utils.CategoryEntry
 import akkounts.sage.SageOneZAService
 import akkounts.sage.SageOneZAUserCompany
@@ -10,28 +8,28 @@ import bitframe.core.users.RegisterUserUseCase
 import bitframe.core.users.RegisterUserUseCaseImpl
 import kash.Currency
 import kash.Money
-import kotlinx.collections.interoperable.List
-import kotlinx.collections.interoperable.mutableListOf
-import kotlinx.collections.interoperable.toInteroperableList
+import kotlinx.collections.interoperable.*
 import kotlinx.datetime.*
 import later.Later
 import later.await
 import later.later
+import pimonitor.core.accounting.FINANCIAL_REPORTS
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
-import pimonitor.core.businesses.params.*
+import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
+import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
+import pimonitor.core.businesses.params.toRegisterUserParams
+import pimonitor.core.businesses.params.toValidatedCreateBusinessParams
+import pimonitor.core.businesses.results.AvailableReportsResults
 import pimonitor.core.contacts.ContactPersonBusinessInfo
-import pimonitor.core.dashboards.OperationalDashboard
+import pimonitor.core.invites.InfoResults
 import pimonitor.core.invites.Invite
 import pimonitor.core.picortex.PiCortexApiCredentials
 import pimonitor.core.picortex.PiCortexDashboardProvider
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig
-import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Production
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Staging
 import pimonitor.core.sage.SageApiCredentials
 import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
-import presenters.containers.ChangeBox
-import presenters.containers.ChangeRemark
 import presenters.containers.changeBoxOf
 
 open class BusinessesDaodService(
@@ -93,19 +91,17 @@ open class BusinessesDaodService(
         )
     }
 
-    override fun operationalDashboard(rb: RequestBody.Authorized<String>): Later<OperationalDashboard?> = config.scope.later {
-        val businessId = rb.data
-
-        val business = monitoredBusinessesDao.loadOrNull(businessId).await()?.takeIf {
-            it.operationalBoard == DASHBOARD_OPERATIONAL.PICORTEX
-        } ?: return@later null
-
-        try {
-            val cred = piCortexCredentialsDao.all(condition = PiCortexApiCredentials::businessId isEqualTo business.uid).await().first()
-            piCortexDashboardProvider.technicalDashboardOf(cred).await()
-        } catch (e: Throwable) {
-            logger.error(e)
-            null
+    override fun operationalDashboard(rb: RequestBody.Authorized<String>) = config.scope.later {
+        val business = load(rb).await()
+        when (business.operationalBoard) {
+            DASHBOARD_OPERATIONAL.NONE -> {
+                InfoResults.NotShared("${business.name} has not shared their reports with any dashboard")
+            }
+            DASHBOARD_OPERATIONAL.PICORTEX -> {
+                val cred = piCortexCredentialsDao.all(condition = PiCortexApiCredentials::businessId isEqualTo business.uid).await().last()
+                InfoResults.Shared(piCortexDashboardProvider.technicalDashboardOf(cred).await())
+            }
+            else -> error("Business is connected to an unknown operational board provider")
         }
     }
 
@@ -117,40 +113,54 @@ open class BusinessesDaodService(
         companyId = companyId
     )
 
-    override fun balanceSheet(rb: RequestBody.Authorized<String>): Later<BalanceSheet?> = config.scope.later {
-        val businessId = rb.data
+    override fun load(rb: RequestBody.Authorized<String>): Later<MonitoredBusinessBasicInfo> = config.scope.later {
+        monitoredBusinessesDao.load(uid = rb.data).await()
+    }
 
-        val business = monitoredBusinessesDao.loadOrNull(businessId).await()?.takeIf {
-            it.financialBoard == DASHBOARD_FINANCIAL.SAGE_ONE
-        } ?: return@later null
+    override fun availableReports(rb: RequestBody.Authorized<String>) = config.scope.later {
+        val business = load(rb).await()
+        val reports = when (business.financialBoard) {
+            DASHBOARD_FINANCIAL.NONE -> emptyList()
+            DASHBOARD_FINANCIAL.SAGE_ONE -> listOf(
+                FINANCIAL_REPORTS.BALANCE_SHEET,
+                FINANCIAL_REPORTS.INCOME_STATEMENT
+            )
+            else -> error("Business is connected to an unknown operational board provider")
+        }
+        AvailableReportsResults(business, reports)
+    }
 
-        try {
-            val cred = sageCredentialsDao.all(condition = SageApiCredentials::businessId isEqualTo business.uid).await().first()
-            val company = cred.toCompany(business)
-            val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
-            sage.offeredTo(company).reports.balanceSheet(at = today).await()
-        } catch (e: Throwable) {
-            logger.error(e)
-            null
+    override fun balanceSheet(rb: RequestBody.Authorized<String>) = config.scope.later {
+        val business = load(rb).await()
+        when (business.financialBoard) {
+            DASHBOARD_FINANCIAL.NONE -> {
+                InfoResults.NotShared("${business.name} has not shared their reports with any accounting system")
+            }
+            DASHBOARD_FINANCIAL.SAGE_ONE -> {
+                val cred = sageCredentialsDao.all(condition = SageApiCredentials::businessId isEqualTo business.uid).await().first()
+                val company = cred.toCompany(business)
+                val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
+                InfoResults.Shared(sage.offeredTo(company).reports.balanceSheet(at = today).await())
+            }
+            else -> error("Business is connected to an unknown accounting provider")
         }
     }
 
-    override fun incomeStatement(rb: RequestBody.Authorized<String>): Later<IncomeStatement?> = config.scope.later {
-        val businessId = rb.data
+    override fun incomeStatement(rb: RequestBody.Authorized<String>) = config.scope.later {
+        val business = load(rb).await()
 
-        val business = monitoredBusinessesDao.loadOrNull(businessId).await()?.takeIf {
-            it.financialBoard == DASHBOARD_FINANCIAL.SAGE_ONE
-        } ?: return@later null
-
-        try {
-            val cred = sageCredentialsDao.all(condition = SageApiCredentials::businessId isEqualTo business.uid).await().first()
-            val company = cred.toCompany(business)
-            val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
-            val lastMonth = today - DatePeriod(months = 1)
-            sage.offeredTo(company).reports.incomeStatement(start = lastMonth, end = today).await()
-        } catch (e: Throwable) {
-            logger.error(e)
-            null
+        when (business.financialBoard) {
+            DASHBOARD_FINANCIAL.NONE -> {
+                InfoResults.NotShared("${business.name} has not shared their reports with any accounting system")
+            }
+            DASHBOARD_FINANCIAL.SAGE_ONE -> {
+                val cred = sageCredentialsDao.all(condition = SageApiCredentials::businessId isEqualTo business.uid).await().first()
+                val company = cred.toCompany(business)
+                val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
+                val lastMonth = today - DatePeriod(months = 1)
+                InfoResults.Shared(sage.offeredTo(company).reports.incomeStatement(start = lastMonth, end = today).await())
+            }
+            else -> error("Business is connected to an unknown accounting provider")
         }
     }
 
@@ -161,7 +171,7 @@ open class BusinessesDaodService(
         }.toInteroperableList()
     }
 
-    override fun delete(rb: RequestBody.Authorized<Array<out String>>): Later<List<MonitoredBusinessBasicInfo>> = config.scope.later {
+    override fun delete(rb: RequestBody.Authorized<Array<out String>>) = config.scope.later {
         val list = mutableListOf<MonitoredBusinessBasicInfo>()
         for (business in rb.data) list.add(monitoredBusinessesDao.delete(business).await())
         list

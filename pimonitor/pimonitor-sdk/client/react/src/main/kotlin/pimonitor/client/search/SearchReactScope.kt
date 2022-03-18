@@ -9,6 +9,6 @@ import viewmodel.asState
 
 class SearchReactScope(
     override val config: UIScopeConfig<SearchService>
-) : SearchScope(config), ReactUIScope<SearchIntent, SearchState> {
-    override val useScopeState: () -> SearchState = { viewModel.asState() }
+) : SearchScope(config), ReactUIScope<SearchState> {
+    override val useScopeState = { viewModel.asState() }
 }

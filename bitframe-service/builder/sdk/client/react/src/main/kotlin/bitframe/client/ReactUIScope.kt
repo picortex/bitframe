@@ -3,6 +3,6 @@
 package bitframe.client
 
 @JsExport
-interface ReactUIScope<in I, S> : UIScope<I, S> {
+interface ReactUIScope<out S> : UIScope<S> {
     val useScopeState: () -> S
 }

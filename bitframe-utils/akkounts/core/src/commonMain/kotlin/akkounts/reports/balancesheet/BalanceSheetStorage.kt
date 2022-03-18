@@ -6,7 +6,7 @@ import kotlinx.datetime.LocalDate
 import later.Later
 
 interface BalanceSheetStorage {
-    fun save(owner: Owner, vendor: Vendor, header: BalanceSheet.Header, body: BalanceSheet.Data): Later<BalanceSheet>
+    fun save(owner: Owner, vendor: Vendor, header: BalanceSheet.Header, body: BalanceSheet.Body): Later<BalanceSheet>
 
     @Deprecated("use load(ownerId, endOf: LocalDate)")
     fun load(ownerId: String, endOf: Long): Later<BalanceSheet?>
