@@ -1,5 +1,7 @@
 package pimonitor.core.businesses
 
+import akkounts.reports.balancesheet.BalanceSheet
+import akkounts.reports.incomestatement.IncomeStatement
 import akkounts.reports.utils.CategoryEntry
 import akkounts.sage.SageOneZAService
 import akkounts.sage.SageOneZAUserCompany
@@ -21,6 +23,7 @@ import pimonitor.core.businesses.params.toRegisterUserParams
 import pimonitor.core.businesses.params.toValidatedCreateBusinessParams
 import pimonitor.core.businesses.results.AvailableReportsResults
 import pimonitor.core.contacts.ContactPersonBusinessInfo
+import pimonitor.core.dashboards.OperationalDashboard
 import pimonitor.core.invites.InfoResults
 import pimonitor.core.invites.Invite
 import pimonitor.core.picortex.PiCortexApiCredentials
@@ -95,7 +98,7 @@ open class BusinessesDaodService(
         val business = load(rb).await()
         when (business.operationalBoard) {
             DASHBOARD_OPERATIONAL.NONE -> {
-                InfoResults.NotShared("${business.name} has not shared their reports with any dashboard")
+                InfoResults.NotShared("${business.name} has not shared their reports with any dashboard") as InfoResults<OperationalDashboard>
             }
             DASHBOARD_OPERATIONAL.PICORTEX -> {
                 val cred = piCortexCredentialsDao.all(condition = PiCortexApiCredentials::businessId isEqualTo business.uid).await().last()
@@ -134,7 +137,7 @@ open class BusinessesDaodService(
         val business = load(rb).await()
         when (business.financialBoard) {
             DASHBOARD_FINANCIAL.NONE -> {
-                InfoResults.NotShared("${business.name} has not shared their reports with any accounting system")
+                InfoResults.NotShared("${business.name} has not shared their reports with any accounting system") as InfoResults<BalanceSheet>
             }
             DASHBOARD_FINANCIAL.SAGE_ONE -> {
                 val cred = sageCredentialsDao.all(condition = SageApiCredentials::businessId isEqualTo business.uid).await().first()
@@ -151,7 +154,7 @@ open class BusinessesDaodService(
 
         when (business.financialBoard) {
             DASHBOARD_FINANCIAL.NONE -> {
-                InfoResults.NotShared("${business.name} has not shared their reports with any accounting system")
+                InfoResults.NotShared("${business.name} has not shared their reports with any accounting system") as InfoResults<IncomeStatement>
             }
             DASHBOARD_FINANCIAL.SAGE_ONE -> {
                 val cred = sageCredentialsDao.all(condition = SageApiCredentials::businessId isEqualTo business.uid).await().first()

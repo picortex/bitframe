@@ -4,10 +4,13 @@
 package pimonitor.core.invites
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
 import kotlin.js.JsExport
 
-@Serializable
+@Serializable(with = InfoResultsSerializer::class)
 sealed class InfoResults<out T> {
+
     data class Shared<out T>(val data: T) : InfoResults<T>()
+
     data class NotShared(val message: String) : InfoResults<Nothing>()
 }

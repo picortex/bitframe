@@ -74,19 +74,21 @@ abstract class BusinessesService(
     }
 
     fun balanceSheet(businessId: String) = config.scope.later {
+        logger.info("Loading balance sheet for business(uid=$businessId)")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("load income statement"),
             data = businessId
         )
-        balanceSheet(rb).await()
+        balanceSheet(rb).await().also { logger.info("Loaded balance sheet: $it") }
     }
 
     fun load(businessId: String): Later<MonitoredBusinessBasicInfo> = config.scope.later {
+        logger.info("Loading business(uid=$businessId)")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("load business"),
             data = businessId
         )
-        load(rb).await()
+        load(rb).await().also { logger.info("Loaded business: $it") }
     }
 
     fun availableReports(businessId: String) = config.scope.later {

@@ -46,7 +46,7 @@ class BusinessFinancialsViewModel(
 
     private suspend fun Flow<State<Content>>.catchAndCollectToUI(i: Intent) = catch {
         emit(State.Failure(it) {
-            post(i)
+            onRetry { post(i) }
         })
     }.collect {
         ui.value = it

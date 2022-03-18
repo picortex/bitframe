@@ -1,16 +1,20 @@
 package pimonitor.server.businesses
 
+import akkounts.reports.incomestatement.IncomeStatement
 import bitframe.core.RequestBody
 import bitframe.server.http.HttpRequest
 import bitframe.server.http.HttpResponse
 import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
+import io.ktor.client.request.*
 import kotlinx.serialization.decodeFromString
+import later.BaseLater.Companion.resolve
 import later.await
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.BusinessesDaodService
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
+import pimonitor.core.invites.InfoResults
 import response.response
 
 class BusinessController(
@@ -41,10 +45,20 @@ class BusinessController(
     suspend fun incomeStatement(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.Authorized<String>>(req.compulsoryBody())
         resolve(service.incomeStatement(rb).await())
-    }.toHttpResponse()
+    }.toHttpResponse(InfoResults.serializer(IncomeStatement.serializer()))
 
     suspend fun balanceSheet(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.Authorized<String>>(req.compulsoryBody())
         resolve(service.balanceSheet(rb).await())
+    }.toHttpResponse()
+
+    suspend fun load(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.Authorized<String>>(req.compulsoryBody())
+        resolve(service.load(rb).await())
+    }.toHttpResponse()
+
+    suspend fun availableReports(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.Authorized<String>>(req.compulsoryBody())
+        resolve(service.availableReports(rb).await())
     }.toHttpResponse()
 }
