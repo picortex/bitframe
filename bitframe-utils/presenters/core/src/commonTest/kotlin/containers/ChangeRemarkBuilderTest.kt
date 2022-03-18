@@ -27,6 +27,7 @@ class ChangeRemarkBuilderTest {
             previous = 100.TZS,
             current = 300.USD
         )
+//        expect(change).toBe<ChangeRemark.Indeterminate<Money>>()
         expect(change).toBe<ChangeRemark.Indeterminate>()
     }
 

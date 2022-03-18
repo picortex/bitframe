@@ -4,7 +4,6 @@
 package pimonitor.core.invites
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
 import kotlin.js.JsExport
 
 @Serializable(with = InfoResultsSerializer::class)

@@ -1,4 +1,3 @@
-@file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package presenters.containers
@@ -8,27 +7,34 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.jvm.JvmName
 
-private const val MONEY_CHANGE_BOX_NAME = "moneyChangeBoxOf"
-
-@JsName(MONEY_CHANGE_BOX_NAME)
-fun changeBoxOf(
+@JsExport
+fun moneyChangeBoxOf(
     previous: Money,
     current: Money,
     details: String = "Updated now"
-): ChangeBox<Money> = ChangeBox(
+): ChangeBox<Money> = MoneyChangeBox(
     previous = previous,
     current = current,
-    details = details,
-    change = changeRemarkOf(previous, current)
+    details = details
 )
 
-fun <N : Number> changeBoxOf(
+@JsExport
+fun <N : Number> numberChangeBoxOf(
     previous: N,
     current: N,
     details: String = "Update now"
-): ChangeBox<Double> = ChangeBox(
-    previous = previous.toDouble(),
-    current = current.toDouble(),
-    details = details,
-    change = changeRemarkOf(previous, current)
+): ChangeBox<N> = NumberChangeBox(
+    previous = previous,
+    current = current,
+    details = details
 )
+
+inline fun <reified T> changeBoxOf(
+    previous: T,
+    current: T,
+    details: String
+): ChangeBox<T> = when {
+    previous is Money && current is Money -> moneyChangeBoxOf(previous, current, details) as ChangeBox<T>
+    previous is Number && current is Number -> numberChangeBoxOf(previous, current, details)
+    else -> GenericChangeBox(previous, current, details) as ChangeBox<T>
+}

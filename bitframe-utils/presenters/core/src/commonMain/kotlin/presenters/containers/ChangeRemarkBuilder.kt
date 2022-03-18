@@ -26,23 +26,28 @@ fun changeRemarkOf(
     return when {
         previous.amount == 0 && diff.amount < 0 -> ChangeRemark.Decrease(
             pct = Percentage.ONE_HUNDRED,
-            value = diff * -1
+            value = diff * -1,
+            decreased = true
         )
         previous.amount != 0 && diff.amount < 0 -> ChangeRemark.Decrease(
             pct = Percentage.fromRatio(diff.amount * -1.0 / previous.amount),
-            value = diff * -1
+            value = diff * -1,
+            decreased = true
         )
         previous.amount == 0 && diff.amount > 0 -> ChangeRemark.Increase(
             pct = Percentage.ONE_HUNDRED,
-            value = diff
+            value = diff,
+            increased = true
         )
         previous.amount != 0 && diff.amount > 0 -> ChangeRemark.Increase(
             pct = Percentage.fromRatio(diff.amount.toDouble() / previous.amount),
-            value = diff
+            value = diff,
+            increased = true
         )
         else -> ChangeRemark.Fixed(
             pct = Percentage.ZERO,
-            at = previous
+            at = previous,
+            fixed = true
         )
     }
 }
@@ -57,23 +62,28 @@ fun <N : Number> changeRemarkOf(
     return when {
         prev == 0.0 && diff < 0.0 -> ChangeRemark.Decrease(
             pct = Percentage.ONE_HUNDRED,
-            value = diff * -1
+            value = diff * -1,
+            decreased = true
         )
         prev != 0.0 && diff < 0.0 -> ChangeRemark.Decrease(
             pct = Percentage.fromRatio(-diff / prev),
-            value = diff * -1
+            value = diff * -1,
+            decreased = true
         )
         prev == 0.0 && diff > 0.0 -> ChangeRemark.Increase(
             pct = Percentage.ONE_HUNDRED,
-            value = diff
+            value = diff,
+            increased = true
         )
         prev != 0.0 && diff > 0.0 -> ChangeRemark.Increase(
             pct = Percentage.fromRatio(diff / prev),
-            value = diff
+            value = diff,
+            increased = true
         )
         else -> ChangeRemark.Fixed(
             pct = Percentage.ZERO,
-            at = prev
+            at = prev,
+            fixed = true
         )
     }
 }

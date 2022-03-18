@@ -53,6 +53,7 @@ class BusinessesServiceKtor(
         val req = client.post(path.businessesAll) {
             setBody(json.of(rb))
         }
+        println(req.bodyAsText())
         val resp = json.decodeResponseFromString(ListSerializer(MonitoredBusinessSummary.serializer()), req.bodyAsText())
         resp.response().toInteroperableList()
     }

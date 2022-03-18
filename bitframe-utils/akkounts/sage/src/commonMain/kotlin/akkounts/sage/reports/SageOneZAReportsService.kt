@@ -121,7 +121,9 @@ class SageOneZAReportsService @JvmOverloads constructor(
             authorize()
             setBody(TextContent(text = Mapper.encodeToString(params), contentType = ContentType.Application.Json))
         }
-        Mapper.decodeFromString("""{"response":${response.bodyAsText()}}""")["response"] as List<Map<String, *>>
+        val json = """{"response":${response.bodyAsText()}}"""
+        println(json)
+        Mapper.decodeFromString(json)["response"] as List<Map<String, *>>
     }
 
     fun company(id: String) = scope.later {
