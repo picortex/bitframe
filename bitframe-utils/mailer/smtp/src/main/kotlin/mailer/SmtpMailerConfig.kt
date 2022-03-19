@@ -109,7 +109,7 @@ interface SmtpMailerConfig {
         ) = invoke(properties, scope)
 
         fun fromProperties(path: String): SmtpMailerConfig {
-            val inputStream = ClassLoader.getSystemResourceAsStream(path) ?: error("Failed to get sendgrid.properties.file")
+            val inputStream = ClassLoader.getSystemResourceAsStream(path) ?: error("Failed to get file $path")
             val props = Properties().apply { load(inputStream) }
             return invoke(props)
         }
