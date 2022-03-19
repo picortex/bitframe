@@ -1,3 +1,4 @@
+import kash.Currency
 import kotlinx.coroutines.test.runTest
 import later.await
 import pimonitor.core.picortex.PiCortexApiCredentials
@@ -37,5 +38,7 @@ class PiCortexDashboardTest {
     fun should_load_picortex_dashboard() = runTest {
         val dashboard = provider.technicalDashboardOf(credentials).await()
         println(dashboard)
+
+        Currency
     }
 }

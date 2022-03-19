@@ -54,7 +54,7 @@ class SageOneZAReportsService @JvmOverloads constructor(
             currency = Currency.ZAR,
             endOf = at
         )
-        val data = BalanceSheet.Data(
+        val data = BalanceSheet.Body(
             assets = bsp.assets(),
             equity = bsp.equity(),
             liabilities = bsp.liabilities()
@@ -89,7 +89,7 @@ class SageOneZAReportsService @JvmOverloads constructor(
         }.toInteroperableList()
         println(income)
 
-        val data = IncomeStatement.Data(
+        val data = IncomeStatement.Body(
             income = CategoryEntry(income),
             otherIncome = CategoryEntry(emptyList()),
             costOfSales = CategoryEntry(emptyList()),
@@ -121,7 +121,9 @@ class SageOneZAReportsService @JvmOverloads constructor(
             authorize()
             setBody(TextContent(text = Mapper.encodeToString(params), contentType = ContentType.Application.Json))
         }
-        Mapper.decodeFromString("""{"response":${response.bodyAsText()}}""")["response"] as List<Map<String, *>>
+        val json = """{"response":${response.bodyAsText()}}"""
+        println(json)
+        Mapper.decodeFromString(json)["response"] as List<Map<String, *>>
     }
 
     fun company(id: String) = scope.later {

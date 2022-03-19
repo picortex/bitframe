@@ -6,12 +6,13 @@ package pimonitor.client.business
 import bitframe.client.ReactUIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.client.businesses.BusinessesService
+import pimonitor.core.businesses.MonitoredBusinessBasicInfo
+import presenters.state.State
 import viewmodel.asState
-import pimonitor.client.business.State as State
-import pimonitor.client.business.Intent as Intent
+import pimonitor.client.business.BusinessDetailsIntent as Intent
 
 class BusinessDetailsReactScope(
     override val config: UIScopeConfig<BusinessesService>
-) : BusinessDetailsScope(config), ReactUIScope<Intent, State> {
+) : BusinessDetailsScope(config), ReactUIScope<State<MonitoredBusinessBasicInfo>> {
     override val useScopeState = { viewModel.asState() }
 }

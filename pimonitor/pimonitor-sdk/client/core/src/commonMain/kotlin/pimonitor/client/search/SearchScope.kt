@@ -9,7 +9,7 @@ import kotlin.js.JsExport
 
 open class SearchScope(
     override val config: UIScopeConfig<SearchService>
-) : UIScope<SearchIntent, SearchState> {
+) : UIScope<SearchState> {
     override val viewModel by lazy { SearchViewModel(config) }
 
     val searchDebouncing = { key: String ->

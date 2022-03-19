@@ -21,7 +21,9 @@ class PiCortexDashboardProvider(
     fun technicalDashboardOf(credentials: PiCortexApiCredentials) = scope.later<OperationalDashboard> {
         val params = mapOf(
             "secret" to credentials.secret,
-            "userType" to "DataConsoleUser"
+            "userType" to "DataConsoleUser",
+            "dateFrom" to "01/03/2022",
+            "dateTo" to "07/03/2022"
         )
         val url = "https://${credentials.subdomain}.$domain/api/reporting"
         println(credentials)

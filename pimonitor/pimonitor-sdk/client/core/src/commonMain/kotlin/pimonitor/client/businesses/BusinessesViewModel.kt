@@ -111,12 +111,12 @@ class BusinessesViewModel(
     }
 
     private fun CoroutineScope.sendCreateBusinessForm(i: SendCreateBusinessForm) = launch {
-        val state = ui.value
+        val state = ui.value.copy(dialog = null)
         flow {
-            emit(state.copy(status = Loading("Adding ${i.params.businessName}, please wait . . ."), dialog = null))
+            emit(state.copy(status = Loading("Adding ${i.params.businessName}, please wait . . .")))
             val result = api.businesses.create(i.params).await()
             if (result.params.sendInvite) {
-                emit(state.copy(status = Success("${i.params.businessName} has successfully been added. Preparing invite form, please wait . . ."), dialog = null))
+                emit(state.copy(status = Success("${i.params.businessName} has successfully been added. Preparing invite form, please wait . . .")))
                 val inviteInfo = api.invites.defaultInviteMessage(InviteMessageParams(result.business.uid)).await()
                 val dialog = InviteToShareReportsDialog(
                     businessName = result.params.businessName, contactEmail = result.params.contactEmail, message = inviteInfo.inviteMessage
@@ -183,7 +183,7 @@ class BusinessesViewModel(
     private suspend fun Flow<State>.catchAndCollectToUI(state: State) = catch {
         emit(state.copy(status = Failure(it), dialog = null))
         delay(config.viewModel.recoveryTime)
-        emit(state.copy(status = None, dialog = null))
+        emit(state.copy(status = None))
     }.collect {
         ui.value = it
     }

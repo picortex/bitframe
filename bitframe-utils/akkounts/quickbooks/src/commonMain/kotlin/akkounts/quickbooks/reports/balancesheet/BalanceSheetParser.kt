@@ -11,13 +11,13 @@ import kotlinx.datetime.LocalDate
 
 class BalanceSheetParser(map: Map<String, Any?>) : GenericParser(map) {
 
-    fun parseAssets(): BalanceSheet.Data.Assets {
+    fun parseAssets(): BalanceSheet.Body.Assets {
         val row = getRows(map).find {
             it["group"] == "NetAssets"
         } ?: error("Failed to get assets from balance sheet report")
         val current = getEntriesFrom(row, "TotalAssetLessCurrentLiabilities")
         val fixed = getEntriesFrom(row, "TotalLongTermAssets")
-        return BalanceSheet.Data.Assets(current, fixed)
+        return BalanceSheet.Body.Assets(current, fixed)
     }
 
     fun parseEquity(): CategoryEntry {
@@ -27,13 +27,13 @@ class BalanceSheetParser(map: Map<String, Any?>) : GenericParser(map) {
         return getEntriesFrom(row, "TotalShareHoldersEquityNode")
     }
 
-    fun parseLiabilities(): BalanceSheet.Data.Liabilities {
+    fun parseLiabilities(): BalanceSheet.Body.Liabilities {
         val row = getRows(map).find {
             it["group"] == "NetLiabilitiesAndShareHolderEquity"
         } ?: error("Failed to get liabilities and shareholders equity")
         val current = getEntriesFrom(row, "TotalLongTermLiabilities")
         val longTerm = getEntriesFrom(row, "TotalNonCurLiabilities")
-        return BalanceSheet.Data.Liabilities(current, longTerm)
+        return BalanceSheet.Body.Liabilities(current, longTerm)
     }
 
     fun parseHeader() = BalanceSheet.Header(
@@ -43,7 +43,7 @@ class BalanceSheetParser(map: Map<String, Any?>) : GenericParser(map) {
         owner = Owner.UNSET
     )
 
-    fun parseBody() = BalanceSheet.Data(
+    fun parseBody() = BalanceSheet.Body(
         assets = parseAssets(),
         equity = parseEquity(),
         liabilities = parseLiabilities()

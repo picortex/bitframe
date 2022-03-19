@@ -9,6 +9,7 @@ import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import presenters.feedbacks.Feedback
+import presenters.table.tabulateToConsole
 import utils.PiMonitorTestScope
 import utils.toContain
 import viewmodel.expect
@@ -53,6 +54,7 @@ class InviteToShareReportsJourneyTest {
                 state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
                 state.copy(status = Feedback.Success("${params.businessName} has successfully been added")),
             )
+            vm.ui.value.table.tabulateToConsole()
             expect(vm.ui.value.table.rows).toBeOfSize(1)
         }
 

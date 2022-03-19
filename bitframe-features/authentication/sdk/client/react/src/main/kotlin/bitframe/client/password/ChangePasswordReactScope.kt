@@ -12,6 +12,6 @@ import bitframe.client.password.ChangePasswordState as State
 
 class ChangePasswordReactScope(
     override val config: UIScopeConfig<ProfileService>
-) : ChangePasswordScope(config), ReactUIScope<Intent, State> {
-    override val useScopeState: () -> State = { viewModel.asState() }
+) : ChangePasswordScope(config), ReactUIScope<State> {
+    override val useScopeState = { viewModel.asState() }
 }

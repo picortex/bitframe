@@ -14,5 +14,5 @@ fun <D> ChangeBox<D>?.toString() = when (this) {
 @JvmName("toShortString")
 fun ChangeBox<Money>?.toString() = when (this) {
     null -> ""
-    else -> "${previous.toShortString()} / ${current.toShortString()}"
+    else -> "${previous.toFormattedString()} / ${current.toFormattedString()}"
 }

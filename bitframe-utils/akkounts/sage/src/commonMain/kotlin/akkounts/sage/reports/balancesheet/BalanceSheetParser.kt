@@ -41,7 +41,7 @@ class BalanceSheetParser(val entries: List<Map<String, *>>) {
         )
     }.let { CategoryEntry(it.toInteroperableList()) }
 
-    fun assets() = BalanceSheet.Data.Assets(
+    fun assets() = BalanceSheet.Body.Assets(
         current = filterToStatementEntry(currentAssetAccountNames, debitFirst = true),
         fixed = filterToStatementEntry(fixedAssetAccountNames, debitFirst = true)
     )
@@ -60,7 +60,7 @@ class BalanceSheetParser(val entries: List<Map<String, *>>) {
         return equity
     }
 
-    fun liabilities() = BalanceSheet.Data.Liabilities(
+    fun liabilities() = BalanceSheet.Body.Liabilities(
         current = filterToStatementEntry(currentLiabilitiesAccountNames, debitFirst = false),
         longTerm = filterToStatementEntry(longTermLiabilitiesAccountNames, debitFirst = false)
     )
