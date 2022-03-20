@@ -8,6 +8,7 @@ import io.ktor.client.statement.*
 import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.collections.interoperable.toInteroperableList
 import later.later
+import pimonitor.client.utils.pathV1
 import pimonitor.core.contacts.ContactsFilter
 import pimonitor.core.search.SearchResult
 import response.decodeResponseFromString
@@ -17,9 +18,8 @@ class ContactsServiceKtor(
 ) : ContactsService(config) {
     private val client get() = config.http
     private val json get() = config.json
-    private val basePath = "/api/contacts"
     override fun all(rb: RequestBody.Authorized<ContactsFilter>) = config.scope.later {
-        val result = client.post("${config.url}$basePath/all") {
+        val result = client.post(config.pathV1.contactsAll) {
             setBody(json.of(rb))
         }
         json.decodeResponseFromString(
