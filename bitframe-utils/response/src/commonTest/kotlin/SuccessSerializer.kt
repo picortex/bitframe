@@ -1,5 +1,3 @@
-package unit.response
-
 import response.Success
 import response.success.decodeSuccessFromString
 import response.success.encodeSuccessToString

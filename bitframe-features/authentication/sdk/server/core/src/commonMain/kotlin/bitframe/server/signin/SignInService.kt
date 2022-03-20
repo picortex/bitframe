@@ -7,4 +7,6 @@ import bitframe.server.ServiceConfig
 
 class SignInService(
     val config: ServiceConfig
-) : CoreSignInService(), SignInUseCase by SignInDaodUseCase(config)
+) : CoreSignInService(), SignInUseCase by SignInDaodUseCase(config) {
+    val parser by lazy { SignInParser(config) }
+}

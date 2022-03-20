@@ -1,21 +1,24 @@
 package bitframe.server
 
 import bitframe.server.controllers.AuthenticationController
-import bitframe.server.signin.SignInAction
-import bitframe.server.signin.SignInService
+import bitframe.server.http.HttpRoute
+import bitframe.server.rest.pathV1
+import io.ktor.http.*
 
 class AuthenticationModule(
     private val controller: AuthenticationController
 ) : Module {
-    constructor(service: SignInService) : this(AuthenticationController(service))
-
-    init {
-//        controller.service.users.createIfNotExist(AuthenticationModule.GENESIS)
-    }
 
     override val name = "authentication"
 
+    private val config get() = controller.signInService.config
+
     override val actions: List<Action> = listOf(
-        SignInAction(controller),
+        Action("sign in", mapOf(), HttpRoute(HttpMethod.Post, config.pathV1.signIn) {
+            controller.signIn(it)
+        }),
+        Action("change-password", mapOf(), HttpRoute(HttpMethod.Post, config.pathV1.changePassword) {
+            controller.changePassword(it)
+        })
     )
 }

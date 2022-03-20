@@ -10,7 +10,7 @@ import io.ktor.client.statement.*
 import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.collections.interoperable.toInteroperableList
 import later.later
-import pimonitor.client.utils.path
+import pimonitor.client.utils.pathV1
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
@@ -24,7 +24,7 @@ import response.decodeResponseFromString
 class BusinessesServiceKtor(
     override val config: ServiceConfigKtor
 ) : BusinessesService(config) {
-    private val path = config.path
+    private val path = config.pathV1
     private val client get() = config.http
     private val json get() = config.json
 

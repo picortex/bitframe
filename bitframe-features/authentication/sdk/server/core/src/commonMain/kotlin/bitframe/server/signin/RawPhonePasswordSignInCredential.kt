@@ -1,12 +1,12 @@
-package bitframe.server.controllers
+package bitframe.server.signin
 
 import bitframe.core.signin.SignInCredentials
 import kotlinx.serialization.Serializable
 
 @Serializable
 class RawPhonePasswordSignInCredential(
-    val phone: String,
-    val password: String
+    private val phone: String,
+    private val password: String
 ) {
     fun toRawSignInCredentials() = SignInCredentials(phone, password)
 }

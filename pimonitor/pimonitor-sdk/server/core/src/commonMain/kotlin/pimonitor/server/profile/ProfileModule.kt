@@ -4,7 +4,6 @@ import bitframe.server.Action
 import bitframe.server.Module
 import bitframe.server.http.HttpRoute
 import io.ktor.http.*
-import pimonitor.server.businesses.BusinessController
 
 class ProfileModule(
     private val controller: ProfileController

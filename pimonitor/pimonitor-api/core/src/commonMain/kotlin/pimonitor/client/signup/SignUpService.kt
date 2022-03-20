@@ -4,9 +4,12 @@
 package pimonitor.client.signup
 
 import bitframe.client.ServiceConfig
+import bitframe.client.logger
 import bitframe.core.RequestBody
+import bitframe.core.logger
 import later.await
 import later.later
+import logging.Logger
 import pimonitor.core.signup.*
 import pimonitor.core.signup.params.BusinessSignUpRawParams
 import pimonitor.core.signup.params.IndividualSignUpRawParams
@@ -18,8 +21,7 @@ import pimonitor.core.signup.SignUpService as CoreSignUpService
 
 interface SignUpService : CoreSignUpService {
     val config: ServiceConfig
-
-    val logger get() = config.logger.with("source" to this::class.simpleName)
+    val logger get() = config.logger(this)
 
     @JsName("signUpAsBusiness")
     fun signUp(params: BusinessSignUpRawParams) = config.scope.later {

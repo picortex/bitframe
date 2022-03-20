@@ -1,4 +1,4 @@
-package bitframe.server.controllers
+package bitframe.server.signin
 
 import bitframe.core.signin.SignInCredentials
 import kotlinx.serialization.Serializable

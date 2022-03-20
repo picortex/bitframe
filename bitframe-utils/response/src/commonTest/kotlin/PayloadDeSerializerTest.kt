@@ -1,5 +1,3 @@
-package unit.response
-
 import response.payload.decodePayloadFromString
 import expect.expect
 import kotlinx.serialization.Serializable

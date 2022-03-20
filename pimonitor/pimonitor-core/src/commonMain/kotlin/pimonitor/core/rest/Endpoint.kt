@@ -1,8 +1,8 @@
-package pimonitor.core
+package pimonitor.core.rest
 
-sealed class RestEndpoint(private val root: String) {
-    class Client(val url: String) : RestEndpoint("$url/api")
-    object Server : RestEndpoint("/api")
+sealed class Endpoint(private val root: String) {
+    class Client(url: String, version: String) : Endpoint("$url/api/$version")
+    class Server(version: String) : Endpoint("/api/$version")
 
     //businesses
     private val businesses = "$root/businesses"

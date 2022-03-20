@@ -1,5 +1,3 @@
-package unit.response
-
 import expect.expect
 import expect.toBe
 import io.ktor.http.*
