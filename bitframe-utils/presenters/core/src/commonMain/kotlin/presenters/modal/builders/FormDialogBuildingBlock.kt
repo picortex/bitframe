@@ -1,5 +1,5 @@
 package presenters.modal.builders
 
-import presenters.modal.SubmitAction
+import presenters.actions.GenericAction
 
-typealias FormDialogBuildingBlock<T> = FormDialogBuilder<T>.() -> SubmitAction<T>
+typealias FormDialogBuildingBlock<T> = FormDialogActionsBuilder<T>.() -> GenericAction<T>

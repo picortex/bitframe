@@ -1,3 +1,8 @@
 package bitframe.core
 
-fun ServiceConfig.logger(source: Any) = logger.with("source" to source::class.simpleName)
+import logging.Logger
+import kotlin.properties.ReadOnlyProperty
+
+fun ServiceConfig.logger(): ReadOnlyProperty<Any, Logger> = ReadOnlyProperty { thisRef, _ ->
+    logger.with("source" to thisRef::class.simpleName)
+}

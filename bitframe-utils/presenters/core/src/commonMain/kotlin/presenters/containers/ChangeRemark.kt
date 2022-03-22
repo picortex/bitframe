@@ -3,30 +3,26 @@
 
 package presenters.containers
 
-import kotlinx.serialization.Serializable
 import presenters.numerics.Percentage
-import presenters.utils.NotSerializable
 import kotlin.js.JsExport
 
 sealed class ChangeRemark<out T> {
 
     data class Increase<out T>(
         val pct: Percentage,
-        val value: T,
-        val increased: Boolean,
+        val value: T
     ) : ChangeRemark<T>()
 
     data class Decrease<out T>(
         val pct: Percentage,
-        val value: T,
-        val decreased: Boolean
+        val value: T
     ) : ChangeRemark<T>()
 
     data class Fixed<out T>(
-        val pct: Percentage = Percentage.ZERO,
-        val at: T,
-        val fixed: Boolean
-    ) : ChangeRemark<T>()
+        val at: T
+    ) : ChangeRemark<T>() {
+        val pct: Percentage by lazy { Percentage.ZERO }
+    }
 
-    object Indeterminate : ChangeRemark<@Serializable(with = NotSerializable::class) Nothing>()
+    object Indeterminate : ChangeRemark<Nothing>()
 }

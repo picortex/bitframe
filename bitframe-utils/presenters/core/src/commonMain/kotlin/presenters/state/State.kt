@@ -5,6 +5,8 @@ package presenters.state
 
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.emptyList
+import presenters.actions.SimpleActionsBuilder
+import presenters.actions.SimpleAction
 import presenters.modal.Dialog
 import kotlin.js.JsExport
 
@@ -20,7 +22,7 @@ sealed class State<out T> {
     class Failure(
         val cause: Throwable? = null,
         override val message: String = cause?.message ?: DEFAULT_FAILURE_MESSAGE,
-        val actions: List<Action> = emptyList()
+        val actions: List<SimpleAction> = emptyList()
     ) : State<Nothing>() {
         companion object {
             const val DEFAULT_FAILURE_MESSAGE = "Unknown Error"
@@ -29,15 +31,15 @@ sealed class State<out T> {
         constructor(
             cause: Throwable? = null,
             message: String = cause?.message ?: DEFAULT_FAILURE_MESSAGE,
-            builder: ActionBuilder.() -> Unit
-        ) : this(cause, message, ActionBuilder().apply(builder).actions)
+            builder: SimpleActionsBuilder.() -> Unit
+        ) : this(cause, message, SimpleActionsBuilder().apply(builder).actions)
 
         val failure: Boolean = true
     }
 
     class Success(
         override val message: String = DEFAULT_SUCCESS_MESSAGE,
-        val actions: List<Action> = emptyList()
+        val actions: List<SimpleAction> = emptyList()
     ) : State<Nothing>() {
         companion object {
             const val DEFAULT_SUCCESS_MESSAGE = "Success"
@@ -45,21 +47,11 @@ sealed class State<out T> {
 
         constructor(
             message: String = DEFAULT_SUCCESS_MESSAGE,
-            builder: ActionBuilder.() -> Unit
-        ) : this(message, ActionBuilder().apply(builder).actions)
+            builder: SimpleActionsBuilder.() -> Unit
+        ) : this(message, SimpleActionsBuilder().apply(builder).actions)
 
         val success = true
     }
-
-    data class Action(
-        val name: String,
-        val handler: () -> Unit
-    )
-
-//    object None : State<Nothing>() {
-//        override val message = "No Feedback"
-//        override fun toString(): String = "NoFeedback"
-//    }
 
     open class Content<out T>(
         open val value: T,

@@ -56,10 +56,7 @@ open class BusinessesDaodService(
         PiCortexDashboardProvider(cfg)
     }
     private val sage by lazy { SageOneZAService("{C7542EBF-4657-484C-B79E-E3D90DB0F0D1}") }
-    private val logger
-        get() = config.logger.with(
-            "source" to this::class.simpleName
-        )
+    private val logger by config.logger()
 
     override fun create(rb: RequestBody.Authorized<CreateMonitoredBusinessParams>) = config.scope.later {
         val params = rb.data.toValidatedCreateBusinessParams()
@@ -157,7 +154,9 @@ open class BusinessesDaodService(
                 InfoResults.NotShared("${business.name} has not shared their reports with any accounting system") as InfoResults<IncomeStatement>
             }
             DASHBOARD_FINANCIAL.SAGE_ONE -> {
-                val cred = sageCredentialsDao.all(condition = SageApiCredentials::businessId isEqualTo business.uid).await().first()
+                val cred = sageCredentialsDao.all(
+                    condition = SageApiCredentials::businessId isEqualTo business.uid
+                ).await().last()
                 val company = cred.toCompany(business)
                 val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
                 val lastMonth = today - DatePeriod(months = 1)

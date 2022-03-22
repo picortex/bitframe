@@ -1,14 +1,12 @@
 package pimonitor.client.signup
 
 import bitframe.client.ServiceConfigKtor
-import bitframe.client.logger
 import bitframe.client.of
 import bitframe.core.RequestBody
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.util.*
 import later.later
-import logging.Logger
 import pimonitor.client.utils.pathV1
 import pimonitor.core.signup.SignUpResult
 import pimonitor.core.signup.params.BusinessSignUpParams

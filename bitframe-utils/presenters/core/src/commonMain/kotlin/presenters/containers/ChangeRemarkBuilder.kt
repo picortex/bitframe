@@ -27,28 +27,20 @@ fun changeRemarkOf(
         previous.amount == 0 && diff.amount < 0 -> ChangeRemark.Decrease(
             pct = Percentage.ONE_HUNDRED,
             value = diff * -1,
-            decreased = true
         )
         previous.amount != 0 && diff.amount < 0 -> ChangeRemark.Decrease(
             pct = Percentage.fromRatio(diff.amount * -1.0 / previous.amount),
             value = diff * -1,
-            decreased = true
         )
         previous.amount == 0 && diff.amount > 0 -> ChangeRemark.Increase(
             pct = Percentage.ONE_HUNDRED,
-            value = diff,
-            increased = true
+            value = diff
         )
         previous.amount != 0 && diff.amount > 0 -> ChangeRemark.Increase(
             pct = Percentage.fromRatio(diff.amount.toDouble() / previous.amount),
-            value = diff,
-            increased = true
+            value = diff
         )
-        else -> ChangeRemark.Fixed(
-            pct = Percentage.ZERO,
-            at = previous,
-            fixed = true
-        )
+        else -> ChangeRemark.Fixed(at = previous)
     }
 }
 
@@ -63,27 +55,19 @@ fun <N : Number> changeRemarkOf(
         prev == 0.0 && diff < 0.0 -> ChangeRemark.Decrease(
             pct = Percentage.ONE_HUNDRED,
             value = diff * -1,
-            decreased = true
         )
         prev != 0.0 && diff < 0.0 -> ChangeRemark.Decrease(
             pct = Percentage.fromRatio(-diff / prev),
             value = diff * -1,
-            decreased = true
         )
         prev == 0.0 && diff > 0.0 -> ChangeRemark.Increase(
             pct = Percentage.ONE_HUNDRED,
             value = diff,
-            increased = true
         )
         prev != 0.0 && diff > 0.0 -> ChangeRemark.Increase(
             pct = Percentage.fromRatio(diff / prev),
             value = diff,
-            increased = true
         )
-        else -> ChangeRemark.Fixed(
-            pct = Percentage.ZERO,
-            at = prev,
-            fixed = true
-        )
+        else -> ChangeRemark.Fixed(at = prev)
     }
 }
