@@ -12,6 +12,7 @@ data class MoneyChangeBox(
     override val previous: Money,
     override val current: Money,
     override val details: String,
+    override val feeling: ChangeFeeling
 ) : ChangeBox<Money>() {
-    override val change: ChangeRemark<Money> by lazy { changeRemarkOf(previous, current) }
+    override val change: ChangeRemark<Money> by lazy { changeRemarkOf(previous, current, feeling) }
 }

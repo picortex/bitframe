@@ -11,6 +11,7 @@ data class NumberChangeBox<N : Number>(
     override val previous: N,
     override val current: N,
     override val details: String,
+    override val feeling: ChangeFeeling
 ) : ChangeBox<N>() {
-    override val change by lazy { changeRemarkOf(previous, current) as ChangeRemark<N> }
+    override val change by lazy { changeRemarkOf(previous, current, feeling) as ChangeRemark<N> }
 }

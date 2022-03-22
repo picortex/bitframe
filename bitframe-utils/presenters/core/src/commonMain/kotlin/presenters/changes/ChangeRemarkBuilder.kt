@@ -16,7 +16,10 @@ private const val CHANGE_MONEY_REMARK_OF = "changeMoneyRemarkOf"
 @JsName(CHANGE_MONEY_REMARK_OF)
 fun changeRemarkOf(
     previous: Money,
-    current: Money
+    current: Money,
+    increaseFeeling: ChangeFeeling? = null,
+    decreaseFeeling: ChangeFeeling? = null,
+    fixedFeeling: ChangeFeeling? = null
 ): ChangeRemark<Money> {
     if (previous.currency != current.currency) {
         return ChangeRemark.Indeterminate
@@ -27,26 +30,36 @@ fun changeRemarkOf(
         previous.amount == 0 && diff.amount < 0 -> ChangeRemark.Decrease(
             pct = Percentage.ONE_HUNDRED,
             value = diff * -1,
+            feeling = decreaseFeeling ?: ChangeRemark.Decrease.DEFAULT_FEELING
         )
         previous.amount != 0 && diff.amount < 0 -> ChangeRemark.Decrease(
             pct = Percentage.fromRatio(diff.amount * -1.0 / previous.amount),
             value = diff * -1,
+            feeling = decreaseFeeling ?: ChangeRemark.Decrease.DEFAULT_FEELING
         )
         previous.amount == 0 && diff.amount > 0 -> ChangeRemark.Increase(
             pct = Percentage.ONE_HUNDRED,
-            value = diff
+            value = diff,
+            feeling = increaseFeeling ?: ChangeRemark.Increase.DEFAULT_FEELING
         )
         previous.amount != 0 && diff.amount > 0 -> ChangeRemark.Increase(
             pct = Percentage.fromRatio(diff.amount.toDouble() / previous.amount),
-            value = diff
+            value = diff,
+            feeling = increaseFeeling ?: ChangeRemark.Increase.DEFAULT_FEELING
         )
-        else -> ChangeRemark.Fixed(at = previous)
+        else -> ChangeRemark.Fixed(
+            at = previous,
+            feeling = fixedFeeling ?: ChangeRemark.Fixed.DEFAULT_FEELING
+        )
     }
 }
 
 fun <N : Number> changeRemarkOf(
     previous: N,
-    current: N
+    current: N,
+    increaseFeeling: ChangeFeeling? = null,
+    decreaseFeeling: ChangeFeeling? = null,
+    fixedFeeling: ChangeFeeling? = null
 ): ChangeRemark<Double> {
     val prev = previous.toDouble()
     val diff = current.toDouble() - prev
@@ -55,19 +68,26 @@ fun <N : Number> changeRemarkOf(
         prev == 0.0 && diff < 0.0 -> ChangeRemark.Decrease(
             pct = Percentage.ONE_HUNDRED,
             value = diff * -1,
+            feeling = decreaseFeeling ?: ChangeRemark.Decrease.DEFAULT_FEELING
         )
         prev != 0.0 && diff < 0.0 -> ChangeRemark.Decrease(
             pct = Percentage.fromRatio(-diff / prev),
             value = diff * -1,
+            feeling = decreaseFeeling ?: ChangeRemark.Decrease.DEFAULT_FEELING
         )
         prev == 0.0 && diff > 0.0 -> ChangeRemark.Increase(
             pct = Percentage.ONE_HUNDRED,
             value = diff,
+            feeling = increaseFeeling ?: ChangeRemark.Increase.DEFAULT_FEELING
         )
         prev != 0.0 && diff > 0.0 -> ChangeRemark.Increase(
             pct = Percentage.fromRatio(diff / prev),
             value = diff,
+            feeling = increaseFeeling ?: ChangeRemark.Increase.DEFAULT_FEELING
         )
-        else -> ChangeRemark.Fixed(at = prev)
+        else -> ChangeRemark.Fixed(
+            at = prev,
+            feeling = fixedFeeling ?: ChangeRemark.Fixed.DEFAULT_FEELING
+        )
     }
 }

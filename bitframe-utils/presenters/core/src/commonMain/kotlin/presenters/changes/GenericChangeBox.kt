@@ -10,7 +10,8 @@ import kotlin.js.JsExport
 data class GenericChangeBox<out T>(
     override val previous: T,
     override val current: T,
-    override val details: String
+    override val details: String,
+    override val feeling: ChangeFeeling
 ) : ChangeBox<T>() {
     override val change: ChangeRemark<T> get() = ChangeRemark.Indeterminate
 }

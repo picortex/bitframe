@@ -33,6 +33,7 @@ import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Stagi
 import pimonitor.core.sage.SageApiCredentials
 import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
+import presenters.changes.ChangeFeeling
 import presenters.changes.moneyChangeBoxOf
 
 open class BusinessesDaodService(
@@ -214,14 +215,23 @@ open class BusinessesDaodService(
                     revenue = moneyChangeBoxOf(
                         previous = earlyIncomeStatement.body.income.toMoney(currency),
                         current = laterIncomeStatement.body.income.toMoney(currency),
+                        increaseFeeling = ChangeFeeling.Good,
+                        decreaseFeeling = ChangeFeeling.Bad,
+                        fixedFeeling = ChangeFeeling.Neutral
                     ),
                     expenses = moneyChangeBoxOf(
                         previous = earlyIncomeStatement.body.expenses.toMoney(currency),
                         current = laterIncomeStatement.body.expenses.toMoney(currency),
+                        increaseFeeling = ChangeFeeling.Bad,
+                        decreaseFeeling = ChangeFeeling.Good,
+                        fixedFeeling = ChangeFeeling.Neutral
                     ),
                     grossProfit = moneyChangeBoxOf(
                         previous = Money.of(earlyIncomeStatement.body.grossProfit / currency.lowestDenomination, currency),
                         current = Money.of(laterIncomeStatement.body.grossProfit / currency.lowestDenomination, currency),
+                        increaseFeeling = ChangeFeeling.Good,
+                        decreaseFeeling = ChangeFeeling.Bad,
+                        fixedFeeling = ChangeFeeling.Neutral
                     )
                 )
             } catch (exp: Throwable) {
