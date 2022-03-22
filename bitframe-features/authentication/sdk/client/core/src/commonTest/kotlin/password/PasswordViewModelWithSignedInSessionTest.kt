@@ -15,7 +15,7 @@ import expect.expect
 import kotlinx.collections.interoperable.listOf
 import kotlinx.coroutines.test.runTest
 import live.mutableLiveOf
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import viewmodel.expect
 import kotlin.test.Test
 

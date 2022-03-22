@@ -1,6 +1,3 @@
-@file:JsExport
-@file:Suppress("NON_EXPORTABLE_TYPE")
-
 package presenters.modal
 
 import presenters.modal.builders.ConfirmDialogActionsBuilder
@@ -8,7 +5,6 @@ import presenters.modal.builders.ConfirmDialogBuildingBlock
 import presenters.modal.builders.FormDialogActionsBuilder
 import presenters.modal.builders.FormDialogBuildingBlock
 import kotlin.experimental.ExperimentalTypeInference
-import kotlin.js.JsExport
 
 @OptIn(ExperimentalTypeInference::class)
 fun <F, P> formDialog(

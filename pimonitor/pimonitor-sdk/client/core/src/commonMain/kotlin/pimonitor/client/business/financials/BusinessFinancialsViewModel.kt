@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.businesses.BusinessesService
 import pimonitor.core.invites.InfoResults
-import presenters.state.State
+import presenters.cases.State
 import viewmodel.ViewModel
 import pimonitor.client.business.financials.BusinessFinancialsContent as Content
 import pimonitor.client.business.financials.BusinessFinancialIntent as Intent

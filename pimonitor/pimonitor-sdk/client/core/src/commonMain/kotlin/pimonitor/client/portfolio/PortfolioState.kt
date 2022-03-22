@@ -4,7 +4,7 @@
 package pimonitor.client.portfolio
 
 import pimonitor.core.portfolio.PortfolioData
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 

@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.businesses.BusinessesService
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
-import presenters.state.State
+import presenters.cases.State
 import viewmodel.ViewModel
 
 class BusinessDetailsViewModel(

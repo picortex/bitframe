@@ -5,7 +5,7 @@ package pimonitor.client.businesses
 
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import presenters.table.Table
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import presenters.modal.Dialog
 import presenters.table.builders.tableOf
 import kotlin.js.JsExport

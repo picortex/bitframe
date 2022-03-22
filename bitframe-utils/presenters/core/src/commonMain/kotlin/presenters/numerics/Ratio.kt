@@ -19,5 +19,7 @@ data class Ratio(
 
     val asPercentageDouble by lazy { value * 100.0 }
 
-    val toPercentage: Percentage by lazy { Percentage(value) }
+    val inPercentage: Percentage by lazy { Percentage(value * 100) }
+
+    fun toPercentage() = Percentage(value * 100)
 }

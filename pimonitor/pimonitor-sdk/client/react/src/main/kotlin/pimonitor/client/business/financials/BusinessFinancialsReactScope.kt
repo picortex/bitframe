@@ -6,7 +6,7 @@ package pimonitor.client.business.financials
 import bitframe.client.ReactUIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.client.businesses.BusinessesService
-import presenters.state.State
+import presenters.cases.State
 import viewmodel.asState
 
 class BusinessFinancialsReactScope(

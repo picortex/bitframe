@@ -32,5 +32,7 @@ data class Percentage(
 
     val asRatio by lazy { asDouble / 100.0 }
 
-    val toRatio by lazy { Ratio(asRatio) }
+    val inRatio by lazy { Ratio(asRatio) }
+
+    fun toRatio() = Ratio(asRatio)
 }

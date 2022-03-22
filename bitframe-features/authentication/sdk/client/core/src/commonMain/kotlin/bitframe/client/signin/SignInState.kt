@@ -5,10 +5,10 @@ package bitframe.client.signin
 import bitframe.core.Space
 import bitframe.core.User
 import kotlinx.collections.interoperable.List
-import presenters.feedbacks.Feedback
-import presenters.feedbacks.Feedback.Failure
-import presenters.feedbacks.Feedback.Success
-import presenters.feedbacks.Feedback.Loading
+import presenters.cases.Feedback
+import presenters.cases.Feedback.Failure
+import presenters.cases.Feedback.Success
+import presenters.cases.Feedback.Loading
 
 import kotlin.js.JsExport
 

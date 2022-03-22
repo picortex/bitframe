@@ -7,7 +7,7 @@ import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.client.businesses.BusinessesService
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
-import presenters.state.State
+import presenters.cases.State
 import kotlin.js.JsExport
 import pimonitor.client.business.BusinessDetailsIntent as Intent
 

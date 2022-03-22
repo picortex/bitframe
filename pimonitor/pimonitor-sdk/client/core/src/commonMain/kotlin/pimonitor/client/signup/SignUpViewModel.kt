@@ -14,7 +14,7 @@ import pimonitor.client.signup.SignUpState.Companion.REGISTER_AS_BUSINESS
 import pimonitor.client.signup.SignUpState.Companion.REGISTER_AS_INDIVIDUAL
 import pimonitor.client.signup.fields.BusinessFormFields
 import pimonitor.client.signup.fields.IndividualFormFields
-import presenters.feedbacks.Feedback.*
+import presenters.cases.Feedback.*
 import viewmodel.ViewModel
 import pimonitor.client.signup.SignUpIntent as Intent
 import pimonitor.client.signup.SignUpState as State

@@ -1,6 +1,6 @@
 package bitframe.client.signin
 
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 
 internal fun SignInState.Form.copy(
     i: SignInIntent.Submit,

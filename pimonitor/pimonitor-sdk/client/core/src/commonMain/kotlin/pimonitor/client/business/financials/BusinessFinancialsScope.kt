@@ -6,7 +6,7 @@ package pimonitor.client.business.financials
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.client.businesses.BusinessesService
-import presenters.state.State
+import presenters.cases.State
 import kotlin.js.JsExport
 import pimonitor.client.business.financials.BusinessFinancialIntent as Intent
 

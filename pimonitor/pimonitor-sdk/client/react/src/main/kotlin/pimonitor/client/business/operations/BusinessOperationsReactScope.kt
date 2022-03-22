@@ -8,7 +8,7 @@ import bitframe.client.UIScopeConfig
 import pimonitor.client.businesses.BusinessesService
 import pimonitor.core.dashboards.OperationalDashboard
 import pimonitor.core.invites.InfoResults
-import presenters.state.State
+import presenters.cases.State
 import viewmodel.asState
 
 class BusinessOperationsReactScope(

@@ -15,7 +15,7 @@ import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.invites.Invite
 import pimonitor.core.sage.AcceptSageOneInviteParams
 import pimonitor.core.signup.params.IndividualSignUpParams
-import presenters.state.State
+import presenters.cases.State
 import utils.PiMonitorTestScope
 import utils.toContain
 import viewmodel.expect

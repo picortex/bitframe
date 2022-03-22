@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
 import pimonitor.core.sage.copy
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import viewmodel.ViewModel
 import pimonitor.client.invites.InvitesIntent as Intent
 import pimonitor.client.invites.InvitesState as State
