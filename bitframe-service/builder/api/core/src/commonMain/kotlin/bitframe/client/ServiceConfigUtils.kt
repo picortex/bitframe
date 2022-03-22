@@ -6,7 +6,7 @@ import kotlin.properties.ReadOnlyProperty
 
 fun ServiceConfig.getSignedInSessionTo(action: String) = session.value as? Session.SignedIn ?: error("You must be signed in to $action")
 
-fun ServiceConfig.logger(withSessionInfo: Boolean) = ReadOnlyProperty<Any, Logger> { thisRef, property ->
+fun ServiceConfig.logger(withSessionInfo: Boolean) = ReadOnlyProperty<Any, Logger> { thisRef, _ ->
     val map = buildMap {
         put("source", thisRef::class.simpleName)
         if (withSessionInfo) session.value.apply {

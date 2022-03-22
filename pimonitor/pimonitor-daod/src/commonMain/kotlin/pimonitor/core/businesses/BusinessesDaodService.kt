@@ -33,7 +33,7 @@ import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Stagi
 import pimonitor.core.sage.SageApiCredentials
 import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
-import presenters.containers.moneyChangeBoxOf
+import presenters.changes.moneyChangeBoxOf
 
 open class BusinessesDaodService(
     open val config: ServiceConfigDaod
@@ -214,10 +214,12 @@ open class BusinessesDaodService(
                     revenue = moneyChangeBoxOf(
                         previous = earlyIncomeStatement.body.income.toMoney(currency),
                         current = laterIncomeStatement.body.income.toMoney(currency),
-                    ), expenses = moneyChangeBoxOf(
+                    ),
+                    expenses = moneyChangeBoxOf(
                         previous = earlyIncomeStatement.body.expenses.toMoney(currency),
                         current = laterIncomeStatement.body.expenses.toMoney(currency),
-                    ), grossProfit = moneyChangeBoxOf(
+                    ),
+                    grossProfit = moneyChangeBoxOf(
                         previous = Money.of(earlyIncomeStatement.body.grossProfit / currency.lowestDenomination, currency),
                         current = Money.of(laterIncomeStatement.body.grossProfit / currency.lowestDenomination, currency),
                     )

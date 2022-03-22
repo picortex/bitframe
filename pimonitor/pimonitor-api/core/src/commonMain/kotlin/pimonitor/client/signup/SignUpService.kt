@@ -21,7 +21,7 @@ import pimonitor.core.signup.SignUpService as CoreSignUpService
 
 interface SignUpService : CoreSignUpService {
     val config: ServiceConfig
-    val logger get() = config.logger(this)
+    val logger get() = config.logger
 
     @JsName("signUpAsBusiness")
     fun signUp(params: BusinessSignUpRawParams) = config.scope.later {

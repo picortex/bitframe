@@ -18,7 +18,7 @@ fun <F, P> formDialog(
     @BuilderInference initializer: FormDialogBuildingBlock<P>
 ): Dialog.Form<F, P> {
     val builder = FormDialogActionsBuilder<P>().apply { initializer() }
-    val submitAction = builder.submitAction ?: error("Submit action is missing in dialog $heading")
+    val submitAction = builder.submitAction
     return Dialog.Form(heading, details, fields, builder.actions, submitAction)
 }
 
@@ -28,6 +28,6 @@ fun confirmDialog(
     initializer: ConfirmDialogBuildingBlock
 ): Dialog.Confirm {
     val builder = ConfirmDialogActionsBuilder().apply { initializer() }
-    val confirm = builder.confirmAction ?: error("Confirm action is not set in dialog $heading")
+    val confirm = builder.confirmAction
     return Dialog.Confirm(heading, details, builder.actions, confirm)
 }

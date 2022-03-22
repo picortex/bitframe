@@ -1,13 +1,10 @@
-@file:Suppress("NON_EXPORTABLE_TYPE")
-
-package presenters.containers
+package presenters.changes
 
 import kash.Money
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.jvm.JvmName
 
-@JsExport
 fun moneyChangeBoxOf(
     previous: Money,
     current: Money,
@@ -18,7 +15,6 @@ fun moneyChangeBoxOf(
     details = details
 )
 
-@JsExport
 fun <N : Number> numberChangeBoxOf(
     previous: N,
     current: N,

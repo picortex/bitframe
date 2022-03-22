@@ -13,7 +13,7 @@ import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.DashboardFinancial
 import pimonitor.core.businesses.DashboardOperational
 import pimonitor.core.invites.Invite
-import presenters.containers.ChangeBox
+import presenters.changes.ChangeBox
 import presenters.containers.DetailBox
 import kotlin.js.JsExport
 

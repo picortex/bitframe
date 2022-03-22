@@ -1,7 +1,7 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package presenters.containers
+package presenters.changes
 
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport

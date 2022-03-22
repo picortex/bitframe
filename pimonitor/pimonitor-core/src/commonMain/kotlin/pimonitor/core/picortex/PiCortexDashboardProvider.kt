@@ -26,9 +26,6 @@ class PiCortexDashboardProvider(
             "dateTo" to "07/03/2022"
         )
         val url = "https://${credentials.subdomain}.$domain/api/reporting"
-        println(credentials)
-        println(url)
-        println(params)
         val res = client.post(url) {
             setBody(
                 TextContent(
@@ -37,7 +34,6 @@ class PiCortexDashboardProvider(
                 )
             )
         }
-        println(res.bodyAsText())
         parser.parseTechnicalDashboard(res.bodyAsText())
     }
 }
