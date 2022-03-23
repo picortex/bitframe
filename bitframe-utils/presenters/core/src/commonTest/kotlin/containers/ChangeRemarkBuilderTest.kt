@@ -5,8 +5,8 @@ import expect.toBe
 import kash.Money
 import kash.TZS
 import kash.USD
-import presenters.containers.ChangeRemark
-import presenters.containers.changeRemarkOf
+import presenters.changes.ChangeRemark
+import presenters.changes.changeRemarkOf
 import presenters.numerics.pct
 import kotlin.test.Test
 

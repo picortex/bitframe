@@ -1,6 +1,6 @@
 package pimonitor.server.utils
 
 import bitframe.core.ServiceConfigDaod
-import pimonitor.core.RestEndpoint
+import pimonitor.core.rest.Endpoint
 
-val ServiceConfigDaod.path: RestEndpoint get() = RestEndpoint.Server
+val ServiceConfigDaod.pathV1: Endpoint get() = Endpoint.Server("v1")

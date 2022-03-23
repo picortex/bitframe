@@ -11,9 +11,9 @@ import pimonitor.core.contacts.ContactsFilter
 import response.response
 
 class ContactsController(
-    private val service: ContactsDaodService
+    private  val service: ContactsDaodService
 ) {
-    private val config get() = service.config
+    internal val config get() = service.config
     private val json get() = config.json
 
     suspend fun all(req: HttpRequest) = response {

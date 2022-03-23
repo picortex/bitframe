@@ -8,7 +8,7 @@ import pimonitor.client.businesses.dialogs.InviteToShareReportsDialog
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.IndividualSignUpParams
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import presenters.table.tabulateToConsole
 import utils.PiMonitorTestScope
 import utils.toContain

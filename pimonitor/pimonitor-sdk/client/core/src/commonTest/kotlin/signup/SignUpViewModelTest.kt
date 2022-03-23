@@ -9,7 +9,7 @@ import pimonitor.client.signup.fields.IndividualFormFields
 import pimonitor.client.signup.fields.copy
 import pimonitor.core.signup.params.BusinessSignUpParams
 import pimonitor.core.signup.params.IndividualSignUpParams
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import utils.PiMonitorTestScope
 import viewmodel.expect
 import kotlin.test.Ignore

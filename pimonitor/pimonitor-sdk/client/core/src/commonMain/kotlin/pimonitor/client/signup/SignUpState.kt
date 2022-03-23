@@ -5,7 +5,7 @@ package pimonitor.client.signup
 
 import pimonitor.client.signup.fields.BusinessFormFields
 import pimonitor.client.signup.fields.IndividualFormFields
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import presenters.fields.ButtonInputField
 import presenters.fields.DropDownInputField
 import presenters.fields.DropDownInputField.Option

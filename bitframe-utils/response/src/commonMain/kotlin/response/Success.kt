@@ -5,7 +5,7 @@ import io.ktor.http.*
 
 data class Success<out D, out I>(
     override val status: Status,
-    val payload: Payload<out D, out I>
+    val payload: Payload<D, I>
 ) : Response<D, I>(status) {
     companion object {
         fun <D> of(data: D): Success<D, Nothing?> = Success(Status(HttpStatusCode.OK), payloadOf(data))

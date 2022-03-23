@@ -5,6 +5,7 @@ package presenters.numerics
 
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.math.roundToInt
@@ -13,6 +14,9 @@ import kotlin.math.roundToInt
 data class Percentage(
     val asDouble: Double
 ) {
+    @JsName("_ignore_fromNumber")
+    constructor(asDouble: Number) : this(asDouble.toDouble())
+
     companion object {
         @JvmField
         val ZERO = Percentage(0.0)
@@ -24,9 +28,11 @@ data class Percentage(
         fun fromRatio(ratio: Number) = Percentage(ratio.toDouble() * 100)
     }
 
-    val asInt get() = asDouble.roundToInt()
+    val asInt by lazy { asDouble.roundToInt() }
 
-    val asRatio get() = asDouble / 100.0
+    val asRatio by lazy { asDouble / 100.0 }
 
-    val toRatio get() = Ratio(asRatio)
+    val inRatio by lazy { Ratio(asRatio) }
+
+    fun toRatio() = Ratio(asRatio)
 }

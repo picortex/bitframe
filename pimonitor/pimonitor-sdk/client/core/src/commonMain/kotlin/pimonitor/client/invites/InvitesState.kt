@@ -4,7 +4,7 @@
 package pimonitor.client.invites
 
 import pimonitor.core.invites.InviteInfo
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import presenters.modal.Dialog
 import kotlin.js.JsExport
 

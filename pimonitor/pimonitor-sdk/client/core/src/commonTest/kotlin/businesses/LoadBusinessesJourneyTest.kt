@@ -7,7 +7,7 @@ import kotlinx.datetime.Clock
 import later.await
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.IndividualSignUpParams
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import utils.PiMonitorTestScope
 import viewmodel.expect
 import kotlin.test.Test

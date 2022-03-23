@@ -4,12 +4,12 @@ import bitframe.server.Action
 import bitframe.server.Module
 import bitframe.server.http.HttpRoute
 import io.ktor.http.*
-import pimonitor.server.utils.path
+import pimonitor.server.utils.pathV1
 
 class BusinessModule(
     private val controller: BusinessController
 ) : Module {
-    val path = controller.service.config.path
+    val path = controller.service.config.pathV1
     override val name = "Businesses"
     override val actions: List<Action> = listOf(
         Action("create", mapOf(), HttpRoute(HttpMethod.Post, path.businessesCreate) {

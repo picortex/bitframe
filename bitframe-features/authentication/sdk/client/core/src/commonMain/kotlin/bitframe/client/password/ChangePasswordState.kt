@@ -4,7 +4,7 @@
 package bitframe.client.password
 
 import bitframe.core.profile.params.ChangePasswordRawParams
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import presenters.fields.PasswordInputField
 import kotlin.js.JsExport
 import kotlin.js.JsName

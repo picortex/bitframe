@@ -1,7 +1,7 @@
 package pimonitor.client.signup
 
 import pimonitor.client.signup.fields.copy
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 
 fun SignUpState.IndividualForm.copy(
     i: SignUpIntent.Submit.IndividualForm, status: Feedback?

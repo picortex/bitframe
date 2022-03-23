@@ -16,7 +16,7 @@ import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.copy
 import presenters.containers.toString
-import presenters.feedbacks.Feedback.*
+import presenters.cases.Feedback.*
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 import pimonitor.client.businesses.BusinessesIntent as Intent

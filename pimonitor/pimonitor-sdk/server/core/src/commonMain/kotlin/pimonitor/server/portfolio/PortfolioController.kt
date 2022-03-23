@@ -14,6 +14,7 @@ class PortfolioController(
     private val service: PortfolioDaodService
 ) {
     private val json get() = service.config.json
+    internal val config get() = service.config
     suspend fun load(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.Authorized<PortfolioFilter>>(req.compulsoryBody())
         resolve(service.load(rb).await())

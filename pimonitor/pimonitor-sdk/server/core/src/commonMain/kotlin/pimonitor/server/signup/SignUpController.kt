@@ -14,7 +14,7 @@ import pimonitor.core.signup.params.IndividualSignUpParams
 import response.response
 
 class SignUpController(
-    private val service: SignUpDaodService
+    internal val service: SignUpDaodService
 ) {
     val json get() = service.config.json
 

@@ -33,7 +33,8 @@ import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Stagi
 import pimonitor.core.sage.SageApiCredentials
 import pimonitor.core.spaces.SPACE_TYPE
 import pimonitor.core.users.USER_TYPE
-import presenters.containers.moneyChangeBoxOf
+import presenters.changes.ChangeFeeling
+import presenters.changes.moneyChangeBoxOf
 
 open class BusinessesDaodService(
     open val config: ServiceConfigDaod
@@ -56,10 +57,7 @@ open class BusinessesDaodService(
         PiCortexDashboardProvider(cfg)
     }
     private val sage by lazy { SageOneZAService("{C7542EBF-4657-484C-B79E-E3D90DB0F0D1}") }
-    private val logger
-        get() = config.logger.with(
-            "source" to this::class.simpleName
-        )
+    private val logger by config.logger()
 
     override fun create(rb: RequestBody.Authorized<CreateMonitoredBusinessParams>) = config.scope.later {
         val params = rb.data.toValidatedCreateBusinessParams()
@@ -157,7 +155,9 @@ open class BusinessesDaodService(
                 InfoResults.NotShared("${business.name} has not shared their reports with any accounting system") as InfoResults<IncomeStatement>
             }
             DASHBOARD_FINANCIAL.SAGE_ONE -> {
-                val cred = sageCredentialsDao.all(condition = SageApiCredentials::businessId isEqualTo business.uid).await().first()
+                val cred = sageCredentialsDao.all(
+                    condition = SageApiCredentials::businessId isEqualTo business.uid
+                ).await().last()
                 val company = cred.toCompany(business)
                 val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
                 val lastMonth = today - DatePeriod(months = 1)
@@ -215,12 +215,23 @@ open class BusinessesDaodService(
                     revenue = moneyChangeBoxOf(
                         previous = earlyIncomeStatement.body.income.toMoney(currency),
                         current = laterIncomeStatement.body.income.toMoney(currency),
-                    ), expenses = moneyChangeBoxOf(
+                        increaseFeeling = ChangeFeeling.Good,
+                        decreaseFeeling = ChangeFeeling.Bad,
+                        fixedFeeling = ChangeFeeling.Neutral
+                    ),
+                    expenses = moneyChangeBoxOf(
                         previous = earlyIncomeStatement.body.expenses.toMoney(currency),
                         current = laterIncomeStatement.body.expenses.toMoney(currency),
-                    ), grossProfit = moneyChangeBoxOf(
+                        increaseFeeling = ChangeFeeling.Bad,
+                        decreaseFeeling = ChangeFeeling.Good,
+                        fixedFeeling = ChangeFeeling.Neutral
+                    ),
+                    grossProfit = moneyChangeBoxOf(
                         previous = Money.of(earlyIncomeStatement.body.grossProfit / currency.lowestDenomination, currency),
                         current = Money.of(laterIncomeStatement.body.grossProfit / currency.lowestDenomination, currency),
+                        increaseFeeling = ChangeFeeling.Good,
+                        decreaseFeeling = ChangeFeeling.Bad,
+                        fixedFeeling = ChangeFeeling.Neutral
                     )
                 )
             } catch (exp: Throwable) {

@@ -8,9 +8,8 @@ import kash.USD
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import presenters.containers.ChangeBox
-import presenters.containers.ChangeRemark
-import presenters.containers.changeRemarkOf
+import presenters.changes.ChangeRemark
+import presenters.changes.changeRemarkOf
 import kotlin.test.Ignore
 import kotlin.test.Test
 

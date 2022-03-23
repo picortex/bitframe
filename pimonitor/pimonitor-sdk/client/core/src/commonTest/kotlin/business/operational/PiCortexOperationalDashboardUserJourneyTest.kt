@@ -3,8 +3,6 @@ package business.operational
 import bitframe.core.signin.SignInCredentials
 import expect.expect
 import later.await
-import pimonitor.client.business.BusinessDetailsIntent
-import pimonitor.client.business.financials.BusinessFinancialIntent
 import pimonitor.client.business.operations.BusinessOperationsIntent
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
@@ -15,8 +13,7 @@ import pimonitor.core.invites.InfoResults
 import pimonitor.core.invites.Invite
 import pimonitor.core.picortex.AcceptPicortexInviteParams
 import pimonitor.core.signup.params.IndividualSignUpParams
-import presenters.feedbacks.Feedback
-import presenters.state.State
+import presenters.cases.State
 import utils.PiMonitorTestScope
 import utils.toContain
 import viewmodel.expect

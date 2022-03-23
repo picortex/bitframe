@@ -7,7 +7,7 @@ import bitframe.client.profile.ProfileServiceMock
 import bitframe.core.profile.params.ChangePasswordParams
 import expect.expect
 import kotlinx.coroutines.test.runTest
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import viewmodel.expect
 import kotlin.test.Test
 import bitframe.client.password.ChangePasswordState as State
