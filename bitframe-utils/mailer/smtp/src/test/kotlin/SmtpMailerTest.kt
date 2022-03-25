@@ -7,6 +7,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import later.await
 import mailer.*
+import java.io.InputStream
 import java.util.*
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -40,14 +41,10 @@ class SmtpMailerTest {
 
     @Test
     fun should_send_html() = runTest {
-        val cfg = config.toProperties()
-        println(cfg)
-
         val message = mailer.send(
             draft = EmailDraft(
                 subject = "Test Draft",
                 body = "<html><body><b>This is a test email</b>&nbsp;not bold</body></html>",
-
             ),
             from = Email("support@picortex.com"),
             to = Email("andylamax@programmer.net"),
@@ -57,22 +54,19 @@ class SmtpMailerTest {
 
     @Test
     fun should_send_html_with_attachments() = runTest {
-        val cfg = config.toProperties()
-        println(cfg)
-        val file = SmtpMailerTest::class.java.getResourceAsStream("Vonage_Guide.pdf");
-
+        val inputStream = SmtpMailerTest::class.java.getResourceAsStream("Vonage_Guide.pdf")!!;
         val message = mailer.send(
             draft = EmailDraft(
                 subject = "Test Draft",
                 body = "<html><body><b>This is a test email</b>&nbsp;not bold</body></html>",
                 attachments = listOf(
-                    EmailAttachment(
-                        content=file.readAllBytes(),
-                        name="Vonage_Guide.pdf",
-                        type="application/pdf"
+                    ByteArrayAttachment(
+                        content = inputStream.readAllBytes(),
+                        name = "Vonage_Guide.pdf",
+                        type = "application/pdf"
                     )
                 )
-                ),
+            ),
             from = Email("support@picortex.com"),
             to = Email("andylamax@programmer.net"),
         ).await()
