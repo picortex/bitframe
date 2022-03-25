@@ -11,7 +11,8 @@ data class GenericChangeBox<out T>(
     override val previous: T,
     override val current: T,
     override val details: String,
-    override val feeling: ChangeFeeling
+    override val feeling: ChangeFeeling,
+    override val priority: Int = -1,
 ) : ChangeBox<T>() {
     override val change: ChangeRemark<T> get() = ChangeRemark.Indeterminate
 }

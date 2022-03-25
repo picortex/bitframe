@@ -1,5 +1,7 @@
 package pimonitor.core.picortex
 
+import kash.Currency
+import kash.Money
 import kotlinx.collections.interoperable.listOf
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.serialization.json.Json
@@ -10,9 +12,7 @@ import presenters.charts.Chart
 import kotlin.collections.List
 import kotlin.collections.Map
 import kotlin.collections.filter
-import kotlin.collections.firstOrNull
 import kotlin.collections.map
-import kotlin.collections.mapOf
 import kotlinx.collections.interoperable.List as IList
 
 internal class PiCortexDashboardParser(val mapper: Mapper) {
@@ -24,9 +24,9 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
         private const val CHART_TYPE_BAR = "bar"
     }
 
-    private fun reports(json: String): List<Map<String, Any>> {
+    private fun currencyReportsPair(json: String): Pair<Currency, List<Map<String, Any>>> {
         val map = mapper.decodeFromString(json)
-        return map["reports"] as List<Map<String, Any>>
+        return Currency.valueOf(map.currency) to map["reports"] as List<Map<String, Any>>
     }
 
     private inline val Map<String, *>.config get() = this["config"] as Map<String, *>
@@ -37,10 +37,13 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
     private inline val Map<String, *>.datasets get() = this["datasets"] as? List<Map<String, *>>
     private inline val Map<String, *>.labels get() = this["labels"] as List<String>
     private inline val Map<String, *>.label get() = this["label"] as String
+    private inline val Map<String, *>.money get() = this["money"] as? Boolean
     private inline val Map<String, *>.data get() = this["data"] as Map<String, Number>
     private inline val Map<String, *>.tabularData get() = this["tabularData"] as? Map<String, Map<String, Double>>
     private inline val Map<String, *>.all get() = this["All"]?.toString()?.toDouble() ?: 0.0
     private inline val Map<String, *>.singleValueString get() = this["singleValueString"] as String
+    private inline val Map<String, *>.singleValue get() = this["singleValue"] as Number
+    private inline val Map<String, *>.currency get() = this["currency"] as String
 
     private fun parseBarChartsWithDataSets(reports: List<Map<String, *>>): List<Chart<Double>> = reports.filter {
         it.config.chartType == CHART_TYPE_BAR && it.datasets != null
@@ -62,7 +65,7 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
         )
     }
 
-    private fun parseBarChartsWithTabularData(reports: List<Map<String, *>>): List<Chart<Double>> = reports.filter {
+    private fun parseBarMoneyChartsWithTabularData(reports: List<Map<String, *>>): List<Chart<Double>> = reports.filter {
         it.config.chartType == CHART_TYPE_BAR && it.tabularData != null
     }.map {
         val data = it.tabularData!!
@@ -80,22 +83,39 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
         )
     }
 
-    private fun parseSingleValues(reports: List<Map<String, *>>): IList<ValueCard<String>> = reports.filter {
-        it.config.reportType == REPORT_TYPE_SINGLE_VALUE
-    }.map {
+    private fun parseSingleNumberValues(reports: List<Map<String, *>>): IList<ValueCard<Double>> = reports.mapIndexed { index, map ->
+        index to map
+    }.filter { (_, map) ->
+        map.config.reportType == REPORT_TYPE_SINGLE_VALUE && map.config.money != true
+    }.map { (priority, map) ->
         ValueCard(
-            title = it.config.name,
-            value = it.singleValueString,
-            details = it.config.description
+            title = map.config.name,
+            value = map.singleValue.toDouble(),
+            details = map.config.description,
+            priority = priority
+        )
+    }.toInteroperableList()
+
+    private fun parseSingleMoneyValues(currency: Currency, reports: List<Map<String, *>>): IList<ValueCard<Money>> = reports.mapIndexed { index, map ->
+        index to map
+    }.filter { (_, map) ->
+        map.config.reportType == REPORT_TYPE_SINGLE_VALUE && map.config.money == true
+    }.map { (priority, map) ->
+        ValueCard(
+            title = map.config.name,
+            value = currency.of(map.singleValue.toDouble()),
+            details = map.config.description,
+            priority = priority
         )
     }.toInteroperableList()
 
     fun parseTechnicalDashboard(json: String): OperationalDashboard {
-        val reports = reports(json)
+        val (currency, reports) = currencyReportsPair(json)
         val barCharts = parseBarChartsWithDataSets(reports)
-        val tabularCharts = parseBarChartsWithTabularData(reports)
+        val tabularCharts = parseBarMoneyChartsWithTabularData(reports)
         return OperationalDashboard(
-            cards = parseSingleValues(reports),
+            moneyCards = parseSingleMoneyValues(currency, reports),
+            numberCards = parseSingleNumberValues(reports),
             charts = (barCharts + tabularCharts).toInteroperableList()
         )
     }

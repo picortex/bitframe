@@ -8,18 +8,17 @@ import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.serialization.Serializable
 import presenters.cards.ValueCard
+import presenters.changes.ChangeBox
 import presenters.charts.Chart
 import kotlin.js.JsExport
 
 @Serializable
-data class OperationalDashboard(
-    internal val moneyCards: List<ValueCard<Money>>,
-    internal val numberCards: List<ValueCard<Double>>,
+data class OperationalDifferenceBoard(
+    internal val moneyCards: List<ChangeBox<Money>>,
+    internal val numberCards: List<ChangeBox<Double>>,
     val charts: List<Chart<Double>>
 ) {
     val cards by lazy {
-        (moneyCards + numberCards).sortedBy {
-            it.priority
-        }.toInteroperableList()
+        (moneyCards + numberCards).sortedBy { it.priority }.toInteroperableList()
     }
 }

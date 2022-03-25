@@ -29,7 +29,7 @@ class BusinessOperationsViewModel(
     private fun CoroutineScope.loadOperationalDashboard(i: Intent.LoadOperationalDashboard) = launch {
         flow {
             emit(State.Loading(DEFAULT_LOADING_MESSAGE))
-            emit(State.Content(service.operationalDashboard(i.businessId).await()))
+            emit(State.Content(service.operationalDashboard(i.params).await()))
         }.catch {
             emit(State.Failure(it) {
                 onRetry { post(i) }

@@ -48,19 +48,35 @@ sealed class State<out T> : Case {
 
     open class Content<out T>(
         open val value: T,
-        open val dialog: Dialog? = null
+        open val dialog: Dialog<*, *>? = null
     ) : State<T>() {
         override val message: String by lazy { "$value" }
 
         open fun copy(
             value: @UnsafeVariance T = this.value,
-            dialog: Dialog? = this.dialog
+            dialog: Dialog<*, *>? = this.dialog
         ): State<T> = Content(value, dialog)
 
         override fun equals(other: Any?): Boolean = other is Content<*> && value == other.value && dialog == other.dialog
         override fun hashCode(): Int = value.hashCode()
         override fun toString(): String = value.toString()
     }
+
+    override val isLoading by lazy { this is Loading }
+
+    override val asLoading by lazy { this as Loading }
+
+    override val isSuccess by lazy { this is Success }
+
+    override val asSuccess by lazy { this as Success }
+
+    override val isFailure by lazy { this is Failure }
+
+    override val asFailure by lazy { this as Failure }
+
+    val isContent by lazy { this is Content }
+
+    val asContent by lazy { this as Content }
 
     override fun hashCode(): Int = message.hashCode()
 

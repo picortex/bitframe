@@ -16,6 +16,7 @@ import later.Later
 import later.await
 import later.later
 import pimonitor.core.accounting.FINANCIAL_REPORTS
+import pimonitor.core.business.params.LoadReportParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
@@ -24,6 +25,7 @@ import pimonitor.core.businesses.params.toValidatedCreateBusinessParams
 import pimonitor.core.businesses.results.AvailableReportsResults
 import pimonitor.core.contacts.ContactPersonBusinessInfo
 import pimonitor.core.dashboards.OperationalDashboard
+import pimonitor.core.dashboards.OperationalDifferenceBoard
 import pimonitor.core.invites.InfoResults
 import pimonitor.core.invites.Invite
 import pimonitor.core.picortex.PiCortexApiCredentials
@@ -92,15 +94,17 @@ open class BusinessesDaodService(
         )
     }
 
-    override fun operationalDashboard(rb: RequestBody.Authorized<String>) = config.scope.later {
-        val business = load(rb).await()
+    override fun operationalDashboard(rb: RequestBody.Authorized<LoadReportParams>): Later<InfoResults<OperationalDifferenceBoard>> = config.scope.later {
+        val business = load(rb.map { it.businessId }).await()
+        val params = rb.data
         when (business.operationalBoard) {
             DASHBOARD_OPERATIONAL.NONE -> {
-                InfoResults.NotShared("${business.name} has not shared their reports with any dashboard") as InfoResults<OperationalDashboard>
+                InfoResults.NotShared("${business.name} has not shared their reports with any dashboard") as InfoResults<OperationalDifferenceBoard>
             }
             DASHBOARD_OPERATIONAL.PICORTEX -> {
                 val cred = piCortexCredentialsDao.all(condition = PiCortexApiCredentials::businessId isEqualTo business.uid).await().last()
-                InfoResults.Shared(piCortexDashboardProvider.technicalDashboardOf(cred).await())
+                val board = piCortexDashboardProvider.technicalDifferenceDashboardOf(cred, params.start, params.end).await()
+                InfoResults.Shared<OperationalDifferenceBoard>(board)
             }
             else -> error("Business is connected to an unknown operational board provider")
         }

@@ -18,6 +18,7 @@ import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.copy
 import presenters.containers.toString
 import presenters.cases.Feedback.*
+import presenters.changes.toString
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 import pimonitor.client.businesses.BusinessesIntent as Intent
@@ -201,6 +202,7 @@ class BusinessesViewModel(
 
     private fun businessTable(data: List<MonitoredBusinessSummary>) = tableOf(data) {
         primaryAction("Add Business") { post(ShowCreateBusinessForm) }
+        primaryAction("Refresh") { post(LoadBusinesses) }
         singleAction("Intervene") { post(ShowInterveneForm(it.data)) }
         singleAction("Capture Investment") { post(ShowCaptureInvestmentForm(it.data)) }
         singleAction("Delete") { post(ShowDeleteSingleConfirmationDialog(it.data)) }

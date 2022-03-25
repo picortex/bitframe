@@ -1,12 +1,22 @@
 package presenters.table.builders
 
-import kotlinx.collections.interoperable.toInteroperableList
-import presenters.table.*
-import kotlin.jvm.JvmSynthetic
+import presenters.actions.SimpleAction
+import presenters.table.Column
+import presenters.table.Row
+import presenters.table.TableAction
 
 class TableBuilder<D> {
     internal val actions: MutableList<TableAction<D>> = mutableListOf()
+    internal val populateActions: MutableList<SimpleAction> = mutableListOf()
     internal val columns: MutableList<Column<D>> = mutableListOf()
+
+    var emptyMessage = "No data found"
+
+    var emptyDetails = "You haven't added any data yet"
+
+    fun emptyAction(name: String, handler: () -> Unit) {
+        populateActions += SimpleAction(name, handler)
+    }
 
     fun primaryAction(name: String, handler: () -> Unit) {
         actions += TableAction.Primary(name, handler)
@@ -31,22 +41,4 @@ class TableBuilder<D> {
     fun column(name: String, accessor: (Row<D>) -> String) {
         columns += Column.Data(name, accessor)
     }
-}
-
-@JvmSynthetic
-fun <D> tableOf(
-    data: Collection<D>,
-    block: TableBuilder<D>.() -> Unit
-): Table<D> {
-    val builder = TableBuilder<D>().apply(block)
-    val columns = builder.columns.toInteroperableList()
-    val actions = builder.actions.toInteroperableList()
-    return if (data.isEmpty()) EmptyTable(
-        columns = columns,
-        actions = actions
-    ) else Table.of(
-        columns = columns,
-        data = data.toList().toInteroperableList(),
-        actions = actions
-    )
 }

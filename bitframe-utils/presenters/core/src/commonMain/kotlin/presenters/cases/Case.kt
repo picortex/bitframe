@@ -35,4 +35,16 @@ sealed interface Case {
             val DEFAULT_MESSAGE = "Success"
         }
     }
+
+    val isLoading get() = this is Loading
+
+    val asLoading get() = this as Loading
+
+    val isSuccess get() = this is Success
+
+    val asSuccess get() = this as Success
+
+    val isFailure get() = this is Failure
+
+    val asFailure get() = this as Failure
 }

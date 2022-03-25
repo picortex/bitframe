@@ -14,8 +14,9 @@ class PiCortexDashboardParserTest {
     @Test
     fun should_serialize_dashboard() {
         val dashboard = OperationalDashboard(
-            cards = listOf(ValueCard("Test", "Test", "Test")),
-            charts = listOf(Chart("Test", "Test", emptyList(), emptyList()))
+            moneyCards = emptyList(),
+            numberCards = listOf(ValueCard("Test", 2.0, "Test")),
+            charts = listOf(Chart("Test", "Test", emptyList(), emptyList())),
         )
         val json = Json.encodeToString(dashboard)
         println(json)

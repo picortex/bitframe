@@ -40,6 +40,8 @@ data class IncomeStatement(
         val taxes: CategoryEntry
     ) {
         val grossProfit by lazy { income.total + otherIncome.total - costOfSales.total }
+        val netIncomeBeforeTaxes by lazy { grossProfit - expenses.total - otherExpenses.total }
+        val netIncomeAfterTaxes by lazy { netIncomeBeforeTaxes - taxes.total }
         val version: String = "2.0"
     }
 }
