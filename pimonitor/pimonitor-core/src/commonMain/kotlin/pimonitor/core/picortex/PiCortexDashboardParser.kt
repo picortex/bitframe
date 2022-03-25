@@ -26,6 +26,9 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
 
     private fun currencyReportsPair(json: String): Pair<Currency, List<Map<String, Any>>> {
         val map = mapper.decodeFromString(json)
+        if (map.error != null) {
+            throw RuntimeException("PiCortex Dashboard responded with an error -> ${map["message"]}")
+        }
         return Currency.valueOf(map.currency) to map["reports"] as List<Map<String, Any>>
     }
 
@@ -44,6 +47,7 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
     private inline val Map<String, *>.singleValueString get() = this["singleValueString"] as String
     private inline val Map<String, *>.singleValue get() = this["singleValue"] as Number
     private inline val Map<String, *>.currency get() = this["currency"] as String
+    private inline val Map<String, *>.error get() = this["error"] as? String
 
     private fun parseBarChartsWithDataSets(reports: List<Map<String, *>>): List<Chart<Double>> = reports.filter {
         it.config.chartType == CHART_TYPE_BAR && it.datasets != null
