@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.businesses.BusinessesService
 import pimonitor.core.dashboards.OperationalDashboard
+import pimonitor.core.dashboards.OperationalDifferenceBoard
 import pimonitor.core.invites.InfoResults
 import presenters.cases.State
 import viewmodel.ViewModel
@@ -15,7 +16,7 @@ import pimonitor.client.business.operations.BusinessOperationsIntent as Intent
 
 class BusinessOperationsViewModel(
     private val config: UIScopeConfig<BusinessesService>
-) : ViewModel<Intent, State<InfoResults<OperationalDashboard>>>(State.Loading(DEFAULT_LOADING_MESSAGE), config.viewModel) {
+) : ViewModel<Intent, State<InfoResults<OperationalDifferenceBoard>>>(State.Loading(DEFAULT_LOADING_MESSAGE), config.viewModel) {
     companion object {
         const val DEFAULT_LOADING_MESSAGE = "Loading operational dashboard, please wait . . ."
     }
