@@ -12,4 +12,12 @@ sealed class InfoResults<out T> {
     data class Shared<out T>(val data: T) : InfoResults<T>()
 
     data class NotShared(val message: String) : InfoResults<Nothing>()
+
+    val areShared get() = this is Shared
+
+    val asShared get() = this as Shared
+
+    val areNotShared get() = this is NotShared
+
+    val asNotShared get() = this as NotShared
 }

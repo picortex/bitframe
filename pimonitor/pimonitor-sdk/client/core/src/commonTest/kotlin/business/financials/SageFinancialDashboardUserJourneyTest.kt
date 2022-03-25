@@ -7,7 +7,6 @@ import expect.expect
 import expect.toBe
 import later.await
 import pimonitor.client.business.financials.BusinessFinancialIntent
-import pimonitor.client.business.financials.BusinessFinancialsContent
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
@@ -15,9 +14,7 @@ import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.invites.Invite
 import pimonitor.core.sage.AcceptSageOneInviteParams
 import pimonitor.core.signup.params.IndividualSignUpParams
-import presenters.cases.State
 import utils.PiMonitorTestScope
-import utils.toContain
 import viewmodel.expect
 import kotlin.test.Test
 
@@ -75,12 +72,8 @@ class SageFinancialDashboardUserJourneyTest {
 
         step("View Income Statement of the business under test") {
             val businessId = invite!!.invitedBusinessId
-            vm.expect(BusinessFinancialIntent.LoadAvailableReports(businessId))
-            vm.expect(BusinessFinancialIntent.LoadIncomeStatement(businessId)).toContain(
-                State.Loading("Loading income statement, please wait . . ."),
-            )
-            val state = vm.ui.value as State.Content<BusinessFinancialsContent.Report>
-            expect(state.value.data).toBe<IncomeStatement>()
+            vm.expect(BusinessFinancialIntent.LoadIncomeStatement(businessId))
+            expect(vm.ui.value.report).toBe<IncomeStatement>()
         }
     }
 
@@ -132,12 +125,8 @@ class SageFinancialDashboardUserJourneyTest {
 
         step("View Balance Sheet of the business under test") {
             val businessId = invite!!.invitedBusinessId
-            vm.expect(BusinessFinancialIntent.LoadAvailableReports(businessId))
-            vm.expect(BusinessFinancialIntent.LoadBalanceSheet(businessId)).toContain(
-                State.Loading("Loading balance sheet, please wait . . ."),
-            )
-            val state = vm.ui.value as State.Content<BusinessFinancialsContent.Report>
-            expect(state.value.data).toBe<BalanceSheet>()
+            vm.expect(BusinessFinancialIntent.LoadBalanceSheet(businessId))
+            expect(vm.ui.value.report).toBe<BalanceSheet>()
         }
     }
 }
