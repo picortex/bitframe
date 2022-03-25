@@ -26,14 +26,14 @@ class PiCortexDashboardParserTest {
     fun should_parse_charts() {
         val parser = PiCortexDashboardParser()
         val dashboard = parser.parseTechnicalDashboard(response)
-        expect(dashboard.charts).toBeOfSize(10)
+        expect(dashboard.charts).toBeOfSize(6)
     }
 
     @Test
     fun should_parse_cards() {
         val parser = PiCortexDashboardParser()
         val dashboard = parser.parseTechnicalDashboard(response)
-        expect(dashboard.cards).toBeOfSize(10)
+        expect(dashboard.cards).toBeOfSize(8)
     }
 
     @Test
