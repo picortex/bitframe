@@ -184,8 +184,6 @@ open class BusinessesDaodService(
         list
     }
 
-    private fun CategoryEntry.toMoney(currency: Currency) = Money.of(total.toDouble() / currency.lowestDenomination, currency)
-
     private suspend fun summaryOf(business: MonitoredBusinessBasicInfo): MonitoredBusinessSummary {
         val contacts = contactPersonBusinessInfoDao.all(ContactPersonBusinessInfo::businessId isEqualTo business.uid).await().flatMap {
             userContactsDao.all(UserContact::userId isEqualTo it.userId).await()
@@ -214,25 +212,24 @@ open class BusinessesDaodService(
                 val laterIncomeStatement = ap.reports.incomeStatement(
                     start = now.date - DatePeriod(months = 1), end = now.date
                 ).await()
-                val currency = earlyIncomeStatement.header.currency
                 bus.copy(
                     revenue = moneyChangeBoxOf(
-                        previous = earlyIncomeStatement.body.income.toMoney(currency),
-                        current = laterIncomeStatement.body.income.toMoney(currency),
+                        previous = earlyIncomeStatement.body.income.total,
+                        current = laterIncomeStatement.body.income.total,
                         increaseFeeling = ChangeFeeling.Good,
                         decreaseFeeling = ChangeFeeling.Bad,
                         fixedFeeling = ChangeFeeling.Neutral
                     ),
                     expenses = moneyChangeBoxOf(
-                        previous = earlyIncomeStatement.body.expenses.toMoney(currency),
-                        current = laterIncomeStatement.body.expenses.toMoney(currency),
+                        previous = earlyIncomeStatement.body.expenses.total,
+                        current = laterIncomeStatement.body.expenses.total,
                         increaseFeeling = ChangeFeeling.Bad,
                         decreaseFeeling = ChangeFeeling.Good,
                         fixedFeeling = ChangeFeeling.Neutral
                     ),
                     grossProfit = moneyChangeBoxOf(
-                        previous = Money.of(earlyIncomeStatement.body.grossProfit / currency.lowestDenomination, currency),
-                        current = Money.of(laterIncomeStatement.body.grossProfit / currency.lowestDenomination, currency),
+                        previous = earlyIncomeStatement.body.grossProfit,
+                        current = laterIncomeStatement.body.grossProfit,
                         increaseFeeling = ChangeFeeling.Good,
                         decreaseFeeling = ChangeFeeling.Bad,
                         fixedFeeling = ChangeFeeling.Neutral

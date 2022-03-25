@@ -6,6 +6,7 @@ import akkounts.provider.Owner
 import akkounts.reports.cashflow.CashFlow
 import akkounts.utils.unset
 import kash.Currency
+import kash.Money
 import kotlinx.datetime.LocalDate
 
 class CashFlowParser(map: Map<String, Any?>) : GenericParser(map) {
@@ -17,22 +18,25 @@ class CashFlowParser(map: Map<String, Any?>) : GenericParser(map) {
         owner = Owner.UNSET
     )
 
-    fun parseStartingAmount(): Int {
+    fun parseStartingAmount(currency: Currency): Money {
         val errorMsg = "Couldn't get cash at the beginning of the period"
         val row = getRows(map).find {
             it["group"] == "BeginningCash"
         } ?: error(errorMsg)
         val value = row["ColData"] as? List<Map<String, String>> ?: error(errorMsg)
         val amount = value.lastOrNull()?.get("value")?.toDouble() ?: error(errorMsg)
-        return (amount * 100).toInt()
+        return currency.of(amount)
     }
 
-    fun parseBody() = CashFlow.Body(
-        startAmount = parseStartingAmount(),
-        operating = getEntriesFrom(map, "OperatingActivities"),
-        investing = getEntriesFrom(map, "InvestingActivities"),
-        financing = getEntriesFrom(map, "FinancingActivities")
+    fun parseBody(currency: Currency) = CashFlow.Body(
+        opening = parseStartingAmount(currency),
+        operating = getEntriesFrom("Operating Activities", currency, map, "OperatingActivities"),
+        investing = getEntriesFrom("Investing Activities", currency, map, "InvestingActivities"),
+        financing = getEntriesFrom("Financing Activities", currency, map, "FinancingActivities")
     )
 
-    fun parse() = CashFlow(unset, parseHeader(), parseBody())
+    fun parse(): CashFlow {
+        val header = parseHeader()
+        return CashFlow(unset, header, parseBody(header.currency))
+    }
 }
