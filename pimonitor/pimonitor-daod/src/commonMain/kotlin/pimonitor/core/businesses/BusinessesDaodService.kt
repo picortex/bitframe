@@ -104,7 +104,7 @@ open class BusinessesDaodService(
             DASHBOARD_OPERATIONAL.PICORTEX -> {
                 val cred = piCortexCredentialsDao.all(condition = PiCortexApiCredentials::businessId isEqualTo business.uid).await().last()
                 val board = piCortexDashboardProvider.technicalDifferenceDashboardOf(cred, params.start, params.end).await()
-                InfoResults.Shared<OperationalDifferenceBoard>(board)
+                InfoResults.Shared(board)
             }
             else -> error("Business is connected to an unknown operational board provider")
         }

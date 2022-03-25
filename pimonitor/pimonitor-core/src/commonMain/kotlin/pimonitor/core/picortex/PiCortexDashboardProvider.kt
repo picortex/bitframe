@@ -20,6 +20,7 @@ import presenters.cards.ValueCard
 import presenters.changes.moneyChangeBoxOf
 import presenters.changes.numberChangeBoxOf
 import presenters.date.DateFormatter
+import kotlin.js.JsName
 import kotlin.jvm.JvmName
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
@@ -34,6 +35,8 @@ class PiCortexDashboardProvider(
     private val parser get() = config.parser
     private val domain get() = config.environment.domain
 
+    @JvmName("diffNumber")
+    @JsName("diffNumber")
     fun ValueCard<Double>.diff(other: ValueCard<Double>) = numberChangeBoxOf(
         previous = other.value,
         current = value,
@@ -42,6 +45,7 @@ class PiCortexDashboardProvider(
     )
 
     @JvmName("diffMoney")
+    @JsName("diffMoney")
     fun ValueCard<Money>.diff(other: ValueCard<Money>) = moneyChangeBoxOf(
         previous = other.value,
         current = value,
@@ -66,10 +70,16 @@ class PiCortexDashboardProvider(
     )
 
     fun OperationalDashboard.diff(other: OperationalDashboard): OperationalDifferenceBoard {
+        println("Diffs")
         val moneyBoxes = moneyCards.map {
-            it.diff(other.findMoneyCardOrDefault(it.title, it.value.currency))
+            val current = it
+            val previous = other.findMoneyCardOrDefault(it.title, it.value.currency)
+            println("Diffing: $current")
+            println("Diffing: $previous")
+            current.diff(previous)
         }.toInteroperableList()
 
+        println("Done diffing money")
         val numberBoxes = numberCards.map {
             it.diff(other.findNumberCardOrDefault(it.title))
         }.toInteroperableList()
@@ -106,7 +116,7 @@ class PiCortexDashboardProvider(
 
         val board1 = dashboard1.await()
         val board2 = dashboard2.await()
-        board2.diff(board1)
+        board2.diff(board1).also { println("Finished diffing board") }
     }
 
     fun technicalDashboardOf(

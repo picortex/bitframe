@@ -34,11 +34,10 @@ class SmtpMailer(val config: SmtpMailerConfig) : Mailer {
     }
 
     override fun send(draft: EmailDraft, from: AddressInfo, to: List<AddressInfo>): Later<EmailMessage> = config.scope.later {
-        val multipart = MimeMultipart("mixed");
-
         val message = MimeMessage(session).apply {
             setFrom(from.toInternetAddress())
             addRecipients(Message.RecipientType.TO, to.map { it.toInternetAddress() }.toTypedArray())
+            val multipart = MimeMultipart("mixed");
             subject = draft.subject
             var messageBodyPart = MimeBodyPart();
             messageBodyPart.setContent(draft.body, "text/html");
@@ -46,16 +45,19 @@ class SmtpMailer(val config: SmtpMailerConfig) : Mailer {
 
             draft.attachments.forEachIndexed { index, attachment ->
                 val attachmentBodyPart = MimeBodyPart()
-                val fds = ByteArrayDataSource(attachment.content, attachment.type)
-
-                attachmentBodyPart.dataHandler = DataHandler(fds)
+                val dataSource = when (attachment) {
+                    is ByteArrayAttachment -> ByteArrayDataSource(attachment.content, attachment.type)
+                    is FileAttachment -> FileDataSource(attachment.content)
+                    else -> error("Unsupported EmailAttachmentType ${attachment::class.simpleName}")
+                }
+                attachmentBodyPart.dataHandler = DataHandler(dataSource)
                 attachmentBodyPart.setHeader("Content-ID", "<attachment-$index>")
                 attachmentBodyPart.setHeader("Content-Type", attachment.type)
                 attachmentBodyPart.fileName = attachment.name
 
                 multipart.addBodyPart(attachmentBodyPart)
             }
-            
+
             setContent(multipart)
         }
 
