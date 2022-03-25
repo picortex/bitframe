@@ -31,7 +31,7 @@ class BusinessesViewModel(
     private val api get() = config.service
 
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
-        LoadBusinesses -> loadBusiness()
+        LoadBusinesses -> loadBusinesses()
 
         ShowCreateBusinessForm -> showCreateBusinessForm()
         is SendCreateBusinessForm -> sendCreateBusinessForm(i)
@@ -192,7 +192,7 @@ class BusinessesViewModel(
         ui.value = it
     }
 
-    private fun CoroutineScope.loadBusiness() = launch {
+    private fun CoroutineScope.loadBusinesses() = launch {
         val state = ui.value
         flow {
             emit(state.copy(status = Loading("Loading your businesses, please wait . . ."), dialog = null))
