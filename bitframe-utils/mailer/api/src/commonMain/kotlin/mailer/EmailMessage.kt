@@ -13,6 +13,6 @@ data class EmailMessage(
     val from: AddressInfo,
     val to: List<AddressInfo>,
     val body: String,
-    val attachments: List<EmailAttachment> = listOf(),
+    val attachments: List<EmailAttachment<*>> = listOf(),
     val status: List<EmailStatus>
 )

@@ -1,5 +1,6 @@
 import expect.expect
 import identifier.Email
+import kotlinx.collections.interoperable.listOf
 import kotlinx.coroutines.test.runTest
 import later.await
 import mailer.*
@@ -19,6 +20,23 @@ class MailerMockTest {
             draft = EmailDraft(
                 subject = "Test Draft",
                 body = "This is a test email"
+            ),
+            from = Email("from@test.com"),
+            to = Email("to@gmail.com"),
+        ).await()
+        expect(message).toBeNonNull()
+    }
+
+    @Test
+    fun should_support_attachments() = runTest {
+        val message = mailer.send(
+            draft = EmailDraft(
+                subject = "Test Draft",
+                body = "This is a test email",
+                attachments = listOf(
+                    MockAttachment(4, "number", "test attachment"),
+                    MockAttachment(mailer, "mailer", "Attached the freaking mailer son"),
+                )
             ),
             from = Email("from@test.com"),
             to = Email("to@gmail.com"),
