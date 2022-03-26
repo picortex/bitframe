@@ -13,7 +13,7 @@ import presenters.modal.builders.FormDialogBuildingBlock
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-sealed class Dialog {
+sealed class Dialog<out F, in P> {
     abstract val heading: String
     abstract val details: String
     abstract val actions: List<SimpleAction>
@@ -24,7 +24,7 @@ sealed class Dialog {
         override val fields: F,
         override val actions: List<SimpleAction>,
         override val submit: GenericAction<P>
-    ) : Dialog(), presenters.forms.Form<F, P> {
+    ) : Dialog<F, P>(), presenters.forms.Form<F, P> {
         override val cancel by lazy {
             actions.firstOrNull {
                 it.name.contentEquals("cancel", ignoreCase = true)
@@ -44,7 +44,7 @@ sealed class Dialog {
         override val details: String,
         override val actions: List<SimpleAction>,
         val confirm: SimpleAction
-    ) : Dialog() {
+    ) : Dialog<Nothing, Nothing>() {
         @JsName("_ignore_fromBuildingBlock")
         constructor(heading: String, details: String, block: ConfirmDialogBuildingBlock) : this(
             heading, details,
@@ -53,5 +53,5 @@ sealed class Dialog {
         )
     }
 
-    override fun equals(other: Any?): Boolean = other is Dialog && other.heading == heading && other::class == this::class
+    override fun equals(other: Any?): Boolean = other is Dialog<*, *> && other.heading == heading && other::class == this::class
 }

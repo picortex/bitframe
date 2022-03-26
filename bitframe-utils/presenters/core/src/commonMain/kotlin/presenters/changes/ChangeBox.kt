@@ -13,4 +13,5 @@ sealed class ChangeBox<out D> {
     abstract val details: String
     abstract val change: ChangeRemark<D>
     abstract val feeling: ChangeFeeling
+    abstract val priority: Int
 }

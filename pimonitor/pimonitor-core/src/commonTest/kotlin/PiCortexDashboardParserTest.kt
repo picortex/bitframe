@@ -14,8 +14,9 @@ class PiCortexDashboardParserTest {
     @Test
     fun should_serialize_dashboard() {
         val dashboard = OperationalDashboard(
-            cards = listOf(ValueCard("Test", "Test", "Test")),
-            charts = listOf(Chart("Test", "Test", emptyList(), emptyList()))
+            moneyCards = emptyList(),
+            numberCards = listOf(ValueCard("Test", 2.0, "Test")),
+            charts = listOf(Chart("Test", "Test", emptyList(), emptyList())),
         )
         val json = Json.encodeToString(dashboard)
         println(json)
@@ -25,14 +26,14 @@ class PiCortexDashboardParserTest {
     fun should_parse_charts() {
         val parser = PiCortexDashboardParser()
         val dashboard = parser.parseTechnicalDashboard(response)
-        expect(dashboard.charts).toBeOfSize(10)
+        expect(dashboard.charts).toBeOfSize(6)
     }
 
     @Test
     fun should_parse_cards() {
         val parser = PiCortexDashboardParser()
         val dashboard = parser.parseTechnicalDashboard(response)
-        expect(dashboard.cards).toBeOfSize(10)
+        expect(dashboard.cards).toBeOfSize(8)
     }
 
     @Test

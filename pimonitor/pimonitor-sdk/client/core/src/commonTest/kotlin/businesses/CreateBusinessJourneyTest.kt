@@ -51,7 +51,7 @@ class CreateBusinessJourneyTest {
             val state = State()
             vm.expect(Intent.SendCreateBusinessForm(params)).toContain(
                 state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
-                state.copy(status = Feedback.Success("${params.businessName} has successfully been added")),
+                state.copy(status = Feedback.Success("${params.businessName} has successfully been added. Loading all your businesses, please wait . . .")),
             )
             expect(vm.ui.value.table.rows).toBeOfSize(1)
         }

@@ -119,9 +119,6 @@ jobs:
       - name: Running js tests
         run: API_MODE="LIVE" API_URL="http://65.21.254.230:90" ./gradlew jsTest
 
-      - name: Build project
-        run: API_MODE="LIVE" API_URL="http://65.21.254.230:90" ./gradlew build
-
   "deploy-artifacts":
     runs-on: "ubuntu-latest"
     needs:

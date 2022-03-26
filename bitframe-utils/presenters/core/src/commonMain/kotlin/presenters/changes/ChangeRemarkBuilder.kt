@@ -54,9 +54,9 @@ fun changeRemarkOf(
     }
 }
 
-fun <N : Number> changeRemarkOf(
-    previous: N,
-    current: N,
+fun changeRemarkOf(
+    previous: Number,
+    current: Number,
     increaseFeeling: ChangeFeeling? = null,
     decreaseFeeling: ChangeFeeling? = null,
     fixedFeeling: ChangeFeeling? = null

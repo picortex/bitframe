@@ -12,5 +12,5 @@ data class InvitesState(
     val status: Feedback = Feedback.Loading("Preparing integration information, please wait . . ."),
     val title: String? = null,
     val info: InviteInfo? = null,
-    val dialog: Dialog? = null
+    val dialog: Dialog<*, *>? = null
 )

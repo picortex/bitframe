@@ -1,3 +1,7 @@
 package akkounts.reports.utils
 
-fun Collection<StatementEntryItem>.total(): Int = sumOf { it.amount }
+import kash.Currency
+
+fun Collection<StatementEntryItem>.total(currency: Currency) = fold(currency.of(0)) { acc, item ->
+    acc + item.value
+}

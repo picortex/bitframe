@@ -1,4 +1,5 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package akkounts.reports.cashflow
 
@@ -8,6 +9,7 @@ import akkounts.provider.Owner
 import akkounts.reports.FinancialReport
 import akkounts.reports.FinancialReportHeader
 import kash.Currency
+import kash.Money
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -29,11 +31,11 @@ data class CashFlow(
 
     @Serializable
     data class Body(
-        val startAmount: Int,
+        val opening: Money,
         val operating: CategoryEntry,
         val investing: CategoryEntry,
         val financing: CategoryEntry
     ) {
-        val endAmount by lazy { startAmount + operating.total + investing.total + financing.total }
+        val closing by lazy { opening + operating.total + investing.total + financing.total }
     }
 }

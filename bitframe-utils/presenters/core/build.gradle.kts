@@ -6,7 +6,7 @@ plugins {
     `picortex-publish`
 }
 
-val tmp = 1
+val tmp = 2
 
 kotlin {
     jvm { library() }
@@ -19,6 +19,7 @@ kotlin {
                 api(asoft.viewmodel.core)
                 api(asoft.kash.core)
                 api(asoft.kotlinx.collections.interoperable)
+                api(kotlinx.datetime)
             }
         }
 

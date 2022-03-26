@@ -10,6 +10,7 @@ import io.ktor.client.request.*
 import kotlinx.serialization.decodeFromString
 import later.BaseLater.Companion.resolve
 import later.await
+import pimonitor.core.business.params.LoadReportParams
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.BusinessesDaodService
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
@@ -38,7 +39,7 @@ class BusinessController(
     }.toHttpResponse()
 
     suspend fun dashboard(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.Authorized<String>>(req.compulsoryBody())
+        val rb = json.decodeFromString<RequestBody.Authorized<LoadReportParams>>(req.compulsoryBody())
         resolve(service.operationalDashboard(rb).await())
     }.toHttpResponse()
 

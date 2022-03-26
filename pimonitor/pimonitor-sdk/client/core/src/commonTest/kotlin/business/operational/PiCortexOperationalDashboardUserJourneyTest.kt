@@ -2,9 +2,14 @@ package business.operational
 
 import bitframe.core.signin.SignInCredentials
 import expect.expect
+import kash.Currency
+import kash.Money
+import kash.TZS
+import kotlinx.datetime.Clock
 import later.await
 import pimonitor.client.business.operations.BusinessOperationsIntent
 import pimonitor.client.runSequence
+import pimonitor.core.business.params.LoadReportParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
 import pimonitor.core.businesses.params.InviteToShareReportsParams
@@ -14,6 +19,7 @@ import pimonitor.core.invites.Invite
 import pimonitor.core.picortex.AcceptPicortexInviteParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import presenters.cases.State
+import presenters.date.last
 import utils.PiMonitorTestScope
 import utils.toContain
 import viewmodel.expect
@@ -72,7 +78,14 @@ class PiCortexOperationalDashboardUserJourneyTest {
         }
 
         step("View PiCortex Operations Dashboard of ${result?.business?.name}") {
-            vm.expect(BusinessOperationsIntent.LoadOperationalDashboard(invite!!.invitedBusinessId)).toContain(
+            val end = time.toEpochMilliseconds().toDouble()
+            val start = time.last(days = 30).toEpochMilliseconds().toDouble()
+            val params = LoadReportParams(
+                businessId = invite!!.invitedBusinessId,
+                start = start,
+                end = end
+            )
+            vm.expect(BusinessOperationsIntent.LoadOperationalDashboard(params)).toContain(
                 State.Loading("Loading operational dashboard, please wait . . ."),
             )
             val state = vm.ui.value as State.Content<InfoResults.Shared<OperationalDashboard>>

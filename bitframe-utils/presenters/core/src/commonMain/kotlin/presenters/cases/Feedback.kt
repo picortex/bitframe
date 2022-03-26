@@ -48,6 +48,22 @@ sealed class Feedback : Case {
         override fun toString(): String = message
     }
 
+    override val isLoading by lazy { this is Loading }
+
+    override val asLoading by lazy { this as Loading }
+
+    override val isSuccess by lazy { this is Success }
+
+    override val asSuccess by lazy { this as Success }
+
+    override val isFailure by lazy { this is Failure }
+
+    override val asFailure by lazy { this as Failure }
+
+    val isNone by lazy { this is None }
+
+    val asNone by lazy { this as None }
+
     override fun hashCode(): Int = message.hashCode()
 
     override fun equals(other: Any?): Boolean = other is Feedback && other.message == message && this::class == other::class

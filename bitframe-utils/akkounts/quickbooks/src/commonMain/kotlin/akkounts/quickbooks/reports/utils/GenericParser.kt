@@ -2,6 +2,7 @@ package akkounts.quickbooks.reports.utils
 
 import akkounts.reports.utils.CategoryEntry
 import akkounts.reports.utils.StatementEntryItem
+import kash.Currency
 import kotlinx.collections.interoperable.toInteroperableList
 
 open class GenericParser(protected val map: Map<String, Any?>) {
@@ -13,7 +14,7 @@ open class GenericParser(protected val map: Map<String, Any?>) {
         return rows["Row"] as? List<Map<String, Any?>> ?: listOf()
     }
 
-    protected fun parseData(data: Map<String, Any?>): StatementEntryItem {
+    protected fun parseData(currency: Currency, data: Map<String, Any?>): StatementEntryItem {
         val colData = data["ColData"] as? List<Map<String, String>> ?: error("Couldn't get ColData")
         val value = colData.lastOrNull()?.get("value")
         val amount = if (value?.isNotEmpty() == true) {
@@ -22,37 +23,37 @@ open class GenericParser(protected val map: Map<String, Any?>) {
 
         return StatementEntryItem(
             details = colData.firstOrNull()?.get("value") ?: error("Failed to get value of ColData"),
-            amount = (amount * 100).toInt()
+            value = currency.of(amount)
         )
     }
 
     @OptIn(ExperimentalStdlibApi::class)
-    protected fun parseSection(section: Map<String, Any?>): List<StatementEntryItem> {
+    protected fun parseSection(currency: Currency, section: Map<String, Any?>): List<StatementEntryItem> {
         val rows = getRows(section)
         return buildList {
             for (row in rows) {
                 if (row["type"] == "Data") {
-                    add(parseData(row))
+                    add(parseData(currency, row))
                 } else if (row["type"] == "Section") {
-                    addAll(parseSection(row))
+                    addAll(parseSection(currency, row))
                 }
             }
         }
     }
 
     @OptIn(ExperimentalStdlibApi::class)
-    protected fun getEntriesFrom(map: Map<String, Any?>, group: String): CategoryEntry {
+    protected fun getEntriesFrom(name: String, currency: Currency, map: Map<String, Any?>, group: String): CategoryEntry {
         val rowGroup = getRows(map).firstOrNull { it["group"] == group }
         val rows = if (rowGroup != null) getRows(rowGroup) else listOf()
         val entries = buildList {
             for (row in rows) {
                 if (row["type"] == "Data") {
-                    add(parseData(row))
+                    add(parseData(currency, row))
                 } else if (row["type"] == "Section") {
-                    addAll(parseSection(row))
+                    addAll(parseSection(currency, row))
                 }
             }
         }.toInteroperableList()
-        return CategoryEntry(entries)
+        return CategoryEntry(name, currency, entries)
     }
 }

@@ -11,37 +11,43 @@ fun moneyChangeBoxOf(
     details: String = "Updated now",
     increaseFeeling: ChangeFeeling? = null,
     decreaseFeeling: ChangeFeeling? = null,
-    fixedFeeling: ChangeFeeling? = null
-): ChangeBox<Money> = MoneyChangeBox(
+    fixedFeeling: ChangeFeeling? = null,
+    priority: Int = -1,
+) = MoneyChangeBox(
     previous = previous,
     current = current,
     details = details,
-    feeling = changeRemarkOf(previous, current, increaseFeeling, decreaseFeeling, fixedFeeling).feeling
+    feeling = changeRemarkOf(previous, current, increaseFeeling, decreaseFeeling, fixedFeeling).feeling,
+    priority
 )
 
-fun <N : Number> numberChangeBoxOf(
-    previous: N,
-    current: N,
+fun numberChangeBoxOf(
+    previous: Number,
+    current: Number,
     details: String = "Update now",
     increaseFeeling: ChangeFeeling? = null,
     decreaseFeeling: ChangeFeeling? = null,
-    fixedFeeling: ChangeFeeling? = null
-): ChangeBox<N> = NumberChangeBox(
-    previous = previous,
-    current = current,
+    fixedFeeling: ChangeFeeling? = null,
+    priority: Int = -1,
+) = NumberChangeBox(
+    previous = previous.toDouble(),
+    current = current.toDouble(),
     details = details,
-    feeling = changeRemarkOf(previous, current, increaseFeeling, decreaseFeeling, fixedFeeling).feeling
+    feeling = changeRemarkOf(previous, current, increaseFeeling, decreaseFeeling, fixedFeeling).feeling,
+    priority
 )
 
 inline fun <T> genericChangeBoxOf(
     previous: T,
     current: T,
     details: String,
-): ChangeBox<T> = GenericChangeBox(
+    priority: Int = -1,
+) = GenericChangeBox(
     previous = previous,
     current = current,
     details = details,
-    feeling = ChangeFeeling.Unknown
+    feeling = ChangeFeeling.Unknown,
+    priority
 )
 
 inline fun <reified T> changeBoxOf(
@@ -50,9 +56,10 @@ inline fun <reified T> changeBoxOf(
     details: String,
     increaseFeeling: ChangeFeeling? = null,
     decreaseFeeling: ChangeFeeling? = null,
-    fixedFeeling: ChangeFeeling? = null
+    fixedFeeling: ChangeFeeling? = null,
+    priority: Int = -1,
 ): ChangeBox<T> = when {
-    previous is Money && current is Money -> moneyChangeBoxOf(previous, current, details, increaseFeeling, decreaseFeeling, fixedFeeling) as ChangeBox<T>
-    previous is Number && current is Number -> numberChangeBoxOf(previous, current, details, increaseFeeling, decreaseFeeling, fixedFeeling)
-    else -> genericChangeBoxOf(previous, current, details)
+    previous is Money && current is Money -> moneyChangeBoxOf(previous, current, details, increaseFeeling, decreaseFeeling, fixedFeeling, priority) as ChangeBox<T>
+    previous is Number && current is Number -> numberChangeBoxOf(previous, current, details, increaseFeeling, decreaseFeeling, fixedFeeling, priority) as ChangeBox<T>
+    else -> genericChangeBoxOf(previous, current, details, priority)
 }

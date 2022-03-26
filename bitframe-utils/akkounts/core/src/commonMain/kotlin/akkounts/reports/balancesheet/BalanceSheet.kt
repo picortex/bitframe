@@ -1,4 +1,5 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package akkounts.reports.balancesheet
 
@@ -8,6 +9,7 @@ import akkounts.provider.Owner
 import akkounts.reports.FinancialReport
 import akkounts.reports.FinancialReportHeader
 import kash.Currency
+import kash.Money
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -61,8 +63,8 @@ data class BalanceSheet(
 
         @Serializable
         data class Verdict(
-            @SerialName("assets") val assets: Int,
-            @SerialName("equity + liabilities") val equityPlusLiabilities: Int
+            @SerialName("assets") val assets: Money,
+            @SerialName("equity + liabilities") val equityPlusLiabilities: Money
         )
     }
 }

@@ -3,6 +3,7 @@ package businesses
 import bitframe.core.UserEmail
 import bitframe.core.signin.SignInCredentials
 import expect.expect
+import kotlinx.coroutines.delay
 import later.await
 import pimonitor.client.businesses.dialogs.InviteToShareReportsDialog
 import pimonitor.client.runSequence
@@ -52,7 +53,7 @@ class InviteToShareReportsJourneyTest {
             val state = State()
             vm.expect(Intent.SendCreateBusinessForm(params)).toContain(
                 state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
-                state.copy(status = Feedback.Success("${params.businessName} has successfully been added")),
+                state.copy(status = Feedback.Success("${params.businessName} has successfully been added. Loading all your businesses, please wait . . .")),
             )
             vm.ui.value.table.tabulateToConsole()
             expect(vm.ui.value.table.rows).toBeOfSize(1)
@@ -63,6 +64,55 @@ class InviteToShareReportsJourneyTest {
             vm.expect(Intent.ShowInviteToShareReportsForm(business))
             val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
             expect(dialog.fields.to.value).toBe(business.contacts.first { it is UserEmail }.value)
+        }
+    }
+
+    @Test
+    fun should_load_businesses_even_if_invite_to_share_reports_is_cancelled() = runSequence {
+        step("Sign Up as a Monitor") {
+            val monitor = IndividualSignUpParams(
+                name = "Jane $time Doe",
+                email = "jane@doe$time.com",
+                password = "jane"
+            )
+            api.signUp.signUp(monitor).await()
+        }
+
+        step("Sign in as the registered monitor") {
+            val cred = SignInCredentials(
+                identifier = "jane@doe$time.com",
+                password = "jane"
+            )
+            api.signIn.signIn(cred).await()
+        }
+
+        step("Create a monitored business") {
+            val params = CreateMonitoredBusinessParams(
+                businessName = "PiCortex LLC",
+                contactName = "Mohammed Majapa",
+                contactEmail = "mmajapa@gmail$time.com",
+                sendInvite = true
+            )
+            val state = State()
+            vm.expect(Intent.SendCreateBusinessForm(params)).toContain(
+                state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
+                state.copy(status = Feedback.Success("${params.businessName} has successfully been added. Preparing invite form, please wait . . .")),
+            )
+            vm.ui.value.table.tabulateToConsole()
+            expect(vm.ui.value.table.rows).toBeOfSize(1)
+        }
+
+        step("Should launch an invite to share reports dialog") {
+            val business = api.businesses.all().await().first()
+            vm.expect(Intent.ShowInviteToShareReportsForm(business))
+            val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
+            expect(dialog.fields.to.value).toBe(business.contacts.first { it is UserEmail }.value)
+        }
+
+        step("Cancel sending invite should return to table with businesses") {
+            val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
+            dialog.cancel()
+            expect(vm.ui.value.table.rows).toBeOfSize(1)
         }
     }
 }

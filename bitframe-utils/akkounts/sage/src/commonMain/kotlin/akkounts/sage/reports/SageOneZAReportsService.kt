@@ -55,9 +55,9 @@ class SageOneZAReportsService @JvmOverloads constructor(
             endOf = at
         )
         val data = BalanceSheet.Body(
-            assets = bsp.assets(),
-            equity = bsp.equity(),
-            liabilities = bsp.liabilities()
+            assets = bsp.assets(header.currency),
+            equity = bsp.equity(header.currency),
+            liabilities = bsp.liabilities(header.currency)
         )
         regulator.incrementCounter(owner, SageOneZAService.VENDOR).await()
         BalanceSheet(uid = "<unset>", header, data)
@@ -75,27 +75,25 @@ class SageOneZAReportsService @JvmOverloads constructor(
             end = end
         )
 
-        val taxes = isp.taxes()
+        val taxes = isp.taxes("Taxes", header.currency)
 
-        val rawIncome = isp.income()
+        val rawIncome = isp.income("Revenue", header.currency)
 
-        println(rawIncome)
         val income = rawIncome.items.map {
             if (it.details == "Sales") {
-                it.copy(amount = it.amount + taxes.total)
+                it.copy(value = it.value + taxes.total)
             } else {
                 it
             }
         }.toInteroperableList()
-        println(income)
 
         val data = IncomeStatement.Body(
-            income = CategoryEntry(income),
-            otherIncome = CategoryEntry(emptyList()),
-            costOfSales = CategoryEntry(emptyList()),
-            expenses = isp.expenses(),
-            otherExpenses = CategoryEntry(emptyList()),
-            taxes = isp.taxes()
+            income = CategoryEntry("Revenue", header.currency, income),
+            otherIncome = CategoryEntry("Other Income", header.currency, emptyList()),
+            costOfSales = CategoryEntry("Cost of Sales", header.currency, emptyList()),
+            expenses = isp.expenses("Expenses", header.currency),
+            otherExpenses = CategoryEntry("Other Expenses", header.currency, emptyList()),
+            taxes = isp.taxes("Taxes", header.currency)
         )
         IncomeStatement(uid = "<unset>", header, data)
     }

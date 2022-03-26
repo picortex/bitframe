@@ -1,6 +1,7 @@
 package pimonitor.core.invites
 
 import bitframe.core.*
+import kotlinx.collections.interoperable.listOf
 import kotlinx.collections.interoperable.toInteroperableList
 import later.Later
 import later.await
@@ -52,14 +53,14 @@ open class InvitesDaodService(
             invitedBusinessId = business.uid,
             invitedContactUserId = userContact.userId,
             sentInviteMessage = rb.data.message,
-            status = kotlinx.collections.interoperable.listOf(
+            status = listOf(
                 InviteStatus.Sent(params = rb.data)
             )
         )
         val invite = invitesDao.create(inviteParams).await()
         val draft = EmailDraft(
             subject = rb.data.subject,
-            body = "${rb.data.message}\n\nGoto https://pimonitor.vercel.app/connect/${invite.uid}"
+            body = "${rb.data.message}\n\nGoto <a href=https://pimonitor.vercel.app/connect/${invite.uid}>PiMonitor</a>"
         )
         config.mailer.send(
             draft = draft,

@@ -3,37 +3,33 @@
 
 package pimonitor.client.businesses
 
-import akkounts.reports.balancesheet.BalanceSheet
-import akkounts.reports.incomestatement.IncomeStatement
 import bitframe.client.ServiceConfig
 import bitframe.client.getSignedInSessionTo
+import bitframe.client.logger
 import bitframe.core.RequestBody
 import later.Later
 import later.await
 import later.later
+import pimonitor.core.business.params.LoadReportRawParams
+import pimonitor.core.business.params.toValidatedParams
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.BusinessesServiceCore
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import pimonitor.core.businesses.params.toValidatedCreateBusinessParams
-import pimonitor.core.dashboards.OperationalDashboard
 import kotlin.js.JsExport
 
 abstract class BusinessesService(
-    open val config: ServiceConfig
+    private val config: ServiceConfig
 ) : BusinessesServiceCore {
 
-    val logger
-        get() = config.logger.with(
-            "source" to this::class.simpleName
-        )
+    val logger by config.logger(withSessionInfo = true)
 
     fun create(params: CreateMonitoredBusinessRawParams) = config.scope.later {
         logger.info("Registering business ${params.businessName}")
-        val validatedParams = params.toValidatedCreateBusinessParams()
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("create a business"),
-            data = validatedParams
+            data = params.toValidatedCreateBusinessParams()
         )
         val result = create(rb).await()
         config.bus.dispatch(BusinessAddedEvent(data = result, spaceId = rb.session.space.uid))
@@ -57,10 +53,10 @@ abstract class BusinessesService(
         delete(rb).await()
     }
 
-    fun operationalDashboard(businessId: String) = config.scope.later {
+    fun operationalDashboard(params: LoadReportRawParams) = config.scope.later {
         val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("load operational dashboard info for business with id=$businessId "),
-            data = businessId
+            session = config.getSignedInSessionTo("load operational dashboard info for business with id=${params.businessId}"),
+            data = params.toValidatedParams()
         )
         operationalDashboard(rb).await()
     }
@@ -92,10 +88,11 @@ abstract class BusinessesService(
     }
 
     fun availableReports(businessId: String) = config.scope.later {
+        logger.info("fetching available reports from business(uid=$businessId)")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("load available reports"),
             data = businessId
         )
-        availableReports(rb).await()
+        availableReports(rb).await().also { logger.info("Reports found"); }
     }
 }
