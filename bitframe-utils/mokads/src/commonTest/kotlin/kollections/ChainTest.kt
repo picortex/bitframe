@@ -4,6 +4,7 @@
 package kollections
 
 import expect.expect
+import expect.toBe
 import kollections.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -19,6 +20,12 @@ class Person(
     val friends: Chain<Person> = chainOf()
 )
 
+@JsExport
+data class Employee(
+    val name: String,
+    val tasks: Chain<String> = chainOf()
+)
+
 class ChainTest {
     @Test
     fun a_chain_can_be_easily_created() {
@@ -28,9 +35,15 @@ class ChainTest {
     }
 
     @Test
-    fun can_be_used_inside_a_class() {
+    fun can_be_used_inside_a_normal_class() {
         val p = Person("Jane")
         expect(p.name).toBe("Jane")
+    }
+
+    @Test
+    @Ignore
+    fun can_be_used_inside_a_data_class() {
+        expect(Employee("John")).toBe(Employee("John"))
     }
 
     @Test

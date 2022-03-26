@@ -23,7 +23,7 @@ import pimonitor.core.sage.SageApiCredentials
 import pimonitor.core.sage.toValidatedInviteParams
 import pimonitor.core.spaces.SPACE_TYPE
 
-open class InvitesDaodService(
+open class InvitesServiceDaod(
     open val config: ServiceConfigDaod
 ) : InvitesServiceCore {
 

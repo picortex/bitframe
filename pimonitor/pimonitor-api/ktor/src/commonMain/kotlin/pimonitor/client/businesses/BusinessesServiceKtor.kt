@@ -45,13 +45,6 @@ class BusinessesServiceKtor(
         json.decodeResponseFromString(MonitoredBusinessBasicInfo.serializer(), req.bodyAsText()).response()
     }
 
-    override fun availableReports(rb: RequestBody.Authorized<String>) = config.scope.later {
-        val req = client.post(path.businessesAvailableReports) {
-            setBody(json.of(rb))
-        }
-        json.decodeResponseFromString(AvailableReportsResults.serializer(), req.bodyAsText()).response()
-    }
-
     override fun all(rb: RequestBody.Authorized<BusinessFilter>) = config.scope.later {
         val req = client.post(path.businessesAll) {
             setBody(json.of(rb))
@@ -67,26 +60,5 @@ class BusinessesServiceKtor(
         }
         val resp = json.decodeResponseFromString(ListSerializer(MonitoredBusinessBasicInfo.serializer()), req.bodyAsText())
         resp.response().toInteroperableList()
-    }
-
-    override fun operationalDashboard(rb: RequestBody.Authorized<LoadReportParams>) = config.scope.later {
-        val req = client.post(path.businessesDashboardOperational) {
-            setBody(json.of(rb))
-        }
-        json.decodeResponseFromString(InfoResults.serializer(OperationalDifferenceBoard.serializer()), req.bodyAsText()).response()
-    }
-
-    override fun incomeStatement(rb: RequestBody.Authorized<String>) = config.scope.later {
-        val req = client.post(path.businessesIncomeStatement) {
-            setBody(json.of(rb))
-        }
-        json.decodeResponseFromString(InfoResults.serializer(IncomeStatement.serializer()), req.bodyAsText()).response()
-    }
-
-    override fun balanceSheet(rb: RequestBody.Authorized<String>) = config.scope.later {
-        val req = client.post(path.businessesBalanceSheet) {
-            setBody(json.of(rb))
-        }
-        json.decodeResponseFromString(InfoResults.serializer(BalanceSheet.serializer()), req.bodyAsText()).response()
     }
 }

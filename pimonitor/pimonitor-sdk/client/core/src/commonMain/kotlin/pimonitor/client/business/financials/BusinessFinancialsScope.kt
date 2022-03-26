@@ -10,7 +10,7 @@ import kotlin.js.JsExport
 import pimonitor.client.business.financials.BusinessFinancialIntent as Intent
 
 open class BusinessFinancialsScope(
-    override val config: UIScopeConfig<BusinessesService>
+    override val config: UIScopeConfig<BusinessFinancialsService>
 ) : UIScope<BusinessFinancialsState> {
     override val viewModel by lazy { BusinessFinancialsViewModel(config) }
 

@@ -8,7 +8,7 @@ import later.later
 import pimonitor.core.businesses.MonitorBusinessBasicInfo
 import pimonitor.core.signup.params.*
 
-open class SignUpDaodService(
+open class SignUpServiceDaod(
     open val config: ServiceConfigDaod
 ) : SignUpService, RegisterUserUseCase by RegisterUserUseCaseImpl(config) {
     private val scope get() = config.scope

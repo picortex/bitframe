@@ -9,6 +9,18 @@ import kotlin.math.max
 class MockMailer(val config: MockMailerConfig = MockMailerConfig()) : Mailer {
     private fun AddressInfo.toDetailsString() = if (name == null) email.value else "$name <${email.value}>"
 
+    private fun StringBuilder.appendRecipients(recipients: List<AddressInfo>) = if (recipients.size == 1) {
+        val address = recipients.first().toDetailsString()
+        appendLine("To:          $address")
+    } else {
+        val first = recipients.first()
+        val rest = recipients - first
+        appendLine("To:          ${first.toDetailsString()}")
+        for (recipient in rest) {
+            appendLine("             ${recipient.toDetailsString()}")
+        }
+    }
+
     override fun send(draft: EmailDraft, from: AddressInfo, to: List<AddressInfo>): Later<EmailMessage> = config.scope.later {
         delay(config.simulationTime)
         if (config.printToConsole) {
@@ -19,7 +31,7 @@ class MockMailer(val config: MockMailerConfig = MockMailerConfig()) : Mailer {
                 appendLine(separator)
                 appendLine("Subject:     ${draft.subject}")
                 appendLine("From:        ${from.toDetailsString()}")
-                appendLine("To:          ${to.joinToString(separator = ";") { it.toDetailsString() }}")
+                appendRecipients(to)
                 appendLine(separator)
                 appendLine("Attachments: ${draft.attachments.joinToString(",") { it.name }}")
                 appendLine(separator)

@@ -13,8 +13,8 @@ import kotlin.js.JsExport
 
 @Serializable
 data class OperationalDashboard(
-    internal val moneyCards: List<ValueCard<Money>>,
-    internal val numberCards: List<ValueCard<Double>>,
+    val moneyCards: List<ValueCard<Money>>,
+    val numberCards: List<ValueCard<Double>>,
     val charts: List<Chart<Double>>
 ) {
     val cards by lazy {

@@ -15,7 +15,7 @@ import viewmodel.ViewModel
 import pimonitor.client.business.operations.BusinessOperationsIntent as Intent
 
 class BusinessOperationsViewModel(
-    private val config: UIScopeConfig<BusinessesService>
+    private val config: UIScopeConfig<BusinessOperationsService>
 ) : ViewModel<Intent, State<InfoResults<OperationalDifferenceBoard>>>(State.Loading(DEFAULT_LOADING_MESSAGE), config.viewModel) {
     companion object {
         const val DEFAULT_LOADING_MESSAGE = "Loading operational dashboard, please wait . . ."
@@ -30,7 +30,7 @@ class BusinessOperationsViewModel(
     private fun CoroutineScope.loadOperationalDashboard(i: Intent.LoadOperationalDashboard) = launch {
         flow {
             emit(State.Loading(DEFAULT_LOADING_MESSAGE))
-            emit(State.Content(service.operationalDashboard(i.params).await()))
+            emit(State.Content(service.dashboard(i.params).await()))
         }.catch {
             emit(State.Failure(it) {
                 onRetry { post(i) }

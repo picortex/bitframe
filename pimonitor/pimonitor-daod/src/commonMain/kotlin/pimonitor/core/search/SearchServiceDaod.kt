@@ -12,7 +12,7 @@ import pimonitor.core.contacts.ContactsFilter
 import pimonitor.core.contacts.LoadContactsUseCase
 import pimonitor.core.contacts.LoadContactsUseCaseImpl
 
-open class SearchDaodService(
+open class SearchServiceDaod(
     open val config: ServiceConfigDaod
 ) : SearchServiceCore, LoadContactsUseCase by LoadContactsUseCaseImpl(config) {
 

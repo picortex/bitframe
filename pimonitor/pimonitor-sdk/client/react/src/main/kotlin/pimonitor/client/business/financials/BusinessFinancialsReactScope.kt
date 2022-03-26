@@ -9,7 +9,7 @@ import pimonitor.client.businesses.BusinessesService
 import viewmodel.asState
 
 class BusinessFinancialsReactScope(
-    override val config: UIScopeConfig<BusinessesService>
+    override val config: UIScopeConfig<BusinessFinancialsService>
 ) : BusinessFinancialsScope(config), ReactUIScope<BusinessFinancialsState> {
     override val useScopeState = { viewModel.asState() }
 }

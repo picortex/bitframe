@@ -6,11 +6,11 @@ import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
 import kotlinx.serialization.decodeFromString
 import later.await
-import pimonitor.core.search.SearchDaodService
+import pimonitor.core.search.SearchServiceDaod
 import pimonitor.core.search.SearchParams
 import response.response
 
-class SearchController(val service: SearchDaodService) {
+class SearchController(val service: SearchServiceDaod) {
     val config get() = service.config
     val json get() = config.json
     suspend fun search(req: HttpRequest) = response {

@@ -84,7 +84,7 @@ class PiCortexDashboardIntegrationTest {
                 start = start.toEpochMilliseconds().toDouble(),
                 end = end.toEpochMilliseconds().toDouble()
             )
-            val board = api.businesses.operationalDashboard(params).await() as InfoResults.Shared
+            val board = api.businessOperations.dashboard(params).await() as InfoResults.Shared
             expect(board.data).toBeNonNull()
         }
     }

@@ -12,7 +12,7 @@ import pimonitor.core.contacts.ContactPersonBusinessInfo
 import presenters.cards.ValueCard
 import presenters.fields.BooleanInputField
 
-open class PortfolioDaodService(
+open class PortfolioServiceDaod(
     override val config: ServiceConfigDaod
 ) : PortfolioServiceCore {
 

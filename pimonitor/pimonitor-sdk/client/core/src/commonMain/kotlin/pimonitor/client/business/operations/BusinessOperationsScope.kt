@@ -14,7 +14,7 @@ import presenters.cases.State
 import kotlin.js.JsExport
 
 open class BusinessOperationsScope(
-    override val config: UIScopeConfig<BusinessesService>,
+    override val config: UIScopeConfig<BusinessOperationsService>,
 ) : UIScope<State<InfoResults<OperationalDifferenceBoard>>> {
     override val viewModel by lazy { BusinessOperationsViewModel(config) }
 

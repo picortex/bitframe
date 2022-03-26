@@ -38,6 +38,6 @@ open class PiMonitorAppScope(
     open val search by lazy { SearchScope(config { api.search }) }
     open val integrations by lazy { InvitesScope(config()) }
     open val businessDetails by lazy { BusinessDetailsScope(config { api.businesses }) }
-    open val businessFinancials by lazy { BusinessFinancialsScope(config { api.businesses }) }
-    open val businessOperations by lazy { BusinessOperationsScope(config { api.businesses }) }
+    open val businessFinancials by lazy { BusinessFinancialsScope(config { api.businessFinancials }) }
+    open val businessOperations by lazy { BusinessOperationsScope(config { api.businessOperations }) }
 }
