@@ -2,6 +2,7 @@ package pimonitor.client.business.investments
 
 import kotlinx.collections.interoperable.toInteroperableList
 import pimonitor.core.business.investments.InvestmentType
+import presenters.fields.ButtonInputField
 import presenters.fields.DateInputField
 import presenters.fields.DropDownInputField
 import presenters.fields.DropDownInputField.Option
@@ -36,5 +37,8 @@ data class CaptureInvestmentFields(
     val details: TextInputField = TextInputField(
         name = Params::details,
         label = "Investment Details"
+    ),
+    val submit: ButtonInputField = ButtonInputField(
+        text = "Capture Investment"
     )
 )
