@@ -23,6 +23,13 @@ sealed class Endpoint(root: String) {
     val businessFinancialReportIncomeStatement = "$businessFinancialReports/income-statement"
     val businessFinancialReportCashFlow = "$businessFinancialReports/cash-flow"
 
+    private val businessInvestments = "$business/investments"
+    val businessInvestmentsCapture = "$businessInvestments/capture"
+    val businessInvestmentsAll = "$businessInvestments/all"
+
+    private val businessInterventions = "$business/interventions"
+    val businessInterventionsCreate = "$businessInterventions/create"
+
     // contacts
     val contactsAll = "$root/contacts/all"
 

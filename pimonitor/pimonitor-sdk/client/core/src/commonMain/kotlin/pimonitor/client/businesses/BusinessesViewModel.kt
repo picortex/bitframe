@@ -11,8 +11,10 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
+import pimonitor.client.businesses.dialogs.CaptureInvestmentDialog
 import pimonitor.client.businesses.BusinessesIntent.*
 import pimonitor.client.businesses.dialogs.*
+import pimonitor.core.business.investments.toValidatedCaptureInvestmentsParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.copy
@@ -40,7 +42,10 @@ class BusinessesViewModel(
         is SendInviteToShareReportsForm -> sendInviteToShareReportsForm(i)
 
         is ShowInterveneForm -> showInterveneForm(i)
+
         is ShowCaptureInvestmentForm -> showCaptureInvestmentForm(i)
+        is SendCaptureInvestmentForm -> sendCaptureInvestmentForm(i)
+
         is ShowDeleteSingleConfirmationDialog -> showDeleteSingleConfirmationDialog(i)
         is ShowDeleteMultipleConfirmationDialog -> showDeleteMultipleConfirmationDialog(i)
 
@@ -61,6 +66,16 @@ class BusinessesViewModel(
             onCancel { post(ExitDialog) }
             onConfirm { post(Delete(i.monitored)) }
         })
+    }
+
+    private fun CoroutineScope.sendCaptureInvestmentForm(i: SendCaptureInvestmentForm) = launch {
+        val state = ui.value
+        flow {
+            val businessId = state.focus?.uid ?: error("Can't capture investments on a non captured business")
+            val params = i.params.toValidatedCaptureInvestmentsParams(businessId = businessId)
+            api.businessInvestments.capture(params).await()
+            emit(state.copy(status = None, dialog = null))
+        }.catchAndCollectToUI(state)
     }
 
     private fun showCaptureInvestmentForm(i: ShowCaptureInvestmentForm) {

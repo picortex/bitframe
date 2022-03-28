@@ -6,6 +6,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
+import kotlin.reflect.KProperty
 
 data class DropDownInputField(
     override val name: String,
@@ -13,10 +14,23 @@ data class DropDownInputField(
     val options: List<Option>
 ) : InputField {
     @JsName("from")
-    constructor(name: String, label: String = name, vararg options: Option) : this(name, label, options.toInteroperableList())
+    constructor(
+        name: String,
+        label: String = name,
+        vararg options: Option
+    ) : this(name, label, options.toInteroperableList())
+
+    @JsName("_ignore_fromProperty")
+    constructor(
+        name: KProperty<*>,
+        label: String = name.name,
+        options: List<Option>
+    ) : this(name.name, label, options)
 
     val itemLabels get() = options.map { it.label }.toInteroperableList()
     val itemValues get() = options.map { it.value }.toInteroperableList()
+
+    val optionsWithFieldLabel get() = (listOf(Option(label, "")) + options).toInteroperableList()
 
     val selected get() = options.firstOrNull { it.selected }
 

@@ -2,9 +2,9 @@ package pimonitor.client
 
 import bitframe.client.BitframeApiMock
 import bitframe.client.BitframeApiMockConfig
-import pimonitor.client.business.financials.BusinessFinancialsService
 import pimonitor.client.business.financials.BusinessFinancialsServiceMock
-import pimonitor.client.business.operations.BusinessOperationsService
+import pimonitor.client.business.interventions.BusinessInterventionsServiceMock
+import pimonitor.client.business.investments.BusinessInvestmentsServiceMock
 import pimonitor.client.business.operations.BusinessOperationsServiceMock
 import pimonitor.client.businesses.BusinessesServiceMock
 import pimonitor.client.contacts.ContactsServiceMock
@@ -21,6 +21,7 @@ class PiMonitorApiMock @JvmOverloads constructor(
     override val businesses by lazy { BusinessesServiceMock(config) }
     override val businessOperations by lazy { BusinessOperationsServiceMock(config) }
     override val businessFinancials by lazy { BusinessFinancialsServiceMock(config) }
+    override val businessInvestments by lazy { BusinessInvestmentsServiceMock(config) }
     override val contacts by lazy { ContactsServiceMock(config) }
     override val portfolio by lazy { PortfolioServiceMock(config) }
     override val search by lazy { SearchServiceMock(config) }

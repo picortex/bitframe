@@ -1,7 +1,7 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.client.businesses.forms
+package pimonitor.client.invites.fields
 
 import presenters.fields.ButtonInputField
 import presenters.fields.EmailInputField

@@ -16,11 +16,11 @@ interface LoadReportRawParams {
 }
 
 fun LoadReportRawParams.toValidatedParams(): LoadReportParams {
-    val st = requiredPositive(::start)
-    require(start < end) { "Start time stamp, should be less than end timestamp" }
+    requiredPositive(::start)
+    require(start < end) { "Start timestamp, should be before (less than) end timestamp" }
     return LoadReportParams(
         businessId = requiredNotBlank(::businessId),
-        start = st,
+        start = start,
         end = end
     )
 }

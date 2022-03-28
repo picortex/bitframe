@@ -3,16 +3,17 @@
 
 package pimonitor.client.businesses.dialogs
 
-import pimonitor.client.businesses.forms.CaptureInvestmentFields
+import pimonitor.client.business.investments.CaptureInvestmentFields
+import pimonitor.core.business.investments.CaptureInvestmentsRawParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import presenters.modal.Dialog
 import presenters.modal.builders.FormDialogBuildingBlock
 import kotlin.js.JsExport
 
 class CaptureInvestmentDialog(
-    val monitored: MonitoredBusinessSummary,
-    val block: FormDialogBuildingBlock<Any>
-) : Dialog.Form<CaptureInvestmentFields, Any>(
+    monitored: MonitoredBusinessSummary,
+    block: FormDialogBuildingBlock<CaptureInvestmentsRawParams>
+) : Dialog.Form<CaptureInvestmentFields, CaptureInvestmentsRawParams>(
     heading = "Capture Investments",
     details = "Capturing investment for ${monitored.name}",
     fields = CaptureInvestmentFields(),

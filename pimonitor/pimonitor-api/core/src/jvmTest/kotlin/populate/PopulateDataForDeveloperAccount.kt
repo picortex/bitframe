@@ -14,23 +14,25 @@ import kotlin.test.Test
 class PopulateDataForDeveloperAccount {
     val api = PiMonitorApiTest()
 
-    val developerEmail = "ssajja@gmail.com"
+    val developerEmail1 = "ssajja@gmail.com"
+    val developerEmail2 = "luge@gmail.com"
+
 
     @Test
-    fun should_create_account_and_add_information_for_a_development_account() = runSequence {
-        step("Register dev account(email: $developerEmail, password: $developerEmail)") {
+    fun should_create_account_and_add_information_for_a_development_account_with_integrated_businesses() = runSequence {
+        step("Register dev account(email: $developerEmail1, password: $developerEmail1)") {
             val params = IndividualSignUpParams(
                 name = "Steven Sajja",
-                email = developerEmail,
-                password = developerEmail
+                email = developerEmail1,
+                password = developerEmail1
             )
             api.signUp.signUp(params).await()
         }
 
         step("Sign in with the dev account") {
             val cred = SignInCredentials(
-                identifier = developerEmail,
-                password = developerEmail
+                identifier = developerEmail1,
+                password = developerEmail1
             )
             api.signIn.signIn(cred).await()
         }
@@ -39,13 +41,13 @@ class PopulateDataForDeveloperAccount {
             val param1 = CreateMonitoredBusinessParams(
                 businessName = "PiCortex LLC",
                 contactName = "Mohammed Majapa",
-                contactEmail = developerEmail
+                contactEmail = developerEmail1
             )
             val res1 = api.businesses.create(param1).await()
 
             val param2 = InviteToShareReportsParams(
                 businessId = res1.business.uid,
-                to = developerEmail,
+                to = developerEmail1,
                 subject = "[STAGING] ${InviteToShareReportsParams.DEFAULT_INVITE_SUBJECT}",
                 message = InviteToShareReportsParams.DEFAULT_INVITE_MESSAGE
             )
@@ -71,7 +73,7 @@ class PopulateDataForDeveloperAccount {
             val param = CreateMonitoredBusinessParams(
                 businessName = "Cilla's Oven",
                 contactName = "Priscilla Sajja",
-                contactEmail = developerEmail
+                contactEmail = developerEmail1
             )
             api.businesses.create(param).await()
         }
@@ -80,7 +82,54 @@ class PopulateDataForDeveloperAccount {
             val param = CreateMonitoredBusinessParams(
                 businessName = "aSoft Ltd",
                 contactName = "Anderson Lameck",
-                contactEmail = developerEmail
+                contactEmail = developerEmail1
+            )
+            api.businesses.create(param).await()
+        }
+    }
+
+    @Test
+    fun should_create_account_and_add_information_for_a_development_account_with_non_integrated_businesses() = runSequence {
+        step("Register dev account(email: $developerEmail2, password: $developerEmail2)") {
+            val params = IndividualSignUpParams(
+                name = "Lugendo Paul Tulla",
+                email = developerEmail2,
+                password = developerEmail2
+            )
+            api.signUp.signUp(params).await()
+        }
+
+        step("Sign in with the dev account") {
+            val cred = SignInCredentials(
+                identifier = developerEmail2,
+                password = developerEmail2
+            )
+            api.signIn.signIn(cred).await()
+        }
+
+        step("Create a business and connect it with picortex dashboard only") {
+            val param1 = CreateMonitoredBusinessParams(
+                businessName = "Kremlin Limited",
+                contactName = "Vladmir Putin",
+                contactEmail = "vlad@putin.com"
+            )
+            api.businesses.create(param1).await()
+        }
+
+        step("Create another business") {
+            val param = CreateMonitoredBusinessParams(
+                businessName = "RUCU",
+                contactName = "Ben Marucho",
+                contactEmail = "ben@marucho.com"
+            )
+            api.businesses.create(param).await()
+        }
+
+        step("Create yet again another business") {
+            val param = CreateMonitoredBusinessParams(
+                businessName = "aSoft Ltd",
+                contactName = "Anderson Lameck",
+                contactEmail = "andy@lamax.com"
             )
             api.businesses.create(param).await()
         }

@@ -6,8 +6,6 @@ plugins {
     `picortex-publish`
 }
 
-val tmp = 2
-
 kotlin {
     jvm { library() }
     js(IR) { library() }
@@ -15,11 +13,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.datetimeCore)
                 api(kotlinx.serialization.core)
-                api(asoft.viewmodel.core)
-                api(asoft.kash.core)
-                api(asoft.kotlinx.collections.interoperable)
                 api(kotlinx.datetime)
             }
         }
@@ -27,8 +21,6 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(asoft.expect.coroutines)
-                implementation(kotlinx.serialization.json)
-                implementation(projects.presentersMock)
             }
         }
     }
