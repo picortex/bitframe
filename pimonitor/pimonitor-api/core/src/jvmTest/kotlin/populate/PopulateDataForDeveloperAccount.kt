@@ -17,7 +17,6 @@ class PopulateDataForDeveloperAccount {
     val developerEmail1 = "ssajja@gmail.com"
     val developerEmail2 = "luge@gmail.com"
 
-
     @Test
     fun should_create_account_and_add_information_for_a_development_account_with_integrated_businesses() = runSequence {
         step("Register dev account(email: $developerEmail1, password: $developerEmail1)") {
@@ -133,7 +132,7 @@ class PopulateDataForDeveloperAccount {
 
         step("Create another business") {
             val param = CreateMonitoredBusinessParams(
-                businessName = "RUCU",
+                businessName = "Ruaha Catholic University",
                 contactName = "Ben Marucho",
                 contactEmail = "ben@marucho.com"
             )

@@ -6,7 +6,9 @@ package pimonitor.client.businesses
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.client.PiMonitorApi
+import pimonitor.core.business.investments.params.CreateInvestmentsRawParamsContextual
 import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
+import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import pimonitor.core.businesses.params.InviteToShareReportsRawFormParams
 import kotlin.js.JsExport
@@ -23,15 +25,35 @@ open class BusinessesScope(
 
     val loadBusinesses: () -> Unit = { viewModel.post(Intent.LoadBusinesses) }
 
-    val submitCreateBusinessForm = { params: CreateMonitoredBusinessRawParams ->
+    val showCreateBusinessForm: () -> Unit = { viewModel.post(Intent.ShowCreateBusinessForm) }
+
+    val sendCreateBusinessForm = { params: CreateMonitoredBusinessRawParams ->
         viewModel.post(Intent.SendCreateBusinessForm(params))
     }
 
-    val submitInviteToShareReportsForm = { params: InviteToShareReportsRawFormParams ->
+    val showInviteToShareReport = { params: MonitoredBusinessSummary ->
+        viewModel.post(Intent.ShowInviteToShareReportsForm(params))
+    }
+
+    val sendInviteToShareReportsForm = { params: InviteToShareReportsRawFormParams ->
         viewModel.post(Intent.SendInviteToShareReportsForm(params))
     }
 
-    val exitDialog: () -> Unit = { viewModel.post(Intent.ExitDialog) }
+    val showInterveneForm = { params: MonitoredBusinessSummary ->
+        viewModel.post(Intent.ShowInterveneForm(params))
+    }
 
-    val showCreateBusinessForm: () -> Unit = { viewModel.post(Intent.ShowCreateBusinessForm) }
+    val sendInterveneForm = { params: Any ->
+        TODO()
+    }
+
+    val showCaptureInvestmentForm = { params: MonitoredBusinessSummary ->
+        viewModel.post(Intent.ShowCaptureInvestmentForm(params))
+    }
+
+    val sendCaptureInvestmentForm = { params: CreateInvestmentsRawParamsContextual ->
+        viewModel.post(Intent.SendCaptureInvestmentForm(params))
+    }
+
+    val exitDialog: () -> Unit = { viewModel.post(Intent.ExitDialog) }
 }

@@ -14,6 +14,7 @@ import pimonitor.client.PiMonitorApi
 import pimonitor.client.businesses.dialogs.CaptureInvestmentDialog
 import pimonitor.client.businesses.BusinessesIntent.*
 import pimonitor.client.businesses.dialogs.*
+import pimonitor.core.business.investments.params.CreateInvestmentsRawParamsContextual
 import pimonitor.core.business.investments.params.toValidatedCreateInvestmentsParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.InviteMessageParams
@@ -81,7 +82,7 @@ class BusinessesViewModel(
     private fun showCaptureInvestmentForm(i: ShowCaptureInvestmentForm) {
         ui.value = ui.value.copy(status = None, focus = i.monitored, dialog = CaptureInvestmentDialog(i.monitored) {
             onCancel { post(ExitDialog) }
-            onSubmit { params: Any -> TODO() }
+            onSubmit { params -> post(SendCaptureInvestmentForm(params)) }
         })
     }
 
