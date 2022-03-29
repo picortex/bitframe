@@ -1,3 +1,6 @@
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
+
 package pimonitor.client.business.investments
 
 import kotlinx.collections.interoperable.toInteroperableList
@@ -8,6 +11,7 @@ import presenters.fields.DropDownInputField
 import presenters.fields.DropDownInputField.Option
 import presenters.fields.TextInputField
 import pimonitor.core.business.investments.params.CreateInvestmentsParams as Params
+import kotlin.js.JsExport
 
 data class CaptureInvestmentFields(
     val name: TextInputField = TextInputField(
