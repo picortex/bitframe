@@ -75,7 +75,7 @@ class PopulateDataForDeveloperAccount {
                 contactName = "Priscilla Sajja",
                 contactEmail = developerEmail1
             )
-            api.businesses.create(param).await()
+            val res1 = api.businesses.create(param).await()
 
             val param2 = InviteToShareReportsParams(
                 businessId = res1.business.uid,
