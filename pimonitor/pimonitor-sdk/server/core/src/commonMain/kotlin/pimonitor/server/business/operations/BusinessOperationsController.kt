@@ -7,7 +7,7 @@ import bitframe.server.http.toHttpResponse
 import kotlinx.serialization.decodeFromString
 import later.await
 import pimonitor.core.business.operations.BusinessOperationsServiceDaod
-import pimonitor.core.business.utils.params.LoadReportParams
+import pimonitor.core.business.utils.info.LoadInfoParams
 import response.response
 
 class BusinessOperationsController(
@@ -15,7 +15,7 @@ class BusinessOperationsController(
 ) {
     val json get() = service.config.json
     suspend fun dashboard(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.Authorized<LoadReportParams>>(req.compulsoryBody())
+        val rb = json.decodeFromString<RequestBody.Authorized<LoadInfoParams>>(req.compulsoryBody())
         resolve(service.dashboard(rb).await())
     }.toHttpResponse()
 }

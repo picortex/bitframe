@@ -7,7 +7,7 @@ import bitframe.server.http.toHttpResponse
 import kotlinx.serialization.decodeFromString
 import later.await
 import pimonitor.core.business.investments.BusinessInvestmentsServiceDaod
-import pimonitor.core.business.investments.CreateInvestmentsParams
+import pimonitor.core.business.investments.params.CreateInvestmentsParams
 import response.response
 
 class BusinessInterventionsController(
