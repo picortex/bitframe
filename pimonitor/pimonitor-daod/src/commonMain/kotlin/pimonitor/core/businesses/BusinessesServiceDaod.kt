@@ -120,6 +120,7 @@ open class BusinessesServiceDaod(
                 val laterIncomeStatement = laterIncomeStatementLater.await()
                 bus.copy(
                     revenue = moneyChangeBoxOf(
+                        title = "Revenue",
                         previous = earlyIncomeStatement.body.income.total,
                         current = laterIncomeStatement.body.income.total,
                         increaseFeeling = ChangeFeeling.Good,
@@ -127,6 +128,7 @@ open class BusinessesServiceDaod(
                         fixedFeeling = ChangeFeeling.Neutral
                     ),
                     expenses = moneyChangeBoxOf(
+                        title = "Expenses",
                         previous = earlyIncomeStatement.body.expenses.total,
                         current = laterIncomeStatement.body.expenses.total,
                         increaseFeeling = ChangeFeeling.Bad,
@@ -134,6 +136,7 @@ open class BusinessesServiceDaod(
                         fixedFeeling = ChangeFeeling.Neutral
                     ),
                     grossProfit = moneyChangeBoxOf(
+                        title = "Gross Profit",
                         previous = earlyIncomeStatement.body.grossProfit,
                         current = laterIncomeStatement.body.grossProfit,
                         increaseFeeling = ChangeFeeling.Good,

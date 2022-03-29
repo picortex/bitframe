@@ -29,7 +29,9 @@ data class Investment(
 
     val createdBy by lazy { history.filterIsInstance<InvestmentHistory.Created>().first().by }
 
+    val totalDisbursed by lazy { disbursements.sumOf { it.amount } }
+
     val disbursementProgressInPercentage by lazy {
-        Percentage.fromRatio(disbursements.sumOf { it.amount } / amount)
+        Percentage.fromRatio(totalDisbursed / amount)
     }
 }

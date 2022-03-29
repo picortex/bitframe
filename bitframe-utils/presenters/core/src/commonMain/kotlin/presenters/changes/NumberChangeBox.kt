@@ -8,6 +8,7 @@ import kotlin.js.JsExport
 
 @Serializable
 data class NumberChangeBox(
+    override val title: String,
     override val previous: Double,
     override val current: Double,
     override val details: String,

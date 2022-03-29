@@ -19,6 +19,7 @@ import pimonitor.core.business.investments.params.toValidatedCreateDisbursementP
 import pimonitor.core.business.investments.params.toValidatedCreateInvestmentsParams
 import presenters.cases.CrowdState
 import presenters.cases.Feedback
+import presenters.numerics.Percentage
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 
@@ -118,9 +119,16 @@ class BusinessInvestmentsViewModel(
         column("Name") { it.data.name }
         column("Source") { it.data.source }
         column("Type") { it.data.type }
+        val options = MoneyFormatterOptions(decimals = 0, abbreviate = false)
+        val currency = Currency.ZAR
         column("Amount") {
-            val options = MoneyFormatterOptions(prefix = "", decimals = 0)
-            Currency.ZAR.of(it.data.amount).toFormattedString(options)
+            currency.of(it.data.amount).toFormattedString(options)
+        }
+        column("Disbursed") {
+            currency.of(it.data.totalDisbursed).toFormattedString(options)
+        }
+        column("Progress") {
+            "${it.data.disbursementProgressInPercentage.asInt}%"
         }
         column("Created By") { it.data.createdBy.name }
         actionsColumn("Actions") {
