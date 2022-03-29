@@ -10,7 +10,7 @@ import later.Later
 import later.later
 import pimonitor.client.business.investments.BusinessInvestmentsService
 import pimonitor.client.utils.pathV1
-import pimonitor.core.business.investments.CaptureInvestmentsParams
+import pimonitor.core.business.investments.CreateInvestmentsParams
 import pimonitor.core.business.investments.Investment
 import response.decodeResponseFromString
 
@@ -20,7 +20,7 @@ open class BusinessInterventionsServiceKtor(
     val path get() = config.pathV1
     val client get() = config.http
     val json get() = config.json
-    override fun capture(rb: RequestBody.Authorized<CaptureInvestmentsParams>) = config.scope.later {
+    override fun capture(rb: RequestBody.Authorized<CreateInvestmentsParams>) = config.scope.later {
         val res = client.post(path.businessInvestmentsCapture) {
             setBody(json.of(rb))
         }

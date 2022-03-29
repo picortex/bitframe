@@ -14,7 +14,7 @@ import pimonitor.client.PiMonitorApi
 import pimonitor.client.businesses.dialogs.CaptureInvestmentDialog
 import pimonitor.client.businesses.BusinessesIntent.*
 import pimonitor.client.businesses.dialogs.*
-import pimonitor.core.business.investments.toValidatedCaptureInvestmentsParams
+import pimonitor.core.business.investments.toValidatedCreateInvestmentsParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.copy
@@ -72,7 +72,7 @@ class BusinessesViewModel(
         val state = ui.value
         flow {
             val businessId = state.focus?.uid ?: error("Can't capture investments on a non captured business")
-            val params = i.params.toValidatedCaptureInvestmentsParams(businessId = businessId)
+            val params = i.params.toValidatedCreateInvestmentsParams(businessId = businessId)
             api.businessInvestments.capture(params).await()
             emit(state.copy(status = None, dialog = null))
         }.catchAndCollectToUI(state)

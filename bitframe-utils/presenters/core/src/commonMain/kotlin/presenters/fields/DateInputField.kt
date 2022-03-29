@@ -10,7 +10,7 @@ data class DateInputField(
     override val label: String = name,
     override val hint: String = label,
     override var value: String? = null
-) : RawTextInputField {
+) : TextInputRawField {
     @JsName("_ignore_fromProperty")
     constructor(
         name: KProperty<*>,

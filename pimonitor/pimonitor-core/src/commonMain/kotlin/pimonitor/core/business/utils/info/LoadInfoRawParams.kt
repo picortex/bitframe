@@ -1,11 +1,11 @@
-package pimonitor.core.business.params
+package pimonitor.core.business.utils.info
 
 import validation.requiredNotBlank
 import validation.requiredPositive
 import kotlin.js.JsExport
 
 @JsExport
-interface LoadReportRawParams {
+interface LoadInfoRawParams {
     val businessId: String
 
     /**in milliseconds*/
@@ -15,10 +15,10 @@ interface LoadReportRawParams {
     val end: Double
 }
 
-fun LoadReportRawParams.toValidatedParams(): LoadReportParams {
+fun LoadInfoRawParams.toValidatedParams(): LoadInfoParams {
     requiredPositive(::start)
     require(start < end) { "Start timestamp, should be before (less than) end timestamp" }
-    return LoadReportParams(
+    return LoadInfoParams(
         businessId = requiredNotBlank(::businessId),
         start = start,
         end = end

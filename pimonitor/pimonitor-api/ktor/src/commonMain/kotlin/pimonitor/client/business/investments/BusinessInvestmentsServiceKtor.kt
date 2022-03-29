@@ -5,24 +5,21 @@ import bitframe.client.of
 import bitframe.core.RequestBody
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.collections.interoperable.toInteroperableList
-import kotlinx.serialization.decodeFromString
-import later.Later
 import later.later
 import pimonitor.client.utils.pathV1
-import pimonitor.core.business.investments.CaptureInvestmentsParams
 import pimonitor.core.business.investments.Investment
+import pimonitor.core.business.investments.params.CreateInvestmentsParams
 import response.decodeResponseFromString
 
 open class BusinessInvestmentsServiceKtor(
     private val config: ServiceConfigKtor
 ) : BusinessInvestmentsService(config) {
-    val path get() = config.pathV1
-    val client get() = config.http
-    val json get() = config.json
-    override fun capture(rb: RequestBody.Authorized<CaptureInvestmentsParams>) = config.scope.later {
+    private val path get() = config.pathV1
+    private val client get() = config.http
+    private val json get() = config.json
+    override fun capture(rb: RequestBody.Authorized<CreateInvestmentsParams>) = config.scope.later {
         val res = client.post(path.businessInvestmentsCapture) {
             setBody(json.of(rb))
         }

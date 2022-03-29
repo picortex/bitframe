@@ -12,7 +12,11 @@ import later.await
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.business.investments.BusinessInvestmentsIntent.*
 import pimonitor.client.business.investments.dialogs.CaptureInvestmentDialog
+import pimonitor.client.business.investments.dialogs.CreateDisbursementDialog
 import pimonitor.core.business.investments.Investment
+import pimonitor.core.business.investments.params.CreateInvestmentsRawParamsContextual
+import pimonitor.core.business.investments.params.toValidatedCreateDisbursementParams
+import pimonitor.core.business.investments.params.toValidatedCreateInvestmentsParams
 import presenters.cases.CrowdState
 import presenters.cases.Feedback
 import presenters.table.builders.tableOf
@@ -28,21 +32,46 @@ class BusinessInvestmentsViewModel(
         is LoadAllInvestments -> loadAllInvestments(i)
         is ShowCreateInvestmentForm -> showCreateInvestmentForm(i)
         is SendCreateInvestmentForm -> sendCreateInvestmentForm(i)
-        is SendCreateDisbursementForm -> TODO()
-        is ShowCreateDisbursementForm -> TODO()
+        is ShowCreateDisbursementForm -> showCreateDisbursementForm(i)
+        is SendCreateDisbursementForm -> sendCreateDisbursementForm(i)
     }
 
     private fun exitDialog() {
-        ui.value = ui.value.copy(dialog = null)g
+        ui.value = ui.value.copy(dialog = null)
+    }
+
+    private fun CoroutineScope.sendCreateDisbursementForm(i: SendCreateDisbursementForm) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(status = Feedback.Loading("Creating a disbursement, please wait . . ."), dialog = null))
+            val investmentId = state.focus?.uid ?: error("Failed to send disbursement form: Couldn't get investment Id from viewmodel context")
+            val params = i.params.toValidatedCreateDisbursementParams(investmentId)
+            api.businessInvestments.disburse(params).await()
+            emit(state.copy(status = Feedback.Success("Success. Loading your investment, please wait . . ."), dialog = null))
+            val table = investmentsTable(api.businessInvestments.all(businessId).await())
+            emit(state.copy(status = Feedback.None, table = table, dialog = null))
+        }.catchAndCollectToUI(state, i)
+    }
+
+    private fun showCreateDisbursementForm(i: ShowCreateDisbursementForm) {
+        ui.value = ui.value.copy(
+            status = Feedback.None,
+            focus = i.investment,
+            dialog = CreateDisbursementDialog(i.investment.name) {
+                onCancel { post(ExitDialog) }
+                onSubmit { post(SendCreateDisbursementForm(it)) }
+            }
+        )
     }
 
     private fun CoroutineScope.sendCreateInvestmentForm(i: SendCreateInvestmentForm) = launch {
         val state = ui.value
         flow {
             emit(state.copy(status = Feedback.Loading("Submitting your form, please wait . . ."), dialog = null))
-            api.businessInvestments.capture(i.params).await()
+            val params = i.params.toValidatedCreateInvestmentsParams(businessId)
+            api.businessInvestments.capture(params).await()
             emit(state.copy(status = Feedback.Success("Investment captured successfully. Loading investments, please wait . . ."), dialog = null))
-            val table = investmentsTable(api.businessInvestments.all(i.params.businessId).await())
+            val table = investmentsTable(api.businessInvestments.all(params.businessId).await())
             emit(state.copy(status = Feedback.None, table = table, dialog = null))
         }.catchAndCollectToUI(state, i)
     }
@@ -50,7 +79,7 @@ class BusinessInvestmentsViewModel(
     private fun CoroutineScope.showCreateInvestmentForm(i: ShowCreateInvestmentForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(status = Feedback.Loading("Loading business information"), dialog = null))
+            emit(state.copy(status = Feedback.Loading("Preparing form, please wait . . ."), dialog = null))
             val business = api.businesses.load(i.businessId).await()
             val dialog = CaptureInvestmentDialog(business.name) {
                 onCancel { post(ExitDialog) }
@@ -83,7 +112,7 @@ class BusinessInvestmentsViewModel(
             post(ShowCreateInvestmentForm(businessId))
         }
         singleAction("Issue Disbursement") {
-            post(ShowCreateDisbursementForm(it.data.uid))
+            post(ShowCreateDisbursementForm(it.data))
         }
         selectable()
         column("Name") { it.data.name }
@@ -95,7 +124,7 @@ class BusinessInvestmentsViewModel(
         }
         column("Created By") { it.data.createdBy.name }
         actionsColumn("Actions") {
-            action("Issue Disbursement") { post(ShowCreateDisbursementForm(it.data.uid)) }
+            action("Issue Disbursement") { post(ShowCreateDisbursementForm(it.data)) }
         }
     }
 }

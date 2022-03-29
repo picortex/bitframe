@@ -5,9 +5,7 @@ package pimonitor.client.business.operations
 
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
-import pimonitor.client.businesses.BusinessesService
-import pimonitor.core.business.params.LoadReportRawParams
-import pimonitor.core.dashboards.OperationalDashboard
+import pimonitor.core.business.utils.params.LoadReportRawParams
 import pimonitor.core.dashboards.OperationalDifferenceBoard
 import pimonitor.core.invites.InfoResults
 import presenters.cases.State

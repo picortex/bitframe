@@ -9,8 +9,8 @@ import bitframe.core.RequestBody
 import later.await
 import later.later
 import pimonitor.core.business.operations.BusinessOperationsServiceCore
-import pimonitor.core.business.params.LoadReportRawParams
-import pimonitor.core.business.params.toValidatedParams
+import pimonitor.core.business.utils.params.LoadReportRawParams
+import pimonitor.core.business.utils.params.toValidatedParams
 import kotlin.js.JsExport
 
 abstract class BusinessOperationsService(

@@ -6,7 +6,7 @@ import bitframe.core.get
 import bitframe.core.isEqualTo
 import later.await
 import later.later
-import pimonitor.core.business.params.LoadReportParams
+import pimonitor.core.business.utils.params.LoadReportParams
 import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.dashboards.OperationalDifferenceBoard

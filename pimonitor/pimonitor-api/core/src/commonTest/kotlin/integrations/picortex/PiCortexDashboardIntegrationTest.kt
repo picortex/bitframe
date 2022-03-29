@@ -7,7 +7,7 @@ import expect.expect
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
-import pimonitor.core.business.params.LoadReportParams
+import pimonitor.core.business.utils.params.LoadReportParams
 import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams

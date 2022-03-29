@@ -1,12 +1,11 @@
-package pimonitor.core.business.investments
+package pimonitor.core.business.investments.params
 
 import validation.requiredNotBlank
 import validation.requiredPositive
 import kotlin.js.JsExport
 
 @JsExport
-interface CaptureInvestmentsRawParams {
-    val businessId: String
+interface CreateInvestmentsRawParamsContextual {
     val name: String
     val type: String
     val source: String
@@ -15,9 +14,9 @@ interface CaptureInvestmentsRawParams {
     val details: String
 }
 
-fun CaptureInvestmentsRawParams.toValidatedCaptureInvestmentsParams(
-    businessId: String = this.businessId
-) = CaptureInvestmentsParams(
+fun CreateInvestmentsRawParamsContextual.toValidatedCreateInvestmentsParams(
+    businessId: String
+) = CreateInvestmentsParams(
     businessId = businessId.takeIf { it.isNotBlank() } ?: "Business id must be provided",
     name = requiredNotBlank(::name),
     type = requiredNotBlank(::type),

@@ -44,6 +44,8 @@ class DateFormatter(private val format: String) {
     @JsName("formatMillis")
     fun format(millis: Double) = format(millis, TimeZone.currentSystemDefault())
 
+    private val Int.to2digits get() = (if (this < 10) "0" else "") + this
+
     @JsName("formatLocalDate")
     fun format(date: LocalDate): String {
         val YYYY = date.year.toString()
@@ -52,13 +54,13 @@ class DateFormatter(private val format: String) {
         val MMMM = month.name.lowercase().replaceFirstChar { it.titlecase() }
         val MMM = MMMM.take(3)
         val monthNumber = month.number
-        val MM = (if (monthNumber < 10) "0" else "") + monthNumber
+        val MM = monthNumber.to2digits
         val M = monthNumber.toString()
         val dayOfWeek = date.dayOfWeek
         val DDDD = dayOfWeek.name.lowercase().replaceFirstChar { it.titlecase() }
         val DDD = DDDD.take(3)
         val day = date.dayOfMonth
-        val DD = (if (day < 10) "0" else "") + day
+        val DD = day.to2digits
         val D = day.toString()
         val th = when {
             day % 10 == 1 -> "st"
@@ -83,16 +85,16 @@ class DateFormatter(private val format: String) {
     @JsName("formatLocalDateTime")
     fun format(date: LocalDateTime): String {
         val hour = date.hour
-        val HH = (if (hour < 10) "0" else "") + hour
+        val HH = hour.to2digits
         val H = hour.toString()
         val smallHour = hour % 12
-        val hh = (if (smallHour < 10) "0" else "")
+        val hh = smallHour.to2digits
         val h = smallHour.toString()
         val minute = date.minute
-        val mm = (if (minute < 10) "0" else "") + minute
+        val mm = minute.to2digits
         val m = minute.toString()
         val seconds = date.second
-        val ss = (if (seconds < 10) "0" else "0") + seconds
+        val ss = seconds.to2digits
         val s = seconds.toString()
 
         return format(date.date)

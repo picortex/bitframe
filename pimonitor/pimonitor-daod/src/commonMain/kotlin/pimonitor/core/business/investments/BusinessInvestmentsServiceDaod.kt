@@ -1,16 +1,16 @@
 package pimonitor.core.business.investments
 
-import bitframe.core.RequestBody
-import bitframe.core.ServiceConfigDaod
-import bitframe.core.get
-import bitframe.core.isEqualTo
+import bitframe.core.*
 import datetime.SimpleDateTime
-import kotlinx.collections.interoperable.List
+import kotlinx.collections.interoperable.toInteroperableList
 import later.Later
 import later.await
 import later.later
-import pimonitor.core.business.investments.*
-import pimonitor.core.invites.Invite
+import pimonitor.core.business.investments.params.CreateInvestmentDisbursementParams
+import pimonitor.core.business.investments.params.CreateInvestmentsParams
+import pimonitor.core.business.investments.params.toInvestment
+import pimonitor.core.business.investments.params.toValidatedCreateInvestmentsParams
+import pimonitor.core.business.utils.disbursements.Disbursement
 
 open class BusinessInvestmentsServiceDaod(
     val config: ServiceConfigDaod
@@ -19,8 +19,8 @@ open class BusinessInvestmentsServiceDaod(
     private val factory get() = config.daoFactory
     private val investmentsDao by lazy { factory.get<Investment>() }
 
-    override fun capture(rb: RequestBody.Authorized<CaptureInvestmentsParams>) = config.scope.later {
-        val params = rb.data.toValidatedCaptureInvestmentsParams()
+    override fun capture(rb: RequestBody.Authorized<CreateInvestmentsParams>) = config.scope.later {
+        val params = rb.data.toValidatedCreateInvestmentsParams()
         val history = InvestmentHistory.Created(
             on = SimpleDateTime.now,
             by = rb.session.user.ref()
@@ -31,4 +31,21 @@ open class BusinessInvestmentsServiceDaod(
     override fun all(rb: RequestBody.Authorized<String>) = config.scope.later {
         investmentsDao.all(Investment::businessId isEqualTo rb.data).await()
     }
+
+    override fun disburse(rb: RequestBody.Authorized<CreateInvestmentDisbursementParams>) = config.scope.later {
+        val investment = investmentsDao.load(rb.data.investmentId).await()
+        val disbursement = rb.data.toDisbursement(rb.session)
+        val input = investment.copy(
+            disbursements = (investment.disbursements + disbursement).toInteroperableList()
+        )
+        investmentsDao.update(input).await()
+        disbursement
+    }
+
+    private fun CreateInvestmentDisbursementParams.toDisbursement(session: Session.SignedIn) = Disbursement(
+        amount = amount,
+        date = SimpleDateTime(date),
+        created = SimpleDateTime.now,
+        by = session.user.ref()
+    )
 }
