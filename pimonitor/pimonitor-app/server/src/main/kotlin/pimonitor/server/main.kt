@@ -7,6 +7,8 @@ import mailer.SmtpMailer
 import mailer.SmtpMailerConfig
 import pimonitor.server.business.financials.BusinessFinancialsController
 import pimonitor.server.business.financials.BusinessFinancialsModule
+import pimonitor.server.business.investments.BusinessInvestmentsController
+import pimonitor.server.business.investments.BusinessInvestmentsModule
 import pimonitor.server.business.operations.BusinessOperationsController
 import pimonitor.server.business.operations.BusinessOperationsModule
 import pimonitor.server.businesses.BusinessesController
@@ -55,12 +57,16 @@ fun main(args: Array<String>) {
             BusinessesModule(BusinessesController(ser.businesses))
         }
 
-        install {ser ->
+        install { ser ->
             BusinessFinancialsModule(BusinessFinancialsController(ser.businessFinancials))
         }
 
         install { ser ->
             BusinessOperationsModule(BusinessOperationsController(ser.businessOperations))
+        }
+
+        install { ser ->
+            BusinessInvestmentsModule(BusinessInvestmentsController(ser.businessInvestments))
         }
 
         install { ser ->

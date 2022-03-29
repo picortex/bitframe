@@ -17,6 +17,9 @@ class BusinessInvestmentsModule(
         }),
         Action("Load All Investments", mapOf(), HttpRoute(HttpMethod.Post, path.businessInvestmentsAll) {
             controller.all(it)
+        }),
+        Action("Create a disbursement", mapOf(), HttpRoute(HttpMethod.Post, path.businessInvestmentsDisburse) {
+            controller.disburse(it)
         })
     )
 }

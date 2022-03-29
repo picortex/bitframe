@@ -10,8 +10,10 @@ import later.Later
 import later.later
 import pimonitor.client.business.investments.BusinessInvestmentsService
 import pimonitor.client.utils.pathV1
-import pimonitor.core.business.investments.CreateInvestmentsParams
 import pimonitor.core.business.investments.Investment
+import pimonitor.core.business.investments.params.CreateInvestmentDisbursementParams
+import pimonitor.core.business.investments.params.CreateInvestmentsParams
+import pimonitor.core.business.utils.disbursements.Disbursement
 import response.decodeResponseFromString
 
 open class BusinessInterventionsServiceKtor(
@@ -28,6 +30,10 @@ open class BusinessInterventionsServiceKtor(
     }
 
     override fun all(rb: RequestBody.Authorized<String>): Later<List<Investment>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun disburse(rb: RequestBody.Authorized<CreateInvestmentDisbursementParams>): Later<Disbursement> {
         TODO("Not yet implemented")
     }
 }

@@ -4,7 +4,7 @@
 package pimonitor.client.businesses.dialogs
 
 import pimonitor.client.business.investments.CaptureInvestmentFields
-import pimonitor.core.business.investments.CreateInvestmentsRawParams
+import pimonitor.core.business.investments.params.CreateInvestmentsRawParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import presenters.modal.Dialog
 import presenters.modal.builders.FormDialogBuildingBlock

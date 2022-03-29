@@ -2,7 +2,7 @@
 
 package pimonitor.client.businesses
 
-import pimonitor.core.business.investments.CreateInvestmentsRawParams
+import pimonitor.core.business.investments.params.CreateInvestmentsRawParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import pimonitor.core.businesses.params.InviteToShareReportsRawFormParams

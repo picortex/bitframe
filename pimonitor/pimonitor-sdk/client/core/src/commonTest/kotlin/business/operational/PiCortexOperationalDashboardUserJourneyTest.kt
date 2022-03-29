@@ -5,7 +5,7 @@ import expect.expect
 import later.await
 import pimonitor.client.business.operations.BusinessOperationsIntent
 import pimonitor.client.runSequence
-import pimonitor.core.business.utils.params.LoadReportParams
+import pimonitor.core.business.utils.info.LoadInfoParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
 import pimonitor.core.businesses.params.InviteToShareReportsParams
@@ -76,7 +76,7 @@ class PiCortexOperationalDashboardUserJourneyTest {
         step("View PiCortex Operations Dashboard of ${result?.business?.name}") {
             val end = time.toEpochMilliseconds().toDouble()
             val start = time.last(days = 30).toEpochMilliseconds().toDouble()
-            val params = LoadReportParams(
+            val params = LoadInfoParams(
                 businessId = invite!!.invitedBusinessId,
                 start = start,
                 end = end

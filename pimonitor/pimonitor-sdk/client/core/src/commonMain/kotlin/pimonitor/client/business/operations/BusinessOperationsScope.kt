@@ -5,7 +5,7 @@ package pimonitor.client.business.operations
 
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
-import pimonitor.core.business.utils.params.LoadReportRawParams
+import pimonitor.core.business.utils.info.LoadInfoRawParams
 import pimonitor.core.dashboards.OperationalDifferenceBoard
 import pimonitor.core.invites.InfoResults
 import presenters.cases.State
@@ -16,7 +16,7 @@ open class BusinessOperationsScope(
 ) : UIScope<State<InfoResults<OperationalDifferenceBoard>>> {
     override val viewModel by lazy { BusinessOperationsViewModel(config) }
 
-    val loadOperationalDashboard = { params: LoadReportRawParams ->
+    val loadOperationalDashboard = { params: LoadInfoRawParams ->
         viewModel.post(BusinessOperationsIntent.LoadOperationalDashboard(params))
     }
 }

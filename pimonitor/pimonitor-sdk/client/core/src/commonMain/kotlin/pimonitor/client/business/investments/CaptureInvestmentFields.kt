@@ -7,7 +7,7 @@ import presenters.fields.DateInputField
 import presenters.fields.DropDownInputField
 import presenters.fields.DropDownInputField.Option
 import presenters.fields.TextInputField
-import pimonitor.core.business.investments.CreateInvestmentsParams as Params
+import pimonitor.core.business.investments.params.CreateInvestmentsParams as Params
 
 data class CaptureInvestmentFields(
     val name: TextInputField = TextInputField(
