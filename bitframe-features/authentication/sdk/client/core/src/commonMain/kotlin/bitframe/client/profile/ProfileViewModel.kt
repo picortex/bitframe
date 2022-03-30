@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import viewmodel.ViewModel
 
 class ProfileViewModel(

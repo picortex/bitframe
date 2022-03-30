@@ -12,12 +12,10 @@ fun <D> Table<D>.tabulateToString() = buildString {
     appendLine()
     columns.forEach {
         if (it is Column.Select) {
-            val middle = if (areAllRowsSelected) {
-                "x"
-            } else if (areNoRowsSelected) {
-                " "
-            } else {
-                "-"
+            val middle = when {
+                areAllRowsSelected -> "x"
+                areNoRowsSelected -> " "
+                else -> "-"
             }
             append("[$middle]\t")
         } else {

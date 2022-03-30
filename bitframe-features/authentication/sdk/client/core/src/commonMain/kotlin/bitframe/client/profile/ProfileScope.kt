@@ -11,7 +11,7 @@ import bitframe.client.profile.ProfileState as State
 
 open class ProfileScope(
     override val config: UIScopeConfig<ProfileService>
-) : UIScope<Intent, State> {
+) : UIScope<State> {
     override val viewModel by lazy { ProfileViewModel(config) }
     val initialize = {
         viewModel.post(Intent.Init)

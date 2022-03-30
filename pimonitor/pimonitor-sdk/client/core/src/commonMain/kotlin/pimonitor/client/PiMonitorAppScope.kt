@@ -1,4 +1,5 @@
-@file:JsExport @file:Suppress("NON_EXPORTABLE_TYPE")
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.client
 
@@ -9,6 +10,9 @@ import bitframe.client.panel.PanelScope
 import bitframe.client.password.ChangePasswordScope
 import bitframe.client.signin.SignInScope
 import pimonitor.client.business.BusinessDetailsScope
+import pimonitor.client.business.financials.BusinessFinancialsScope
+import pimonitor.client.business.investments.BusinessInvestmentsScope
+import pimonitor.client.business.operations.BusinessOperationsScope
 import pimonitor.client.businesses.BusinessesScope
 import pimonitor.client.contacts.ContactsScope
 import pimonitor.client.invites.InvitesScope
@@ -35,5 +39,8 @@ open class PiMonitorAppScope(
     open val password by lazy { ChangePasswordScope(config { api.profile }) }
     open val search by lazy { SearchScope(config { api.search }) }
     open val integrations by lazy { InvitesScope(config()) }
-    open val business by lazy { BusinessDetailsScope(config { api.businesses }) }
+    open val businessDetails by lazy { BusinessDetailsScope(config { api.businesses }) }
+    open val businessFinancials by lazy { BusinessFinancialsScope(config { api.businessFinancials }) }
+    open val businessOperations by lazy { BusinessOperationsScope(config { api.businessOperations }) }
+    open val businessInvestments by lazy { BusinessInvestmentsScope(config()) }
 }

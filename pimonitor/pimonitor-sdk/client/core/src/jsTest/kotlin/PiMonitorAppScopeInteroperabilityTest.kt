@@ -1,4 +1,6 @@
+import bitframe.client.jso
 import expect.expect
+import expect.toBe
 import pimonitor.client.PiMonitorAppScope
 import utils.PiMonitorTestScope
 import kotlin.test.Test

@@ -12,6 +12,6 @@ import pimonitor.client.invites.InvitesState as State
 
 class InvitesReactScope(
     override val config: UIScopeConfig<PiMonitorApi>
-) : InvitesScope(config), ReactUIScope<Intent, State> {
-    override val useScopeState: () -> State = { viewModel.asState() }
+) : InvitesScope(config), ReactUIScope<State> {
+    override val useScopeState = { viewModel.asState() }
 }

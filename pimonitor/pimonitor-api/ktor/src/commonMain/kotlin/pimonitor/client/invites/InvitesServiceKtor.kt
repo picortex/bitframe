@@ -5,12 +5,8 @@ import bitframe.client.of
 import bitframe.core.RequestBody
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import kotlinx.collections.interoperable.List.Companion.serializer
-import kotlinx.serialization.builtins.serializer
-import later.Later
 import later.later
-import pimonitor.client.utils.path
-import pimonitor.core.RestEndpoint
+import pimonitor.client.utils.pathV1
 import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.invites.Invite
@@ -28,7 +24,7 @@ class InvitesServiceKtor(
     private val json get() = config.json
 
     override fun send(rb: RequestBody.Authorized<InviteToShareReportsParams>) = config.scope.later {
-        val res = client.post(config.path.invitesSend) {
+        val res = client.post(config.pathV1.invitesSend) {
             setBody(json.of(rb))
         }
         val text = res.bodyAsText()
@@ -37,28 +33,28 @@ class InvitesServiceKtor(
     }
 
     override fun defaultInviteMessage(rb: RequestBody.Authorized<InviteMessageParams>) = config.scope.later {
-        val res = client.post(config.path.invitesDefaultMessage) {
+        val res = client.post(config.pathV1.invitesDefaultMessage) {
             setBody(json.of(rb))
         }
         json.decodeResponseFromString(PreInviteInfo.serializer(), res.bodyAsText()).response()
     }
 
     override fun load(rb: RequestBody.UnAuthorized<String>) = config.scope.later {
-        val res = client.post(config.path.invitesLoad) {
+        val res = client.post(config.pathV1.invitesLoad) {
             setBody(json.of(rb))
         }
         json.decodeResponseFromString(InviteInfo.serializer(), res.bodyAsText()).response()
     }
 
     override fun acceptSageInvite(rb: RequestBody.UnAuthorized<AcceptSageOneInviteParams>) = config.scope.later {
-        val res = client.post(config.path.invitesAcceptSage) {
+        val res = client.post(config.pathV1.invitesAcceptSage) {
             setBody(json.of(rb))
         }
         json.decodeResponseFromString(AcceptSageOneInviteParams.serializer(), res.bodyAsText()).response()
     }
 
     override fun acceptPiCortexInvite(rb: RequestBody.UnAuthorized<AcceptPicortexInviteParams>) = config.scope.later {
-        val res = client.post(config.path.invitesAcceptPicortex) {
+        val res = client.post(config.pathV1.invitesAcceptPicortex) {
             setBody(json.of(rb))
         }
         json.decodeResponseFromString(AcceptPicortexInviteParams.serializer(), res.bodyAsText()).response()

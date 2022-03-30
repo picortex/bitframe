@@ -6,7 +6,7 @@ package presenters.table
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import live.*
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import kotlin.js.JsExport
 import kotlin.js.JsName
 

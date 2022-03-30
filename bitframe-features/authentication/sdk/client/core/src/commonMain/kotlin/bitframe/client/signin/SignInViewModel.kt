@@ -2,7 +2,7 @@ package bitframe.client.signin
 
 import bitframe.client.UIScopeConfig
 import bitframe.core.signin.SignInCredentials
-import presenters.feedbacks.Feedback.*
+import presenters.cases.Feedback.*
 import cache.Cache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -29,7 +29,7 @@ class SignInViewModel(
 
     private fun CoroutineScope.initialize() = launch {
         val state = State.Form(SignInFormFields(), null)
-        flow<State> {
+        flow {
             emit(state.copy(status = Loading("Fetching your previous credentials")))
             val cred = cache.load<SignInCredentials>(SignInService.CREDENTIALS_CACHE_KEY).await()
             emit(state.copy(fields = SignInFormFields.with(cred)))

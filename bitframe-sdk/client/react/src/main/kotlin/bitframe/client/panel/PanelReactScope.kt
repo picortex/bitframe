@@ -7,9 +7,10 @@ import bitframe.client.ReactUIScope
 import bitframe.client.UIScopeConfig
 import bitframe.client.signin.SignInService
 import useViewModelState
+import viewmodel.asState
 
-class PanelReactScope(config: UIScopeConfig<SignInService>) : PanelScope(config), ReactUIScope<PanelIntent, PanelState> {
-    override val useScopeState: () -> PanelState = {
-        useViewModelState(viewModel)
-    }
+class PanelReactScope(
+    override val config: UIScopeConfig<SignInService>
+) : PanelScope(config), ReactUIScope<PanelState> {
+    override val useScopeState = { viewModel.asState() }
 }

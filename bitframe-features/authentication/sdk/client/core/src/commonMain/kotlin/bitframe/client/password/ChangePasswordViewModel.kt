@@ -8,9 +8,8 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import viewmodel.ViewModel
-import kotlin.js.JsExport
 import bitframe.client.password.ChangePasswordIntent as Intent
 import bitframe.client.password.ChangePasswordState as State
 

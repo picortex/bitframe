@@ -12,16 +12,15 @@ import pimonitor.core.signup.SignUpResult
 import pimonitor.core.signup.SignUpService
 import useEventHandler
 import useViewModelState
+import viewmodel.asState
 import pimonitor.client.signup.SignUpIntent as Intent
 import pimonitor.client.signup.SignUpState as State
 
 class SignUpReactScope internal constructor(
     override val config: UIScopeConfig<PiMonitorApi>
-) : SignUpScope(config), ReactUIScope<Intent, State> {
+) : SignUpScope(config), ReactUIScope<State> {
 
-    override val useScopeState: () -> State = {
-        useViewModelState(viewModel)
-    }
+    override val useScopeState = { viewModel.asState() }
 
     private val bus get() = config.service.config.bus
 

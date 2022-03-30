@@ -9,6 +9,6 @@ import viewmodel.asState
 @JsExport
 class ProfileReactScope(
     override val config: UIScopeConfig<ProfileService>
-) : ProfileScope(config), ReactUIScope<ProfileIntent, ProfileState> {
-    override val useScopeState: () -> ProfileState = { viewModel.asState() }
+) : ProfileScope(config), ReactUIScope<ProfileState> {
+    override val useScopeState = { viewModel.asState() }
 }

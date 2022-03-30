@@ -12,7 +12,7 @@ import kotlin.js.JsExport
 
 open class PortfolioScope(
     override val config: UIScopeConfig<PortfolioService>
-) : UIScope<Intent, State> {
+) : UIScope<State> {
     override val viewModel by lazy { PortfolioViewModel(config) }
 
     val loadPortfolio = { viewModel.post(Intent.LoadPortfolioData) }

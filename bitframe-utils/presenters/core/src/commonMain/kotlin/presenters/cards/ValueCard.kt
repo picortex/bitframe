@@ -10,5 +10,6 @@ import kotlin.js.JsExport
 data class ValueCard<out T>(
     val title: String,
     val value: T,
-    val details: String
+    val details: String,
+    val priority: Int = -1
 )

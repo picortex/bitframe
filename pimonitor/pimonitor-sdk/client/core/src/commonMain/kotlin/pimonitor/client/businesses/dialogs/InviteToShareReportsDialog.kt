@@ -6,14 +6,14 @@ package pimonitor.client.businesses.dialogs
 import presenters.modal.Dialog
 import presenters.modal.builders.FormDialogBuildingBlock
 import kotlin.js.JsExport
-import pimonitor.client.businesses.forms.InviteToShareFormFields as Fields
+import pimonitor.client.invites.fields.InviteToShareFormFields as Fields
 import pimonitor.core.businesses.params.InviteToShareReportsRawParams as Params
 
 class InviteToShareReportsDialog(
-    val businessName: String,
-    val contactEmail: String,
-    val message: String,
-    val block: FormDialogBuildingBlock<Params>
+    businessName: String,
+    contactEmail: String,
+    message: String,
+    block: FormDialogBuildingBlock<Params>
 ) : Dialog.Form<Fields, Params>(
     heading = "Request information",
     details = "Request $businessName's information by email",

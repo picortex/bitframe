@@ -11,29 +11,29 @@ import kotlinx.datetime.LocalDate
 
 class BalanceSheetParser(map: Map<String, Any?>) : GenericParser(map) {
 
-    fun parseAssets(): BalanceSheet.Data.Assets {
+    fun parseAssets(currency: Currency): BalanceSheet.Body.Assets {
         val row = getRows(map).find {
             it["group"] == "NetAssets"
         } ?: error("Failed to get assets from balance sheet report")
-        val current = getEntriesFrom(row, "TotalAssetLessCurrentLiabilities")
-        val fixed = getEntriesFrom(row, "TotalLongTermAssets")
-        return BalanceSheet.Data.Assets(current, fixed)
+        val current = getEntriesFrom("Current Assets", currency, row, "TotalAssetLessCurrentLiabilities")
+        val fixed = getEntriesFrom("Fixed Assets", currency, row, "TotalLongTermAssets")
+        return BalanceSheet.Body.Assets(current, fixed)
     }
 
-    fun parseEquity(): CategoryEntry {
+    fun parseEquity(currency: Currency): CategoryEntry {
         val row = getRows(map).find {
             it["group"] == "NetLiabilitiesAndShareHolderEquity"
         } ?: error("Failed to get liabilities and shareholders equity")
-        return getEntriesFrom(row, "TotalShareHoldersEquityNode")
+        return getEntriesFrom("Equity", currency, row, "TotalShareHoldersEquityNode")
     }
 
-    fun parseLiabilities(): BalanceSheet.Data.Liabilities {
+    fun parseLiabilities(currency: Currency): BalanceSheet.Body.Liabilities {
         val row = getRows(map).find {
             it["group"] == "NetLiabilitiesAndShareHolderEquity"
         } ?: error("Failed to get liabilities and shareholders equity")
-        val current = getEntriesFrom(row, "TotalLongTermLiabilities")
-        val longTerm = getEntriesFrom(row, "TotalNonCurLiabilities")
-        return BalanceSheet.Data.Liabilities(current, longTerm)
+        val current = getEntriesFrom("Current Liabilities", currency, row, "TotalLongTermLiabilities")
+        val longTerm = getEntriesFrom("Long Term Liabilities", currency, row, "TotalNonCurLiabilities")
+        return BalanceSheet.Body.Liabilities(current, longTerm)
     }
 
     fun parseHeader() = BalanceSheet.Header(
@@ -43,11 +43,14 @@ class BalanceSheetParser(map: Map<String, Any?>) : GenericParser(map) {
         owner = Owner.UNSET
     )
 
-    fun parseBody() = BalanceSheet.Data(
-        assets = parseAssets(),
-        equity = parseEquity(),
-        liabilities = parseLiabilities()
+    fun parseBody(currency: Currency) = BalanceSheet.Body(
+        assets = parseAssets(currency),
+        equity = parseEquity(currency),
+        liabilities = parseLiabilities(currency),
     )
 
-    fun parse() = BalanceSheet(unset, parseHeader(), parseBody())
+    fun parse(): BalanceSheet {
+        val header = parseHeader()
+        return BalanceSheet(unset, header, parseBody(header.currency))
+    }
 }

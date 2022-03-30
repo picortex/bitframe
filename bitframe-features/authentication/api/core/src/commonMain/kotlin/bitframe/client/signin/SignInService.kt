@@ -64,10 +64,10 @@ abstract class SignInService(
             data = validCredentials
         )
         val conundrum = signIn(rb).await()
+        cache.save(CREDENTIALS_CACHE_KEY, validCredentials).await()
         if (conundrum.spaces.size == 1) {
             val (user, spaces) = conundrum
             val s = Session.SignedIn(App(config.appId), spaces.first(), user, spaces)
-            cache.save(CREDENTIALS_CACHE_KEY, validCredentials).await()
             finalizeSignIn(s)
         } else {
             session.value = Session.Conundrum(App(config.appId), conundrum.spaces, conundrum.user)

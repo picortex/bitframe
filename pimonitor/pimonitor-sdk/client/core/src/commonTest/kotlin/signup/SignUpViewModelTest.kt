@@ -9,7 +9,7 @@ import pimonitor.client.signup.fields.IndividualFormFields
 import pimonitor.client.signup.fields.copy
 import pimonitor.core.signup.params.BusinessSignUpParams
 import pimonitor.core.signup.params.IndividualSignUpParams
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import utils.PiMonitorTestScope
 import viewmodel.expect
 import kotlin.test.Ignore
@@ -94,8 +94,8 @@ class SignUpViewModelTest {
             val s = it as? State.IndividualForm
             s?.status as? Feedback.Failure
         } ?: throw AssertionError("Expected viewmodel to have error but did not")
-        expect(status.message).toBe("Failed to create your account: Property name must not be empty/blank")
-        expect(status.cause?.message).toBe("Property name must not be empty/blank")
+        expect(status.message).toBe("Failed to create your account: Field name is required and must not be blank")
+        expect(status.cause?.message).toBe("Field name is required and must not be blank")
     }
 
     @Test

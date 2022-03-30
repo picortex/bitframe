@@ -14,8 +14,8 @@ import pimonitor.client.businesses.BusinessesState as State
 
 class BusinessesReactScope internal constructor(
     override val config: UIScopeConfig<PiMonitorApi>
-) : BusinessesScope(config), ReactUIScope<Intent, State> {
-    override val useScopeState: () -> State = { viewModel.asState() }
+) : BusinessesScope(config), ReactUIScope<State> {
+    override val useScopeState = { viewModel.asState() }
     val useBusinessAddedEvent: (callback: (CreateMonitoredBusinessParams) -> Unit) -> Unit = { handler ->
         val conf = config.service.config
         useEventHandler(

@@ -13,7 +13,7 @@ interface ReportsDao {
         owner: Owner,
         vendor: Vendor,
         header: BalanceSheet.Header,
-        body: BalanceSheet.Data
+        body: BalanceSheet.Body
     ): Later<BalanceSheet>
 
     fun loadBalanceSheet(
@@ -26,7 +26,7 @@ interface ReportsDao {
         owner: Owner,
         vendor: Vendor,
         header: IncomeStatement.Header,
-        body: IncomeStatement.Data
+        body: IncomeStatement.Body
     ): Later<IncomeStatement>
 
     fun loadIncomeStatement(
@@ -39,7 +39,7 @@ interface ReportsDao {
         owner: Owner,
         vendor: Vendor,
         header: CashFlow.Header,
-        body: CashFlow.Data
+        body: CashFlow.Body
     ): Later<CashFlow>
 
     fun loadCashFlow(

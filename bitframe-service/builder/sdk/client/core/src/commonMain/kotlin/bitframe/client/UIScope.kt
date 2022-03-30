@@ -6,12 +6,7 @@ import viewmodel.ViewModel
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-interface UIScope<in I, out S> {
+interface UIScope<out S> {
     val config: UIScopeConfig<*>
-    val viewModel: ViewModel<I, out S>
-
-    @JsName("_ignore_post")
-    fun post(intent: I) {
-        viewModel.post(intent)
-    }
+    val viewModel: ViewModel<*, out S>
 }

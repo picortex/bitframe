@@ -1,9 +1,17 @@
 package bitframe.server
 
+import bitframe.server.controllers.AuthenticationController
+
 open class BitframeApplication<S : BitframeService>(
     open val config: BitframeApplicationConfig<S>
 ) {
-    val authenticationModule: AuthenticationModule by lazy { AuthenticationModule(config.service.signin) }
+    val authenticationModule: AuthenticationModule by lazy {
+        val controller = AuthenticationController(
+            signInService = config.service.signin,
+            profileService = config.service.profile
+        )
+        AuthenticationModule(controller)
+    }
     open val modules: List<Module> get() = config.modules
 
     open suspend fun onStart(service: S) {}

@@ -3,36 +3,31 @@
 
 package pimonitor.client.businesses
 
-import akkounts.reports.balancesheet.BalanceSheet
-import akkounts.reports.incomestatement.IncomeStatement
 import bitframe.client.ServiceConfig
 import bitframe.client.getSignedInSessionTo
+import bitframe.client.logger
 import bitframe.core.RequestBody
 import later.Later
 import later.await
 import later.later
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.BusinessesServiceCore
+import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import pimonitor.core.businesses.params.toValidatedCreateBusinessParams
-import pimonitor.core.dashboards.OperationalDashboard
 import kotlin.js.JsExport
 
 abstract class BusinessesService(
-    open val config: ServiceConfig
+    private val config: ServiceConfig
 ) : BusinessesServiceCore {
 
-    val logger
-        get() = config.logger.with(
-            "source" to this::class.simpleName
-        )
+    val logger by config.logger(withSessionInfo = true)
 
     fun create(params: CreateMonitoredBusinessRawParams) = config.scope.later {
         logger.info("Registering business ${params.businessName}")
-        val validatedParams = params.toValidatedCreateBusinessParams()
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("create a business"),
-            data = validatedParams
+            data = params.toValidatedCreateBusinessParams()
         )
         val result = create(rb).await()
         config.bus.dispatch(BusinessAddedEvent(data = result, spaceId = rb.session.space.uid))
@@ -56,27 +51,12 @@ abstract class BusinessesService(
         delete(rb).await()
     }
 
-    fun operationalDashboard(businessId: String): Later<OperationalDashboard?> = config.scope.later {
+    fun load(businessId: String): Later<MonitoredBusinessBasicInfo> = config.scope.later {
+        logger.info("Loading business(uid=$businessId)")
         val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("load operational dashboard info for business with id=$businessId "),
+            session = config.getSignedInSessionTo("load business"),
             data = businessId
         )
-        operationalDashboard(rb).await()
-    }
-
-    fun incomeStatement(businessId: String): Later<IncomeStatement?> = config.scope.later {
-        val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("load income statement"),
-            data = businessId
-        )
-        incomeStatement(rb).await()
-    }
-
-    fun balanceSheet(businessId: String): Later<BalanceSheet?> = config.scope.later {
-        val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("load income statement"),
-            data = businessId
-        )
-        balanceSheet(rb).await()
+        load(rb).await().also { logger.info("Loaded business: $it") }
     }
 }

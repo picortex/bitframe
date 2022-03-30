@@ -19,14 +19,17 @@ class IncomeStatementParser(map: Map<String, Any?>) : GenericParser(map) {
         owner = Owner.UNSET
     )
 
-    fun parseBody() = IncomeStatement.Data(
-        income = getEntriesFrom(map, "Income"),
-        otherIncome = CategoryEntry(listOf()),
-        costOfSales = getEntriesFrom(map, "COGS"),
-        expenses = getEntriesFrom(map, "Expenses"),
-        otherExpenses = CategoryEntry(listOf()),
-        taxes = CategoryEntry(listOf())
+    fun parseBody(currency: Currency) = IncomeStatement.Body(
+        income = getEntriesFrom("Revenue", currency, map, "Income"),
+        otherIncome = CategoryEntry("Other Income", currency, listOf()),
+        costOfSales = getEntriesFrom("Cost of Sales", currency, map, "COGS"),
+        expenses = getEntriesFrom("Expenses", currency, map, "Expenses"),
+        otherExpenses = CategoryEntry("Other Expenses", currency, listOf()),
+        taxes = CategoryEntry("Taxes", currency, listOf())
     )
 
-    fun parse() = IncomeStatement(unset, parseHeader(), parseBody())
+    fun parse(): IncomeStatement {
+        val header = parseHeader()
+        return IncomeStatement(unset, parseHeader(), parseBody(header.currency))
+    }
 }

@@ -1,4 +1,5 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package mailer
 
@@ -9,7 +10,7 @@ import kotlin.js.JsExport
 data class EmailDraft(
     val subject: String,
     val body: String,
-    val attachments: List<EmailAttachment> = listOf()
+    val attachments: List<EmailAttachment<*>> = listOf()
 ) {
     fun toMessage(
         from: AddressInfo,

@@ -11,9 +11,9 @@ import kotlin.js.JsExport
 import bitframe.client.panel.PanelIntent as Intent
 import bitframe.client.panel.PanelState as State
 
-open class PanelScope(override val config: UIScopeConfig<SignInService>) : UIScope<Intent, State> {
-    override val viewModel: ViewModel<Intent, State> by lazy {
-        PanelViewModel(config)
-    }
+open class PanelScope(
+    override val config: UIScopeConfig<SignInService>
+) : UIScope<State> {
+    override val viewModel by lazy { PanelViewModel(config) }
     val initPanel = { viewModel.post(Intent.InitPanel) }
 }

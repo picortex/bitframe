@@ -10,8 +10,8 @@ import presenters.modal.builders.FormDialogBuildingBlock
 import kotlin.js.JsExport
 
 class InterveneDialog(
-    val monitored: MonitoredBusinessSummary,
-    val block: FormDialogBuildingBlock<Any>
+    monitored: MonitoredBusinessSummary,
+    block: FormDialogBuildingBlock<Any>
 ) : Dialog.Form<Any, Any>(
     heading = "Intervene",
     details = "Perform an intervention to ${monitored.name} pronto",

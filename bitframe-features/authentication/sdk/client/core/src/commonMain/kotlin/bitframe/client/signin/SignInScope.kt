@@ -12,7 +12,9 @@ import kotlin.js.JsExport
 import bitframe.client.signin.SignInState as State
 import bitframe.client.signin.SignInIntent as Intent
 
-open class SignInScope(override val config: UIScopeConfig<SignInService>) : UIScope<Intent, State> {
+open class SignInScope(
+    override val config: UIScopeConfig<SignInService>
+) : UIScope<State> {
 
     override val viewModel: ViewModel<Intent, State> by lazy {
         SignInViewModel(config)

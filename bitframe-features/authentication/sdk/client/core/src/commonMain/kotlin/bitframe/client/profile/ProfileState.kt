@@ -1,6 +1,6 @@
 package bitframe.client.profile
 
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import kotlin.js.JsExport
 
 @JsExport

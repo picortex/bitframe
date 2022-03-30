@@ -3,9 +3,17 @@ package mailer
 import kotlinx.collections.interoperable.List
 import later.Later
 import later.later
+import java.nio.file.Files
+import java.nio.file.Paths
+import javax.activation.DataHandler
+import javax.activation.DataSource
+import javax.activation.FileDataSource
 import javax.mail.*
 import javax.mail.internet.InternetAddress
+import javax.mail.internet.MimeBodyPart
 import javax.mail.internet.MimeMessage
+import javax.mail.internet.MimeMultipart
+import javax.mail.util.ByteArrayDataSource
 
 class SmtpMailer(val config: SmtpMailerConfig) : Mailer {
 
@@ -29,9 +37,30 @@ class SmtpMailer(val config: SmtpMailerConfig) : Mailer {
         val message = MimeMessage(session).apply {
             setFrom(from.toInternetAddress())
             addRecipients(Message.RecipientType.TO, to.map { it.toInternetAddress() }.toTypedArray())
+            val multipart = MimeMultipart("mixed");
             subject = draft.subject
-            setText(draft.body)
+            var messageBodyPart = MimeBodyPart();
+            messageBodyPart.setContent(draft.body, "text/html");
+            multipart.addBodyPart(messageBodyPart);
+
+            draft.attachments.forEachIndexed { index, attachment ->
+                val attachmentBodyPart = MimeBodyPart()
+                val dataSource = when (attachment) {
+                    is ByteArrayAttachment -> ByteArrayDataSource(attachment.content, attachment.type)
+                    is FileAttachment -> FileDataSource(attachment.content)
+                    else -> error("Unsupported EmailAttachmentType ${attachment::class.simpleName}")
+                }
+                attachmentBodyPart.dataHandler = DataHandler(dataSource)
+                attachmentBodyPart.setHeader("Content-ID", "<attachment-$index>")
+                attachmentBodyPart.setHeader("Content-Type", attachment.type)
+                attachmentBodyPart.fileName = attachment.name
+
+                multipart.addBodyPart(attachmentBodyPart)
+            }
+
+            setContent(multipart)
         }
+
         Transport.send(message)
         draft.toMessage(from, to)
     }

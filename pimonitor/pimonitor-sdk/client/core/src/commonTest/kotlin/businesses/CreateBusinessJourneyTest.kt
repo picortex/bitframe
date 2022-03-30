@@ -4,14 +4,11 @@ import bitframe.core.signin.SignInCredentials
 import expect.expect
 import later.await
 import pimonitor.client.businesses.dialogs.InviteToShareReportsDialog
-import pimonitor.client.businesses.forms.InviteToShareFormFields
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.businesses.params.InviteToShareReportsRawParams
 import pimonitor.core.signup.params.BusinessSignUpParams
 import pimonitor.core.signup.params.IndividualSignUpParams
-import presenters.feedbacks.Feedback
-import presenters.modal.Dialog
+import presenters.cases.Feedback
 import utils.PiMonitorTestScope
 import utils.toContain
 import viewmodel.expect
@@ -54,7 +51,7 @@ class CreateBusinessJourneyTest {
             val state = State()
             vm.expect(Intent.SendCreateBusinessForm(params)).toContain(
                 state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
-                state.copy(status = Feedback.Success("${params.businessName} has successfully been added")),
+                state.copy(status = Feedback.Success("${params.businessName} has successfully been added. Loading all your businesses, please wait . . .")),
             )
             expect(vm.ui.value.table.rows).toBeOfSize(1)
         }

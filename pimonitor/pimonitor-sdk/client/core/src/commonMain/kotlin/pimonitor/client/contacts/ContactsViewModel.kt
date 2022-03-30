@@ -7,9 +7,8 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import pimonitor.client.PiMonitorApi
 import pimonitor.core.search.SearchResult
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 import pimonitor.client.contacts.ContactsIntent as Intent

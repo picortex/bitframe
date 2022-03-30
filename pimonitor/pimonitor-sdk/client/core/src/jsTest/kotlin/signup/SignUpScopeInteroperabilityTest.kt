@@ -3,6 +3,8 @@ package signup
 import bitframe.client.jso
 import kotlinx.coroutines.test.runTest
 import live.WatchMode
+import pimonitor.client.PiMonitorApiTest
+import pimonitor.client.signup.SignUpScope
 import utils.PiMonitorTestScope
 import kotlin.test.Test
 

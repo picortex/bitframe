@@ -2,7 +2,7 @@ package feedbacks
 
 import expect.expect
 import expect.toBeUnequalTo
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import kotlin.test.Test
 
 class LoadingEqualityTest {

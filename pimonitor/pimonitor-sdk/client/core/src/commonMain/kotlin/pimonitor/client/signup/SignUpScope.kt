@@ -15,9 +15,9 @@ import pimonitor.client.signup.SignUpState as State
 
 open class SignUpScope(
     override val config: UIScopeConfig<PiMonitorApi>
-) : UIScope<Intent, State> {
+) : UIScope<State> {
 
-    override val viewModel: ViewModel<Intent, State> by lazy { SignUpViewModel(config) }
+    override val viewModel by lazy { SignUpViewModel(config) }
 
     val TYPE_BUSINESS: SignUpType get() = State.REGISTER_AS_BUSINESS.value
 

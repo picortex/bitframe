@@ -15,7 +15,7 @@ import expect.expect
 import kotlinx.collections.interoperable.listOf
 import kotlinx.coroutines.test.runTest
 import live.mutableLiveOf
-import presenters.feedbacks.Feedback
+import presenters.cases.Feedback
 import viewmodel.expect
 import kotlin.test.Test
 
@@ -46,7 +46,7 @@ class PasswordViewModelWithSignedInSessionTest {
         val state = vm.ui.value
         vm.expect(ChangePasswordIntent(params)).toGoThrough(
             state.copy(params = params, status = Feedback.Loading(message = "Changing your password, please wait . . .")),
-            state.copy(params = params, status = Feedback.Failure(message = "Property previous must not be empty/blank")),
+            state.copy(params = params, status = Feedback.Failure(message = "Field previous is required and must not be blank")),
             state.copy(params = params)
         )
     }

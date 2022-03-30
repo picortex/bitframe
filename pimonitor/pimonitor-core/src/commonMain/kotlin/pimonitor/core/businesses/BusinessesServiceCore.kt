@@ -2,17 +2,11 @@
 
 package pimonitor.core.businesses
 
-import akkounts.reports.balancesheet.BalanceSheet
-import akkounts.reports.incomestatement.IncomeStatement
 import bitframe.core.RequestBody
-import bitframe.core.ServiceConfig
-import events.Event
 import kotlinx.collections.interoperable.List
 import later.Later
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.*
-import pimonitor.core.dashboards.OperationalDashboard
-import pimonitor.core.invites.Invite
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.jvm.JvmSynthetic
@@ -35,20 +29,6 @@ interface BusinessesServiceCore {
      * @param rb - [RequestBody.Authorized]<BusinessId> where BusinessId is a string
      */
     @JvmSynthetic
-    @JsName("_ignore_operationalDashboard")
-    fun operationalDashboard(rb: RequestBody.Authorized<String>): Later<OperationalDashboard?>
-
-    /**
-     * @param rb - [RequestBody.Authorized]<BusinessId> where BusinessId is a string
-     */
-    @JvmSynthetic
-    @JsName("_ignore_incomeStatement")
-    fun incomeStatement(rb: RequestBody.Authorized<String>): Later<IncomeStatement?>
-
-    /**
-     * @param rb - [RequestBody.Authorized]<BusinessId> where BusinessId is a string
-     */
-    @JvmSynthetic
-    @JsName("_ignore_balanceSheet")
-    fun balanceSheet(rb: RequestBody.Authorized<String>): Later<BalanceSheet?>
+    @JsName("_ignore_load")
+    fun load(rb: RequestBody.Authorized<String>): Later<MonitoredBusinessBasicInfo>
 }

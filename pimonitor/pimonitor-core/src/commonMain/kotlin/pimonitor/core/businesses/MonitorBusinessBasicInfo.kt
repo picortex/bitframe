@@ -1,4 +1,5 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package pimonitor.core.businesses
 
@@ -12,7 +13,7 @@ data class MonitorBusinessBasicInfo(
     override val owningSpaceId: String,
     override val email: String = "",
     override val address: String = "",
-    override val logoUrl: String? = "",
+    override val logoUrl: String? = null,
     override val uid: String = UNSET,
     override val deleted: Boolean = false
 ) : Business() {

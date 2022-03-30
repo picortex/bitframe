@@ -3,9 +3,11 @@ package akkounts.sage.reports.incomestatement
 import akkounts.reports.utils.CategoryEntry
 import akkounts.reports.utils.StatementEntryItem
 import akkounts.containsAny
+import kash.Currency
 import kotlinx.collections.interoperable.toInteroperableList
 
 class IncomeStatementParser(val entries: List<Map<String, *>>) {
+
     companion object {
         private val incomeAccountNames = listOf(
             "Sales", "Revenue", "Income"
@@ -20,48 +22,45 @@ class IncomeStatementParser(val entries: List<Map<String, *>>) {
         )
     }
 
-    private fun Any?.toMoney(): Int = (toString().toDouble() * 100.0).toInt()
+    private fun Any?.toMoney(currency: Currency) = currency.of(toString().toDouble())
 
-    fun income(): CategoryEntry {
+    fun income(name: String, currency: Currency): CategoryEntry {
         val incomeEntries = entries.filter {
             it["Name"].toString().containsAny(incomeAccountNames)
         }
         val primary = incomeEntries.map {
-            val amount = it["Credit"].toMoney() - it["Debit"].toMoney()
-            println("${it["Name"]} ${it["Credit"]}")
-            println("${it["Name"]} ${it["Debit"]}")
-            println("${it["Name"]} $amount")
+            val amount = it["Credit"].toMoney(currency) - it["Debit"].toMoney(currency)
             StatementEntryItem(
                 details = it["Name"].toString(),
-                amount = amount
+                value = amount
             )
         }
-        return CategoryEntry(primary.toInteroperableList())
+        return CategoryEntry(name, currency, primary.toInteroperableList())
     }
 
-    fun expenses(): CategoryEntry {
+    fun expenses(name: String, currency: Currency): CategoryEntry {
         val expenseEntries = entries.filter {
             it["Name"].toString().containsAny(expenseAccountNames)
         }
         val primary = expenseEntries.map {
             StatementEntryItem(
                 details = it["Name"].toString(),
-                amount = it["Debit"].toMoney() - it["Credit"].toMoney()
+                value = it["Debit"].toMoney(currency) - it["Credit"].toMoney(currency)
             )
         }
-        return CategoryEntry(primary.toInteroperableList())
+        return CategoryEntry(name, currency, primary.toInteroperableList())
     }
 
-    fun taxes(): CategoryEntry {
+    fun taxes(name: String, currency: Currency): CategoryEntry {
         val taxEntries = entries.filter {
             it["Name"].toString().containsAny(taxesAccountNames)
         }
         val primary = taxEntries.map {
             StatementEntryItem(
                 details = it["Name"].toString(),
-                amount = it["Credit"].toMoney() - it["Debit"].toMoney()
+                value = it["Credit"].toMoney(currency) - it["Debit"].toMoney(currency)
             )
         }
-        return CategoryEntry(primary.toInteroperableList())
+        return CategoryEntry(name, currency, primary.toInteroperableList())
     }
 }

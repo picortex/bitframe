@@ -28,23 +28,23 @@ class IncomeStatementParserTest {
     fun should_parse_income_categories_correctly() {
         val statement = IncomeStatementParser(Mapper.decodeFromString(rawJson)).parse()
         val income = statement.body.income
-        expect(income.items.first { it.details == "Markup" }.amount).toBe(99500)
-        expect(income.total).toBe(5517117)
+        expect(income.items.first { it.details == "Markup" }.value.amount).toBe(99500)
+        expect(income.total.amount).toBe(5517117)
     }
 
     @Test
     fun should_parse_cost_of_goods_sold_too() {
         val statement = IncomeStatementParser(Mapper.decodeFromString(rawJson)).parse()
         val cogs = statement.body.costOfSales
-        expect(cogs.items.first { it.details == "Cost of sales" }.amount).toBe(1054348)
-        expect(cogs.total).toBe(4063873)
+        expect(cogs.items.first { it.details == "Cost of sales" }.value.amount).toBe(1054348)
+        expect(cogs.total.amount).toBe(4063873)
     }
 
     @Test
     fun should_parse_expenses_well() {
         val statement = IncomeStatementParser(Mapper.decodeFromString(rawJson)).parse()
         val expenses = statement.body.expenses
-        expect(expenses.items.first { it.details == "Utilities - Water" }.amount).toBe(76651)
-        expect(expenses.total).toBe(1850121)
+        expect(expenses.items.first { it.details == "Utilities - Water" }.value.amount).toBe(76651)
+        expect(expenses.total.amount).toBe(1850121)
     }
 }
