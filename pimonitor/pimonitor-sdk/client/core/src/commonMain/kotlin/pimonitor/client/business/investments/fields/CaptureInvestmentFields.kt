@@ -1,7 +1,7 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.client.business.investments
+package pimonitor.client.business.investments.fields
 
 import kotlinx.collections.interoperable.toInteroperableList
 import pimonitor.core.business.investments.InvestmentType

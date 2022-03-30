@@ -12,6 +12,6 @@ import kotlin.js.JsExport
 data class Disbursement(
     val amount: Double,
     val date: SimpleDateTime,
-    val created: SimpleDateTime,
+    val on: SimpleDateTime,
     val by: UserRef
 )
