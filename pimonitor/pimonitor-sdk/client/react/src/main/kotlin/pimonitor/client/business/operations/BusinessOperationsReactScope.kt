@@ -13,7 +13,7 @@ import presenters.cases.State
 import viewmodel.asState
 
 class BusinessOperationsReactScope(
-    override val config: UIScopeConfig<BusinessesService>
+    override val config: UIScopeConfig<BusinessOperationsService>
 ) : BusinessOperationsScope(config), ReactUIScope<State<InfoResults<OperationalDifferenceBoard>>> {
     override val useScopeState = { viewModel.asState() }
 }

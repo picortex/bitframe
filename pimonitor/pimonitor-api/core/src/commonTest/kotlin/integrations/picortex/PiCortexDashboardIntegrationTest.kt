@@ -7,7 +7,7 @@ import expect.expect
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
-import pimonitor.core.business.params.LoadReportParams
+import pimonitor.core.business.utils.info.LoadInfoParams
 import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
@@ -79,12 +79,12 @@ class PiCortexDashboardIntegrationTest {
 
             val end = time
             val start = time - 30.days
-            val params = LoadReportParams(
+            val params = LoadInfoParams(
                 businessId = business.uid,
                 start = start.toEpochMilliseconds().toDouble(),
                 end = end.toEpochMilliseconds().toDouble()
             )
-            val board = api.businesses.operationalDashboard(params).await() as InfoResults.Shared
+            val board = api.businessOperations.dashboard(params).await() as InfoResults.Shared
             expect(board.data).toBeNonNull()
         }
     }

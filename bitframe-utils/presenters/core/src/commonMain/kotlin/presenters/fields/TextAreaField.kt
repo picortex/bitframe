@@ -9,4 +9,4 @@ data class TextAreaField(
     override val label: String = name,
     override val hint: String = label,
     override var value: String? = null
-) : RawTextInputField
+) : TextInputRawField

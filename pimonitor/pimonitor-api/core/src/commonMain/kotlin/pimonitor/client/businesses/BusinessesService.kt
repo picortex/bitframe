@@ -10,8 +10,6 @@ import bitframe.core.RequestBody
 import later.Later
 import later.await
 import later.later
-import pimonitor.core.business.params.LoadReportRawParams
-import pimonitor.core.business.params.toValidatedParams
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.BusinessesServiceCore
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
@@ -53,31 +51,6 @@ abstract class BusinessesService(
         delete(rb).await()
     }
 
-    fun operationalDashboard(params: LoadReportRawParams) = config.scope.later {
-        val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("load operational dashboard info for business with id=${params.businessId}"),
-            data = params.toValidatedParams()
-        )
-        operationalDashboard(rb).await()
-    }
-
-    fun incomeStatement(businessId: String) = config.scope.later {
-        val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("load income statement"),
-            data = businessId
-        )
-        incomeStatement(rb).await()
-    }
-
-    fun balanceSheet(businessId: String) = config.scope.later {
-        logger.info("Loading balance sheet for business(uid=$businessId)")
-        val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("load income statement"),
-            data = businessId
-        )
-        balanceSheet(rb).await().also { logger.info("Loaded balance sheet: $it") }
-    }
-
     fun load(businessId: String): Later<MonitoredBusinessBasicInfo> = config.scope.later {
         logger.info("Loading business(uid=$businessId)")
         val rb = RequestBody.Authorized(
@@ -85,14 +58,5 @@ abstract class BusinessesService(
             data = businessId
         )
         load(rb).await().also { logger.info("Loaded business: $it") }
-    }
-
-    fun availableReports(businessId: String) = config.scope.later {
-        logger.info("fetching available reports from business(uid=$businessId)")
-        val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("load available reports"),
-            data = businessId
-        )
-        availableReports(rb).await().also { logger.info("Reports found"); }
     }
 }

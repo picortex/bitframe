@@ -8,13 +8,13 @@ import io.ktor.http.HttpStatusCode.Companion.Created
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import later.await
-import pimonitor.core.signup.SignUpDaodService
+import pimonitor.core.signup.SignUpServiceDaod
 import pimonitor.core.signup.params.BusinessSignUpParams
 import pimonitor.core.signup.params.IndividualSignUpParams
 import response.response
 
 class SignUpController(
-    internal val service: SignUpDaodService
+    internal val service: SignUpServiceDaod
 ) {
     val json get() = service.config.json
 

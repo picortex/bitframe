@@ -44,8 +44,9 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
 rootProject.name = "bitframe"
 
 // <Bitframe Utils>
-includeSubs("mailer", "bitframe-utils/mailer", "api", "mock", "smtp")
+includeSubs(base = "mailer", path = "bitframe-utils/mailer", "api", "mock", "smtp")
 includeRoot("templater", "bitframe-utils/templater")
+includeSubs(base = "datetime", path = "bitframe-utils/datetime", "core")
 includeSubs(base = "events", path = "bitframe-utils/events", "core", "inmemory", "react")
 includeSubs(base = "presenters", path = "bitframe-utils/presenters", "core", "mock")
 includeRoot(name = "validation", path = "bitframe-utils/validation")

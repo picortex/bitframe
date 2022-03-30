@@ -43,26 +43,24 @@ class SageFinancialDashboardUserJourneyTest {
             api.signIn.signIn(cred).await()
         }
 
-        var result: CreateMonitoredBusinessResult? = null
-        step("Create a monitored business") {
+        val result = step("Create a monitored business") {
             val params = CreateMonitoredBusinessParams(
                 businessName = "aSoft Ltd",
                 contactName = "Anderson Lameck",
                 contactEmail = "andylamax@programmer.net",
                 sendInvite = true
             )
-            result = api.businesses.create(params).await()
+            api.businesses.create(params).await()
         }
 
-        var invite: Invite? = null
-        step("Invite Business to share reports") {
+        val invite = step("Invite Business to share reports") {
             val params = InviteToShareReportsParams(result!!.summary)
-            invite = api.invites.send(params).await()
+            api.invites.send(params).await()
         }
 
         step("Accept invite to share sage reports params") {
             val params = AcceptSageOneInviteParams(
-                inviteId = invite!!.uid,
+                inviteId = invite.uid,
                 username = "mmajapa@gmail.com",
                 password = "Rondebosch2016@",
                 companyId = "468271",
@@ -96,26 +94,24 @@ class SageFinancialDashboardUserJourneyTest {
             api.signIn.signIn(cred).await()
         }
 
-        var result: CreateMonitoredBusinessResult? = null
-        step("Create a monitored business") {
+        val result = step("Create a monitored business") {
             val params = CreateMonitoredBusinessParams(
                 businessName = "aSoft Ltd",
                 contactName = "Anderson Lameck",
                 contactEmail = "andylamax@programmer.net",
                 sendInvite = true
             )
-            result = api.businesses.create(params).await()
+            api.businesses.create(params).await()
         }
 
-        var invite: Invite? = null
-        step("Invite Business to share reports") {
-            val params = InviteToShareReportsParams(result!!.summary)
-            invite = api.invites.send(params).await()
+        val invite = step("Invite ${result.business.name} to share reports") {
+            val params = InviteToShareReportsParams(result.summary)
+            api.invites.send(params).await()
         }
 
         step("Accept invite to share sage reports params") {
             val params = AcceptSageOneInviteParams(
-                inviteId = invite!!.uid,
+                inviteId = invite.uid,
                 username = "mmajapa@gmail.com",
                 password = "Rondebosch2016@",
                 companyId = "468271",

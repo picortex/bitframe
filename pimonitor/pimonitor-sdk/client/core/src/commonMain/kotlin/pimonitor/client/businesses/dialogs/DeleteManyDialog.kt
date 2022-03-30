@@ -10,8 +10,8 @@ import presenters.table.Row
 import kotlin.js.JsExport
 
 class DeleteManyDialog(
-    val monitored: Array<Row<MonitoredBusinessSummary>>,
-    val block: ConfirmDialogBuildingBlock
+    monitored: Array<Row<MonitoredBusinessSummary>>,
+    block: ConfirmDialogBuildingBlock
 ) : Dialog.Confirm(
     heading = "Delete Businesses",
     details = "Completely delete ${monitored.size} from your list of businesses",

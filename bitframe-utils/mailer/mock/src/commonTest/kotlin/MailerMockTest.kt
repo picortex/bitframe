@@ -64,4 +64,41 @@ class MailerMockTest {
             )
         ).await()
     }
+
+    @Test
+    fun should_print_multiple_recipients_properly() = runTest {
+        val cfg = MockMailerConfig(charsPerLine = 55)
+        val m = MockMailer(cfg)
+        val draft = EmailDraft(
+            subject = "Look good while doing it",
+            body = "When you decide to do something, make sure you do it well and make sure you look good doing it\n" +
+                    "It not only makes thr whole thing wow, but even people watching you do enjoy",
+            attachments = listOf(
+                MockAttachment(12, "image/jpg", "picture-12.jpg"),
+                MockAttachment(13, "image/jpg", "picture-13.jpg"),
+                MockAttachment(14, "image/jpg", "picture-14.jpg"),
+            )
+        )
+        m.send(
+            draft,
+            from = AddressInfo(
+                name = "Dope Developer",
+                email = "anderson@developer.com"
+            ),
+            to = listOf(
+                AddressInfo(
+                    name = "Anderson",
+                    email = "test@anderson.com"
+                ),
+                AddressInfo(
+                    name = "Lugendo",
+                    email = "test@luge.com"
+                ),
+                AddressInfo(
+                    name = "Vladmir Putin",
+                    email = "test@vlad.com"
+                ),
+            )
+        ).await()
+    }
 }

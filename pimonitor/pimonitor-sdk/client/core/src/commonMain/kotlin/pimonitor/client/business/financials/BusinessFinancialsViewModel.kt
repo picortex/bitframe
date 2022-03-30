@@ -15,7 +15,7 @@ import pimonitor.client.business.financials.BusinessFinancialIntent as Intent
 import pimonitor.client.business.financials.BusinessFinancialsState as State
 
 class BusinessFinancialsViewModel(
-    private val config: UIScopeConfig<BusinessesService>
+    private val config: UIScopeConfig<BusinessFinancialsService>
 ) : ViewModel<Intent, State>(State(), config.viewModel) {
 
     private val service get() = config.service

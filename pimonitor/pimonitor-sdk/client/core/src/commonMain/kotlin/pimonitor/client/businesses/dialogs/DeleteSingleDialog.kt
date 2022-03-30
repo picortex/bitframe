@@ -9,8 +9,8 @@ import presenters.modal.builders.ConfirmDialogBuildingBlock
 import kotlin.js.JsExport
 
 class DeleteSingleDialog(
-    val monitored: MonitoredBusinessSummary,
-    val block: ConfirmDialogBuildingBlock
+    monitored: MonitoredBusinessSummary,
+    block: ConfirmDialogBuildingBlock
 ) : Dialog.Confirm(
     heading = "Delete Business",
     details = "Completely delete ${monitored.name} from your list of businesses",

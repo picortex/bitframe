@@ -9,6 +9,7 @@ import kotlin.js.JsExport
 
 @Serializable
 data class MoneyChangeBox(
+    override val title: String,
     override val previous: Money,
     override val current: Money,
     override val details: String,

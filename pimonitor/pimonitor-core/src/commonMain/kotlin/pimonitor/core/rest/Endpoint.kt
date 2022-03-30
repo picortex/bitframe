@@ -12,11 +12,24 @@ sealed class Endpoint(root: String) {
     val businessesAll = "$businesses/all"
     val businessesCreate = "$businesses/create"
     val businessesLoad = "$businesses/load"
-    val businessesAvailableReports = "$businesses/available-reports"
     val businessesDelete = "$businesses/delete"
-    val businessesDashboardOperational = "$businesses/dashboard/operational"
-    val businessesIncomeStatement = "$businesses/income-statement"
-    val businessesBalanceSheet = "$businesses/balance-sheet"
+
+    private val business = "$root/business"
+    val businessOperationalDashboard = "$business/operations/dashboard"
+
+    private val businessFinancialReports = "$business/financials/reports"
+    val businessFinancialReportsAvailable = "$businessFinancialReports/available"
+    val businessFinancialReportBalanceSheet = "$businessFinancialReports/balance-sheet"
+    val businessFinancialReportIncomeStatement = "$businessFinancialReports/income-statement"
+    val businessFinancialReportCashFlow = "$businessFinancialReports/cash-flow"
+
+    private val businessInvestments = "$business/investments"
+    val businessInvestmentsCapture = "$businessInvestments/capture"
+    val businessInvestmentsAll = "$businessInvestments/all"
+    val businessInvestmentsDisburse = "$businessInvestments/disburse"
+
+    private val businessInterventions = "$business/interventions"
+    val businessInterventionsCreate = "$businessInterventions/create"
 
     // contacts
     val contactsAll = "$root/contacts/all"

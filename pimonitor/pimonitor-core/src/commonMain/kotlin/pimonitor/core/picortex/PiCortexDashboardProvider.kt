@@ -7,8 +7,6 @@ import io.ktor.http.content.*
 import kash.Currency
 import kash.Money
 import kotlinx.collections.interoperable.toInteroperableList
-import kotlinx.datetime.DatePeriod
-import kotlinx.datetime.DateTimePeriod
 import kotlinx.datetime.Instant
 import kotlinx.serialization.mapper.Mapper
 import later.await
@@ -38,6 +36,7 @@ class PiCortexDashboardProvider(
     @JvmName("diffNumber")
     @JsName("diffNumber")
     fun ValueCard<Double>.diff(other: ValueCard<Double>) = numberChangeBoxOf(
+        title = title,
         previous = other.value,
         current = value,
         details = details,
@@ -47,6 +46,7 @@ class PiCortexDashboardProvider(
     @JvmName("diffMoney")
     @JsName("diffMoney")
     fun ValueCard<Money>.diff(other: ValueCard<Money>) = moneyChangeBoxOf(
+        title = title,
         previous = other.value,
         current = value,
         details = details,
@@ -70,16 +70,12 @@ class PiCortexDashboardProvider(
     )
 
     fun OperationalDashboard.diff(other: OperationalDashboard): OperationalDifferenceBoard {
-        println("Diffs")
         val moneyBoxes = moneyCards.map {
             val current = it
             val previous = other.findMoneyCardOrDefault(it.title, it.value.currency)
-            println("Diffing: $current")
-            println("Diffing: $previous")
             current.diff(previous)
         }.toInteroperableList()
 
-        println("Done diffing money")
         val numberBoxes = numberCards.map {
             it.diff(other.findNumberCardOrDefault(it.title))
         }.toInteroperableList()

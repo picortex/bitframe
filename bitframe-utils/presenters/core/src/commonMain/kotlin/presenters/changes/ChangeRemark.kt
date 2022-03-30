@@ -47,4 +47,16 @@ sealed class ChangeRemark<out T> {
     object Indeterminate : ChangeRemark<Nothing>() {
         override val feeling: ChangeFeeling = ChangeFeeling.Unknown
     }
+
+    val isIncrease by lazy { this is Increase }
+    val asIncrease by lazy { this as Increase }
+
+    val isDecrease by lazy { this is Decrease }
+    val asDecrease by lazy { this as Decrease }
+
+    val isFixed by lazy { this is Fixed }
+    val asFixed by lazy { this as Fixed }
+
+    val isIndeterminate by lazy { this is Indeterminate }
+    val asIndeterminate by lazy { this as Indeterminate }
 }

@@ -1,21 +1,24 @@
 package pimonitor.server
 
 import bitframe.core.MockDaoFactory
-import bitframe.server.MongoDaoFactory
-import bitframe.server.MongoDaoFactoryConfig
 import bitframe.server.ServiceConfig
 import bitframe.server.bitframeApplication
 import mailer.SmtpMailer
 import mailer.SmtpMailerConfig
-import pimonitor.server.businesses.BusinessController
-import pimonitor.server.businesses.BusinessModule
+import pimonitor.server.business.financials.BusinessFinancialsController
+import pimonitor.server.business.financials.BusinessFinancialsModule
+import pimonitor.server.business.investments.BusinessInvestmentsController
+import pimonitor.server.business.investments.BusinessInvestmentsModule
+import pimonitor.server.business.operations.BusinessOperationsController
+import pimonitor.server.business.operations.BusinessOperationsModule
+import pimonitor.server.businesses.BusinessesController
+import pimonitor.server.businesses.BusinessesModule
 import pimonitor.server.contacts.ContactsController
 import pimonitor.server.contacts.ContactsModule
 import pimonitor.server.invites.InvitesController
 import pimonitor.server.invites.InvitesModule
 import pimonitor.server.portfolio.PortfolioController
 import pimonitor.server.portfolio.PortfolioModule
-import pimonitor.server.profile.ProfileModule
 import pimonitor.server.search.SearchController
 import pimonitor.server.search.SearchModule
 import pimonitor.server.signup.SignUpController
@@ -49,9 +52,23 @@ fun main(args: Array<String>) {
         install { ser ->
             SignUpModule(SignUpController(ser.signup))
         }
+
         install { ser ->
-            BusinessModule(BusinessController(ser.businesses))
+            BusinessesModule(BusinessesController(ser.businesses))
         }
+
+        install { ser ->
+            BusinessFinancialsModule(BusinessFinancialsController(ser.businessFinancials))
+        }
+
+        install { ser ->
+            BusinessOperationsModule(BusinessOperationsController(ser.businessOperations))
+        }
+
+        install { ser ->
+            BusinessInvestmentsModule(BusinessInvestmentsController(ser.businessInvestments))
+        }
+
         install { ser ->
             ContactsModule(ContactsController(ser.contacts))
         }
