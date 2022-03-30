@@ -13,22 +13,22 @@ import pimonitor.core.businesses.params.CreateMonitoredBusinessParams as Params
 data class CreateBusinessFormFields internal constructor(
     val title: String = "Add a business",
     val businessName: TextInputField = TextInputField(
-        name = Params::businessName.name,
+        name = Params::businessName,
         label = "Business name",
         hint = "PiCortex LLC"
     ),
     val contactName: TextInputField = TextInputField(
-        name = Params::contactName.name,
+        name = Params::contactName,
         label = "Contact Name",
         hint = "John Doe"
     ),
     val contactEmail: EmailInputField = EmailInputField(
-        name = Params::contactEmail.name,
+        name = Params::contactEmail,
         label = "Contact Email",
         hint = "john@doe.com"
     ),
     val sendInvite: BooleanInputField = BooleanInputField(
-        name = Params::sendInvite.name,
+        name = Params::sendInvite,
         label = "Ask to share reports",
         value = true
     ),

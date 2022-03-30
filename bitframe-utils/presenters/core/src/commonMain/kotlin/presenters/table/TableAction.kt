@@ -14,13 +14,22 @@ sealed class TableAction<out D> {
         override val handler: () -> Unit
     ) : TableAction<Nothing>()
 
-    data class SingleSelect<D>(
+    data class SingleSelect<out D>(
         override val name: String,
-        override val handler: (Row<D>) -> Unit
+        override val handler: (Row<@UnsafeVariance D>) -> Unit
     ) : TableAction<D>()
 
-    data class MultiSelect<D>(
+    data class MultiSelect<out D>(
         override val name: String,
-        override val handler: (Array<Row<D>>) -> Unit
+        override val handler: (Array<Row<@UnsafeVariance D>>) -> Unit
     ) : TableAction<D>()
+
+    val isPrimary by lazy { this is Primary }
+    val asPrimary by lazy { this as Primary }
+
+    val isSingleSelect by lazy { this is SingleSelect }
+    val asSingleSelect by lazy { this as SingleSelect }
+
+    val isMultiSelect by lazy { this is MultiSelect }
+    val asMultiSelect by lazy { this as MultiSelect }
 }

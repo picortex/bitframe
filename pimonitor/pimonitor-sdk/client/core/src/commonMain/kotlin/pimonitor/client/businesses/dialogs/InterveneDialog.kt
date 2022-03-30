@@ -5,14 +5,14 @@ package pimonitor.client.businesses.dialogs
 
 import pimonitor.client.businesses.forms.CreateBusinessFormFields
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
-import presenters.modal.Dialog
-import presenters.modal.builders.FormDialogBuildingBlock
+import presenters.forms.FormActionsBuildingBlock
+import presenters.modal.FormDialog
 import kotlin.js.JsExport
 
 class InterveneDialog(
     monitored: MonitoredBusinessSummary,
-    block: FormDialogBuildingBlock<Any>
-) : Dialog.Form<Any, Any>(
+    block: FormActionsBuildingBlock<Any>
+) : FormDialog<Any, Any>(
     heading = "Intervene",
     details = "Perform an intervention to ${monitored.name} pronto",
     fields = CreateBusinessFormFields(),
