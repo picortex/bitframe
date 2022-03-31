@@ -217,6 +217,9 @@ class BusinessesViewModel(
     }
 
     private fun businessTable(data: List<MonitoredBusinessSummary>) = tableOf(data) {
+        emptyMessage = "No Businesses Found"
+        emptyDetails = "You haven't added any businesses to your space yet"
+        emptyAction("Create Business") { post(ShowCreateBusinessForm) }
         primaryAction("Add Business") { post(ShowCreateBusinessForm) }
         primaryAction("Refresh") { post(LoadBusinesses) }
         singleAction("Intervene") { post(ShowInterveneForm(it.data)) }

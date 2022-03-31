@@ -12,6 +12,7 @@ import akkounts.sage.SageOneZAService
 import akkounts.sage.reports.balancesheet.BalanceSheetParser
 import akkounts.sage.reports.incomestatement.IncomeStatementParser
 import akkounts.utils.toYYYYMMDD
+import datetime.toSimpleDateTime
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -52,7 +53,7 @@ class SageOneZAReportsService @JvmOverloads constructor(
             vendor = SageOneZAService.VENDOR,
             owner = owner,
             currency = Currency.ZAR,
-            endOf = at
+            endOf = at.toSimpleDateTime()
         )
         val data = BalanceSheet.Body(
             assets = bsp.assets(header.currency),
@@ -71,8 +72,8 @@ class SageOneZAReportsService @JvmOverloads constructor(
             vendor = SageOneZAService.VENDOR,
             currency = Currency.ZAR,
             owner = owner,
-            start = start,
-            end = end
+            start = start.toSimpleDateTime(),
+            end = end.toSimpleDateTime()
         )
 
         val taxes = isp.taxes("Taxes", header.currency)
@@ -88,10 +89,10 @@ class SageOneZAReportsService @JvmOverloads constructor(
         }.toInteroperableList()
 
         val data = IncomeStatement.Body(
-            income = CategoryEntry("Revenue", header.currency, income),
+            operatingIncome = CategoryEntry("Revenue", header.currency, income),
             otherIncome = CategoryEntry("Other Income", header.currency, emptyList()),
             costOfSales = CategoryEntry("Cost of Sales", header.currency, emptyList()),
-            expenses = isp.expenses("Expenses", header.currency),
+            operatingExpenses = isp.expenses("Expenses", header.currency),
             otherExpenses = CategoryEntry("Other Expenses", header.currency, emptyList()),
             taxes = isp.taxes("Taxes", header.currency)
         )

@@ -1,7 +1,7 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.client.business.investments.dialogs
+package pimonitor.client.business.interventions.dialog
 
 import pimonitor.client.business.utils.disbursements.CreateDisbursementForm
 import presenters.forms.FormActionsBuildingBlock
@@ -11,6 +11,6 @@ import pimonitor.client.business.utils.disbursements.CreateDisbursementFields as
 import pimonitor.core.business.investments.params.CreateInvestmentDisbursementRawParams as Params
 
 class CreateDisbursementDialog(
-    investment: String,
+    intervention: String,
     block: FormActionsBuildingBlock<Params>
-) : FormDialog<Fields, Params>(CreateDisbursementForm(investment, block))
+) : FormDialog<Fields, Params>(CreateDisbursementForm(intervention, block))

@@ -6,6 +6,7 @@ import akkounts.provider.Owner
 import akkounts.reports.balancesheet.BalanceSheet
 import akkounts.reports.utils.CategoryEntry
 import akkounts.utils.unset
+import datetime.toSimpleDateTime
 import kash.Currency
 import kotlinx.datetime.LocalDate
 
@@ -37,7 +38,7 @@ class BalanceSheetParser(map: Map<String, Any?>) : GenericParser(map) {
     }
 
     fun parseHeader() = BalanceSheet.Header(
-        endOf = LocalDate.parse(header["EndPeriod"] ?: error("Couldn't get End Period")),
+        endOf = LocalDate.parse(header["EndPeriod"] ?: error("Couldn't get End Period")).toSimpleDateTime(),
         currency = Currency.valueOf(header["Currency"].toString().uppercase()),
         vendor = QuickBooksService.VENDOR,
         owner = Owner.UNSET

@@ -4,7 +4,6 @@
 package pimonitor.client.business.utils.disbursements
 
 import presenters.fields.DateInputField
-import presenters.fields.MoneyInputField
 import presenters.fields.NumberInputField
 import kotlin.js.JsExport
 import pimonitor.core.business.utils.disbursements.CreateDisbursementParamsContextual as Params

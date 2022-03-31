@@ -1,6 +1,7 @@
 package intergration.reports.balancesheet
 
 import akkounts.quickbooks.reports.balancesheet.BalanceSheetParser
+import datetime.toSimpleDateTime
 import expect.expect
 import expect.toBe
 import kotlinx.datetime.LocalDate
@@ -21,7 +22,7 @@ class BalanceSheetParserTest {
 
     @Test
     fun should_parse_the_date_as_required() {
-        expect(sheet.header.endOf).toBe(LocalDate(2021, 6, 10))
+        expect(sheet.header.endOf).toBe(LocalDate(2021, 6, 10).toSimpleDateTime())
     }
 
     @Test

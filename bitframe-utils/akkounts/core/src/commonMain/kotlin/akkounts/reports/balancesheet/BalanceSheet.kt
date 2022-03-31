@@ -8,6 +8,7 @@ import akkounts.provider.Vendor
 import akkounts.provider.Owner
 import akkounts.reports.FinancialReport
 import akkounts.reports.FinancialReportHeader
+import datetime.SimpleDateTime
 import kash.Currency
 import kash.Money
 import kotlinx.datetime.LocalDate
@@ -27,7 +28,7 @@ data class BalanceSheet(
         override val vendor: Vendor,
         override val owner: Owner,
         override val currency: Currency,
-        val endOf: LocalDate
+        val endOf: SimpleDateTime
     ) : FinancialReportHeader
 
     @Serializable
