@@ -8,7 +8,7 @@ import presenters.forms.FormActionsBuildingBlock
 import presenters.modal.FormDialog
 import kotlin.js.JsExport
 import pimonitor.client.business.utils.disbursements.CreateDisbursementFields as Fields
-import pimonitor.core.business.investments.params.CreateInvestmentDisbursementRawParams as Params
+import pimonitor.client.business.utils.disbursements.CreateDisbursementRawFormParams as Params
 
 class CreateDisbursementDialog(
     investment: String,

@@ -41,7 +41,7 @@ abstract class BusinessInvestmentsService(
         logger.info("Creating a disbursement")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("create a disbursement"),
-            data = params.toValidatedCreateDisbursementParams()
+            data = params.toValidatedParams()
         )
         disburse(rb).await()
     }

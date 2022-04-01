@@ -11,7 +11,8 @@ data class TextAreaField(
     override val name: String,
     override val label: String = name,
     override val hint: String = label,
-    override var value: String? = null
+    override var value: String? = null,
+    override val isReadonly: Boolean = false
 ) : TextInputRawField {
     @JsName("_ignore_fromProperty")
     constructor(

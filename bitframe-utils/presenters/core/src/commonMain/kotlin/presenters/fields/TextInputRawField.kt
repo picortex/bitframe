@@ -6,5 +6,6 @@ import kotlin.js.JsExport
 interface TextInputRawField : InputField {
     val label: String
     val hint: String
+    val isReadonly: Boolean
     var value: String?
 }

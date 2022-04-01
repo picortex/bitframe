@@ -16,11 +16,11 @@ data class CreateInterventionFields(
         hint = "Concur the world"
     ),
     val interventionDate: TextInputField = TextInputField(
-        name = Params::interventionDate,
+        name = Params::date,
         label = "Intervention Date"
     ),
     val interventionDeadline: TextInputField = TextInputField(
-        name = Params::interventionDeadline,
+        name = Params::deadline,
         label = "Intervention Deadline"
     ),
     val amount: NumberInputField = NumberInputField(

@@ -3,7 +3,7 @@ package pimonitor.client.business.utils.disbursements
 import presenters.forms.Form
 import presenters.forms.FormActionsBuildingBlock
 import pimonitor.client.business.utils.disbursements.CreateDisbursementFields as Fields
-import pimonitor.core.business.investments.params.CreateInvestmentDisbursementRawParams as Params
+import pimonitor.client.business.utils.disbursements.CreateDisbursementRawFormParams as Params
 
 class CreateDisbursementForm(
     name: String,

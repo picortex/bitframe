@@ -7,5 +7,6 @@ data class PasswordInputField(
     override val name: String,
     override val label: String = name,
     override val hint: String = label,
-    override var value: String? = null
+    override var value: String? = null,
+    override val isReadonly: Boolean = false
 ) : TextInputRawField

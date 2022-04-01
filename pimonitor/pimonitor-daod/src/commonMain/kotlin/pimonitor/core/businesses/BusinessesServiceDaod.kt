@@ -121,16 +121,16 @@ open class BusinessesServiceDaod(
                 bus.copy(
                     revenue = moneyChangeBoxOf(
                         title = "Revenue",
-                        previous = earlyIncomeStatement.body.operatingIncome.total,
-                        current = laterIncomeStatement.body.operatingIncome.total,
+                        previous = earlyIncomeStatement.body.revenue.total,
+                        current = laterIncomeStatement.body.revenue.total,
                         increaseFeeling = ChangeFeeling.Good,
                         decreaseFeeling = ChangeFeeling.Bad,
                         fixedFeeling = ChangeFeeling.Neutral
                     ),
                     expenses = moneyChangeBoxOf(
                         title = "Expenses",
-                        previous = earlyIncomeStatement.body.operatingExpenses.total,
-                        current = laterIncomeStatement.body.operatingExpenses.total,
+                        previous = earlyIncomeStatement.body.expenses.total,
+                        current = laterIncomeStatement.body.expenses.total,
                         increaseFeeling = ChangeFeeling.Bad,
                         decreaseFeeling = ChangeFeeling.Good,
                         fixedFeeling = ChangeFeeling.Neutral

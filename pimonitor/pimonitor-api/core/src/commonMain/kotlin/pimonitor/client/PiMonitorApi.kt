@@ -5,6 +5,7 @@ package pimonitor.client
 import bitframe.client.BitframeApi
 import pimonitor.client.business.investments.BusinessInvestmentsService
 import pimonitor.client.business.financials.BusinessFinancialsService
+import pimonitor.client.business.interventions.BusinessInterventionService
 import pimonitor.client.business.operations.BusinessOperationsService
 import pimonitor.client.businesses.BusinessesService
 import pimonitor.client.contacts.ContactsService
@@ -19,6 +20,7 @@ interface PiMonitorApi : BitframeApi {
     val signUp: SignUpService
     val businesses: BusinessesService
     val businessInvestments: BusinessInvestmentsService
+    val businessInterventions: BusinessInterventionService
     val businessOperations: BusinessOperationsService
     val businessFinancials: BusinessFinancialsService
     val contacts: ContactsService

@@ -13,13 +13,11 @@ import pimonitor.client.PiMonitorApi
 import pimonitor.client.business.investments.BusinessInvestmentsIntent.*
 import pimonitor.client.business.investments.dialogs.CaptureInvestmentDialog
 import pimonitor.client.business.investments.dialogs.CreateDisbursementDialog
+import pimonitor.client.business.investments.params.toCreateInvestmentDisbursementParams
 import pimonitor.core.business.investments.Investment
-import pimonitor.core.business.investments.params.CreateInvestmentsRawParamsContextual
-import pimonitor.core.business.investments.params.toValidatedCreateDisbursementParams
 import pimonitor.core.business.investments.params.toValidatedCreateInvestmentsParams
 import presenters.cases.CrowdState
 import presenters.cases.Feedback
-import presenters.numerics.Percentage
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 
@@ -46,7 +44,7 @@ class BusinessInvestmentsViewModel(
         flow {
             emit(state.copy(status = Feedback.Loading("Creating a disbursement, please wait . . ."), dialog = null))
             val investmentId = state.focus?.uid ?: error("Failed to send disbursement form: Couldn't get investment Id from viewmodel context")
-            val params = i.params.toValidatedCreateDisbursementParams(investmentId)
+            val params = i.params.toCreateInvestmentDisbursementParams(investmentId)
             api.businessInvestments.disburse(params).await()
             emit(state.copy(status = Feedback.Success("Success. Loading your investment, please wait . . ."), dialog = null))
             val table = investmentsTable(api.businessInvestments.all(businessId).await())

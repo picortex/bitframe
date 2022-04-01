@@ -10,6 +10,8 @@ import later.Later
 import later.later
 import pimonitor.client.business.investments.BusinessInvestmentsService
 import pimonitor.client.utils.pathV1
+import pimonitor.core.business.interventions.Intervention
+import pimonitor.core.business.interventions.params.CreateInterventionDisbursementParams
 import pimonitor.core.business.investments.Investment
 import pimonitor.core.business.investments.params.CreateInvestmentDisbursementParams
 import pimonitor.core.business.investments.params.CreateInvestmentsParams
@@ -18,22 +20,30 @@ import response.decodeResponseFromString
 
 open class BusinessInterventionsServiceKtor(
     private val config: ServiceConfigKtor
-) : BusinessInvestmentsService(config) {
+) : BusinessInterventionService(config) {
     val path get() = config.pathV1
     val client get() = config.http
     val json get() = config.json
-    override fun capture(rb: RequestBody.Authorized<CreateInvestmentsParams>) = config.scope.later {
-        val res = client.post(path.businessInvestmentsCapture) {
-            setBody(json.of(rb))
-        }
-        json.decodeResponseFromString(Investment.serializer(), res.bodyAsText()).response()
-    }
+//    override fun capture(rb: RequestBody.Authorized<CreateInvestmentsParams>) = config.scope.later {
+//        val res = client.post(path.businessInvestmentsCapture) {
+//            setBody(json.of(rb))
+//        }
+//        json.decodeResponseFromString(Investment.serializer(), res.bodyAsText()).response()
+//    }
 
-    override fun all(rb: RequestBody.Authorized<String>): Later<List<Investment>> {
+    override fun create(rb: RequestBody.Authorized<Any>): Later<Intervention> {
         TODO("Not yet implemented")
     }
 
-    override fun disburse(rb: RequestBody.Authorized<CreateInvestmentDisbursementParams>): Later<Disbursement> {
+    override fun all(rb: RequestBody.Authorized<String>): Later<List<Intervention>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun disburse(rb: RequestBody.Authorized<CreateInterventionDisbursementParams>): Later<Disbursement> {
+        TODO("Not yet implemented")
+    }
+
+    override fun addGoal(rb: RequestBody.Authorized<Any>): Later<Any> {
         TODO("Not yet implemented")
     }
 }

@@ -22,6 +22,7 @@ data class Intervention(
     val date: SimpleDateTime,
     val deadline: SimpleDateTime,
     val recommendations: String,
+    val goals: List<String>,
     val history: List<InterventionHistory>,
     val disbursements: List<Disbursement>,
     override val deleted: Boolean = false

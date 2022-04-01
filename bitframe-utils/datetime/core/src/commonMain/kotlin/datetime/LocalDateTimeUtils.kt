@@ -2,6 +2,6 @@ package datetime
 
 import kotlinx.datetime.*
 
-fun LocalDateTime.toSimpleDateTime() = SimpleDateTime(
-    timeStampInMillis = toInstant(TimeZone.UTC).toEpochMilliseconds().toDouble()
+fun LocalDateTime.toSimpleDateTime(timezone: TimeZone = TimeZone.UTC) = SimpleDateTime(
+    timeStampInMillis = toInstant(timezone).toEpochMilliseconds().toDouble()
 )
