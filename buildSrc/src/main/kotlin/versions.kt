@@ -6,9 +6,9 @@ object vers {
     val npmPublish = "2.1.2"
 
     object bitframe {
-        private val latest = "0.0.99"
+        private val latest = "0.10.0"
         val stagingCurrent = latest
-        val stagingPrevious = "0.0.98"
+        val stagingPrevious = "0.0.99"
         val productionCurrent = latest
         val productionPrevious = "0.0.90"
     }
