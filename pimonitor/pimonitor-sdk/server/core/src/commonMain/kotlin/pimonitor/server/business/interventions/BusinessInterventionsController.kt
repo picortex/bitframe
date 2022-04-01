@@ -6,16 +6,29 @@ import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
 import kotlinx.serialization.decodeFromString
 import later.await
+import pimonitor.core.business.interventions.BusinessInterventionsServiceDaod
+import pimonitor.core.business.interventions.params.CreateInterventionDisbursementParams
+import pimonitor.core.business.interventions.params.CreateInterventionParams
 import pimonitor.core.business.investments.BusinessInvestmentsServiceDaod
 import pimonitor.core.business.investments.params.CreateInvestmentsParams
 import response.response
 
 class BusinessInterventionsController(
-    val service: BusinessInvestmentsServiceDaod
+    val service: BusinessInterventionsServiceDaod
 ) {
     private val json get() = service.config.json
     suspend fun create(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.Authorized<CreateInvestmentsParams>>(req.compulsoryBody())
-        resolve(service.capture(rb).await())
+        val rb = json.decodeFromString<RequestBody.Authorized<CreateInterventionParams>>(req.compulsoryBody())
+        resolve(service.create(rb).await())
+    }.toHttpResponse()
+
+    suspend fun disburse(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.Authorized<CreateInterventionDisbursementParams>>(req.compulsoryBody())
+        resolve(service.disburse(rb).await())
+    }.toHttpResponse()
+
+    suspend fun all(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.Authorized<String>>(req.compulsoryBody())
+        resolve(service.all(rb).await())
     }.toHttpResponse()
 }

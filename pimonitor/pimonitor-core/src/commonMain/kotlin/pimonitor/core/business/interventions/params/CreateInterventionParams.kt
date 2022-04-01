@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CreateInterventionParams(
+    override val businessId: String,
     override val name: String,
     override val date: Double,
     override val deadline: Double,

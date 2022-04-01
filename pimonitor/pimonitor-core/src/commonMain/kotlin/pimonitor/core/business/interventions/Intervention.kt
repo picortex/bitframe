@@ -34,6 +34,6 @@ data class Intervention(
     val totalDisbursed by lazy { disbursements.sumOf { it.amount } }
 
     val disbursementProgressInPercentage by lazy {
-        Percentage.fromRatio(totalDisbursed / amount.amount)
+        Percentage.fromRatio(totalDisbursed / (amount.amount / amount.currency.lowestDenomination))
     }
 }
