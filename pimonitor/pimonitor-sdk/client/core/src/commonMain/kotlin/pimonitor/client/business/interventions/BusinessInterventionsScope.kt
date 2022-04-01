@@ -1,3 +1,6 @@
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
+
 package pimonitor.client.business.interventions
 
 import bitframe.client.UIScope
@@ -9,6 +12,7 @@ import pimonitor.client.business.interventions.params.CreateInterventionRawFormP
 import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams
 import pimonitor.core.business.interventions.Intervention
 import presenters.cases.CrowdState
+import kotlin.js.JsExport
 
 open class BusinessInterventionsScope(
     override val config: UIScopeConfig<PiMonitorApi>

@@ -74,7 +74,7 @@ class BusinessInterventionsViewModel(
             val amount = currency.of(params.amount).toFormattedString(options)
             emit(state.copy(status = Feedback.Success("$amount disbursed successfully. Reloading your interventions, please wait. . ."), dialog = null))
             val interventions = api.businessInterventions.all(businessId).await()
-            emit(state.copy(status = Feedback.None, table = interventionTable(interventions), dialog = null))
+            emit(state.copy(status = Feedback.None, table = interventionsTable(interventions), dialog = null))
         }.catch {
             emit(state.copy(status = Feedback.Failure(message = "Failed to create disbursement", cause = it), dialog = null))
             delay(config.viewModel.recoveryTime)
@@ -109,7 +109,7 @@ class BusinessInterventionsViewModel(
             api.businessInterventions.create(params).await()
             emit(state.copy(status = Feedback.Success("Intervention Created. Reloading your interventions, please wait. . ."), dialog = null))
             val interventions = api.businessInterventions.all(businessId).await()
-            emit(state.copy(status = Feedback.None, table = interventionTable(interventions), dialog = null))
+            emit(state.copy(status = Feedback.None, table = interventionsTable(interventions), dialog = null))
         }.catch {
             emit(state.copy(status = Feedback.Failure(message = "Failed to create an intervention", cause = it), dialog = null))
             delay(config.viewModel.recoveryTime)
@@ -144,7 +144,7 @@ class BusinessInterventionsViewModel(
         flow {
             emit(state.copy(status = Feedback.Loading("Loading all interventions, please wait . . .")))
             val interventions = api.businessInterventions.all(businessId).await()
-            emit(state.copy(status = Feedback.None, table = interventionTable(interventions)))
+            emit(state.copy(status = Feedback.None, table = interventionsTable(interventions)))
         }.catch {
             emit(state.copy(status = Feedback.Failure(message = "Failed to load all interventions", cause = it) {
                 onRetry { post(i) }
@@ -154,7 +154,7 @@ class BusinessInterventionsViewModel(
         }
     }
 
-    private fun interventionTable(data: List<Intervention>) = tableOf(data) {
+    private fun interventionsTable(data: List<Intervention>) = tableOf(data) {
         emptyMessage = "No Interventions Found"
         emptyDetails = "You haven't created any intervention for this business"
         emptyAction("Create Intervention") { post(ShowCreateInterventionForm(businessId)) }

@@ -107,12 +107,12 @@ class BusinessInvestmentsViewModel(
     }
 
     private fun investmentsTable(data: List<Investment>) = tableOf(data) {
-        primaryAction("Add Investment") {
-            post(ShowCreateInvestmentForm(businessId))
-        }
-        singleAction("Issue Disbursement") {
-            post(ShowCreateDisbursementForm(it.data))
-        }
+        emptyMessage = "No Investment Found"
+        emptyDetails = "You haven't captured any investments for this business yet"
+        emptyAction("Capture Investment") { post(ShowCreateInvestmentForm(businessId)) }
+
+        primaryAction("Add Investment") { post(ShowCreateInvestmentForm(businessId)) }
+        singleAction("Issue Disbursement") { post(ShowCreateDisbursementForm(it.data)) }
         selectable()
         column("Name") { it.data.name }
         column("Source") { it.data.source }
