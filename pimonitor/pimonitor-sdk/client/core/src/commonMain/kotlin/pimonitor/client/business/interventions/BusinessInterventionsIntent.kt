@@ -2,7 +2,7 @@ package pimonitor.client.business.interventions
 
 import pimonitor.client.business.interventions.params.CreateGoalRawFormParams
 import pimonitor.client.business.interventions.params.CreateInterventionRawFormParams
-import pimonitor.client.business.utils.disbursements.CreateDisbursementRawFormParams
+import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams
 import pimonitor.core.business.interventions.Intervention
 
 sealed class BusinessInterventionsIntent {
@@ -12,7 +12,7 @@ sealed class BusinessInterventionsIntent {
     data class SendCreateInterventionForm(val params: CreateInterventionRawFormParams) : BusinessInterventionsIntent()
 
     data class ShowCreateDisbursementForm(val intervention: Intervention) : BusinessInterventionsIntent()
-    data class SendCreateDisbursementForm(val intervention: Intervention, val params: CreateDisbursementRawFormParams) : BusinessInterventionsIntent()
+    data class SendCreateDisbursementForm(val intervention: Intervention, val params: DisbursementRawFormParams) : BusinessInterventionsIntent()
 
     data class ShowCreateGoalForm(val intervention: Intervention) : BusinessInterventionsIntent()
     data class SendCreateGoalForm(val intervention: Intervention, val params: CreateGoalRawFormParams) : BusinessInterventionsIntent()

@@ -44,7 +44,7 @@ class IncomeStatementCompanyAUTest {
             end = LocalDate(2021, 6, 8)
         ).await()
         println(Json.encodeToString(statement))
-        expect(statement.body.operatingIncome.total.amount).toBe(5517117)
-        expect(statement.body.operatingExpenses.total.amount).toBe(1852212)
+        expect(statement.body.revenue.operating.total.amount).toBe(5517117)
+        expect(statement.body.expenses.operating.total.amount).toBe(1852212)
     }
 }

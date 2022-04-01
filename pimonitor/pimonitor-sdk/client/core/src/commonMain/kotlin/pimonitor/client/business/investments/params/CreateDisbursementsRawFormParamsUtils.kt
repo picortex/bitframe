@@ -1,12 +1,12 @@
 package pimonitor.client.business.investments.params
 
 import datetime.SimpleDateTime
-import pimonitor.client.business.utils.disbursements.CreateDisbursementRawFormParams
+import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams
 import pimonitor.core.business.investments.params.CreateInvestmentDisbursementParams
 import validation.BlankFieldException
 import validation.requiredNotBlank
 
-fun CreateDisbursementRawFormParams.toCreateInvestmentDisbursementParams(
+fun DisbursementRawFormParams.toCreateInvestmentDisbursementParams(
     investmentId: String
 ) = CreateInvestmentDisbursementParams(
     investmentId = investmentId.takeIf { it.isNotBlank() } ?: throw BlankFieldException("investmentId"),

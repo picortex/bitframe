@@ -6,7 +6,7 @@ import pimonitor.client.PiMonitorApi
 import pimonitor.client.business.interventions.BusinessInterventionsIntent.*
 import pimonitor.client.business.interventions.params.CreateGoalRawFormParams
 import pimonitor.client.business.interventions.params.CreateInterventionRawFormParams
-import pimonitor.client.business.utils.disbursements.CreateDisbursementRawFormParams
+import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams
 import pimonitor.core.business.interventions.Intervention
 import presenters.cases.CrowdState
 
@@ -31,7 +31,7 @@ open class BusinessInterventionsScope(
         viewModel.post(ShowCreateDisbursementForm(intervention))
     }
 
-    val sendCreateDisbursementForm = { intervention: Intervention, params: CreateDisbursementRawFormParams ->
+    val sendCreateDisbursementForm = { intervention: Intervention, params: DisbursementRawFormParams ->
         viewModel.post(SendCreateDisbursementForm(intervention, params))
     }
 
