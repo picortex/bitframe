@@ -1,3 +1,6 @@
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
+
 package pimonitor.client.business.interventions.fields
 
 import kotlinx.collections.interoperable.listOf
@@ -5,6 +8,7 @@ import presenters.fields.DateInputField
 import presenters.fields.DropDownInputField
 import presenters.fields.DropDownInputField.Option
 import presenters.fields.TextInputField
+import kotlin.js.JsExport
 import pimonitor.client.business.interventions.params.CreateGoalRawFormParams as Params
 
 data class CreateGoalFields(

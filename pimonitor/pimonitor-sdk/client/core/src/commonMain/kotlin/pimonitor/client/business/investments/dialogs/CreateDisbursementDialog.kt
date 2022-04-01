@@ -1,6 +1,3 @@
-@file:JsExport
-@file:Suppress("NON_EXPORTABLE_TYPE")
-
 package pimonitor.client.business.investments.dialogs
 
 import pimonitor.client.business.utils.disbursements.CreateDisbursementForm

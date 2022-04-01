@@ -1,6 +1,3 @@
-@file:JsExport
-@file:Suppress("NON_EXPORTABLE_TYPE")
-
 package pimonitor.client.business.interventions.forms
 
 import presenters.forms.Form

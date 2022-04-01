@@ -175,5 +175,9 @@ class BusinessInterventionsViewModel(
         column("Deadline") { it.data.deadline.format(dateFormat) }
         column("Countdown") { (it.data.deadline.toLocalDateTime().date - it.data.date.toLocalDateTime().date).toString() }
         column("Created By") { it.data.createdBy.name }
+        actionsColumn("Actions") {
+            action("Issue Disbursement") { post(ShowCreateDisbursementForm(it.data)) }
+            action("Add Goal") { post(ShowCreateGoalForm(it.data)) }
+        }
     }
 }
