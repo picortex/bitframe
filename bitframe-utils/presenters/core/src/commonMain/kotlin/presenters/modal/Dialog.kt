@@ -1,4 +1,3 @@
-@file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package presenters.modal
@@ -7,6 +6,7 @@ import kotlinx.collections.interoperable.List
 import presenters.actions.SimpleAction
 import kotlin.js.JsExport
 
+@JsExport
 sealed interface Dialog<out F, in P> {
     val heading: String
     val details: String
