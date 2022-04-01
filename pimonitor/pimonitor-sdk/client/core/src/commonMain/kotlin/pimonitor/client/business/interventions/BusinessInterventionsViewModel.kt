@@ -105,7 +105,7 @@ class BusinessInterventionsViewModel(
         val state = ui.value
         flow {
             emit(state.copy(status = Feedback.Loading("Creating intervention, please wait . . ."), dialog = null))
-            val params = i.params.toCreateInterventionParams()
+            val params = i.params.toCreateInterventionParams(businessId)
             api.businessInterventions.create(params).await()
             emit(state.copy(status = Feedback.Success("Intervention Created. Reloading your interventions, please wait. . ."), dialog = null))
             val interventions = api.businessInterventions.all(businessId).await()
