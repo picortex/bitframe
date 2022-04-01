@@ -2,6 +2,7 @@
 
 package pimonitor.client.businesses
 
+import pimonitor.client.business.interventions.params.CreateInterventionRawFormParams
 import pimonitor.core.business.investments.params.CreateInvestmentsRawParams
 import pimonitor.core.business.investments.params.CreateInvestmentsRawParamsContextual
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
@@ -18,6 +19,7 @@ sealed class BusinessesIntent {
     data class SendCreateBusinessForm(val params: CreateMonitoredBusinessRawParams) : BusinessesIntent()
 
     data class ShowInterveneForm(val monitored: MonitoredBusinessSummary) : BusinessesIntent()
+    data class SendInterveneForm(val monitored: MonitoredBusinessSummary, val params: CreateInterventionRawFormParams) : BusinessesIntent()
 
     data class ShowInviteToShareReportsForm(val monitored: MonitoredBusinessSummary) : BusinessesIntent()
     data class SendInviteToShareReportsForm(val params: InviteToShareReportsRawFormParams) : BusinessesIntent()

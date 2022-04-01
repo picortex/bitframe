@@ -11,7 +11,7 @@ import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams as Para
 
 class CreateBusinessDialog(block: FormActionsBuildingBlock<Params>) : FormDialog<Fields, Params>(
     heading = "Add Business",
-    details = "Adding a new business to PiMonitor lets you monitor all its operational and financial data in one place. You can always add more details later.",
+    details = "Adding a new business to PiMonitor",
     fields = Fields(),
     block
 )

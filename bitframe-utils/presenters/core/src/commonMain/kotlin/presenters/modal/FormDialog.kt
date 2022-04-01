@@ -26,6 +26,11 @@ open class FormDialog<out F, in P>(
         } ?: error("No cancel action has been registered")
     }
 
+    override val isForm = true
+    override val isConfirm = false
+
+    override val asForm get() = this
+
     @JsName("_ignore_fromBuildingBlock")
     constructor(heading: String, details: String, fields: F, block: FormActionsBuildingBlock<P>) : this(
         heading, details, fields,

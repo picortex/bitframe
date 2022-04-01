@@ -16,6 +16,10 @@ open class ConfirmDialog(
     override val actions: List<SimpleAction>,
     val confirm: SimpleAction
 ) : Dialog<Nothing, Nothing> {
+    override val isForm = false
+    override val isConfirm = true
+    
+    override val asConfirm get() = this
 
     @JsName("_ignore_fromBuildingBlock")
     constructor(heading: String, details: String, block: ConfirmDialogBuildingBlock) : this(

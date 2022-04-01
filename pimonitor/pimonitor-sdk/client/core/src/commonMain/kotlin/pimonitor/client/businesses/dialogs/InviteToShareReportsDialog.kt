@@ -17,6 +17,6 @@ class InviteToShareReportsDialog(
 ) : FormDialog<Fields, Params>(
     heading = "Request information",
     details = "Request $businessName's information by email",
-    fields = Fields().copy(contactEmail, message),
+    fields = Fields(contactEmail, message),
     block
 )

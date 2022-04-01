@@ -41,8 +41,5 @@ data class CaptureInvestmentFields(
     val details: TextInputField = TextInputField(
         name = Params::details,
         label = "Investment Details"
-    ),
-    val submit: ButtonInputField = ButtonInputField(
-        text = "Capture Investment"
     )
 )
