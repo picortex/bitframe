@@ -1,3 +1,5 @@
+# 0.10.11
+
 # 0.0.52
 
 - [[BF127]](https://github.com/picortex/bitframe/issues/217) Implemented CreateBusiness Dialog
