@@ -1,6 +1,6 @@
 package businesses
 
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
 import datetime.SimpleDateTime
 import expect.expect
 import later.await
@@ -9,7 +9,7 @@ import pimonitor.client.runSequence
 import pimonitor.core.business.interventions.params.CreateInterventionDisbursementParams
 import pimonitor.core.business.interventions.params.CreateInterventionParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.signup.params.BusinessSignUpParams
+import pimonitor.core.signup.params.SignUpBusinessParams
 import kotlin.test.Test
 import kotlin.time.Duration.Companion.days
 
@@ -19,7 +19,7 @@ class InterventionJourneyTest {
     @Test
     fun should_be_able_to_intervene_a_business() = runSequence {
         step("If not registered, signup as business or individual") {
-            val params = BusinessSignUpParams(
+            val params = SignUpBusinessParams(
                 businessName = "Test Business $time",
                 individualName = "Business Owner $time",
                 individualEmail = "business.owner@business$time.com",
@@ -30,7 +30,7 @@ class InterventionJourneyTest {
         }
 
         step("Sign in with your registered account") {
-            val params = SignInCredentials(
+            val params = SignInParams(
                 identifier = "business.owner@business$time.com",
                 password = "business.owner@business$time.com",
             )
@@ -66,7 +66,7 @@ class InterventionJourneyTest {
     @Test
     fun should_be_able_to_intervene_a_business_and_add_a_disbursement() = runSequence {
         step("If not registered, signup as business or individual") {
-            val params = BusinessSignUpParams(
+            val params = SignUpBusinessParams(
                 businessName = "Test Business $time",
                 individualName = "Business Owner $time",
                 individualEmail = "business.owner@business$time.com",
@@ -77,7 +77,7 @@ class InterventionJourneyTest {
         }
 
         step("Sign in with your registered account") {
-            val params = SignInCredentials(
+            val params = SignInParams(
                 identifier = "business.owner@business$time.com",
                 password = "business.owner@business$time.com",
             )

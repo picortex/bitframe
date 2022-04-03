@@ -1,6 +1,6 @@
 package business.operational
 
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
 import expect.expect
 import later.await
 import pimonitor.client.business.operations.BusinessOperationsIntent
@@ -13,7 +13,7 @@ import pimonitor.core.dashboards.OperationalDashboard
 import pimonitor.core.invites.InfoResults
 import pimonitor.core.invites.Invite
 import pimonitor.core.picortex.AcceptPicortexInviteParams
-import pimonitor.core.signup.params.IndividualSignUpParams
+import pimonitor.core.signup.params.SignUpIndividualParams
 import presenters.cases.State
 import presenters.date.last
 import utils.PiMonitorTestScope
@@ -30,7 +30,7 @@ class PiCortexOperationalDashboardUserJourneyTest {
     @Test
     fun should_load_picortex_dashboard_of_a_business_with_picortex_integration() = runSequence {
         step("Sign Up as a Monitor") {
-            val monitor = IndividualSignUpParams(
+            val monitor = SignUpIndividualParams(
                 name = "Jane Doe",
                 email = "jane@doe$time.com",
                 password = "jane@doe$time.com"
@@ -39,7 +39,7 @@ class PiCortexOperationalDashboardUserJourneyTest {
         }
 
         step("Sign in as the registered monitor") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = "jane@doe$time.com",
                 password = "jane@doe$time.com"
             )

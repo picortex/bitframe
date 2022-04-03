@@ -1,14 +1,13 @@
 package businesses
 
 import bitframe.core.UserEmail
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
 import expect.expect
-import kotlinx.coroutines.delay
 import later.await
 import pimonitor.client.businesses.dialogs.InviteToShareReportsDialog
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.signup.params.IndividualSignUpParams
+import pimonitor.core.signup.params.SignUpIndividualParams
 import presenters.cases.Feedback
 import presenters.table.tabulateToConsole
 import utils.PiMonitorTestScope
@@ -27,7 +26,7 @@ class InviteToShareReportsJourneyTest {
     @Test
     fun should_invite_to_share_reports_for_a_loaded_business() = runSequence {
         step("Sign Up as a Monitor") {
-            val monitor = IndividualSignUpParams(
+            val monitor = SignUpIndividualParams(
                 name = "Jane $time Doe",
                 email = "jane@doe$time.com",
                 password = "jane"
@@ -36,7 +35,7 @@ class InviteToShareReportsJourneyTest {
         }
 
         step("Sign in as the registered monitor") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = "jane@doe$time.com",
                 password = "jane"
             )
@@ -70,7 +69,7 @@ class InviteToShareReportsJourneyTest {
     @Test
     fun should_load_businesses_even_if_invite_to_share_reports_is_cancelled() = runSequence {
         step("Sign Up as a Monitor") {
-            val monitor = IndividualSignUpParams(
+            val monitor = SignUpIndividualParams(
                 name = "Jane $time Doe",
                 email = "jane@doe$time.com",
                 password = "jane"
@@ -79,7 +78,7 @@ class InviteToShareReportsJourneyTest {
         }
 
         step("Sign in as the registered monitor") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = "jane@doe$time.com",
                 password = "jane"
             )

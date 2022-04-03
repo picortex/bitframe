@@ -5,10 +5,10 @@ import identifier.Phone
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SignInCredentials(
+data class SignInParams(
     override val identifier: String,
     override val password: String,
-) : RawSignInCredentials {
+) : SignInRawParams {
     override val email: String?
         get() = try {
             Email(identifier).value

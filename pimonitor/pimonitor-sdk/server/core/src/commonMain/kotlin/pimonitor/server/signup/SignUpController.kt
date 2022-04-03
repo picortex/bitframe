@@ -9,8 +9,8 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import later.await
 import pimonitor.core.signup.SignUpServiceDaod
-import pimonitor.core.signup.params.BusinessSignUpParams
-import pimonitor.core.signup.params.IndividualSignUpParams
+import pimonitor.core.signup.params.SignUpBusinessParams
+import pimonitor.core.signup.params.SignUpIndividualParams
 import response.response
 
 class SignUpController(
@@ -20,12 +20,12 @@ class SignUpController(
 
     @OptIn(ExperimentalSerializationApi::class)
     suspend fun signUpAsIndividual(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.UnAuthorized<IndividualSignUpParams>>(req.compulsoryBody())
+        val rb = json.decodeFromString<RequestBody.UnAuthorized<SignUpIndividualParams>>(req.compulsoryBody())
         resolve(service.signUpAsIndividual(rb).await(), Created)
     }.toHttpResponse()
 
     suspend fun signUpAsBusiness(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.UnAuthorized<BusinessSignUpParams>>(req.compulsoryBody())
+        val rb = json.decodeFromString<RequestBody.UnAuthorized<SignUpBusinessParams>>(req.compulsoryBody())
         resolve(service.signUpAsBusiness(rb).await(), Created)
     }.toHttpResponse()
 }

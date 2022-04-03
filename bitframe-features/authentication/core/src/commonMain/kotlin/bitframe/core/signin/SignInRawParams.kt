@@ -1,5 +1,9 @@
 package bitframe.core.signin
 
+import bitframe.core.Identifier
+import validation.MissingFieldException
+import validation.requiredNotBlank
+import validation.validate
 import kotlin.js.JsExport
 
 /**
@@ -26,9 +30,16 @@ import kotlin.js.JsExport
  * ```
  */
 @JsExport
-interface RawSignInCredentials {
+interface SignInRawParams {
     val phone: String?
     val email: String?
     val identifier: String?
     val password: String
 }
+
+fun SignInRawParams.toSignInParams() = SignInParams(
+    identifier = Identifier.from(
+        email ?: phone ?: identifier ?: throw MissingFieldException("email|phone|identifier")
+    ).value,
+    password = requiredNotBlank(::password)
+)

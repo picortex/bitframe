@@ -6,9 +6,8 @@ package pimonitor.client.signup
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.client.PiMonitorApi
-import pimonitor.core.signup.params.BusinessSignUpRawParams
-import pimonitor.core.signup.params.IndividualSignUpRawParams
-import viewmodel.ViewModel
+import pimonitor.core.signup.params.SignUpBusinessRawParams
+import pimonitor.core.signup.params.SignUpIndividualRawParams
 import kotlin.js.JsExport
 import pimonitor.client.signup.SignUpIntent as Intent
 import pimonitor.client.signup.SignUpState as State
@@ -27,11 +26,11 @@ open class SignUpScope(
         viewModel.post(Intent.ChangeRegistrationType(type))
     }
 
-    val submitIndividualForm = { params: IndividualSignUpRawParams ->
+    val submitIndividualForm = { params: SignUpIndividualRawParams ->
         viewModel.post(Intent.Submit.IndividualForm(params))
     }
 
-    val submitBusinessForm = { params: BusinessSignUpRawParams ->
+    val submitBusinessForm = { params: SignUpBusinessRawParams ->
         viewModel.post(Intent.Submit.BusinessForm(params))
     }
 }

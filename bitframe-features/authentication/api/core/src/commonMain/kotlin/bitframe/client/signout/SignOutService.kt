@@ -1,8 +1,10 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package bitframe.client.signout
 
 import bitframe.client.ServiceConfig
+import bitframe.client.logger
 import bitframe.client.signin.SignInService
 import bitframe.core.Session
 import events.Event
@@ -12,11 +14,7 @@ import kotlin.js.JsExport
 import kotlin.jvm.JvmStatic
 
 class SignOutService(private val config: ServiceConfig) {
-    private val logger
-        get() = config.logger.with(
-            "User" to (config.session.value as? Session.SignedIn)?.user?.name,
-            "Source" to SignOutService::class.simpleName
-        )
+    private val logger by config.logger(withSessionInfo = true)
 
     companion object {
         @JvmStatic

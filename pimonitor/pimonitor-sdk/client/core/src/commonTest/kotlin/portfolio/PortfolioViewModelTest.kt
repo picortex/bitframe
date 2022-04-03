@@ -4,7 +4,8 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import later.await
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.signup.params.IndividualSignUpParams
+import pimonitor.core.signup.params.SignUpIndividualParams
+import pimonitor.core.signup.params.toSignInParams
 import presenters.cases.Feedback
 import utils.PiMonitorTestScope
 import viewmodel.expect
@@ -22,7 +23,7 @@ class PortfolioViewModelTest {
     fun should_load_portfolio_data() = runTest {
         val time = Clock.System.now()
         // STEP 1: SignUp as a monitor
-        val monitor = IndividualSignUpParams(
+        val monitor = SignUpIndividualParams(
             name = "Jane $time Doe",
             email = "jane@doe$time.com",
             password = "jane"
@@ -30,7 +31,7 @@ class PortfolioViewModelTest {
         api.signUp.signUp(monitor).await()
 
         //STEP 2: Sign In as the registered monitor
-        api.signIn.signIn(monitor.toSignInCredentials()).await()
+        api.signIn.signIn(monitor.toSignInParams()).await()
 
         // STEP 3: Ensure viewmodel has gone through the expected states and has an empty portfolio data
         val state3 = State()
