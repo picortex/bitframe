@@ -1,8 +1,8 @@
 package pimonitor.client.business.investments
 
+import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams
 import pimonitor.core.business.investments.Investment
 import pimonitor.core.business.investments.params.CreateInvestmentsRawParamsContextual
-import pimonitor.core.business.utils.disbursements.CreateDisbursementRawParamsContextual
 
 sealed class BusinessInvestmentsIntent {
     data class LoadAllInvestments(val businessId: String) : BusinessInvestmentsIntent()
@@ -11,7 +11,7 @@ sealed class BusinessInvestmentsIntent {
     data class SendCreateInvestmentForm(val params: CreateInvestmentsRawParamsContextual) : BusinessInvestmentsIntent()
 
     data class ShowCreateDisbursementForm(val investment: Investment) : BusinessInvestmentsIntent()
-    data class SendCreateDisbursementForm(val params: CreateDisbursementRawParamsContextual) : BusinessInvestmentsIntent()
+    data class SendCreateDisbursementForm(val params: DisbursementRawFormParams) : BusinessInvestmentsIntent()
 
     object ExitDialog : BusinessInvestmentsIntent()
 }

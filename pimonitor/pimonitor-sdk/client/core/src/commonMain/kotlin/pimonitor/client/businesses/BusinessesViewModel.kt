@@ -11,14 +11,15 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
+import pimonitor.client.business.interventions.params.toCreateInterventionParams
 import pimonitor.client.businesses.dialogs.CaptureInvestmentDialog
 import pimonitor.client.businesses.BusinessesIntent.*
 import pimonitor.client.businesses.dialogs.*
-import pimonitor.core.business.investments.params.CreateInvestmentsRawParamsContextual
 import pimonitor.core.business.investments.params.toValidatedCreateInvestmentsParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.copy
+import presenters.cases.Feedback
 import presenters.containers.toString
 import presenters.cases.Feedback.*
 import presenters.changes.toString
@@ -43,6 +44,7 @@ class BusinessesViewModel(
         is SendInviteToShareReportsForm -> sendInviteToShareReportsForm(i)
 
         is ShowInterveneForm -> showInterveneForm(i)
+        is SendInterveneForm -> sendInterveneForm(i)
 
         is ShowCaptureInvestmentForm -> showCaptureInvestmentForm(i)
         is SendCaptureInvestmentForm -> sendCaptureInvestmentForm(i)
@@ -53,6 +55,17 @@ class BusinessesViewModel(
         ExitDialog -> exitDialog()
         is Delete -> delete(i)
         is DeleteAll -> deleteAll(i)
+    }
+
+    private fun CoroutineScope.sendInterveneForm(i: SendInterveneForm) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(status = Loading("Intervening ${i.monitored.name}, please wait . . .")))
+            val params = i.params.toCreateInterventionParams(businessId = i.monitored.uid)
+            api.businessInterventions.create(params).await()
+            emit(state.copy(status = Success("Intervention completed successfully. Loading businesses, please wait . . .")))
+            emit(state.copy(status = None, table = businessesTable(api.businesses.all().await()), dialog = null))
+        }.catchAndCollectToUI(state)
     }
 
     private fun showDeleteMultipleConfirmationDialog(i: ShowDeleteMultipleConfirmationDialog) {
@@ -89,14 +102,14 @@ class BusinessesViewModel(
     private fun showInterveneForm(i: ShowInterveneForm) {
         ui.value = ui.value.copy(status = None, focus = i.monitored, dialog = InterveneDialog(i.monitored) {
             onCancel { post(ExitDialog) }
-            onSubmit { params: Any -> TODO() }
+            onSubmit("Create Intervention") { post(SendInterveneForm(i.monitored, it)) }
         })
     }
 
     private fun showCreateBusinessForm() {
         ui.value = ui.value.copy(status = None, focus = null, dialog = CreateBusinessDialog {
             onCancel { post(ExitDialog) }
-            onSubmit { params -> post(SendCreateBusinessForm(params)) }
+            onSubmit("Create Business") { params -> post(SendCreateBusinessForm(params)) }
         })
     }
 
@@ -111,7 +124,7 @@ class BusinessesViewModel(
                 message = inviteInfo.inviteMessage
             ) {
                 onCancel { post(LoadBusinesses) }
-                onSubmit { params -> post(SendInviteToShareReportsForm(params)) }
+                onSubmit("Send Invite") { params -> post(SendInviteToShareReportsForm(params)) }
             }
             emit(state.copy(status = None, focus = i.monitored, dialog = dialog))
         }.catchAndCollectToUI(state)
@@ -124,7 +137,7 @@ class BusinessesViewModel(
             emit(state.copy(status = Loading("Sending invite to ${focused.name}, Please wait . . ."), dialog = null))
             api.invites.send(i.params.copy(focused.uid)).await()
             emit(state.copy(status = Success("Invite Sent. Loading your businesses, please wait . . ."), dialog = null))
-            emit(state.copy(status = None, table = businessTable(api.businesses.all().await()), dialog = null))
+            emit(state.copy(status = None, table = businessesTable(api.businesses.all().await()), dialog = null))
         }.catchAndCollectToUI(ui.value)
     }
 
@@ -144,21 +157,13 @@ class BusinessesViewModel(
                     businessName = result.params.businessName, contactEmail = result.params.contactEmail, message = inviteInfo.inviteMessage
                 ) {
                     onCancel { post(ExitDialog) }
-                    onSubmit { params -> post(SendInviteToShareReportsForm(params)) }
+                    onSubmit("Send Invite") { post(SendInviteToShareReportsForm(it)) }
                 }
-                emit(state.copy(status = None, table = businessTable(businesses), dialog = dialog, focus = result.summary))
+                emit(state.copy(status = None, table = businessesTable(businesses), dialog = dialog, focus = result.summary))
             } else {
                 emit(state.copy(status = Success("${i.params.businessName} has successfully been added. Loading all your businesses, please wait . . ."), dialog = null))
-                emit(state.copy(status = None, table = businessTable(api.businesses.all().await()), dialog = null))
+                emit(state.copy(status = None, table = businessesTable(api.businesses.all().await()), dialog = null))
             }
-        }.catchAndCollectToUI(state)
-    }
-
-    private fun CoroutineScope.intervene(i: ShowInterveneForm) = launch {
-        val state = ui.value
-        flow {
-            emit(state.copy(status = Loading("Intervening"), dialog = null))
-            error("Implement intervene for ${i.monitored.name}")
         }.catchAndCollectToUI(state)
     }
 
@@ -169,7 +174,7 @@ class BusinessesViewModel(
             api.businesses.delete(*i.data.map { it.uid }.toTypedArray()).await()
             emit(state.copy(status = Success("${i.data.size} businesses deleted successfully, Loading remaining businesses . . ."), dialog = null))
             val phase = state.copy(
-                status = None, table = businessTable(api.businesses.all().await()), dialog = null
+                status = None, table = businessesTable(api.businesses.all().await()), dialog = null
             )
             emit(phase)
         }.catchAndCollectToUI(state)
@@ -181,15 +186,7 @@ class BusinessesViewModel(
             emit(state.copy(status = Loading("Deleting ${i.monitored.name}"), dialog = null))
             api.businesses.delete(i.monitored.uid).await()
             emit(state.copy(status = Success("Successfully delete ${i.monitored.name}, Loading remaining businesses . . ."), dialog = null))
-            emit(state.copy(status = None, table = businessTable(api.businesses.all().await()), dialog = null))
-        }.catchAndCollectToUI(state)
-    }
-
-    private fun CoroutineScope.captureInvestment(i: ShowCaptureInvestmentForm) = launch {
-        val state = ui.value
-        flow {
-            emit(state.copy(status = Loading("Capturing investment"), focus = null, dialog = null))
-            error("Implement capture investment for ${i.monitored}")
+            emit(state.copy(status = None, table = businessesTable(api.businesses.all().await()), dialog = null))
         }.catchAndCollectToUI(state)
     }
 
@@ -212,11 +209,14 @@ class BusinessesViewModel(
         val state = ui.value
         flow {
             emit(state.copy(status = Loading("Loading your businesses, please wait . . ."), dialog = null))
-            emit(state.copy(status = None, table = businessTable(api.businesses.all().await()), dialog = null))
+            emit(state.copy(status = None, table = businessesTable(api.businesses.all().await()), dialog = null))
         }.catchAndCollectToUI(state)
     }
 
-    private fun businessTable(data: List<MonitoredBusinessSummary>) = tableOf(data) {
+    private fun businessesTable(data: List<MonitoredBusinessSummary>) = tableOf(data) {
+        emptyMessage = "No Businesses Found"
+        emptyDetails = "You haven't added any businesses to your space yet"
+        emptyAction("Create Business") { post(ShowCreateBusinessForm) }
         primaryAction("Add Business") { post(ShowCreateBusinessForm) }
         primaryAction("Refresh") { post(LoadBusinesses) }
         singleAction("Intervene") { post(ShowInterveneForm(it.data)) }

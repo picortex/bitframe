@@ -2,7 +2,7 @@
 
 package integrations.picortex
 
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
 import expect.expect
 import later.await
 import pimonitor.client.PiMonitorApiTest
@@ -14,7 +14,7 @@ import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.invites.InfoResults
 import pimonitor.core.invites.Invite
 import pimonitor.core.picortex.AcceptPicortexInviteParams
-import pimonitor.core.signup.params.BusinessSignUpParams
+import pimonitor.core.signup.params.SignUpBusinessParams
 import kotlin.test.Test
 import kotlin.time.Duration.Companion.days
 import kotlin.time.ExperimentalTime
@@ -25,7 +25,7 @@ class PiCortexDashboardIntegrationTest {
     @Test
     fun should_load_dashboard_after_credentials_have_been_captured() = runSequence {
         step("If not registered, signup as business or individual") {
-            val params = BusinessSignUpParams(
+            val params = SignUpBusinessParams(
                 businessName = "PiCortex Int Ltd",
                 individualName = "Business Owner $time",
                 individualEmail = "business.owner@business$time.com",
@@ -36,7 +36,7 @@ class PiCortexDashboardIntegrationTest {
         }
 
         step("Sign in with your registered account") {
-            val params = SignInCredentials(
+            val params = SignInParams(
                 identifier = "business.owner@business$time.com",
                 password = "business.owner@business$time.com",
             )

@@ -1,6 +1,6 @@
 package businesses
 
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
 import expect.expect
 import expect.toBe
 import kotlinx.coroutines.delay
@@ -8,7 +8,7 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import later.await
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.signup.params.IndividualSignUpParams
+import pimonitor.core.signup.params.SignUpIndividualParams
 import presenters.table.EmptyTable
 import presenters.table.action
 import presenters.table.click
@@ -30,7 +30,7 @@ class DeleteBusinessJourneyTest {
     fun should_delete_a_single_business_easily() = runTest {
         val time = Clock.System.now()
         // Step 1: Register as an individual monitor
-        val params1 = IndividualSignUpParams(
+        val params1 = SignUpIndividualParams(
             name = "John $time Doe",
             email = "john@doe$time.com",
             password = "johndoe"
@@ -39,7 +39,7 @@ class DeleteBusinessJourneyTest {
         expect(res1.user.name).toBe("John $time Doe")
 
         // Step 2: Sign in as the registered monitor
-        val params2 = SignInCredentials(
+        val params2 = SignInParams(
             identifier = "john@doe$time.com",
             password = "johndoe"
         )
@@ -73,7 +73,7 @@ class DeleteBusinessJourneyTest {
     fun should_delete_multiple_business_easily() = runTest {
         val time = Clock.System.now()
         // Step 1: Register as an individual monitor
-        val params1 = IndividualSignUpParams(
+        val params1 = SignUpIndividualParams(
             name = "John $time Doe",
             email = "john@doe$time.com",
             password = "johndoe"
@@ -82,7 +82,7 @@ class DeleteBusinessJourneyTest {
         expect(res1.user.name).toBe("John $time Doe")
 
         // Step 2: Sign in as the registered monitor
-        val params2 = SignInCredentials(
+        val params2 = SignInParams(
             identifier = "john@doe$time.com",
             password = "johndoe"
         )

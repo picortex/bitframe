@@ -1,6 +1,4 @@
-import bitframe.client.jso
 import expect.expect
-import expect.toBe
 import pimonitor.client.PiMonitorAppScope
 import utils.PiMonitorTestScope
 import kotlin.test.Test
@@ -11,11 +9,5 @@ class PiMonitorAppScopeInteroperabilityTest {
     @Test
     fun should_be_able_to_get_api_from_pi_monitor() {
         expect(scope.config.api).toBeNonNull()
-    }
-
-    @Test
-    fun config_should_not_be_null() {
-        println("Is config null: ${scope.config == null}")
-        expect(scope.config).toBeNonNull()
     }
 }

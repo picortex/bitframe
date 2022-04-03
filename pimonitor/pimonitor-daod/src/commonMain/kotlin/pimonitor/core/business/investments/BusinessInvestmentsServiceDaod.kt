@@ -3,7 +3,6 @@ package pimonitor.core.business.investments
 import bitframe.core.*
 import datetime.SimpleDateTime
 import kotlinx.collections.interoperable.toInteroperableList
-import later.Later
 import later.await
 import later.later
 import pimonitor.core.business.investments.params.CreateInvestmentDisbursementParams
@@ -11,6 +10,7 @@ import pimonitor.core.business.investments.params.CreateInvestmentsParams
 import pimonitor.core.business.investments.params.toInvestment
 import pimonitor.core.business.investments.params.toValidatedCreateInvestmentsParams
 import pimonitor.core.business.utils.disbursements.Disbursement
+import pimonitor.core.business.utils.disbursements.toDisbursement
 
 open class BusinessInvestmentsServiceDaod(
     val config: ServiceConfigDaod
@@ -41,11 +41,4 @@ open class BusinessInvestmentsServiceDaod(
         investmentsDao.update(input).await()
         disbursement
     }
-
-    private fun CreateInvestmentDisbursementParams.toDisbursement(session: Session.SignedIn) = Disbursement(
-        amount = amount,
-        date = SimpleDateTime(date),
-        created = SimpleDateTime.now,
-        by = session.user.ref()
-    )
 }

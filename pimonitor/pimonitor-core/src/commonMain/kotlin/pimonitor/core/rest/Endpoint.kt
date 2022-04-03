@@ -30,6 +30,8 @@ sealed class Endpoint(root: String) {
 
     private val businessInterventions = "$business/interventions"
     val businessInterventionsCreate = "$businessInterventions/create"
+    val businessInterventionsAll = "$businessInterventions/all"
+    val businessInterventionsDisburse = "$businessInterventions/disburse"
 
     // contacts
     val contactsAll = "$root/contacts/all"

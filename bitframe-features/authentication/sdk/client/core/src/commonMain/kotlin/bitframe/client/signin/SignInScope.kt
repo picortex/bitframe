@@ -6,7 +6,7 @@ package bitframe.client.signin
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import bitframe.core.Space
-import bitframe.core.signin.RawSignInCredentials
+import bitframe.core.signin.SignInRawParams
 import viewmodel.ViewModel
 import kotlin.js.JsExport
 import bitframe.client.signin.SignInState as State
@@ -24,7 +24,7 @@ open class SignInScope(
         viewModel.post(Intent.InitForm)
     }
 
-    val submit = { cred: RawSignInCredentials ->
+    val submit = { cred: SignInRawParams ->
         viewModel.post(Intent.Submit(cred))
     }
 

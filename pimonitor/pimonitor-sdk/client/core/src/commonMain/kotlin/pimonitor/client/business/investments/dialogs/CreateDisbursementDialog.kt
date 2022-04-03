@@ -1,20 +1,13 @@
-@file:JsExport
-@file:Suppress("NON_EXPORTABLE_TYPE")
-
 package pimonitor.client.business.investments.dialogs
 
-import pimonitor.client.business.utils.disbursements.CreateDisbursementFields
-import pimonitor.core.business.investments.params.CreateInvestmentDisbursementRawParams
-import presenters.modal.Dialog
-import presenters.modal.builders.FormDialogBuildingBlock
+import pimonitor.client.business.utils.disbursements.CreateDisbursementForm
+import presenters.forms.FormActionsBuildingBlock
+import presenters.modal.FormDialog
 import kotlin.js.JsExport
+import pimonitor.client.business.utils.disbursements.DisbursementFields as Fields
+import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams as Params
 
 class CreateDisbursementDialog(
-    investmentName: String,
-    block: FormDialogBuildingBlock<CreateInvestmentDisbursementRawParams>
-) : Dialog.Form<CreateDisbursementFields, CreateInvestmentDisbursementRawParams>(
-    heading = "Issue a Disbursement",
-    details = "Issue a new disbursement for the $investmentName investment",
-    fields = CreateDisbursementFields(),
-    block
-)
+    investment: String,
+    block: FormActionsBuildingBlock<Params>
+) : FormDialog<Fields, Params>(CreateDisbursementForm(investment, block))

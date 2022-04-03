@@ -5,10 +5,8 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import later.await
 import pimonitor.client.PiMonitorApi
-import pimonitor.client.PiMonitorApiMock
 import pimonitor.client.PiMonitorApiTest
-import pimonitor.core.signup.params.IndividualSignUpParams
-import pimonitor.core.signup.params.IndividualSignUpRawParams
+import pimonitor.core.signup.params.SignUpIndividualParams
 import kotlin.test.Test
 
 class AuthFlowInteroperabilityTest {
@@ -17,7 +15,7 @@ class AuthFlowInteroperabilityTest {
     @Test
     fun should_register_a_monitor_as_a_valid_user() = runTest {
         val time = Clock.System.now()
-        val params = IndividualSignUpParams(
+        val params = SignUpIndividualParams(
             name = "John Doe $time",
             email = "john@doe$time.com",
             password = "john@doe$time.com"

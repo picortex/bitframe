@@ -1,13 +1,13 @@
 package businesses
 
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
 import expect.expect
 import later.await
 import pimonitor.client.businesses.dialogs.InviteToShareReportsDialog
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.signup.params.BusinessSignUpParams
-import pimonitor.core.signup.params.IndividualSignUpParams
+import pimonitor.core.signup.params.SignUpBusinessParams
+import pimonitor.core.signup.params.SignUpIndividualParams
 import presenters.cases.Feedback
 import utils.PiMonitorTestScope
 import utils.toContain
@@ -25,7 +25,7 @@ class CreateBusinessJourneyTest {
     @Test
     fun should_create_a_business_without_sending_an_invite_easily() = runSequence {
         step("Sign Up as a Monitor") {
-            val monitor = IndividualSignUpParams(
+            val monitor = SignUpIndividualParams(
                 name = "Jane $time Doe",
                 email = "jane@doe$time.com",
                 password = "jane"
@@ -34,7 +34,7 @@ class CreateBusinessJourneyTest {
         }
 
         step("Sign in as the registered monitor") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = "jane@doe$time.com",
                 password = "jane"
             )
@@ -60,7 +60,7 @@ class CreateBusinessJourneyTest {
     @Test
     fun an_individual_monitor_should_create_a_business_then_send_an_invite_afterwards() = runSequence {
         step("Sign Up as a Monitor") {
-            val monitor = IndividualSignUpParams(
+            val monitor = SignUpIndividualParams(
                 name = "Jane Doe",
                 email = "jane@doe$time.com",
                 password = "jane"
@@ -69,7 +69,7 @@ class CreateBusinessJourneyTest {
         }
 
         step("Sign in as the registered monitor") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = "jane@doe$time.com",
                 password = "jane"
             )
@@ -100,7 +100,7 @@ class CreateBusinessJourneyTest {
     @Test
     fun a_corporate_monitor_should_create_a_business_then_send_an_invite_afterwards() = runSequence {
         step("Sign Up as a Monitor") {
-            val monitor = BusinessSignUpParams(
+            val monitor = SignUpBusinessParams(
                 businessName = "Jane Doe Inc",
                 individualName = "Jane Doe",
                 individualEmail = "jane@doe$time.com",
@@ -110,7 +110,7 @@ class CreateBusinessJourneyTest {
         }
 
         step("Sign in as the registered monitor") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = "jane@doe$time.com",
                 password = "jane"
             )

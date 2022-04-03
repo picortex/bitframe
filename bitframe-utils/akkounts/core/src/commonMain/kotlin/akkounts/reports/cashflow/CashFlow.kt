@@ -8,6 +8,7 @@ import akkounts.provider.Vendor
 import akkounts.provider.Owner
 import akkounts.reports.FinancialReport
 import akkounts.reports.FinancialReportHeader
+import datetime.SimpleDateTime
 import kash.Currency
 import kash.Money
 import kotlinx.datetime.LocalDate
@@ -25,8 +26,8 @@ data class CashFlow(
         override val vendor: Vendor,
         override val owner: Owner,
         override val currency: Currency,
-        val start: LocalDate,
-        val end: LocalDate
+        val start: SimpleDateTime,
+        val end: SimpleDateTime
     ) : FinancialReportHeader
 
     @Serializable

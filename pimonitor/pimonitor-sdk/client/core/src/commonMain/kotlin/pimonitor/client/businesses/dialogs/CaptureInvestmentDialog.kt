@@ -3,20 +3,15 @@
 
 package pimonitor.client.businesses.dialogs
 
-import pimonitor.client.business.investments.CaptureInvestmentFields
-import pimonitor.core.business.investments.params.CreateInvestmentsRawParams
-import pimonitor.core.business.investments.params.CreateInvestmentsRawParamsContextual
+import pimonitor.client.business.investments.forms.CaptureInvestmentForm
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
-import presenters.modal.Dialog
-import presenters.modal.builders.FormDialogBuildingBlock
+import presenters.forms.FormActionsBuildingBlock
+import presenters.modal.FormDialog
 import kotlin.js.JsExport
+import pimonitor.client.business.investments.fields.CaptureInvestmentFields as Fields
+import pimonitor.core.business.investments.params.CreateInvestmentsRawParamsContextual as Params
 
 class CaptureInvestmentDialog(
     monitored: MonitoredBusinessSummary,
-    block: FormDialogBuildingBlock<CreateInvestmentsRawParamsContextual>
-) : Dialog.Form<CaptureInvestmentFields, CreateInvestmentsRawParamsContextual>(
-    heading = "Capture Investments",
-    details = "Capturing investment for ${monitored.name}",
-    fields = CaptureInvestmentFields(),
-    block
-)
+    block: FormActionsBuildingBlock<Params>
+) : FormDialog<Fields, Params>(CaptureInvestmentForm(monitored.name, block))

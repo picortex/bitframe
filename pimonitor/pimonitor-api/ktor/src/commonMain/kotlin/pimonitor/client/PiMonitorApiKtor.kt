@@ -4,6 +4,7 @@ import bitframe.client.BitframeApi
 import bitframe.client.BitframeApiKtor
 import bitframe.client.BitframeApiKtorConfig
 import pimonitor.client.business.financials.BusinessFinancialsServiceKtor
+import pimonitor.client.business.interventions.BusinessInterventionService
 import pimonitor.client.business.interventions.BusinessInterventionsServiceKtor
 import pimonitor.client.business.investments.BusinessInvestmentsServiceKtor
 import pimonitor.client.business.operations.BusinessOperationsServiceKtor
@@ -22,6 +23,7 @@ class PiMonitorApiKtor(
     override val businessOperations by lazy { BusinessOperationsServiceKtor(config) }
     override val businessFinancials by lazy { BusinessFinancialsServiceKtor(config) }
     override val businessInvestments by lazy { BusinessInvestmentsServiceKtor(config) }
+    override val businessInterventions by lazy { BusinessInterventionsServiceKtor(config) }
     override val contacts by lazy { ContactsServiceKtor(config) }
     override val portfolio by lazy { PortfolioServiceKtor(config) }
     override val search by lazy { SearchServiceKtor(config) }

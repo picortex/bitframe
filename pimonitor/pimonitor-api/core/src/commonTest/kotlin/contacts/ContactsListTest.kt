@@ -1,6 +1,6 @@
 package contacts
 
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
 import expect.expect
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
@@ -8,7 +8,7 @@ import later.await
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.signup.params.BusinessSignUpParams
+import pimonitor.core.signup.params.SignUpBusinessParams
 import kotlin.test.Test
 
 class ContactsListTest {
@@ -19,7 +19,7 @@ class ContactsListTest {
         // STEP 1. If not registered, signup as business or individual
         val time = Clock.System.now()
 
-        val params1 = BusinessSignUpParams(
+        val params1 = SignUpBusinessParams(
             businessName = "Test Business $time",
             individualName = "Business Owner $time",
             individualEmail = "business.owner@business$time.com",
@@ -29,7 +29,7 @@ class ContactsListTest {
         expect(res1.user.name).toBe("Business Owner $time")
 
         // STEP 2. Sign in with your registered account
-        val params2 = SignInCredentials(
+        val params2 = SignInParams(
             identifier = "business.owner@business$time.com",
             password = "business.owner@business$time.com",
         )

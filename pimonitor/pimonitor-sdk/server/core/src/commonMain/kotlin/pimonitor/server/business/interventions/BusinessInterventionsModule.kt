@@ -10,10 +10,16 @@ class BusinessInterventionsModule(
     val controller: BusinessInterventionsController
 ) : Module {
     override val name: String = "Business Interventions Module"
-    val path get() = controller.service.config.pathV1
+    private val path get() = controller.service.config.pathV1
     override val actions: List<Action> = listOf(
         Action("Create an investment", mapOf(), HttpRoute(HttpMethod.Post, path.businessInterventionsCreate) {
             controller.create(it)
+        }),
+        Action("Create a disbursement", mapOf(), HttpRoute(HttpMethod.Post, path.businessInterventionsDisburse) {
+            controller.disburse(it)
+        }),
+        Action("Load all investments", mapOf(), HttpRoute(HttpMethod.Post, path.businessInterventionsAll) {
+            controller.all(it)
         })
     )
 }

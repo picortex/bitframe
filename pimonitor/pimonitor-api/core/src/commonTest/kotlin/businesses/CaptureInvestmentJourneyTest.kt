@@ -1,6 +1,7 @@
 package businesses
 
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
+import bitframe.core.signin.SignInRawParams
 import datetime.SimpleDateTime
 import expect.expect
 import later.await
@@ -10,7 +11,7 @@ import pimonitor.core.business.investments.InvestmentType
 import pimonitor.core.business.investments.params.CreateInvestmentsParams
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.signup.params.BusinessSignUpParams
+import pimonitor.core.signup.params.SignUpBusinessParams
 import kotlin.test.Test
 
 class CaptureInvestmentJourneyTest {
@@ -19,7 +20,7 @@ class CaptureInvestmentJourneyTest {
     @Test
     fun should_capture_investments() = runSequence {
         step("If not registered, signup as business or individual") {
-            val params = BusinessSignUpParams(
+            val params = SignUpBusinessParams(
                 businessName = "Invitor LLC",
                 individualName = "Business Owner $time",
                 individualEmail = "business.owner@business$time.com",
@@ -30,7 +31,7 @@ class CaptureInvestmentJourneyTest {
         }
 
         step("Sign in with your registered account") {
-            val params = SignInCredentials(
+            val params = SignInParams(
                 identifier = "business.owner@business$time.com",
                 password = "business.owner@business$time.com",
             )

@@ -1,37 +1,32 @@
+@file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package bitframe.client.signin
 
 import bitframe.core.App
 import bitframe.client.ServiceConfig
+import bitframe.client.logger
 import bitframe.core.RequestBody
 import bitframe.core.Session
 import bitframe.core.Space
-import bitframe.core.signin.RawSignInCredentials
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
+import bitframe.core.signin.SignInRawParams
 import bitframe.core.signin.SignInResult
 import events.Event
 import later.Later
 import later.await
 import later.later
-import live.MutableLive
 import kotlin.js.JsExport
 import kotlin.jvm.JvmStatic
-import bitframe.core.signin.SignInService as CoreSignInService
+import bitframe.core.signin.SignInServiceCore
 
-@JsExport
 abstract class SignInService(
-    open val config: ServiceConfig
-) : CoreSignInService() {
-    val session: MutableLive<Session> get() = config.session
+    private val config: ServiceConfig
+) : SignInServiceCore {
+    val session get() = config.session
     val currentSession get() = session.value
     protected val scope get() = config.scope
-    private val logger
-        get() = config.logger.with(
-            "user" to currentSession.user?.name,
-            "space" to currentSession.space?.name,
-            "source" to this::class.simpleName
-        )
+    private val logger by config.logger(withSessionInfo = true)
 
     private val cache get() = config.cache
     private val bus get() = config.bus
@@ -53,11 +48,13 @@ abstract class SignInService(
         private fun SignInEvent(session: Session.SignedIn) = Event(session, SIGN_IN_EVENT_TOPIC)
 
         @JvmStatic
-        private fun SwithSpaceEvent(session: Session.SignedIn) = Event(session, SWITCH_SPACE_EVENT_TOPIC)
+        private fun SwitchSpaceEvent(session: Session.SignedIn) = Event(session, SWITCH_SPACE_EVENT_TOPIC)
     }
 
-    fun signIn(cred: RawSignInCredentials): Later<SignInResult> = scope.later {
-        val validCredentials = validate(cred).getOrThrow()
+    fun loadCachedCredentials() = cache.load<SignInParams>(CREDENTIALS_CACHE_KEY)
+
+    fun signIn(params: SignInRawParams): Later<SignInResult> = scope.later {
+        val validCredentials = validate(params).getOrThrow()
         logger.info("Signing `${validCredentials.identifier}` in")
         val rb = RequestBody.UnAuthorized(
             appId = config.appId,
@@ -121,7 +118,7 @@ abstract class SignInService(
     }
 
     fun signInWithLastSession(): Later<Session.SignedIn?> = scope.later {
-        val cred = cache.load<SignInCredentials>(CREDENTIALS_CACHE_KEY).await()
+        val cred = cache.load<SignInRawParams>(CREDENTIALS_CACHE_KEY).await()
         val res = signIn(cred).await()
         if (res.spaces.size != 1) {
             val session = cache.load<Session.SignedIn>(SESSION_CACHE_KEY).await()

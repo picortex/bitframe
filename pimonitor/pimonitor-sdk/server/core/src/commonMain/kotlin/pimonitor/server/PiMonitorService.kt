@@ -3,6 +3,7 @@ package pimonitor.server
 import bitframe.server.BitframeService
 import bitframe.server.ServiceConfig
 import pimonitor.core.business.financials.BusinessFinancialsServiceDaod
+import pimonitor.core.business.interventions.BusinessInterventionsServiceDaod
 import pimonitor.core.business.investments.BusinessInvestmentsServiceDaod
 import pimonitor.core.business.operations.BusinessOperationsServiceDaod
 import pimonitor.core.businesses.BusinessesServiceDaod
@@ -18,6 +19,7 @@ class PiMonitorService(config: ServiceConfig) : BitframeService(config) {
     val businessOperations by lazy { BusinessOperationsServiceDaod(config) }
     val businessFinancials by lazy { BusinessFinancialsServiceDaod(config) }
     val businessInvestments by lazy { BusinessInvestmentsServiceDaod(config) }
+    val businessInterventions by lazy { BusinessInterventionsServiceDaod(config) }
     val contacts by lazy { ContactsServiceDaod(config) }
     val portfolio by lazy { PortfolioServiceDaod(config) }
     val search by lazy { SearchServiceDaod(config) }

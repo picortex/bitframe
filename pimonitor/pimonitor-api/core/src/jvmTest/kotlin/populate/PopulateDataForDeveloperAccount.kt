@@ -1,6 +1,6 @@
 package populate
 
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
@@ -8,7 +8,7 @@ import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.picortex.AcceptPicortexInviteParams
 import pimonitor.core.sage.AcceptSageOneInviteParams
-import pimonitor.core.signup.params.IndividualSignUpParams
+import pimonitor.core.signup.params.SignUpIndividualParams
 import kotlin.test.Test
 
 class PopulateDataForDeveloperAccount {
@@ -20,7 +20,7 @@ class PopulateDataForDeveloperAccount {
     @Test
     fun should_create_account_and_add_information_for_a_development_account_with_integrated_businesses() = runSequence {
         step("Register dev account(email: $developerEmail1, password: $developerEmail1)") {
-            val params = IndividualSignUpParams(
+            val params = SignUpIndividualParams(
                 name = "Steven Sajja",
                 email = developerEmail1,
                 password = developerEmail1
@@ -29,7 +29,7 @@ class PopulateDataForDeveloperAccount {
         }
 
         step("Sign in with the dev account") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = developerEmail1,
                 password = developerEmail1
             )
@@ -105,7 +105,7 @@ class PopulateDataForDeveloperAccount {
     @Test
     fun should_create_account_and_add_information_for_a_development_account_with_non_integrated_businesses() = runSequence {
         step("Register dev account(email: $developerEmail2, password: $developerEmail2)") {
-            val params = IndividualSignUpParams(
+            val params = SignUpIndividualParams(
                 name = "Lugendo Paul Tulla",
                 email = developerEmail2,
                 password = developerEmail2
@@ -114,7 +114,7 @@ class PopulateDataForDeveloperAccount {
         }
 
         step("Sign in with the dev account") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = developerEmail2,
                 password = developerEmail2
             )

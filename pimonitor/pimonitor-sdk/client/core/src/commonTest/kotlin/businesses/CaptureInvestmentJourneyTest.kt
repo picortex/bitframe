@@ -1,13 +1,13 @@
 package businesses
 
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
 import later.await
 import pimonitor.client.businesses.BusinessesIntent
 import pimonitor.client.businesses.BusinessesState
 import pimonitor.client.businesses.dialogs.CaptureInvestmentDialog
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.signup.params.IndividualSignUpParams
+import pimonitor.core.signup.params.SignUpIndividualParams
 import presenters.cases.Feedback
 import presenters.table.tabulateToConsole
 import utils.PiMonitorTestScope
@@ -23,7 +23,7 @@ class CaptureInvestmentJourneyTest {
     @Test
     fun should_capture_investment_from_dialog() = runSequence {
         step("Sign Up as a Monitor") {
-            val monitor = IndividualSignUpParams(
+            val monitor = SignUpIndividualParams(
                 name = "Jane $time Doe",
                 email = "jane@doe$time.com",
                 password = "jane"
@@ -32,7 +32,7 @@ class CaptureInvestmentJourneyTest {
         }
 
         step("Sign in as the registered monitor") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = "jane@doe$time.com",
                 password = "jane"
             )

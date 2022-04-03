@@ -6,9 +6,9 @@ package pimonitor.client.business.investments
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.client.PiMonitorApi
+import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams
 import pimonitor.core.business.investments.Investment
 import pimonitor.core.business.investments.params.CreateInvestmentsRawParamsContextual
-import pimonitor.core.business.utils.disbursements.CreateDisbursementRawParamsContextual
 import presenters.cases.CrowdState
 import kotlin.js.JsExport
 import pimonitor.client.business.investments.BusinessInvestmentsIntent as Intent
@@ -34,7 +34,7 @@ open class BusinessInvestmentsScope(
         viewModel.post(Intent.ShowCreateDisbursementForm(investment))
     }
 
-    val sendCreateDisbursementForm = { params: CreateDisbursementRawParamsContextual ->
+    val sendCreateDisbursementForm = { params: DisbursementRawFormParams ->
         viewModel.post(Intent.SendCreateDisbursementForm(params))
     }
 

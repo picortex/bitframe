@@ -11,6 +11,7 @@ import bitframe.client.password.ChangePasswordScope
 import bitframe.client.signin.SignInScope
 import pimonitor.client.business.BusinessDetailsScope
 import pimonitor.client.business.financials.BusinessFinancialsScope
+import pimonitor.client.business.interventions.BusinessInterventionsScope
 import pimonitor.client.business.investments.BusinessInvestmentsScope
 import pimonitor.client.business.operations.BusinessOperationsScope
 import pimonitor.client.businesses.BusinessesScope
@@ -26,7 +27,6 @@ open class PiMonitorAppScope(
 ) : BitframeAppScope<PiMonitorApi> {
 
     open val api get() = config.api
-    protected fun <S : Any> of(service: S) = config.toConfig(service)
 
     override val session: SessionAware get() = config.api.session
 
@@ -43,4 +43,5 @@ open class PiMonitorAppScope(
     open val businessFinancials by lazy { BusinessFinancialsScope(config { api.businessFinancials }) }
     open val businessOperations by lazy { BusinessOperationsScope(config { api.businessOperations }) }
     open val businessInvestments by lazy { BusinessInvestmentsScope(config()) }
+    open val businessInterventions by lazy { BusinessInterventionsScope(config()) }
 }
