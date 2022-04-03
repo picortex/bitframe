@@ -1,5 +1,5 @@
 import bitframe.client.signin.SignInServiceMock
-import bitframe.core.signin.SignInRawParams
+import bitframe.core.signin.SignInParams
 import bitframe.core.signin.SignInServiceCore
 import expect.expect
 import expect.expectFailure
@@ -13,7 +13,7 @@ open class SignInCredentialsValidationTest {
 
     @Test
     fun should_fail_when_credentials_are_empty() = runTest {
-        val credentials = SignInRawParams("", "")
+        val credentials = SignInParams("", "")
         val validation = service.validate(credentials)
         expect(validation).toBe<Invalid>()
         val invalid = validation as Invalid
@@ -22,7 +22,7 @@ open class SignInCredentialsValidationTest {
 
     @Test
     fun should_fail_when_sign_in_alias_password_is_empty() = runTest {
-        val credentials = SignInRawParams("john", "")
+        val credentials = SignInParams("john", "")
         val validation = service.validate(credentials)
         expect(validation).toBe<Invalid>()
         val err = expectFailure {

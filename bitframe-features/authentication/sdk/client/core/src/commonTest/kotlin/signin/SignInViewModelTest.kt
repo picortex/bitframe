@@ -26,7 +26,7 @@ class SignInViewModelTest {
 
     @Test
     fun should_be_in_a_show_form_state_with_null_credentials_when_intent_with_null_credentials_is_posted() = runTest {
-        expect(vm.ui.value).toBe(SignInState.Form(vm.form(), Feedback.None))
+        expect(vm.ui.value).toBe<SignInState.Form>()
     }
 
     @Test
@@ -84,6 +84,8 @@ class SignInViewModelTest {
         val state = SignInState.Form(vm.form(credentials), Feedback.None)
         val intent = SignInIntent.Submit(credentials)
         vm.expect(intent)
-        expect(vm).toBeIn(state)
+        val ui = vm.ui.value as SignInState.Form
+        expect(ui.data.fields.email.value).toBe("user01")
+        expect(ui.data.fields.password.value).toBe("pass1")
     }
 }

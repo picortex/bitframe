@@ -1,3 +1,3 @@
-package bitframe.client
+package events
 
 typealias EventCallback<T> = (T) -> Unit

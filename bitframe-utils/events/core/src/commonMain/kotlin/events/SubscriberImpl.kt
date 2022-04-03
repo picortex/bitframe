@@ -2,7 +2,7 @@ package events
 
 class SubscriberImpl<D>(
     topic: String,
-    private val callback: (D) -> Unit,
+    private val callback: EventCallback<D>,
     private val container: MutableList<Subscriber<Any>>
 ) : Subscriber<D>(topic) {
     override fun invoke(data: D) = try {

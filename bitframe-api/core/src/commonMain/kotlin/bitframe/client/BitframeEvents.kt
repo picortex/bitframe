@@ -6,6 +6,7 @@ package bitframe.client
 import bitframe.core.Session
 import bitframe.core.events.AuthEventTopics
 import events.EventBus
+import events.EventCallback
 import kotlin.js.JsExport
 
 open class BitframeEvents(private val bus: EventBus) {

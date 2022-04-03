@@ -3,7 +3,6 @@
 
 package bitframe.client.signin
 
-import bitframe.core.signin.SignInParams
 import presenters.fields.TextInputField
 import kotlin.js.JsExport
 import kotlin.js.JsName
@@ -14,7 +13,7 @@ class SignInFields(
     password: String? = null
 ) {
     @JsName("fromParams")
-    constructor(cred: SignInParams) : this(
+    constructor(cred: Params) : this(
         email = cred.email ?: cred.identifier,
         password = cred.password
     )
