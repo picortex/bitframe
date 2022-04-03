@@ -5,6 +5,8 @@ package bitframe.client.signin
 
 import bitframe.core.App
 import bitframe.client.ServiceConfig
+import bitframe.client.events.SignedInEvent
+import bitframe.client.events.SwitchedSpaceEvent
 import bitframe.client.logger
 import bitframe.core.RequestBody
 import bitframe.core.Session
@@ -12,7 +14,6 @@ import bitframe.core.Space
 import bitframe.core.signin.SignInParams
 import bitframe.core.signin.SignInRawParams
 import bitframe.core.signin.SignInResult
-import events.Event
 import later.Later
 import later.await
 import later.later
@@ -37,18 +38,6 @@ abstract class SignInService(
 
         @JvmStatic
         val CREDENTIALS_CACHE_KEY = "bitframe.credentials"
-
-        @JvmStatic
-        val SIGN_IN_EVENT_TOPIC = "bitframe.authentication.sign.in"
-
-        @JvmStatic
-        val SWITCH_SPACE_EVENT_TOPIC = "bitframe.authentication.space.switch"
-
-        @JvmStatic
-        private fun SignInEvent(session: Session.SignedIn) = Event(session, SIGN_IN_EVENT_TOPIC)
-
-        @JvmStatic
-        private fun SwitchSpaceEvent(session: Session.SignedIn) = Event(session, SWITCH_SPACE_EVENT_TOPIC)
     }
 
     fun loadCachedCredentials() = cache.load<SignInParams>(CREDENTIALS_CACHE_KEY)
@@ -65,7 +54,7 @@ abstract class SignInService(
         if (conundrum.spaces.size == 1) {
             val (user, spaces) = conundrum
             val s = Session.SignedIn(App(config.appId), spaces.first(), user, spaces)
-            finalizeSignIn(s)
+            finalizeSignIn(s, FinalizeType.SignIn)
         } else {
             session.value = Session.Conundrum(App(config.appId), conundrum.spaces, conundrum.user)
         }
@@ -92,29 +81,38 @@ abstract class SignInService(
             is Session.SignedIn -> Session.SignedIn(App(config.appId), space, s.user, s.spaces)
             is Session.Conundrum -> Session.SignedIn(App(config.appId), space, s.user, s.spaces)
             is Session.SignedOut -> throw error
-        }.also { finalizeSignIn(it) }
+        }.also { finalizeSignIn(it, FinalizeType.SignIn) }
     }
 
-    private suspend fun finalizeSignIn(s: Session.SignedIn) {
+    private enum class FinalizeType {
+        SignIn, SwitchSpace
+    }
+
+    private suspend fun finalizeSignIn(s: Session.SignedIn, type: FinalizeType) {
         session.value = s
         cache.save(SESSION_CACHE_KEY, s).await()
-        bus.dispatch(SignInEvent(s))
-        logger.info("Signed In")
+        val event = when (type) {
+            FinalizeType.SignIn -> SignedInEvent(s)
+            FinalizeType.SwitchSpace -> SwitchedSpaceEvent(s)
+        }
+        bus.dispatch(event)
+        logger.info("Success")
     }
 
     /**
      * Switch from the current space to the new [space]
      */
     fun switchToSpace(space: Space) = scope.later {
+        logger.info("Switching to ${space.name}")
         val error = IllegalStateException(
             """You are attempting to switch spaces while you haven't logged in yet. Make sure you are logged in first,"""
         )
         when (val s = session.value) {
             Session.Unknown -> throw error
-            is Session.SignedIn -> Session.SignedIn(App(config.appId), space, s.user, s.spaces)
-            is Session.Conundrum -> throw error
+            is Session.SignedIn -> Session.SignedIn(s.app, space, s.user, s.spaces)
+            is Session.Conundrum -> Session.SignedIn(s.app, space, s.user, s.spaces)
             is Session.SignedOut -> throw error
-        }.also { finalizeSignIn(it) }
+        }.also { finalizeSignIn(it, FinalizeType.SwitchSpace) }
     }
 
     fun signInWithLastSession(): Later<Session.SignedIn?> = scope.later {

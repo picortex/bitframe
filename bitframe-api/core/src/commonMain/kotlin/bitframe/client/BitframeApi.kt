@@ -13,6 +13,7 @@ import kotlin.js.JsExport
 interface BitframeApi {
     val config: BitframeApiConfig
     val session: SessionAware
+    val events: BitframeEvents
     val spaces: SpacesService
     val users: UsersService
     val signIn: SignInService
