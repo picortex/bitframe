@@ -9,7 +9,7 @@ repositories {
 }
 
 object vers {
-    val kotlin = "1.6.20-RC2"
+    val kotlin = "1.6.20"
     val ktor = "1.6.8"
     val foundation = "1.4.62"
 }
