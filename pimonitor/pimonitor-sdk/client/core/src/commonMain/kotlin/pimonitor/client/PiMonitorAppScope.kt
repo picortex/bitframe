@@ -5,12 +5,15 @@ package pimonitor.client
 
 import bitframe.client.BitframeAppScope
 import bitframe.client.BitframeAppScopeConfig
+import bitframe.client.MicroScope
 import bitframe.client.SessionAware
 import bitframe.client.panel.PanelScope
 import bitframe.client.password.ChangePasswordScope
 import bitframe.client.signin.SignInScope
 import pimonitor.client.business.BusinessDetailsScope
 import pimonitor.client.business.financials.BusinessFinancialsScope
+import pimonitor.client.business.info.BusinessInfoIntents
+import pimonitor.client.business.info.BusinessInfoViewModel
 import pimonitor.client.business.interventions.BusinessInterventionsScope
 import pimonitor.client.business.investments.BusinessInvestmentsScope
 import pimonitor.client.business.operations.BusinessOperationsScope
@@ -44,4 +47,6 @@ open class PiMonitorAppScope(
     open val businessOperations by lazy { BusinessOperationsScope(config { api.businessOperations }) }
     open val businessInvestments by lazy { BusinessInvestmentsScope(config()) }
     open val businessInterventions by lazy { BusinessInterventionsScope(config()) }
+
+    val businessInfo by MicroScope(BusinessInfoViewModel(config())) { intents(BusinessInfoIntents(it)) }
 }

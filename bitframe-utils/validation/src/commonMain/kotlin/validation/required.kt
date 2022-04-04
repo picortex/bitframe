@@ -14,6 +14,8 @@ inline fun requiredNotBlank(
     return nonNullValue
 }
 
+inline fun String.requiredNotBlank(fieldName: String) = takeIf { it.isNotBlank() } ?: throw BlankFieldException(fieldName)
+
 inline fun <T : Number?> requiredPositive(
     property: KProperty0<T>
 ): T {
