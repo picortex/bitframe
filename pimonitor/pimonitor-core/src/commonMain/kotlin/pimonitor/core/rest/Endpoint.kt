@@ -12,6 +12,7 @@ sealed class Endpoint(root: String) {
     val businessesAll = "$businesses/all"
     val businessesCreate = "$businesses/create"
     val businessesLoad = "$businesses/load"
+    val businessesUpdate = "$businesses/update"
     val businessesDelete = "$businesses/delete"
 
     private val business = "$root/business"
