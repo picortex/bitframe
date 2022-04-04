@@ -48,5 +48,8 @@ open class PiMonitorAppScope(
     open val businessInvestments by lazy { BusinessInvestmentsScope(config()) }
     open val businessInterventions by lazy { BusinessInterventionsScope(config()) }
 
-    val businessInfo by MicroScope(BusinessInfoViewModel(config())) { intents(BusinessInfoIntents(it)) }
+    val businessInfo by MicroScope {
+        viewModel(BusinessInfoViewModel(config()))
+        intents(BusinessInfoIntents(viewModel))
+    }
 }
