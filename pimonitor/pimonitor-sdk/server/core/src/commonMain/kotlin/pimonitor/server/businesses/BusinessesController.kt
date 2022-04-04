@@ -7,6 +7,7 @@ import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
 import kotlinx.serialization.decodeFromString
 import later.await
+import pimonitor.core.business.info.params.BusinessInfoParams
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.BusinessesServiceDaod
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
@@ -35,5 +36,10 @@ class BusinessesController(
     suspend fun load(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.Authorized<String>>(req.compulsoryBody())
         resolve(service.load(rb).await())
+    }.toHttpResponse()
+
+    suspend fun updated(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.Authorized<BusinessInfoParams>>(req.compulsoryBody())
+        resolve(service.update(rb).await())
     }.toHttpResponse()
 }

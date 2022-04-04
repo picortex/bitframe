@@ -78,13 +78,13 @@ open class BusinessesServiceDaod(
     }
 
     fun MonitoredBusinessBasicInfo.updated(params: BusinessInfoParams) = copy(
-        name = name,
-        industry = industry,
-        address = address,
-        phone = phone,
-        email = email,
-        website = website,
-        about = about,
+        name = params.name,
+        industry = params.industry,
+        address = params.address,
+        phone = params.phone,
+        email = params.email,
+        website = params.website,
+        about = params.about,
     )
 
     override fun update(rb: RequestBody.Authorized<BusinessInfoParams>): Later<MonitoredBusinessBasicInfo> = config.scope.later {
