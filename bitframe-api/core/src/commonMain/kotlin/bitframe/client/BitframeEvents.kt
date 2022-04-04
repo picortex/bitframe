@@ -14,11 +14,11 @@ open class BitframeEvents(private val bus: EventBus) {
         bus.subscribe(AuthEventTopics.SPACE_SWITCHED, callback)
     }
 
-    val onUserSignedIn = { callback: EventCallback<Session.SignedIn> ->
+    val onSignedIn = { callback: EventCallback<Session.SignedIn> ->
         bus.subscribe(AuthEventTopics.SIGNED_IN, callback)
     }
 
-    val onUserSignedOut = { callback: EventCallback<Session.SignedIn> ->
+    val onSignedOut = { callback: EventCallback<Session.SignedIn> ->
         bus.subscribe(AuthEventTopics.SIGNED_OUT, callback)
     }
 }

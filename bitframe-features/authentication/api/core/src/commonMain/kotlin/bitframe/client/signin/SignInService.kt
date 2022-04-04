@@ -11,15 +11,12 @@ import bitframe.client.logger
 import bitframe.core.RequestBody
 import bitframe.core.Session
 import bitframe.core.Space
-import bitframe.core.signin.SignInParams
-import bitframe.core.signin.SignInRawParams
-import bitframe.core.signin.SignInResult
+import bitframe.core.signin.*
 import later.Later
 import later.await
 import later.later
 import kotlin.js.JsExport
 import kotlin.jvm.JvmStatic
-import bitframe.core.signin.SignInServiceCore
 
 abstract class SignInService(
     private val config: ServiceConfig
@@ -30,7 +27,7 @@ abstract class SignInService(
     private val logger by config.logger(withSessionInfo = true)
 
     private val cache get() = config.cache
-    private val bus get() = config.bus
+    val bus get() = config.bus
 
     companion object {
         @JvmStatic
@@ -43,14 +40,14 @@ abstract class SignInService(
     fun loadCachedCredentials() = cache.load<SignInParams>(CREDENTIALS_CACHE_KEY)
 
     fun signIn(params: SignInRawParams): Later<SignInResult> = scope.later {
-        val validCredentials = validate(params).getOrThrow()
-        logger.info("Signing `${validCredentials.identifier}` in")
+        val validatedParams = params.toSignInParams()
+        logger.info("Signing `${validatedParams.identifier}` in")
         val rb = RequestBody.UnAuthorized(
             appId = config.appId,
-            data = validCredentials
+            data = validatedParams
         )
         val conundrum = signIn(rb).await()
-        cache.save(CREDENTIALS_CACHE_KEY, validCredentials).await()
+        cache.save(CREDENTIALS_CACHE_KEY, validatedParams).await()
         if (conundrum.spaces.size == 1) {
             val (user, spaces) = conundrum
             val s = Session.SignedIn(App(config.appId), spaces.first(), user, spaces)

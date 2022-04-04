@@ -3,12 +3,14 @@
 package pimonitor.client
 
 import bitframe.client.BitframeApi
+import bitframe.client.BitframeEvents
 import pimonitor.client.business.investments.BusinessInvestmentsService
 import pimonitor.client.business.financials.BusinessFinancialsService
 import pimonitor.client.business.interventions.BusinessInterventionService
 import pimonitor.client.business.operations.BusinessOperationsService
 import pimonitor.client.businesses.BusinessesService
 import pimonitor.client.contacts.ContactsService
+import pimonitor.client.events.PiMonitorEvents
 import pimonitor.client.invites.InvitesService
 import pimonitor.client.portfolio.PortfolioService
 import pimonitor.client.search.SearchService
@@ -17,6 +19,7 @@ import kotlin.js.JsExport
 
 @JsExport
 interface PiMonitorApi : BitframeApi {
+    override val events: PiMonitorEvents
     val signUp: SignUpService
     val businesses: BusinessesService
     val businessInvestments: BusinessInvestmentsService
