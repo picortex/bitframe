@@ -6,7 +6,7 @@ package pimonitor.client.businesses
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.client.PiMonitorApi
-import pimonitor.core.business.investments.params.CreateInvestmentsRawParamsContextual
+import pimonitor.client.business.investments.params.CreateInvestmentsRawFormParams
 import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
@@ -51,7 +51,7 @@ open class BusinessesScope(
         viewModel.post(Intent.ShowCaptureInvestmentForm(params))
     }
 
-    val sendCaptureInvestmentForm = { params: CreateInvestmentsRawParamsContextual ->
+    val sendCaptureInvestmentForm = { params: CreateInvestmentsRawFormParams ->
         viewModel.post(Intent.SendCaptureInvestmentForm(params))
     }
 

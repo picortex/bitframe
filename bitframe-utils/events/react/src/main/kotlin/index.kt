@@ -11,7 +11,7 @@ fun <D> useEventHandler(
     callback: (D) -> Unit
 ): Unit = useEffectOnce {
     val subscriber = bus.subscribe(topic, callback)
-    useSubscriber(subscriber)
+    cleanup { subscriber.unsubscribe() }
 }
 
 fun <D> useSubscriber(subscriber: Subscriber<D>) = useEffectOnce {
