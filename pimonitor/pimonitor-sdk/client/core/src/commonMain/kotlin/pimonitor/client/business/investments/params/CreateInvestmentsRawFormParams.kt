@@ -1,5 +1,6 @@
 package pimonitor.client.business.investments.params
 
+import datetime.SimpleDateTime
 import pimonitor.core.business.investments.params.CreateInvestmentsParams
 import validation.BlankFieldException
 import validation.requiredNotBlank
@@ -22,6 +23,6 @@ fun CreateInvestmentsRawFormParams.toValidatedParams(businessId: String) = Creat
     type = requiredNotBlank(::type),
     source = requiredNotBlank(::source),
     amount = requiredPositiveDouble(::amount),
-    date = requiredPositiveDouble(::date),
+    date = SimpleDateTime.parseDate(requiredNotBlank(::date)).timeStampInMillis,
     details = requiredNotBlank(::details),
 )
