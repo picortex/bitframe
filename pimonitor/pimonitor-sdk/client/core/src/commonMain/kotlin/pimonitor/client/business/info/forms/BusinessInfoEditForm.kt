@@ -8,7 +8,7 @@ import presenters.forms.Form
 import presenters.forms.FormActionsBuildingBlock
 import kotlin.js.JsExport
 import pimonitor.client.business.info.fields.BusinessInfoFields as Fields
-import pimonitor.core.business.info.params.BusinessInfoParams as Params
+import pimonitor.core.business.info.params.BusinessInfoRawParams as Params
 
 class BusinessInfoEditForm(
     business: MonitoredBusinessBasicInfo,

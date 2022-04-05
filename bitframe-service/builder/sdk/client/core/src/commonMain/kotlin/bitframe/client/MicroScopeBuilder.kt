@@ -2,10 +2,10 @@ package bitframe.client
 
 import viewmodel.ViewModel
 
-open class MicroScopeBuilder<I, S> {
-    private var mViewModel: ViewModel<*, S>? = null
-    val viewModel: ViewModel<I, S> get() = error("ViewModel has not been set yet")
-    fun viewModel(vm: ViewModel<*, S>) {
+open class MicroScopeBuilder<I, S, V : ViewModel<*, S>> {
+    private var mViewModel: V? = null
+    val viewModel: V get() = mViewModel ?: error("ViewModel has not been set yet")
+    fun viewModel(vm: V) {
         mViewModel = vm
     }
 
