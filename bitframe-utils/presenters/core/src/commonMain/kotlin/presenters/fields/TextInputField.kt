@@ -20,4 +20,6 @@ data class TextInputField(
         hint: String = name.name,
         value: String? = null
     ) : this(name.name, label, hint, value)
+
+    val asteriskedLabel = label
 }

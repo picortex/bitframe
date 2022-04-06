@@ -3,6 +3,7 @@ package pimonitor.client.business.info
 import bitframe.client.UIScopeConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -12,6 +13,8 @@ import pimonitor.client.PiMonitorApi
 import pimonitor.client.business.BusinessDetailsIntent
 import pimonitor.client.business.info.BusinessInfoIntent.*
 import pimonitor.client.business.info.forms.BusinessInfoEditForm
+import pimonitor.core.business.info.params.BusinessInfoRawFormParams
+import pimonitor.core.business.info.params.BusinessInfoRawParams
 import pimonitor.core.business.info.params.toValidatedParams
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import presenters.cases.State
@@ -47,20 +50,24 @@ class BusinessInfoViewModel(
         }.catch {
             emit(State.Failure(it))
             delay(config.viewModel.recoveryTime)
-            emit(state)
+            emitForm(params = i.params, business = state.value)
         }.collect {
             ui.value = it
         }
     }
 
+    private suspend fun FlowCollector<State<MonitoredBusinessBasicInfo>>.emitForm(params: BusinessInfoRawFormParams?, business: MonitoredBusinessBasicInfo) {
+        val form = BusinessInfoEditForm(params, business) {
+            onCancel { post(ExitDialog) }
+            onSubmit("Save Changes") { post(SendEditForm(it)) }
+        }
+        emit(State.Content(value = business, dialog = dialog(form)))
+    }
+
     private fun CoroutineScope.showEditForm(i: ShowEditForm) = launch {
         flow {
             val content = ui.value as? State.Content ?: error("Make sure you are already viewing the info to be able to edit it")
-            val form = BusinessInfoEditForm(content.value) {
-                onCancel { post(ExitDialog) }
-                onSubmit("Save Changes") { post(SendEditForm(it)) }
-            }
-            emit(content.copy(dialog = dialog(form)))
+            emitForm(params = null, business = content.value)
         }.catch {
             emit(State.Failure(it) {
                 onGoBack { post(ExitDialog) }

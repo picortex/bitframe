@@ -113,7 +113,7 @@ abstract class SignInService(
     }
 
     fun signInWithLastSession(): Later<Session.SignedIn?> = scope.later {
-        val cred = cache.load<SignInRawParams>(CREDENTIALS_CACHE_KEY).await()
+        val cred = cache.load<SignInParams>(CREDENTIALS_CACHE_KEY).await()
         val res = signIn(cred).await()
         if (res.spaces.size != 1) {
             val session = cache.load<Session.SignedIn>(SESSION_CACHE_KEY).await()

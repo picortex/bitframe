@@ -8,14 +8,15 @@ import presenters.forms.Form
 import presenters.forms.FormActionsBuildingBlock
 import kotlin.js.JsExport
 import pimonitor.client.business.info.fields.BusinessInfoFields as Fields
-import pimonitor.core.business.info.params.BusinessInfoRawParams as Params
+import pimonitor.core.business.info.params.BusinessInfoRawFormParams as Params
 
 class BusinessInfoEditForm(
+    params: Params? = null,
     business: MonitoredBusinessBasicInfo,
     block: FormActionsBuildingBlock<Params>
 ) : Form<Fields, Params> by Form(
     heading = "Edit Business information",
     details = "Add or Updated existing information about ${business.name}",
-    fields = Fields(business),
+    fields = Fields(params, business),
     block
 )
