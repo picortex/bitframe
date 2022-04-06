@@ -11,7 +11,6 @@ class ApiConfiguratorTest {
         val obj = jso<dynamic> {
             appId = "test-id"
         }.unsafeCast<ApiConfigurator>()
-        console.log(obj)
         expect(obj.appId).toBe("test-id")
     }
 

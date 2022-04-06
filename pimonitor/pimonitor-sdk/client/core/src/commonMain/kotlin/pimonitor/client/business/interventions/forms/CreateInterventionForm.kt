@@ -11,7 +11,7 @@ class CreateInterventionForm(
     block: FormActionsBuildingBlock<Params>
 ) : Form<Fields, Params> by Form(
     heading = "Create Intervention",
-    details = "Intervene $business",
+    details = "Perform an intervention for $business",
     fields = Fields(),
     block
 )
