@@ -24,7 +24,7 @@ import pimonitor.client.search.SearchReactScope
 import pimonitor.client.signup.SignUpReactScope
 
 class PiMonitorReactAppScope(
-    override val config: BitframeAppScopeConfig<PiMonitorApi>,
+    private val config: BitframeAppScopeConfig<PiMonitorApi>,
 ) : PiMonitorAppScope(config), BitframeReactAppScope<PiMonitorApi> {
     override val signIn by lazy { SignInReactScope(config { api.signIn }) }
     override val signUp by lazy { SignUpReactScope(config()) }

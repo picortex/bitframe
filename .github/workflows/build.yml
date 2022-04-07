@@ -143,5 +143,5 @@ jobs:
       - name: Publish pimonitor api & sdk artifacts to picortex npm registry
         run: ./gradlew publishJsNpmPublicationToPiCortex
 
-      - name: Publish bitframe & pimonitor artifacts to picortex maven repository
-        run: ./gradlew publishAllPublicationsToPiCortex
+#      - name: Publish bitframe & pimonitor artifacts to picortex maven repository
+#        run: ./gradlew publishAllPublicationsToPiCortex

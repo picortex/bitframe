@@ -1,4 +1,6 @@
-# 0.10.11
+# 0.10.19
+
+- [[PM404]](https://github.com/picortex/bitframe/issues/404) Setup cases to cover all business overview approaches
 
 # 0.0.52
 

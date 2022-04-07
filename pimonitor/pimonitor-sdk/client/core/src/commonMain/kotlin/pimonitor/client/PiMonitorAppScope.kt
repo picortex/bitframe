@@ -5,18 +5,17 @@ package pimonitor.client
 
 import bitframe.client.BitframeAppScope
 import bitframe.client.BitframeAppScopeConfig
-import bitframe.client.MicroScope
 import bitframe.client.SessionAware
 import bitframe.client.panel.PanelScope
 import bitframe.client.password.ChangePasswordScope
 import bitframe.client.signin.SignInScope
 import pimonitor.client.business.BusinessDetailsScope
 import pimonitor.client.business.financials.BusinessFinancialsScope
-import pimonitor.client.business.info.BusinessInfoIntents
-import pimonitor.client.business.info.BusinessInfoViewModel
+import pimonitor.client.business.info.BusinessInfoScope
 import pimonitor.client.business.interventions.BusinessInterventionsScope
 import pimonitor.client.business.investments.BusinessInvestmentsScope
 import pimonitor.client.business.operations.BusinessOperationsScope
+import pimonitor.client.business.overview.BusinessOverviewScope
 import pimonitor.client.businesses.BusinessesScope
 import pimonitor.client.contacts.ContactsScope
 import pimonitor.client.invites.InvitesScope
@@ -26,7 +25,7 @@ import pimonitor.client.signup.SignUpScope
 import kotlin.js.JsExport
 
 open class PiMonitorAppScope(
-    override val config: BitframeAppScopeConfig<PiMonitorApi>,
+    private val config: BitframeAppScopeConfig<PiMonitorApi>,
 ) : BitframeAppScope<PiMonitorApi> {
 
     open val api get() = config.api
@@ -43,13 +42,10 @@ open class PiMonitorAppScope(
     open val search by lazy { SearchScope(config { api.search }) }
     open val integrations by lazy { InvitesScope(config()) }
     open val businessDetails by lazy { BusinessDetailsScope(config { api.businesses }) }
+    val businessOverview by BusinessOverviewScope(config())
     open val businessFinancials by lazy { BusinessFinancialsScope(config { api.businessFinancials }) }
     open val businessOperations by lazy { BusinessOperationsScope(config { api.businessOperations }) }
     open val businessInvestments by lazy { BusinessInvestmentsScope(config()) }
     open val businessInterventions by lazy { BusinessInterventionsScope(config()) }
-
-    val businessInfo by MicroScope {
-        viewModel(BusinessInfoViewModel(config()))
-        intents(BusinessInfoIntents(viewModel))
-    }
+    val businessInfo by BusinessInfoScope(config())
 }
