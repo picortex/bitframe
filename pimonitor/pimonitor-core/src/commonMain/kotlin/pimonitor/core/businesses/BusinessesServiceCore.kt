@@ -5,6 +5,8 @@ package pimonitor.core.businesses
 import bitframe.core.RequestBody
 import kotlinx.collections.interoperable.List
 import later.Later
+import pimonitor.core.business.info.params.BusinessInfoParams
+import pimonitor.core.business.info.params.BusinessInfoRawParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.*
 import kotlin.js.JsExport
@@ -31,4 +33,8 @@ interface BusinessesServiceCore {
     @JvmSynthetic
     @JsName("_ignore_load")
     fun load(rb: RequestBody.Authorized<String>): Later<MonitoredBusinessBasicInfo>
+
+    @JvmSynthetic
+    @JsName("_ignore_updatedMonitored")
+    fun update(rb: RequestBody.Authorized<BusinessInfoParams>): Later<MonitoredBusinessBasicInfo>
 }

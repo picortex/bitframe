@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import live.WatchMode.Companion.CASUALLY
 import live.WatchMode.Companion.EAGERLY
 import live.watch
 import viewmodel.ViewModel
@@ -23,7 +24,7 @@ class PanelViewModel(
         Intent.InitPanel -> initialize()
     }
 
-    private fun watchSessionAndUpdateUI() = coroutineScope.watch(service.session, EAGERLY) {
+    private fun watchSessionAndUpdateUI() = coroutineScope.watch(service.session, CASUALLY) {
         when (it) {
             is Session.SignedOut -> ui.value = State.Login
             is Session.SignedIn -> ui.value = State.Panel(it)

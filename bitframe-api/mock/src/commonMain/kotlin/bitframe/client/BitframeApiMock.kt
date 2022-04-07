@@ -18,6 +18,7 @@ interface BitframeApiMock : BitframeApi {
             override val config: BitframeApiConfig by lazy { config }
             override val spaces: SpacesService by lazy { SpacesServiceMock(config) }
             override val session: SessionAware get() = SessionAwareImpl(this)
+            override val events: BitframeEvents by lazy { BitframeEvents(config.bus) }
             override val users: UsersService by lazy { UsersServiceMock(config) }
             override val signIn: SignInService by lazy { SignInServiceMock(config) }
             override val profile: ProfileService by lazy { ProfileServiceMock(config) }

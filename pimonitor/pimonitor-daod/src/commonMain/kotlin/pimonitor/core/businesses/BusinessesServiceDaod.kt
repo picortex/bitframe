@@ -11,6 +11,8 @@ import kotlinx.datetime.*
 import later.Later
 import later.await
 import later.later
+import pimonitor.core.business.info.params.BusinessInfoParams
+import pimonitor.core.business.info.params.toValidatedParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
@@ -73,6 +75,22 @@ open class BusinessesServiceDaod(
 
     override fun load(rb: RequestBody.Authorized<String>): Later<MonitoredBusinessBasicInfo> = config.scope.later {
         monitoredBusinessesDao.load(uid = rb.data).await()
+    }
+
+    fun MonitoredBusinessBasicInfo.updated(params: BusinessInfoParams) = copy(
+        name = params.name,
+        industry = params.industry,
+        address = params.address,
+        phone = params.phone,
+        email = params.email,
+        website = params.website,
+        about = params.about,
+    )
+
+    override fun update(rb: RequestBody.Authorized<BusinessInfoParams>): Later<MonitoredBusinessBasicInfo> = config.scope.later {
+        val params = rb.data.toValidatedParams()
+        val business = monitoredBusinessesDao.load(params.businessId).await()
+        monitoredBusinessesDao.update(business.updated(params)).await()
     }
 
     override fun all(rb: RequestBody.Authorized<BusinessFilter>) = config.scope.later {

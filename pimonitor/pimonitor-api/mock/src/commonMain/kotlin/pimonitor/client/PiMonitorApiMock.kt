@@ -9,6 +9,7 @@ import pimonitor.client.business.investments.BusinessInvestmentsServiceMock
 import pimonitor.client.business.operations.BusinessOperationsServiceMock
 import pimonitor.client.businesses.BusinessesServiceMock
 import pimonitor.client.contacts.ContactsServiceMock
+import pimonitor.client.events.PiMonitorEvents
 import pimonitor.client.invites.InvitesServiceMock
 import pimonitor.client.portfolio.PortfolioServiceMock
 import pimonitor.client.search.SearchServiceMock
@@ -18,6 +19,7 @@ import kotlin.jvm.JvmOverloads
 class PiMonitorApiMock @JvmOverloads constructor(
     override val config: BitframeApiMockConfig = BitframeApiMockConfig()
 ) : PiMonitorApi, BitframeApiMock by BitframeApiMock(config) {
+    override val events by lazy { PiMonitorEvents(config.bus) }
     override val signUp by lazy { SignUpServiceMock(config) }
     override val businesses by lazy { BusinessesServiceMock(config) }
     override val businessOperations by lazy { BusinessOperationsServiceMock(config) }

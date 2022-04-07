@@ -118,7 +118,7 @@ class SageFinancialDashboardUserJourneyTest {
         }
 
         step("View Balance Sheet of the business under test") {
-            val businessId = invite!!.invitedBusinessId
+            val businessId = invite.invitedBusinessId
             vm.expect(BusinessFinancialIntent.LoadBalanceSheet(businessId))
             expect(vm.ui.value.report).toBe<BalanceSheet>()
         }

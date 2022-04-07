@@ -8,6 +8,7 @@ import bitframe.client.logger
 import bitframe.core.RequestBody
 import later.await
 import later.later
+import pimonitor.client.events.SignedUpEvent
 import pimonitor.core.signup.*
 import pimonitor.core.signup.params.SignUpBusinessRawParams
 import pimonitor.core.signup.params.SignUpIndividualRawParams
@@ -44,7 +45,7 @@ abstract class SignUpService(
     }
 
     private fun SignUpResult.finalize(): SignUpResult {
-        config.bus.dispatch(SignUpEvent(this))
+        config.bus.dispatch(SignedUpEvent(this))
         logger.info("Registration completed successfully")
         return this
     }

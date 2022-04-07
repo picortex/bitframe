@@ -16,7 +16,7 @@ class SignInServiceDaod(val config: ServiceConfigDaod) : SignInServiceCore {
     private val credentialsDao by lazy { factory.get<UserCredentials>() }
     private val contactsDao by lazy { CompoundDao(factory.get<UserEmail>(), factory.get<UserPhone>()) }
 
-    override fun signIn(rb: RequestBody.UnAuthorized<SignInRawParams>) = scope.later {
+    override fun signIn(rb: RequestBody.UnAuthorized<SignInParams>) = scope.later {
         val params = rb.data.toSignInParams()
         val contact = contactsDao.all(UserContact::value isEqualTo params.identifier).await().firstOrNull() ?: throw EntityNotFoundException("identifier", params.identifier)
         val user = usersDao.load(contact.userId).await()

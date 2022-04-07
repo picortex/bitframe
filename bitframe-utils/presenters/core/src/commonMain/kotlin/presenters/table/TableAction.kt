@@ -7,7 +7,7 @@ import kotlin.js.JsExport
 
 sealed class TableAction<out D> {
     abstract val name: String
-    abstract val handler: Function<Unit>
+    abstract val handler: Any
 
     data class Primary(
         override val name: String,

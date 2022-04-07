@@ -6,6 +6,8 @@ package bitframe.client.signin
 import bitframe.client.ReactUIScope
 import bitframe.client.UIScopeConfig
 import bitframe.core.Session
+import bitframe.core.events.AuthEventTopics
+import events.EventCallback
 import useEventHandler
 import useViewModelState
 import viewmodel.asState
@@ -17,7 +19,7 @@ class SignInReactScope(
 ) : SignInScope(config), ReactUIScope<State> {
     override val useScopeState = { viewModel.asState() }
 
-    val useSignInEvent: (callback: (Session.SignedIn) -> Unit) -> Unit = {
-        useEventHandler(config.service.config.bus, SignInService.SIGN_IN_EVENT_TOPIC, it)
+    val useSignedInEvent = { callback: EventCallback<Session.SignedIn> ->
+        useEventHandler(config.service.bus, AuthEventTopics.SIGNED_IN, callback)
     }
 }

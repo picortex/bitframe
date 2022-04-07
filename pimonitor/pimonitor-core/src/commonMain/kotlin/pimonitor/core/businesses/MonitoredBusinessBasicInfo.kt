@@ -13,8 +13,11 @@ data class MonitoredBusinessBasicInfo(
     val operationalBoard: DashboardOperational = DASHBOARD_OPERATIONAL.NONE,
     val financialBoard: DashboardFinancial = DASHBOARD_FINANCIAL.NONE,
     override val email: String = "",
+    val phone: String = "",
     override val address: String = "",
     val industry: String = "",
+    val website: String = "",
+    val about: String = "",
     override val logoUrl: String? = null,
     override val uid: String = UNSET,
     override val deleted: Boolean = false

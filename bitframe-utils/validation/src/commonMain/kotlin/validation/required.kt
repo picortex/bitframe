@@ -14,6 +14,16 @@ inline fun requiredNotBlank(
     return nonNullValue
 }
 
+inline fun requiredPositiveDouble(
+    property: KProperty0<Any?>
+): Double {
+    val nonNullValue = property.get() ?: throw MissingFieldException(property.name)
+    if (nonNullValue.toString().isBlank()) throw BlankFieldException(property.name)
+    return nonNullValue.toString().toDouble()
+}
+
+inline fun String.requiredNotBlank(fieldName: String) = takeIf { it.isNotBlank() } ?: throw BlankFieldException(fieldName)
+
 inline fun <T : Number?> requiredPositive(
     property: KProperty0<T>
 ): T {

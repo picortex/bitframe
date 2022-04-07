@@ -10,6 +10,7 @@ import pimonitor.client.business.investments.BusinessInvestmentsServiceKtor
 import pimonitor.client.business.operations.BusinessOperationsServiceKtor
 import pimonitor.client.businesses.BusinessesServiceKtor
 import pimonitor.client.contacts.ContactsServiceKtor
+import pimonitor.client.events.PiMonitorEvents
 import pimonitor.client.invites.InvitesServiceKtor
 import pimonitor.client.portfolio.PortfolioServiceKtor
 import pimonitor.client.search.SearchServiceKtor
@@ -18,6 +19,7 @@ import pimonitor.client.signup.SignUpServiceKtor
 class PiMonitorApiKtor(
     override val config: BitframeApiKtorConfig,
 ) : PiMonitorApi, BitframeApi by BitframeApiKtor(config) {
+    override val events by lazy { PiMonitorEvents(config.bus) }
     override val signUp by lazy { SignUpServiceKtor(config) }
     override val businesses by lazy { BusinessesServiceKtor(config) }
     override val businessOperations by lazy { BusinessOperationsServiceKtor(config) }

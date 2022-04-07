@@ -18,6 +18,7 @@ interface BitframeApiKtor : BitframeApi {
             override val config: BitframeApiConfig by lazy { config }
             override val spaces: SpacesService by lazy { SpacesServiceKtor(config) }
             override val session: SessionAware get() = SessionAwareImpl(this)
+            override val events: BitframeEvents by lazy { BitframeEvents(config.bus) }
             override val users: UsersService by lazy { UsersServiceKtor(config) }
             override val signIn: SignInService by lazy { SignInServiceKtor(config) }
             override val profile: ProfileService by lazy { ProfileServiceKtor(config) }

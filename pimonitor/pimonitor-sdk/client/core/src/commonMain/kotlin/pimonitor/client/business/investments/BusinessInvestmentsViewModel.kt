@@ -14,6 +14,7 @@ import pimonitor.client.business.investments.BusinessInvestmentsIntent.*
 import pimonitor.client.business.investments.dialogs.CaptureInvestmentDialog
 import pimonitor.client.business.investments.dialogs.CreateDisbursementDialog
 import pimonitor.client.business.investments.params.toCreateInvestmentDisbursementParams
+import pimonitor.client.business.investments.params.toValidatedParams
 import pimonitor.core.business.investments.Investment
 import pimonitor.core.business.investments.params.toValidatedCreateInvestmentsParams
 import presenters.cases.CrowdState
@@ -67,7 +68,7 @@ class BusinessInvestmentsViewModel(
         val state = ui.value
         flow {
             emit(state.copy(status = Feedback.Loading("Submitting your form, please wait . . ."), dialog = null))
-            val params = i.params.toValidatedCreateInvestmentsParams(businessId)
+            val params = i.params.toValidatedParams(businessId)
             api.businessInvestments.capture(params).await()
             emit(state.copy(status = Feedback.Success("Investment captured successfully. Loading investments, please wait . . ."), dialog = null))
             val table = investmentsTable(api.businessInvestments.all(params.businessId).await())
