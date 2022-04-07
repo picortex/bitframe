@@ -24,7 +24,7 @@ class BusinessesModule(
         Action("load business", mapOf(), HttpRoute(HttpMethod.Post, path.businessesLoad) {
             controller.load(it)
         }),
-        Action("update business info", mapOf(), HttpRoute(HttpMethod.Post, path.businessesLoad) {
+        Action("update business info", mapOf(), HttpRoute(HttpMethod.Post, path.businessesUpdate) {
             controller.updated(it)
         }),
     )
