@@ -6,8 +6,7 @@ import bitframe.core.get
 import bitframe.core.isEqualTo
 import later.await
 import later.later
-import pimonitor.core.business.utils.info.LoadInfoParams
-import pimonitor.core.business.utils.info.toParsedParams
+import pimonitor.core.business.utils.info.LoadInfoParsedParams
 import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.dashboards.OperationalDifferenceBoard
@@ -29,9 +28,9 @@ open class BusinessOperationsServiceDaod(
         PiCortexDashboardProvider(cfg)
     }
 
-    override fun dashboard(rb: RequestBody.Authorized<LoadInfoParams>) = config.scope.later {
+    override fun dashboard(rb: RequestBody.Authorized<LoadInfoParsedParams>) = config.scope.later {
         val business = monitoredBusinessesDao.load(rb.data.businessId).await()
-        val params = rb.data.toParsedParams()
+        val params = rb.data
         when (business.operationalBoard) {
             DASHBOARD_OPERATIONAL.NONE -> {
                 InfoResults.NotShared("${business.name} has not shared their reports with any dashboard") as InfoResults<OperationalDifferenceBoard>

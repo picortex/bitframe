@@ -25,14 +25,15 @@ interface LoadInfoRawParams {
 fun LoadInfoRawParams.toValidatedParams() = LoadInfoParams(
     businessId = requiredNotBlank(::businessId),
     start = start,
-    end = end
+    end = end,
+    timeZone = timeZone?.toTimeZone()?.id ?: TimeZone.UTC.id
 )
 
 fun LoadInfoRawParams.toParsedParams(): LoadInfoParsedParams {
-    val timezone = timeZone?.toTimeZone() ?: TimeZone.UTC
-    val bId = requiredNotBlank(::businessId)
-    val st = start
-    val en = end
+    val validated = toValidatedParams()
+    val bId = validated.businessId
+    val st = validated.start
+    val en = validated.end
     val (startDate, endDate) = when {
         st != null && en != null -> {
             st.toDate() to en.toDate()
@@ -48,7 +49,7 @@ fun LoadInfoRawParams.toParsedParams(): LoadInfoParsedParams {
             s to e
         }
         else -> { // st == null && en == null ->
-            val e = Date.today(timezone)
+            val e = Date.today(TimeZone.of(validated.timeZone))
             val s = e - DatePeriod(days = 30)
             s to e
         }

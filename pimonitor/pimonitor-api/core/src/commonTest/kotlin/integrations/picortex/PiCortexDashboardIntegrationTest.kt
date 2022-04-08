@@ -3,7 +3,9 @@
 package integrations.picortex
 
 import bitframe.core.signin.SignInParams
+import datetime.Date
 import expect.expect
+import kotlinx.datetime.DatePeriod
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
@@ -77,13 +79,9 @@ class PiCortexDashboardIntegrationTest {
             val business = api.businesses.all().await().first()
             expect(business.operationalBoard).toBe(DASHBOARD_OPERATIONAL.PICORTEX)
 
-            val end = time
-            val start = time - 30.days
-            val params = LoadInfoParams(
-                businessId = business.uid,
-                start = start.toEpochMilliseconds().toDouble(),
-                end = end.toEpochMilliseconds().toDouble()
-            )
+            val end = Date.today()
+            val start = end - DatePeriod(days = 30)
+            val params = LoadInfoParams(business.uid, start, end)
             val board = api.businessOperations.dashboard(params).await() as InfoResults.Shared
             expect(board.data).toBeNonNull()
         }
