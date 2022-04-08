@@ -1,5 +1,7 @@
+import datetime.Date
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
+import kotlinx.datetime.DatePeriod
 import later.await
 import pimonitor.core.picortex.PiCortexApiCredentials
 import pimonitor.core.picortex.PiCortexDashboardProvider
@@ -37,17 +39,19 @@ class PiCortexDashboardTest {
     @Test
     fun should_load_picortex_dashboard() = runTest {
         val now = Clock.System.now()
-        val oneLastMonth = now.last(days = 30)
-        val twoLastMonths = oneLastMonth.last(days = 30)
+        val today = Date.today()
+        val period = DatePeriod(days = 30)
+        val oneLastMonth = today - period
+        val twoLastMonths = oneLastMonth - period
         val dashboard1 = provider.technicalDashboardOf(
             credentials,
-            start = oneLastMonth.toEpochMilliseconds().toDouble(),
-            end = now.toEpochMilliseconds().toInt().toDouble()
+            start = oneLastMonth,
+            end = today
         )
         val dashboard2 = provider.technicalDashboardOf(
             credentials,
-            start = twoLastMonths.toEpochMilliseconds().toDouble(),
-            end = oneLastMonth.toEpochMilliseconds().toDouble()
+            start = twoLastMonths,
+            end = oneLastMonth
         )
 
         val board1 = dashboard1.await()
@@ -59,13 +63,13 @@ class PiCortexDashboardTest {
 
     @Test
     fun should_load_picortex_difference_dashboard() = runTest {
-        val now = Clock.System.now()
-        val oneLastMonth = now.last(days = 30)
+        val today = Date.today()
+        val oneLastMonth = today - DatePeriod(days = 30)
         val dashboard = provider.technicalDifferenceDashboardOf(
             credentials,
-            start = oneLastMonth.toEpochMilliseconds().toDouble(),
-            end = now.toEpochMilliseconds().toDouble()
+            start = oneLastMonth,
+            end = today
         )
-        val board = dashboard.await()
+        dashboard.await()
     }
 }

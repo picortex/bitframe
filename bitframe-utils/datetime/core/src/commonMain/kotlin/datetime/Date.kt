@@ -31,6 +31,9 @@ interface Date : Comparable<Date> {
     @JsName("minusPeriod")
     operator fun minus(period: DatePeriod): Date
 
+    @JsName("plusPeriod")
+    operator fun plus(period: DatePeriod): Date
+
     @JsName("minusDate")
     operator fun minus(other: Date): DatePeriod
 

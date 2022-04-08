@@ -3,9 +3,9 @@ package pimonitor.core.business.utils.info
 import datetime.Date
 import datetime.toDate
 import datetime.toTimeZone
+import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.TimeZone
 import validation.requiredNotBlank
-import validation.requiredPositive
 import kotlin.js.JsExport
 
 @JsExport
@@ -25,18 +25,34 @@ interface LoadInfoRawParams {
 fun LoadInfoRawParams.toValidatedParams() = LoadInfoParams(
     businessId = requiredNotBlank(::businessId),
     start = start,
-    end = end,
-    timeZone = TimeZone.currentSystemDefault().id
+    end = end
 )
 
-fun LoadInfoRawParams.toPureParams(): LoadInfoPureParams {
+fun LoadInfoRawParams.toParsedParams(): LoadInfoParsedParams {
     val timezone = timeZone?.toTimeZone() ?: TimeZone.UTC
-    val s = start?.toDate() ?: Date.today(timezone)
-    val e = end?.toDate() ?: Date.today(timezone)
-    if (e <= s) throw IllegalArgumentException("The start date ($s) must come before the end date $e")
-    return LoadInfoPureParams(
-        businessId = requiredNotBlank(::businessId),
-        start = s,
-        end = e
-    )
+    val bId = requiredNotBlank(::businessId)
+    val st = start
+    val en = end
+    val (startDate, endDate) = when {
+        st != null && en != null -> {
+            st.toDate() to en.toDate()
+        }
+        st != null && en == null -> {
+            val s = st.toDate()
+            val e = s + DatePeriod(days = 30)
+            s to e
+        }
+        st == null && en != null -> {
+            val e = en.toDate()
+            val s = e - DatePeriod(days = 30)
+            s to e
+        }
+        else -> { // st == null && en == null ->
+            val e = Date.today(timezone)
+            val s = e - DatePeriod(days = 30)
+            s to e
+        }
+    }
+    if (endDate <= startDate) throw IllegalArgumentException("The start date ($startDate) must come before the end date $endDate")
+    return LoadInfoParsedParams(bId, startDate, endDate)
 }

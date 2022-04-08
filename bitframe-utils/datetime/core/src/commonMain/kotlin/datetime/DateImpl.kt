@@ -28,6 +28,8 @@ internal class DateImpl internal constructor(private val value: LocalDate) : Dat
 
     override fun format(pattern: String): String = DateFormatter(pattern).format(this)
 
+    override fun plus(period: DatePeriod): Date = DateImpl(value.plus(period))
+
     override fun minus(period: DatePeriod): Date = DateImpl(value.minus(period))
 
     override fun minus(other: Date): DatePeriod = value.minus(other.toLocalDate())
