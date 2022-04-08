@@ -8,6 +8,8 @@ import pimonitor.client.business.interventions.BusinessInterventionService
 import pimonitor.client.business.interventions.BusinessInterventionsServiceKtor
 import pimonitor.client.business.investments.BusinessInvestmentsServiceKtor
 import pimonitor.client.business.operations.BusinessOperationsServiceKtor
+import pimonitor.client.business.overview.BusinessOverviewService
+import pimonitor.client.business.overview.BusinessOverviewServiceKtor
 import pimonitor.client.businesses.BusinessesServiceKtor
 import pimonitor.client.contacts.ContactsServiceKtor
 import pimonitor.client.events.PiMonitorEvents
@@ -22,6 +24,7 @@ class PiMonitorApiKtor(
     override val events by lazy { PiMonitorEvents(config.bus) }
     override val signUp by lazy { SignUpServiceKtor(config) }
     override val businesses by lazy { BusinessesServiceKtor(config) }
+    override val businessOverview by lazy { BusinessOverviewServiceKtor(config) }
     override val businessOperations by lazy { BusinessOperationsServiceKtor(config) }
     override val businessFinancials by lazy { BusinessFinancialsServiceKtor(config) }
     override val businessInvestments by lazy { BusinessInvestmentsServiceKtor(config) }

@@ -5,6 +5,7 @@ import akkounts.provider.Vendor
 import akkounts.reports.balancesheet.BalanceSheet
 import akkounts.reports.cashflow.CashFlow
 import akkounts.reports.incomestatement.IncomeStatement
+import akkounts.reports.utils.FinancialReportHeader
 import kotlinx.datetime.LocalDate
 import later.Later
 
@@ -12,7 +13,7 @@ interface ReportsDao {
     fun save(
         owner: Owner,
         vendor: Vendor,
-        header: BalanceSheet.Header,
+        header: FinancialReportHeader.Snapshot,
         body: BalanceSheet.Body
     ): Later<BalanceSheet>
 
@@ -25,7 +26,7 @@ interface ReportsDao {
     fun save(
         owner: Owner,
         vendor: Vendor,
-        header: IncomeStatement.Header,
+        header: FinancialReportHeader.Durational,
         body: IncomeStatement.Body
     ): Later<IncomeStatement>
 
@@ -38,7 +39,7 @@ interface ReportsDao {
     fun save(
         owner: Owner,
         vendor: Vendor,
-        header: CashFlow.Header,
+        header: FinancialReportHeader.Snapshot,
         body: CashFlow.Body
     ): Later<CashFlow>
 

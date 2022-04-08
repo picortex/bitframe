@@ -1,6 +1,16 @@
 # 0.10.19
 
+### Enhancements
+
 - [[PM404]](https://github.com/picortex/bitframe/issues/404) Setup cases to cover all business overview approaches
+
+### Bug Fixes
+
+- Dates are now not predicting the future.
+
+  Previously, viewing today's date displayed it as the date of the next date.
+
+  e.g requesting a report of 1st July 2021, you would get a report of 2nd July 2021
 
 # 0.0.52
 

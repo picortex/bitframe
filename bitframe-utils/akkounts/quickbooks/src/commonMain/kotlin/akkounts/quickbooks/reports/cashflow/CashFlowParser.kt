@@ -1,24 +1,12 @@
 package akkounts.quickbooks.reports.cashflow
 
-import akkounts.quickbooks.QuickBooksService
 import akkounts.quickbooks.reports.utils.GenericParser
-import akkounts.provider.Owner
 import akkounts.reports.cashflow.CashFlow
 import akkounts.utils.unset
-import datetime.toSimpleDateTime
 import kash.Currency
 import kash.Money
-import kotlinx.datetime.LocalDate
 
 class CashFlowParser(map: Map<String, Any?>) : GenericParser(map) {
-    fun parseHeader() = CashFlow.Header(
-        start = LocalDate.parse(header["StartPeriod"] ?: error("Couldn't get Start Period")).toSimpleDateTime(),
-        end = LocalDate.parse(header["EndPeriod"] ?: error("Couldn't get End Period")).toSimpleDateTime(),
-        currency = Currency.valueOf(header["Currency"].toString().uppercase()),
-        vendor = QuickBooksService.VENDOR,
-        owner = Owner.UNSET
-    )
-
     fun parseStartingAmount(currency: Currency): Money {
         val errorMsg = "Couldn't get cash at the beginning of the period"
         val row = getRows(map).find {
@@ -37,7 +25,7 @@ class CashFlowParser(map: Map<String, Any?>) : GenericParser(map) {
     )
 
     fun parse(): CashFlow {
-        val header = parseHeader()
+        val header = parseDurationalHeader()
         return CashFlow(unset, header, parseBody(header.currency))
     }
 }

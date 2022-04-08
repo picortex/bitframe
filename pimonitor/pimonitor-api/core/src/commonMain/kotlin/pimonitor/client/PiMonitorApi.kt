@@ -8,6 +8,7 @@ import pimonitor.client.business.investments.BusinessInvestmentsService
 import pimonitor.client.business.financials.BusinessFinancialsService
 import pimonitor.client.business.interventions.BusinessInterventionService
 import pimonitor.client.business.operations.BusinessOperationsService
+import pimonitor.client.business.overview.BusinessOverviewService
 import pimonitor.client.businesses.BusinessesService
 import pimonitor.client.contacts.ContactsService
 import pimonitor.client.events.PiMonitorEvents
@@ -22,6 +23,7 @@ interface PiMonitorApi : BitframeApi {
     override val events: PiMonitorEvents
     val signUp: SignUpService
     val businesses: BusinessesService
+    val businessOverview: BusinessOverviewService
     val businessInvestments: BusinessInvestmentsService
     val businessInterventions: BusinessInterventionService
     val businessOperations: BusinessOperationsService

@@ -1,6 +1,7 @@
 package intergration.reports.incomestatement
 
 import akkounts.quickbooks.reports.incomestatement.IncomeStatementParser
+import datetime.Date
 import datetime.toSimpleDateTime
 import expect.expect
 import kotlinx.datetime.LocalDate
@@ -14,10 +15,10 @@ class IncomeStatementParserTest {
     @Test
     fun should_parse_dates_correctly() {
         val statement = IncomeStatementParser(Mapper.decodeFromString(rawJson)).parse()
-        val from = LocalDate(2020, 7, 1)
-        val to = LocalDate(2021, 6, 8)
-        expect(statement.header.start).toBe(from.toSimpleDateTime())
-        expect(statement.header.end).toBe(to.toSimpleDateTime())
+        val from = Date(2020, 7, 1)
+        val to = Date(2021, 6, 8)
+        expect(statement.header.start).toBe(from)
+        expect(statement.header.end).toBe(to)
     }
 
     @Test

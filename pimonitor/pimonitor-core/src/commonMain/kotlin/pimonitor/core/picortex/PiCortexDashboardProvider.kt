@@ -1,5 +1,6 @@
 package pimonitor.core.picortex
 
+import datetime.Date
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -7,7 +8,7 @@ import io.ktor.http.content.*
 import kash.Currency
 import kash.Money
 import kotlinx.collections.interoperable.toInteroperableList
-import kotlinx.datetime.Instant
+import kotlinx.datetime.DatePeriod
 import kotlinx.serialization.mapper.Mapper
 import later.await
 import later.later
@@ -20,8 +21,6 @@ import presenters.changes.numberChangeBoxOf
 import presenters.date.DateFormatter
 import kotlin.js.JsName
 import kotlin.jvm.JvmName
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.ExperimentalTime
 
 class PiCortexDashboardProvider(
@@ -90,24 +89,23 @@ class PiCortexDashboardProvider(
     fun technicalDifferenceDashboardOf(
         credentials: PiCortexApiCredentials,
         /** start time in milli seconds */
-        start: Double,
+        start: Date,
         /** end time in milli seconds*/
-        end: Double
+        end: Date
     ) = scope.later {
-        val point1 = Instant.fromEpochMilliseconds(end.toLong())
-        val point2 = Instant.fromEpochMilliseconds(start.toLong())
-        val difference: Duration = (end - start).milliseconds
-        val point3 = point2 - difference
+
+        val period: DatePeriod = end - start
+        val initial = start - period
         val dashboard1 = technicalDashboardOf(
             credentials,
-            start = point3.toEpochMilliseconds().toDouble(),
-            end = point2.toEpochMilliseconds().toDouble()
+            start = initial,
+            end = start
         )
 
         val dashboard2 = technicalDashboardOf(
             credentials,
-            start = point2.toEpochMilliseconds().toDouble(),
-            end = point1.toEpochMilliseconds().toDouble()
+            start = start,
+            end = end
         )
 
         val board1 = dashboard1.await()
@@ -118,16 +116,16 @@ class PiCortexDashboardProvider(
     fun technicalDashboardOf(
         credentials: PiCortexApiCredentials,
         /** start time in milli seconds */
-        start: Double,
+        start: Date,
         /** end time in milli seconds*/
-        end: Double
+        end: Date
     ) = scope.later {
         val formatter = DateFormatter("{DD}/{MM}/{YYYY}")
         val params = mapOf(
             "secret" to credentials.secret,
             "userType" to "DataConsoleUser",
-            "dateFrom" to formatter.format(millis = start),
-            "dateTo" to formatter.format(millis = end)
+            "dateFrom" to formatter.format(start),
+            "dateTo" to formatter.format(end)
         )
         val url = "https://${credentials.subdomain}.$domain/api/reporting"
         val res = client.post(url) {

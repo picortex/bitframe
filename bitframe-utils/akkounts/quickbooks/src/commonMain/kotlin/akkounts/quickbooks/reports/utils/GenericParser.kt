@@ -1,7 +1,11 @@
 package akkounts.quickbooks.reports.utils
 
+import akkounts.provider.Owner
+import akkounts.quickbooks.QuickBooksService
 import akkounts.reports.utils.CategoryEntry
+import akkounts.reports.utils.FinancialReportHeader
 import akkounts.reports.utils.StatementEntryItem
+import datetime.Date
 import kash.Currency
 import kotlinx.collections.interoperable.toInteroperableList
 
@@ -56,4 +60,12 @@ open class GenericParser(protected val map: Map<String, Any?>) {
         }.toInteroperableList()
         return CategoryEntry(name, currency, entries)
     }
+
+    fun parseDurationalHeader() = FinancialReportHeader.Durational(
+        start = Date.parse(header["StartPeriod"] ?: error("Couldn't get Start Period")),
+        end = Date.parse(header["EndPeriod"] ?: error("Couldn't get End Period")),
+        currency = Currency.valueOf(header["Currency"].toString().uppercase()),
+        vendor = QuickBooksService.VENDOR,
+        owner = Owner.UNSET
+    )
 }

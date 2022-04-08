@@ -5,7 +5,6 @@ package datetime
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -22,7 +21,8 @@ data class SimpleDateTime(
     }
 
     override fun compareTo(other: SimpleDateTime) = timeStampInMillis.compareTo(other.timeStampInMillis)
-    fun format(template: String) = DateFormatter(template).format(timeStampInMillis)
+
+    fun format(pattern: String) = DateFormatter(pattern).format(timeStampInMillis)
 
     @JsName("formatWithTimeZone")
     fun format(template: String, timeZone: TimeZone) = DateFormatter(template).format(timeStampInMillis, timeZone)

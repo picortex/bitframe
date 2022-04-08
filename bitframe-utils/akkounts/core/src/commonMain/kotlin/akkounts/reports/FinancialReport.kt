@@ -3,6 +3,7 @@ package akkounts.reports
 import akkounts.reports.balancesheet.BalanceSheet
 import akkounts.reports.cashflow.CashFlow
 import akkounts.reports.incomestatement.IncomeStatement
+import akkounts.reports.utils.FinancialReportHeader
 import kotlin.js.JsExport
 
 @JsExport

@@ -7,6 +7,8 @@ import pimonitor.client.business.interventions.BusinessInterventionService
 import pimonitor.client.business.interventions.BusinessInterventionsServiceMock
 import pimonitor.client.business.investments.BusinessInvestmentsServiceMock
 import pimonitor.client.business.operations.BusinessOperationsServiceMock
+import pimonitor.client.business.overview.BusinessOverviewService
+import pimonitor.client.business.overview.BusinessOverviewServiceMock
 import pimonitor.client.businesses.BusinessesServiceMock
 import pimonitor.client.contacts.ContactsServiceMock
 import pimonitor.client.events.PiMonitorEvents
@@ -22,6 +24,7 @@ class PiMonitorApiMock @JvmOverloads constructor(
     override val events by lazy { PiMonitorEvents(config.bus) }
     override val signUp by lazy { SignUpServiceMock(config) }
     override val businesses by lazy { BusinessesServiceMock(config) }
+    override val businessOverview by lazy { BusinessOverviewServiceMock(config) }
     override val businessOperations by lazy { BusinessOperationsServiceMock(config) }
     override val businessFinancials by lazy { BusinessFinancialsServiceMock(config) }
     override val businessInvestments by lazy { BusinessInvestmentsServiceMock(config) }

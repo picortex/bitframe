@@ -8,6 +8,7 @@ import pimonitor.core.business.investments.InvestmentType
 import presenters.fields.DateInputField
 import presenters.fields.DropDownInputField
 import presenters.fields.DropDownInputField.Option
+import presenters.fields.MoneyInputField
 import presenters.fields.TextInputField
 import kotlin.js.JsExport
 import pimonitor.core.business.investments.params.CreateInvestmentsRawParams as Params
@@ -28,7 +29,7 @@ data class CaptureInvestmentFields(
         label = "Investment Source",
         hint = "John Doe"
     ),
-    val amount: TextInputField = TextInputField(
+    val amount: MoneyInputField = MoneyInputField(
         name = Params::amount,
         label = "Investment Amount",
         hint = "8,000"
