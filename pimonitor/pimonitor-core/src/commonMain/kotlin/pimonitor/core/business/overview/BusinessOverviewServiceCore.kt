@@ -11,5 +11,5 @@ import kotlin.js.JsName
 @JsExport
 interface BusinessOverviewServiceCore {
     @JsName("_ignore_load")
-    fun load(params: RequestBody.Authorized<LoadInfoParsedParams>): Later<MonitoredBusinessOverview>
+    fun load(rb: RequestBody.Authorized<LoadInfoParsedParams>): Later<MonitoredBusinessOverview>
 }

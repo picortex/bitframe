@@ -1,6 +1,5 @@
 package pimonitor.core.businesses
 
-import akkounts.sage.SageOneZAService
 import akkounts.sage.SageOneZAUserCompany
 import bitframe.core.*
 import bitframe.core.users.RegisterUserUseCase
@@ -18,6 +17,7 @@ import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
 import pimonitor.core.businesses.params.toRegisterUserParams
 import pimonitor.core.businesses.params.toValidatedCreateBusinessParams
+import pimonitor.core.configs.sageService
 import pimonitor.core.contacts.ContactPersonBusinessInfo
 import pimonitor.core.invites.Invite
 import pimonitor.core.sage.SageApiCredentials
@@ -38,7 +38,7 @@ open class BusinessesServiceDaod(
     private val userContactsDao by lazy { CompoundDao(factory.get<UserEmail>(), factory.get<UserPhone>()) }
     private val contactPersonBusinessInfoDao by lazy { factory.get<ContactPersonBusinessInfo>() }
     private val sageCredentialsDao by lazy { factory.get<SageApiCredentials>() }
-    private val sage by lazy { SageOneZAService("{C7542EBF-4657-484C-B79E-E3D90DB0F0D1}") }
+    private val sage by lazy { config.sageService }
 
     override fun create(rb: RequestBody.Authorized<CreateMonitoredBusinessParams>) = config.scope.later {
         val params = rb.data.toValidatedCreateBusinessParams()

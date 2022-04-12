@@ -68,7 +68,10 @@ open class InvitesServiceDaod(
                 name = senderSpace.name,
                 email = "support@picortex.com"
             ),
-            to = AddressInfo(rb.data.to)
+            to = listOf(
+                AddressInfo(rb.data.to),
+                AddressInfo(email = "support@picortex.com")
+            )
         ).await()
         invite
     }

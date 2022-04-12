@@ -15,8 +15,10 @@ import pimonitor.core.accounting.FINANCIAL_REPORTS
 import pimonitor.core.businesses.DASHBOARD_FINANCIAL
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.results.AvailableReportsResults
+import pimonitor.core.configs.sageService
 import pimonitor.core.invites.InfoResults
 import pimonitor.core.sage.SageApiCredentials
+import pimonitor.core.sage.toCompany
 
 class BusinessFinancialsServiceDaod(
     val config: ServiceConfigDaod
@@ -25,7 +27,7 @@ class BusinessFinancialsServiceDaod(
     private val factory get() = config.daoFactory
     private val monitoredBusinessesDao by lazy { factory.get<MonitoredBusinessBasicInfo>() }
     private val sageCredentialsDao by lazy { factory.get<SageApiCredentials>() }
-    private val sage by lazy { SageOneZAService("{C7542EBF-4657-484C-B79E-E3D90DB0F0D1}") }
+    private val sage by lazy { config.sageService }
 
     private suspend fun load(rb: RequestBody.Authorized<String>) = monitoredBusinessesDao.load(uid = rb.data).await()
 
@@ -77,12 +79,4 @@ class BusinessFinancialsServiceDaod(
             else -> error("Business is connected to an unknown accounting provider")
         }
     }
-
-    private fun SageApiCredentials.toCompany(business: MonitoredBusinessBasicInfo) = SageOneZAUserCompany(
-        uid = business.uid,
-        name = business.name,
-        username = username,
-        password = password,
-        companyId = companyId
-    )
 }

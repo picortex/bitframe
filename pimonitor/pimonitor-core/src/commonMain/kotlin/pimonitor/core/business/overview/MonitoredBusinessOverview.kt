@@ -3,6 +3,7 @@
 
 package pimonitor.core.business.overview
 
+import kash.Money
 import kotlinx.collections.interoperable.List
 import kotlinx.serialization.Serializable
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
@@ -13,37 +14,44 @@ import kotlin.js.JsExport
 @Serializable
 sealed class MonitoredBusinessOverview {
     abstract val business: MonitoredBusinessBasicInfo
+    abstract val isInvited: Boolean
 
     @Serializable
     data class FinancialAndOperational(
         override val business: MonitoredBusinessBasicInfo,
         val cards: List<MoneyChangeBox>,
-        val revenueVsExpenses: Chart<Double>,
-        val otherChart: Chart<Double>,
-        val assets: Chart<Double>,
+        val revenueVsExpenses: Chart<Money>,
+        val otherChart: Chart<Money>,
+        val assets: Chart<Money>,
         val balanceSheetChart: BalanceSheetChart
-    ) : MonitoredBusinessOverview()
+    ) : MonitoredBusinessOverview() {
+        override val isInvited: Boolean = true
+    }
 
     @Serializable
     data class OperationalOnly(
         override val business: MonitoredBusinessBasicInfo,
         val cards: List<MoneyChangeBox>,
-        val revenueVsExpenses: Chart<Double>,
-        val otherChart: Chart<Double>
-    ) : MonitoredBusinessOverview()
+        val revenueVsExpenses: Chart<Money>,
+        val otherChart: Chart<Money>
+    ) : MonitoredBusinessOverview() {
+        override val isInvited: Boolean = true
+    }
 
     @Serializable
     data class FinancialOnly(
         override val business: MonitoredBusinessBasicInfo,
         val cards: List<MoneyChangeBox>,
-        val assets: Chart<Double>,
+        val assets: Chart<Money>,
         val balanceSheetChart: BalanceSheetChart
-    ) : MonitoredBusinessOverview()
+    ) : MonitoredBusinessOverview() {
+        override val isInvited: Boolean = true
+    }
 
     @Serializable
     data class NotIntegrated(
         override val business: MonitoredBusinessBasicInfo,
-        val isInvited: Boolean
+        override val isInvited: Boolean = false
     ) : MonitoredBusinessOverview()
 
     val isFinancialAndOperational get() = this is FinancialAndOperational

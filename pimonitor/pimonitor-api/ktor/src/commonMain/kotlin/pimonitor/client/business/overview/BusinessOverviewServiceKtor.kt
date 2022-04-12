@@ -10,7 +10,7 @@ import pimonitor.core.business.utils.info.LoadInfoParsedParams
 class BusinessOverviewServiceKtor(
     private val config: ServiceConfigKtor
 ) : BusinessOverviewService(config) {
-    override fun load(params: RequestBody.Authorized<LoadInfoParsedParams>): Later<MonitoredBusinessOverview> = config.scope.later {
+    override fun load(rb: RequestBody.Authorized<LoadInfoParsedParams>): Later<MonitoredBusinessOverview> = config.scope.later {
         TODO("Not yet implemented")
     }
 }

@@ -8,4 +8,9 @@ class LoadInfoParsedParams(
     val businessId: String,
     val start: Date,
     val end: Date
-)
+) {
+    val prequel by lazy {
+        val duration = end - start
+        start - duration
+    }
+}
