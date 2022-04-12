@@ -14,13 +14,13 @@ class DisbursementFields(disbursement: Disbursement? = null) {
     val amount = NumberInputField(
         name = Params::amount,
         label = "Amount",
-        value = disbursement?.amount
+        value = disbursement?.amount?.let { it.amount.toDouble() / it.currency.lowestDenomination }
     )
     val date = DateInputField(
         name = Params::date,
         label = "Disbursement Date",
         value = disbursement?.date?.let {
-            DateFormatter("{YYYY}-{MM}-{DD}").format(it.timeStampInMillis)
+            DateFormatter("{YYYY}-{MM}-{DD}").format(it)
         }
     )
 }

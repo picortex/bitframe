@@ -10,15 +10,11 @@ import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.collections.interoperable.toInteroperableList
 import later.Later
 import later.later
-import pimonitor.client.business.investments.BusinessInvestmentsService
 import pimonitor.client.utils.pathV1
 import pimonitor.core.business.interventions.Intervention
 import pimonitor.core.business.interventions.params.CreateGoalParams
 import pimonitor.core.business.interventions.params.CreateInterventionDisbursementParams
-import pimonitor.core.business.interventions.params.CreateInterventionParams
-import pimonitor.core.business.investments.Investment
-import pimonitor.core.business.investments.params.CreateInvestmentDisbursementParams
-import pimonitor.core.business.investments.params.CreateInvestmentsParams
+import pimonitor.core.business.interventions.params.InterventionParams
 import pimonitor.core.business.utils.disbursements.Disbursement
 import response.decodeResponseFromString
 
@@ -29,7 +25,7 @@ open class BusinessInterventionsServiceKtor(
     private val client get() = config.http
     private val json get() = config.json
 
-    override fun create(rb: RequestBody.Authorized<CreateInterventionParams>) = config.scope.later {
+    override fun create(rb: RequestBody.Authorized<InterventionParams>) = config.scope.later {
         val res = client.post(path.businessInterventionsCreate) { setBody(json.of(rb)) }
         json.decodeResponseFromString(Intervention.serializer(), res.bodyAsText()).response()
     }

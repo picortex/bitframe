@@ -4,14 +4,14 @@
 package pimonitor.client.business.investments.fields
 
 import kotlinx.collections.interoperable.toInteroperableList
-import pimonitor.core.business.investments.InvestmentType
+import pimonitor.core.investments.InvestmentType
 import presenters.fields.DateInputField
 import presenters.fields.DropDownInputField
 import presenters.fields.DropDownInputField.Option
 import presenters.fields.MoneyInputField
 import presenters.fields.TextInputField
 import kotlin.js.JsExport
-import pimonitor.core.business.investments.params.CreateInvestmentsRawParams as Params
+import pimonitor.core.investments.params.CreateInvestmentsRawParams as Params
 
 data class CaptureInvestmentFields(
     val name: TextInputField = TextInputField(

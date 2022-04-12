@@ -20,6 +20,7 @@ import pimonitor.client.business.interventions.dialogs.CreateInterventionDialog
 import pimonitor.client.business.interventions.params.toCreateInterventionDisbursementParams
 import pimonitor.client.business.interventions.params.toCreateInterventionParams
 import pimonitor.core.business.interventions.Intervention
+import pimonitor.core.business.utils.disbursements.toParsedParams
 import presenters.cases.CrowdState
 import presenters.cases.Feedback
 import presenters.table.builders.tableOf
@@ -71,7 +72,7 @@ class BusinessInterventionsViewModel(
             emit(state.copy(status = Feedback.Loading("Creating disbursement for ${i.intervention.name}"), dialog = null))
             val params = i.params.toCreateInterventionDisbursementParams(i.intervention.uid)
             api.businessInterventions.disburse(params).await()
-            val amount = currency.of(params.amount).toFormattedString(options)
+            val amount = params.toParsedParams(currency).amount.toFormattedString(options)
             emit(state.copy(status = Feedback.Success("$amount disbursed successfully. Reloading your interventions, please wait. . ."), dialog = null))
             val interventions = api.businessInterventions.all(businessId).await()
             emit(state.copy(status = Feedback.None, table = interventionsTable(interventions), dialog = null))
@@ -169,11 +170,11 @@ class BusinessInterventionsViewModel(
         val dateFormat = "{DD}-{MM}-{YYYY}"
         column("Name") { it.data.name }
         column("Amount") { it.data.amount.toFormattedString(options) }
-        column("Disbursed") { currency.of(it.data.totalDisbursed).toFormattedString(options) }
+        column("Disbursed") { it.data.totalDisbursed.toFormattedString(options) }
         column("Goals") { "0/${it.data.goals.size}" }
         column("Start") { it.data.date.format(dateFormat) }
         column("Deadline") { it.data.deadline.format(dateFormat) }
-        column("Countdown") { (it.data.deadline.toLocalDateTime().date - it.data.date.toLocalDateTime().date).toString() }
+        column("Countdown") { (it.data.deadline - it.data.date).toString() }
         column("Created By") { it.data.createdBy.name }
         actionsColumn("Actions") {
             action("Issue Disbursement") { post(ShowCreateDisbursementForm(it.data)) }

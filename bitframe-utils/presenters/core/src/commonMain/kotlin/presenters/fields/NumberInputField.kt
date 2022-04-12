@@ -16,7 +16,7 @@ data class NumberInputField(
     constructor(
         name: KProperty<*>,
         label: String = name.name,
-        hint: String = name.name,
+        hint: String = label,
         value: Double? = null
     ) : this(name.name, label, hint, value)
 }

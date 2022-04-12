@@ -11,10 +11,8 @@ import later.await
 import later.later
 import pimonitor.core.business.interventions.BusinessInterventionsServiceCore
 import pimonitor.core.business.interventions.params.CreateInterventionDisbursementRawParams
-import pimonitor.core.business.interventions.params.CreateInterventionRawParams
+import pimonitor.core.business.interventions.params.InterventionRawParams
 import pimonitor.core.business.interventions.params.toValidatedParams
-import pimonitor.core.business.investments.BusinessInvestmentsServiceCore
-import pimonitor.core.business.investments.params.*
 import kotlin.js.JsExport
 
 abstract class BusinessInterventionService(
@@ -23,7 +21,7 @@ abstract class BusinessInterventionService(
 
     private val logger by config.logger(withSessionInfo = true)
 
-    fun create(params: CreateInterventionRawParams) = config.scope.later {
+    fun create(params: InterventionRawParams) = config.scope.later {
         logger.info("Creating intervention)")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("capture investments"),

@@ -7,7 +7,7 @@ import viewmodel.ViewModel
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-open class MicroScope<out I, out S>(
-    open val viewModel: ViewModel<*, out S>,
-    open val intents: I
+open class MicroScope<out W, in I, out S>(
+    open val viewModel: ViewModel<I, out S>,
+    open val intents: W
 )

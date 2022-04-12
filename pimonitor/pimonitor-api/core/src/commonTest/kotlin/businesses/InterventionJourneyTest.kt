@@ -7,7 +7,7 @@ import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
 import pimonitor.core.business.interventions.params.CreateInterventionDisbursementParams
-import pimonitor.core.business.interventions.params.CreateInterventionParams
+import pimonitor.core.business.interventions.params.InterventionParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.SignUpBusinessParams
 import kotlin.test.Test
@@ -50,7 +50,7 @@ class InterventionJourneyTest {
         }
 
         step("Intervene for the newly created business") {
-            val params = CreateInterventionParams(
+            val params = InterventionParams(
                 businessId = business.uid,
                 name = "Working Capital",
                 date = SimpleDateTime.now.timeStampInMillis,
@@ -97,7 +97,7 @@ class InterventionJourneyTest {
         }
 
         val intervention = step("Intervene for the newly created business") {
-            val params = CreateInterventionParams(
+            val params = InterventionParams(
                 businessId = business.uid,
                 name = "Working Capital",
                 date = SimpleDateTime.now.timeStampInMillis,

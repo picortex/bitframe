@@ -8,7 +8,7 @@ import bitframe.client.UIScopeConfig
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.business.investments.params.CreateInvestmentsRawFormParams
 import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams
-import pimonitor.core.business.investments.Investment
+import pimonitor.core.investments.Investment
 import presenters.cases.CrowdState
 import kotlin.js.JsExport
 import pimonitor.client.business.investments.BusinessInvestmentsIntent as Intent

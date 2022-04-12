@@ -1,10 +1,8 @@
 package pimonitor.client.business.investments.params
 
-import datetime.SimpleDateTime
-import pimonitor.core.business.investments.params.CreateInvestmentsParams
+import pimonitor.core.investments.params.CreateInvestmentsParams
 import validation.BlankFieldException
 import validation.requiredNotBlank
-import validation.requiredPositiveDouble
 import kotlin.js.JsExport
 
 @JsExport
@@ -22,7 +20,7 @@ fun CreateInvestmentsRawFormParams.toValidatedParams(businessId: String) = Creat
     name = requiredNotBlank(::name),
     type = requiredNotBlank(::type),
     source = requiredNotBlank(::source),
-    amount = requiredPositiveDouble(::amount),
-    date = SimpleDateTime.parseDate(requiredNotBlank(::date)).timeStampInMillis,
+    amount = requiredNotBlank(::amount),
+    date = requiredNotBlank(::date),
     details = requiredNotBlank(::details),
 )

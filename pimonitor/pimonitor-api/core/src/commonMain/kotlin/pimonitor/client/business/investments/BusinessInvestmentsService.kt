@@ -9,8 +9,8 @@ import bitframe.client.logger
 import bitframe.core.RequestBody
 import later.await
 import later.later
-import pimonitor.core.business.investments.BusinessInvestmentsServiceCore
-import pimonitor.core.business.investments.params.*
+import pimonitor.core.investments.BusinessInvestmentsServiceCore
+import pimonitor.core.investments.params.*
 import kotlin.js.JsExport
 
 abstract class BusinessInvestmentsService(
@@ -23,7 +23,7 @@ abstract class BusinessInvestmentsService(
         logger.info("Capturing investment")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("capture investments"),
-            data = params.toValidatedCreateInvestmentsParams()
+            data = params.toValidatedParams()
         )
         capture(rb).await().also { logger.info("Investment captured successfully") }
     }

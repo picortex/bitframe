@@ -1,6 +1,6 @@
 @file:JsExport
 
-package pimonitor.core.business.investments
+package pimonitor.core.investments
 
 import kotlin.js.JsExport
 

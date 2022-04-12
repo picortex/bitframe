@@ -6,8 +6,8 @@ package bitframe.client
 import viewmodel.ViewModel
 import kotlin.js.JsExport
 
-class MiniScope<out I, out S, out C>(
-    override val viewModel: ViewModel<*, out S>,
-    override val intents: I,
+class MiniScope<out W, in I, out S, out C>(
+    override val viewModel: ViewModel<I, out S>,
+    override val intents: W,
     val constants: C
-) : MicroScope<I, S>(viewModel, intents)
+) : MicroScope<W, I, S>(viewModel, intents)

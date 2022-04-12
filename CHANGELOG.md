@@ -1,12 +1,12 @@
 # 0.10.19
 
 ### Enhancements
-
-- [[PM404]](https://github.com/picortex/bitframe/issues/404) Setup cases to cover all business overview approaches
+- [ ] [[PM404]](https://github.com/picortex/bitframe/issues/404) Setup cases to cover all business overview approaches
+- [x] [[PM400]](https://github.com/picortex/bitframe/issues/400) Business Overview for a business with only operational integrations
 
 ### Bug Fixes
 
-- Dates are now not predicting the future.
+- [x] Dates are now not predicting the future.
 
   Previously, viewing today's date displayed it as the date of the next date.
 

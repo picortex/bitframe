@@ -18,6 +18,7 @@ import pimonitor.client.business.operations.BusinessOperationsScope
 import pimonitor.client.business.overview.BusinessOverviewScope
 import pimonitor.client.businesses.BusinessesScope
 import pimonitor.client.contacts.ContactsScope
+import pimonitor.client.investments.InvestmentScope
 import pimonitor.client.invites.InvitesScope
 import pimonitor.client.portfolio.PortfolioScope
 import pimonitor.client.search.SearchScope
@@ -40,6 +41,7 @@ open class PiMonitorAppScope(
     open val portfolio by lazy { PortfolioScope(config { api.portfolio }) }
     open val password by lazy { ChangePasswordScope(config { api.profile }) }
     open val search by lazy { SearchScope(config { api.search }) }
+    val investments by InvestmentScope(config())
     open val integrations by lazy { InvitesScope(config()) }
     open val businessDetails by lazy { BusinessDetailsScope(config { api.businesses }) }
     val businessOverview by BusinessOverviewScope(config())

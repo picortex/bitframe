@@ -7,10 +7,7 @@ import kotlinx.collections.interoperable.List
 import later.Later
 import pimonitor.core.business.interventions.params.CreateGoalParams
 import pimonitor.core.business.interventions.params.CreateInterventionDisbursementParams
-import pimonitor.core.business.interventions.params.CreateInterventionParams
-import pimonitor.core.business.interventions.params.CreateInterventionRawParams
-import pimonitor.core.business.investments.Investment
-import pimonitor.core.business.investments.params.CreateInvestmentDisbursementParams
+import pimonitor.core.business.interventions.params.InterventionParams
 import pimonitor.core.business.utils.disbursements.Disbursement
 import kotlin.js.JsExport
 import kotlin.js.JsName
@@ -18,7 +15,7 @@ import kotlin.js.JsName
 @JsExport
 interface BusinessInterventionsServiceCore {
     @JsName("_ignore_create")
-    fun create(rb: RequestBody.Authorized<CreateInterventionParams>): Later<Intervention>
+    fun create(rb: RequestBody.Authorized<InterventionParams>): Later<Intervention>
 
     /**
      * @param rb takes in a [RequestBody.Authorized] of a businessId

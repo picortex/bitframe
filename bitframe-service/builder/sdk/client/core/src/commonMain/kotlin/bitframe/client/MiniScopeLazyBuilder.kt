@@ -6,6 +6,6 @@ package bitframe.client
 import viewmodel.ViewModel
 import kotlin.experimental.ExperimentalTypeInference
 
-fun <I, S, C, V : ViewModel<*, S>> MiniScope(
-    @BuilderInference builder: MiniScopeBuilder<I, S, C, V>.() -> Unit
-): Lazy<MiniScope<I, S, C>> = lazy { MiniScopeBuilder<I, S, C, V>().apply(builder).build() }
+fun <W, I, S, C, V : ViewModel<I, S>> MiniScope(
+    @BuilderInference builder: MiniScopeBuilder<W, I, S, C, V>.() -> Unit
+): Lazy<MiniScope<W, I, S, C>> = lazy { MiniScopeBuilder<W, I, S, C, V>().apply(builder).build() }

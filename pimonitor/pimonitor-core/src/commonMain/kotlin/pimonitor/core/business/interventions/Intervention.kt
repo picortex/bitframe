@@ -5,11 +5,13 @@ package pimonitor.core.business.interventions
 
 import akkounts.utils.unset
 import bitframe.core.Savable
+import datetime.Date
 import datetime.SimpleDateTime
 import kash.Money
 import kotlinx.collections.interoperable.List
 import kotlinx.serialization.Serializable
 import pimonitor.core.business.utils.disbursements.Disbursement
+import pimonitor.core.business.utils.money.sum
 import presenters.numerics.Percentage
 import kotlin.js.JsExport
 
@@ -19,8 +21,8 @@ data class Intervention(
     val businessId: String,
     val name: String,
     val amount: Money,
-    val date: SimpleDateTime,
-    val deadline: SimpleDateTime,
+    val date: Date,
+    val deadline: Date,
     val recommendations: String,
     val goals: List<String>,
     val history: List<InterventionHistory>,
@@ -31,9 +33,9 @@ data class Intervention(
 
     val createdBy by lazy { history.filterIsInstance<InterventionHistory.Created>().first().by }
 
-    val totalDisbursed by lazy { disbursements.sumOf { it.amount } }
+    val totalDisbursed by lazy { disbursements.map { it.amount }.sum(amount.currency) }
 
     val disbursementProgressInPercentage by lazy {
-        Percentage.fromRatio(totalDisbursed / (amount.amount / amount.currency.lowestDenomination))
+        Percentage.fromRatio(totalDisbursed.amount / amount.amount)
     }
 }
