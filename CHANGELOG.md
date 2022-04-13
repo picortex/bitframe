@@ -2,13 +2,13 @@
 
 ### Enhancements
 
-- [ ] [[PM404]](https://github.com/picortex/bitframe/issues/404) Setup cases to cover all business overview approaches
-- [x] [[PM400]](https://github.com/picortex/bitframe/issues/400) Business Overview for a business with only operational integrations
-- [x] [[PM308]](https://github.com/picortex/bitframe/issues/308) Added SDK support for the investments section
+- [[PM404]](https://github.com/picortex/bitframe/issues/404) Setup cases to cover all business overview approaches
+- [[PM400]](https://github.com/picortex/bitframe/issues/400) Business Overview for a business with only operational integrations
+- [[PM308]](https://github.com/picortex/bitframe/issues/308) Added SDK support for the investments section
 
 ### Bug Fixes
 
-- [x] Dates are now not predicting the future.
+- Dates are now not predicting the future.
 
   Previously, viewing today's date displayed it as the date of the next date.
 
