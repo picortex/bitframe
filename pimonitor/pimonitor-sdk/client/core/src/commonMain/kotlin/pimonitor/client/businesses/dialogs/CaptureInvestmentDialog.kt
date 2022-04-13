@@ -8,8 +8,8 @@ import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import presenters.forms.FormActionsBuildingBlock
 import presenters.modal.FormDialog
 import kotlin.js.JsExport
-import pimonitor.client.business.investments.fields.CaptureInvestmentFields as Fields
-import pimonitor.client.business.investments.params.CreateInvestmentsRawFormParams as Params
+import pimonitor.client.investments.fields.InvestmentFields as Fields
+import pimonitor.client.business.investments.params.InvestmentsRawParams as Params
 
 class CaptureInvestmentDialog(
     monitored: MonitoredBusinessSummary,

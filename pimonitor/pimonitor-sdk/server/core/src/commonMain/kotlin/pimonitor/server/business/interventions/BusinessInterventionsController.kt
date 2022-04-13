@@ -8,9 +8,7 @@ import kotlinx.serialization.decodeFromString
 import later.await
 import pimonitor.core.business.interventions.BusinessInterventionsServiceDaod
 import pimonitor.core.business.interventions.params.CreateInterventionDisbursementParams
-import pimonitor.core.business.interventions.params.CreateInterventionParams
-import pimonitor.core.business.investments.BusinessInvestmentsServiceDaod
-import pimonitor.core.business.investments.params.CreateInvestmentsParams
+import pimonitor.core.business.interventions.params.InterventionParams
 import response.response
 
 class BusinessInterventionsController(
@@ -18,7 +16,7 @@ class BusinessInterventionsController(
 ) {
     private val json get() = service.config.json
     suspend fun create(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.Authorized<CreateInterventionParams>>(req.compulsoryBody())
+        val rb = json.decodeFromString<RequestBody.Authorized<InterventionParams>>(req.compulsoryBody())
         resolve(service.create(rb).await())
     }.toHttpResponse()
 

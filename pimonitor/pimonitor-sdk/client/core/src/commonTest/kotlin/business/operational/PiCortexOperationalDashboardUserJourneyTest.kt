@@ -1,7 +1,9 @@
 package business.operational
 
 import bitframe.core.signin.SignInParams
+import datetime.Date
 import expect.expect
+import kotlinx.datetime.DatePeriod
 import later.await
 import pimonitor.client.business.operations.BusinessOperationsIntent
 import pimonitor.client.runSequence
@@ -74,8 +76,8 @@ class PiCortexOperationalDashboardUserJourneyTest {
         }
 
         step("View PiCortex Operations Dashboard of ${result?.business?.name}") {
-            val end = time.toEpochMilliseconds().toDouble()
-            val start = time.last(days = 30).toEpochMilliseconds().toDouble()
+            val end = Date.today()
+            val start = end - DatePeriod(days = 30)
             val params = LoadInfoParams(
                 businessId = invite!!.invitedBusinessId,
                 start = start,

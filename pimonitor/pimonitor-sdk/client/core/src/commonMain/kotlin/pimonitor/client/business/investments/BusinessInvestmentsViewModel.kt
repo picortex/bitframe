@@ -1,7 +1,6 @@
 package pimonitor.client.business.investments
 
 import bitframe.client.UIScopeConfig
-import kash.Currency
 import kash.MoneyFormatterOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -15,8 +14,7 @@ import pimonitor.client.business.investments.dialogs.CaptureInvestmentDialog
 import pimonitor.client.business.investments.dialogs.CreateDisbursementDialog
 import pimonitor.client.business.investments.params.toCreateInvestmentDisbursementParams
 import pimonitor.client.business.investments.params.toValidatedParams
-import pimonitor.core.business.investments.Investment
-import pimonitor.core.business.investments.params.toValidatedCreateInvestmentsParams
+import pimonitor.core.investments.Investment
 import presenters.cases.CrowdState
 import presenters.cases.Feedback
 import presenters.table.builders.tableOf
@@ -119,18 +117,17 @@ class BusinessInvestmentsViewModel(
         column("Source") { it.data.source }
         column("Type") { it.data.type }
         val options = MoneyFormatterOptions(decimals = 0, abbreviate = false)
-        val currency = Currency.ZAR
         column("Amount") {
-            currency.of(it.data.amount).toFormattedString(options)
+            it.data.amount.toFormattedString(options)
         }
         column("Disbursed") {
-            currency.of(it.data.totalDisbursed).toFormattedString(options)
+            it.data.totalDisbursed.toFormattedString(options)
         }
         column("Progress") {
             "${it.data.disbursementProgressInPercentage.asInt}%"
         }
         column("Created By") { it.data.createdBy.name }
-        actionsColumn("Actions") {
+        actions("Actions") {
             action("Issue Disbursement") { post(ShowCreateDisbursementForm(it.data)) }
         }
     }

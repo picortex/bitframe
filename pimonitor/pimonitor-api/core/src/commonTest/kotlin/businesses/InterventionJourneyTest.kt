@@ -1,13 +1,15 @@
 package businesses
 
 import bitframe.core.signin.SignInParams
+import datetime.Date
 import datetime.SimpleDateTime
 import expect.expect
+import kotlinx.datetime.DatePeriod
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
 import pimonitor.core.business.interventions.params.CreateInterventionDisbursementParams
-import pimonitor.core.business.interventions.params.CreateInterventionParams
+import pimonitor.core.business.interventions.params.InterventionParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.SignUpBusinessParams
 import kotlin.test.Test
@@ -50,12 +52,14 @@ class InterventionJourneyTest {
         }
 
         step("Intervene for the newly created business") {
-            val params = CreateInterventionParams(
+            val today = Date.today()
+            val deadline = today + DatePeriod(days = 3)
+            val params = InterventionParams(
                 businessId = business.uid,
                 name = "Working Capital",
-                date = SimpleDateTime.now.timeStampInMillis,
-                deadline = (time + 3.days).toEpochMilliseconds().toDouble(),
-                amount = 30_000.0,
+                date = today.toIsoFormat(),
+                deadline = deadline.toIsoFormat(),
+                amount = 30_000.0.toString(),
                 recommendations = "Make sure the API is well tested"
             )
             val res = api.businessInterventions.create(params).await()
@@ -97,12 +101,14 @@ class InterventionJourneyTest {
         }
 
         val intervention = step("Intervene for the newly created business") {
-            val params = CreateInterventionParams(
+            val today = Date.today()
+            val deadline = today + DatePeriod(days = 3)
+            val params = InterventionParams(
                 businessId = business.uid,
                 name = "Working Capital",
-                date = SimpleDateTime.now.timeStampInMillis,
-                deadline = (time + 3.days).toEpochMilliseconds().toDouble(),
-                amount = 100_000.0,
+                date = today.toIsoFormat(),
+                deadline = deadline.toIsoFormat(),
+                amount = 100_000.0.toString(),
                 recommendations = "Make sure the API is well tested"
             )
             val res = api.businessInterventions.create(params).await()
@@ -113,16 +119,16 @@ class InterventionJourneyTest {
         step("Add a disbursement to that newly created intervention") {
             val params = CreateInterventionDisbursementParams(
                 interventionId = intervention.uid,
-                amount = 10_000.0,
-                date = time.toEpochMilliseconds().toDouble()
+                amount = 10_000.0.toString(),
+                date = Date.today().toIsoFormat()
             )
             val disbursement = api.businessInterventions.disburse(params).await()
-            expect(disbursement.amount).toBe(10_000.0)
+            expect(disbursement.amount.amount).toBe(1_000_000)
         }
 
         step("Ensure all things are disbursed correctly") {
             val i = api.businessInterventions.all(business.uid).await().first()
-            expect(i.totalDisbursed).toBe(10_000.0)
+            expect(i.totalDisbursed.amount).toBe(1_000_000)
             println(i)
             println(i.totalDisbursed)
             println(i.disbursementProgressInPercentage)

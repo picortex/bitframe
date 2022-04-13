@@ -2,7 +2,6 @@ package changes
 
 import expect.expect
 import expect.toBe
-import kash.Money
 import kash.TZS
 import kash.USD
 import presenters.changes.ChangeRemark

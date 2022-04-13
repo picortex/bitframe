@@ -10,6 +10,7 @@ import later.await
 import later.later
 import pimonitor.core.business.operations.BusinessOperationsServiceCore
 import pimonitor.core.business.utils.info.LoadInfoRawParams
+import pimonitor.core.business.utils.info.toParsedParams
 import pimonitor.core.business.utils.info.toValidatedParams
 import kotlin.js.JsExport
 
@@ -19,7 +20,7 @@ abstract class BusinessOperationsService(
     fun dashboard(params: LoadInfoRawParams) = config.scope.later {
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("load operational dashboard info for business with id=${params.businessId}"),
-            data = params.toValidatedParams()
+            data = params.toParsedParams()
         )
         dashboard(rb).await()
     }

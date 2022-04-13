@@ -9,10 +9,11 @@ import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams a
 
 class EditDisbursementForm(
     disbursement: Disbursement,
+    params: Params? = null,
     block: FormActionsBuildingBlock<Params>
 ) : Form<Fields, Params> by Form(
     heading = "Edit Disbursement",
     details = "Edit ${Name(disbursement.by.name).first}'s ${disbursement.amount} disbursement",
-    fields = Fields(disbursement),
+    fields = Fields(params, disbursement),
     block
 )

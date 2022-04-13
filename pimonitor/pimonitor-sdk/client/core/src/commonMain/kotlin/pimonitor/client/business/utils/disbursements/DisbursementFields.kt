@@ -10,17 +10,17 @@ import presenters.fields.NumberInputField
 import kotlin.js.JsExport
 import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams as Params
 
-class DisbursementFields(disbursement: Disbursement? = null) {
+class DisbursementFields(params: Params? = null, disbursement: Disbursement? = null) {
     val amount = NumberInputField(
         name = Params::amount,
         label = "Amount",
-        value = disbursement?.amount
+        value = params?.amount ?: disbursement?.amount?.toFormattedString()
     )
     val date = DateInputField(
         name = Params::date,
         label = "Disbursement Date",
-        value = disbursement?.date?.let {
-            DateFormatter("{YYYY}-{MM}-{DD}").format(it.timeStampInMillis)
+        value = params?.date ?: disbursement?.date?.let {
+            DateFormatter("{YYYY}-{MM}-{DD}").format(it)
         }
     )
 }

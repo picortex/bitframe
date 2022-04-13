@@ -13,7 +13,7 @@ class TableTest {
         column("Name") { it.data.name }
         column("Cores") { "${it.data.cores} cores" }
         column("Speed") { "${it.data.clock} GHz" }
-        actionsColumn("Actions") {
+        actions("Actions") {
             action("Edit") { println("Editing ${it.data.name}") }
             action("Update") { println("Updating ${it.data.name}") }
         }

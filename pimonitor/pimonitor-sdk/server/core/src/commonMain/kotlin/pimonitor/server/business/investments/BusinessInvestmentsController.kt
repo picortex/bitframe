@@ -6,9 +6,9 @@ import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
 import kotlinx.serialization.decodeFromString
 import later.await
-import pimonitor.core.business.investments.BusinessInvestmentsServiceDaod
-import pimonitor.core.business.investments.params.CreateInvestmentDisbursementParams
-import pimonitor.core.business.investments.params.CreateInvestmentsParams
+import pimonitor.core.investments.BusinessInvestmentsServiceDaod
+import pimonitor.core.investments.params.InvestmentDisbursementParams
+import pimonitor.core.investments.params.InvestmentsParams
 import response.response
 
 class BusinessInvestmentsController(
@@ -17,7 +17,7 @@ class BusinessInvestmentsController(
     private val json get() = service.config.json
 
     suspend fun capture(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.Authorized<CreateInvestmentsParams>>(req.compulsoryBody())
+        val rb = json.decodeFromString<RequestBody.Authorized<InvestmentsParams>>(req.compulsoryBody())
         resolve(service.capture(rb).await())
     }.toHttpResponse()
 
@@ -27,7 +27,7 @@ class BusinessInvestmentsController(
     }.toHttpResponse()
 
     suspend fun disburse(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.Authorized<CreateInvestmentDisbursementParams>>(req.compulsoryBody())
+        val rb = json.decodeFromString<RequestBody.Authorized<InvestmentDisbursementParams>>(req.compulsoryBody())
         resolve(service.disburse(rb).await())
     }.toHttpResponse()
 }

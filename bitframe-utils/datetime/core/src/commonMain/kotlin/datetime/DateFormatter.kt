@@ -34,7 +34,7 @@ import kotlin.js.JsName
  * {AMPM}     "AM" or "PM"             PM
  * ```
  */
-class DateFormatter(private val format: String) {
+class DateFormatter(private val pattern: String) {
     @JsName("formatMillisWithTimeZone")
     fun format(millis: Double, timezone: TimeZone): String {
         val instant = Instant.fromEpochMilliseconds(millis.toLong())
@@ -45,6 +45,9 @@ class DateFormatter(private val format: String) {
     fun format(millis: Double) = format(millis, TimeZone.currentSystemDefault())
 
     private val Int.to2digits get() = (if (this < 10) "0" else "") + this
+
+    @JsName("formatDate")
+    fun format(date: Date) = format(date.toLocalDate())
 
     @JsName("formatLocalDate")
     fun format(date: LocalDate): String {
@@ -68,7 +71,7 @@ class DateFormatter(private val format: String) {
             day % 10 == 3 -> "rd"
             else -> "th"
         }
-        return format
+        return pattern
             .replace("{YYYY}", YYYY)
             .replace("{YY}", YY)
             .replace("{MMMM}", MMMM)

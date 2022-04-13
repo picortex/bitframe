@@ -9,5 +9,6 @@ import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams a
 
 class CreateDisbursementDialog(
     investment: String,
+    params: Params? = null,
     block: FormActionsBuildingBlock<Params>
-) : FormDialog<Fields, Params>(CreateDisbursementForm(investment, block))
+) : FormDialog<Fields, Params>(CreateDisbursementForm(investment, params, block))

@@ -1,7 +1,6 @@
 package pimonitor.client.business.interventions.params
 
-import datetime.SimpleDateTime
-import pimonitor.core.business.interventions.params.CreateInterventionParams
+import pimonitor.core.business.interventions.params.InterventionParams
 import validation.BlankFieldException
 import validation.requiredNotBlank
 import kotlin.js.JsExport
@@ -15,11 +14,11 @@ interface CreateInterventionRawFormParams {
     val recommendations: String
 }
 
-fun CreateInterventionRawFormParams.toCreateInterventionParams(businessId: String) = CreateInterventionParams(
+fun CreateInterventionRawFormParams.toCreateInterventionParams(businessId: String) = InterventionParams(
     businessId = businessId.takeIf { it.isNotBlank() } ?: throw BlankFieldException("businessId"),
     name = requiredNotBlank(::name),
-    date = SimpleDateTime.parseDate(requiredNotBlank(::date)).timeStampInMillis,
-    deadline = SimpleDateTime.parseDate(requiredNotBlank(::deadline)).timeStampInMillis,
-    amount = requiredNotBlank(::amount).toDouble(),
+    date = requiredNotBlank(::date),
+    deadline = requiredNotBlank(::deadline),
+    amount = requiredNotBlank(::amount),
     recommendations = requiredNotBlank(::recommendations),
 )

@@ -56,6 +56,14 @@ val commit = workflow(
             command = """API_MODE="MOCK" ./gradlew :pimonitor-app-server:test"""
         )
         run(
+            name = "Running js node tests",
+            command = """API_MODE="MOCK" ./gradlew jsNodeTest"""
+        )
+        run(
+            name = "Running js browser tests",
+            command = """API_MODE="MOCK" ./gradlew jsBrowserTest"""
+        )
+        run(
             name = "Running js tests",
             command = """API_MODE="MOCK" ./gradlew jsTest"""
         )

@@ -21,6 +21,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(asoft.expect.coroutines)
+                implementation(kotlinx.serialization.json)
             }
         }
     }

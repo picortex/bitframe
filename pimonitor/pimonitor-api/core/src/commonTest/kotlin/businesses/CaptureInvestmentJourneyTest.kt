@@ -1,14 +1,13 @@
 package businesses
 
 import bitframe.core.signin.SignInParams
-import bitframe.core.signin.SignInRawParams
-import datetime.SimpleDateTime
+import datetime.Date
 import expect.expect
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
-import pimonitor.core.business.investments.InvestmentType
-import pimonitor.core.business.investments.params.CreateInvestmentsParams
+import pimonitor.core.investments.InvestmentType
+import pimonitor.core.investments.params.InvestmentsParams
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.SignUpBusinessParams
@@ -51,18 +50,18 @@ class CaptureInvestmentJourneyTest {
         }
 
         step("Capture Investment of the newly created business") {
-            val params = CreateInvestmentsParams(
+            val params = InvestmentsParams(
                 businessId = business!!.uid,
                 name = "Asset Capital",
                 type = InvestmentType.Loan.name,
                 source = "aSoft Ltd",
-                amount = 30_000.0,
-                date = SimpleDateTime.now.timeStampInMillis,
+                amount = 30_000.0.toString(),
+                date = Date.today().toIsoFormat(),
                 details = "Test details"
             )
             val investment = api.businessInvestments.capture(params).await()
             expect(investment.name).toBe("Asset Capital")
-            expect(investment.amount).toBe(30_000.0)
+            expect(investment.amount.amount).toBe(3_000_000)
         }
 
         step("Load to ensure that the captured investments") {
@@ -70,7 +69,7 @@ class CaptureInvestmentJourneyTest {
             expect(investments).toBeOfSize(1)
 
             val investment = investments.first()
-            expect(investment.amount).toBe(30_000.0)
+            expect(investment.amount.amount).toBe(3_000_000)
         }
     }
 }

@@ -17,6 +17,7 @@ kotlin {
             dependencies {
                 api(projects.pimonitorApiPublicCore)
                 api(projects.bitframeSdkClientCore)
+                api(projects.presentersCore)
             }
         }
 
@@ -24,8 +25,7 @@ kotlin {
             dependencies {
                 implementation(projects.pimonitorApiPublicTest)
                 implementation(projects.presentersMock)
-                implementation(asoft.viewmodel.test.expect)
-                implementation(asoft.expect.core)
+                implementation(projects.bitframeServiceBuilderSdkClientMock)
             }
         }
     }

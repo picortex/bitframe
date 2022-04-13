@@ -9,8 +9,8 @@ import bitframe.client.logger
 import bitframe.core.RequestBody
 import later.await
 import later.later
-import pimonitor.core.business.investments.BusinessInvestmentsServiceCore
-import pimonitor.core.business.investments.params.*
+import pimonitor.core.investments.BusinessInvestmentsServiceCore
+import pimonitor.core.investments.params.*
 import kotlin.js.JsExport
 
 abstract class BusinessInvestmentsService(
@@ -19,13 +19,22 @@ abstract class BusinessInvestmentsService(
 
     private val logger by config.logger(withSessionInfo = true)
 
-    fun capture(params: CreateInvestmentsRawParams) = config.scope.later {
+    fun capture(params: InvestmentsRawParams) = config.scope.later {
         logger.info("Capturing investment")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("capture investments"),
-            data = params.toValidatedCreateInvestmentsParams()
+            data = params.toValidatedParams()
         )
         capture(rb).await().also { logger.info("Investment captured successfully") }
+    }
+
+    fun disburse(params: InvestmentDisbursementRawParams) = config.scope.later {
+        logger.info("Creating a disbursement")
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("create a disbursement"),
+            data = params.toValidatedParams()
+        )
+        disburse(rb).await()
     }
 
     fun all(businessId: String) = config.scope.later {
@@ -35,14 +44,5 @@ abstract class BusinessInvestmentsService(
             data = businessId
         )
         all(rb).await().also { logger.info("Investment loaded successfully") }
-    }
-
-    fun disburse(params: CreateInvestmentDisbursementRawParams) = config.scope.later {
-        logger.info("Creating a disbursement")
-        val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("create a disbursement"),
-            data = params.toValidatedParams()
-        )
-        disburse(rb).await()
     }
 }

@@ -29,6 +29,10 @@ jobs:
         run: API_MODE="MOCK" ./gradlew jvmTest
       - name: Run pimonitor-app-server tests
         run: API_MODE="MOCK" ./gradlew :pimonitor-app-server:test
+      - name: Running js node tests
+        run: API_MODE="MOCK" ./gradlew jsNodeTest
+      - name: Running js browser tests
+        run: API_MODE="MOCK" ./gradlew jsBrowserTest
       - name: Running js tests
         run: API_MODE="MOCK" ./gradlew jsTest
       - name: Build project

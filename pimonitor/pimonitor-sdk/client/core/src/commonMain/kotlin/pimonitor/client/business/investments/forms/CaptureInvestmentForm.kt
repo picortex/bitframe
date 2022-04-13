@@ -2,8 +2,8 @@ package pimonitor.client.business.investments.forms
 
 import presenters.forms.Form
 import presenters.forms.FormActionsBuildingBlock
-import pimonitor.client.business.investments.fields.CaptureInvestmentFields as Fields
-import pimonitor.client.business.investments.params.CreateInvestmentsRawFormParams as Params
+import pimonitor.client.investments.fields.InvestmentFields as Fields
+import pimonitor.client.business.investments.params.InvestmentsRawParams as Params
 
 class CaptureInvestmentForm(
     business: String,
@@ -11,6 +11,6 @@ class CaptureInvestmentForm(
 ) : Form<Fields, Params> by Form(
     heading = "Capture Investments",
     details = "Capture investment for $business",
-    fields = Fields(),
+    fields = Fields(listOf(), null, null, null),
     block
 )

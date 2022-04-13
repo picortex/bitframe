@@ -13,10 +13,14 @@ import pimonitor.server.business.investments.BusinessInvestmentsController
 import pimonitor.server.business.investments.BusinessInvestmentsModule
 import pimonitor.server.business.operations.BusinessOperationsController
 import pimonitor.server.business.operations.BusinessOperationsModule
+import pimonitor.server.business.overview.BusinessOverviewController
+import pimonitor.server.business.overview.BusinessOverviewModule
 import pimonitor.server.businesses.BusinessesController
 import pimonitor.server.businesses.BusinessesModule
 import pimonitor.server.contacts.ContactsController
 import pimonitor.server.contacts.ContactsModule
+import pimonitor.server.investments.InvestmentsController
+import pimonitor.server.investments.InvestmentsModule
 import pimonitor.server.invites.InvitesController
 import pimonitor.server.invites.InvitesModule
 import pimonitor.server.portfolio.PortfolioController
@@ -76,7 +80,15 @@ fun main(args: Array<String>) {
         }
 
         install { ser ->
+            BusinessOverviewModule(BusinessOverviewController(ser.businessOverview))
+        }
+
+        install { ser ->
             ContactsModule(ContactsController(ser.contacts))
+        }
+
+        install { ser ->
+            InvestmentsModule(InvestmentsController(ser.investments))
         }
 
         install { ser ->

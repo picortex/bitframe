@@ -1,9 +1,9 @@
+@file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package bitframe.client
 
-@JsExport
-interface MicroScopeHook<out I, out S> {
-    val intents: I
-    val state: S
-}
+open class MicroScopeHook<out IW, out S>(
+    open val intents: IW,
+    open val state: S
+)

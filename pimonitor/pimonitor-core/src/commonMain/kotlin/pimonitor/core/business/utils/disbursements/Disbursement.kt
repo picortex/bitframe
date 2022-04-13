@@ -4,14 +4,16 @@
 package pimonitor.core.business.utils.disbursements
 
 import bitframe.core.UserRef
-import datetime.SimpleDateTime
+import datetime.Date
+import kash.Money
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @Serializable
 data class Disbursement(
-    val amount: Double,
-    val date: SimpleDateTime,
-    val on: SimpleDateTime,
+    val uid: String,
+    val amount: Money,
+    val date: Date,
+    val on: Date,
     val by: UserRef
 )

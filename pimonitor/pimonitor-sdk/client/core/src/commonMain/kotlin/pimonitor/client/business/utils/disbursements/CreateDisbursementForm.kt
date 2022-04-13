@@ -7,10 +7,11 @@ import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams a
 
 class CreateDisbursementForm(
     name: String,
+    params: Params? = null,
     block: FormActionsBuildingBlock<Params>
 ) : Form<Fields, Params> by Form(
     heading = "Issue a Disbursement",
     details = "Issue a new disbursement for $name",
-    fields = Fields(),
+    fields = Fields(params),
     block
 )

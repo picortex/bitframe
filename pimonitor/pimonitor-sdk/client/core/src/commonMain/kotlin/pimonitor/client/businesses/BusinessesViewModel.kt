@@ -16,11 +16,9 @@ import pimonitor.client.business.investments.params.toValidatedParams
 import pimonitor.client.businesses.dialogs.CaptureInvestmentDialog
 import pimonitor.client.businesses.BusinessesIntent.*
 import pimonitor.client.businesses.dialogs.*
-import pimonitor.core.business.investments.params.toValidatedCreateInvestmentsParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.copy
-import presenters.cases.Feedback
 import presenters.containers.toString
 import presenters.cases.Feedback.*
 import presenters.changes.toString
@@ -234,7 +232,7 @@ class BusinessesViewModel(
         column("Velocity") { it.data.velocity.toString() }
         column("NCF") { it.data.netCashFlow.toString() }
         column("V/day") { it.data.velocity.toString() }
-        actionsColumn("Actions") {
+        actions("Actions") {
             action("Invite to share reports") { post(ShowInviteToShareReportsForm(it.data)) }
             action("Intervene") { post(ShowInterveneForm(it.data)) }
             action("Capture Investment") { post(ShowCaptureInvestmentForm(it.data)) }
