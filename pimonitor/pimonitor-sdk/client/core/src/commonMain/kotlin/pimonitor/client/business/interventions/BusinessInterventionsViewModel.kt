@@ -1,7 +1,6 @@
 package pimonitor.client.business.interventions
 
 import bitframe.client.UIScopeConfig
-import datetime.toLocalDateTime
 import kash.Currency
 import kash.MoneyFormatterOptions
 import kotlinx.collections.interoperable.List
@@ -10,7 +9,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import kotlinx.datetime.minus
 import later.await
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.business.interventions.BusinessInterventionsIntent.*
@@ -176,7 +174,7 @@ class BusinessInterventionsViewModel(
         column("Deadline") { it.data.deadline.format(dateFormat) }
         column("Countdown") { (it.data.deadline - it.data.date).toString() }
         column("Created By") { it.data.createdBy.name }
-        actionsColumn("Actions") {
+        actions("Actions") {
             action("Issue Disbursement") { post(ShowCreateDisbursementForm(it.data)) }
             action("Add Goal") { post(ShowCreateGoalForm(it.data)) }
         }

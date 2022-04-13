@@ -1,18 +1,14 @@
 package pimonitor.client.investments
 
 import bitframe.client.UIScopeConfig
-import kash.Currency
 import kash.MoneyFormatterOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
-import pimonitor.client.business.investments.BusinessInvestmentsIntent
 import pimonitor.client.investments.InvestmentIntent.*
-import pimonitor.core.investments.Investment
 import pimonitor.core.investments.InvestmentSummary
 import presenters.cases.CrowdState
 import presenters.cases.Feedback
@@ -23,10 +19,12 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
     private val api get() = config.service
     override fun CoroutineScope.execute(i: InvestmentIntent): Any = when (i) {
         is LoadAllInvestments -> loadAllInvestments(i)
-        is ShowDisbursementForm -> TODO()
-        is SendDisbursementForm -> TODO()
+        is ShowCreateInvestmentForm -> TODO()
+        is SendCreateInvestmentForm -> TODO()
         is ShowEditInvestmentForm -> TODO()
         is SendEditInvestmentForm -> TODO()
+        is ShowDisbursementForm -> TODO()
+        is SendDisbursementForm -> TODO()
         is ShowDeleteOneInvestmentDialog -> TODO()
         is SendDeleteOneInvestmentIntent -> TODO()
         is ShowDeleteManyInvestmentDialog -> TODO()
@@ -50,13 +48,14 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
     private fun investmentsTable(data: List<InvestmentSummary>) = tableOf(data) {
         emptyMessage = "No Investment Found"
         emptyDetails = "You haven't captured any investments"
-        emptyAction("Capture Investment") { logger.debug("Should we add this feature?") }
+        emptyAction("Capture Investment") { post(ShowCreateInvestmentForm(null)) }
 
-        primaryAction("Add Investment") { logger.debug("Should we add this feature?") }
-        singleAction("Issue Disbursement") { post(InvestmentIntent.ShowDisbursementForm(it.data)) }
-        singleAction("Edit Investment") { post(InvestmentIntent.ShowEditInvestmentForm(it.data)) }
-        singleAction("Delete Investment") { post(InvestmentIntent.ShowDeleteOneInvestmentDialog(it.data)) }
-        multiAction("Delete All") { post(InvestmentIntent.ShowDeleteManyInvestmentDialog(it)) }
+        primaryAction("Add Investment") { post(ShowCreateInvestmentForm(null)) }
+        primaryAction("Refresh") { post(LoadAllInvestments) }
+        singleAction("Issue Disbursement") { post(ShowDisbursementForm(it.data)) }
+        singleAction("Edit Investment") { post(ShowEditInvestmentForm(it.data)) }
+        singleAction("Delete Investment") { post(ShowDeleteOneInvestmentDialog(it.data)) }
+        multiAction("Delete All") { post(ShowDeleteManyInvestmentDialog(it)) }
         selectable()
         column("Name") { it.data.name }
         column("Business") { it.data.businessName }
@@ -73,10 +72,10 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
             "${it.data.disbursementProgressInPercentage.asInt}%"
         }
         column("Created By") { it.data.createdBy.name }
-        actionsColumn("Actions") {
-            action("Issue Disbursement") { post(InvestmentIntent.ShowDisbursementForm(it.data)) }
-            action("Edit") { post(InvestmentIntent.ShowEditInvestmentForm(it.data)) }
-            action("Delete") { post(InvestmentIntent.ShowDeleteOneInvestmentDialog(it.data)) }
+        actions("Actions") {
+            action("Issue Disbursement") { post(ShowDisbursementForm(it.data)) }
+            action("Edit") { post(ShowEditInvestmentForm(it.data)) }
+            action("Delete") { post(ShowDeleteOneInvestmentDialog(it.data)) }
         }
     }
 }

@@ -42,7 +42,7 @@ open class InvestmentsServiceDaod(
             is String -> Investment::businessId isEqualTo businessId
             else -> Investment::owningSpaceId isEqualTo rb.session.space.uid
         }
-        investmentsDao.all(condition).await().map { it.toSummary() }.toInteroperableList()
+        investmentsDao.all(condition).await().toTypedArray().map { it.toSummary() }.toInteroperableList()
     }
 
     override fun disburse(rb: RequestBody.Authorized<CreateInvestmentDisbursementParams>) = config.scope.later {
