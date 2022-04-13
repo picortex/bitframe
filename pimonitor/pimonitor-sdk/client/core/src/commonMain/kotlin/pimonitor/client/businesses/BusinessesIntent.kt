@@ -3,7 +3,7 @@
 package pimonitor.client.businesses
 
 import pimonitor.client.business.interventions.params.CreateInterventionRawFormParams
-import pimonitor.client.business.investments.params.CreateInvestmentsRawFormParams
+import pimonitor.client.business.investments.params.InvestmentsRawParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import pimonitor.core.businesses.params.InviteToShareReportsRawFormParams
@@ -24,7 +24,7 @@ sealed class BusinessesIntent {
     data class SendInviteToShareReportsForm(val params: InviteToShareReportsRawFormParams) : BusinessesIntent()
 
     data class ShowCaptureInvestmentForm(val monitored: MonitoredBusinessSummary) : BusinessesIntent()
-    data class SendCaptureInvestmentForm(val params: CreateInvestmentsRawFormParams) : BusinessesIntent()
+    data class SendCaptureInvestmentForm(val params: InvestmentsRawParams) : BusinessesIntent()
 
     data class ShowDeleteSingleConfirmationDialog(val monitored: MonitoredBusinessSummary) : BusinessesIntent()
     data class ShowDeleteMultipleConfirmationDialog(val data: Array<Row<MonitoredBusinessSummary>>) : BusinessesIntent()

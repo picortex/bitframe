@@ -4,7 +4,7 @@
 package pimonitor.core.investments
 
 import bitframe.core.UserRef
-import datetime.SimpleDateTime
+import datetime.Date
 import kash.Money
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -13,8 +13,11 @@ import kotlin.js.JsExport
 sealed class InvestmentHistory {
 
     @Serializable
-    data class Created(val on: SimpleDateTime, val by: UserRef) : InvestmentHistory()
+    data class Created(val on: Date, val by: UserRef) : InvestmentHistory()
 
     @Serializable
-    data class Disbursed(val amount: Money, val on: SimpleDateTime, val by: UserRef) : InvestmentHistory()
+    data class Updated(val on: Date, val by: UserRef) : InvestmentHistory()
+
+    @Serializable
+    data class Disbursed(val amount: Money, val on: Date, val by: UserRef) : InvestmentHistory()
 }

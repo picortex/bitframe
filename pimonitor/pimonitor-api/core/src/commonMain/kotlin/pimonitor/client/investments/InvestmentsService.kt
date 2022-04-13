@@ -3,28 +3,39 @@ package pimonitor.client.investments
 import bitframe.client.ServiceConfig
 import bitframe.client.getSignedInSessionTo
 import bitframe.client.logger
+import bitframe.core.IdentifiedRaw
 import bitframe.core.RequestBody
+import bitframe.core.toValidated
 import later.await
 import later.later
 import pimonitor.core.investments.InvestmentFilter
 import pimonitor.core.investments.InvestmentsServiceCore
-import pimonitor.core.investments.params.CreateInvestmentDisbursementRawParams
-import pimonitor.core.investments.params.CreateInvestmentsRawParams
+import pimonitor.core.investments.params.InvestmentDisbursementRawParams
+import pimonitor.core.investments.params.InvestmentsRawParams
 import pimonitor.core.investments.params.toValidatedParams
 
 abstract class InvestmentsService(private val config: ServiceConfig) : InvestmentsServiceCore {
     val logger by config.logger(withSessionInfo = true)
 
-    fun capture(params: CreateInvestmentsRawParams) = config.scope.later {
-        logger.info("Capturing investment")
+    fun create(params: InvestmentsRawParams) = config.scope.later {
+        logger.info("Capturing ${params.name} investment")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("capture investments"),
             data = params.toValidatedParams()
         )
-        capture(rb).await().also { logger.info("Investment captured successfully") }
+        create(rb).await().also { logger.info("Investment captured successfully") }
     }
 
-    fun disburse(params: CreateInvestmentDisbursementRawParams) = config.scope.later {
+    fun update(params: IdentifiedRaw<InvestmentsRawParams>) = config.scope.later {
+        logger.info("Updating ${params.body.name} investment")
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("updated an investment"),
+            data = params.toValidated().map { it.toValidatedParams() }
+        )
+        update(rb).await()
+    }
+
+    fun disburse(params: InvestmentDisbursementRawParams) = config.scope.later {
         logger.info("Creating a disbursement")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("create a disbursement"),

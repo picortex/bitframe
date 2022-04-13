@@ -1,6 +1,7 @@
 package pimonitor.core.investments
 
 import bitframe.core.*
+import datetime.Date
 import datetime.SimpleDateTime
 import kash.Currency
 import kotlinx.collections.interoperable.toInteroperableList
@@ -8,8 +9,8 @@ import kotlinx.datetime.TimeZone
 import later.await
 import later.later
 import pimonitor.core.business.utils.disbursements.toParsedParams
-import pimonitor.core.investments.params.CreateInvestmentDisbursementParams
-import pimonitor.core.investments.params.CreateInvestmentsParams
+import pimonitor.core.investments.params.InvestmentDisbursementParams
+import pimonitor.core.investments.params.InvestmentsParams
 import pimonitor.core.investments.params.toValidatedParams
 
 open class BusinessInvestmentsServiceDaod(
@@ -22,10 +23,10 @@ open class BusinessInvestmentsServiceDaod(
     private val currency: Currency = Currency.ZAR
     private val timezone: TimeZone = TimeZone.UTC
 
-    override fun capture(rb: RequestBody.Authorized<CreateInvestmentsParams>) = config.scope.later {
+    override fun capture(rb: RequestBody.Authorized<InvestmentsParams>) = config.scope.later {
         val params = rb.data.toValidatedParams().toParsedParams(currency)
         val history = InvestmentHistory.Created(
-            on = SimpleDateTime.now,
+            on = Date.today(timezone),
             by = rb.session.user.ref()
         )
         investmentsDao.create(params.toInvestment(rb.session.space.uid, history)).await()
@@ -35,7 +36,7 @@ open class BusinessInvestmentsServiceDaod(
         investmentsDao.all(Investment::businessId isEqualTo rb.data).await()
     }
 
-    override fun disburse(rb: RequestBody.Authorized<CreateInvestmentDisbursementParams>) = config.scope.later {
+    override fun disburse(rb: RequestBody.Authorized<InvestmentDisbursementParams>) = config.scope.later {
         val investment = investmentsDao.load(rb.data.investmentId).await()
         val disbursement = rb.data.toParsedParams(currency).toDisbursement(rb.session, timezone)
         val input = investment.copy(

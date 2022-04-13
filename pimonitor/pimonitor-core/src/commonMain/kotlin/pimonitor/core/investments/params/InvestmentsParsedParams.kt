@@ -9,7 +9,7 @@ import pimonitor.core.investments.Investment
 import pimonitor.core.investments.InvestmentHistory
 
 @Serializable
-data class CreateInvestmentsParsedParams(
+open class InvestmentsParsedParams(
     val businessId: String,
     val name: String,
     val type: String,

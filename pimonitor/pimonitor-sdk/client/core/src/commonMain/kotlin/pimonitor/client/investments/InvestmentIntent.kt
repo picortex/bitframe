@@ -1,19 +1,19 @@
 package pimonitor.client.investments
 
-import pimonitor.client.business.investments.params.CreateInvestmentsRawFormParams
 import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.investments.InvestmentSummary
+import pimonitor.core.investments.params.InvestmentsRawParams
 import presenters.table.Row
 
 sealed class InvestmentIntent {
     object LoadAllInvestments : InvestmentIntent()
 
-    data class ShowCreateInvestmentForm(val business: MonitoredBusinessBasicInfo?) : InvestmentIntent()
-    data class SendCreateInvestmentForm(val params: CreateInvestmentsRawFormParams) : InvestmentIntent()
+    data class ShowCreateInvestmentForm(val business: MonitoredBusinessBasicInfo?, val params: InvestmentsRawParams?) : InvestmentIntent()
+    data class SendCreateInvestmentForm(val params: InvestmentsRawParams) : InvestmentIntent()
 
-    data class ShowEditInvestmentForm(val investment: InvestmentSummary) : InvestmentIntent()
-    data class SendEditInvestmentForm(val investment: InvestmentSummary, val params: CreateInvestmentsRawFormParams) : InvestmentIntent()
+    data class ShowUpdateInvestmentForm(val investment: InvestmentSummary, val params: InvestmentsRawParams?) : InvestmentIntent()
+    data class SendUpdateInvestmentForm(val investment: InvestmentSummary, val params: InvestmentsRawParams) : InvestmentIntent()
 
     data class ShowDisbursementForm(val investment: InvestmentSummary, val params: DisbursementRawFormParams?) : InvestmentIntent()
     data class SendDisbursementForm(val investment: InvestmentSummary, val params: DisbursementRawFormParams) : InvestmentIntent()

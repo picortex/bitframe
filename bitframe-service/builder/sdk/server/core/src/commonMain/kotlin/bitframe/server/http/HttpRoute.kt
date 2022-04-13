@@ -16,13 +16,10 @@ data class HttpRoute(
     )
 
     suspend fun runHandlerCatching(request: HttpRequest): HttpResponse = try {
-        println("Processing request")
-        val res: HttpResponse = handler(request)
-        println("Response went through")
-        res
+        handler(request)
     } catch (cause: Throwable) {
         cause.printStackTrace()
-        println("Err (In HttpRoute): ${cause.message}")
+        println("Err (In HttpRoute: $this): ${cause.message}")
         responseOf(Status(HttpStatusCode.InternalServerError), cause, cause.message).toHttpResponse<Error>()
     }
 

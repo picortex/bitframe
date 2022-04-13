@@ -4,9 +4,6 @@ sealed class Endpoint(root: String) {
     class Client(url: String, version: String) : Endpoint("$url/api/$version")
     class Server(version: String) : Endpoint("/api/$version")
 
-    val signUpIndividual = "$root/sign-up/individual"
-    val signUpBusiness = "$root/sign-up/business"
-
     //businesses
     private val businesses = "$root/businesses"
     val businessesAll = "$businesses/all"
@@ -17,6 +14,8 @@ sealed class Endpoint(root: String) {
 
     private val business = "$root/business"
     val businessOperationalDashboard = "$business/operations/dashboard"
+
+    val businessOverviewLoad = "$business/overview/load"
 
     private val businessFinancialReports = "$business/financials/reports"
     val businessFinancialReportsAvailable = "$businessFinancialReports/available"
@@ -37,6 +36,16 @@ sealed class Endpoint(root: String) {
     // contacts
     val contactsAll = "$root/contacts/all"
 
+    // investments
+    private val investments = "$root/investments"
+    val investmentsCreate = "$investments/create"
+    val investmentsUpdate = "$investments/update"
+    val investmentsDelete = "$investments/delete"
+    val investmentsAll = "$investments/all"
+    private val investmentsDisbursements = "$investments/disbursements"
+    val investmentsDisbursementCreate = "$investmentsDisbursements/create"
+    val investmentsDisbursementUpdate = "$investmentsDisbursements/update"
+
     // invites
     val invitesAcceptSage = "$root/invites/accept/sage"
     val invitesAcceptPicortex = "$root/invites/accept/picortex"
@@ -49,4 +58,7 @@ sealed class Endpoint(root: String) {
 
     // search
     val search = "$root/search"
+
+    val signUpIndividual = "$root/sign-up/individual"
+    val signUpBusiness = "$root/sign-up/business"
 }

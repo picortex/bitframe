@@ -19,7 +19,7 @@ abstract class BusinessInvestmentsService(
 
     private val logger by config.logger(withSessionInfo = true)
 
-    fun capture(params: CreateInvestmentsRawParams) = config.scope.later {
+    fun capture(params: InvestmentsRawParams) = config.scope.later {
         logger.info("Capturing investment")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("capture investments"),
@@ -28,7 +28,7 @@ abstract class BusinessInvestmentsService(
         capture(rb).await().also { logger.info("Investment captured successfully") }
     }
 
-    fun disburse(params: CreateInvestmentDisbursementRawParams) = config.scope.later {
+    fun disburse(params: InvestmentDisbursementRawParams) = config.scope.later {
         logger.info("Creating a disbursement")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("create a disbursement"),

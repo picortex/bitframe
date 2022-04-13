@@ -14,7 +14,9 @@ data class MoneyInputField(
     override val name: String,
     val label: String = name,
     val hint: String = label,
-    val value: Money? = null
+    val selectCurrency: Boolean = false,
+    val currency: Currency? = null,
+    val value: String? = null
 ) : InputField {
 
     @JsName("from_property")
@@ -22,8 +24,10 @@ data class MoneyInputField(
         name: KProperty<*>,
         label: String = name.name,
         hint: String = name.name,
-        value: Money? = null
-    ) : this(name.name, label, hint, value)
+        selectCurrency: Boolean = false,
+        currency: Currency? = null,
+        value: String? = null
+    ) : this(name.name, label, hint, selectCurrency, currency, value)
 
     val currencies by lazy {
         DropDownInputField(
@@ -33,7 +37,7 @@ data class MoneyInputField(
                 DropDownInputField.Option(
                     label = it.name,
                     value = it.name,
-                    selected = it.name == value?.currency?.name
+                    selected = it == currency
                 )
             }.toInteroperableList()
         )
@@ -43,8 +47,8 @@ data class MoneyInputField(
         NumberInputField(
             name = "$name-value",
             label = "Value",
-            hint = hint ?: "",
-            value = value?.toFormattedString(prefix = "")
+            hint = hint,
+            value = value
         )
     }
 }

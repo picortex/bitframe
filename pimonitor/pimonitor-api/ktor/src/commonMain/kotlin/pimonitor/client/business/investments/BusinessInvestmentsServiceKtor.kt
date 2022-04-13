@@ -10,8 +10,8 @@ import kotlinx.collections.interoperable.toInteroperableList
 import later.later
 import pimonitor.client.utils.pathV1
 import pimonitor.core.investments.Investment
-import pimonitor.core.investments.params.CreateInvestmentDisbursementParams
-import pimonitor.core.investments.params.CreateInvestmentsParams
+import pimonitor.core.investments.params.InvestmentDisbursementParams
+import pimonitor.core.investments.params.InvestmentsParams
 import pimonitor.core.business.utils.disbursements.Disbursement
 import response.decodeResponseFromString
 
@@ -21,7 +21,7 @@ open class BusinessInvestmentsServiceKtor(
     private val path get() = config.pathV1
     private val client get() = config.http
     private val json get() = config.json
-    override fun capture(rb: RequestBody.Authorized<CreateInvestmentsParams>) = config.scope.later {
+    override fun capture(rb: RequestBody.Authorized<InvestmentsParams>) = config.scope.later {
         val res = client.post(path.businessInvestmentsCapture) {
             setBody(json.of(rb))
         }
@@ -35,7 +35,7 @@ open class BusinessInvestmentsServiceKtor(
         json.decodeResponseFromString(ListSerializer(Investment.serializer()), res.bodyAsText()).response().toInteroperableList()
     }
 
-    override fun disburse(rb: RequestBody.Authorized<CreateInvestmentDisbursementParams>) = config.scope.later {
+    override fun disburse(rb: RequestBody.Authorized<InvestmentDisbursementParams>) = config.scope.later {
         val res = client.post(path.businessInvestmentsDisburse) {
             setBody(json.of(rb))
         }

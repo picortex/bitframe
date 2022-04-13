@@ -1,14 +1,14 @@
 package pimonitor.core.investments.params
 
+import bitframe.core.Identified
 import datetime.Date
 import kash.Currency
 import kash.Money
-import validation.BlankFieldException
 import validation.requiredNotBlank
 import kotlin.js.JsExport
 
 @JsExport
-interface CreateInvestmentsRawParams {
+interface InvestmentsRawParams {
     val businessId: String
     val name: String
     val type: String
@@ -18,8 +18,8 @@ interface CreateInvestmentsRawParams {
     val details: String
 }
 
-fun CreateInvestmentsRawParams.toValidatedParams() = CreateInvestmentsParams(
-    businessId = businessId.takeIf { it.isNotBlank() } ?: throw BlankFieldException("businessId"),
+fun InvestmentsRawParams.toValidatedParams() = InvestmentsParams(
+    businessId = requiredNotBlank(::businessId),
     name = requiredNotBlank(::name),
     type = requiredNotBlank(::type),
     source = requiredNotBlank(::source),
@@ -28,9 +28,14 @@ fun CreateInvestmentsRawParams.toValidatedParams() = CreateInvestmentsParams(
     details = requiredNotBlank(::details),
 )
 
-fun CreateInvestmentsRawParams.toParsedParams(currency: Currency): CreateInvestmentsParsedParams {
+fun InvestmentsRawParams.toIdentifiedParams(investmentId: String) = Identified(
+    uid = investmentId,
+    body = toValidatedParams()
+)
+
+fun InvestmentsRawParams.toParsedParams(currency: Currency): InvestmentsParsedParams {
     val validated = toValidatedParams()
-    return CreateInvestmentsParsedParams(
+    return InvestmentsParsedParams(
         businessId = validated.businessId,
         name = validated.name,
         type = validated.type,

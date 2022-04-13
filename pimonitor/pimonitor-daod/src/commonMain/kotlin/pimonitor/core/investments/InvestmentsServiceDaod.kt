@@ -1,11 +1,10 @@
 package pimonitor.core.investments
 
-import bitframe.core.RequestBody
-import bitframe.core.ServiceConfigDaod
-import bitframe.core.get
-import bitframe.core.isEqualTo
+import bitframe.core.*
+import datetime.Date
 import datetime.SimpleDateTime
 import kash.Currency
+import kash.Money
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.coroutines.async
@@ -13,10 +12,12 @@ import kotlinx.datetime.TimeZone
 import later.Later
 import later.await
 import later.later
+import pimonitor.core.business.utils.disbursements.Disbursement
 import pimonitor.core.business.utils.disbursements.toParsedParams
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
-import pimonitor.core.investments.params.CreateInvestmentDisbursementParams
-import pimonitor.core.investments.params.CreateInvestmentsParams
+import pimonitor.core.investments.params.InvestmentDisbursementParams
+import pimonitor.core.investments.params.InvestmentsParams
+import pimonitor.core.investments.params.InvestmentsParsedParams
 import pimonitor.core.investments.params.toValidatedParams
 
 open class InvestmentsServiceDaod(
@@ -30,13 +31,19 @@ open class InvestmentsServiceDaod(
     private val currency: Currency = Currency.ZAR
     private val timezone: TimeZone = TimeZone.UTC
 
-    override fun capture(rb: RequestBody.Authorized<CreateInvestmentsParams>) = config.scope.later {
+    override fun create(rb: RequestBody.Authorized<InvestmentsParams>) = config.scope.later {
         val params = rb.data.toValidatedParams().toParsedParams(currency)
         val history = InvestmentHistory.Created(
-            on = SimpleDateTime.now,
+            on = Date.today(timezone),
             by = rb.session.user.ref()
         )
-        investmentsDao.create(params.toInvestment(spaceId = rb.session.space.uid, history)).await().toSummary()
+        investmentsDao.create(params.toInvestment(spaceId = rb.session.space.uid, history)).await()
+    }
+
+    override fun update(rb: RequestBody.Authorized<Identified<InvestmentsParams>>): Later<Investment> = config.scope.later {
+        val params = rb.data.map { it.toParsedParams(currency) }
+        val investment = investmentsDao.load(uid = params.uid).await()
+        investmentsDao.update(investment.merge(params.body, rb.session.user.ref())).await()
     }
 
     override fun all(rb: RequestBody.Authorized<InvestmentFilter>) = config.scope.later {
@@ -48,7 +55,7 @@ open class InvestmentsServiceDaod(
         investmentsDao.all(condition).await().toTypedArray().map { it.toSummary() }.toInteroperableList()
     }
 
-    override fun disburse(rb: RequestBody.Authorized<CreateInvestmentDisbursementParams>) = config.scope.later {
+    override fun disburse(rb: RequestBody.Authorized<InvestmentDisbursementParams>) = config.scope.later {
         val investment = investmentsDao.load(rb.data.investmentId).await()
         val disbursement = rb.data.toParsedParams(currency).toDisbursement(rb.session, timezone)
         val input = investment.copy(
@@ -66,6 +73,17 @@ open class InvestmentsServiceDaod(
             }
         }.map { it.await() }.toInteroperableList()
     }
+
+    private fun Investment.merge(params: InvestmentsParsedParams, by: UserRef) = copy(
+        businessId = params.businessId,
+        name = params.name,
+        type = params.type,
+        source = params.source,
+        amount = params.amount,
+        date = params.date,
+        details = params.details,
+        history = (history + InvestmentHistory.Updated(Date.today(timezone), by)).toInteroperableList()
+    )
 
     private suspend fun Investment.toSummary(): InvestmentSummary = InvestmentSummary(
         businessId = businessId,

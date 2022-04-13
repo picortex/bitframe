@@ -5,11 +5,11 @@ import validation.requiredNotBlank
 import kotlin.js.JsExport
 
 @JsExport
-interface CreateInvestmentDisbursementRawParams : DisbursementRawParams {
+interface InvestmentDisbursementRawParams : DisbursementRawParams {
     val investmentId: String
 }
 
-fun CreateInvestmentDisbursementRawParams.toValidatedParams() = CreateInvestmentDisbursementParams(
+fun InvestmentDisbursementRawParams.toValidatedParams() = InvestmentDisbursementParams(
     investmentId = requiredNotBlank(::investmentId),
     amount = requiredNotBlank(::amount),
     date = requiredNotBlank(::date),

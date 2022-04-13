@@ -1,12 +1,12 @@
 package pimonitor.client.business.investments.params
 
-import pimonitor.core.investments.params.CreateInvestmentsParams
+import pimonitor.core.investments.params.InvestmentsParams
 import validation.BlankFieldException
 import validation.requiredNotBlank
 import kotlin.js.JsExport
 
 @JsExport
-interface CreateInvestmentsRawFormParams {
+interface InvestmentsRawParams {
     val name: String
     val type: String
     val source: String
@@ -15,7 +15,7 @@ interface CreateInvestmentsRawFormParams {
     val details: String
 }
 
-fun CreateInvestmentsRawFormParams.toValidatedParams(businessId: String) = CreateInvestmentsParams(
+fun InvestmentsRawParams.toValidatedParams(businessId: String) = InvestmentsParams(
     businessId = businessId.takeIf { it.isNotBlank() } ?: throw BlankFieldException("businessId"),
     name = requiredNotBlank(::name),
     type = requiredNotBlank(::type),
