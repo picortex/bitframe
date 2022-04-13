@@ -6,8 +6,11 @@ import bitframe.core.get
 import bitframe.core.isEqualTo
 import datetime.SimpleDateTime
 import kash.Currency
+import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
+import kotlinx.coroutines.async
 import kotlinx.datetime.TimeZone
+import later.Later
 import later.await
 import later.later
 import pimonitor.core.business.utils.disbursements.toParsedParams
@@ -53,6 +56,15 @@ open class InvestmentsServiceDaod(
         )
         investmentsDao.update(input).await()
         disbursement
+    }
+
+    override fun delete(rb: RequestBody.Authorized<Array<out String>>) = config.scope.later {
+        rb.data.map { uid ->
+            async {
+                val investment = investmentsDao.load(uid).await()
+                investmentsDao.update(investment.copy(deleted = true)).await()
+            }
+        }.map { it.await() }.toInteroperableList()
     }
 
     private suspend fun Investment.toSummary(): InvestmentSummary = InvestmentSummary(

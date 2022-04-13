@@ -24,4 +24,7 @@ interface InvestmentsServiceCore {
 
     @JsName("_ignore_disburse")
     fun disburse(rb: RequestBody.Authorized<CreateInvestmentDisbursementParams>): Later<Disbursement>
+
+    @JsName("_ignore_delete")
+    fun delete(rb: RequestBody.Authorized<Array<out String>>): Later<List<Investment>>
 }

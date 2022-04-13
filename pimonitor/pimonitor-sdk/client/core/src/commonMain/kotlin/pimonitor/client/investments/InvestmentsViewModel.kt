@@ -4,6 +4,7 @@ import bitframe.client.UIScopeConfig
 import kash.MoneyFormatterOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
@@ -12,6 +13,7 @@ import pimonitor.client.investments.InvestmentIntent.*
 import pimonitor.core.investments.InvestmentSummary
 import presenters.cases.CrowdState
 import presenters.cases.Feedback
+import presenters.modal.confirmDialog
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 
@@ -25,10 +27,56 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
         is SendEditInvestmentForm -> TODO()
         is ShowDisbursementForm -> TODO()
         is SendDisbursementForm -> TODO()
-        is ShowDeleteOneInvestmentDialog -> TODO()
-        is SendDeleteOneInvestmentIntent -> TODO()
-        is ShowDeleteManyInvestmentDialog -> TODO()
-        is SendDeleteManyInvestmentIntent -> TODO()
+        is ShowDeleteOneInvestmentDialog -> showDeleteOneInvestment(i)
+        is SendDeleteOneInvestmentIntent -> sendDeleteOneInvestment(i)
+        is ShowDeleteManyInvestmentsDialog -> showDeleteManyInvestmentsDialog(i)
+        is SendDeleteManyInvestmentsIntent -> sendDeleteManyInvestments(i)
+    }
+
+    private fun showDeleteOneInvestment(i: ShowDeleteOneInvestmentDialog) {
+
+    }
+
+    private fun CoroutineScope.sendDeleteOneInvestment(i: SendDeleteOneInvestmentIntent) = launch {
+        val state = ui.value.copy(dialog = null)
+        flow {
+            emit(state.copy(status = Feedback.Loading("Deleting ${i.investment.name} investment, please wait . . .")))
+            api.investments.delete(i.investment.uid).await()
+            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all().await())))
+        }.catch {
+            emit(state.copy(status = Feedback.Failure(it) {
+                onGoBack { ui.value = state }
+                onRetry { post(i) }
+            }))
+        }.collect {
+            ui.value = it
+        }
+    }
+
+    private fun showDeleteManyInvestmentsDialog(i: ShowDeleteManyInvestmentsDialog) {
+        val state = ui.value
+        ui.value = state.copy(
+            dialog = confirmDialog("Delete Investments", "Are you sure you want to delete ${i.investments.size} investments?") {
+                onCancel { ui.value = state }
+                onConfirm { post(SendDeleteManyInvestmentsIntent(i.investments.map { it.data }.toTypedArray())) }
+            }
+        )
+    }
+
+    private fun CoroutineScope.sendDeleteManyInvestments(i: SendDeleteManyInvestmentsIntent) = launch {
+        val state = ui.value.copy(dialog = null)
+        flow {
+            emit(state.copy(status = Feedback.Loading("Deleting ${i.investments.size} investments, please wait. . .")))
+            api.investments.delete(*i.investments.map { it.uid }.toTypedArray()).await()
+            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all().await())))
+        }.catch {
+            emit(state.copy(status = Feedback.Failure(it) {
+                onGoBack { ui.value = state }
+                onRetry { post(i) }
+            }))
+        }.collect {
+            ui.value = it
+        }
     }
 
     private fun CoroutineScope.loadAllInvestments(i: LoadAllInvestments) = launch {
@@ -55,7 +103,7 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
         singleAction("Issue Disbursement") { post(ShowDisbursementForm(it.data)) }
         singleAction("Edit Investment") { post(ShowEditInvestmentForm(it.data)) }
         singleAction("Delete Investment") { post(ShowDeleteOneInvestmentDialog(it.data)) }
-        multiAction("Delete All") { post(ShowDeleteManyInvestmentDialog(it)) }
+        multiAction("Delete All") { post(ShowDeleteManyInvestmentsDialog(it)) }
         selectable()
         column("Name") { it.data.name }
         column("Business") { it.data.businessName }
