@@ -7,7 +7,7 @@ import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
 import pimonitor.core.investments.InvestmentType
-import pimonitor.core.investments.params.InvestmentsParams
+import pimonitor.core.investments.params.InvestmentParams
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.SignUpBusinessParams
@@ -50,7 +50,7 @@ class CaptureInvestmentJourneyTest {
         }
 
         step("Capture Investment of the newly created business") {
-            val params = InvestmentsParams(
+            val params = InvestmentParams(
                 businessId = business!!.uid,
                 name = "Asset Capital",
                 type = InvestmentType.Loan.name,

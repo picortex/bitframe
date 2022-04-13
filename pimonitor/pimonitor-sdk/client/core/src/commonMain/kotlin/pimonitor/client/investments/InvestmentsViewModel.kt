@@ -9,11 +9,12 @@ import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.business.investments.params.toCreateInvestmentDisbursementParams
-import pimonitor.client.business.utils.disbursements.CreateDisbursementForm
 import pimonitor.client.investments.InvestmentIntent.*
 import pimonitor.client.investments.forms.CreateInvestmentForm
 import pimonitor.client.investments.forms.UpdateInvestmentForm
+import pimonitor.client.utils.disbursements.forms.CreateDisbursementForm
 import pimonitor.core.investments.InvestmentSummary
+import pimonitor.core.investments.filters.InvestmentFilter
 import pimonitor.core.investments.params.toIdentifiedParams
 import pimonitor.core.investments.params.toValidatedParams
 import presenters.cases.CrowdState
@@ -25,6 +26,7 @@ import viewmodel.ViewModel
 
 class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : ViewModel<InvestmentIntent, CrowdState<InvestmentSummary>>(CrowdState()) {
     private val api get() = config.service
+    private var businessId: String? = null
     override fun CoroutineScope.execute(i: InvestmentIntent): Any = when (i) {
         is LoadAllInvestments -> loadAllInvestments(i)
         is ShowCreateInvestmentForm -> showCreateInvestmentForm(i)
@@ -55,7 +57,7 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
                 onRetry { post(i) }
             }))
         }.collect {
-            ui.value = state
+            ui.value = it
         }
     }
 
@@ -66,7 +68,7 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
             val params = i.params.toValidatedParams()
             val investment = api.investments.create(params).await()
             emit(state.copy(status = Feedback.Success("${investment.name} investment has been created successfully. Updating your feed, please wait. . .")))
-            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all().await())))
+            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {
             emit(state.copy(status = Feedback.Failure(it) {
                 onCancel { post(ShowCreateInvestmentForm(null, i.params)) }
@@ -93,7 +95,7 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
                 onRetry { post(i) }
             }))
         }.collect {
-            ui.value = state
+            ui.value = it
         }
     }
 
@@ -104,7 +106,7 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
             val params = i.params.toIdentifiedParams(i.investment.uid)
             val investment = api.investments.update(params).await()
             emit(state.copy(status = Feedback.Success("${investment.name} investment has been updated successfully. Synchronizing the remaining investments, please wait. . .")))
-            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all().await())))
+            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {
             emit(state.copy(status = Feedback.Failure(it) {
                 onCancel { post(ShowUpdateInvestmentForm(i.investment, i.params)) }
@@ -130,7 +132,7 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
             emit(state.copy(status = Feedback.Loading("Sending disbursement, please wait. . .!")))
             val disbursement = api.investments.disburse(i.params.toCreateInvestmentDisbursementParams(i.investment.uid)).await()
             emit(state.copy(status = Feedback.Success("${disbursement.amount.toFormattedString()} has been successfully disbursed to ${i.investment.name} investment. Loading the remaining investments, please wait. . .")))
-            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all().await())))
+            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {
             emit(state.copy(status = Feedback.Failure(it) {
                 onGoBack { post(ShowDisbursementForm(i.investment, i.params)) }
@@ -157,7 +159,7 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
             emit(state.copy(status = Feedback.Loading("Deleting ${i.investment.name} investment, please wait . . .")))
             api.investments.delete(i.investment.uid).await()
             emit(state.copy(status = Feedback.Success("Investment ${i.investment.name} deleted. Loading the remaining investments, please wait. . .")))
-            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all().await())))
+            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {
             emit(state.copy(status = Feedback.Failure(it) {
                 onGoBack { ui.value = state }
@@ -184,7 +186,7 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
             emit(state.copy(status = Feedback.Loading("Deleting ${i.investments.size} investments, please wait. . .")))
             api.investments.delete(*i.investments.map { it.uid }.toTypedArray()).await()
             emit(state.copy(status = Feedback.Success("${i.investments.size} Investments deleted. Loading the remaining investments, please wait. . .")))
-            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all().await())))
+            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {
             emit(state.copy(status = Feedback.Failure(it) {
                 onGoBack { ui.value = state }
@@ -196,10 +198,11 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
     }
 
     private fun CoroutineScope.loadAllInvestments(i: LoadAllInvestments) = launch {
+        businessId = i.businessId
         val state = ui.value.copy(dialog = null)
         flow {
             emit(state.copy(status = Feedback.Loading("Loading your investments, please wait. . .")))
-            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all().await())))
+            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {
             emit(state.copy(status = Feedback.Failure(it) {
                 onRetry { post(i) }
@@ -215,14 +218,14 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
         emptyAction("Capture Investment") { post(ShowCreateInvestmentForm(null, null)) }
 
         primaryAction("Add Investment") { post(ShowCreateInvestmentForm(null, null)) }
-        primaryAction("Refresh") { post(LoadAllInvestments) }
+        primaryAction("Refresh") { post(LoadAllInvestments(businessId)) }
         singleAction("Issue Disbursement") { post(ShowDisbursementForm(it.data, null)) }
         singleAction("Edit Investment") { post(ShowUpdateInvestmentForm(it.data, null)) }
         singleAction("Delete Investment") { post(ShowDeleteOneInvestmentDialog(it.data)) }
         multiAction("Delete All") { post(ShowDeleteManyInvestmentsDialog(it)) }
         selectable()
         column("Name") { it.data.name }
-        column("Business") { it.data.businessName }
+        if (businessId == null) column("Business") { it.data.businessName }
         column("Source") { it.data.source }
         column("Type") { it.data.type }
         val options = MoneyFormatterOptions(decimals = 0, abbreviate = false)

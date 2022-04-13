@@ -8,7 +8,7 @@ import later.Later
 import pimonitor.core.business.interventions.params.CreateGoalParams
 import pimonitor.core.business.interventions.params.CreateInterventionDisbursementParams
 import pimonitor.core.business.interventions.params.InterventionParams
-import pimonitor.core.business.utils.disbursements.Disbursement
+import pimonitor.core.utils.disbursements.Disbursement
 import kotlin.js.JsExport
 import kotlin.js.JsName
 

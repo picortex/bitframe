@@ -1,15 +1,15 @@
-package pimonitor.client.business.utils.disbursements
+package pimonitor.client.utils.disbursements.forms
 
 import presenters.forms.Form
 import presenters.forms.FormActionsBuildingBlock
-import pimonitor.client.business.utils.disbursements.DisbursementFields as Fields
-import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams as Params
+import pimonitor.client.utils.disbursements.params.DisbursementFields as Fields
+import pimonitor.core.utils.disbursements.params.DisbursementRawParams as Params
 
-class CreateDisbursementForm(
+fun CreateDisbursementForm(
     name: String,
     params: Params? = null,
     block: FormActionsBuildingBlock<Params>
-) : Form<Fields, Params> by Form(
+) = Form(
     heading = "Issue a Disbursement",
     details = "Issue a new disbursement for $name",
     fields = Fields(params),

@@ -1,3 +1,6 @@
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
+
 package pimonitor.client.investments
 
 import bitframe.client.ServiceConfig
@@ -8,16 +11,19 @@ import bitframe.core.RequestBody
 import bitframe.core.toValidated
 import later.await
 import later.later
-import pimonitor.core.investments.InvestmentFilter
+import pimonitor.core.investments.filters.InvestmentFilter
 import pimonitor.core.investments.InvestmentsServiceCore
+import pimonitor.core.investments.filters.InvestmentRawFilter
+import pimonitor.core.investments.filters.toValidatedFilter
 import pimonitor.core.investments.params.InvestmentDisbursementRawParams
-import pimonitor.core.investments.params.InvestmentsRawParams
+import pimonitor.core.investments.params.InvestmentRawParams
 import pimonitor.core.investments.params.toValidatedParams
+import kotlin.js.JsExport
 
 abstract class InvestmentsService(private val config: ServiceConfig) : InvestmentsServiceCore {
     val logger by config.logger(withSessionInfo = true)
 
-    fun create(params: InvestmentsRawParams) = config.scope.later {
+    fun create(params: InvestmentRawParams) = config.scope.later {
         logger.info("Capturing ${params.name} investment")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("capture investments"),
@@ -26,7 +32,7 @@ abstract class InvestmentsService(private val config: ServiceConfig) : Investmen
         create(rb).await().also { logger.info("Investment captured successfully") }
     }
 
-    fun update(params: IdentifiedRaw<InvestmentsRawParams>) = config.scope.later {
+    fun update(params: IdentifiedRaw<InvestmentRawParams>) = config.scope.later {
         logger.info("Updating ${params.body.name} investment")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("updated an investment"),
@@ -53,11 +59,11 @@ abstract class InvestmentsService(private val config: ServiceConfig) : Investmen
         delete(rb).await()
     }
 
-    fun all() = config.scope.later {
+    fun all(params: InvestmentRawFilter? = null) = config.scope.later {
         logger.info("Loading all investments")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("load all investments"),
-            data = InvestmentFilter()
+            data = params.toValidatedFilter()
         )
         all(rb).await()
     }

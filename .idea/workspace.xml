@@ -5,8 +5,65 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/filters/InvestmentRawFilter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/BusinessInvestmentsScopeLegacy.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/forms/CaptureInvestmentForm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/forms/CaptureInvestmentForm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/akkounts/sage/src/commonMain/kotlin/akkounts/sage/reports/SageOneZAReportsService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/akkounts/sage/src/commonMain/kotlin/akkounts/sage/reports/SageOneZAReportsService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonTest/kotlin/changes/ChangeRemarkBuilderTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonTest/kotlin/changes/ChangeRemarkBuilderTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/business/investments/BusinessInvestmentsService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/business/investments/BusinessInvestmentsService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/businesses/CaptureInvestmentJourneyTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/businesses/CaptureInvestmentJourneyTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/business/interventions/BusinessInterventionsServiceKtor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/business/interventions/BusinessInterventionsServiceKtor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/business/investments/BusinessInvestmentsServiceKtor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/business/investments/BusinessInvestmentsServiceKtor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsServiceKtor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsServiceKtor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/interventions/BusinessInterventionsServiceCore.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/interventions/BusinessInterventionsServiceCore.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/interventions/Intervention.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/interventions/Intervention.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/interventions/params/CreateInterventionDisbursementRawParams.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/interventions/params/CreateInterventionDisbursementRawParams.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/utils/disbursements/Disbursement.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursements/Disbursement.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/utils/disbursements/DisbursementParams.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursements/params/DisbursementParams.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/utils/disbursements/DisbursementParsedParams.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursements/params/DisbursementParsedParams.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/utils/disbursements/DisbursementRawParams.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursements/params/DisbursementRawParams.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/BusinessInvestmentsServiceCore.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/BusinessInvestmentsServiceCore.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/Investment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/Investment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentFilter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/filters/InvestmentFilter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentSummary.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentSummary.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsServiceCore.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsServiceCore.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentDisbursementRawParams.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentDisbursementRawParams.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentsParams.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentParams.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentsRawParams.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentRawParams.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/business/interventions/BusinessInterventionsServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/business/interventions/BusinessInterventionsServiceDaod.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/investments/BusinessInvestmentsServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/investments/BusinessInvestmentsServiceDaod.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsServiceDaod.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/PiMonitorAppScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/PiMonitorAppScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/interventions/BusinessInterventionsIntent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/interventions/BusinessInterventionsIntent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/interventions/BusinessInterventionsScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/interventions/BusinessInterventionsScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/interventions/BusinessInterventionsViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/interventions/BusinessInterventionsViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/interventions/dialogs/CreateDisbursementDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/interventions/dialogs/CreateDisbursementDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/interventions/params/CreateDisbursementsRawFormParamsUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/interventions/params/CreateDisbursementsRawFormParamsUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/BusinessInvestmentsIntent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/BusinessInvestmentsIntent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/BusinessInvestmentsScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/BusinessInvestmentsScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/dialogs/CreateDisbursementDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/dialogs/CreateDisbursementDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/params/CreateDisbursementsRawFormParamsUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/params/CreateDisbursementsRawFormParamsUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/params/InvestmentsFromParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/params/InvestmentsRawParams.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/params/InvestmentsRawParams.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/utils/disbursements/CreateDisbursementForm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursements/forms/CreateDisbursementForm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/utils/disbursements/DisbursementFields.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursements/params/DisbursementFields.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/utils/disbursements/DisbursementFormParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/utils/disbursements/DisbursementRawFormParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/utils/disbursements/EditDisbursementForm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursements/forms/UpdateDisbursementForm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentIntent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentIntent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentIntents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentIntents.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/fields/InvestmentFields.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/fields/InvestmentFields.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/forms/CreateInvestmentForm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/forms/CreateInvestmentForm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/forms/EditInvestmentForm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/forms/EditInvestmentForm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/investments/InvestmentsScopeTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/investments/InvestmentsScopeTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/PiMonitorReactAppScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/PiMonitorReactAppScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/business/investments/BusinessInvestmentsReactScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/business/investments/BusinessInvestmentsReactScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/investments/BusinessInvestmentsController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/investments/BusinessInvestmentsController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/investments/InvestmentsController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/investments/InvestmentsController.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,9 +134,9 @@
         <option value="Kotlin Enum" />
         <option value="Kotlin Sealed Class" />
         <option value="Kotlin Object" />
-        <option value="Kotlin File" />
         <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
+        <option value="Kotlin File" />
       </list>
     </option>
   </component>
@@ -126,11 +183,11 @@
       <recent name="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/utils/disbursements" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursements/params" />
+      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursements/forms" />
       <recent name="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/configs" />
       <recent name="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/forms" />
       <recent name="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/investments/params" />
-      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/utils/info" />
-      <recent name="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/changes" />
     </key>
     <key name="CreateKotlinClassDialog.RecentsKey">
       <recent name="pimonitor.core.business.utils.disbursements" />
@@ -140,21 +197,21 @@
       <recent name="pimonitor.client.business.interventions.params" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="pimonitor.core.investments.filters" />
+      <recent name="pimonitor.client.utils.disbursements.params" />
       <recent name="akkounts.reports.utils" />
       <recent name="pimonitor.core.business.info.params" />
       <recent name="pimonitor.client.business.investments.fields" />
-      <recent name="pimonitor.client.business.investments.forms" />
-      <recent name="presenters.forms" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="pimonitor.core.investments.filters" />
       <recent name="pimonitor.core.investments.params" />
       <recent name="pimonitor.client.investments.forms" />
       <recent name="pimonitor.core.business.utils.disbursements" />
       <recent name="pimonitor.core.investments" />
-      <recent name="businesses" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.ChangeRemarkBuilderTest">
+  <component name="RunManager" selected="Gradle.InvestmentsScopeTest">
     <configuration name="BusinessOverviewJourneyTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -243,6 +300,28 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="InvestmentsScopeTest.should_load_investments_from_all_businesses" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;investments.InvestmentsScopeTest.should_load_investments_from_all_businesses&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":pimonitor-sdk-client-core:cleanJvmTest" />
+            <option value=":pimonitor-sdk-client-core:jvmTest" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="SendInviteJourneyTest" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="env">
@@ -265,28 +344,6 @@
           </list>
         </option>
         <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="UIScopesTestability.crypto_explanations" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/bitframe-service/builder/sdk/client/mock" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;UIScopesTestability.crypto_explanations&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":bitframe-service-builder-sdk-client-mock:cleanJvmTest" />
-            <option value=":bitframe-service-builder-sdk-client-mock:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
@@ -662,34 +719,34 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.SendInviteJourneyTest" />
-      <item itemvalue="Gradle.pi-api-mock-jvm-test" />
-      <item itemvalue="Gradle.pi-core-jvm-test" />
-      <item itemvalue="Gradle.pi-core-js-node-test" />
-      <item itemvalue="Gradle.pi-api-live-remote-jvm-test" />
-      <item itemvalue="Gradle.pi-api-live-local-jvm-test" />
-      <item itemvalue="Gradle.pi-api-live-local-js-browser-test" />
-      <item itemvalue="Gradle.pi-sdk-mock-jvm-test" />
-      <item itemvalue="Gradle.pi-sdk-mock-js-node-test" />
-      <item itemvalue="Gradle.pi-sdk-live-local-jvm-test" />
-      <item itemvalue="Gradle.pi-sdk-live-remote-jvm-test" />
-      <item itemvalue="Gradle.mokads:linuxTest" />
-      <item itemvalue="Gradle.mokads:jvmTest" />
-      <item itemvalue="Gradle.mokads:jsNodeTest" />
-      <item itemvalue="Gradle.response:jvmTest" />
-      <item itemvalue="Gradle.UIScopesTestability.crypto_explanations" />
-      <item itemvalue="Gradle.InvestmentsScopeTest" />
-      <item itemvalue="Gradle.InterventionJourneyTest" />
       <item itemvalue="Gradle.BusinessOverviewJourneyTest" />
       <item itemvalue="Gradle.ChangeRemarkBuilderTest" />
+      <item itemvalue="Gradle.InterventionJourneyTest" />
+      <item itemvalue="Gradle.InvestmentsScopeTest" />
+      <item itemvalue="Gradle.SendInviteJourneyTest" />
+      <item itemvalue="Gradle.mokads:jsNodeTest" />
+      <item itemvalue="Gradle.mokads:jvmTest" />
+      <item itemvalue="Gradle.mokads:linuxTest" />
+      <item itemvalue="Gradle.pi-api-live-local-js-browser-test" />
+      <item itemvalue="Gradle.pi-api-live-local-jvm-test" />
+      <item itemvalue="Gradle.pi-api-live-remote-jvm-test" />
+      <item itemvalue="Gradle.pi-api-mock-jvm-test" />
+      <item itemvalue="Gradle.pi-core-js-node-test" />
+      <item itemvalue="Gradle.pi-core-jvm-test" />
+      <item itemvalue="Gradle.pi-sdk-live-local-jvm-test" />
+      <item itemvalue="Gradle.pi-sdk-live-remote-jvm-test" />
+      <item itemvalue="Gradle.pi-sdk-mock-js-node-test" />
+      <item itemvalue="Gradle.pi-sdk-mock-jvm-test" />
+      <item itemvalue="Gradle.response:jvmTest" />
+      <item itemvalue="Gradle.InvestmentsScopeTest.should_load_investments_from_all_businesses" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.ChangeRemarkBuilderTest" />
-        <item itemvalue="Gradle.BusinessOverviewJourneyTest" />
+        <item itemvalue="Gradle.InvestmentsScopeTest" />
+        <item itemvalue="Gradle.InvestmentsScopeTest.should_load_investments_from_all_businesses" />
+        <item itemvalue="Gradle.InvestmentsScopeTest" />
         <item itemvalue="Gradle.InterventionJourneyTest" />
-        <item itemvalue="Gradle.InvestmentsScopeTest" />
-        <item itemvalue="Gradle.InvestmentsScopeTest" />
+        <item itemvalue="Gradle.ChangeRemarkBuilderTest" />
       </list>
     </recent_temporary>
   </component>

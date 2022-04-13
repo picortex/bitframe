@@ -1,3 +1,11 @@
+# 0.10.20
+
+- Unified investments viewmodel to be used in different investment scopes
+
+Debug Features
+
+- Removed sage response from mock logs and server logs
+
 # 0.10.19
 
 ### Enhancements

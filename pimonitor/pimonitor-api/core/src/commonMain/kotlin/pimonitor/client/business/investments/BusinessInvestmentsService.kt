@@ -19,7 +19,7 @@ abstract class BusinessInvestmentsService(
 
     private val logger by config.logger(withSessionInfo = true)
 
-    fun capture(params: InvestmentsRawParams) = config.scope.later {
+    fun capture(params: InvestmentRawParams) = config.scope.later {
         logger.info("Capturing investment")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("capture investments"),

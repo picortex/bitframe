@@ -1,4 +1,4 @@
-package pimonitor.core.business.utils.disbursements
+package pimonitor.core.utils.disbursements.params
 
 import datetime.Date
 import kash.Currency

@@ -8,7 +8,7 @@ import kotlinx.serialization.decodeFromString
 import later.await
 import pimonitor.core.investments.BusinessInvestmentsServiceDaod
 import pimonitor.core.investments.params.InvestmentDisbursementParams
-import pimonitor.core.investments.params.InvestmentsParams
+import pimonitor.core.investments.params.InvestmentParams
 import response.response
 
 class BusinessInvestmentsController(
@@ -17,7 +17,7 @@ class BusinessInvestmentsController(
     private val json get() = service.config.json
 
     suspend fun capture(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.Authorized<InvestmentsParams>>(req.compulsoryBody())
+        val rb = json.decodeFromString<RequestBody.Authorized<InvestmentParams>>(req.compulsoryBody())
         resolve(service.capture(rb).await())
     }.toHttpResponse()
 

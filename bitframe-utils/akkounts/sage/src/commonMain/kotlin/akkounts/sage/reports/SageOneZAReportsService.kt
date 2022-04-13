@@ -123,7 +123,6 @@ class SageOneZAReportsService @JvmOverloads constructor(
             setBody(TextContent(text = Mapper.encodeToString(params), contentType = ContentType.Application.Json))
         }
         val json = """{"response":${response.bodyAsText()}}"""
-        println(json)
         Mapper.decodeFromString(json)["response"] as List<Map<String, *>>
     }
 

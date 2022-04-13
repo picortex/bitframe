@@ -8,7 +8,7 @@ import validation.requiredNotBlank
 import kotlin.js.JsExport
 
 @JsExport
-interface InvestmentsRawParams {
+interface InvestmentRawParams {
     val businessId: String
     val name: String
     val type: String
@@ -18,7 +18,7 @@ interface InvestmentsRawParams {
     val details: String
 }
 
-fun InvestmentsRawParams.toValidatedParams() = InvestmentsParams(
+fun InvestmentRawParams.toValidatedParams() = InvestmentParams(
     businessId = requiredNotBlank(::businessId),
     name = requiredNotBlank(::name),
     type = requiredNotBlank(::type),
@@ -28,12 +28,12 @@ fun InvestmentsRawParams.toValidatedParams() = InvestmentsParams(
     details = requiredNotBlank(::details),
 )
 
-fun InvestmentsRawParams.toIdentifiedParams(investmentId: String) = Identified(
+fun InvestmentRawParams.toIdentifiedParams(investmentId: String) = Identified(
     uid = investmentId,
     body = toValidatedParams()
 )
 
-fun InvestmentsRawParams.toParsedParams(currency: Currency): InvestmentsParsedParams {
+fun InvestmentRawParams.toParsedParams(currency: Currency): InvestmentsParsedParams {
     val validated = toValidatedParams()
     return InvestmentsParsedParams(
         businessId = validated.businessId,

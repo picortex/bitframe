@@ -1,17 +1,19 @@
 package pimonitor.core.investments
 
-import bitframe.core.*
+import bitframe.core.RequestBody
+import bitframe.core.ServiceConfigDaod
+import bitframe.core.get
+import bitframe.core.isEqualTo
 import datetime.Date
-import datetime.SimpleDateTime
 import kash.Currency
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.datetime.TimeZone
 import later.await
 import later.later
-import pimonitor.core.business.utils.disbursements.toParsedParams
 import pimonitor.core.investments.params.InvestmentDisbursementParams
-import pimonitor.core.investments.params.InvestmentsParams
+import pimonitor.core.investments.params.InvestmentParams
 import pimonitor.core.investments.params.toValidatedParams
+import pimonitor.core.utils.disbursements.params.toParsedParams
 
 open class BusinessInvestmentsServiceDaod(
     val config: ServiceConfigDaod
@@ -23,7 +25,7 @@ open class BusinessInvestmentsServiceDaod(
     private val currency: Currency = Currency.ZAR
     private val timezone: TimeZone = TimeZone.UTC
 
-    override fun capture(rb: RequestBody.Authorized<InvestmentsParams>) = config.scope.later {
+    override fun capture(rb: RequestBody.Authorized<InvestmentParams>) = config.scope.later {
         val params = rb.data.toValidatedParams().toParsedParams(currency)
         val history = InvestmentHistory.Created(
             on = Date.today(timezone),
