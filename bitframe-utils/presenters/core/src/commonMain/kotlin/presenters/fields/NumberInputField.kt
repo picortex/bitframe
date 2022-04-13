@@ -10,13 +10,13 @@ data class NumberInputField(
     override val name: String,
     override val label: String = name,
     override val hint: String = label,
-    override var value: Double? = null
+    override var value: String? = null
 ) : NumberInputRawField {
     @JsName("_ignore_fromProperty")
     constructor(
         name: KProperty<*>,
         label: String = name.name,
         hint: String = label,
-        value: Double? = null
+        value: String? = null
     ) : this(name.name, label, hint, value)
 }

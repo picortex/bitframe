@@ -3,7 +3,7 @@
 
 package bitframe.client
 
-open class MicroScopeHook<out I, out S>(
-    open val intents: I,
+open class MicroScopeHook<out IW, out S>(
+    open val intents: IW,
     open val state: S
 )

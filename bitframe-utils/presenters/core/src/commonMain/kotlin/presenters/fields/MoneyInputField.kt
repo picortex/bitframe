@@ -44,7 +44,7 @@ data class MoneyInputField(
             name = "$name-value",
             label = "Value",
             hint = hint ?: "",
-            value = value?.amount?.toDouble()
+            value = value?.toFormattedString(prefix = "")
         )
     }
 }

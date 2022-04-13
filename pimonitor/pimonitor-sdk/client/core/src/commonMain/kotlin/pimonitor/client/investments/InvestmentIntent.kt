@@ -9,13 +9,13 @@ import presenters.table.Row
 sealed class InvestmentIntent {
     object LoadAllInvestments : InvestmentIntent()
 
-    data class ShowEditInvestmentForm(val investment: InvestmentSummary) : InvestmentIntent()
-    data class SendEditInvestmentForm(val investment: InvestmentSummary) : InvestmentIntent()
-
     data class ShowCreateInvestmentForm(val business: MonitoredBusinessBasicInfo?) : InvestmentIntent()
     data class SendCreateInvestmentForm(val params: CreateInvestmentsRawFormParams) : InvestmentIntent()
 
-    data class ShowDisbursementForm(val investment: InvestmentSummary) : InvestmentIntent()
+    data class ShowEditInvestmentForm(val investment: InvestmentSummary) : InvestmentIntent()
+    data class SendEditInvestmentForm(val investment: InvestmentSummary, val params: CreateInvestmentsRawFormParams) : InvestmentIntent()
+
+    data class ShowDisbursementForm(val investment: InvestmentSummary, val params: DisbursementRawFormParams?) : InvestmentIntent()
     data class SendDisbursementForm(val investment: InvestmentSummary, val params: DisbursementRawFormParams) : InvestmentIntent()
 
     data class ShowDeleteOneInvestmentDialog(val investment: InvestmentSummary) : InvestmentIntent()

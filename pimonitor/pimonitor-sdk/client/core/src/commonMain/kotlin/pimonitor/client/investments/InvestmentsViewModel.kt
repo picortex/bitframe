@@ -4,16 +4,18 @@ import bitframe.client.UIScopeConfig
 import kash.MoneyFormatterOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
+import pimonitor.client.business.investments.params.toCreateInvestmentDisbursementParams
+import pimonitor.client.business.utils.disbursements.CreateDisbursementForm
 import pimonitor.client.investments.InvestmentIntent.*
 import pimonitor.core.investments.InvestmentSummary
 import presenters.cases.CrowdState
 import presenters.cases.Feedback
 import presenters.modal.confirmDialog
+import presenters.modal.dialog
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 
@@ -24,8 +26,8 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
         is ShowCreateInvestmentForm -> TODO()
         is SendCreateInvestmentForm -> TODO()
         is ShowEditInvestmentForm -> TODO()
-        is SendEditInvestmentForm -> TODO()
-        is ShowDisbursementForm -> TODO()
+        is SendEditInvestmentForm -> sendEditInvestment(i)
+        is ShowDisbursementForm -> showDisbursementForm(i)
         is SendDisbursementForm -> sendDisbursementForm(i)
         is ShowDeleteOneInvestmentDialog -> showDeleteOneInvestment(i)
         is SendDeleteOneInvestmentIntent -> sendDeleteOneInvestment(i)
@@ -33,13 +35,39 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
         is SendDeleteManyInvestmentsIntent -> sendDeleteManyInvestments(i)
     }
 
+    private fun CoroutineScope.sendEditInvestment(i: SendEditInvestmentForm) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(status = Feedback.Loading("Editing ${i.investment.name}, please wait . . .!")))
+        }.catch {
+            emit(state.copy(status = Feedback.Failure(it) {
+                onCancel { post(ShowEditInvestmentForm(i.investment)) }
+                onRetry { post(i) }
+            }))
+        }.collect {
+            ui.value = it
+        }
+    }
+
+    private fun showDisbursementForm(i: ShowDisbursementForm) {
+        val state = ui.value
+        val form = CreateDisbursementForm(i.investment.name, i.params) {
+            onCancel { ui.value = state }
+            onSubmit { params -> post(SendDisbursementForm(i.investment, params)) }
+        }
+        ui.value = state.copy(dialog = dialog(form))
+    }
+
     private fun CoroutineScope.sendDisbursementForm(i: SendDisbursementForm) = launch {
         val state = ui.value
         flow {
             emit(state.copy(status = Feedback.Loading("Sending disbursement, please wait. . .!")))
+            val disbursement = api.investments.disburse(i.params.toCreateInvestmentDisbursementParams(i.investment.uid)).await()
+            emit(state.copy(status = Feedback.Success("${disbursement.amount.toFormattedString()} has been successfully disbursed to ${i.investment.name} investment. Loading the remaining investments, please wait. . .")))
+            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all().await())))
         }.catch {
             emit(state.copy(status = Feedback.Failure(it) {
-                onCancel { ui.value = state }
+                onGoBack { post(ShowDisbursementForm(i.investment, i.params)) }
                 onRetry { post(i) }
             }))
         }.collect {
@@ -62,6 +90,7 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
         flow {
             emit(state.copy(status = Feedback.Loading("Deleting ${i.investment.name} investment, please wait . . .")))
             api.investments.delete(i.investment.uid).await()
+            emit(state.copy(status = Feedback.Success("Investment ${i.investment.name} deleted. Loading the remaining investments, please wait. . .")))
             emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all().await())))
         }.catch {
             emit(state.copy(status = Feedback.Failure(it) {
@@ -88,6 +117,7 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
         flow {
             emit(state.copy(status = Feedback.Loading("Deleting ${i.investments.size} investments, please wait. . .")))
             api.investments.delete(*i.investments.map { it.uid }.toTypedArray()).await()
+            emit(state.copy(status = Feedback.Success("${i.investments.size} Investments deleted. Loading the remaining investments, please wait. . .")))
             emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all().await())))
         }.catch {
             emit(state.copy(status = Feedback.Failure(it) {
@@ -120,7 +150,7 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
 
         primaryAction("Add Investment") { post(ShowCreateInvestmentForm(null)) }
         primaryAction("Refresh") { post(LoadAllInvestments) }
-        singleAction("Issue Disbursement") { post(ShowDisbursementForm(it.data)) }
+        singleAction("Issue Disbursement") { post(ShowDisbursementForm(it.data, null)) }
         singleAction("Edit Investment") { post(ShowEditInvestmentForm(it.data)) }
         singleAction("Delete Investment") { post(ShowDeleteOneInvestmentDialog(it.data)) }
         multiAction("Delete All") { post(ShowDeleteManyInvestmentsDialog(it)) }
@@ -141,7 +171,7 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
         }
         column("Created By") { it.data.createdBy.name }
         actions("Actions") {
-            action("Issue Disbursement") { post(ShowDisbursementForm(it.data)) }
+            action("Issue Disbursement") { post(ShowDisbursementForm(it.data, null)) }
             action("Edit") { post(ShowEditInvestmentForm(it.data)) }
             action("Delete") { post(ShowDeleteOneInvestmentDialog(it.data)) }
         }

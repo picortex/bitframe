@@ -12,7 +12,7 @@ class InvestmentIntents(private val vm: ViewModel<InvestmentIntent, *>) {
     val loadAllIntents = { vm.post(InvestmentIntent.LoadAllInvestments) }
 
     val showDisbursementForm = { investment: InvestmentSummary ->
-        vm.post(InvestmentIntent.ShowDisbursementForm(investment))
+        vm.post(InvestmentIntent.ShowDisbursementForm(investment, null))
     }
 
     val sendDisbursementForm = { investment: InvestmentSummary, params: DisbursementRawFormParams ->

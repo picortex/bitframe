@@ -3,8 +3,8 @@
 
 package bitframe.client
 
-class MiniScopeHook<out I, out S, out C>(
-    override val intents: I,
+class MiniScopeHook<out IW, out S, out C>(
+    override val intents: IW,
     override val state: S,
     val constants: C
-) : MicroScopeHook<I, S>(intents, state)
+) : MicroScopeHook<IW, S>(intents, state)

@@ -5,16 +5,16 @@ import live.watchAsState
 import viewmodel.asState
 
 @JsExport
-fun <I, S> useMicroScope(scope: MicroScope<I, S>): MicroScopeHook<I, S> = MicroScopeHook(
+fun <IW, S> useMicroScope(scope: MicroScope<IW, *, S>): MicroScopeHook<IW, S> = MicroScopeHook(
     intents = scope.intents,
     state = scope.viewModel.ui.watchAsState()
 )
 
 @JsExport
-fun <I, S> useScope(scope: MicroScope<I, S>): MicroScopeHook<I, S> = useMicroScope(scope)
+fun <IW, S> useScope(scope: MicroScope<IW, *, S>): MicroScopeHook<IW, S> = useMicroScope(scope)
 
 @JsExport
-fun <I, S, C> useMiniScope(scope: MiniScope<I, S, C>): MiniScopeHook<I, S, C> = MiniScopeHook(
+fun <IW, S, C> useMiniScope(scope: MiniScope<IW, *, S, C>): MiniScopeHook<IW, S, C> = MiniScopeHook(
     intents = scope.intents,
     state = scope.viewModel.ui.watchAsState(),
     constants = scope.constants

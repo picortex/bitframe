@@ -28,15 +28,6 @@ abstract class BusinessInvestmentsService(
         capture(rb).await().also { logger.info("Investment captured successfully") }
     }
 
-    fun all(businessId: String) = config.scope.later {
-        logger.info("Loading investments")
-        val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("load investments for business"),
-            data = businessId
-        )
-        all(rb).await().also { logger.info("Investment loaded successfully") }
-    }
-
     fun disburse(params: CreateInvestmentDisbursementRawParams) = config.scope.later {
         logger.info("Creating a disbursement")
         val rb = RequestBody.Authorized(
@@ -44,5 +35,14 @@ abstract class BusinessInvestmentsService(
             data = params.toValidatedParams()
         )
         disburse(rb).await()
+    }
+
+    fun all(businessId: String) = config.scope.later {
+        logger.info("Loading investments")
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("load investments for business"),
+            data = businessId
+        )
+        all(rb).await().also { logger.info("Investment loaded successfully") }
     }
 }
