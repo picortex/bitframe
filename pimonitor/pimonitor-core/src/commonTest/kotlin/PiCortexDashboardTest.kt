@@ -8,7 +8,6 @@ import pimonitor.core.picortex.PiCortexDashboardProvider
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Production
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Staging
-import presenters.date.last
 import kotlin.test.Test
 
 class PiCortexDashboardTest {

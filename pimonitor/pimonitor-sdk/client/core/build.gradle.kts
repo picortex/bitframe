@@ -17,6 +17,7 @@ kotlin {
             dependencies {
                 api(projects.pimonitorApiPublicCore)
                 api(projects.bitframeSdkClientCore)
+                api(projects.presentersCore)
             }
         }
 
