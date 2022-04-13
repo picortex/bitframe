@@ -29,7 +29,7 @@ open class PiMonitorAppScope(
     private val config: BitframeAppScopeConfig<PiMonitorApi>,
 ) : BitframeAppScope<PiMonitorApi> {
 
-    open val api get() = config.api
+    override val api: PiMonitorApi get() = config.api
 
     override val session: SessionAware get() = config.api.session
 

@@ -26,15 +26,35 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
         is ShowEditInvestmentForm -> TODO()
         is SendEditInvestmentForm -> TODO()
         is ShowDisbursementForm -> TODO()
-        is SendDisbursementForm -> TODO()
+        is SendDisbursementForm -> sendDisbursementForm(i)
         is ShowDeleteOneInvestmentDialog -> showDeleteOneInvestment(i)
         is SendDeleteOneInvestmentIntent -> sendDeleteOneInvestment(i)
         is ShowDeleteManyInvestmentsDialog -> showDeleteManyInvestmentsDialog(i)
         is SendDeleteManyInvestmentsIntent -> sendDeleteManyInvestments(i)
     }
 
-    private fun showDeleteOneInvestment(i: ShowDeleteOneInvestmentDialog) {
+    private fun CoroutineScope.sendDisbursementForm(i: SendDisbursementForm) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(status = Feedback.Loading("Sending disbursement, please wait. . .!")))
+        }.catch {
+            emit(state.copy(status = Feedback.Failure(it) {
+                onCancel { ui.value = state }
+                onRetry { post(i) }
+            }))
+        }.collect {
+            ui.value = it
+        }
+    }
 
+    private fun showDeleteOneInvestment(i: ShowDeleteOneInvestmentDialog) {
+        val state = ui.value
+        ui.value = state.copy(
+            dialog = confirmDialog("Delete Investment", "Are you sure you want to delete ${i.investment.name} investment?") {
+                onCancel { ui.value = state }
+                onConfirm { post(SendDeleteOneInvestmentIntent(i.investment)) }
+            }
+        )
     }
 
     private fun CoroutineScope.sendDeleteOneInvestment(i: SendDeleteOneInvestmentIntent) = launch {

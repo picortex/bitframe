@@ -8,6 +8,6 @@ class PiMonitorAppScopeInteroperabilityTest {
 
     @Test
     fun should_be_able_to_get_api_from_pi_monitor() {
-        expect(scope.config.api).toBeNonNull()
+        expect(scope.api).toBeNonNull()
     }
 }
