@@ -14,5 +14,8 @@ sealed class InvestmentIntent {
     data class SendEditInvestmentForm(val investment: InvestmentSummary) : InvestmentIntent()
 
     data class ShowDeleteOneInvestmentDialog(val investment: InvestmentSummary) : InvestmentIntent()
-    data class ShowDeleteManyInvestmentDialog(val investment: Array<Row<InvestmentSummary>>) : InvestmentIntent()
+    data class SendDeleteOneInvestmentIntent(val investment: InvestmentSummary) : InvestmentIntent()
+
+    data class ShowDeleteManyInvestmentDialog(val investments: Array<Row<InvestmentSummary>>) : InvestmentIntent()
+    data class SendDeleteManyInvestmentIntent(val investments: Array<InvestmentSummary>) : InvestmentIntent()
 }

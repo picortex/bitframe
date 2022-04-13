@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.business.investments.BusinessInvestmentsIntent
+import pimonitor.client.investments.InvestmentIntent.*
 import pimonitor.core.investments.Investment
 import pimonitor.core.investments.InvestmentSummary
 import presenters.cases.CrowdState
@@ -21,16 +22,18 @@ import viewmodel.ViewModel
 class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : ViewModel<InvestmentIntent, CrowdState<InvestmentSummary>>(CrowdState()) {
     private val api get() = config.service
     override fun CoroutineScope.execute(i: InvestmentIntent): Any = when (i) {
-        is InvestmentIntent.LoadAllInvestments -> loadAllInvestments(i)
-        is InvestmentIntent.SendDisbursementForm -> TODO()
-        is InvestmentIntent.SendEditInvestmentForm -> TODO()
-        is InvestmentIntent.ShowDeleteManyInvestmentDialog -> TODO()
-        is InvestmentIntent.ShowDeleteOneInvestmentDialog -> TODO()
-        is InvestmentIntent.ShowDisbursementForm -> TODO()
-        is InvestmentIntent.ShowEditInvestmentForm -> TODO()
+        is LoadAllInvestments -> loadAllInvestments(i)
+        is ShowDisbursementForm -> TODO()
+        is SendDisbursementForm -> TODO()
+        is ShowEditInvestmentForm -> TODO()
+        is SendEditInvestmentForm -> TODO()
+        is ShowDeleteOneInvestmentDialog -> TODO()
+        is SendDeleteOneInvestmentIntent -> TODO()
+        is ShowDeleteManyInvestmentDialog -> TODO()
+        is SendDeleteManyInvestmentIntent -> TODO()
     }
 
-    private fun CoroutineScope.loadAllInvestments(i: InvestmentIntent.LoadAllInvestments) = launch {
+    private fun CoroutineScope.loadAllInvestments(i: LoadAllInvestments) = launch {
         val state = ui.value.copy(dialog = null)
         flow {
             emit(state.copy(status = Feedback.Loading("Loading your investments, please wait. . .")))

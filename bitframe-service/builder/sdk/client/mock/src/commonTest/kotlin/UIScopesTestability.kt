@@ -2,6 +2,7 @@ import bitframe.client.MicroScope
 import bitframe.client.expect
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.test.runTest
+import logging.console
 import viewmodel.ViewModel
 import kotlin.test.Test
 
@@ -9,7 +10,7 @@ class UIScopesTestability {
 
     class TestVM : ViewModel<Int, Int>(0) {
         override fun CoroutineScope.execute(i: Int): Any {
-            TODO("Not yet implemented")
+            return console.log(i)
         }
     }
 

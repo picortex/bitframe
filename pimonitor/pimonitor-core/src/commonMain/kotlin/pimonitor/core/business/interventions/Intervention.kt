@@ -36,6 +36,6 @@ data class Intervention(
     val totalDisbursed by lazy { disbursements.map { it.amount }.sum(amount.currency) }
 
     val disbursementProgressInPercentage by lazy {
-        Percentage.fromRatio(totalDisbursed.amount / amount.amount)
+        Percentage.fromRatio(totalDisbursed.amount.toDouble() / amount.amount)
     }
 }

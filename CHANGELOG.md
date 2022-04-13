@@ -1,8 +1,10 @@
 # 0.10.19
 
 ### Enhancements
+
 - [ ] [[PM404]](https://github.com/picortex/bitframe/issues/404) Setup cases to cover all business overview approaches
 - [x] [[PM400]](https://github.com/picortex/bitframe/issues/400) Business Overview for a business with only operational integrations
+- [x] [[PM308]](https://github.com/picortex/bitframe/issues/308) Added SDK support for the investments section
 
 ### Bug Fixes
 
