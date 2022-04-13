@@ -11,6 +11,6 @@ class CaptureInvestmentForm(
 ) : Form<Fields, Params> by Form(
     heading = "Capture Investments",
     details = "Capture investment for $business",
-    fields = Fields(),
+    fields = Fields(listOf(), null, null, null),
     block
 )
