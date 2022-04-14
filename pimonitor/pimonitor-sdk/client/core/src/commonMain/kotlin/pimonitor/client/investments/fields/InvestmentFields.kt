@@ -7,11 +7,8 @@ import kotlinx.collections.interoperable.toInteroperableList
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.InvestmentType
-import presenters.fields.DateInputField
-import presenters.fields.DropDownInputField
+import presenters.fields.*
 import presenters.fields.DropDownInputField.Option
-import presenters.fields.MoneyInputField
-import presenters.fields.TextInputField
 import kotlin.js.JsExport
 import pimonitor.core.investments.params.InvestmentRawParams as Params
 
@@ -51,7 +48,7 @@ class InvestmentFields(
         name = Params::amount,
         label = "Investment Amount",
         hint = "8,000",
-        value = params?.amount ?: investment?.amount?.toFormattedString(prefix = "")
+        value = params?.amount ?: investment?.amount?.toInputValue()
     )
     val date: DateInputField = DateInputField(
         name = Params::date,

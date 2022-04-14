@@ -9,24 +9,27 @@ import presenters.actions.SimpleActionsBuilder
 import presenters.actions.SimpleAction
 import presenters.modal.Dialog
 import kotlin.js.JsExport
+import presenters.cases.Loading as LoadingCase
+import presenters.cases.Success as SuccessCase
+import presenters.cases.Failure as FailureCase
 
 sealed class State<out T> : Case {
     abstract override val message: String
 
     class Loading(
         override val message: String
-    ) : State<Nothing>(), Case.Loading {
+    ) : State<Nothing>(), LoadingCase {
         override val loading: Boolean = true
     }
 
     class Failure(
         override val cause: Throwable? = null,
-        override val message: String = cause?.message ?: Case.Failure.DEFAULT_MESSAGE,
+        override val message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
         override val actions: List<SimpleAction> = emptyList()
-    ) : State<Nothing>(), Case.Failure {
+    ) : State<Nothing>(), FailureCase {
         constructor(
             cause: Throwable? = null,
-            message: String = cause?.message ?: Case.Failure.DEFAULT_MESSAGE,
+            message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
             builder: SimpleActionsBuilder.() -> Unit
         ) : this(cause, message, SimpleActionsBuilder().apply(builder).actions)
 
@@ -34,12 +37,12 @@ sealed class State<out T> : Case {
     }
 
     class Success(
-        override val message: String = Case.Success.DEFAULT_MESSAGE,
+        override val message: String = SuccessCase.DEFAULT_MESSAGE,
         override val actions: List<SimpleAction> = emptyList()
-    ) : State<Nothing>(), Case.Success {
+    ) : State<Nothing>(), SuccessCase {
 
         constructor(
-            message: String = Case.Success.DEFAULT_MESSAGE,
+            message: String = SuccessCase.DEFAULT_MESSAGE,
             builder: SimpleActionsBuilder.() -> Unit
         ) : this(message, SimpleActionsBuilder().apply(builder).actions)
 

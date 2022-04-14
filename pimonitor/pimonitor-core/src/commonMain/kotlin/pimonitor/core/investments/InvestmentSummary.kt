@@ -3,7 +3,6 @@
 
 package pimonitor.core.investments
 
-import akkounts.utils.unset
 import bitframe.core.UserRef
 import datetime.Date
 import kash.Money
@@ -15,7 +14,7 @@ import kotlin.js.JsExport
 
 @Serializable
 data class InvestmentSummary(
-    val uid: String = unset,
+    val uid: String,
     val businessId: String,
     val businessName: String,
     val name: String,

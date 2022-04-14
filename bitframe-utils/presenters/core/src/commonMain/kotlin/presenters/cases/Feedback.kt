@@ -8,24 +8,27 @@ import kotlinx.collections.interoperable.emptyList
 import presenters.actions.SimpleAction
 import presenters.actions.SimpleActionsBuilder
 import kotlin.js.JsExport
+import presenters.cases.Loading as LoadingCase
+import presenters.cases.Success as SuccessCase
+import presenters.cases.Failure as FailureCase
 
 sealed class Feedback : Case {
     abstract override val message: String
 
     class Loading(
         override val message: String
-    ) : Feedback(), Case.Loading {
+    ) : Feedback(), LoadingCase {
         override val loading: Boolean = true
     }
 
     class Failure(
         override val cause: Throwable? = null,
-        override val message: String = cause?.message ?: Case.Failure.DEFAULT_MESSAGE,
+        override val message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
         override val actions: List<SimpleAction>
-    ) : Feedback(), Case.Failure {
+    ) : Feedback(), FailureCase {
         constructor(
             cause: Throwable? = null,
-            message: String = cause?.message ?: Case.Failure.DEFAULT_MESSAGE,
+            message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
             builder: (SimpleActionsBuilder.() -> Unit)? = null
         ) : this(cause, message, builder?.let { SimpleActionsBuilder().apply(it).actions } ?: emptyList())
 
@@ -33,11 +36,11 @@ sealed class Feedback : Case {
     }
 
     class Success(
-        override val message: String = Case.Success.DEFAULT_MESSAGE,
+        override val message: String = SuccessCase.DEFAULT_MESSAGE,
         override val actions: List<SimpleAction>
-    ) : Feedback(), Case.Success {
+    ) : Feedback(), SuccessCase {
         constructor(
-            message: String = Case.Success.DEFAULT_MESSAGE,
+            message: String = SuccessCase.DEFAULT_MESSAGE,
             builder: (SimpleActionsBuilder.() -> Unit)? = null
         ) : this(message, builder?.let { SimpleActionsBuilder().apply(it).actions } ?: emptyList())
 

@@ -9,19 +9,21 @@ import presenters.modal.Dialog
 import presenters.modal.dialog
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import presenters.cases.Failure as FailureCase
+import presenters.cases.Success as SuccessCase
 
 sealed class Emphasis {
     companion object {
         fun Loading(message: String) = Status(Feedback.Loading(message))
 
         fun Success(
-            message: String = Case.Success.DEFAULT_MESSAGE,
+            message: String = SuccessCase.DEFAULT_MESSAGE,
             builder: (SimpleActionsBuilder.() -> Unit)? = null
         ) = Status(Feedback.Success(message, builder))
 
         fun Failure(
             cause: Throwable? = null,
-            message: String = cause?.message ?: Case.Failure.DEFAULT_MESSAGE,
+            message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
             builder: (SimpleActionsBuilder.() -> Unit)? = null
         ) = Status(Feedback.Failure(cause, message, builder))
 

@@ -232,15 +232,9 @@ class InvestmentsViewModel(
         column("Source") { it.data.source }
         column("Type") { it.data.type }
         val options = MoneyFormatterOptions(decimals = 0, abbreviate = false)
-        column("Amount") {
-            it.data.amount.toFormattedString(options)
-        }
-        column("Disbursed") {
-            it.data.totalDisbursed.toFormattedString(options)
-        }
-        column("Progress") {
-            "${it.data.disbursementProgressInPercentage.asInt}%"
-        }
+        column("Amount") { it.data.amount.toFormattedString(options) }
+        column("Disbursed") { it.data.totalDisbursed.toFormattedString(options) }
+        column("Progress") { "${it.data.disbursementProgressInPercentage.asInt}%" }
         column("Created By") { it.data.createdBy.name }
         actions("Actions") {
             action("Issue Disbursement") { post(ShowDisbursementForm(it.data, null)) }

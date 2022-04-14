@@ -83,6 +83,7 @@ open class InvestmentsServiceDaod(
     )
 
     private suspend fun Investment.toSummary(): InvestmentSummary = InvestmentSummary(
+        uid = uid,
         businessId = businessId,
         businessName = monitoredBusinessesDao.load(uid = businessId).await().name,
         name = name,
