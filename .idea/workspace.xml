@@ -5,8 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/Emphasis.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/ManyState.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/Feedback.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/Feedback.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/State.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/State.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/validation/src/commonMain/kotlin/validation/Exceptions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/validation/src/commonMain/kotlin/validation/Exceptions.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/interventions/dialogs/CreateDisbursementDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/interventions/dialogs/CreateDisbursementDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/dialogs/CreateDisbursementDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/investments/dialogs/CreateDisbursementDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/fields/InvestmentFields.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/fields/InvestmentFields.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/forms/CreateInvestmentForm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/forms/CreateInvestmentForm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursements/forms/CreateDisbursementForm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursements/forms/CreateDisbursementForm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursements/forms/UpdateDisbursementForm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursements/forms/UpdateDisbursementForm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursements/params/DisbursementFields.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursements/fields/DisbursementFields.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/investments/InvestmentsScopeTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/investments/InvestmentsScopeTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,11 +89,11 @@
         <option value="Kotlin Sealed Interface" />
         <option value="Kotlin Data Class" />
         <option value="Kotlin Enum" />
-        <option value="Kotlin Sealed Class" />
         <option value="Kotlin Object" />
         <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
         <option value="Kotlin File" />
+        <option value="Kotlin Sealed Class" />
       </list>
     </option>
   </component>
@@ -147,11 +161,11 @@
       <recent name="pimonitor.client.business.investments.fields" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="presenters.cases" />
       <recent name="pimonitor.core.investments.filters" />
       <recent name="pimonitor.core.investments.params" />
       <recent name="pimonitor.client.investments.forms" />
       <recent name="pimonitor.core.business.utils.disbursements" />
-      <recent name="pimonitor.core.investments" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.InvestmentsScopeTest">
@@ -686,10 +700,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.InvestmentsScopeTest" />
+        <item itemvalue="Gradle.InvestmentsScopeTest" />
         <item itemvalue="Gradle.InvestmentsScopeTest.should_load_investments_from_all_businesses" />
         <item itemvalue="Gradle.InvestmentsScopeTest" />
         <item itemvalue="Gradle.InterventionJourneyTest" />
-        <item itemvalue="Gradle.ChangeRemarkBuilderTest" />
       </list>
     </recent_temporary>
   </component>

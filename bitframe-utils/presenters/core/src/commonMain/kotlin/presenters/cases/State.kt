@@ -50,7 +50,7 @@ sealed class State<out T> : Case {
         open val value: T,
         open val dialog: Dialog<*, *>? = null
     ) : State<T>() {
-        override val message: String by lazy { "$value" }
+        override val message: String get() = "$value"
 
         open fun copy(
             value: @UnsafeVariance T = this.value,
@@ -62,21 +62,23 @@ sealed class State<out T> : Case {
         override fun toString(): String = value.toString()
     }
 
-    override val isLoading by lazy { this is Loading }
+    override val isLoading get() = this is Loading
 
-    override val asLoading by lazy { this as Loading }
+    override val asLoading get() = this as Loading
 
-    override val isSuccess by lazy { this is Success }
+    override val isSuccess get() = this is Success
 
-    override val asSuccess by lazy { this as Success }
+    override val asSuccess get() = this as Success
 
-    override val isFailure by lazy { this is Failure }
+    override val isFailure get() = this is Failure
 
-    override val asFailure by lazy { this as Failure }
+    override val asFailure get() = this as Failure
 
-    val isContent by lazy { this is Content }
+    val isContent get() = this is Content
 
-    val asContent by lazy { this as Content }
+    val asContent get() = this as Content
+
+    val contentValue get() = (this as Content).value
 
     override fun hashCode(): Int = message.hashCode()
 

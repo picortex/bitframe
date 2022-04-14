@@ -15,6 +15,7 @@ import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.params.InvestmentParams
 import pimonitor.core.signup.params.SignUpIndividualParams
+import presenters.cases.Emphasis
 import presenters.cases.Feedback
 import presenters.table.EmptyTable
 import presenters.table.Table
@@ -99,7 +100,7 @@ class InvestmentsScopeTest {
         step("should be able to load all investments") {
             val state = scope.expect(InvestmentIntent.LoadAllInvestments(null)).value.last()
             state.table.tabulateToConsole()
-            expect(state.status).toBe(Feedback.None)
+            expect(state.emphasis).toBe(Emphasis.None)
             expect(state.table).toBe<Table<InvestmentSummary>>()
             val inv = state.table.rows.firstOrNull { it.data.uid == investment.uid }
             expect(inv).toBeNull()

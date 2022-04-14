@@ -17,14 +17,18 @@ import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.filters.InvestmentFilter
 import pimonitor.core.investments.params.toIdentifiedParams
 import pimonitor.core.investments.params.toValidatedParams
-import presenters.cases.CrowdState
-import presenters.cases.Feedback
+import presenters.cases.*
+import presenters.cases.Emphasis.Companion.Dialog
+import presenters.cases.Emphasis.Companion.Failure
+import presenters.cases.Emphasis.Companion.Loading
+import presenters.cases.Emphasis.Companion.Success
 import presenters.modal.confirmDialog
-import presenters.modal.dialog
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 
-class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : ViewModel<InvestmentIntent, CrowdState<InvestmentSummary>>(CrowdState()) {
+class InvestmentsViewModel(
+    private val config: UIScopeConfig<PiMonitorApi>
+) : ViewModel<InvestmentIntent, ManyState<InvestmentSummary>>(ManyState(Loading("Loading"))) {
     private val api get() = config.service
     private var businessId: String? = null
     override fun CoroutineScope.execute(i: InvestmentIntent): Any = when (i) {
@@ -44,15 +48,16 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
     private fun CoroutineScope.showCreateInvestmentForm(i: ShowCreateInvestmentForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(status = Feedback.Loading("Preparing investment form, please wait. . .")))
+            emit(state.copy(emphasis = Loading("Preparing investment form, please wait. . .")))
             val businesses = api.businesses.all().await()
-            val form = CreateInvestmentForm(businesses, null, i.params) {
+            val business = businesses.firstOrNull { it.uid == businessId }
+            val form = CreateInvestmentForm(businesses, business, i.params) {
                 onCancel { ui.value = state }
                 onSubmit { params -> post(SendCreateInvestmentForm(params)) }
             }
-            emit(state.copy(dialog = dialog(form)))
+            emit(state.copy(emphasis = Dialog(form)))
         }.catch {
-            emit(state.copy(status = Feedback.Failure(it) {
+            emit(state.copy(emphasis = Failure(it) {
                 onGoBack { ui.value = state }
                 onRetry { post(i) }
             }))
@@ -64,13 +69,13 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
     private fun CoroutineScope.sendCreateInvestmentForm(i: SendCreateInvestmentForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(status = Feedback.Loading("Capturing ${i.params.name} investment, please wait . . .!")))
+            emit(state.copy(emphasis = Loading("Capturing ${i.params.name} investment, please wait . . .!")))
             val params = i.params.toValidatedParams()
             val investment = api.investments.create(params).await()
-            emit(state.copy(status = Feedback.Success("${investment.name} investment has been created successfully. Updating your feed, please wait. . .")))
-            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
+            emit(state.copy(emphasis = Success("${investment.name} investment has been created successfully. Updating your feed, please wait. . .")))
+            emit(state.copy(table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {
-            emit(state.copy(status = Feedback.Failure(it) {
+            emit(state.copy(emphasis = Failure(it) {
                 onCancel { post(ShowCreateInvestmentForm(null, i.params)) }
                 onRetry { post(i) }
             }))
@@ -82,15 +87,15 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
     private fun CoroutineScope.showUpdateInvestmentForm(i: ShowUpdateInvestmentForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(status = Feedback.Loading("Preparing investment form, please wait. . .")))
+            emit(state.copy(emphasis = Loading("Preparing investment form, please wait. . .")))
             val businesses = api.businesses.all().await()
             val form = UpdateInvestmentForm(businesses, i.investment, i.params) {
                 onCancel { ui.value = state }
                 onSubmit { params -> post(SendUpdateInvestmentForm(i.investment, params)) }
             }
-            emit(state.copy(dialog = dialog(form)))
+            emit(state.copy(emphasis = Dialog(form)))
         }.catch {
-            emit(state.copy(status = Feedback.Failure(it) {
+            emit(state.copy(emphasis = Failure(it) {
                 onGoBack { ui.value = state }
                 onRetry { post(i) }
             }))
@@ -102,13 +107,13 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
     private fun CoroutineScope.sendUpdateInvestment(i: SendUpdateInvestmentForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(status = Feedback.Loading("Editing ${i.investment.name}, please wait . . .!")))
+            emit(state.copy(emphasis = Loading("Editing ${i.investment.name}, please wait . . .!")))
             val params = i.params.toIdentifiedParams(i.investment.uid)
             val investment = api.investments.update(params).await()
-            emit(state.copy(status = Feedback.Success("${investment.name} investment has been updated successfully. Synchronizing the remaining investments, please wait. . .")))
-            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
+            emit(state.copy(emphasis = Success("${investment.name} investment has been updated successfully. Synchronizing the remaining investments, please wait. . .")))
+            emit(state.copy(table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {
-            emit(state.copy(status = Feedback.Failure(it) {
+            emit(state.copy(emphasis = Failure(it) {
                 onCancel { post(ShowUpdateInvestmentForm(i.investment, i.params)) }
                 onRetry { post(i) }
             }))
@@ -123,18 +128,18 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
             onCancel { ui.value = state }
             onSubmit { params -> post(SendDisbursementForm(i.investment, params)) }
         }
-        ui.value = state.copy(dialog = dialog(form))
+        ui.value = state.copy(emphasis = Dialog(form))
     }
 
     private fun CoroutineScope.sendDisbursementForm(i: SendDisbursementForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(status = Feedback.Loading("Sending disbursement, please wait. . .!")))
+            emit(state.copy(emphasis = Loading("Sending disbursement, please wait. . .!")))
             val disbursement = api.investments.disburse(i.params.toCreateInvestmentDisbursementParams(i.investment.uid)).await()
-            emit(state.copy(status = Feedback.Success("${disbursement.amount.toFormattedString()} has been successfully disbursed to ${i.investment.name} investment. Loading the remaining investments, please wait. . .")))
-            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
+            emit(state.copy(emphasis = Success("${disbursement.amount.toFormattedString()} has been successfully disbursed to ${i.investment.name} investment. Loading the remaining investments, please wait. . .")))
+            emit(state.copy(table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {
-            emit(state.copy(status = Feedback.Failure(it) {
+            emit(state.copy(emphasis = Failure(it) {
                 onGoBack { post(ShowDisbursementForm(i.investment, i.params)) }
                 onRetry { post(i) }
             }))
@@ -145,23 +150,22 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
 
     private fun showDeleteOneInvestment(i: ShowDeleteOneInvestmentDialog) {
         val state = ui.value
-        ui.value = state.copy(
-            dialog = confirmDialog("Delete Investment", "Are you sure you want to delete ${i.investment.name} investment?") {
-                onCancel { ui.value = state }
-                onConfirm { post(SendDeleteOneInvestmentIntent(i.investment)) }
-            }
-        )
+        val confirm = confirmDialog("Delete Investment", "Are you sure you want to delete ${i.investment.name} investment?") {
+            onCancel { ui.value = state }
+            onConfirm { post(SendDeleteOneInvestmentIntent(i.investment)) }
+        }
+        ui.value = state.copy(emphasis = Dialog(confirm))
     }
 
     private fun CoroutineScope.sendDeleteOneInvestment(i: SendDeleteOneInvestmentIntent) = launch {
-        val state = ui.value.copy(dialog = null)
+        val state = ui.value
         flow {
-            emit(state.copy(status = Feedback.Loading("Deleting ${i.investment.name} investment, please wait . . .")))
+            emit(state.copy(emphasis = Loading("Deleting ${i.investment.name} investment, please wait . . .")))
             api.investments.delete(i.investment.uid).await()
-            emit(state.copy(status = Feedback.Success("Investment ${i.investment.name} deleted. Loading the remaining investments, please wait. . .")))
-            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
+            emit(state.copy(emphasis = Success("Investment ${i.investment.name} deleted. Loading the remaining investments, please wait. . .")))
+            emit(state.copy(table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {
-            emit(state.copy(status = Feedback.Failure(it) {
+            emit(state.copy(emphasis = Failure(it) {
                 onGoBack { ui.value = state }
                 onRetry { post(i) }
             }))
@@ -172,23 +176,22 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
 
     private fun showDeleteManyInvestmentsDialog(i: ShowDeleteManyInvestmentsDialog) {
         val state = ui.value
-        ui.value = state.copy(
-            dialog = confirmDialog("Delete Investments", "Are you sure you want to delete ${i.investments.size} investments?") {
-                onCancel { ui.value = state }
-                onConfirm { post(SendDeleteManyInvestmentsIntent(i.investments.map { it.data }.toTypedArray())) }
-            }
-        )
+        val confirm = confirmDialog("Delete Investments", "Are you sure you want to delete ${i.investments.size} investments?") {
+            onCancel { ui.value = state }
+            onConfirm { post(SendDeleteManyInvestmentsIntent(i.investments.map { it.data }.toTypedArray())) }
+        }
+        ui.value = state.copy(emphasis = Dialog(confirm))
     }
 
     private fun CoroutineScope.sendDeleteManyInvestments(i: SendDeleteManyInvestmentsIntent) = launch {
-        val state = ui.value.copy(dialog = null)
+        val state = ui.value
         flow {
-            emit(state.copy(status = Feedback.Loading("Deleting ${i.investments.size} investments, please wait. . .")))
+            emit(state.copy(emphasis = Loading("Deleting ${i.investments.size} investments, please wait. . .")))
             api.investments.delete(*i.investments.map { it.uid }.toTypedArray()).await()
-            emit(state.copy(status = Feedback.Success("${i.investments.size} Investments deleted. Loading the remaining investments, please wait. . .")))
-            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
+            emit(state.copy(emphasis = Success("${i.investments.size} Investments deleted. Loading the remaining investments, please wait. . .")))
+            emit(state.copy(table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {
-            emit(state.copy(status = Feedback.Failure(it) {
+            emit(state.copy(emphasis = Failure(it) {
                 onGoBack { ui.value = state }
                 onRetry { post(i) }
             }))
@@ -199,12 +202,12 @@ class InvestmentsViewModel(private val config: UIScopeConfig<PiMonitorApi>) : Vi
 
     private fun CoroutineScope.loadAllInvestments(i: LoadAllInvestments) = launch {
         businessId = i.businessId
-        val state = ui.value.copy(dialog = null)
+        val state = ui.value
         flow {
-            emit(state.copy(status = Feedback.Loading("Loading your investments, please wait. . .")))
-            emit(state.copy(status = Feedback.None, table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
+            emit(state.copy(emphasis = Loading("Loading your investments, please wait. . .")))
+            emit(state.copy(table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {
-            emit(state.copy(status = Feedback.Failure(it) {
+            emit(state.copy(emphasis = Failure(it) {
                 onRetry { post(i) }
             }))
         }.collect {

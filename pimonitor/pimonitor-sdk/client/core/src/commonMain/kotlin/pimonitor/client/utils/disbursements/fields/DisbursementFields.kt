@@ -1,7 +1,7 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.client.utils.disbursements.params
+package pimonitor.client.utils.disbursements.fields
 
 import datetime.DateFormatter
 import pimonitor.core.utils.disbursements.Disbursement

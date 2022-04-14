@@ -2,7 +2,7 @@ package pimonitor.client.utils.disbursements.forms
 
 import presenters.forms.Form
 import presenters.forms.FormActionsBuildingBlock
-import pimonitor.client.utils.disbursements.params.DisbursementFields as Fields
+import pimonitor.client.utils.disbursements.fields.DisbursementFields as Fields
 import pimonitor.core.utils.disbursements.params.DisbursementRawParams as Params
 
 fun CreateDisbursementForm(

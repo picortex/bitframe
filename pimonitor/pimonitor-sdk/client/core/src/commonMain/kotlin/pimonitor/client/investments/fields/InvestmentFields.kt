@@ -4,7 +4,6 @@
 package pimonitor.client.investments.fields
 
 import kotlinx.collections.interoperable.toInteroperableList
-import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.InvestmentType
@@ -18,7 +17,7 @@ import pimonitor.core.investments.params.InvestmentRawParams as Params
 
 class InvestmentFields(
     businesses: List<MonitoredBusinessSummary>,
-    business: MonitoredBusinessBasicInfo?,
+    business: MonitoredBusinessSummary?,
     params: Params?,
     investment: InvestmentSummary?
 ) {
@@ -30,7 +29,7 @@ class InvestmentFields(
     )
     val businessId = DropDownInputField(
         name = Params::businessId,
-        label = "Select Business",
+        label = "Investments for",
         options = businesses.map { biz ->
             Option(label = biz.name, value = biz.uid, selected = biz.uid == business?.uid || biz.uid == investment?.businessId)
         }.toInteroperableList()
