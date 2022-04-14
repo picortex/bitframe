@@ -2,23 +2,20 @@ package pimonitor.core.investments
 
 import bitframe.core.*
 import datetime.Date
-import datetime.SimpleDateTime
 import kash.Currency
-import kash.Money
-import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.coroutines.async
 import kotlinx.datetime.TimeZone
 import later.Later
 import later.await
 import later.later
-import pimonitor.core.business.utils.disbursements.Disbursement
-import pimonitor.core.business.utils.disbursements.toParsedParams
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
+import pimonitor.core.investments.filters.InvestmentFilter
 import pimonitor.core.investments.params.InvestmentDisbursementParams
-import pimonitor.core.investments.params.InvestmentsParams
+import pimonitor.core.investments.params.InvestmentParams
 import pimonitor.core.investments.params.InvestmentsParsedParams
 import pimonitor.core.investments.params.toValidatedParams
+import pimonitor.core.utils.disbursements.params.toParsedParams
 
 open class InvestmentsServiceDaod(
     val config: ServiceConfigDaod
@@ -31,7 +28,7 @@ open class InvestmentsServiceDaod(
     private val currency: Currency = Currency.ZAR
     private val timezone: TimeZone = TimeZone.UTC
 
-    override fun create(rb: RequestBody.Authorized<InvestmentsParams>) = config.scope.later {
+    override fun create(rb: RequestBody.Authorized<InvestmentParams>) = config.scope.later {
         val params = rb.data.toValidatedParams().toParsedParams(currency)
         val history = InvestmentHistory.Created(
             on = Date.today(timezone),
@@ -40,7 +37,7 @@ open class InvestmentsServiceDaod(
         investmentsDao.create(params.toInvestment(spaceId = rb.session.space.uid, history)).await()
     }
 
-    override fun update(rb: RequestBody.Authorized<Identified<InvestmentsParams>>): Later<Investment> = config.scope.later {
+    override fun update(rb: RequestBody.Authorized<Identified<InvestmentParams>>): Later<Investment> = config.scope.later {
         val params = rb.data.map { it.toParsedParams(currency) }
         val investment = investmentsDao.load(uid = params.uid).await()
         investmentsDao.update(investment.merge(params.body, rb.session.user.ref())).await()
@@ -87,7 +84,7 @@ open class InvestmentsServiceDaod(
 
     private suspend fun Investment.toSummary(): InvestmentSummary = InvestmentSummary(
         businessId = businessId,
-        businessName = monitoredBusinessesDao.load(uid = uid).await().name,
+        businessName = monitoredBusinessesDao.load(uid = businessId).await().name,
         name = name,
         type = type,
         source = source,

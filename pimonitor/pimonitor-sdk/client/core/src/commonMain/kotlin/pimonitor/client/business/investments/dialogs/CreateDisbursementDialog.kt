@@ -1,11 +1,10 @@
 package pimonitor.client.business.investments.dialogs
 
-import pimonitor.client.business.utils.disbursements.CreateDisbursementForm
+import pimonitor.client.utils.disbursements.forms.CreateDisbursementForm
 import presenters.forms.FormActionsBuildingBlock
 import presenters.modal.FormDialog
-import kotlin.js.JsExport
-import pimonitor.client.business.utils.disbursements.DisbursementFields as Fields
-import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams as Params
+import pimonitor.client.utils.disbursements.params.DisbursementFields as Fields
+import pimonitor.core.utils.disbursements.params.DisbursementRawParams as Params
 
 class CreateDisbursementDialog(
     investment: String,

@@ -18,7 +18,7 @@ import pimonitor.client.business.interventions.dialogs.CreateInterventionDialog
 import pimonitor.client.business.interventions.params.toCreateInterventionDisbursementParams
 import pimonitor.client.business.interventions.params.toCreateInterventionParams
 import pimonitor.core.business.interventions.Intervention
-import pimonitor.core.business.utils.disbursements.toParsedParams
+import pimonitor.core.utils.disbursements.params.toParsedParams
 import presenters.cases.CrowdState
 import presenters.cases.Feedback
 import presenters.table.builders.tableOf

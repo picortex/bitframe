@@ -3,19 +3,19 @@
 
 package pimonitor.client.investments
 
-import pimonitor.client.business.utils.disbursements.DisbursementRawFormParams
 import pimonitor.core.investments.InvestmentSummary
+import pimonitor.core.utils.disbursements.params.DisbursementRawParams
 import viewmodel.ViewModel
 import kotlin.js.JsExport
 
 class InvestmentIntents(private val vm: ViewModel<InvestmentIntent, *>) {
-    val loadAllIntents = { vm.post(InvestmentIntent.LoadAllInvestments) }
+    val loadAllInvestments = { businessId: String? -> vm.post(InvestmentIntent.LoadAllInvestments(businessId)) }
 
     val showDisbursementForm = { investment: InvestmentSummary ->
         vm.post(InvestmentIntent.ShowDisbursementForm(investment, null))
     }
 
-    val sendDisbursementForm = { investment: InvestmentSummary, params: DisbursementRawFormParams ->
+    val sendDisbursementForm = { investment: InvestmentSummary, params: DisbursementRawParams ->
         vm.post(InvestmentIntent.SendDisbursementForm(investment, params))
     }
 }

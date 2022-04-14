@@ -10,11 +10,8 @@ import bitframe.client.password.ChangePasswordReactScope
 import bitframe.client.signin.SignInReactScope
 import pimonitor.client.business.BusinessDetailsReactScope
 import pimonitor.client.business.financials.BusinessFinancialsReactScope
-import pimonitor.client.business.financials.BusinessFinancialsScope
 import pimonitor.client.business.interventions.BusinessInterventionsReactScope
-import pimonitor.client.business.interventions.BusinessInterventionsScope
 import pimonitor.client.business.investments.BusinessInvestmentsReactScope
-import pimonitor.client.business.investments.BusinessInvestmentsScope
 import pimonitor.client.business.operations.BusinessOperationsReactScope
 import pimonitor.client.businesses.BusinessesReactScope
 import pimonitor.client.contacts.ContactsReactScope
@@ -38,6 +35,5 @@ class PiMonitorReactAppScope(
     override val businessDetails by lazy { BusinessDetailsReactScope(config { api.businesses }) }
     override val businessOperations by lazy { BusinessOperationsReactScope(config { api.businessOperations }) }
     override val businessFinancials by lazy { BusinessFinancialsReactScope(config { api.businessFinancials }) }
-    override val businessInvestments by lazy { BusinessInvestmentsReactScope(config()) }
     override val businessInterventions by lazy { BusinessInterventionsReactScope(config()) }
 }

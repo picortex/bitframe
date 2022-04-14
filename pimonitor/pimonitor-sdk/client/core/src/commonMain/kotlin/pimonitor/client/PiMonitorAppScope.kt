@@ -47,7 +47,7 @@ open class PiMonitorAppScope(
     val businessOverview by BusinessOverviewScope(config())
     open val businessFinancials by lazy { BusinessFinancialsScope(config { api.businessFinancials }) }
     open val businessOperations by lazy { BusinessOperationsScope(config { api.businessOperations }) }
-    open val businessInvestments by lazy { BusinessInvestmentsScope(config()) }
+    val businessInvestments by BusinessInvestmentsScope(config())
     open val businessInterventions by lazy { BusinessInterventionsScope(config()) }
     val businessInfo by BusinessInfoScope(config())
 }

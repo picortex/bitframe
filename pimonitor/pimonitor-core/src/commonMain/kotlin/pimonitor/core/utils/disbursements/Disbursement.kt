@@ -1,7 +1,7 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.core.business.utils.disbursements
+package pimonitor.core.utils.disbursements
 
 import bitframe.core.UserRef
 import datetime.Date

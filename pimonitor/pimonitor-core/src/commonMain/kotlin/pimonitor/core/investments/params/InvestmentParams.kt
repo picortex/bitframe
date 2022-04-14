@@ -6,7 +6,7 @@ import kash.Money
 import kotlinx.serialization.Serializable
 
 @Serializable
-open class InvestmentsParams(
+open class InvestmentParams(
     override val businessId: String,
     override val name: String,
     override val type: String,
@@ -14,7 +14,7 @@ open class InvestmentsParams(
     override val amount: String,
     override val date: String,
     override val details: String
-) : InvestmentsRawParams {
+) : InvestmentRawParams {
     open fun toParsedParams(currency: Currency) = InvestmentsParsedParams(
         businessId = businessId,
         name = name,

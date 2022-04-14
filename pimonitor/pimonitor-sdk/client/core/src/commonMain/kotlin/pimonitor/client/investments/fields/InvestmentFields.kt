@@ -14,7 +14,7 @@ import presenters.fields.DropDownInputField.Option
 import presenters.fields.MoneyInputField
 import presenters.fields.TextInputField
 import kotlin.js.JsExport
-import pimonitor.core.investments.params.InvestmentsRawParams as Params
+import pimonitor.core.investments.params.InvestmentRawParams as Params
 
 class InvestmentFields(
     businesses: List<MonitoredBusinessSummary>,

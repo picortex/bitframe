@@ -12,6 +12,6 @@ import viewmodel.asState
 
 class BusinessInvestmentsReactScope(
     override val config: UIScopeConfig<PiMonitorApi>
-) : BusinessInvestmentsScope(config), ReactUIScope<CrowdState<Investment>> {
+) : BusinessInvestmentsScopeLegacy(config), ReactUIScope<CrowdState<Investment>> {
     override val useScopeState = { viewModel.asState() }
 }

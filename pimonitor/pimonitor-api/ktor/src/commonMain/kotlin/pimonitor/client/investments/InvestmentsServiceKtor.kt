@@ -12,12 +12,12 @@ import kotlinx.collections.interoperable.toInteroperableList
 import later.Later
 import later.later
 import pimonitor.client.utils.pathV1
-import pimonitor.core.business.utils.disbursements.Disbursement
+import pimonitor.core.utils.disbursements.Disbursement
 import pimonitor.core.investments.Investment
-import pimonitor.core.investments.InvestmentFilter
+import pimonitor.core.investments.filters.InvestmentFilter
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.params.InvestmentDisbursementParams
-import pimonitor.core.investments.params.InvestmentsParams
+import pimonitor.core.investments.params.InvestmentParams
 import response.decodeResponseFromString
 
 class InvestmentsServiceKtor(private val config: ServiceConfigKtor) : InvestmentsService(config) {
@@ -25,7 +25,7 @@ class InvestmentsServiceKtor(private val config: ServiceConfigKtor) : Investment
     private val http get() = config.http
     private val path get() = config.pathV1
 
-    override fun update(rb: RequestBody.Authorized<Identified<InvestmentsParams>>): Later<Investment> = config.scope.later {
+    override fun update(rb: RequestBody.Authorized<Identified<InvestmentParams>>): Later<Investment> = config.scope.later {
         val res = http.post(path.investmentsUpdate) {
             setBody(json.of(rb))
         }
@@ -46,7 +46,7 @@ class InvestmentsServiceKtor(private val config: ServiceConfigKtor) : Investment
         json.decodeResponseFromString(ListSerializer(InvestmentSummary.serializer()), res.bodyAsText()).response().toInteroperableList()
     }
 
-    override fun create(rb: RequestBody.Authorized<InvestmentsParams>): Later<Investment> = config.scope.later {
+    override fun create(rb: RequestBody.Authorized<InvestmentParams>): Later<Investment> = config.scope.later {
         val res = http.post(path.investmentsCreate) {
             setBody(json.of(rb))
         }

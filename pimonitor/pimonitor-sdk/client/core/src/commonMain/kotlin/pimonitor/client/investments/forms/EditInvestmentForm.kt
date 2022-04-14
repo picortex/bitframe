@@ -5,7 +5,7 @@ import pimonitor.core.investments.InvestmentSummary
 import presenters.forms.Form
 import presenters.forms.FormActionsBuildingBlock
 import pimonitor.client.investments.fields.InvestmentFields as Fields
-import pimonitor.core.investments.params.InvestmentsRawParams as Params
+import pimonitor.core.investments.params.InvestmentRawParams as Params
 
 fun UpdateInvestmentForm(
     businesses: List<MonitoredBusinessSummary>,
