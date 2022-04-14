@@ -8,30 +8,30 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
-import pimonitor.client.business.investments.params.toCreateInvestmentDisbursementParams
-import pimonitor.client.investments.InvestmentIntent.*
+import pimonitor.client.investments.InvestmentsIntent.*
 import pimonitor.client.investments.forms.CreateInvestmentForm
 import pimonitor.client.investments.forms.UpdateInvestmentForm
+import pimonitor.client.investments.params.toCreateInvestmentDisbursementParams
 import pimonitor.client.utils.disbursements.forms.CreateDisbursementForm
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.filters.InvestmentFilter
 import pimonitor.core.investments.params.toIdentifiedParams
 import pimonitor.core.investments.params.toValidatedParams
-import presenters.cases.*
 import presenters.cases.Emphasis.Companion.Dialog
 import presenters.cases.Emphasis.Companion.Failure
 import presenters.cases.Emphasis.Companion.Loading
 import presenters.cases.Emphasis.Companion.Success
+import presenters.cases.CentralState
 import presenters.modal.confirmDialog
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 
 class InvestmentsViewModel(
     private val config: UIScopeConfig<PiMonitorApi>
-) : ViewModel<InvestmentIntent, ManyState<InvestmentSummary>>(ManyState(Loading("Loading"))) {
+) : ViewModel<InvestmentsIntent, CentralState<InvestmentSummary>>(CentralState(Loading("Loading"))) {
     private val api get() = config.service
     private var businessId: String? = null
-    override fun CoroutineScope.execute(i: InvestmentIntent): Any = when (i) {
+    override fun CoroutineScope.execute(i: InvestmentsIntent): Any = when (i) {
         is LoadAllInvestments -> loadAllInvestments(i)
         is ShowCreateInvestmentForm -> showCreateInvestmentForm(i)
         is SendCreateInvestmentForm -> sendCreateInvestmentForm(i)

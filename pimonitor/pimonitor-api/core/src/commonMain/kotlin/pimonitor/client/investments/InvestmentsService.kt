@@ -9,8 +9,10 @@ import bitframe.client.logger
 import bitframe.core.IdentifiedRaw
 import bitframe.core.RequestBody
 import bitframe.core.toValidated
+import later.Later
 import later.await
 import later.later
+import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.filters.InvestmentFilter
 import pimonitor.core.investments.InvestmentsServiceCore
 import pimonitor.core.investments.filters.InvestmentRawFilter
@@ -66,5 +68,9 @@ abstract class InvestmentsService(private val config: ServiceConfig) : Investmen
             data = params.toValidatedFilter()
         )
         all(rb).await()
+    }
+
+    fun load(investmentId: String): Later<InvestmentSummary> = config.scope.later {
+        TODO()
     }
 }

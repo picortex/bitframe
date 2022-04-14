@@ -4,25 +4,18 @@ import bitframe.client.expect
 import bitframe.core.signin.SignInParams
 import expect.expect
 import expect.toBe
-import kotlinx.coroutines.test.runTest
 import later.await
-import pimonitor.client.businesses.BusinessesIntent
-import pimonitor.client.businesses.BusinessesState
-import pimonitor.client.businesses.dialogs.CaptureInvestmentDialog
-import pimonitor.client.investments.InvestmentIntent
+import pimonitor.client.investments.InvestmentsIntent
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.params.InvestmentParams
 import pimonitor.core.signup.params.SignUpIndividualParams
 import presenters.cases.Emphasis
-import presenters.cases.Feedback
 import presenters.table.EmptyTable
 import presenters.table.Table
 import presenters.table.tabulateToConsole
 import utils.PiMonitorTestScope
-import utils.toContain
-import viewmodel.expect
 import kotlin.test.Test
 
 class InvestmentsScopeTest {
@@ -50,7 +43,7 @@ class InvestmentsScopeTest {
         }
 
         step("Ensure that the investments are loaded") {
-            val state = scope.expect(InvestmentIntent.LoadAllInvestments(null)).value.last()
+            val state = scope.expect(InvestmentsIntent.LoadAllInvestments(null)).value.last()
             expect(state.table).toBe<EmptyTable<InvestmentSummary>>()
         }
     }
@@ -98,7 +91,7 @@ class InvestmentsScopeTest {
         }
 
         step("should be able to load all investments") {
-            val state = scope.expect(InvestmentIntent.LoadAllInvestments(null)).value.last()
+            val state = scope.expect(InvestmentsIntent.LoadAllInvestments(null)).value.last()
             state.table.tabulateToConsole()
             expect(state.emphasis).toBe(Emphasis.None)
             expect(state.table).toBe<Table<InvestmentSummary>>()

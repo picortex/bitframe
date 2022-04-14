@@ -32,7 +32,6 @@ class PiMonitorReactAppScope(
     override val password by lazy { ChangePasswordReactScope(config { api.profile }) }
     override val search by lazy { SearchReactScope(config { api.search }) }
     override val integrations by lazy { InvitesReactScope(config()) }
-    override val businessDetails by lazy { BusinessDetailsReactScope(config { api.businesses }) }
     override val businessOperations by lazy { BusinessOperationsReactScope(config { api.businessOperations }) }
     override val businessFinancials by lazy { BusinessFinancialsReactScope(config { api.businessFinancials }) }
     override val businessInterventions by lazy { BusinessInterventionsReactScope(config()) }

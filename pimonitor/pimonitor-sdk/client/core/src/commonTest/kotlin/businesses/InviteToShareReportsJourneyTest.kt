@@ -4,7 +4,7 @@ import bitframe.core.UserEmail
 import bitframe.core.signin.SignInParams
 import expect.expect
 import later.await
-import pimonitor.client.businesses.dialogs.InviteToShareReportsDialog
+import pimonitor.client.businesses.dialogs.InviteToShareReportsForm
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.SignUpIndividualParams
@@ -61,7 +61,7 @@ class InviteToShareReportsJourneyTest {
         step("Should launch an invite to share reports dialog") {
             val business = api.businesses.all().await().first()
             vm.expect(Intent.ShowInviteToShareReportsForm(business))
-            val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
+            val dialog = vm.ui.value.dialog as InviteToShareReportsForm
             expect(dialog.fields.to.value).toBe(business.contacts.first { it is UserEmail }.value)
         }
     }
@@ -104,12 +104,12 @@ class InviteToShareReportsJourneyTest {
         step("Should launch an invite to share reports dialog") {
             val business = api.businesses.all().await().first()
             vm.expect(Intent.ShowInviteToShareReportsForm(business))
-            val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
+            val dialog = vm.ui.value.dialog as InviteToShareReportsForm
             expect(dialog.fields.to.value).toBe(business.contacts.first { it is UserEmail }.value)
         }
 
         step("Cancel sending invite should return to table with businesses") {
-            val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
+            val dialog = vm.ui.value.dialog as InviteToShareReportsForm
             dialog.cancel()
             expect(vm.ui.value.table.rows).toBeOfSize(1)
         }

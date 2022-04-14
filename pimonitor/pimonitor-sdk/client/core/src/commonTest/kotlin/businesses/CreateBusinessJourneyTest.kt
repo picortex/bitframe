@@ -3,7 +3,7 @@ package businesses
 import bitframe.core.signin.SignInParams
 import expect.expect
 import later.await
-import pimonitor.client.businesses.dialogs.InviteToShareReportsDialog
+import pimonitor.client.businesses.dialogs.InviteToShareReportsForm
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.SignUpBusinessParams
@@ -88,7 +88,7 @@ class CreateBusinessJourneyTest {
                 state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
                 state.copy(status = Feedback.Success("${params.businessName} has successfully been added. Preparing invite form, please wait . . .")),
             )
-            val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
+            val dialog = vm.ui.value.dialog as InviteToShareReportsForm
             expect(dialog.fields.message.value).toBe(
                 "Jane Doe would like to invite you to share your operational & financial reports with them through PiMonitor"
             )
@@ -129,7 +129,7 @@ class CreateBusinessJourneyTest {
                 state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
                 state.copy(status = Feedback.Success("${params.businessName} has successfully been added. Preparing invite form, please wait . . .")),
             )
-            val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
+            val dialog = vm.ui.value.dialog as InviteToShareReportsForm
             expect(dialog.fields.message.value).toBe(
                 "Jane Doe Inc would like to invite you to share your operational & financial reports with them through PiMonitor"
             )

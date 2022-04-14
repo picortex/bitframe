@@ -1,4 +1,4 @@
-package pimonitor.client.business.investments.params
+package pimonitor.client.investments.params
 
 import pimonitor.core.investments.params.InvestmentDisbursementParams
 import pimonitor.core.utils.disbursements.params.DisbursementRawParams
