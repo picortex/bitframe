@@ -1,8 +1,14 @@
 # 0.10.20
 
+## Enhancements
+
+- All dialogs are `SDK cancelable` (Previously only form dialogs where cancelable)
+
+## Patches
+
 - Unified investments viewmodel to be used in different investment scopes
 
-Debug Features
+## Debug Features
 
 - Removed sage response from mock logs and server logs
 

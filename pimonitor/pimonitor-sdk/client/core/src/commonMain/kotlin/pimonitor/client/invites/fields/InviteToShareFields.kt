@@ -9,7 +9,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import pimonitor.core.businesses.params.InviteToShareReportsParams as Params
 
-class InviteToShareFormFields(contactEmail: String, message: String) {
+class InviteToShareFields(contactEmail: String, message: String) {
     val to = EmailInputField(
         name = Params::to.name,
         label = "To",

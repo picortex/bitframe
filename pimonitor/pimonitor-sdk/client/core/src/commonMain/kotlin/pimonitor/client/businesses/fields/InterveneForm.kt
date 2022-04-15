@@ -1,4 +1,4 @@
-package pimonitor.client.businesses.dialogs
+package pimonitor.client.businesses.fields
 
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import presenters.forms.Form

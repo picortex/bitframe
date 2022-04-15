@@ -4,17 +4,24 @@ import bitframe.client.UIScopeConfig
 import bitframe.core.UserEmail
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import live.Live
+import live.MutableLive
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.business.interventions.params.toCreateInterventionParams
 import pimonitor.client.businesses.BusinessesIntent.*
 import pimonitor.client.businesses.dialogs.*
+import pimonitor.client.businesses.fields.InterveneForm
+import pimonitor.client.businesses.fields.InviteToShareReportsForm
+import pimonitor.client.businesses.forms.CreateBusinessForm
 import pimonitor.client.investments.forms.CreateInvestmentForm
+import pimonitor.client.utils.live.removeEmphasis
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.toValidatedParams
@@ -42,7 +49,7 @@ class BusinessesViewModel(
     override fun CoroutineScope.execute(i: Intent): Any = when (i) {
         LoadBusinesses -> loadBusinesses()
 
-        is ShowCreateBusinessForm -> showCreateBusinessForm()
+        is ShowCreateBusinessForm -> showCreateBusinessForm(i)
         is SendCreateBusinessForm -> sendCreateBusinessForm(i)
 
         is ShowInviteToShareReportsForm -> showInviteToShareReportsForm(i)
@@ -82,7 +89,7 @@ class BusinessesViewModel(
     private fun showDeleteMultipleConfirmationDialog(i: ShowDeleteMultipleConfirmationDialog) {
         val state = ui.value
         val confirm = DeleteManyDialog(i.data) {
-            onCancel { ui.value = state.copy(emphasis = None) }
+            onCancel { ui.removeEmphasis() }
             onConfirm { post(DeleteAll(i.data.map { it.data }.toTypedArray())) }
         }
         ui.value = ui.value.copy(emphasis = Dialog(confirm))
@@ -137,9 +144,9 @@ class BusinessesViewModel(
         ui.value = ui.value.copy(emphasis = Dialog(form))
     }
 
-    private fun showCreateBusinessForm() {
+    private fun showCreateBusinessForm(i: ShowCreateBusinessForm) {
         val state = ui.value
-        val form = CreateBusinessForm {
+        val form = CreateBusinessForm(i.params) {
             onCancel { ui.value = state.copy(emphasis = None) }
             onSubmit("Create Business") { params -> post(SendCreateBusinessForm(params)) }
         }
@@ -194,14 +201,18 @@ class BusinessesViewModel(
             val result = api.businesses.create(i.params).await()
             if (result.params.sendInvite) {
                 emit(state.copy(emphasis = Success("${i.params.businessName} has successfully been added. Preparing invite form, please wait . . .")))
-                val inviteInfo = api.invites.defaultInviteMessage(InviteMessageParams(result.business.uid)).await()
+                val (inviteInfo, businesses) = coroutineScope {
+                    val i = api.invites.defaultInviteMessage(InviteMessageParams(result.business.uid))
+                    val b = api.businesses.all()
+                    i.await() to b.await()
+                }
                 val form = InviteToShareReportsForm(
                     businessName = result.params.businessName, contactEmail = result.params.contactEmail, message = inviteInfo.inviteMessage
                 ) {
-                    onCancel { post(LoadBusinesses) }
+                    onCancel { ui.value = ui.value.copy(emphasis = None) }
                     onSubmit("Send Invite") { post(SendInviteToShareReportsForm(result.summary, it)) }
                 }
-                emit(state.copy(emphasis = Dialog(form)))
+                emit(state.copy(emphasis = Dialog(form), table = businessesTable(businesses)))
             } else {
                 emit(state.copy(emphasis = Success("${i.params.businessName} has successfully been added. Loading all your businesses, please wait . . .")))
                 emit(state.copy(table = businessesTable(api.businesses.all().await())))
@@ -210,7 +221,7 @@ class BusinessesViewModel(
             emit(state.copy(emphasis = Failure(it) {
                 onGoBack { post(ShowCreateBusinessForm(i.params)) }
             }))
-        }.collect{
+        }.collect {
             ui.value = it
         }
     }
@@ -227,8 +238,8 @@ class BusinessesViewModel(
                 onGoBack { ui.value = state.copy(emphasis = None) }
                 onRetry { post(i) }
             }))
-        }.collect{
-            ui.value
+        }.collect {
+            ui.value = it
         }
     }
 
@@ -244,8 +255,8 @@ class BusinessesViewModel(
                 onGoBack { ui.value = state.copy(emphasis = None) }
                 onRetry { post(i) }
             }))
-        }.collect{
-            ui.value
+        }.collect {
+            ui.value = it
         }
     }
 

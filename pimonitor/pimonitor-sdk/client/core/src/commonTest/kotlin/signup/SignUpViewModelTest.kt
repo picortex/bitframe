@@ -94,8 +94,8 @@ class SignUpViewModelTest {
             val s = it as? State.IndividualForm
             s?.status as? Feedback.Failure
         } ?: throw AssertionError("Expected viewmodel to have error but did not")
-        expect(status.message).toBe("Failed to create your account: Field name is required and must not be blank")
-        expect(status.cause?.message).toBe("Field name is required and must not be blank")
+        expect(status.message).toBe("Failed to create your account: Field `name` is required and must not be blank")
+        expect(status.cause?.message).toBe("Field `name` is required and must not be blank")
     }
 
     @Test

@@ -23,7 +23,7 @@ open class FormDialog<out F, in P>(
     override val cancel by lazy {
         actions.firstOrNull {
             it.name.contentEquals("cancel", ignoreCase = true)
-        } ?: error("No cancel action has been registered")
+        } ?: error("No cancel action has been registered to FormDialog(heading=$heading)")
     }
 
     override val isForm = true

@@ -1,12 +1,12 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE", "FunctionName")
 
-package pimonitor.client.businesses.dialogs
+package pimonitor.client.businesses.fields
 
 import presenters.forms.Form
 import presenters.forms.FormActionsBuildingBlock
 import kotlin.js.JsExport
-import pimonitor.client.invites.fields.InviteToShareFormFields as Fields
+import pimonitor.client.invites.fields.InviteToShareFields as Fields
 import pimonitor.core.businesses.params.InviteToShareReportsRawParams as Params
 
 internal fun InviteToShareReportsForm(

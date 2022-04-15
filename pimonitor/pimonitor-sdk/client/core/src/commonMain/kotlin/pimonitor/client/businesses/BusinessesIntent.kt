@@ -11,8 +11,7 @@ import presenters.table.Row
 
 sealed class BusinessesIntent {
     object LoadBusinesses : BusinessesIntent()
-
-    // dialogs
+    
     data class ShowCreateBusinessForm(val params: CreateMonitoredBusinessRawParams?) : BusinessesIntent()
     data class SendCreateBusinessForm(val params: CreateMonitoredBusinessRawParams) : BusinessesIntent()
 

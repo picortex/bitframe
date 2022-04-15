@@ -6,18 +6,19 @@ package pimonitor.client.businesses
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.client.PiMonitorApi
-import pimonitor.client.business.investments.params.InvestmentsRawParams
+import pimonitor.client.business.interventions.params.CreateInterventionRawFormParams
 import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import pimonitor.core.businesses.params.InviteToShareReportsRawFormParams
+import pimonitor.core.investments.params.InvestmentRawParams
+import presenters.cases.CentralState
 import kotlin.js.JsExport
 import pimonitor.client.businesses.BusinessesIntent as Intent
-import pimonitor.client.businesses.BusinessesState as State
 
 open class BusinessesScope(
     override val config: UIScopeConfig<PiMonitorApi>
-) : UIScope<State> {
+) : UIScope<CentralState<MonitoredBusinessSummary>> {
 
     override val viewModel by lazy { BusinessesViewModel(config) }
 
@@ -25,35 +26,35 @@ open class BusinessesScope(
 
     val loadBusinesses: () -> Unit = { viewModel.post(Intent.LoadBusinesses) }
 
-    val showCreateBusinessForm: () -> Unit = { viewModel.post(Intent.ShowCreateBusinessForm) }
+    val showCreateBusinessForm = { params: CreateMonitoredBusinessRawParams? ->
+        viewModel.post(Intent.ShowCreateBusinessForm(params))
+    }
 
     val sendCreateBusinessForm = { params: CreateMonitoredBusinessRawParams ->
         viewModel.post(Intent.SendCreateBusinessForm(params))
     }
 
-    val showInviteToShareReport = { params: MonitoredBusinessSummary ->
-        viewModel.post(Intent.ShowInviteToShareReportsForm(params))
+    val showInviteToShareReport = { monitored: MonitoredBusinessSummary, params: InviteToShareReportsRawFormParams? ->
+        viewModel.post(Intent.ShowInviteToShareReportsForm(monitored, params))
     }
 
-    val sendInviteToShareReportsForm = { params: InviteToShareReportsRawFormParams ->
-        viewModel.post(Intent.SendInviteToShareReportsForm(params))
+    val sendInviteToShareReportsForm = { monitored: MonitoredBusinessSummary, params: InviteToShareReportsRawFormParams ->
+        viewModel.post(Intent.SendInviteToShareReportsForm(monitored, params))
     }
 
-    val showInterveneForm = { params: MonitoredBusinessSummary ->
-        viewModel.post(Intent.ShowInterveneForm(params))
+    val showInterveneForm = { monitored: MonitoredBusinessSummary, params: CreateInterventionRawFormParams? ->
+        viewModel.post(Intent.ShowInterveneForm(monitored, params))
     }
 
-    val sendInterveneForm = { params: Any ->
-        TODO()
+    val sendInterveneForm = { monitored: MonitoredBusinessSummary, params: CreateInterventionRawFormParams ->
+        viewModel.post(Intent.SendInterveneForm(monitored, params))
     }
 
-    val showCaptureInvestmentForm = { params: MonitoredBusinessSummary ->
-        viewModel.post(Intent.ShowCaptureInvestmentForm(params))
+    val showCaptureInvestmentForm = { monitored: MonitoredBusinessSummary, params: InvestmentRawParams? ->
+        viewModel.post(Intent.ShowCaptureInvestmentForm(monitored, params))
     }
 
-    val sendCaptureInvestmentForm = { params: InvestmentsRawParams ->
-        viewModel.post(Intent.SendCaptureInvestmentForm(params))
+    val sendCaptureInvestmentForm = { monitored: MonitoredBusinessSummary, params: InvestmentRawParams ->
+        viewModel.post(Intent.SendCaptureInvestmentForm(monitored, params))
     }
-
-    val exitDialog: () -> Unit = { viewModel.post(Intent.ExitDialog) }
 }

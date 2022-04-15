@@ -96,7 +96,7 @@ class InvestmentsScopeTest {
             expect(state.emphasis).toBe(Emphasis.None)
             expect(state.table).toBe<Table<InvestmentSummary>>()
             val inv = state.table.rows.firstOrNull { it.data.uid == investment.uid }
-            expect(inv).toBeNull()
+            expect(inv).toBeNonNull()
         }
     }
 }

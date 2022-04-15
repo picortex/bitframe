@@ -46,11 +46,12 @@ abstract class BusinessesService(
     }
 
     fun delete(vararg monitorIds: String) = config.scope.later {
+        logger.info("Deleting ${monitorIds.size} business(es)")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("delete business(es)"),
             data = monitorIds
         )
-        delete(rb).await()
+        delete(rb).await().also { logger.info("Success") }
     }
 
     fun load(businessId: String): Later<MonitoredBusinessBasicInfo> = config.scope.later {

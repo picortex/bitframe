@@ -7,6 +7,10 @@ import kotlinx.datetime.Clock
 import later.await
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.SignUpIndividualParams
+import presenters.cases.Emphasis
+import presenters.cases.Emphasis.Companion.Failure
+import presenters.cases.Emphasis.Companion.Loading
+import presenters.cases.Emphasis.None
 import presenters.cases.Feedback
 import utils.PiMonitorTestScope
 import viewmodel.expect
@@ -21,19 +25,12 @@ class LoadBusinessesJourneyTest {
     private val vm = scope.businesses.viewModel
 
     @Test
-    fun should_start_in_a_loading_state() {
-        val state = expect(vm).toBeIn<State>()
-        expect(state.status).toBe(Feedback.Loading("Loading your businesses, please wait . . ."))
-    }
-
-    @Test
     fun should_fail_to_load_businesses_when_there_is_no_signed_in_user() = runTest {
         api.session.signOut()
-        val state = State()
+        val state = vm.ui.value
         vm.expect(Intent.LoadBusinesses).toGoThrough(
-            state.copy(status = Feedback.Loading(message = "Loading your businesses, please wait . . .")),
-            state.copy(status = Feedback.Failure(message = "You must be signed in to query businesses")),
-            state.copy(status = Feedback.None)
+            state.copy(emphasis = Loading(message = "Loading your businesses, please wait . . .")),
+            state.copy(emphasis = Failure(message = "You must be signed in to query businesses")),
         )
     }
 
