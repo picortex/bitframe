@@ -53,7 +53,7 @@ class InvestmentsServiceKtor(private val config: ServiceConfigKtor) : Investment
         json.decodeResponseFromString(Investment.serializer(), res.bodyAsText()).response()
     }
 
-    override fun disburse(rb: RequestBody.Authorized<InvestmentDisbursementParams>): Later<Disbursement> = config.scope.later {
+    override fun createDisbursement(rb: RequestBody.Authorized<InvestmentDisbursementParams>): Later<Disbursement> = config.scope.later {
         val res = http.post(path.investmentsDisbursementCreate) {
             setBody(json.of(rb))
         }

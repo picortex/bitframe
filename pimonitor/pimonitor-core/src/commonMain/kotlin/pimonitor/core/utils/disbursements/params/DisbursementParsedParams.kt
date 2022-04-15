@@ -1,6 +1,5 @@
 package pimonitor.core.utils.disbursements.params
 
-import akkounts.utils.unset
 import bitframe.core.Session
 import datetime.Date
 import kash.Money
@@ -14,7 +13,6 @@ data class DisbursementParsedParams(
     val date: Date
 ) {
     fun toDisbursement(session: Session.SignedIn, timeZone: TimeZone) = Disbursement(
-        uid = unset,
         amount = amount,
         date = date,
         on = Date.today(timeZone),

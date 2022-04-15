@@ -1,8 +1,8 @@
-@file:JsExport
-@file:Suppress("NON_EXPORTABLE_TYPE")
+@file:Suppress("FunctionName")
 
 package pimonitor.client.businesses
 
+import bitframe.client.MiniScope
 import bitframe.client.UIScope
 import bitframe.client.UIScopeConfig
 import pimonitor.client.PiMonitorApi
@@ -16,45 +16,8 @@ import presenters.cases.CentralState
 import kotlin.js.JsExport
 import pimonitor.client.businesses.BusinessesIntent as Intent
 
-open class BusinessesScope(
-    override val config: UIScopeConfig<PiMonitorApi>
-) : UIScope<CentralState<MonitoredBusinessSummary>> {
-
-    override val viewModel by lazy { BusinessesViewModel(config) }
-
-    val Dashboard get() = DASHBOARD_OPERATIONAL
-
-    val loadBusinesses: () -> Unit = { viewModel.post(Intent.LoadBusinesses) }
-
-    val showCreateBusinessForm = { params: CreateMonitoredBusinessRawParams? ->
-        viewModel.post(Intent.ShowCreateBusinessForm(params))
-    }
-
-    val sendCreateBusinessForm = { params: CreateMonitoredBusinessRawParams ->
-        viewModel.post(Intent.SendCreateBusinessForm(params))
-    }
-
-    val showInviteToShareReport = { monitored: MonitoredBusinessSummary, params: InviteToShareReportsRawFormParams? ->
-        viewModel.post(Intent.ShowInviteToShareReportsForm(monitored, params))
-    }
-
-    val sendInviteToShareReportsForm = { monitored: MonitoredBusinessSummary, params: InviteToShareReportsRawFormParams ->
-        viewModel.post(Intent.SendInviteToShareReportsForm(monitored, params))
-    }
-
-    val showInterveneForm = { monitored: MonitoredBusinessSummary, params: CreateInterventionRawFormParams? ->
-        viewModel.post(Intent.ShowInterveneForm(monitored, params))
-    }
-
-    val sendInterveneForm = { monitored: MonitoredBusinessSummary, params: CreateInterventionRawFormParams ->
-        viewModel.post(Intent.SendInterveneForm(monitored, params))
-    }
-
-    val showCaptureInvestmentForm = { monitored: MonitoredBusinessSummary, params: InvestmentRawParams? ->
-        viewModel.post(Intent.ShowCaptureInvestmentForm(monitored, params))
-    }
-
-    val sendCaptureInvestmentForm = { monitored: MonitoredBusinessSummary, params: InvestmentRawParams ->
-        viewModel.post(Intent.SendCaptureInvestmentForm(monitored, params))
-    }
+internal fun BusinessesScope(config: UIScopeConfig<PiMonitorApi>) = MiniScope {
+    viewModel(BusinessesViewModel(config))
+    intents(BusinessesIntents(viewModel))
+    constants(BusinessesConstants)
 }

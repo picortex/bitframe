@@ -1,7 +1,6 @@
 package pimonitor.client.investments
 
 import bitframe.client.UIScopeConfig
-import kash.MoneyFormatterOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -13,6 +12,8 @@ import pimonitor.client.investments.forms.CreateInvestmentForm
 import pimonitor.client.investments.forms.UpdateInvestmentForm
 import pimonitor.client.investments.params.toCreateInvestmentDisbursementParams
 import pimonitor.client.utils.disbursements.forms.CreateDisbursementForm
+import pimonitor.client.utils.live.update
+import pimonitor.client.utils.money.toDefaultFormat
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.filters.InvestmentFilter
 import pimonitor.core.investments.params.toIdentifiedParams
@@ -135,7 +136,7 @@ class InvestmentsViewModel(
         val state = ui.value
         flow {
             emit(state.copy(emphasis = Loading("Sending disbursement, please wait. . .!")))
-            val disbursement = api.investments.disburse(i.params.toCreateInvestmentDisbursementParams(i.investment.uid)).await()
+            val disbursement = api.investments.createDisbursement(i.params.toCreateInvestmentDisbursementParams(i.investment.uid)).await()
             emit(state.copy(emphasis = Success("${disbursement.amount.toFormattedString()} has been successfully disbursed to ${i.investment.name} investment. Loading the remaining investments, please wait. . .")))
             emit(state.copy(table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {
@@ -180,7 +181,7 @@ class InvestmentsViewModel(
             onCancel { ui.value = state }
             onConfirm { post(SendDeleteManyInvestmentsIntent(i.investments.map { it.data }.toTypedArray())) }
         }
-        ui.value = state.copy(emphasis = Dialog(confirm))
+        ui.update { copy(emphasis = Dialog(confirm)) }
     }
 
     private fun CoroutineScope.sendDeleteManyInvestments(i: SendDeleteManyInvestmentsIntent) = launch {
@@ -231,9 +232,8 @@ class InvestmentsViewModel(
         if (businessId == null) column("Business") { it.data.businessName }
         column("Source") { it.data.source }
         column("Type") { it.data.type }
-        val options = MoneyFormatterOptions(decimals = 0, abbreviate = false)
-        column("Amount") { it.data.amount.toFormattedString(options) }
-        column("Disbursed") { it.data.totalDisbursed.toFormattedString(options) }
+        column("Amount") { it.data.amount.toDefaultFormat() }
+        column("Disbursed") { it.data.totalDisbursed.toDefaultFormat() }
         column("Progress") { "${it.data.disbursementProgressInPercentage.asInt}%" }
         column("Created By") { it.data.createdBy.name }
         actions("Actions") {

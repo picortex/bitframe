@@ -66,6 +66,7 @@ class DateFormatter(private val pattern: String) {
         val DD = day.to2digits
         val D = day.toString()
         val th = when {
+            day in 10..20 -> "th"
             day % 10 == 1 -> "st"
             day % 10 == 2 -> "nd"
             day % 10 == 3 -> "rd"

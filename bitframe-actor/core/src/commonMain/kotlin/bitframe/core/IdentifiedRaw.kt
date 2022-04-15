@@ -14,3 +14,8 @@ fun <T : Any> IdentifiedRaw<T>.toValidated() = Identified(
     uid = uid,
     body = body
 )
+
+inline fun <T : Any, S : Any> IdentifiedRaw<T>.toValidated(mapper: (T) -> S) = Identified(
+    uid = uid,
+    body = mapper(body)
+)

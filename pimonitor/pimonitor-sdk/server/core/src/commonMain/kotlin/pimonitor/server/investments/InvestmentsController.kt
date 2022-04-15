@@ -34,7 +34,7 @@ class InvestmentsController(
 
     suspend fun createDisbursement(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.Authorized<InvestmentDisbursementParams>>(req.compulsoryBody())
-        resolve(service.disburse(rb).await())
+        resolve(service.createDisbursement(rb).await())
     }.toHttpResponse()
 
     suspend fun updateDisbursement(req: HttpRequest) = response {

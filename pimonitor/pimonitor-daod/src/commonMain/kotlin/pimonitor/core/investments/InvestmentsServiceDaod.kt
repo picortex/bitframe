@@ -52,7 +52,7 @@ open class InvestmentsServiceDaod(
         investmentsDao.all(condition).await().toTypedArray().map { it.toSummary() }.toInteroperableList()
     }
 
-    override fun disburse(rb: RequestBody.Authorized<InvestmentDisbursementParams>) = config.scope.later {
+    override fun createDisbursement(rb: RequestBody.Authorized<InvestmentDisbursementParams>) = config.scope.later {
         val investment = investmentsDao.load(rb.data.investmentId).await()
         val disbursement = rb.data.toParsedParams(currency).toDisbursement(rb.session, timezone)
         val input = investment.copy(

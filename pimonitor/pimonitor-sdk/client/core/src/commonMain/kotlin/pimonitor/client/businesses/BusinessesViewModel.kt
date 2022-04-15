@@ -22,6 +22,7 @@ import pimonitor.client.businesses.fields.InviteToShareReportsForm
 import pimonitor.client.businesses.forms.CreateBusinessForm
 import pimonitor.client.investments.forms.CreateInvestmentForm
 import pimonitor.client.utils.live.removeEmphasis
+import pimonitor.client.utils.live.update
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.toValidatedParams
@@ -87,12 +88,11 @@ class BusinessesViewModel(
     }
 
     private fun showDeleteMultipleConfirmationDialog(i: ShowDeleteMultipleConfirmationDialog) {
-        val state = ui.value
         val confirm = DeleteManyDialog(i.data) {
             onCancel { ui.removeEmphasis() }
             onConfirm { post(DeleteAll(i.data.map { it.data }.toTypedArray())) }
         }
-        ui.value = ui.value.copy(emphasis = Dialog(confirm))
+        ui.update { copy(emphasis = Dialog(confirm)) }
     }
 
     private fun showDeleteSingleConfirmationDialog(i: ShowDeleteSingleConfirmationDialog) {
@@ -101,7 +101,7 @@ class BusinessesViewModel(
             onCancel { ui.value = state.copy(emphasis = None) }
             onConfirm { post(Delete(i.monitored)) }
         }
-        ui.value = ui.value.copy(emphasis = Dialog(confirm))
+        ui.update { copy(emphasis = Dialog(confirm)) }
     }
 
     private fun CoroutineScope.sendCaptureInvestmentForm(i: SendCaptureInvestmentForm) = launch {
@@ -291,9 +291,9 @@ class BusinessesViewModel(
         column("Revenue") { it.data.revenue.toString() }
         column("Expenses") { it.data.expenses.toString() }
         column("GP") { it.data.grossProfit.toString() }
-        column("Velocity") { it.data.velocity.toString() }
-        column("NCF") { it.data.netCashFlow.toString() }
-        column("V/day") { it.data.velocity.toString() }
+        // column("Velocity") { it.data.velocity.toString() }
+        // column("NCF") { it.data.netCashFlow.toString() }
+        // column("V/day") { it.data.velocity.toString() }
         actions("Actions") {
             action("Invite to share reports") { post(ShowInviteToShareReportsForm(it.data, null)) }
             action("Intervene") { post(ShowInterveneForm(it.data, null)) }

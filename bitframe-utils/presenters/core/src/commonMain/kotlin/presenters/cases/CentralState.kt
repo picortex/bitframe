@@ -12,6 +12,9 @@ data class CentralState<T>(
     val emphasis: Emphasis = Emphasis.Loading("Please wait . . ."),
     val table: Table<T> = tableOf(emptyList()) {},
 ) {
+    @JsName("_ignore_fromLoading")
+    constructor(message: String) : this(emphasis = Emphasis.Loading(message))
+
     @JsName("_ignore_copy")
     fun copy(table: Table<T>) = copy(emphasis = Emphasis.None, table = table)
 

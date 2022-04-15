@@ -15,7 +15,6 @@ import utils.toContain
 import viewmodel.expect
 import kotlin.test.Test
 import pimonitor.client.businesses.BusinessesIntent as Intent
-import pimonitor.client.businesses.BusinessesState as State
 
 class CreateBusinessJourneyTest {
 

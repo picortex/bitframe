@@ -9,20 +9,24 @@ import bitframe.client.logger
 import bitframe.core.IdentifiedRaw
 import bitframe.core.RequestBody
 import bitframe.core.toValidated
+import kotlinx.collections.interoperable.List
 import later.Later
 import later.await
 import later.later
+import pimonitor.client.utils.DisbursableService
 import pimonitor.core.investments.InvestmentSummary
-import pimonitor.core.investments.filters.InvestmentFilter
 import pimonitor.core.investments.InvestmentsServiceCore
 import pimonitor.core.investments.filters.InvestmentRawFilter
 import pimonitor.core.investments.filters.toValidatedFilter
-import pimonitor.core.investments.params.InvestmentDisbursementRawParams
 import pimonitor.core.investments.params.InvestmentRawParams
 import pimonitor.core.investments.params.toValidatedParams
+import pimonitor.core.utils.disbursements.Disbursement
+import pimonitor.core.utils.disbursements.params.DisbursableDisbursementParams
+import pimonitor.core.utils.disbursements.params.DisbursableDisbursementRawParams
+import pimonitor.core.utils.disbursements.params.toValidatedParams
 import kotlin.js.JsExport
 
-abstract class InvestmentsService(private val config: ServiceConfig) : InvestmentsServiceCore {
+abstract class InvestmentsService(private val config: ServiceConfig) : InvestmentsServiceCore, DisbursableService {
     val logger by config.logger(withSessionInfo = true)
 
     fun create(params: InvestmentRawParams) = config.scope.later {
@@ -34,6 +38,10 @@ abstract class InvestmentsService(private val config: ServiceConfig) : Investmen
         create(rb).await().also { logger.info("Investment captured successfully") }
     }
 
+    override fun load(disbursableId: String): Later<InvestmentSummary> = config.scope.later {
+        TODO()
+    }
+
     fun update(params: IdentifiedRaw<InvestmentRawParams>) = config.scope.later {
         logger.info("Updating ${params.body.name} investment")
         val rb = RequestBody.Authorized(
@@ -43,13 +51,31 @@ abstract class InvestmentsService(private val config: ServiceConfig) : Investmen
         update(rb).await()
     }
 
-    fun disburse(params: InvestmentDisbursementRawParams) = config.scope.later {
+    override fun createDisbursement(params: DisbursableDisbursementParams): Later<Disbursement> = config.scope.later {
         logger.info("Creating a disbursement")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("create a disbursement"),
             data = params.toValidatedParams()
         )
-        disburse(rb).await()
+        createDisbursement(rb).await()
+    }
+
+    override fun updateDisbursement(params: IdentifiedRaw<DisbursableDisbursementRawParams>): Later<Disbursement> = config.scope.later {
+        logger.info("Updating a disbursement")
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("update a disbursement"),
+            data = params.toValidated { it.toValidatedParams() }
+        )
+        updateDisbursement(rb).await().also { logger.info("Success") }
+    }
+
+    override fun deleteDisbursements(params: IdentifiedRaw<Array<String>>): Later<List<Disbursement>> = config.scope.later {
+        logger.info("Deleting disbursements")
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("delete disbursement"),
+            data = params.toValidated()
+        )
+        deleteDisbursement(rb).await()
     }
 
     fun delete(vararg ids: String) = config.scope.later {
@@ -58,7 +84,7 @@ abstract class InvestmentsService(private val config: ServiceConfig) : Investmen
             session = config.getSignedInSessionTo("delete multiple investments"),
             data = ids
         )
-        delete(rb).await()
+        delete(rb).await().also { logger.info("Success") }
     }
 
     fun all(params: InvestmentRawFilter? = null) = config.scope.later {
@@ -68,9 +94,5 @@ abstract class InvestmentsService(private val config: ServiceConfig) : Investmen
             data = params.toValidatedFilter()
         )
         all(rb).await()
-    }
-
-    fun load(investmentId: String): Later<InvestmentSummary> = config.scope.later {
-        TODO()
     }
 }
