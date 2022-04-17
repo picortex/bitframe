@@ -7,7 +7,7 @@ import presenters.forms.FormActionsBuildingBlock
 import pimonitor.client.utils.disbursements.fields.DisbursementFields as Fields
 import pimonitor.core.utils.disbursements.params.DisbursementRawParams as Params
 
-fun UpdateDisbursementForm(
+internal fun UpdateDisbursementForm(
     disbursement: Disbursement,
     params: Params? = null,
     block: FormActionsBuildingBlock<Params>

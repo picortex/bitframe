@@ -3,6 +3,7 @@ package pimonitor.core.utils.disbursements.params
 import datetime.Date
 import kash.Currency
 import kash.Money
+import validation.BlankFieldException
 import validation.requiredNotBlank
 import kotlin.js.JsExport
 
@@ -22,5 +23,14 @@ fun DisbursementRawParams.toParsedParams(currency: Currency): DisbursementParsed
     return DisbursementParsedParams(
         amount = Money.of(validated.amount.toDouble(), currency),
         date = Date.parse(validated.date)
+    )
+}
+
+fun DisbursementRawParams.toValidatedDisbursableParams(disbursableId: String): DisbursableDisbursementParams {
+    val validated = toValidatedParams()
+    return DisbursableDisbursementParams(
+        disbursableId = disbursableId.takeIf { it.isNotBlank() } ?: throw BlankFieldException("disbursableId"),
+        amount = validated.amount,
+        date = validated.date
     )
 }

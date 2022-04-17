@@ -12,6 +12,7 @@ import kotlin.js.JsName
 
 abstract class Disbursable {
     abstract val uid: String
+    abstract val name: String
     abstract val amount: Money
     abstract val disbursements: List<Disbursement>
 

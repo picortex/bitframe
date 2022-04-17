@@ -18,6 +18,7 @@ import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.filters.InvestmentFilter
 import pimonitor.core.investments.params.toIdentifiedParams
 import pimonitor.core.investments.params.toValidatedParams
+import pimonitor.core.utils.disbursements.params.toValidatedDisbursableParams
 import presenters.cases.Emphasis.Companion.Dialog
 import presenters.cases.Emphasis.Companion.Failure
 import presenters.cases.Emphasis.Companion.Loading
@@ -125,7 +126,7 @@ class InvestmentsViewModel(
 
     private fun showDisbursementForm(i: ShowDisbursementForm) {
         val state = ui.value
-        val form = CreateDisbursementForm(i.investment.name, i.params) {
+        val form = CreateDisbursementForm(i.investment, i.params) {
             onCancel { ui.value = state }
             onSubmit { params -> post(SendDisbursementForm(i.investment, params)) }
         }
@@ -136,7 +137,7 @@ class InvestmentsViewModel(
         val state = ui.value
         flow {
             emit(state.copy(emphasis = Loading("Sending disbursement, please wait. . .!")))
-            val disbursement = api.investments.createDisbursement(i.params.toCreateInvestmentDisbursementParams(i.investment.uid)).await()
+            val disbursement = api.investments.createDisbursement(i.params.toValidatedDisbursableParams(i.investment.uid)).await()
             emit(state.copy(emphasis = Success("${disbursement.amount.toFormattedString()} has been successfully disbursed to ${i.investment.name} investment. Loading the remaining investments, please wait. . .")))
             emit(state.copy(table = investmentsTable(api.investments.all(InvestmentFilter(businessId)).await())))
         }.catch {

@@ -20,7 +20,7 @@ data class Investment(
     override val uid: String = unset,
     val businessId: String,
     val owningSpaceId: String,
-    val name: String,
+    override val name: String,
     val type: String,
     val source: String,
     override val amount: Money,

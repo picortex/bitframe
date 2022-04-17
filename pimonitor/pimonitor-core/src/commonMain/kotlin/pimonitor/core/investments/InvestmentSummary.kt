@@ -17,7 +17,7 @@ data class InvestmentSummary(
     override val uid: String,
     val businessId: String,
     val businessName: String,
-    val name: String,
+    override val name: String,
     val type: String,
     val source: String,
     override val amount: Money,

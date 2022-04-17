@@ -85,7 +85,7 @@ class BusinessInterventionsViewModel(
 
     private fun showCreateDisbursementForm(i: ShowCreateDisbursementForm) {
         ui.value = ui.value.copy(
-            dialog = CreateDisbursementDialog(i.intervention.name) {
+            dialog = CreateDisbursementDialog(i.intervention) {
                 onCancel { post(ExitDialog) }
                 onSubmit { post(SendCreateDisbursementForm(i.intervention, it)) }
             },

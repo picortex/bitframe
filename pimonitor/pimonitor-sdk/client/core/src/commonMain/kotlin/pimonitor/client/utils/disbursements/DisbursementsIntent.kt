@@ -9,10 +9,10 @@ sealed class DisbursementsIntent {
     data class LoadDisbursements(val disbursableId: String) : DisbursementsIntent()
 
     data class ShowCreateDisbursementForm(val disbursable: Disbursable, val params: DisbursementRawParams?) : DisbursementsIntent()
-    data class SendCreateDisbursementForm(val disbursable: Disbursable, val params: DisbursementRawParams?) : DisbursementsIntent()
+    data class SendCreateDisbursementForm(val disbursable: Disbursable, val params: DisbursementRawParams) : DisbursementsIntent()
 
     data class ShowEditDisbursementForm(val disbursement: Disbursement, val params: DisbursementRawParams?) : DisbursementsIntent()
-    data class SendEditDisbursementForm(val disbursement: Disbursement, val params: DisbursementRawParams?) : DisbursementsIntent()
+    data class SendEditDisbursementForm(val disbursement: Disbursement, val params: DisbursementRawParams) : DisbursementsIntent()
 
     data class ShowDeleteSingleConfirmationDialog(val disbursement: Disbursement) : DisbursementsIntent()
     data class ShowDeleteMultipleConfirmationDialog(val data: Array<Row<Disbursement>>) : DisbursementsIntent()

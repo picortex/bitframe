@@ -19,7 +19,7 @@ import kotlin.js.JsExport
 data class Intervention(
     override val uid: String = unset,
     val businessId: String,
-    val name: String,
+    override val name: String,
     override val amount: Money,
     val date: Date,
     val deadline: Date,
