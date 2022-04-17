@@ -26,7 +26,7 @@ import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 
 class DisbursementsViewModel(
-    private val config: UIScopeConfig<DisbursableService>
+    private val config: UIScopeConfig<DisbursableService<*>>
 ) : ViewModel<DisbursementsIntent, CentralState<Disbursement>>(DEFAULT_LOADING_STATE) {
     private val service get() = config.service
 

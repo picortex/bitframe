@@ -25,8 +25,7 @@ data class InvestmentSummary(
     val details: String,
     val history: List<InvestmentHistory>,
     override val disbursements: List<Disbursement>,
-    val createdBy: UserRef,
-    override val deleted: Boolean
+    val createdBy: UserRef
 ) : Disbursable() {
-    override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
+    override fun copy(disbursements: List<Disbursement>) = copy(uid = uid, disbursements = disbursements)
 }

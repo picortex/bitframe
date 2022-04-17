@@ -28,8 +28,8 @@ data class Intervention(
     val history: List<InterventionHistory>,
     override val disbursements: List<Disbursement>,
     override val deleted: Boolean = false
-) : Disbursable() {
-    override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
-
+) : Disbursable(), Savable {
     val createdBy by lazy { history.filterIsInstance<InterventionHistory.Created>().first().by }
+    override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
+    override fun copy(disbursements: List<Disbursement>) = copy(uid = uid, disbursements = disbursements)
 }

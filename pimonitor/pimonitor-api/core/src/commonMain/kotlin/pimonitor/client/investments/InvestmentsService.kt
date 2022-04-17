@@ -14,6 +14,8 @@ import later.Later
 import later.await
 import later.later
 import pimonitor.client.utils.DisbursableService
+import pimonitor.client.utils.DisbursableServiceImpl
+import pimonitor.core.investments.Investment
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.InvestmentsServiceCore
 import pimonitor.core.investments.filters.InvestmentRawFilter
@@ -26,7 +28,7 @@ import pimonitor.core.utils.disbursements.params.DisbursableDisbursementRawParam
 import pimonitor.core.utils.disbursements.params.toValidatedParams
 import kotlin.js.JsExport
 
-abstract class InvestmentsService(private val config: ServiceConfig) : InvestmentsServiceCore, DisbursableService {
+abstract class InvestmentsService(private val config: ServiceConfig) : DisbursableServiceImpl<Investment>(config), InvestmentsServiceCore {
     val logger by config.logger(withSessionInfo = true)
 
     fun create(params: InvestmentRawParams) = config.scope.later {
@@ -38,10 +40,6 @@ abstract class InvestmentsService(private val config: ServiceConfig) : Investmen
         create(rb).await().also { logger.info("Investment captured successfully") }
     }
 
-    override fun load(disbursableId: String): Later<InvestmentSummary> = config.scope.later {
-        TODO()
-    }
-
     fun update(params: IdentifiedRaw<InvestmentRawParams>) = config.scope.later {
         logger.info("Updating ${params.body.name} investment")
         val rb = RequestBody.Authorized(
@@ -49,33 +47,6 @@ abstract class InvestmentsService(private val config: ServiceConfig) : Investmen
             data = params.toValidated().map { it.toValidatedParams() }
         )
         update(rb).await()
-    }
-
-    override fun createDisbursement(params: DisbursableDisbursementParams): Later<Disbursement> = config.scope.later {
-        logger.info("Creating a disbursement")
-        val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("create a disbursement"),
-            data = params.toValidatedParams()
-        )
-        createDisbursement(rb).await()
-    }
-
-    override fun updateDisbursement(params: IdentifiedRaw<DisbursableDisbursementRawParams>): Later<Disbursement> = config.scope.later {
-        logger.info("Updating a disbursement")
-        val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("update a disbursement"),
-            data = params.toValidated { it.toValidatedParams() }
-        )
-        updateDisbursement(rb).await().also { logger.info("Success") }
-    }
-
-    override fun deleteDisbursements(params: IdentifiedRaw<Array<String>>): Later<List<Disbursement>> = config.scope.later {
-        logger.info("Deleting disbursements")
-        val rb = RequestBody.Authorized(
-            session = config.getSignedInSessionTo("delete disbursement"),
-            data = params.toValidated()
-        )
-        deleteDisbursement(rb).await()
     }
 
     fun delete(vararg ids: String) = config.scope.later {

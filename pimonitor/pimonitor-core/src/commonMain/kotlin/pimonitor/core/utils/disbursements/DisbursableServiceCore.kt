@@ -11,9 +11,9 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-interface DisbursableServiceCore {
+interface DisbursableServiceCore<out D : Disbursable> {
     @JsName("_ignore_load")
-    fun load(disbursableId: String): Later<Disbursable>
+    fun load(rb: RequestBody.Authorized<String>): Later<D>
 
     @JsName("_ignore_createDisbursement")
     fun createDisbursement(rb: RequestBody.Authorized<DisbursableDisbursementParams>): Later<Disbursement>

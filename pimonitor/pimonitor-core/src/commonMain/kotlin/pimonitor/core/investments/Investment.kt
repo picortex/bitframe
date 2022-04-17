@@ -29,8 +29,8 @@ data class Investment(
     val history: List<InvestmentHistory>,
     override val disbursements: List<Disbursement>,
     override val deleted: Boolean = false
-) : Disbursable() {
+) : Disbursable(), Savable {
     override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
-
+    override fun copy(disbursements: List<Disbursement>) = copy(uid = uid, disbursements = disbursements)
     val createdBy by lazy { history.filterIsInstance<InvestmentHistory.Created>().first().by }
 }

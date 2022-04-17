@@ -3,14 +3,15 @@
 
 package pimonitor.core.utils.disbursements
 
-import bitframe.core.Savable
 import kash.Money
 import kotlinx.collections.interoperable.List
 import pimonitor.core.business.utils.money.sum
 import presenters.numerics.Percentage
 import kotlin.js.JsExport
+import kotlin.js.JsName
 
-abstract class Disbursable : Savable {
+abstract class Disbursable {
+    abstract val uid: String
     abstract val amount: Money
     abstract val disbursements: List<Disbursement>
 
@@ -19,4 +20,7 @@ abstract class Disbursable : Savable {
     val disbursementProgressInPercentage by lazy {
         Percentage.fromRatio(totalDisbursed.amount / amount.amount)
     }
+
+    @JsName("_ignore_copyDisbursable")
+    abstract fun copy(disbursements: List<Disbursement>): Disbursable
 }

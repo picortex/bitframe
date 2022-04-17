@@ -13,7 +13,7 @@ import pimonitor.core.utils.disbursements.params.DisbursementRawParams
 import kotlin.js.JsExport
 
 @JsExport
-interface DisbursableService {
+interface DisbursableService<out D : Disbursable> {
     fun load(disbursableId: String): Later<Disbursable>
     fun createDisbursement(params: DisbursableDisbursementParams): Later<Disbursement>
     fun deleteDisbursements(params: IdentifiedRaw<Array<String>>): Later<List<Disbursement>>

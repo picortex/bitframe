@@ -13,7 +13,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-interface InvestmentsServiceCore : DisbursableServiceCore {
+interface InvestmentsServiceCore : DisbursableServiceCore<Investment> {
     @JsName("_ignore_create")
     fun create(rb: RequestBody.Authorized<InvestmentParams>): Later<Investment>
 

@@ -12,7 +12,8 @@ data class DisbursementParsedParams(
     val amount: Money,
     val date: Date
 ) {
-    fun toDisbursement(session: Session.SignedIn, timeZone: TimeZone) = Disbursement(
+    fun toDisbursement(session: Session.SignedIn, timeZone: TimeZone, uid: Int) = Disbursement(
+        uid = "disbursement-$uid",
         amount = amount,
         date = date,
         on = Date.today(timeZone),
