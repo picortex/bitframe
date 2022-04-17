@@ -1,7 +1,7 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.core.utils.disbursements
+package pimonitor.core.utils.disbursables.disbursements
 
 import akkounts.utils.unset
 import bitframe.core.Savable

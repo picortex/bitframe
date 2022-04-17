@@ -3,7 +3,7 @@ package pimonitor.client.investments
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.params.InvestmentRawParams
-import pimonitor.core.utils.disbursements.params.DisbursementRawParams
+import pimonitor.core.utils.disbursables.disbursements.params.DisbursementRawParams
 import presenters.table.Row
 
 sealed class InvestmentsIntent {

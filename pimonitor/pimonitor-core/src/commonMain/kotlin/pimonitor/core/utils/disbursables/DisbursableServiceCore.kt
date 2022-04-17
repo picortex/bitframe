@@ -1,12 +1,13 @@
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.core.utils.disbursements
+package pimonitor.core.utils.disbursables
 
 import bitframe.core.Identified
 import bitframe.core.RequestBody
 import kotlinx.collections.interoperable.List
 import later.Later
-import pimonitor.core.utils.disbursements.params.DisbursableDisbursementParams
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.params.DisbursableDisbursementParams
 import kotlin.js.JsExport
 import kotlin.js.JsName
 

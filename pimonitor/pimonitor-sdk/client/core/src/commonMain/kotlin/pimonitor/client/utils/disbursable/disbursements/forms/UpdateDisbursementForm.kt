@@ -1,11 +1,11 @@
-package pimonitor.client.utils.disbursements.forms
+package pimonitor.client.utils.disbursable.disbursements.forms
 
 import identifier.Name
-import pimonitor.core.utils.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
 import presenters.forms.Form
 import presenters.forms.FormActionsBuildingBlock
-import pimonitor.client.utils.disbursements.fields.DisbursementFields as Fields
-import pimonitor.core.utils.disbursements.params.DisbursementRawParams as Params
+import pimonitor.client.utils.disbursable.disbursements.fields.DisbursementFields as Fields
+import pimonitor.core.utils.disbursables.disbursements.params.DisbursementRawParams as Params
 
 internal fun UpdateDisbursementForm(
     disbursement: Disbursement,

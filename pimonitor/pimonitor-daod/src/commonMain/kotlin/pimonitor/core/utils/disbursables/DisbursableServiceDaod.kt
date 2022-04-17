@@ -1,4 +1,4 @@
-package pimonitor.core.utils.disbursements
+package pimonitor.core.utils.disbursables
 
 import bitframe.core.Identified
 import bitframe.core.RequestBody
@@ -11,8 +11,9 @@ import kotlinx.datetime.TimeZone
 import later.Later
 import later.await
 import later.later
-import pimonitor.core.utils.disbursements.params.DisbursableDisbursementParams
-import pimonitor.core.utils.disbursements.params.toParsedParams
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.params.DisbursableDisbursementParams
+import pimonitor.core.utils.disbursables.disbursements.params.toParsedParams
 
 abstract class DisbursableServiceDaod<out D : Disbursable>(
     private val config: ServiceConfigDaod,

@@ -15,7 +15,7 @@ import pimonitor.core.business.interventions.Intervention
 import pimonitor.core.business.interventions.params.CreateGoalParams
 import pimonitor.core.business.interventions.params.CreateInterventionDisbursementParams
 import pimonitor.core.business.interventions.params.InterventionParams
-import pimonitor.core.utils.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
 import response.decodeResponseFromString
 
 open class BusinessInterventionsServiceKtor(

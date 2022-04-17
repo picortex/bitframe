@@ -1,6 +1,6 @@
 package pimonitor.core.business.interventions.params
 
-import pimonitor.core.utils.disbursements.params.DisbursementRawParams
+import pimonitor.core.utils.disbursables.disbursements.params.DisbursementRawParams
 import validation.requiredNotBlank
 import kotlin.js.JsExport
 

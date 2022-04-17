@@ -10,7 +10,7 @@ import pimonitor.client.business.interventions.BusinessInterventionsIntent.*
 import pimonitor.client.business.interventions.params.CreateGoalRawFormParams
 import pimonitor.client.business.interventions.params.CreateInterventionRawFormParams
 import pimonitor.core.business.interventions.Intervention
-import pimonitor.core.utils.disbursements.params.DisbursementRawParams
+import pimonitor.core.utils.disbursables.disbursements.params.DisbursementRawParams
 import presenters.cases.CrowdState
 import kotlin.js.JsExport
 

@@ -1,11 +1,11 @@
-package pimonitor.core.utils.disbursements.params
+package pimonitor.core.utils.disbursables.disbursements.params
 
 import bitframe.core.Session
 import datetime.Date
 import kash.Money
 import kotlinx.datetime.TimeZone
 import kotlinx.serialization.Serializable
-import pimonitor.core.utils.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
 
 @Serializable
 data class DisbursementParsedParams(

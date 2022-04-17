@@ -1,4 +1,4 @@
-package pimonitor.client.utils.disbursements
+package pimonitor.client.utils.disbursable.disbursements
 
 import bitframe.client.UIScopeConfig
 import bitframe.core.Identified
@@ -6,22 +6,20 @@ import kash.Money
 import kotlinx.collections.interoperable.List
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import pimonitor.client.utils.DisbursableService
-import pimonitor.client.utils.disbursements.DisbursementsIntent.*
+import pimonitor.client.utils.disbursables.DisbursableService
+import pimonitor.client.utils.disbursable.disbursements.DisbursementsIntent.*
 import pimonitor.client.utils.date.toDefaultFormat
-import pimonitor.client.utils.disbursements.forms.CreateDisbursementForm
-import pimonitor.client.utils.disbursements.forms.UpdateDisbursementForm
+import pimonitor.client.utils.disbursable.disbursements.forms.CreateDisbursementForm
+import pimonitor.client.utils.disbursable.disbursements.forms.UpdateDisbursementForm
 import pimonitor.client.utils.live.removeEmphasis
 import pimonitor.client.utils.live.update
 import pimonitor.client.utils.money.toDefaultFormat
-import pimonitor.core.utils.disbursements.Disbursable
-import pimonitor.core.utils.disbursements.Disbursement
-import pimonitor.core.utils.disbursements.params.toValidatedDisbursableParams
-import pimonitor.core.utils.disbursements.params.toValidatedParams
+import pimonitor.core.utils.disbursables.Disbursable
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.params.toValidatedDisbursableParams
 import presenters.cases.CentralState
 import presenters.cases.Emphasis
 import presenters.cases.Emphasis.Companion.Dialog

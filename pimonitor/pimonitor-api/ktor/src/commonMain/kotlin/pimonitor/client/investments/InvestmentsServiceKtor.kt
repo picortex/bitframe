@@ -11,13 +11,13 @@ import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.collections.interoperable.toInteroperableList
 import later.Later
 import later.later
-import pimonitor.client.utils.disbursements.DisbursableServiceKtor
+import pimonitor.client.utils.disbursables.DisbursableServiceKtor
 import pimonitor.client.utils.pathV1
 import pimonitor.core.investments.Investment
 import pimonitor.core.investments.filters.InvestmentFilter
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.params.InvestmentParams
-import pimonitor.core.utils.disbursements.DisbursableServiceCore
+import pimonitor.core.utils.disbursables.DisbursableServiceCore
 import response.decodeResponseFromString
 
 class InvestmentsServiceKtor(

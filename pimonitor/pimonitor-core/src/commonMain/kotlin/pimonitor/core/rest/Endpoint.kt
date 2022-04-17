@@ -1,6 +1,6 @@
 package pimonitor.core.rest
 
-import pimonitor.core.utils.disbursements.DisbursableEndpoint
+import pimonitor.core.utils.disbursables.DisbursableEndpoint
 
 sealed class Endpoint(root: String) {
     class Client(url: String, version: String) : Endpoint("$url/api/$version")

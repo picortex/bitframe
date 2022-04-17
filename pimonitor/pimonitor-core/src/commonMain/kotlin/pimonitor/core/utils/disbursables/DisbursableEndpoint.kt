@@ -1,4 +1,4 @@
-package pimonitor.core.utils.disbursements
+package pimonitor.core.utils.disbursables
 
 open class DisbursableEndpoint(root: String) {
     val create = "$root/create"

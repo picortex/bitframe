@@ -12,7 +12,7 @@ import pimonitor.client.utils.pathV1
 import pimonitor.core.investments.Investment
 import pimonitor.core.investments.params.InvestmentDisbursementParams
 import pimonitor.core.investments.params.InvestmentParams
-import pimonitor.core.utils.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
 import response.decodeResponseFromString
 
 open class BusinessInvestmentsServiceKtor(

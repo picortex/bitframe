@@ -1,8 +1,8 @@
-package pimonitor.client.utils.disbursements
+package pimonitor.client.utils.disbursable.disbursements
 
-import pimonitor.core.utils.disbursements.Disbursable
-import pimonitor.core.utils.disbursements.Disbursement
-import pimonitor.core.utils.disbursements.params.DisbursementRawParams
+import pimonitor.core.utils.disbursables.Disbursable
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.params.DisbursementRawParams
 import presenters.table.Row
 
 sealed class DisbursementsIntent {

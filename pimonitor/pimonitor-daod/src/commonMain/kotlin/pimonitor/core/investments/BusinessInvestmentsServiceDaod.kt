@@ -13,7 +13,7 @@ import later.later
 import pimonitor.core.investments.params.InvestmentDisbursementParams
 import pimonitor.core.investments.params.InvestmentParams
 import pimonitor.core.investments.params.toValidatedParams
-import pimonitor.core.utils.disbursements.params.toParsedParams
+import pimonitor.core.utils.disbursables.disbursements.params.toParsedParams
 
 open class BusinessInvestmentsServiceDaod(
     val config: ServiceConfigDaod

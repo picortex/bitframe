@@ -1,4 +1,4 @@
-package pimonitor.client.investment.index
+package pimonitor.client.utils.disbursable.index
 
 import bitframe.client.UIScopeConfig
 import kotlinx.coroutines.CoroutineScope
@@ -7,14 +7,16 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.investments.InvestmentsService
+import pimonitor.client.utils.disbursables.DisbursableService
 import pimonitor.core.investments.InvestmentSummary
+import pimonitor.core.utils.disbursables.Disbursable
 import presenters.cases.Mission
 import presenters.intents.IndexIntent
 import viewmodel.ViewModel
 
-class InvestmentIndexViewModel(
-    val config: UIScopeConfig<InvestmentsService>
-) : ViewModel<IndexIntent, Mission<InvestmentSummary>>(DEFAULT_LOADING_STATE, config.viewModel) {
+class DisbursableIndexViewModel<out D : Disbursable>(
+    val config: UIScopeConfig<DisbursableService<D>>
+) : ViewModel<IndexIntent, Mission<@UnsafeVariance D>>(DEFAULT_LOADING_STATE, config.viewModel) {
     private val service get() = config.service
 
     companion object {

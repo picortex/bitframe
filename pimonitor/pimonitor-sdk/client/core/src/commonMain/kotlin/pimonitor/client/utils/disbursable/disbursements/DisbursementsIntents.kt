@@ -1,6 +1,6 @@
 @file:JsExport
 
-package pimonitor.client.utils.disbursements
+package pimonitor.client.utils.disbursable.disbursements
 
 import viewmodel.ViewModel
 import kotlin.js.JsExport
@@ -8,7 +8,7 @@ import kotlin.js.JsExport
 class DisbursementsIntents internal constructor(
     private val viewModel: ViewModel<DisbursementsIntent, *>
 ) {
-    val loadInvestment = { investmentId: String ->
+    val loadDisbursable = { investmentId: String ->
         viewModel.post(DisbursementsIntent.LoadDisbursements(investmentId))
     }
 }

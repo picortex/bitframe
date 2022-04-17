@@ -14,7 +14,7 @@ import pimonitor.core.investments.filters.InvestmentFilter
 import pimonitor.core.investments.params.InvestmentParams
 import pimonitor.core.investments.params.InvestmentsParsedParams
 import pimonitor.core.investments.params.toValidatedParams
-import pimonitor.core.utils.disbursements.DisbursableServiceDaod
+import pimonitor.core.utils.disbursables.DisbursableServiceDaod
 
 open class InvestmentsServiceDaod(
     val config: ServiceConfigDaod,

@@ -7,7 +7,7 @@ import kotlinx.collections.interoperable.List
 import later.Later
 import pimonitor.core.investments.params.InvestmentDisbursementParams
 import pimonitor.core.investments.params.InvestmentParams
-import pimonitor.core.utils.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
 import kotlin.js.JsExport
 import kotlin.js.JsName
 

@@ -1,14 +1,14 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.client.utils.disbursements.fields
+package pimonitor.client.utils.disbursable.disbursements.fields
 
-import pimonitor.core.utils.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
 import presenters.fields.DateInputField
 import presenters.fields.NumberInputField
 import presenters.fields.toInputValue
 import kotlin.js.JsExport
-import pimonitor.core.utils.disbursements.params.DisbursementRawParams as Params
+import pimonitor.core.utils.disbursables.disbursements.params.DisbursementRawParams as Params
 
 class DisbursementFields(params: Params? = null, disbursement: Disbursement? = null) {
     val amount = NumberInputField(

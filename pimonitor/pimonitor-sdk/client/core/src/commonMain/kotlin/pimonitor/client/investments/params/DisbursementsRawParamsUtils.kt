@@ -1,7 +1,7 @@
 package pimonitor.client.investments.params
 
 import pimonitor.core.investments.params.InvestmentDisbursementParams
-import pimonitor.core.utils.disbursements.params.DisbursementRawParams
+import pimonitor.core.utils.disbursables.disbursements.params.DisbursementRawParams
 import validation.BlankFieldException
 import validation.requiredNotBlank
 

@@ -9,10 +9,8 @@ import datetime.Date
 import kash.Money
 import kotlinx.collections.interoperable.List
 import kotlinx.serialization.Serializable
-import pimonitor.core.utils.disbursements.Disbursement
-import pimonitor.core.business.utils.money.sum
-import pimonitor.core.utils.disbursements.Disbursable
-import presenters.numerics.Percentage
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.Disbursable
 import kotlin.js.JsExport
 
 @Serializable

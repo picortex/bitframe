@@ -1,4 +1,4 @@
-package pimonitor.client.utils.disbursements
+package pimonitor.client.utils.disbursables
 
 import bitframe.client.ServiceConfigKtor
 import bitframe.client.of
@@ -12,11 +12,11 @@ import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.serialization.KSerializer
 import later.Later
 import later.later
-import pimonitor.core.utils.disbursements.Disbursable
-import pimonitor.core.utils.disbursements.DisbursableEndpoint
-import pimonitor.core.utils.disbursements.DisbursableServiceCore
-import pimonitor.core.utils.disbursements.Disbursement
-import pimonitor.core.utils.disbursements.params.DisbursableDisbursementParams
+import pimonitor.core.utils.disbursables.Disbursable
+import pimonitor.core.utils.disbursables.DisbursableEndpoint
+import pimonitor.core.utils.disbursables.DisbursableServiceCore
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.params.DisbursableDisbursementParams
 import response.decodeResponseFromString
 
 class DisbursableServiceKtor<out D : Disbursable>(

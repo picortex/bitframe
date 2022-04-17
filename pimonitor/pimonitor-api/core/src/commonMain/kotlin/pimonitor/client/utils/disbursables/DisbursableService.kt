@@ -1,15 +1,14 @@
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package pimonitor.client.utils
+package pimonitor.client.utils.disbursables
 
 import bitframe.core.IdentifiedRaw
 import kotlinx.collections.interoperable.List
 import later.Later
-import pimonitor.core.utils.disbursements.Disbursable
-import pimonitor.core.utils.disbursements.Disbursement
-import pimonitor.core.utils.disbursements.params.DisbursableDisbursementParams
-import pimonitor.core.utils.disbursements.params.DisbursableDisbursementRawParams
-import pimonitor.core.utils.disbursements.params.DisbursementRawParams
+import pimonitor.core.utils.disbursables.Disbursable
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.params.DisbursableDisbursementParams
+import pimonitor.core.utils.disbursables.disbursements.params.DisbursableDisbursementRawParams
 import kotlin.js.JsExport
 
 @JsExport
