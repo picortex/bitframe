@@ -32,12 +32,7 @@ interface UIScopedViewModelConfig : ViewModelConfig {
             transitionTime: Long = DEFAULT_TRANSITION_TIME,
             logger: Logger = DEFAULT_LOGGER,
             builder: () -> CoroutineScope = DEFAULT_SCOPE_BUILDER
-        ) = object : UIScopedViewModelConfig {
-            override val recoveryTime: Long = recoveryTime
-            override val transitionTime: Long = transitionTime
-            override val logger: Logger = logger
-            override val scopeBuilder: () -> CoroutineScope = builder
-        }
+        ): UIScopedViewModelConfig = UIScopedViewModelConfigImpl(recoveryTime, transitionTime, logger, builder)
 
         @JvmStatic
         @JvmOverloads

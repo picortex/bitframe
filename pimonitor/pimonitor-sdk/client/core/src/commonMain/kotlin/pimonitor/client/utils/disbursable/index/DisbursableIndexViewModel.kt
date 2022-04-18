@@ -6,16 +6,14 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import pimonitor.client.investments.InvestmentsService
 import pimonitor.client.utils.disbursables.DisbursableService
-import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.utils.disbursables.Disbursable
 import presenters.cases.Mission
 import presenters.intents.IndexIntent
 import viewmodel.ViewModel
 
 class DisbursableIndexViewModel<out D : Disbursable>(
-    val config: UIScopeConfig<DisbursableService<D>>
+    val config: UIScopeConfig<DisbursableService<D, *>>
 ) : ViewModel<IndexIntent, Mission<@UnsafeVariance D>>(DEFAULT_LOADING_STATE, config.viewModel) {
     private val service get() = config.service
 
@@ -30,8 +28,8 @@ class DisbursableIndexViewModel<out D : Disbursable>(
     private fun CoroutineScope.loadInvestment(i: IndexIntent.Load) = launch {
         flow {
             emit(DEFAULT_LOADING_STATE)
-            val investment = service.load(i.uid).await()
-            emit(Mission.Success(investment))
+            val disbursable = service.load(i.uid).await()
+            emit(Mission.Success(disbursable))
         }.catch {
             emit(Mission.Failure(it) {
                 onRetry { post(i) }

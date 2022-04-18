@@ -4,7 +4,6 @@ import bitframe.server.BitframeService
 import bitframe.server.ServiceConfig
 import pimonitor.core.business.financials.BusinessFinancialsServiceDaod
 import pimonitor.core.business.interventions.BusinessInterventionsServiceDaod
-import pimonitor.core.investments.BusinessInvestmentsServiceDaod
 import pimonitor.core.business.operations.BusinessOperationsServiceDaod
 import pimonitor.core.business.overview.BusinessOverviewServiceDaod
 import pimonitor.core.businesses.BusinessesServiceDaod

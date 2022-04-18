@@ -3,11 +3,11 @@
 
 package pimonitor.client.businesses
 
-import pimonitor.client.business.interventions.params.CreateInterventionRawFormParams
-import pimonitor.core.businesses.DASHBOARD_OPERATIONAL
+import pimonitor.client.interventions.params.CreateInterventionRawFormParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import pimonitor.core.businesses.params.InviteToShareReportsRawFormParams
+import pimonitor.core.interventions.params.InterventionRawParams
 import pimonitor.core.investments.params.InvestmentRawParams
 import viewmodel.ViewModel
 import kotlin.js.JsExport
@@ -32,21 +32,5 @@ open class BusinessesIntents internal constructor(
 
     val sendInviteToShareReportsForm = { monitored: MonitoredBusinessSummary, params: InviteToShareReportsRawFormParams ->
         viewModel.post(Intent.SendInviteToShareReportsForm(monitored, params))
-    }
-
-    val showInterveneForm = { monitored: MonitoredBusinessSummary, params: CreateInterventionRawFormParams? ->
-        viewModel.post(Intent.ShowInterveneForm(monitored, params))
-    }
-
-    val sendInterveneForm = { monitored: MonitoredBusinessSummary, params: CreateInterventionRawFormParams ->
-        viewModel.post(Intent.SendInterveneForm(monitored, params))
-    }
-
-    val showCaptureInvestmentForm = { monitored: MonitoredBusinessSummary, params: InvestmentRawParams? ->
-        viewModel.post(Intent.ShowCaptureInvestmentForm(monitored, params))
-    }
-
-    val sendCaptureInvestmentForm = { monitored: MonitoredBusinessSummary, params: InvestmentRawParams ->
-        viewModel.post(Intent.SendCaptureInvestmentForm(monitored, params))
     }
 }

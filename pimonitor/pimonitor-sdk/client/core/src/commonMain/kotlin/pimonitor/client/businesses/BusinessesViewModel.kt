@@ -5,21 +5,17 @@ import bitframe.core.UserEmail
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import live.Live
-import live.MutableLive
 import pimonitor.client.PiMonitorApi
-import pimonitor.client.business.interventions.params.toCreateInterventionParams
 import pimonitor.client.businesses.BusinessesIntent.*
-import pimonitor.client.businesses.dialogs.*
-import pimonitor.client.businesses.fields.InterveneForm
+import pimonitor.client.businesses.dialogs.DeleteManyDialog
+import pimonitor.client.businesses.dialogs.DeleteSingleDialog
 import pimonitor.client.businesses.fields.InviteToShareReportsForm
 import pimonitor.client.businesses.forms.CreateBusinessForm
+import pimonitor.client.interventions.forms.CreateInterventionForm
 import pimonitor.client.investments.forms.CreateInvestmentForm
 import pimonitor.client.utils.live.removeEmphasis
 import pimonitor.client.utils.live.update
@@ -27,16 +23,13 @@ import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.toValidatedParams
 import pimonitor.core.investments.params.toValidatedParams
-import presenters.cases.Feedback.*
 import presenters.cases.CentralState
-import presenters.cases.Emphasis
 import presenters.cases.Emphasis.Companion.Dialog
 import presenters.cases.Emphasis.Companion.Failure
 import presenters.cases.Emphasis.Companion.Loading
 import presenters.cases.Emphasis.Companion.Success
 import presenters.cases.Emphasis.None
 import presenters.changes.toString
-import presenters.containers.toString
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 import pimonitor.client.businesses.BusinessesIntent as Intent
@@ -56,11 +49,11 @@ class BusinessesViewModel(
         is ShowInviteToShareReportsForm -> showInviteToShareReportsForm(i)
         is SendInviteToShareReportsForm -> sendInviteToShareReportsForm(i)
 
-        is ShowInterveneForm -> showInterveneForm(i)
-        is SendInterveneForm -> sendInterveneForm(i)
+        is ShowCreateInterventionForm -> showInterveneForm(i)
+        is SendCreateInterventionForm -> sendInterveneForm(i)
 
-        is ShowCaptureInvestmentForm -> showCaptureInvestmentForm(i)
-        is SendCaptureInvestmentForm -> sendCaptureInvestmentForm(i)
+        is ShowCreateInvestmentForm -> showCaptureInvestmentForm(i)
+        is SendCreateInvestmentForm -> sendCaptureInvestmentForm(i)
 
         is ShowDeleteSingleConfirmationDialog -> showDeleteSingleConfirmationDialog(i)
         is ShowDeleteMultipleConfirmationDialog -> showDeleteMultipleConfirmationDialog(i)
@@ -69,17 +62,16 @@ class BusinessesViewModel(
         is DeleteAll -> deleteAll(i)
     }
 
-    private fun CoroutineScope.sendInterveneForm(i: SendInterveneForm) = launch {
+    private fun CoroutineScope.sendInterveneForm(i: SendCreateInterventionForm) = launch {
         val state = ui.value
         flow {
             emit(state.copy(emphasis = Loading("Intervening ${i.monitored.name}, please wait . . .")))
-            val params = i.params.toCreateInterventionParams(businessId = i.monitored.uid)
-            api.businessInterventions.create(params).await()
+            api.interventions.create(i.params).await()
             emit(state.copy(emphasis = Success("Intervention completed successfully. Loading businesses, please wait . . .")))
             emit(state.copy(table = businessesTable(api.businesses.all().await())))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
-                onGoBack { post(ShowInterveneForm(i.monitored, i.params)) }
+                onGoBack { post(ShowCreateInterventionForm(i.monitored, i.params)) }
                 onRetry { post(i) }
             }))
         }.collect {
@@ -104,17 +96,17 @@ class BusinessesViewModel(
         ui.update { copy(emphasis = Dialog(confirm)) }
     }
 
-    private fun CoroutineScope.sendCaptureInvestmentForm(i: SendCaptureInvestmentForm) = launch {
+    private fun CoroutineScope.sendCaptureInvestmentForm(i: SendCreateInvestmentForm) = launch {
         val state = ui.value
         flow {
             emit(state.copy(emphasis = Loading("Capturing investment for ${i.monitored.name}, please wait. . .")))
             val params = i.params.toValidatedParams()
-            api.businessInvestments.capture(params).await()
+            api.investments.create(params).await()
             emit(state.copy(emphasis = Success("Investment captured successfuly. Loading remaining business, please wait . . .")))
             emit(state.copy(table = businessesTable(api.businesses.all().await())))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
-                onGoBack { post(ShowCaptureInvestmentForm(i.monitored, i.params)) }
+                onGoBack { post(ShowCreateInvestmentForm(i.monitored, i.params)) }
                 onRetry { post(i) }
             }))
         }.collect {
@@ -122,7 +114,7 @@ class BusinessesViewModel(
         }
     }
 
-    private fun showCaptureInvestmentForm(i: ShowCaptureInvestmentForm) {
+    private fun showCaptureInvestmentForm(i: ShowCreateInvestmentForm) {
         val state = ui.value
         val form = CreateInvestmentForm(
             businesses = state.table.rows.map { it.data }.toInteroperableList(),
@@ -130,16 +122,20 @@ class BusinessesViewModel(
             params = i.params
         ) {
             onCancel { ui.value = state.copy(emphasis = None) }
-            onSubmit { params -> post(SendCaptureInvestmentForm(i.monitored, params)) }
+            onSubmit { params -> post(SendCreateInvestmentForm(i.monitored, params)) }
         }
         ui.value = ui.value.copy(emphasis = Dialog(form))
     }
 
-    private fun showInterveneForm(i: ShowInterveneForm) {
+    private fun showInterveneForm(i: ShowCreateInterventionForm) {
         val state = ui.value
-        val form = InterveneForm(i.monitored) {
+        val form = CreateInterventionForm(
+            businesses = state.table.rows.map { it.data },
+            business = i.monitored,
+            params = i.params
+        ) {
             onCancel { ui.value = state.copy(emphasis = None) }
-            onSubmit("Create Intervention") { post(SendInterveneForm(i.monitored, it)) }
+            onSubmit("Create Intervention") { post(SendCreateInterventionForm(i.monitored, it)) }
         }
         ui.value = ui.value.copy(emphasis = Dialog(form))
     }
@@ -280,8 +276,8 @@ class BusinessesViewModel(
         emptyAction("Create Business") { post(ShowCreateBusinessForm(null)) }
         primaryAction("Add Business") { post(ShowCreateBusinessForm(null)) }
         primaryAction("Refresh") { post(LoadBusinesses) }
-        singleAction("Intervene") { post(ShowInterveneForm(it.data, null)) }
-        singleAction("Capture Investment") { post(ShowCaptureInvestmentForm(it.data, null)) }
+        singleAction("Intervene") { post(ShowCreateInterventionForm(it.data, null)) }
+        singleAction("Capture Investment") { post(ShowCreateInvestmentForm(it.data, null)) }
         singleAction("Delete") { post(ShowDeleteSingleConfirmationDialog(it.data)) }
         multiAction("Delete All") { post(ShowDeleteMultipleConfirmationDialog(it)) }
         selectable()
@@ -296,8 +292,8 @@ class BusinessesViewModel(
         // column("V/day") { it.data.velocity.toString() }
         actions("Actions") {
             action("Invite to share reports") { post(ShowInviteToShareReportsForm(it.data, null)) }
-            action("Intervene") { post(ShowInterveneForm(it.data, null)) }
-            action("Capture Investment") { post(ShowCaptureInvestmentForm(it.data, null)) }
+            action("Intervene") { post(ShowCreateInterventionForm(it.data, null)) }
+            action("Capture Investment") { post(ShowCreateInvestmentForm(it.data, null)) }
             action("Delete") { post(ShowDeleteSingleConfirmationDialog(it.data)) }
         }
     }

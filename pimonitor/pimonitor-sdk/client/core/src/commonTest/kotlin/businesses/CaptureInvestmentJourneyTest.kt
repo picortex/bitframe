@@ -57,7 +57,7 @@ class CaptureInvestmentJourneyTest {
 
         step("Should launch a capture investment dialog") {
             val business = api.businesses.all().await().first()
-            vm.expect(BusinessesIntent.ShowCaptureInvestmentForm(business, null))
+            vm.expect(BusinessesIntent.ShowCreateInvestmentForm(business, null))
             vm.ui.value.dialog?.asForm?.fields as InvestmentFields
         }
     }

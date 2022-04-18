@@ -1,4 +1,4 @@
-@file:Suppress("NON_EXPORTABLE_TYPE")
+@file:Suppress("NON_EXPORTABLE_TYPE", "WRONG_EXPORTED_DECLARATION")
 
 package pimonitor.core.utils.disbursables
 
@@ -8,13 +8,23 @@ import kotlinx.collections.interoperable.List
 import later.Later
 import pimonitor.core.utils.disbursables.disbursements.Disbursement
 import pimonitor.core.utils.disbursables.disbursements.params.DisbursableDisbursementParams
+import pimonitor.core.utils.disbursables.filters.DisbursableFilter
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-interface DisbursableServiceCore<out D : Disbursable> {
+interface DisbursableServiceCore<out D : Disbursable, out DS : DisbursableSummary> {
     @JsName("_ignore_load")
     fun load(rb: RequestBody.Authorized<String>): Later<D>
+
+    /**
+     * @param rb takes in a [RequestBody.Authorized] of a businessId
+     */
+    @JsName("_ignore_all")
+    fun all(rb: RequestBody.Authorized<DisbursableFilter>): Later<List<DS>>
+
+    @JsName("_ignore_delete")
+    fun delete(rb: RequestBody.Authorized<Array<out String>>): Later<List<D>>
 
     @JsName("_ignore_createDisbursement")
     fun createDisbursement(rb: RequestBody.Authorized<DisbursableDisbursementParams>): Later<Disbursement>

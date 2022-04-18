@@ -3,16 +3,20 @@
 
 package pimonitor.core.utils.disbursables
 
+import bitframe.core.Savable
 import kash.Money
 import kotlinx.collections.interoperable.List
+import kotlinx.serialization.Serializable
 import pimonitor.core.business.utils.money.sum
 import pimonitor.core.utils.disbursables.disbursements.Disbursement
 import presenters.numerics.Percentage
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-abstract class Disbursable {
-    abstract val uid: String
+@Serializable
+abstract class Disbursable : Savable {
+    abstract val businessId: String
+    abstract val owningSpaceId: String
     abstract val name: String
     abstract val amount: Money
     abstract val disbursements: List<Disbursement>

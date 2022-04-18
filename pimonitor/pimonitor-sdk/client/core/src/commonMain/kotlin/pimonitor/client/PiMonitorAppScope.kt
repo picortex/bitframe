@@ -9,14 +9,14 @@ import bitframe.client.SessionAware
 import bitframe.client.panel.PanelScope
 import bitframe.client.password.ChangePasswordScope
 import bitframe.client.signin.SignInScope
-import pimonitor.client.business.index.BusinessIndexScope
 import pimonitor.client.business.financials.BusinessFinancialsScope
+import pimonitor.client.business.index.BusinessIndexScope
 import pimonitor.client.business.info.BusinessInfoScope
-import pimonitor.client.business.interventions.BusinessInterventionsScope
 import pimonitor.client.business.operations.BusinessOperationsScope
 import pimonitor.client.business.overview.BusinessOverviewScope
 import pimonitor.client.businesses.BusinessesScope
 import pimonitor.client.contacts.ContactsScope
+import pimonitor.client.interventions.InterventionsScope
 import pimonitor.client.investment.index.InvestmentIndexScope
 import pimonitor.client.investments.InvestmentScope
 import pimonitor.client.invites.InvitesScope
@@ -41,6 +41,7 @@ open class PiMonitorAppScope(
     open val portfolio by lazy { PortfolioScope(config { api.portfolio }) }
     open val password by lazy { ChangePasswordScope(config { api.profile }) }
     open val search by lazy { SearchScope(config { api.search }) }
+    val interventions by InterventionsScope(config())
     val investments by InvestmentScope(config())
     val investmentIndex by InvestmentIndexScope(config { api.investments })
     open val integrations by lazy { InvitesScope(config()) }
@@ -48,6 +49,5 @@ open class PiMonitorAppScope(
     val businessOverview by BusinessOverviewScope(config())
     open val businessFinancials by lazy { BusinessFinancialsScope(config { api.businessFinancials }) }
     open val businessOperations by lazy { BusinessOperationsScope(config { api.businessOperations }) }
-    open val businessInterventions by lazy { BusinessInterventionsScope(config()) }
     val businessInfo by BusinessInfoScope(config())
 }

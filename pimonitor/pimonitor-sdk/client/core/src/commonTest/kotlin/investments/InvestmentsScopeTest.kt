@@ -7,6 +7,7 @@ import expect.toBe
 import later.await
 import pimonitor.client.investments.InvestmentsIntent
 import pimonitor.client.runSequence
+import pimonitor.client.utils.disbursables.DisbursablesIntent
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.params.InvestmentParams
@@ -43,7 +44,7 @@ class InvestmentsScopeTest {
         }
 
         step("Ensure that the investments are loaded") {
-            val state = scope.expect(InvestmentsIntent.LoadAllInvestments(null)).value.last()
+            val state = scope.expect(DisbursablesIntent.LoadAllDisbursables(null)).value.last()
             expect(state.table).toBe<EmptyTable<InvestmentSummary>>()
         }
     }
@@ -91,7 +92,7 @@ class InvestmentsScopeTest {
         }
 
         step("should be able to load all investments") {
-            val state = scope.expect(InvestmentsIntent.LoadAllInvestments(null)).value.last()
+            val state = scope.expect(DisbursablesIntent.LoadAllDisbursables(null)).value.last()
             state.table.tabulateToConsole()
             expect(state.emphasis).toBe(Emphasis.None)
             expect(state.table).toBe<Table<InvestmentSummary>>()

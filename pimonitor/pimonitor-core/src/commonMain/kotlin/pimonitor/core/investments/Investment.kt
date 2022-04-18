@@ -16,8 +16,8 @@ import kotlin.js.JsExport
 @Serializable
 data class Investment(
     override val uid: String = unset,
-    val businessId: String,
-    val owningSpaceId: String,
+    override val businessId: String,
+    override val owningSpaceId: String,
     override val name: String,
     val type: String,
     val source: String,
@@ -27,7 +27,7 @@ data class Investment(
     val history: List<InvestmentHistory>,
     override val disbursements: List<Disbursement>,
     override val deleted: Boolean = false
-) : Disbursable(), Savable {
+) : Disbursable() {
     override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
     override fun copy(disbursements: List<Disbursement>) = copy(uid = uid, disbursements = disbursements)
     val createdBy by lazy { history.filterIsInstance<InvestmentHistory.Created>().first().by }
