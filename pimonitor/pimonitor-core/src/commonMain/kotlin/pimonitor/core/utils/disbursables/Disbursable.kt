@@ -24,7 +24,7 @@ abstract class Disbursable : Savable {
     val totalDisbursed by lazy { disbursements.filter { !it.deleted }.map { it.amount }.sum(amount.currency) }
 
     val disbursementProgressInPercentage by lazy {
-        Percentage.fromRatio(totalDisbursed.amount / amount.amount)
+        Percentage.fromRatio(totalDisbursed.amount.toDouble() / amount.amount)
     }
 
     @JsName("_ignore_copyDisbursable")

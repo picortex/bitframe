@@ -116,13 +116,14 @@ class InterventionsViewModel(
         singleAction("Add Disbursement") { post(ShowDisbursementForm(it.data, null)) }
         singleAction("Add Goal") { post(ShowCreateGoalForm(it.data, null)) }
 
-        singleAction("Edit Investment") { post(ShowUpdateInterventionForm(it.data, null)) }
-        singleAction("Delete Investment") { post(ShowDeleteOneDisbursableDialog(it.data)) }
+        singleAction("Edit Intervention") { post(ShowUpdateInterventionForm(it.data, null)) }
+        singleAction("Delete Intervention") { post(ShowDeleteOneDisbursableDialog(it.data)) }
         multiAction("Delete All") { post(ShowDeleteManyDisbursablesDialog(it)) }
 
         selectable()
         val dateFormat = "{DD}-{MM}-{YYYY}"
         column("Name") { it.data.name }
+        if (businessId == null) column("Business") { it.data.businessName }
         column("Amount") { it.data.amount.toDefaultFormat() }
         column("Disbursed") { it.data.totalDisbursed.toDefaultFormat() }
         column("Goals") { "0/${it.data.goals.size}" }

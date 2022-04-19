@@ -3,9 +3,9 @@ package presenters.fields
 import kash.Money
 
 fun Money.toInputValue() = toFormattedString(
-    abbreviate = true,
+    abbreviate = false,
     prefix = "",
     decimals = 2,
     thousandsSeparator = "",
     decimalSeparator = "."
-)
+).replace(" ", "")

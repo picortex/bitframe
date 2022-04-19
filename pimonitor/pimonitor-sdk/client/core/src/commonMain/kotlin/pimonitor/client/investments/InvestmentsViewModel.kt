@@ -14,6 +14,8 @@ import pimonitor.client.investments.forms.UpdateInvestmentForm
 import pimonitor.client.utils.disbursables.DisbursablesIntent
 import pimonitor.client.utils.disbursables.DisbursablesIntent.*
 import pimonitor.client.utils.disbursables.DisbursablesViewModel
+import pimonitor.client.utils.live.removeEmphasis
+import pimonitor.client.utils.live.update
 import pimonitor.client.utils.money.toDefaultFormat
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.params.toIdentifiedParams
@@ -44,7 +46,7 @@ class InvestmentsViewModel(
             val businesses = api.businesses.all().await()
             val business = businesses.firstOrNull { it.uid == businessId }
             val form = CreateInvestmentForm(businesses, business, i.params) {
-                onCancel { ui.value = state }
+                onCancel { ui.removeEmphasis() }
                 onSubmit { params -> post(SendCreateInvestmentForm(params)) }
             }
             emit(state.copy(emphasis = Dialog(form)))
@@ -54,7 +56,7 @@ class InvestmentsViewModel(
                 onRetry { post(i) }
             }))
         }.collect {
-            ui.value = it
+            ui.update { it }
         }
     }
 
@@ -72,7 +74,7 @@ class InvestmentsViewModel(
                 onRetry { post(i) }
             }))
         }.collect {
-            ui.value = it
+            ui.update { it }
         }
     }
 
@@ -82,7 +84,7 @@ class InvestmentsViewModel(
             emit(state.copy(emphasis = Loading("Preparing investment form, please wait. . .")))
             val businesses = api.businesses.all().await()
             val form = UpdateInvestmentForm(businesses, i.investment, i.params) {
-                onCancel { ui.value = state }
+                onCancel { ui.removeEmphasis() }
                 onSubmit { params -> post(SendUpdateInvestmentForm(i.investment, params)) }
             }
             emit(state.copy(emphasis = Dialog(form)))
@@ -92,7 +94,7 @@ class InvestmentsViewModel(
                 onRetry { post(i) }
             }))
         }.collect {
-            ui.value = it
+            ui.update { it }
         }
     }
 
@@ -110,7 +112,7 @@ class InvestmentsViewModel(
                 onRetry { post(i) }
             }))
         }.collect {
-            ui.value = it
+            ui.update { it }
         }
     }
 
