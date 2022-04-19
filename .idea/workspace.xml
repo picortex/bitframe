@@ -5,25 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/disbursables/DisbursablesController.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/interventions/InterventionsController.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/interventions/InterventionsModule.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-app/server/src/main/kotlin/pimonitor/server/main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-app/server/src/main/kotlin/pimonitor/server/main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/interventions/InterventionsServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/interventions/InterventionsServiceDaod.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsServiceDaod.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/utils/disbursables/DisbursableServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/utils/disbursables/DisbursableServiceDaod.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesIntents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesIntents.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/params/CreateDisbursementsRawFormParamsUtils.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/params/CreateInterventionFormParams.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/params/CreateInterventionRawFormParams.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/PiMonitorService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/PiMonitorService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/interventions/BusinessInterventionsController.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/interventions/BusinessInterventionsModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/disbursables/DisbursablesModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/investments/BusinessInvestmentsController.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/investments/BusinessInvestmentsModule.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/investments/InvestmentsController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/investments/InvestmentsController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/investments/InvestmentsModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/investments/InvestmentsModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/index/BusinessIndexScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/index/BusinessIndexScope.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
