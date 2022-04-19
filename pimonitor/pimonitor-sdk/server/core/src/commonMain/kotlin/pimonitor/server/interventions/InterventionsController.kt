@@ -1,4 +1,4 @@
-package pimonitor.server.investments
+package pimonitor.server.interventions
 
 import bitframe.core.Identified
 import bitframe.core.RequestBody
@@ -7,6 +7,10 @@ import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
 import kotlinx.serialization.decodeFromString
 import later.await
+import pimonitor.core.interventions.Intervention
+import pimonitor.core.interventions.InterventionSummary
+import pimonitor.core.interventions.InterventionsServiceDaod
+import pimonitor.core.interventions.params.InterventionParams
 import pimonitor.core.investments.Investment
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.filters.InvestmentFilter
@@ -16,19 +20,20 @@ import pimonitor.core.investments.params.InvestmentParams
 import pimonitor.server.disbursables.DisbursablesController
 import response.response
 
-class InvestmentsController(
-    override val service: InvestmentsServiceDaod
-) : DisbursablesController<Investment, InvestmentSummary>(
-    service, Investment.serializer(), InvestmentSummary.serializer()
+class InterventionsController(
+    override val service: InterventionsServiceDaod
+) : DisbursablesController<Intervention, InterventionSummary>(
+    service, Intervention.serializer(), InterventionSummary.serializer()
 ) {
     private val json get() = service.config.json
-    suspend fun createInvestment(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.Authorized<InvestmentParams>>(req.compulsoryBody())
+
+    suspend fun createIntervention(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.Authorized<InterventionParams>>(req.compulsoryBody())
         resolve(service.create(rb).await())
     }.toHttpResponse()
 
-    suspend fun updateInvestment(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.Authorized<Identified<InvestmentParams>>>(req.compulsoryBody())
+    suspend fun updateIntervention(req: HttpRequest) = response {
+        val rb = json.decodeFromString<RequestBody.Authorized<Identified<InterventionParams>>>(req.compulsoryBody())
         resolve(service.update(rb).await())
     }.toHttpResponse()
 }

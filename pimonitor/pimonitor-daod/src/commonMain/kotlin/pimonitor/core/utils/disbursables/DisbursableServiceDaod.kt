@@ -16,7 +16,7 @@ import pimonitor.core.utils.disbursables.disbursements.params.toParsedParams
 import pimonitor.core.utils.disbursables.filters.DisbursableFilter
 
 abstract class DisbursableServiceDaod<out D : Disbursable, out DS : DisbursableSummary>(
-    private val config: ServiceConfigDaod,
+    open val config: ServiceConfigDaod,
     private val currency: Currency,
     private val timezone: TimeZone
 ) : DisbursableServiceCore<D, DS> {

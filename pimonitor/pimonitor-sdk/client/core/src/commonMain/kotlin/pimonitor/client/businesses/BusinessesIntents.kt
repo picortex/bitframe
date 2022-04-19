@@ -3,12 +3,9 @@
 
 package pimonitor.client.businesses
 
-import pimonitor.client.interventions.params.CreateInterventionRawFormParams
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessRawParams
 import pimonitor.core.businesses.params.InviteToShareReportsRawFormParams
-import pimonitor.core.interventions.params.InterventionRawParams
-import pimonitor.core.investments.params.InvestmentRawParams
 import viewmodel.ViewModel
 import kotlin.js.JsExport
 import pimonitor.client.businesses.BusinessesIntent as Intent

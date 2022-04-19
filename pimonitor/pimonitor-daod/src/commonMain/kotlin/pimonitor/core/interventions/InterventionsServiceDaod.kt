@@ -19,7 +19,7 @@ import pimonitor.core.utils.disbursables.DisbursableServiceDaod
 import pimonitor.core.utils.disbursables.disbursements.params.DisbursableDisbursementParams
 
 open class InterventionsServiceDaod(
-    val config: ServiceConfigDaod,
+    override val config: ServiceConfigDaod,
     private val currency: Currency = Currency.ZAR,
     private val timezone: TimeZone = TimeZone.UTC
 ) : DisbursableServiceDaod<Intervention, InterventionSummary>(config, currency, timezone), InterventionsServiceCore {

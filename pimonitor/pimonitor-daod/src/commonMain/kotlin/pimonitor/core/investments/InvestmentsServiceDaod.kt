@@ -15,7 +15,7 @@ import pimonitor.core.investments.params.toValidatedParams
 import pimonitor.core.utils.disbursables.DisbursableServiceDaod
 
 open class InvestmentsServiceDaod(
-    val config: ServiceConfigDaod,
+    override val config: ServiceConfigDaod,
     private val currency: Currency = Currency.ZAR,
     private val timezone: TimeZone = TimeZone.UTC
 ) : DisbursableServiceDaod<Investment, InvestmentSummary>(config, currency, timezone), InvestmentsServiceCore {
