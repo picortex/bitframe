@@ -63,7 +63,7 @@ abstract class DisbursableServiceImpl<out D : Disbursable, out DS : DisbursableS
             session = config.getSignedInSessionTo("create a disbursement"),
             data = params.toValidatedParams()
         )
-        createDisbursement(rb).await()
+        createDisbursement(rb).await().also { logger.info("Disbursement created successfully") }
     }
 
     override fun updateDisbursement(params: IdentifiedRaw<DisbursableDisbursementRawParams>): Later<Disbursement> = config.scope.later {

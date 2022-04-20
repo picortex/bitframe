@@ -25,6 +25,9 @@ open class DisbursablesModule<out D : Disbursable, out DS : DisbursableSummary>(
         Action("Load all ${disbursableName}s", mapOf(), HttpRoute(HttpMethod.Post, path.all) {
             controller.all(it)
         }),
+        Action("delete ${disbursableName}s", mapOf(), HttpRoute(HttpMethod.Post, path.delete) {
+            controller.delete(it)
+        }),
         Action("Create a disbursement", mapOf(), HttpRoute(HttpMethod.Post, path.disbursementCreate) {
             controller.createDisbursement(it)
         }),
@@ -32,7 +35,7 @@ open class DisbursablesModule<out D : Disbursable, out DS : DisbursableSummary>(
             controller.updateDisbursement(it)
         }),
         Action("delete a disbursement", mapOf(), HttpRoute(HttpMethod.Post, path.disbursementDelete) {
-            controller.delete(it)
+            controller.deleteDisbursement(it)
         })
     )
 }

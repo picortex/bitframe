@@ -8,6 +8,7 @@ import kotlinx.datetime.TimeZone
 import later.Later
 import later.await
 import later.later
+import logging.Logger
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.investments.params.InvestmentParams
 import pimonitor.core.investments.params.InvestmentsParsedParams
@@ -19,10 +20,9 @@ open class InvestmentsServiceDaod(
     private val currency: Currency = Currency.ZAR,
     private val timezone: TimeZone = TimeZone.UTC
 ) : DisbursableServiceDaod<Investment, InvestmentSummary>(config, currency, timezone), InvestmentsServiceCore {
-
     private val factory get() = config.daoFactory
     private val monitoredBusinessesDao by lazy { factory.get<MonitoredBusinessBasicInfo>() }
-    override val disbursableDao by lazy { factory.get<Investment>() }
+    override val disbursableDao: Dao<Investment> by lazy { factory.get() }
 
     override fun create(rb: RequestBody.Authorized<InvestmentParams>) = config.scope.later {
         val params = rb.data.toValidatedParams().toParsedParams(currency)
@@ -50,7 +50,7 @@ open class InvestmentsServiceDaod(
         history = (history + InvestmentHistory.Updated(Date.today(timezone), by)).toInteroperableList()
     )
 
-    override suspend fun Investment.toSummary(): InvestmentSummary = InvestmentSummary(
+    override suspend fun Investment.toSummary() = InvestmentSummary(
         uid = uid,
         owningSpaceId = owningSpaceId,
         businessId = businessId,

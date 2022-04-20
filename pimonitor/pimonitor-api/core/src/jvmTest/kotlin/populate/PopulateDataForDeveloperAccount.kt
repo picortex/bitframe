@@ -3,17 +3,25 @@ package populate
 import bitframe.core.signin.SignInParams
 import datetime.Date
 import identifier.NameGenerator
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.joinAll
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
+import pimonitor.core.investments.Investment
 import pimonitor.core.investments.InvestmentType
 import pimonitor.core.investments.params.InvestmentParams
 import pimonitor.core.picortex.AcceptPicortexInviteParams
 import pimonitor.core.sage.AcceptSageOneInviteParams
 import pimonitor.core.signup.params.SignUpIndividualParams
+import pimonitor.core.utils.disbursables.disbursements.params.DisbursableDisbursementParams
+import presenters.fields.toInputValue
+import kotlin.random.Random
 import kotlin.test.Test
 
 class PopulateDataForDeveloperAccount {
@@ -27,7 +35,6 @@ class PopulateDataForDeveloperAccount {
         "Working Capital" to 150000,
         "Seed Fund" to 50000,
         "Women Empowerment" to 780000,
-        "Inclusivity" to 560000
     )
 
     @Test
@@ -83,9 +90,9 @@ class PopulateDataForDeveloperAccount {
         }
 
         step("Create investments for the created business") {
-            investments.map { it.toInvestmentParam(business1) }.forEach { param ->
+            investments.map { it.toInvestmentParam(business1) }.map { param ->
                 api.investments.create(param).await()
-            }
+            }.map { inv -> inv.disburseRandomly() }
         }
 
         val business2 = step("Create another business") {
@@ -113,10 +120,10 @@ class PopulateDataForDeveloperAccount {
             res1.business
         }
 
-        step("Create investments for the created business") {
-            investments.map { it.toInvestmentParam(business2) }.forEach { param ->
+        step("Create yet another investments for the created business") {
+            investments.map { it.toInvestmentParam(business2) }.map { param ->
                 api.investments.create(param).await()
-            }
+            }.map { inv -> inv.disburseRandomly() }
         }
 
         val business3 = step("Create yet again another business") {
@@ -128,10 +135,10 @@ class PopulateDataForDeveloperAccount {
             api.businesses.create(param).await().business
         }
 
-        step("Create investments for the created business") {
-            investments.map { it.toInvestmentParam(business3) }.forEach { param ->
+        step("Create yet again another investments for the created business") {
+            investments.map { it.toInvestmentParam(business3) }.map { param ->
                 api.investments.create(param).await()
-            }
+            }.map { inv -> inv.disburseRandomly() }
         }
     }
 
@@ -191,4 +198,16 @@ class PopulateDataForDeveloperAccount {
         date = Date.today().toIsoFormat(),
         details = "Testing"
     )
+
+    suspend fun Investment.disburseRandomly() = coroutineScope {
+        if (Random.nextInt(10) < 3) {
+            val noOfDisbursements = Random.nextInt(5)
+            buildList {
+                repeat(noOfDisbursements) {
+                    val params = DisbursableDisbursementParams(uid, (amount * 0.2).toInputValue(), Date.today().toIsoFormat())
+                    add(async { api.investments.createDisbursement(params).await() })
+                }
+            }.joinAll()
+        }
+    }
 }
