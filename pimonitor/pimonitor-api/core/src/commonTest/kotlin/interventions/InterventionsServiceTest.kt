@@ -1,4 +1,4 @@
-package businesses
+package interventions
 
 import bitframe.core.signin.SignInParams
 import datetime.Date
@@ -6,19 +6,17 @@ import expect.expect
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
+import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.investments.InvestmentType
 import pimonitor.core.investments.params.InvestmentParams
-import pimonitor.core.businesses.MonitoredBusinessBasicInfo
-import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.SignUpBusinessParams
-import pimonitor.core.utils.disbursables.filters.DisbursableFilter
 import kotlin.test.Test
 
-class CaptureInvestmentJourneyTest {
+class InterventionsServiceTest {
     val api = PiMonitorApiTest()
 
     @Test
-    fun should_capture_investments() = runSequence {
+    fun should_be_able_to_load_all_investment() = runSequence {
         step("If not registered, signup as business or individual") {
             val params = SignUpBusinessParams(
                 businessName = "Invitor LLC",
@@ -45,9 +43,7 @@ class CaptureInvestmentJourneyTest {
                 contactName = "Steven Sajja",
                 contactEmail = "ssajja@picortex.com"
             )
-            val res = api.businesses.create(params).await()
-            expect(res.business.name).toBe("PiCortex LLC")
-            res.business
+            api.businesses.create(params).await().business.also { expect(it.name).toBe("PiCortex LLC") }
         }
 
         step("Capture Investment of the newly created business") {
@@ -60,17 +56,13 @@ class CaptureInvestmentJourneyTest {
                 date = Date.today().toIsoFormat(),
                 details = "Test details"
             )
-            val investment = api.investments.create(params).await()
-            expect(investment.name).toBe("Asset Capital")
-            expect(investment.amount.amount).toBe(3_000_000)
+            api.investments.create(params).await().also { expect(it.name).toBe("Asset Capital") }
         }
 
         step("Load to ensure that the captured investments") {
-            val investments = api.investments.all(DisbursableFilter(business.uid)).await()
+            val investments = api.investments.all(null).await()
             expect(investments).toBeOfSize(1)
-
-            val investment = investments.first()
-            expect(investment.amount.amount).toBe(3_000_000)
+            investments.first().also { expect(it.amount.amount).toBe(3_000_000) }
         }
     }
 }

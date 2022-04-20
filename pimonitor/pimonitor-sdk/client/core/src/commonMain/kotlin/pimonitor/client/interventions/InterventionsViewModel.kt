@@ -2,9 +2,11 @@ package pimonitor.client.interventions
 
 import bitframe.client.UIScopeConfig
 import bitframe.client.map
+import bitframe.core.Identified
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
@@ -12,6 +14,7 @@ import pimonitor.client.PiMonitorApi
 import pimonitor.client.interventions.InterventionsIntent.*
 import pimonitor.client.interventions.forms.CreateGoalForm
 import pimonitor.client.interventions.forms.CreateInterventionForm
+import pimonitor.client.interventions.forms.UpdateInterventionForm
 import pimonitor.client.utils.disbursables.DisbursablesIntent
 import pimonitor.client.utils.disbursables.DisbursablesIntent.*
 import pimonitor.client.utils.disbursables.DisbursablesViewModel
@@ -24,6 +27,7 @@ import presenters.cases.Emphasis
 import presenters.cases.Emphasis.Companion.Dialog
 import presenters.cases.Emphasis.Companion.Failure
 import presenters.cases.Emphasis.Companion.Loading
+import presenters.cases.Emphasis.Companion.Success
 import presenters.table.builders.tableOf
 
 class InterventionsViewModel(
@@ -34,8 +38,8 @@ class InterventionsViewModel(
     override fun CoroutineScope.execute(i: DisbursablesIntent): Any = when (i) {
         is ShowCreateInterventionForm -> showCreateInterventionForm(i)
         is SendCreateInterventionForm -> sendCreateInterventionForm(i)
-        is ShowUpdateInterventionForm -> TODO()
-        is SendUpdateInterventionForm -> TODO()
+        is ShowUpdateInterventionForm -> showUpdateInterventionForm(i)
+        is SendUpdateInterventionForm -> sendUpdateInterventionForm(i)
         is ShowCreateGoalForm -> showCreateGoalForm(i)
         is SendCreateGoalForm -> sendCreateGoalForm(i)
         is ShowUpdateGoalForm -> TODO()
@@ -43,10 +47,55 @@ class InterventionsViewModel(
         else -> perform(i)
     }
 
+    private fun CoroutineScope.showUpdateInterventionForm(i: ShowUpdateInterventionForm) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(emphasis = Loading("Preparing interventions form, please wait . . .")))
+            val businesses = api.businesses.all().await()
+            val business = businesses.firstOrNull { it.uid == businessId }
+            val form = UpdateInterventionForm(
+                businesses = businesses,
+                business = business,
+                params = i.params,
+                intervention = i.intervention,
+            ) {
+                onCancel { ui.removeEmphasis() }
+                onSubmit { post(SendCreateInterventionForm(it)) }
+            }
+            emit(state.copy(emphasis = Dialog(form)))
+        }.catch {
+            emit(state.copy(emphasis = Failure(it) {
+                onGoBack { post(ShowCreateInterventionForm(null, i.params)) }
+                onRetry { post(i) }
+            }))
+        }.collect {
+            ui.update { it }
+        }
+    }
+
+    private fun CoroutineScope.sendUpdateInterventionForm(i: SendUpdateInterventionForm) = launch {
+        val state = ui.value
+        flow {
+            emit(state.copy(emphasis = Loading("Updating investment, please wait. . .!")))
+            val params = Identified(i.intervention.uid, i.params)
+            val intervention = api.interventions.update(params).await()
+            emit(state.copy(emphasis = Success("Updated ${intervention.name} investment")))
+            val interventions = api.interventions.all(DisbursableFilter(businessId)).await()
+            emit(state.copy(table = disbursablesTable(interventions)))
+        }.catch {
+            emit(state.copy(emphasis = Failure(it) {
+                onGoBack { post(ShowUpdateInterventionForm(i.intervention, i.params)) }
+                onRetry { post(i) }
+            }))
+        }.collect {
+            ui.update { it }
+        }
+    }
+
     private fun CoroutineScope.sendCreateGoalForm(i: SendCreateGoalForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Emphasis.Success(message = "Success. Feature is still tricky to implement")))
+            emit(state.copy(emphasis = Success(message = "Success. Feature is still tricky to implement")))
             delay(config.viewModel.recoveryTime)
             emit(state)
         }.collect {
@@ -67,7 +116,7 @@ class InterventionsViewModel(
         flow {
             emit(state.copy(emphasis = Loading("Creating intervention, please wait . . .")))
             api.interventions.create(i.params).await()
-            emit(state.copy(emphasis = Emphasis.Success("Intervention Successfully Created")))
+            emit(state.copy(emphasis = Success("Intervention Successfully Created")))
             val interventions = api.interventions.all(DisbursableFilter(businessId)).await()
             emit(state.copy(table = disbursablesTable(interventions)))
         }.catch {

@@ -7,7 +7,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.mapper.Mapper
 
-fun <D> Json.encodeSuccessToString(
+internal fun <D> Json.encodeSuccessToString(
     serializer: KSerializer<D>,
     success: Success<D, *>
 ): String {
@@ -22,7 +22,7 @@ fun <D> Json.encodeSuccessToString(
     return mapper.encodeToString(map)
 }
 
-fun <D, I> Json.encodeSuccessToString(
+internal fun <D, I> Json.encodeSuccessToString(
     dataSerializer: KSerializer<D>,
     infoSerializer: KSerializer<I>,
     success: Success<D, I>

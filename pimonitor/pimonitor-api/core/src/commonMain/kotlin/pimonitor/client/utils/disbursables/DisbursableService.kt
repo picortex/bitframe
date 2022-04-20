@@ -17,7 +17,7 @@ import kotlin.js.JsExport
 interface DisbursableService<out D : Disbursable, out DS : DisbursableSummary> {
     fun load(disbursableId: String): Later<D>
     fun delete(vararg ids: String): Later<List<D>>
-    fun all(params: DisbursableRawFilter?): Later<List<DS>>
+    fun all(params: DisbursableRawFilter? = null): Later<List<DS>>
     fun createDisbursement(params: DisbursableDisbursementParams): Later<Disbursement>
     fun deleteDisbursements(params: IdentifiedRaw<Array<String>>): Later<List<Disbursement>>
     fun updateDisbursement(params: IdentifiedRaw<DisbursableDisbursementRawParams>): Later<Disbursement>

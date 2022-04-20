@@ -5,7 +5,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.mapper.Mapper
 
-fun <D> Json.encodePayloadToString(
+internal fun <D> Json.encodePayloadToString(
     serializer: KSerializer<D>,
     payload: Payload<out D, *>
 ): String {
@@ -16,7 +16,7 @@ fun <D> Json.encodePayloadToString(
     return mapper.encodeToString(mapOf(Payload<*, *>::data.name to value))
 }
 
-fun <D, I> Json.encodePayloadToString(
+internal fun <D, I> Json.encodePayloadToString(
     dataSerializer: KSerializer<D>,
     infoSerializer: KSerializer<I>,
     payload: Payload<out D, out I>

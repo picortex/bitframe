@@ -1,24 +1,23 @@
 package businesses
 
 import bitframe.core.signin.SignInParams
-import datetime.Date
 import expect.expect
+import expect.toBe
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
-import pimonitor.core.investments.InvestmentType
-import pimonitor.core.investments.params.InvestmentParams
-import pimonitor.core.businesses.MonitoredBusinessBasicInfo
+import pimonitor.core.business.utils.info.LoadInfoParams
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
+import pimonitor.core.invites.InfoResults
 import pimonitor.core.signup.params.SignUpBusinessParams
-import pimonitor.core.utils.disbursables.filters.DisbursableFilter
 import kotlin.test.Test
 
-class CaptureInvestmentJourneyTest {
+class BusinessOperationsServiceTest {
+
     val api = PiMonitorApiTest()
 
     @Test
-    fun should_capture_investments() = runSequence {
+    fun should_return_a_not_shared_instance_of_a_business_with_not_shared_operational_info() = runSequence {
         step("If not registered, signup as business or individual") {
             val params = SignUpBusinessParams(
                 businessName = "Invitor LLC",
@@ -50,27 +49,9 @@ class CaptureInvestmentJourneyTest {
             res.business
         }
 
-        step("Capture Investment of the newly created business") {
-            val params = InvestmentParams(
-                businessId = business.uid,
-                name = "Asset Capital",
-                type = InvestmentType.Loan.name,
-                source = "aSoft Ltd",
-                amount = 30_000.0.toString(),
-                date = Date.today().toIsoFormat(),
-                details = "Test details"
-            )
-            val investment = api.investments.create(params).await()
-            expect(investment.name).toBe("Asset Capital")
-            expect(investment.amount.amount).toBe(3_000_000)
-        }
-
-        step("Load to ensure that the captured investments") {
-            val investments = api.investments.all(DisbursableFilter(business.uid)).await()
-            expect(investments).toBeOfSize(1)
-
-            val investment = investments.first()
-            expect(investment.amount.amount).toBe(3_000_000)
+        step("Load Operation Info for the registered business") {
+            val board = api.businessOperations.dashboard(LoadInfoParams(business.uid)).await()
+            expect(board).toBe<InfoResults.NotShared>()
         }
     }
 }

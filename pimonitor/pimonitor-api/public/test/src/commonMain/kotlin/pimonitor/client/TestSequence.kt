@@ -20,6 +20,11 @@ class TestSequence(
         console.info("SKIPPING STEP[$steps]: $name")
     }
 
+    fun step(name: String) {
+        steps++
+        console.warn("SKIPPING STEP[$steps]: $name")
+    }
+
     @OptIn(ExperimentalCoroutinesApi::class)
     inline fun <O : Any> step(name: String, block: TestScope.() -> O): O = try {
         steps++
