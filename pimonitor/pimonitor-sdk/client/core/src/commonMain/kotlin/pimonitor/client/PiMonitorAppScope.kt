@@ -16,7 +16,10 @@ import pimonitor.client.business.operations.BusinessOperationsScope
 import pimonitor.client.business.overview.BusinessOverviewScope
 import pimonitor.client.businesses.BusinessesScope
 import pimonitor.client.contacts.ContactsScope
+import pimonitor.client.intervention.disbursements.InterventionDisbursementScope
 import pimonitor.client.interventions.InterventionsScope
+import pimonitor.client.intervention.index.InterventionIndexScope
+import pimonitor.client.investment.disbursements.InvestmentDisbursementScope
 import pimonitor.client.investment.index.InvestmentIndexScope
 import pimonitor.client.investments.InvestmentScope
 import pimonitor.client.invites.InvitesScope
@@ -37,17 +40,20 @@ open class PiMonitorAppScope(
     open val signUp by lazy { SignUpScope(config()) }
     override val panel by lazy { PanelScope(config { api.signIn }) }
     val businesses by BusinessesScope(config())
+    val businessIndex by BusinessIndexScope(config { api.businesses })
+    val businessOverview by BusinessOverviewScope(config())
+    open val businessFinancials by lazy { BusinessFinancialsScope(config { api.businessFinancials }) }
+    open val businessOperations by lazy { BusinessOperationsScope(config { api.businessOperations }) }
     open val contacts by lazy { ContactsScope(config { api.contacts }) }
     open val portfolio by lazy { PortfolioScope(config { api.portfolio }) }
     open val password by lazy { ChangePasswordScope(config { api.profile }) }
     open val search by lazy { SearchScope(config { api.search }) }
     val interventions by InterventionsScope(config())
+    val interventionIndex by InterventionIndexScope(config { api.interventions })
+    val interventionDisbursement by InterventionDisbursementScope(config { api.interventions })
     val investments by InvestmentScope(config())
     val investmentIndex by InvestmentIndexScope(config { api.investments })
+    val investmentDisbursements by InvestmentDisbursementScope(config { api.investments })
     open val integrations by lazy { InvitesScope(config()) }
-    val businessIndex by BusinessIndexScope(config { api.businesses })
-    val businessOverview by BusinessOverviewScope(config())
-    open val businessFinancials by lazy { BusinessFinancialsScope(config { api.businessFinancials }) }
-    open val businessOperations by lazy { BusinessOperationsScope(config { api.businessOperations }) }
     val businessInfo by BusinessInfoScope(config())
 }

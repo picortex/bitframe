@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/intervention/disbursements/InvestmentDisbursementScope.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/intervention/index/InvestmentIndexScope.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Condition.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Condition.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/core/src/commonMain/kotlin/bitframe/core/ServiceConfigUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/core/src/commonMain/kotlin/bitframe/core/ServiceConfigUtil.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursableServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursableServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/investments/InvestmentsServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/investments/InvestmentsServiceTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jvmTest/kotlin/populate/PopulateDataForDeveloperAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jvmTest/kotlin/populate/PopulateDataForDeveloperAccount.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/test/src/commonMain/kotlin/pimonitor/client/TestSequence.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/test/src/commonMain/kotlin/pimonitor/client/TestSequence.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/interventions/InterventionsServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/interventions/InterventionsServiceDaod.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsServiceDaod.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/utils/disbursables/DisbursableServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/utils/disbursables/DisbursableServiceDaod.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/disbursables/DisbursablesController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/disbursables/DisbursablesController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/disbursables/DisbursablesModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/disbursables/DisbursablesModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/PiMonitorAppScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/PiMonitorAppScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investment/disbursements/InvestmentDisbursementScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investment/disbursements/InvestmentDisbursementScope.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,15 +119,15 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions" />
       <recent name="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server" />
       <recent name="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/forms" />
       <recent name="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client" />
       <recent name="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core" />
-      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/fields" />
