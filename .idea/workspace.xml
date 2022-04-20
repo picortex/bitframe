@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/interventions/InterventionsServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/investments/InvestmentsServiceTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursableServiceKtor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursableServiceKtor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/disbursables/DisbursablesController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/disbursables/DisbursablesController.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,22 +202,28 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="InfoResultSerialization.should_encode_a_non_shared_info_to_json" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="InvestmentsServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
+        <option name="env">
+          <map>
+            <entry key="API_MODE" value="LIVE" />
+            <entry key="API_URL" value="http://127.0.0.1:8080" />
+          </map>
+        </option>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-core" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-api/core" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;InfoResultSerialization.should_encode_a_non_shared_info_to_json&quot;" />
+        <option name="scriptParameters" value="--tests &quot;investments.InvestmentsServiceTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":pimonitor-core:cleanJvmTest" />
-            <option value=":pimonitor-core:jvmTest" />
+            <option value=":pimonitor-api-core:cleanJvmTest" />
+            <option value=":pimonitor-api-core:jvmTest" />
           </list>
         </option>
-        <option name="vmOptions" />
+        <option name="vmOptions" value="" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
@@ -676,18 +686,18 @@
       <item itemvalue="Gradle.pi-sdk-mock-js-node-test" />
       <item itemvalue="Gradle.pi-sdk-mock-jvm-test" />
       <item itemvalue="Gradle.response:jvmTest" />
-      <item itemvalue="Gradle.InfoResultSerialization.should_encode_a_non_shared_info_to_json" />
       <item itemvalue="Gradle.InfoResultSerializationTest" />
       <item itemvalue="Gradle.PayloadDeSerializerTest.should_deserialize_primitive_responses" />
       <item itemvalue="Gradle.InfoResultSerializationTest.should_decode_a_response_of_an_info_result" />
       <item itemvalue="Gradle.PayloadDeSerializerTest" />
+      <item itemvalue="Gradle.InvestmentsServiceTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.InvestmentsServiceTest" />
         <item itemvalue="Gradle.InfoResultSerializationTest.should_decode_a_response_of_an_info_result" />
         <item itemvalue="Gradle.PayloadDeSerializerTest" />
         <item itemvalue="Gradle.InfoResultSerializationTest.should_decode_a_response_of_an_info_result" />
-        <item itemvalue="Gradle.PayloadDeSerializerTest.should_deserialize_primitive_responses" />
         <item itemvalue="Gradle.PayloadDeSerializerTest.should_deserialize_primitive_responses" />
       </list>
     </recent_temporary>
