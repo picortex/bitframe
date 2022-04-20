@@ -1,11 +1,16 @@
 package populate
 
 import bitframe.core.signin.SignInParams
+import datetime.Date
+import identifier.NameGenerator
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
+import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
+import pimonitor.core.investments.InvestmentType
+import pimonitor.core.investments.params.InvestmentParams
 import pimonitor.core.picortex.AcceptPicortexInviteParams
 import pimonitor.core.sage.AcceptSageOneInviteParams
 import pimonitor.core.signup.params.SignUpIndividualParams
@@ -16,6 +21,14 @@ class PopulateDataForDeveloperAccount {
 
     val developerEmail1 = "ssajja@gmail.com"
     val developerEmail2 = "luge@gmail.com"
+
+    val investments = listOf(
+        "Asset Capital" to 200000,
+        "Working Capital" to 150000,
+        "Seed Fund" to 50000,
+        "Women Empowerment" to 780000,
+        "Inclusivity" to 560000
+    )
 
     @Test
     fun should_create_account_and_add_information_for_a_development_account_with_integrated_businesses() = runSequence {
@@ -36,7 +49,7 @@ class PopulateDataForDeveloperAccount {
             api.signIn.signIn(cred).await()
         }
 
-        step("Create a business and connect it with picortex dashboard only") {
+        val business1 = step("Create a business and connect it with picortex dashboard only") {
             val param1 = CreateMonitoredBusinessParams(
                 businessName = "PiCortex LLC",
                 contactName = "Mohammed Majapa",
@@ -66,9 +79,16 @@ class PopulateDataForDeveloperAccount {
                 companyId = "468271",
             )
             api.invites.accept(params4).await()
+            res1.business
         }
 
-        step("Create another business") {
+        step("Create investments for the created business") {
+            investments.map { it.toInvestmentParam(business1) }.forEach { param ->
+                api.investments.create(param).await()
+            }
+        }
+
+        val business2 = step("Create another business") {
             val param = CreateMonitoredBusinessParams(
                 businessName = "Cilla's Oven",
                 contactName = "Priscilla Sajja",
@@ -89,16 +109,29 @@ class PopulateDataForDeveloperAccount {
                 subdomain = "b2bdemo",
                 secret = "89aqiclvjktp0aa4bgfqpbppf6",
             )
-            val res3 = api.invites.accept(params3).await()
+            api.invites.accept(params3).await()
+            res1.business
         }
 
-        step("Create yet again another business") {
+        step("Create investments for the created business") {
+            investments.map { it.toInvestmentParam(business2) }.forEach { param ->
+                api.investments.create(param).await()
+            }
+        }
+
+        val business3 = step("Create yet again another business") {
             val param = CreateMonitoredBusinessParams(
                 businessName = "aSoft Ltd",
                 contactName = "Anderson Lameck",
                 contactEmail = developerEmail1
             )
-            api.businesses.create(param).await()
+            api.businesses.create(param).await().business
+        }
+
+        step("Create investments for the created business") {
+            investments.map { it.toInvestmentParam(business3) }.forEach { param ->
+                api.investments.create(param).await()
+            }
         }
     }
 
@@ -148,4 +181,14 @@ class PopulateDataForDeveloperAccount {
             api.businesses.create(param).await()
         }
     }
+
+    private fun Pair<String, Number>.toInvestmentParam(business: MonitoredBusinessBasicInfo) = InvestmentParams(
+        businessId = business.uid,
+        name = first,
+        type = InvestmentType.values().random().name,
+        source = NameGenerator.randomFullName(),
+        amount = second.toString(),
+        date = Date.today().toIsoFormat(),
+        details = "Testing"
+    )
 }

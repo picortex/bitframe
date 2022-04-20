@@ -29,11 +29,11 @@ class DisbursableServiceKtor<out D : Disbursable, out DS : DisbursableSummary>(
 ) : DisbursableServiceCore<D, DS> {
     private val json get() = config.json
     private val http get() = config.http
-    override fun load(rb: RequestBody.Authorized<String>): Later<D> = config.scope.later {
+    override fun load(rb: RequestBody.Authorized<String>) = config.scope.later {
         val res = http.post(path.load) {
             setBody(json.of(rb))
         }
-        json.decodeResponseFromString(serializer, res.bodyAsText()).response()
+        json.decodeResponseFromString(summarySerializer, res.bodyAsText()).response()
     }
 
     override fun all(rb: RequestBody.Authorized<DisbursableFilter>): Later<List<DS>> = config.scope.later {

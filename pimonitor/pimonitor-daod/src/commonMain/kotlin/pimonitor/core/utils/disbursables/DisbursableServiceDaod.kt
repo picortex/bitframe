@@ -23,9 +23,11 @@ abstract class DisbursableServiceDaod<out D : Disbursable, out DS : DisbursableS
 
     abstract val disbursableDao: Dao<D>
 
-    override fun load(rb: RequestBody.Authorized<String>): Later<D> = disbursableDao.load(rb.data)
+    override fun load(rb: RequestBody.Authorized<String>) = config.scope.later {
+        disbursableDao.load(rb.data).await().toSummary()
+    }
 
-    override fun createDisbursement(rb: RequestBody.Authorized<DisbursableDisbursementParams>): Later<Disbursement> = config.scope.later {
+    override fun createDisbursement(rb: RequestBody.Authorized<DisbursableDisbursementParams>) = config.scope.later {
         val disbursable = load(rb.map { it.disbursableId }).await()
         val disbursements = disbursable.disbursements
         val disbursement = rb.data.toParsedParams(currency).toDisbursement(rb.session, timezone, disbursements.size)

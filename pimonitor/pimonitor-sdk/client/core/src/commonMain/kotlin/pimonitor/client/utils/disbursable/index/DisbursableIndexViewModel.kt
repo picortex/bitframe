@@ -7,14 +7,16 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.utils.disbursables.DisbursableService
+import pimonitor.client.utils.disbursables.DisbursablesViewModel
 import pimonitor.core.utils.disbursables.Disbursable
+import pimonitor.core.utils.disbursables.DisbursableSummary
 import presenters.cases.Mission
 import presenters.intents.IndexIntent
 import viewmodel.ViewModel
 
-class DisbursableIndexViewModel<out D : Disbursable>(
-    val config: UIScopeConfig<DisbursableService<D, *>>
-) : ViewModel<IndexIntent, Mission<@UnsafeVariance D>>(DEFAULT_LOADING_STATE, config.viewModel) {
+class DisbursableIndexViewModel<out DS : DisbursableSummary>(
+    val config: UIScopeConfig<DisbursableService<*, DS>>
+) : ViewModel<IndexIntent, Mission<@UnsafeVariance DS>>(DEFAULT_LOADING_STATE, config.viewModel) {
     private val service get() = config.service
 
     companion object {

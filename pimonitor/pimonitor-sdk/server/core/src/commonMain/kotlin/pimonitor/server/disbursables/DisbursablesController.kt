@@ -25,7 +25,7 @@ open class DisbursablesController<out D : Disbursable, out DS : DisbursableSumma
     suspend fun load(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.Authorized<String>>(req.compulsoryBody())
         resolve(service.load(rb).await().also { println(it) })
-    }.toHttpResponse(serializer)
+    }.toHttpResponse(summarySerializer)
 
     suspend fun createDisbursement(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.Authorized<DisbursableDisbursementParams>>(req.compulsoryBody())

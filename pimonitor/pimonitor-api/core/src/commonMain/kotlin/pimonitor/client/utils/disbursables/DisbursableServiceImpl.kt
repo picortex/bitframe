@@ -30,7 +30,7 @@ abstract class DisbursableServiceImpl<out D : Disbursable, out DS : DisbursableS
     private val config: ServiceConfig
 ) : DisbursableService<D, DS>, DisbursableServiceCore<D, DS> {
     private val logger: Logger by config.logger(withSessionInfo = true)
-    override fun load(disbursableId: String): Later<D> = config.scope.later {
+    override fun load(disbursableId: String) = config.scope.later {
         logger.info("loading a disbursable(uid=$disbursableId)")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("update a disbursement"),

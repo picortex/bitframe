@@ -15,7 +15,7 @@ import kotlin.js.JsName
 @JsExport
 interface DisbursableServiceCore<out D : Disbursable, out DS : DisbursableSummary> {
     @JsName("_ignore_load")
-    fun load(rb: RequestBody.Authorized<String>): Later<D>
+    fun load(rb: RequestBody.Authorized<String>): Later<DS>
 
     /**
      * @param rb takes in a [RequestBody.Authorized] of a businessId

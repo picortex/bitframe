@@ -16,6 +16,7 @@ expect-core = { module = "tz.co.asoft:expect-core", version.ref = "foundation" }
 expect-coroutines = { module = "tz.co.asoft:expect-coroutines", version.ref = "foundation" }
 
 identifier-core = { module = "tz.co.asoft:identifier-core", version.ref = "stdlib" }
+identifier-generators = { module = "tz.co.asoft:identifier-generators", version.ref = "stdlib" }
 
 kotlinx-collections-interoperable = { module = "tz.co.asoft:kotlinx-collections-interoperable", version.ref = "foundation" }
 kotlinx-serialization-mapper = { module = "tz.co.asoft:kotlinx-serialization-mapper", version.ref = "foundation" }
