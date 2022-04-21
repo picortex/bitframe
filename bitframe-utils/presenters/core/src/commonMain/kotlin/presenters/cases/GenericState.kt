@@ -16,11 +16,13 @@ import presenters.cases.Failure as FailureCase
 
 sealed class GenericState<out S> : Case {
     abstract override val message: String
+    abstract val data: S?
 
     data class Loading(
         override val message: String
     ) : GenericState<Nothing>(), LoadingCase {
         override val loading: Boolean = true
+        override val data = null
     }
 
     data class Failure(
@@ -35,6 +37,7 @@ sealed class GenericState<out S> : Case {
         ) : this(cause, message, SimpleActionsBuilder().apply(builder).actions)
 
         override val failure: Boolean = true
+        override val data = null
     }
 
     data class Success(
@@ -48,12 +51,13 @@ sealed class GenericState<out S> : Case {
         ) : this(message, SimpleActionsBuilder().apply(builder).actions)
 
         override val success = true
+        override val data = null
     }
 
-    data class Content<out T>(
-        val data: T,
+    data class Content<out S>(
+        override val data: S,
         val dialog: Dialog<*, *>? = null
-    ) : GenericState<T>() {
+    ) : GenericState<S>() {
         override val message: String get() = "$data"
     }
 

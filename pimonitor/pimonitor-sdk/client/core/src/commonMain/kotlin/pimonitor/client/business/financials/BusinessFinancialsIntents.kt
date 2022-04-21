@@ -11,4 +11,12 @@ class BusinessFinancialsIntents internal constructor(
     val loadAvailableReports = { businessId: String ->
         viewModel.post(BusinessFinancialsIntent.LoadAvailableReports(businessId))
     }
+
+    val loadIncomeStatement = { businessId: String ->
+        viewModel.post(BusinessFinancialsIntent.LoadIncomeStatement(businessId))
+    }
+
+    val loadBalanceString = { businessId: String ->
+        viewModel.post(BusinessFinancialsIntent.LoadBalanceSheet(businessId))
+    }
 }
