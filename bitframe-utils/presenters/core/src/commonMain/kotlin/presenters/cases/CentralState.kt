@@ -8,28 +8,22 @@ import presenters.table.builders.tableOf
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-class CentralState<out C, T> private constructor(
+data class CentralState<out C, D>(
     val emphasis: Emphasis = Emphasis.Loading("Please wait . . ."),
-    private val _context: C?,
-    val table: Table<T> = tableOf(emptyList()) {},
+    val context: C? = null,
+    val table: Table<D> = tableOf(emptyList()) {},
 ) {
     @JsName("_ignore_fromLoading")
     constructor(message: String) : this(emphasis = Emphasis.Loading(message))
 
     @JsName("_ignore_from")
-    constructor(emphasis: Emphasis, table: Table<T> = tableOf(emptyList()) {}) : this(emphasis, null, table)
+    constructor(emphasis: Emphasis, table: Table<D> = tableOf(emptyList()) {}) : this(emphasis, null, table)
 
-    val context: C
-        get() = _context as C
+    @JsName("_ignore_copyTable")
+    fun copy(table: Table<D>) = copy(emphasis = Emphasis.None, table = table)
 
-    @JsName("_ignore_copy")
-    fun copy(table: Table<T>) = copy(emphasis = Emphasis.None, table = table)
-
-    fun copy(
-        emphasis: Emphasis = this.emphasis,
-        context: @UnsafeVariance C = this.context,
-        table: Table<T> = this.table
-    ): CentralState<C, T> = CentralState(emphasis, context, table)
+    @JsName("_ignore_copyTableAndContext")
+    fun copy(table: Table<D>, context: @UnsafeVariance C?) = copy(emphasis = Emphasis.None, table = table, context = context)
 
     val isLoading get() = emphasis.isLoading
     val asLoading get() = emphasis.asLoading
@@ -44,11 +38,4 @@ class CentralState<out C, T> private constructor(
     val asDialog get() = emphasis.asDialog
 
     val dialog get() = (emphasis as? Emphasis.Modal)?.dialog
-
-    override fun toString() = "CentralState(emphasis=$emphasis,context=$_context,table=$table)"
-    override fun hashCode() = emphasis.hashCode() or (_context?.hashCode() ?: 0) or table.hashCode()
-    override fun equals(other: Any?): Boolean = other is CentralState<*, *>
-            && other.emphasis == emphasis
-            && other._context == _context
-            && other.table == other.table
 }

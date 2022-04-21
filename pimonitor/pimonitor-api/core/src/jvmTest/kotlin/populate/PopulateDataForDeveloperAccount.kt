@@ -10,15 +10,19 @@ import kotlinx.coroutines.joinAll
 import later.await
 import pimonitor.client.PiMonitorApiTest
 import pimonitor.client.runSequence
+import pimonitor.client.utils.disbursables.DisbursableService
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
+import pimonitor.core.interventions.Intervention
+import pimonitor.core.interventions.params.InterventionParams
 import pimonitor.core.investments.Investment
 import pimonitor.core.investments.InvestmentType
 import pimonitor.core.investments.params.InvestmentParams
 import pimonitor.core.picortex.AcceptPicortexInviteParams
 import pimonitor.core.sage.AcceptSageOneInviteParams
 import pimonitor.core.signup.params.SignUpIndividualParams
+import pimonitor.core.utils.disbursables.Disbursable
 import pimonitor.core.utils.disbursables.disbursements.params.DisbursableDisbursementParams
 import presenters.fields.toInputValue
 import kotlin.random.Random
@@ -35,6 +39,13 @@ class PopulateDataForDeveloperAccount {
         "Working Capital" to 150000,
         "Seed Fund" to 50000,
         "Women Empowerment" to 780000,
+    )
+
+    val interventions = listOf(
+        "Concur the world" to 200000,
+        "Eastern coverage" to 150000,   
+        "Best sellers" to 50000,
+        "Top Consultant in South Africa" to 780000,
     )
 
     @Test
@@ -92,7 +103,13 @@ class PopulateDataForDeveloperAccount {
         step("Create investments for the created business") {
             investments.map { it.toInvestmentParam(business1) }.map { param ->
                 api.investments.create(param).await()
-            }.map { inv -> inv.disburseRandomly() }
+            }.map { inv -> inv.disburseInvestmentRandomly() }
+        }
+
+        step("Create interventions for the created business") {
+            investments.map { it.toInterventionParam(business1) }.map { param ->
+                api.interventions.create(param).await()
+            }.map { inv -> inv.disburseInterventionsRandomly() }
         }
 
         val business2 = step("Create another business") {
@@ -123,7 +140,13 @@ class PopulateDataForDeveloperAccount {
         step("Create yet another investments for the created business") {
             investments.map { it.toInvestmentParam(business2) }.map { param ->
                 api.investments.create(param).await()
-            }.map { inv -> inv.disburseRandomly() }
+            }.map { inv -> inv.disburseInvestmentRandomly() }
+        }
+
+        step("Create yet another interventions for the created business") {
+            investments.map { it.toInterventionParam(business2) }.map { param ->
+                api.interventions.create(param).await()
+            }.map { inv -> inv.disburseInterventionsRandomly() }
         }
 
         val business3 = step("Create yet again another business") {
@@ -138,7 +161,13 @@ class PopulateDataForDeveloperAccount {
         step("Create yet again another investments for the created business") {
             investments.map { it.toInvestmentParam(business3) }.map { param ->
                 api.investments.create(param).await()
-            }.map { inv -> inv.disburseRandomly() }
+            }.map { inv -> inv.disburseInvestmentRandomly() }
+        }
+
+        step("Create yet again another interventions for the created business") {
+            investments.map { it.toInterventionParam(business3) }.map { param ->
+                api.interventions.create(param).await()
+            }.map { inv -> inv.disburseInterventionsRandomly() }
         }
     }
 
@@ -199,15 +228,28 @@ class PopulateDataForDeveloperAccount {
         details = "Testing"
     )
 
-    suspend fun Investment.disburseRandomly() = coroutineScope {
-        if (Random.nextInt(10) < 3) {
+    private fun Pair<String, Number>.toInterventionParam(business: MonitoredBusinessBasicInfo) = InterventionParams(
+        businessId = business.uid,
+        name = first,
+        date = Date.today().toIsoFormat(),
+        amount = "$second",
+        deadline = Date.today().toIsoFormat(),
+        recommendations = "Testing"
+    )
+
+    suspend fun Disbursable.disburseRandomly(service: DisbursableService<*, *>) = coroutineScope {
+        if (Random.nextInt(10) < 7) {
             val noOfDisbursements = Random.nextInt(5)
             buildList {
                 repeat(noOfDisbursements) {
                     val params = DisbursableDisbursementParams(uid, (amount * 0.2).toInputValue(), Date.today().toIsoFormat())
-                    add(async { api.investments.createDisbursement(params).await() })
+                    add(async { service.createDisbursement(params).await() })
                 }
             }.joinAll()
         }
     }
+
+    suspend fun Investment.disburseInvestmentRandomly() = disburseRandomly(api.investments)
+
+    suspend fun Intervention.disburseInterventionsRandomly() = disburseRandomly(api.interventions)
 }

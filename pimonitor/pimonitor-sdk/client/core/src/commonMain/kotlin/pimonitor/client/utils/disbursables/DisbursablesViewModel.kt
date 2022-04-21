@@ -35,10 +35,10 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
         is LoadAllDisbursables -> loadAllDisbursables(i)
         is ShowDisbursementForm -> showDisbursementForm(i)
         is SendDisbursementForm -> sendDisbursementForm(i)
-        is ShowDeleteOneDisbursableDialog -> showDeleteOneInvestment(i)
-        is SendDeleteOneDisbursableIntent -> sendDeleteOneInvestment(i)
-        is ShowDeleteManyDisbursablesDialog -> showDeleteManyInvestmentsDialog(i)
-        is SendDeleteManyDisbursablesIntent -> sendDeleteManyInvestments(i)
+        is ShowDeleteOneDisbursableDialog -> showDeleteOneDisbursable(i)
+        is SendDeleteOneDisbursableIntent -> sendDeleteOneDisbursable(i)
+        is ShowDeleteManyDisbursablesDialog -> showDeleteManyDisbursableDialog(i)
+        is SendDeleteManyDisbursablesIntent -> sendDeleteManyDisbursable(i)
         else -> throw IllegalStateException("Invalid intent $i")
     }
 
@@ -68,7 +68,7 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
         }
     }
 
-    private fun showDeleteOneInvestment(i: ShowDeleteOneDisbursableDialog) {
+    private fun showDeleteOneDisbursable(i: ShowDeleteOneDisbursableDialog) {
         val confirm = confirmDialog("Delete ${i.disbursable.name}", "Are you sure you want to delete ${i.disbursable.name}?") {
             onCancel { ui.removeEmphasis() }
             onConfirm { post(SendDeleteOneDisbursableIntent(i.disbursable)) }
@@ -76,7 +76,7 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
         ui.update { copy(emphasis = Dialog(confirm)) }
     }
 
-    private fun CoroutineScope.sendDeleteOneInvestment(i: SendDeleteOneDisbursableIntent) = launch {
+    private fun CoroutineScope.sendDeleteOneDisbursable(i: SendDeleteOneDisbursableIntent) = launch {
         val state = ui.value
         flow {
             emit(state.copy(emphasis = Loading("Deleting ${i.disbursable.name} disbursable, please wait . . .")))
@@ -93,7 +93,7 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
         }
     }
 
-    private fun showDeleteManyInvestmentsDialog(i: ShowDeleteManyDisbursablesDialog) {
+    private fun showDeleteManyDisbursableDialog(i: ShowDeleteManyDisbursablesDialog) {
         val confirm = confirmDialog(
             heading = "Delete Investments",
             details =
@@ -105,7 +105,7 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
         ui.update { copy(emphasis = Dialog(confirm)) }
     }
 
-    private fun CoroutineScope.sendDeleteManyInvestments(i: SendDeleteManyDisbursablesIntent) = launch {
+    private fun CoroutineScope.sendDeleteManyDisbursable(i: SendDeleteManyDisbursablesIntent) = launch {
         val state = ui.value
         flow {
             emit(state.copy(emphasis = Loading("Deleting ${i.disbursables.size} disbursables, please wait. . .")))
