@@ -33,14 +33,15 @@ import viewmodel.ViewModel
 
 class DisbursementsViewModel(
     private val config: UIScopeConfig<DisbursableService<*, *>>
-) : ViewModel<DisbursementsIntent, CentralState<Disbursement>>(DEFAULT_LOADING_STATE) {
+) : ViewModel<DisbursementsIntent, CentralState<Disbursable, Disbursement>>(DEFAULT_LOADING_STATE) {
     private val service get() = config.service
 
     companion object {
-        private val DEFAULT_LOADING_STATE = CentralState<Disbursement>("Loading disbursements, please wait . . .")
+        private val DEFAULT_LOADING_STATE = CentralState<Disbursable, Disbursement>("Loading disbursements, please wait . . .")
     }
 
-    private lateinit var disbursable: Disbursable
+    private val disbursable: Disbursable get() = ui.value.context
+
     override fun CoroutineScope.execute(i: DisbursementsIntent): Any = when (i) {
         is LoadDisbursements -> loadDisbursements(i)
         is ShowCreateDisbursementForm -> showCreateDisbursementForm(i)
@@ -67,8 +68,8 @@ class DisbursementsViewModel(
             emit(state.copy(emphasis = Loading("Creating a disbursement, please wait . . .")))
             val disbursement = service.createDisbursement(i.params.toValidatedDisbursableParams(i.disbursable.uid)).await()
             emit(state.copy(emphasis = Success("${disbursement.amount.toDefaultFormat()} has successfully been disbursed")))
-            disbursable = service.load(disbursable.uid).await()
-            emit(state.copy(table = disbursementTable(disbursable.disbursements)))
+            val context = service.load(disbursable.uid).await()
+            emit(state.copy(table = disbursementTable(context.disbursements)))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
                 onGoBack { post(ShowCreateDisbursementForm(i.disbursable, i.params)) }
@@ -94,8 +95,8 @@ class DisbursementsViewModel(
             val params = Identified(i.disbursement.uid, i.params.toValidatedDisbursableParams(disbursable.uid))
             val disbursement = service.updateDisbursement(params).await()
             emit(state.copy(emphasis = Success("${disbursement.amount.toDefaultFormat()} disbursement has been updated")))
-            disbursable = service.load(disbursable.uid).await()
-            emit(state.copy(table = disbursementTable(disbursable.disbursements)))
+            val context = service.load(disbursable.uid).await()
+            emit(state.copy(table = disbursementTable(context.disbursements)))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
                 onCancel { post(ShowEditDisbursementForm(i.disbursement, i.params)) }
@@ -127,8 +128,8 @@ class DisbursementsViewModel(
             )
             val disbursement = service.deleteDisbursements(params).await()
             emit(state.copy(emphasis = Success("${disbursement.first().amount.toDefaultFormat()} disbursement has been deleted successfully")))
-            disbursable = service.load(disbursable.uid).await()
-            emit(state.copy(table = disbursementTable(disbursable.disbursements)))
+            val context = service.load(disbursable.uid).await()
+            emit(state.copy(table = disbursementTable(context.disbursements)))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
                 onGoBack { ui.removeEmphasis() }
@@ -160,8 +161,8 @@ class DisbursementsViewModel(
             )
             service.deleteDisbursements(params).await()
             emit(state.copy(emphasis = Success("${i.data.size} disbursements have been deleted successfully")))
-            disbursable = service.load(disbursable.uid).await()
-            emit(state.copy(table = disbursementTable(disbursable.disbursements)))
+            val context = service.load(disbursable.uid).await()
+            emit(state.copy(table = disbursementTable(context.disbursements)))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
                 onGoBack { ui.removeEmphasis() }
@@ -176,10 +177,10 @@ class DisbursementsViewModel(
         val state = ui.value
         flow {
             emit(DEFAULT_LOADING_STATE)
-            disbursable = service.load(i.disbursableId).await()
-            emit(state.copy(table = disbursementTable(disbursable.disbursements)))
+            val context = service.load(i.disbursableId).await()
+            emit(state.copy(context = context, table = disbursementTable(context.disbursements)))
         }.catch {
-            emit(state.copy(emphasis = Emphasis.Failure(it) {
+            emit(state.copy(emphasis = Failure(it) {
                 onRetry { post(i) }
             }))
         }.collect {

@@ -27,12 +27,15 @@ open class BusinessOperationsServiceDaod(
         val params = rb.data
         when (business.operationalBoard) {
             DASHBOARD_OPERATIONAL.NONE -> {
-                InfoResults.NotShared("${business.name} has not shared their reports with any dashboard") as InfoResults<OperationalDifferenceBoard>
+                InfoResults.NotShared(
+                    business = business,
+                    message = "${business.name} has not shared their reports with any dashboard"
+                ) as InfoResults<OperationalDifferenceBoard>
             }
             DASHBOARD_OPERATIONAL.PICORTEX -> {
                 val cred = piCortexCredentialsDao.all(condition = PiCortexApiCredentials::businessId isEqualTo business.uid).await().last()
                 val board = piCortexDashboardProvider.technicalDifferenceDashboardOf(cred, params.start, params.end).await()
-                InfoResults.Shared(board)
+                InfoResults.Shared(business, board)
             }
             else -> error("Business is connected to an unknown operational board provider")
         }

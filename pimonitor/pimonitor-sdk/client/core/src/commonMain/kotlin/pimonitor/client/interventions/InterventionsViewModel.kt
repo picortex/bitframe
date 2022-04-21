@@ -32,9 +32,7 @@ import presenters.table.builders.tableOf
 
 class InterventionsViewModel(
     val config: UIScopeConfig<PiMonitorApi>
-) : DisbursablesViewModel<InterventionSummary>(config.map { it.interventions }) {
-    private val api get() = config.service
-
+) : DisbursablesViewModel<InterventionSummary>(config, config.service.interventions) {
     override fun CoroutineScope.execute(i: DisbursablesIntent): Any = when (i) {
         is ShowCreateInterventionForm -> showCreateInterventionForm(i)
         is SendCreateInterventionForm -> sendCreateInterventionForm(i)
@@ -52,7 +50,7 @@ class InterventionsViewModel(
         flow {
             emit(state.copy(emphasis = Loading("Preparing interventions form, please wait . . .")))
             val businesses = api.businesses.all().await()
-            val business = businesses.firstOrNull { it.uid == businessId }
+            val business = businesses.firstOrNull { it.uid == state.context?.uid }
             val form = UpdateInterventionForm(
                 businesses = businesses,
                 business = business,
@@ -80,7 +78,7 @@ class InterventionsViewModel(
             val params = Identified(i.intervention.uid, i.params)
             val intervention = api.interventions.update(params).await()
             emit(state.copy(emphasis = Success("Updated ${intervention.name} investment")))
-            val interventions = api.interventions.all(DisbursableFilter(businessId)).await()
+            val interventions = api.interventions.all(DisbursableFilter(state.context?.uid)).await()
             emit(state.copy(table = disbursablesTable(interventions)))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
@@ -117,7 +115,7 @@ class InterventionsViewModel(
             emit(state.copy(emphasis = Loading("Creating intervention, please wait . . .")))
             api.interventions.create(i.params).await()
             emit(state.copy(emphasis = Success("Intervention Successfully Created")))
-            val interventions = api.interventions.all(DisbursableFilter(businessId)).await()
+            val interventions = api.interventions.all(DisbursableFilter(state.context?.uid)).await()
             emit(state.copy(table = disbursablesTable(interventions)))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
@@ -134,7 +132,7 @@ class InterventionsViewModel(
         flow {
             emit(state.copy(emphasis = Loading("Preparing interventions form, please wait . . .")))
             val businesses = api.businesses.all().await()
-            val business = businesses.firstOrNull { it.uid == businessId }
+            val business = businesses.firstOrNull { it.uid == state.context?.uid }
             val form = CreateInterventionForm(
                 businesses = businesses,
                 business = business,
@@ -160,7 +158,7 @@ class InterventionsViewModel(
         emptyAction("Create Intervention") { post(ShowCreateInterventionForm(null, null)) }
 
         primaryAction("Create Intervention") { post(ShowCreateInterventionForm(null, null)) }
-        primaryAction("Refresh") { post(LoadAllDisbursables(businessId)) }
+        primaryAction("Refresh") { post(LoadAllDisbursables(ui.value.context?.uid)) }
 
         singleAction("Add Disbursement") { post(ShowDisbursementForm(it.data, null)) }
         singleAction("Add Goal") { post(ShowCreateGoalForm(it.data, null)) }
@@ -172,7 +170,7 @@ class InterventionsViewModel(
         selectable()
         val dateFormat = "{DD}-{MM}-{YYYY}"
         column("Name") { it.data.name }
-        if (businessId == null) column("Business") { it.data.businessName }
+        if (ui.value.context == null) column("Business") { it.data.businessName }
         column("Amount") { it.data.amount.toDefaultFormat() }
         column("Disbursed") { it.data.totalDisbursed.toDefaultFormat() }
         column("Goals") { "0/${it.data.goals.size}" }

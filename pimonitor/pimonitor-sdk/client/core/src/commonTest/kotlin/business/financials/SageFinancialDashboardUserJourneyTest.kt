@@ -6,7 +6,7 @@ import bitframe.core.signin.SignInParams
 import expect.expect
 import expect.toBe
 import later.await
-import pimonitor.client.business.financials.BusinessFinancialIntent
+import pimonitor.client.business.financials.BusinessFinancialsIntent
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
@@ -68,7 +68,7 @@ class SageFinancialDashboardUserJourneyTest {
 
         step("View Income Statement of the business under test") {
             val businessId = invite!!.invitedBusinessId
-            vm.expect(BusinessFinancialIntent.LoadIncomeStatement(businessId))
+            vm.expect(BusinessFinancialsIntent.LoadIncomeStatement(businessId))
             expect(vm.ui.value.report).toBe<IncomeStatement>()
         }
     }
@@ -119,7 +119,7 @@ class SageFinancialDashboardUserJourneyTest {
 
         step("View Balance Sheet of the business under test") {
             val businessId = invite.invitedBusinessId
-            vm.expect(BusinessFinancialIntent.LoadBalanceSheet(businessId))
+            vm.expect(BusinessFinancialsIntent.LoadBalanceSheet(businessId))
             expect(vm.ui.value.report).toBe<BalanceSheet>()
         }
     }

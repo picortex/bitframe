@@ -16,8 +16,7 @@ import pimonitor.core.invites.InfoResults
 import pimonitor.core.invites.Invite
 import pimonitor.core.picortex.AcceptPicortexInviteParams
 import pimonitor.core.signup.params.SignUpIndividualParams
-import presenters.cases.State
-import presenters.date.last
+import presenters.cases.GenericState
 import utils.PiMonitorTestScope
 import utils.toContain
 import viewmodel.expect
@@ -84,10 +83,10 @@ class PiCortexOperationalDashboardUserJourneyTest {
                 end = end
             )
             vm.expect(BusinessOperationsIntent.LoadOperationalDashboard(params)).toContain(
-                State.Loading("Loading operational dashboard, please wait . . ."),
+                GenericState.Loading("Loading operational dashboard, please wait . . ."),
             )
-            val state = vm.ui.value as State.Content<InfoResults.Shared<OperationalDashboard>>
-            expect(state.value.data).toBeNonNull()
+            val state = vm.ui.value as GenericState.Content<InfoResults.Shared<OperationalDashboard>>
+            expect(state.data.data).toBeNonNull()
         }
     }
 }

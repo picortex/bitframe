@@ -8,6 +8,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 
 @Serializer(forClass = InfoResults::class)
 internal open class InfoResultsSerializer<T>(
@@ -15,14 +16,18 @@ internal open class InfoResultsSerializer<T>(
 ) : KSerializer<InfoResults<T>> {
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("InfoResults")
 
+    @Serializable
+    private class NotShared(val business: MonitoredBusinessBasicInfo, val message: String)
+
     override fun deserialize(decoder: Decoder) = try {
-        InfoResults.Shared(decoder.decodeSerializableValue(elementSerializer))
+        decoder.decodeSerializableValue(InfoResults.Shared.serializer(elementSerializer))
     } catch (err: Throwable) {
-        InfoResults.NotShared(decoder.decodeSerializableValue(String.serializer()))
+        val ns = decoder.decodeSerializableValue(NotShared.serializer())
+        InfoResults.NotShared(ns.business, ns.message)
     }
 
     override fun serialize(encoder: Encoder, value: InfoResults<T>) = when (value) {
-        is InfoResults.NotShared -> encoder.encodeSerializableValue(String.serializer(), value.message)
-        is InfoResults.Shared -> encoder.encodeSerializableValue(elementSerializer, value.data)
+        is InfoResults.NotShared -> encoder.encodeSerializableValue(NotShared.serializer(), NotShared(value.business, value.message))
+        is InfoResults.Shared -> encoder.encodeSerializableValue(InfoResults.Shared.serializer(elementSerializer), value)
     }
 }

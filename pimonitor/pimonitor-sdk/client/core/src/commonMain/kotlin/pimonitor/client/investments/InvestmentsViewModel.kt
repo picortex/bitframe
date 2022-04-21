@@ -29,8 +29,7 @@ import presenters.table.builders.tableOf
 
 class InvestmentsViewModel(
     private val config: UIScopeConfig<PiMonitorApi>
-) : DisbursablesViewModel<InvestmentSummary>(config.map { it.investments }) {
-    private val api get() = config.service
+) : DisbursablesViewModel<InvestmentSummary>(config, config.service.investments) {
     override fun CoroutineScope.execute(i: DisbursablesIntent): Any = when (i) {
         is ShowCreateInvestmentForm -> showCreateInvestmentForm(i)
         is SendCreateInvestmentForm -> sendCreateInvestmentForm(i)
@@ -44,7 +43,7 @@ class InvestmentsViewModel(
         flow {
             emit(state.copy(emphasis = Loading("Preparing investment form, please wait. . .")))
             val businesses = api.businesses.all().await()
-            val business = businesses.firstOrNull { it.uid == businessId }
+            val business = businesses.firstOrNull { it.uid == state.context?.uid }
             val form = CreateInvestmentForm(businesses, business, i.params) {
                 onCancel { ui.removeEmphasis() }
                 onSubmit { params -> post(SendCreateInvestmentForm(params)) }
@@ -67,7 +66,7 @@ class InvestmentsViewModel(
             val params = i.params.toValidatedParams()
             val investment = api.investments.create(params).await()
             emit(state.copy(emphasis = Success("${investment.name} investment has been created successfully. Updating your feed, please wait. . .")))
-            emit(state.copy(table = disbursablesTable(api.investments.all(DisbursableFilter(businessId)).await())))
+            emit(state.copy(table = disbursablesTable(api.investments.all(DisbursableFilter(state.context?.uid)).await())))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
                 onCancel { post(ShowCreateInvestmentForm(null, i.params)) }
@@ -105,7 +104,7 @@ class InvestmentsViewModel(
             val params = i.params.toIdentifiedParams(i.investment.uid)
             val investment = api.investments.update(params).await()
             emit(state.copy(emphasis = Success("${investment.name} investment has been updated successfully. Synchronizing the remaining investments, please wait. . .")))
-            emit(state.copy(table = disbursablesTable(api.investments.all(DisbursableFilter(businessId)).await())))
+            emit(state.copy(table = disbursablesTable(api.investments.all(DisbursableFilter(state.context?.uid)).await())))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
                 onCancel { post(ShowUpdateInvestmentForm(i.investment, i.params)) }
@@ -122,19 +121,19 @@ class InvestmentsViewModel(
         emptyAction("Capture Investment") { post(ShowCreateInvestmentForm(null, null)) }
 
         primaryAction("Add Investment") { post(ShowCreateInvestmentForm(null, null)) }
-        primaryAction("Refresh") { post(LoadAllDisbursables(businessId)) }
+        primaryAction("Refresh") { post(LoadAllDisbursables(ui.value.context?.uid)) }
         singleAction("Issue Disbursement") { post(ShowDisbursementForm(it.data, null)) }
         singleAction("Edit Investment") { post(ShowUpdateInvestmentForm(it.data, null)) }
         singleAction("Delete Investment") { post(ShowDeleteOneDisbursableDialog(it.data)) }
         multiAction("Delete All") { post(ShowDeleteManyDisbursablesDialog(it)) }
         selectable()
         column("Name") { it.data.name }
-        if (businessId == null) column("Business") { it.data.businessName }
+        if (ui.value.context == null) column("Business") { it.data.businessName }
         column("Source") { it.data.source }
         column("Type") { it.data.type }
         column("Amount") { it.data.amount.toDefaultFormat() }
         column("Disbursed") { it.data.totalDisbursed.toDefaultFormat() }
-        column("Progress") { "${it.data.disbursementProgressInPercentage.asInt}%" }
+//        column("Progress") { "${it.data.disbursementProgressInPercentage.asInt}%" }
         column("Created By") { it.data.createdBy.name }
         actions("Actions") {
             action("Issue Disbursement") { post(ShowDisbursementForm(it.data, null)) }

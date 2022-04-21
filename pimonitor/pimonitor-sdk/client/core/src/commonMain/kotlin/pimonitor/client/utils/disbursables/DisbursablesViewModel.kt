@@ -2,14 +2,18 @@ package pimonitor.client.utils.disbursables
 
 import bitframe.client.UIScopeConfig
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
+import pimonitor.client.PiMonitorApi
 import pimonitor.client.utils.disbursable.disbursements.forms.CreateDisbursementForm
 import pimonitor.client.utils.disbursables.DisbursablesIntent.*
 import pimonitor.client.utils.live.removeEmphasis
 import pimonitor.client.utils.live.update
+import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.utils.disbursables.DisbursableSummary
 import pimonitor.core.utils.disbursables.disbursements.params.toValidatedDisbursableParams
 import pimonitor.core.utils.disbursables.filters.DisbursableFilter
@@ -23,10 +27,10 @@ import presenters.table.Table
 import viewmodel.ViewModel
 
 abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
-    private val config: UIScopeConfig<DisbursableService<*, DS>>
-) : ViewModel<DisbursablesIntent, CentralState<@UnsafeVariance DS>>(CentralState(Loading("Loading")), config.viewModel) {
-    val service: DisbursableService<*, DS> get() = config.service
-    protected var businessId: String? = null
+    private val config: UIScopeConfig<PiMonitorApi>,
+    val service: DisbursableService<*, DS>,
+) : ViewModel<DisbursablesIntent, CentralState<MonitoredBusinessBasicInfo?, @UnsafeVariance DS>>(CentralState(Loading("Loading")), config.viewModel) {
+    val api get() = config.service
     protected fun CoroutineScope.perform(i: DisbursablesIntent): Any = when (i) {
         is LoadAllDisbursables -> loadAllDisbursables(i)
         is ShowDisbursementForm -> showDisbursementForm(i)
@@ -53,7 +57,7 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
             emit(state.copy(emphasis = Loading("Sending disbursement, please wait. . .!")))
             val disbursement = service.createDisbursement(i.params.toValidatedDisbursableParams(i.disbursable.uid)).await()
             emit(state.copy(emphasis = Success("${disbursement.amount.toFormattedString()} has been successfully disbursed to ${i.disbursable.name} disbursable. Loading the remaining disbursables, please wait. . .")))
-            emit(state.copy(table = disbursablesTable(service.all(DisbursableFilter(businessId)).await())))
+            emit(state.copy(table = disbursablesTable(service.all(DisbursableFilter(state.context?.uid)).await())))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
                 onGoBack { post(ShowDisbursementForm(i.disbursable, i.params)) }
@@ -78,7 +82,7 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
             emit(state.copy(emphasis = Loading("Deleting ${i.disbursable.name} disbursable, please wait . . .")))
             service.delete(i.disbursable.uid).await()
             emit(state.copy(emphasis = Success("Investment ${i.disbursable.name} deleted. Loading the remaining disbursables, please wait. . .")))
-            emit(state.copy(table = disbursablesTable(service.all(DisbursableFilter(businessId)).await())))
+            emit(state.copy(table = disbursablesTable(service.all(DisbursableFilter(state.context?.uid)).await())))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
                 onGoBack { ui.removeEmphasis() }
@@ -107,7 +111,7 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
             emit(state.copy(emphasis = Loading("Deleting ${i.disbursables.size} disbursables, please wait. . .")))
             service.delete(*i.disbursables.map { it.uid }.toTypedArray()).await()
             emit(state.copy(emphasis = Success("${i.disbursables.size} Items deleted")))
-            emit(state.copy(table = disbursablesTable(service.all(DisbursableFilter(businessId)).await())))
+            emit(state.copy(table = disbursablesTable(service.all(DisbursableFilter(state.context?.uid)).await())))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
                 onGoBack { ui.removeEmphasis() }
@@ -119,11 +123,15 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
     }
 
     private fun CoroutineScope.loadAllDisbursables(i: LoadAllDisbursables) = launch {
-        businessId = i.businessId
         val state = ui.value
         flow {
             emit(state.copy(emphasis = Loading("Loading, please wait. . .")))
-            emit(state.copy(table = disbursablesTable(service.all(DisbursableFilter(businessId)).await())))
+            val (context, table) = coroutineScope {
+                val business = async { i.businessId?.let { api.businesses.load(it).await() } }
+                val table = async { disbursablesTable(service.all(DisbursableFilter(state.context?.uid)).await()) }
+                business.await() to table.await()
+            }
+            emit(state.copy(context = context, table = table))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
                 onRetry { post(i) }

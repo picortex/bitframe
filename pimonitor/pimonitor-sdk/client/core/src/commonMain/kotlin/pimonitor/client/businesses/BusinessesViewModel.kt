@@ -36,7 +36,10 @@ import pimonitor.client.businesses.BusinessesIntent as Intent
 
 class BusinessesViewModel(
     private val config: UIScopeConfig<PiMonitorApi>
-) : ViewModel<Intent, CentralState<MonitoredBusinessSummary>>(CentralState(emphasis = Loading("Loading businesses, please wait. . .")), config.viewModel) {
+) : ViewModel<Intent, CentralState<*, MonitoredBusinessSummary>>(INITIAL_LOADING_STATE, config.viewModel) {
+    companion object {
+        private val INITIAL_LOADING_STATE = CentralState<Any?, MonitoredBusinessSummary>(emphasis = Loading("Loading businesses, please wait. . ."))
+    }
 
     private val api get() = config.service
 
@@ -259,7 +262,7 @@ class BusinessesViewModel(
     private fun CoroutineScope.loadBusinesses() = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Loading your businesses, please wait . . .")))
+            emit(INITIAL_LOADING_STATE)
             emit(state.copy(table = businessesTable(api.businesses.all().await())))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {
