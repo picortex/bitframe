@@ -125,12 +125,10 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
     private fun CoroutineScope.loadAllDisbursables(i: LoadAllDisbursables) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Loading, please wait. . .")))
-            val (context, table) = coroutineScope {
-                val business = async { i.businessId?.let { api.businesses.load(it).await() } }
-                val table = async { disbursablesTable(service.all(DisbursableFilter(state.context?.uid)).await()) }
-                business.await() to table.await()
-            }
+            emit(state.copy(emphasis = Loading("Loading context, please wait. . .")))
+            val context = i.businessId?.let { api.businesses.load(it).await() }
+            emit(state.copy(emphasis = Loading("We are almost done"), context = context))
+            val table = disbursablesTable(service.all(DisbursableFilter(i.businessId)).await())
             emit(state.copy(context = context, table = table))
         }.catch {
             emit(state.copy(emphasis = Failure(it) {

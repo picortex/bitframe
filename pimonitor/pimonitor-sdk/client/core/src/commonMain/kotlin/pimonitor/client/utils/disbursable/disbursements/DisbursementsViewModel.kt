@@ -18,6 +18,7 @@ import pimonitor.client.utils.live.removeEmphasis
 import pimonitor.client.utils.live.update
 import pimonitor.client.utils.money.toDefaultFormat
 import pimonitor.core.utils.disbursables.Disbursable
+import pimonitor.core.utils.disbursables.DisbursableSummary
 import pimonitor.core.utils.disbursables.disbursements.Disbursement
 import pimonitor.core.utils.disbursables.disbursements.params.toValidatedDisbursableParams
 import presenters.cases.CentralState
@@ -33,11 +34,11 @@ import viewmodel.ViewModel
 
 class DisbursementsViewModel(
     private val config: UIScopeConfig<DisbursableService<*, *>>
-) : ViewModel<DisbursementsIntent, CentralState<Disbursable, Disbursement>>(DEFAULT_LOADING_STATE) {
+) : ViewModel<DisbursementsIntent, CentralState<DisbursableSummary, Disbursement>>(DEFAULT_LOADING_STATE) {
     private val service get() = config.service
 
     companion object {
-        private val DEFAULT_LOADING_STATE = CentralState<Disbursable, Disbursement>("Loading disbursements, please wait . . .")
+        private val DEFAULT_LOADING_STATE = CentralState<DisbursableSummary, Disbursement>("Loading disbursements, please wait . . .")
     }
 
     private val disbursable: Disbursable
