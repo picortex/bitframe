@@ -14,15 +14,21 @@ import presenters.cases.Loading as LoadingCase
 import presenters.cases.Success as SuccessCase
 
 sealed class MissionState<out T> : Case {
+    abstract val data: T?
+
     data class Loading(
         override val message: String
-    ) : MissionState<Nothing>(), LoadingCase
+    ) : MissionState<Nothing>(), LoadingCase {
+        override val data = null
+    }
 
     data class Failure(
         override val cause: Throwable? = null,
         override val message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
         override val actions: List<SimpleAction>
     ) : MissionState<Nothing>(), FailureCase {
+        override val data = null
+
         @JsName("_ignore_builder")
         constructor(
             cause: Throwable? = null,
@@ -34,8 +40,8 @@ sealed class MissionState<out T> : Case {
     }
 
     data class Success<out T>(
-        val data: T
-    ) : MissionState<Nothing>(), SuccessCase {
+        override val data: T
+    ) : MissionState<T>(), SuccessCase {
         override val message: String = SuccessCase.DEFAULT_MESSAGE
         override val actions: List<SimpleAction> = emptyList()
     }

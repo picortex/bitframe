@@ -40,7 +40,10 @@ class DisbursementsViewModel(
         private val DEFAULT_LOADING_STATE = CentralState<Disbursable, Disbursement>("Loading disbursements, please wait . . .")
     }
 
-    private val disbursable: Disbursable get() = ui.value.context
+    private val disbursable: Disbursable
+        get() = ui.value.context ?: throw IllegalStateException(
+            "Disbursable context has not yet been set. Make sure you have called LoadDisbursements Intents"
+        )
 
     override fun CoroutineScope.execute(i: DisbursementsIntent): Any = when (i) {
         is LoadDisbursements -> loadDisbursements(i)
