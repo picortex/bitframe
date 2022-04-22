@@ -82,9 +82,9 @@ class PiCortexOperationalDashboardUserJourneyTest {
                 start = start,
                 end = end
             )
-            vm.expect(BusinessOperationsIntent.LoadOperationalDashboard(params)).toContain(
-                GenericState.Loading("Loading operational dashboard, please wait . . ."),
-            )
+//            vm.expect(BusinessOperationsIntent.LoadOperationalDashboard(params)).toContain(
+//                GenericState.Loading("Loading operational dashboard, please wait . . ."),
+//            )
             val state = vm.ui.value as GenericState.Content<InfoResults.Shared<OperationalDashboard>>
             expect(state.data.data).toBeNonNull()
         }

@@ -33,6 +33,6 @@ class AuthFlowInteroperabilityTest {
             }.unsafeCast<SignUpIndividualRawParams>()
             service.signUp.signUp(params).await()
         }
-        expect(err.message).toBe("Field password is required but was not found")
+        expect(err.message).toBe("Field `password` is required but was not found")
     }
 }

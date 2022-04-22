@@ -5,11 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/CRUD.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Creator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/CreatorUpdater.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Deleter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Lister.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Reader.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Updater.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/GenericState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/GenericState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsIntents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsIntents.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/BusinessInfoIntents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/BusinessInfoIntents.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-actor/core/src/commonMain/kotlin/bitframe/core/Identified.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-actor/core/src/commonMain/kotlin/bitframe/core/Identified.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-actor/core/src/commonMain/kotlin/bitframe/core/IdentifiedRaw.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-actor/core/src/commonMain/kotlin/bitframe/core/IdentifiedRaw.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonTest/kotlin/password/PasswordViewModelWithSignedInSessionTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonTest/kotlin/password/PasswordViewModelWithSignedInSessionTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jsTest/kotlin/AuthFlowInteroperabilityTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jsTest/kotlin/AuthFlowInteroperabilityTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/InfoResultSerializationTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/InfoResultSerializationTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardParserTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardParserTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexReportsResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexReportsResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/business/operational/PiCortexOperationalDashboardUserJourneyTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/business/operational/PiCortexOperationalDashboardUserJourneyTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,9 +91,9 @@
         <option value="Kotlin Object" />
         <option value="Kotlin Sealed Class" />
         <option value="Kotlin File" />
-        <option value="Kotlin Interface" />
         <option value="Kotlin Data Class" />
         <option value="Kotlin Class" />
+        <option value="Kotlin Interface" />
       </list>
     </option>
   </component>
@@ -150,27 +161,49 @@
       <recent name="pimonitor.client.business.index" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="bitframe.client" />
       <recent name="presenters.cases" />
       <recent name="pimonitor.server.disbursables" />
       <recent name="pimonitor.core.interventions" />
-      <recent name="bitframe.client" />
       <recent name="pimonitor.core.utils.disbursables" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.populate-live-local">
-    <configuration name="InfoResultSerializationTest.should_decode_a_response_of_an_info_result" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.InfoResultSerializationTest">
+    <configuration name="AuthFlowInteroperabilityTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-core" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-api/core" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;InfoResultSerializationTest.should_decode_a_response_of_an_info_result&quot;" />
+        <option name="scriptParameters" value="--tests &quot;AuthFlowInteroperabilityTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":pimonitor-core:cleanJvmTest" />
-            <option value=":pimonitor-core:jvmTest" />
+            <option value=":pimonitor-api-core:cleanJsNodeTest" />
+            <option value=":pimonitor-api-core:jsNodeTest" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="InfoResultSerializationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-core" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;InfoResultSerializationTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":pimonitor-core:cleanJsNodeTest" />
+            <option value=":pimonitor-core:jsNodeTest" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -208,19 +241,19 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="PayloadDeSerializerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PasswordViewModelWithSignedInSessionTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/bitframe-utils/response" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;PayloadDeSerializerTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;password.PasswordViewModelWithSignedInSessionTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":response:cleanJvmTest" />
-            <option value=":response:jvmTest" />
+            <option value=":bitframe-authentication-sdk-client-core:cleanJvmTest" />
+            <option value=":bitframe-authentication-sdk-client-core:jvmTest" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -230,12 +263,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="PayloadDeSerializerTest.should_deserialize_primitive_responses" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PayloadDeSerializerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/bitframe-utils/response" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;PayloadDeSerializerTest.should_deserialize_primitive_responses&quot;" />
+        <option name="scriptParameters" value="--tests &quot;PayloadDeSerializerTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -693,18 +726,19 @@
       <item itemvalue="Gradle.pi-sdk-mock-jvm-test" />
       <item itemvalue="Gradle.response:jvmTest" />
       <item itemvalue="Gradle.populate-live-local" />
-      <item itemvalue="Gradle.PayloadDeSerializerTest.should_deserialize_primitive_responses" />
-      <item itemvalue="Gradle.InfoResultSerializationTest.should_decode_a_response_of_an_info_result" />
       <item itemvalue="Gradle.PayloadDeSerializerTest" />
       <item itemvalue="Gradle.InvestmentsServiceTest" />
+      <item itemvalue="Gradle.PasswordViewModelWithSignedInSessionTest" />
+      <item itemvalue="Gradle.AuthFlowInteroperabilityTest" />
+      <item itemvalue="Gradle.InfoResultSerializationTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.InfoResultSerializationTest" />
+        <item itemvalue="Gradle.AuthFlowInteroperabilityTest" />
+        <item itemvalue="Gradle.PasswordViewModelWithSignedInSessionTest" />
         <item itemvalue="Gradle.InvestmentsServiceTest" />
         <item itemvalue="Gradle.InvestmentsServiceTest" />
-        <item itemvalue="Gradle.InfoResultSerializationTest.should_decode_a_response_of_an_info_result" />
-        <item itemvalue="Gradle.PayloadDeSerializerTest" />
-        <item itemvalue="Gradle.InfoResultSerializationTest.should_decode_a_response_of_an_info_result" />
       </list>
     </recent_temporary>
   </component>
