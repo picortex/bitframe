@@ -10,7 +10,8 @@ data class TextInputField(
     override val name: String,
     override val label: String = name,
     override val hint: String = label,
-    override var value: String? = null
+    override var value: String? = null,
+    override val isReadonly: Boolean = false
 ) : TextInputRawField {
     @JsName("_ignore_fromProperty")
     constructor(
@@ -19,4 +20,6 @@ data class TextInputField(
         hint: String = name.name,
         value: String? = null
     ) : this(name.name, label, hint, value)
+
+    val asteriskedLabel = label
 }

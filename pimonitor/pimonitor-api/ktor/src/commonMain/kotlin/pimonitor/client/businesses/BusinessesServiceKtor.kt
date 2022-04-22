@@ -7,8 +7,10 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.collections.interoperable.serializers.ListSerializer
 import kotlinx.collections.interoperable.toInteroperableList
+import later.Later
 import later.later
 import pimonitor.client.utils.pathV1
+import pimonitor.core.business.info.params.BusinessInfoParams
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
@@ -37,11 +39,17 @@ class BusinessesServiceKtor(
         json.decodeResponseFromString(MonitoredBusinessBasicInfo.serializer(), req.bodyAsText()).response()
     }
 
+    override fun update(rb: RequestBody.Authorized<BusinessInfoParams>) = config.scope.later {
+        val req = client.post(path.businessesUpdate) {
+            setBody(json.of(rb))
+        }
+        json.decodeResponseFromString(MonitoredBusinessBasicInfo.serializer(), req.bodyAsText()).response()
+    }
+
     override fun all(rb: RequestBody.Authorized<BusinessFilter>) = config.scope.later {
         val req = client.post(path.businessesAll) {
             setBody(json.of(rb))
         }
-        println(req.bodyAsText())
         val resp = json.decodeResponseFromString(ListSerializer(MonitoredBusinessSummary.serializer()), req.bodyAsText())
         resp.response().toInteroperableList()
     }

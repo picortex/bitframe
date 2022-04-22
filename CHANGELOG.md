@@ -1,3 +1,33 @@
+# 0.10.20
+
+## Enhancements
+
+- All dialogs are `SDK cancelable` (Previously only form dialogs where cancelable)
+
+## Patches
+
+- Unified investments viewmodel to be used in different investment scopes
+
+## Debug Features
+
+- Removed sage response from mock logs and server logs
+
+# 0.10.19
+
+### Enhancements
+
+- [[PM404]](https://github.com/picortex/bitframe/issues/404) Setup cases to cover all business overview approaches
+- [[PM400]](https://github.com/picortex/bitframe/issues/400) Business Overview for a business with only operational integrations
+- [[PM308]](https://github.com/picortex/bitframe/issues/308) Added SDK support for the investments section
+
+### Bug Fixes
+
+- Dates are now not predicting the future.
+
+  Previously, viewing today's date displayed it as the date of the next date.
+
+  e.g requesting a report of 1st July 2021, you would get a report of 2nd July 2021
+
 # 0.0.52
 
 - [[BF127]](https://github.com/picortex/bitframe/issues/217) Implemented CreateBusiness Dialog

@@ -8,7 +8,7 @@ import kotlin.js.JsExport
 
 @JsExport
 interface BitframeAppScope<A : BitframeApi> {
-    val config: BitframeAppScopeConfig<A>
+    val api: A
     val session: SessionAware
     val signIn: SignInScope
     val panel: PanelScope

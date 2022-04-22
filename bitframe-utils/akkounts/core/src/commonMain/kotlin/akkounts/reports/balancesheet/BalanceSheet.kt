@@ -7,10 +7,10 @@ import akkounts.reports.utils.CategoryEntry
 import akkounts.provider.Vendor
 import akkounts.provider.Owner
 import akkounts.reports.FinancialReport
-import akkounts.reports.FinancialReportHeader
+import akkounts.reports.utils.FinancialReportHeader
+import datetime.Date
 import kash.Currency
 import kash.Money
-import kotlinx.datetime.LocalDate
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -18,17 +18,9 @@ import kotlin.js.JsExport
 @Serializable
 data class BalanceSheet(
     override val uid: String,
-    override val header: Header,
+    override val header: FinancialReportHeader.Snapshot,
     override val body: Body,
 ) : FinancialReport {
-
-    @Serializable
-    data class Header(
-        override val vendor: Vendor,
-        override val owner: Owner,
-        override val currency: Currency,
-        val endOf: LocalDate
-    ) : FinancialReportHeader
 
     @Serializable
     data class Body(

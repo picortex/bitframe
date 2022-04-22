@@ -1,9 +1,9 @@
 package bitframe.client.signin
 
 import bitframe.client.UIScopeConfig
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
+import bitframe.core.signin.SignInRawParams
 import presenters.cases.Feedback.*
-import cache.Cache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
@@ -14,12 +14,11 @@ import viewmodel.ViewModel
 import bitframe.client.signin.SignInState as State
 
 class SignInViewModel(
-    config: UIScopeConfig<SignInService>
-) : ViewModel<SignInIntent, State>(State.Form(SignInFormFields(), null), config.viewModel) {
+    private val config: UIScopeConfig<SignInService>
+) : ViewModel<SignInIntent, State>(State.Form(SignInForm { onSubmit { } }), config.viewModel) {
 
-    private val service: SignInService = config.service
-    private val cache: Cache = config.service.config.cache
-    private val recoveryTime = config.viewModel.recoveryTime
+    private val service get() = config.service
+    private val recoveryTime get() = config.viewModel.recoveryTime
 
     override fun CoroutineScope.execute(i: SignInIntent): Any = when (i) {
         is SignInIntent.InitForm -> initialize()
@@ -27,12 +26,19 @@ class SignInViewModel(
         is SignInIntent.ResolveConundrum -> resolveConundrum(i)
     }
 
+    internal fun form(email: String? = null, password: String? = null) = SignInForm(email, password) { onSubmit("Sign In") { post(SignInIntent.Submit(it)) } }
+
+    internal fun form(cred: SignInRawParams) = form(
+        email = cred.email ?: cred.identifier,
+        password = cred.password
+    )
+
     private fun CoroutineScope.initialize() = launch {
-        val state = State.Form(SignInFormFields(), null)
+        val state = State.Form(status = None, data = form())
         flow {
             emit(state.copy(status = Loading("Fetching your previous credentials")))
-            val cred = cache.load<SignInCredentials>(SignInService.CREDENTIALS_CACHE_KEY).await()
-            emit(state.copy(fields = SignInFormFields.with(cred)))
+            val cred = service.loadCachedCredentials().await()
+            emit(state.copy(status = None, data = form(cred)))
         }.catch {
             emit(state)
         }.collect {
@@ -57,18 +63,16 @@ class SignInViewModel(
         val state = ui.value as State.Form
         flow {
             emit(state.copy(status = Loading("Signing you in, please wait . . .")))
-            val conundrum = service.signIn(i.credentials).await()
+            val conundrum = service.signIn(i.params).await()
             if (conundrum.spaces.size > 1) {
-                emit(State.Conundrum(conundrum.user, conundrum.spaces, null))
+                emit(State.Conundrum(conundrum.user, conundrum.spaces, None))
             } else {
-                emit(state.copy(status = Loading("Saving your session for next login")))
-                cache.save(SignInService.SESSION_CACHE_KEY, service.currentSession)
                 emit(state.copy(status = Success("Logged in successfully")))
             }
         }.catch {
             emit(state.copy(status = Failure(it)))
             delay(recoveryTime)
-            emit(state.copy(i, null))
+            emit(state.copy(status = None, data = form(i.params)))
         }.collect { ui.value = it }
     }
 }

@@ -2,18 +2,16 @@ package business.financials
 
 import akkounts.reports.balancesheet.BalanceSheet
 import akkounts.reports.incomestatement.IncomeStatement
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
 import expect.expect
 import expect.toBe
 import later.await
-import pimonitor.client.business.financials.BusinessFinancialIntent
+import pimonitor.client.business.financials.BusinessFinancialsIntent
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.businesses.params.CreateMonitoredBusinessResult
 import pimonitor.core.businesses.params.InviteToShareReportsParams
-import pimonitor.core.invites.Invite
 import pimonitor.core.sage.AcceptSageOneInviteParams
-import pimonitor.core.signup.params.IndividualSignUpParams
+import pimonitor.core.signup.params.SignUpIndividualParams
 import utils.PiMonitorTestScope
 import viewmodel.expect
 import kotlin.test.Test
@@ -27,7 +25,7 @@ class SageFinancialDashboardUserJourneyTest {
     @Test
     fun should_load_income_statement_of_a_business_with_sage_integration() = runSequence {
         step("Sign Up as a Monitor") {
-            val monitor = IndividualSignUpParams(
+            val monitor = SignUpIndividualParams(
                 name = "Jane Doe",
                 email = "jane@doe$time.com",
                 password = "jane@doe$time.com"
@@ -36,7 +34,7 @@ class SageFinancialDashboardUserJourneyTest {
         }
 
         step("Sign in as the registered monitor") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = "jane@doe$time.com",
                 password = "jane@doe$time.com"
             )
@@ -70,7 +68,7 @@ class SageFinancialDashboardUserJourneyTest {
 
         step("View Income Statement of the business under test") {
             val businessId = invite!!.invitedBusinessId
-            vm.expect(BusinessFinancialIntent.LoadIncomeStatement(businessId))
+            vm.expect(BusinessFinancialsIntent.LoadIncomeStatement(businessId))
             expect(vm.ui.value.report).toBe<IncomeStatement>()
         }
     }
@@ -78,7 +76,7 @@ class SageFinancialDashboardUserJourneyTest {
     @Test
     fun should_load_balance_sheet_statement_of_a_business_with_sage_integration() = runSequence {
         step("Sign Up as a Monitor") {
-            val monitor = IndividualSignUpParams(
+            val monitor = SignUpIndividualParams(
                 name = "Jane Doe",
                 email = "jane@doe$time.com",
                 password = "jane@doe$time.com"
@@ -87,7 +85,7 @@ class SageFinancialDashboardUserJourneyTest {
         }
 
         step("Sign in as the registered monitor") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = "jane@doe$time.com",
                 password = "jane@doe$time.com"
             )
@@ -120,8 +118,8 @@ class SageFinancialDashboardUserJourneyTest {
         }
 
         step("View Balance Sheet of the business under test") {
-            val businessId = invite!!.invitedBusinessId
-            vm.expect(BusinessFinancialIntent.LoadBalanceSheet(businessId))
+            val businessId = invite.invitedBusinessId
+            vm.expect(BusinessFinancialsIntent.LoadBalanceSheet(businessId))
             expect(vm.ui.value.report).toBe<BalanceSheet>()
         }
     }

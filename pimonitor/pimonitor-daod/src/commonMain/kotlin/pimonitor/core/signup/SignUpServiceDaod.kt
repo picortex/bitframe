@@ -10,12 +10,12 @@ import pimonitor.core.signup.params.*
 
 open class SignUpServiceDaod(
     open val config: ServiceConfigDaod
-) : SignUpService, RegisterUserUseCase by RegisterUserUseCaseImpl(config) {
+) : SignUpServiceCore, RegisterUserUseCase by RegisterUserUseCaseImpl(config) {
     private val scope get() = config.scope
     private val businessDao by lazy { config.daoFactory.get<MonitorBusinessBasicInfo>() }
 
-    override fun signUpAsBusiness(rb: RequestBody.UnAuthorized<BusinessSignUpParams>) = scope.later {
-        val params = rb.data.toBusinessSignUpParams()
+    override fun signUpAsBusiness(rb: RequestBody.UnAuthorized<SignUpBusinessParams>) = scope.later {
+        val params = rb.data.toValidatedSignUpParams()
         val result = register(params.toRegisterUserParams()).await()
         val space = result.spaces.first()
         businessDao.create(MonitorBusinessBasicInfo(name = params.businessName, owningSpaceId = space.uid)).await()
@@ -24,8 +24,8 @@ open class SignUpServiceDaod(
         )
     }
 
-    override fun signUpAsIndividual(rb: RequestBody.UnAuthorized<IndividualSignUpParams>) = scope.later {
-        val params = rb.data.toIndividualSignUpParams()
+    override fun signUpAsIndividual(rb: RequestBody.UnAuthorized<SignUpIndividualParams>) = scope.later {
+        val params = rb.data.toValidatedSignUpParams()
         val result = register(params.toRegisterUserParams()).await()
         val space = result.spaces.first()
         SignUpResult(
@@ -34,7 +34,7 @@ open class SignUpServiceDaod(
     }
 
     fun signUp(rb: RequestBody.UnAuthorized<SignUpRawParams>) = when (val params = rb.data) {
-        is BusinessSignUpRawParams -> signUpAsBusiness(rb.map { params.toBusinessSignUpParams() })
-        is IndividualSignUpRawParams -> signUpAsIndividual(rb.map { params.toIndividualSignUpParams() })
+        is SignUpBusinessRawParams -> signUpAsBusiness(rb.map { params.toValidatedSignUpParams() })
+        is SignUpIndividualRawParams -> signUpAsIndividual(rb.map { params.toValidatedSignUpParams() })
     }
 }

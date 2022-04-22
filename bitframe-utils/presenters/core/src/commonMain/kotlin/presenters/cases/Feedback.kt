@@ -4,65 +4,69 @@
 package presenters.cases
 
 import kotlinx.collections.interoperable.List
+import kotlinx.collections.interoperable.emptyList
 import presenters.actions.SimpleAction
 import presenters.actions.SimpleActionsBuilder
 import kotlin.js.JsExport
+import presenters.cases.Loading as LoadingCase
+import presenters.cases.Success as SuccessCase
+import presenters.cases.Failure as FailureCase
 
 sealed class Feedback : Case {
     abstract override val message: String
 
     class Loading(
         override val message: String
-    ) : Feedback(), Case.Loading {
+    ) : Feedback(), LoadingCase {
         override val loading: Boolean = true
     }
 
     class Failure(
         override val cause: Throwable? = null,
-        override val message: String = cause?.message ?: Case.Failure.DEFAULT_MESSAGE,
-        override val actions: List<SimpleAction> = kotlinx.collections.interoperable.emptyList()
-    ) : Feedback(), Case.Failure {
+        override val message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
+        override val actions: List<SimpleAction>
+    ) : Feedback(), FailureCase {
         constructor(
             cause: Throwable? = null,
-            message: String = cause?.message ?: Case.Failure.DEFAULT_MESSAGE,
-            builder: SimpleActionsBuilder.() -> Unit
-        ) : this(cause, message, SimpleActionsBuilder().apply(builder).actions)
+            message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
+            builder: (SimpleActionsBuilder.() -> Unit)? = null
+        ) : this(cause, message, builder?.let { SimpleActionsBuilder().apply(it).actions } ?: emptyList())
 
         override val failure: Boolean = true
     }
 
     class Success(
-        override val message: String = Case.Success.DEFAULT_MESSAGE,
-        override val actions: List<SimpleAction> = kotlinx.collections.interoperable.emptyList()
-    ) : Feedback(), Case.Success {
+        override val message: String = SuccessCase.DEFAULT_MESSAGE,
+        override val actions: List<SimpleAction>
+    ) : Feedback(), SuccessCase {
         constructor(
-            message: String = Case.Success.DEFAULT_MESSAGE,
-            builder: SimpleActionsBuilder.() -> Unit
-        ) : this(message, SimpleActionsBuilder().apply(builder).actions)
+            message: String = SuccessCase.DEFAULT_MESSAGE,
+            builder: (SimpleActionsBuilder.() -> Unit)? = null
+        ) : this(message, builder?.let { SimpleActionsBuilder().apply(it).actions } ?: emptyList())
 
         override val success = true
     }
 
     object None : Feedback() {
-        override val message by lazy { "No Feedback" }
+        override val message get() = "No Feedback"
         override fun toString(): String = message
     }
 
-    override val isLoading by lazy { this is Loading }
+    override val isLoading get() = this is Loading
 
-    override val asLoading by lazy { this as Loading }
+    override val asLoading get() = this as Loading
 
-    override val isSuccess by lazy { this is Success }
+    override val isSuccess get() = this is Success
 
-    override val asSuccess by lazy { this as Success }
+    override val asSuccess get() = this as Success
 
-    override val isFailure by lazy { this is Failure }
+    override val isFailure get() = this is Failure
 
-    override val asFailure by lazy { this as Failure }
+    override val asFailure get() = this as Failure
 
-    val isNone by lazy { this is None }
+    val isNone get() = this is None
 
-    val asNone by lazy { this as None }
+    val asNone get() = this as None
 
     override fun hashCode(): Int = message.hashCode()
 

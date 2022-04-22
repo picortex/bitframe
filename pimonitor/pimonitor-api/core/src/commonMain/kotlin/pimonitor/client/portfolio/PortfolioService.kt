@@ -7,7 +7,9 @@ import later.await
 import later.later
 import pimonitor.core.portfolio.PortfolioFilter
 import pimonitor.core.portfolio.PortfolioServiceCore
+import kotlin.js.JsExport
 
+@JsExport
 interface PortfolioService : PortfolioServiceCore {
     override val config: ServiceConfig
 

@@ -14,11 +14,17 @@ kotlin {
             useJUnitPlatform()
         }
     }
-    js(IR) { library() }
+    js(IR) {
+        browser()
+        nodejs()
+        binaries.library()
+        //        library()
+    }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(projects.datetimeCore)
                 api(asoft.later.ktx)
                 api(asoft.payments.requests.core)
             }

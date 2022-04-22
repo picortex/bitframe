@@ -7,11 +7,14 @@ import akkounts.reports.services.ReportsService
 import akkounts.reports.balancesheet.BalanceSheet
 import akkounts.reports.cashflow.CashFlow
 import akkounts.reports.incomestatement.IncomeStatement
+import akkounts.reports.utils.FinancialReportHeader
 import akkounts.sage.Credentials
 import akkounts.sage.SageOneZAService
 import akkounts.sage.reports.balancesheet.BalanceSheetParser
 import akkounts.sage.reports.incomestatement.IncomeStatementParser
 import akkounts.utils.toYYYYMMDD
+import datetime.toDate
+import datetime.toSimpleDateTime
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -48,11 +51,11 @@ class SageOneZAReportsService @JvmOverloads constructor(
 
     override fun balanceSheet(at: LocalDate): Later<BalanceSheet> = scope.later {
         val bsp = BalanceSheetParser(trialBalance(from = (at - DatePeriod(days = 30)), to = at).await())
-        val header = BalanceSheet.Header(
+        val header = FinancialReportHeader.Snapshot(
             vendor = SageOneZAService.VENDOR,
             owner = owner,
             currency = Currency.ZAR,
-            endOf = at
+            endOf = at.toDate()
         )
         val data = BalanceSheet.Body(
             assets = bsp.assets(header.currency),
@@ -67,12 +70,12 @@ class SageOneZAReportsService @JvmOverloads constructor(
         val tb = trialBalance(start, end).await()
         println(Mapper.encodeToString(tb))
         val isp = IncomeStatementParser(tb)
-        val header = IncomeStatement.Header(
+        val header = FinancialReportHeader.Durational(
             vendor = SageOneZAService.VENDOR,
             currency = Currency.ZAR,
             owner = owner,
-            start = start,
-            end = end
+            start = start.toDate(),
+            end = end.toDate()
         )
 
         val taxes = isp.taxes("Taxes", header.currency)
@@ -88,10 +91,10 @@ class SageOneZAReportsService @JvmOverloads constructor(
         }.toInteroperableList()
 
         val data = IncomeStatement.Body(
-            income = CategoryEntry("Revenue", header.currency, income),
+            operatingIncome = CategoryEntry("Revenue", header.currency, income),
             otherIncome = CategoryEntry("Other Income", header.currency, emptyList()),
             costOfSales = CategoryEntry("Cost of Sales", header.currency, emptyList()),
-            expenses = isp.expenses("Expenses", header.currency),
+            operatingExpenses = isp.expenses("Expenses", header.currency),
             otherExpenses = CategoryEntry("Other Expenses", header.currency, emptyList()),
             taxes = isp.taxes("Taxes", header.currency)
         )
@@ -120,7 +123,6 @@ class SageOneZAReportsService @JvmOverloads constructor(
             setBody(TextContent(text = Mapper.encodeToString(params), contentType = ContentType.Application.Json))
         }
         val json = """{"response":${response.bodyAsText()}}"""
-        println(json)
         Mapper.decodeFromString(json)["response"] as List<Map<String, *>>
     }
 

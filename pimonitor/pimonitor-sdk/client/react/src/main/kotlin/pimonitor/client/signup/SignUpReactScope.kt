@@ -7,13 +7,12 @@ import bitframe.client.ReactUIScope
 import bitframe.client.UIScopeConfig
 import bitframe.client.signin.SignInService
 import bitframe.core.Session
+import events.EventCallback
 import pimonitor.client.PiMonitorApi
 import pimonitor.core.signup.SignUpResult
-import pimonitor.core.signup.SignUpService
 import useEventHandler
-import useViewModelState
+import useSubscriber
 import viewmodel.asState
-import pimonitor.client.signup.SignUpIntent as Intent
 import pimonitor.client.signup.SignUpState as State
 
 class SignUpReactScope internal constructor(
@@ -22,13 +21,11 @@ class SignUpReactScope internal constructor(
 
     override val useScopeState = { viewModel.asState() }
 
-    private val bus get() = config.service.config.bus
-
-    val useSignUpEvent: (callback: (SignUpResult) -> Unit) -> Unit = {
-        useEventHandler(bus, SignUpEvent.TOPIC, it)
+    val useSignedUpEvent = { callback: EventCallback<SignUpResult> ->
+        useSubscriber(config.service.events.onSignedUp(callback))
     }
 
-    val useSignInEvent: (callback: (Session.SignedIn) -> Unit) -> Unit = {
-        useEventHandler(bus, SignInService.SIGN_IN_EVENT_TOPIC, it)
+    val useSignedInEvent = { callback: EventCallback<Session.SignedIn> ->
+        useSubscriber(config.service.events.onSignedIn(callback))
     }
 }

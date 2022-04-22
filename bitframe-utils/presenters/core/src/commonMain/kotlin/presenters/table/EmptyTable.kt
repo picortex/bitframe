@@ -16,5 +16,5 @@ class EmptyTable<D>(
     columns: List<Column<D>> = emptyList(),
     actions: List<TableAction<D>> = emptyList()
 ) : Table<D>(columns, emptyList(), actions) {
-    override fun toString() = "EmptyTable(cols=${columns.size})"
+    override fun toString() = "EmptyTable(cols=${columns.joinToString(",") { it.name }})"
 }

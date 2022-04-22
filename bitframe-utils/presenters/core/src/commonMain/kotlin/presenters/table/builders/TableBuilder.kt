@@ -34,7 +34,7 @@ class TableBuilder<D> {
         columns += Column.Select(name)
     }
 
-    fun actionsColumn(name: String, builder: RowActionsBuilder<D>.() -> Unit) {
+    fun actions(name: String = "Actions", builder: RowActionsBuilder<D>.() -> Unit) {
         columns += Column.Action(name, RowActionsBuilder<D>().apply(builder).actions)
     }
 

@@ -6,5 +6,5 @@ import kotlin.js.JsExport
 interface NumberInputRawField : InputField {
     val label: String
     val hint: String
-    var value: Double?
+    var value: String?
 }

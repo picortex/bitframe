@@ -12,12 +12,12 @@ open class ValidationException(
 
 open class BlankFieldException(
     val fieldName: String,
-) : ValidationException("Field $fieldName is required and must not be blank", null)
+) : ValidationException("Field `$fieldName` is required and must not be blank", null)
 
 open class MissingFieldException(
     val fieldName: String
-) : ValidationException("Field $fieldName is required but was not found", null)
+) : ValidationException("Field `$fieldName` is required but was not found", null)
 
 open class NotPositiveException(
     val fieldName: String
-) : ValidationException("Field $fieldName must be positive", null)
+) : ValidationException("Field `$fieldName` must be positive", null)

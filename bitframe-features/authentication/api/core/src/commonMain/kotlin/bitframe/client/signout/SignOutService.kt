@@ -1,30 +1,19 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package bitframe.client.signout
 
 import bitframe.client.ServiceConfig
+import bitframe.client.events.SignedOutEvent
+import bitframe.client.logger
 import bitframe.client.signin.SignInService
 import bitframe.core.Session
-import events.Event
 import kotlinx.coroutines.launch
 import later.await
 import kotlin.js.JsExport
-import kotlin.jvm.JvmStatic
 
 class SignOutService(private val config: ServiceConfig) {
-    private val logger
-        get() = config.logger.with(
-            "User" to (config.session.value as? Session.SignedIn)?.user?.name,
-            "Source" to SignOutService::class.simpleName
-        )
-
-    companion object {
-        @JvmStatic
-        val SIGN_OUT_EVENT_TOPIC = "bitframe.authentication.sign.out"
-
-        @JvmStatic
-        fun SignOutEvent(session: Session.SignedIn) = Event(session, SIGN_OUT_EVENT_TOPIC)
-    }
+    private val logger by config.logger(withSessionInfo = true)
 
     fun signOut() {
         logger.info("Signing out . . .")
@@ -44,7 +33,7 @@ class SignOutService(private val config: ServiceConfig) {
             cache.remove(SignInService.CREDENTIALS_CACHE_KEY).await()
 
             val bus = config.bus
-            bus.dispatch(SignOutEvent(session))
+            bus.dispatch(SignedOutEvent(session))
         }
 
         logger.info("Signed out")

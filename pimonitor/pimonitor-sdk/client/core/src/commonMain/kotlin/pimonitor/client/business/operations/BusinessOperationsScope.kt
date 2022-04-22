@@ -1,22 +1,11 @@
-@file:JsExport
-@file:Suppress("NON_EXPORTABLE_TYPE")
-
 package pimonitor.client.business.operations
 
-import bitframe.client.UIScope
+import bitframe.client.MicroScope
 import bitframe.client.UIScopeConfig
-import pimonitor.core.business.utils.info.LoadInfoRawParams
-import pimonitor.core.dashboards.OperationalDifferenceBoard
-import pimonitor.core.invites.InfoResults
-import presenters.cases.State
-import kotlin.js.JsExport
 
-open class BusinessOperationsScope(
-    override val config: UIScopeConfig<BusinessOperationsService>,
-) : UIScope<State<InfoResults<OperationalDifferenceBoard>>> {
-    override val viewModel by lazy { BusinessOperationsViewModel(config) }
-
-    val loadOperationalDashboard = { params: LoadInfoRawParams ->
-        viewModel.post(BusinessOperationsIntent.LoadOperationalDashboard(params))
-    }
+internal fun BusinessOperationsScope(
+    config: UIScopeConfig<BusinessOperationsService>,
+) = MicroScope {
+    viewModel(BusinessOperationsViewModel(config))
+    intents(BusinessOperationsIntents(viewModel))
 }

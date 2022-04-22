@@ -2,22 +2,22 @@ package pimonitor.server
 
 import bitframe.core.RequestBody
 import later.await
-import pimonitor.core.signup.params.BusinessSignUpParams
-import pimonitor.core.signup.params.IndividualSignUpParams
+import pimonitor.core.signup.params.SignUpBusinessParams
+import pimonitor.core.signup.params.SignUpIndividualParams
 
 private val TEST_PARAMS = listOf(
-    IndividualSignUpParams(
+    SignUpIndividualParams(
         name = "Steven Sajja",
         email = "ssajja@gmail.com",
         password = "ssajja@gmail.com"
     ),
-    BusinessSignUpParams(
+    SignUpBusinessParams(
         businessName = "PiCortex LLC",
         individualName = "Mohamed Majapa",
         individualEmail = "mmajapa@gmail.com",
         password = "mmajapa@gmail.com"
     ),
-    IndividualSignUpParams(
+    SignUpIndividualParams(
         name = "George Sechu",
         email = "jojipoji@gmail.com",
         password = "jojipoji@gmail.com"

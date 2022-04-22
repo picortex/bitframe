@@ -5,10 +5,8 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import later.await
 import pimonitor.client.PiMonitorApi
-import pimonitor.client.PiMonitorApiMock
 import pimonitor.client.PiMonitorApiTest
-import pimonitor.core.signup.params.BusinessSignUpParams
-import pimonitor.core.signup.params.IndividualSignUpRawParams
+import pimonitor.core.signup.params.SignUpIndividualRawParams
 import kotlin.test.Test
 
 class AuthFlowInteroperabilityTest {
@@ -21,7 +19,7 @@ class AuthFlowInteroperabilityTest {
             name = "John Doe $time"
             email = "john@doe$time.com"
             password = "john@doe1.com"
-        }.unsafeCast<IndividualSignUpRawParams>()
+        }.unsafeCast<SignUpIndividualRawParams>()
         val res = service.signUp.signUp(params).await()
         expect(res.user.name).toBe("John Doe $time")
     }
@@ -32,9 +30,9 @@ class AuthFlowInteroperabilityTest {
             val params = jso<dynamic> {
                 name = "John Doe 1"
                 email = "john@doe1.com"
-            }.unsafeCast<IndividualSignUpRawParams>()
+            }.unsafeCast<SignUpIndividualRawParams>()
             service.signUp.signUp(params).await()
         }
-        expect(err.message).toBe("Field password is required but was not found")
+        expect(err.message).toBe("Field `password` is required but was not found")
     }
 }

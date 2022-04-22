@@ -31,7 +31,7 @@ data class DropDownInputField(
     val itemLabels get() = options.map { it.label }.toInteroperableList()
     val itemValues get() = options.map { it.value }.toInteroperableList()
 
-    val optionsWithFieldLabel get() = (listOf(Option(label, "")) + options).toInteroperableList()
+    val optionsWithFieldLabel get() = (listOf(Option("Select $label", "")) + options).toInteroperableList()
 
     val selected get() = options.firstOrNull { it.selected }
 

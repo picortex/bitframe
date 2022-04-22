@@ -1,18 +1,21 @@
 package businesses
 
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
 import expect.expect
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import later.await
+import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.signup.params.IndividualSignUpParams
-import presenters.cases.Feedback
+import pimonitor.core.signup.params.SignUpIndividualParams
+import presenters.cases.CentralState
+import presenters.cases.Emphasis.Companion.Failure
+import presenters.cases.Emphasis.Companion.Loading
 import utils.PiMonitorTestScope
+import viewmodel.ViewModel
 import viewmodel.expect
 import kotlin.test.Test
 import pimonitor.client.businesses.BusinessesIntent as Intent
-import pimonitor.client.businesses.BusinessesState as State
 
 class LoadBusinessesJourneyTest {
 
@@ -21,19 +24,12 @@ class LoadBusinessesJourneyTest {
     private val vm = scope.businesses.viewModel
 
     @Test
-    fun should_start_in_a_loading_state() {
-        val state = expect(vm).toBeIn<State>()
-        expect(state.status).toBe(Feedback.Loading("Loading your businesses, please wait . . ."))
-    }
-
-    @Test
     fun should_fail_to_load_businesses_when_there_is_no_signed_in_user() = runTest {
         api.session.signOut()
-        val state = State()
+        val state = vm.ui.value
         vm.expect(Intent.LoadBusinesses).toGoThrough(
-            state.copy(status = Feedback.Loading(message = "Loading your businesses, please wait . . .")),
-            state.copy(status = Feedback.Failure(message = "You must be signed in to query businesses")),
-            state.copy(status = Feedback.None)
+            state.copy(emphasis = Loading(message = "Loading your businesses, please wait . . .")),
+            state.copy(emphasis = Failure(message = "You must be signed in to query businesses")),
         )
     }
 
@@ -41,7 +37,7 @@ class LoadBusinessesJourneyTest {
     fun should_load_business_after_load_businesses_is_called() = runTest {
         val time = Clock.System.now()
         // Step 1: Register as an individual monitor
-        val params1 = IndividualSignUpParams(
+        val params1 = SignUpIndividualParams(
             name = "John $time Doe",
             email = "john@doe$time.com",
             password = "johndoe"
@@ -50,7 +46,7 @@ class LoadBusinessesJourneyTest {
         expect(res1.user.name).toBe("John $time Doe")
 
         // Step 2: Sign in as the registered monitor
-        val params2 = SignInCredentials(
+        val params2 = SignInParams(
             identifier = "john@doe$time.com",
             password = "johndoe"
         )

@@ -1,9 +1,9 @@
 package akkounts
 
-fun String.containsAny(strings: Collection<String>): Boolean {
+fun String.containsAny(strings: Collection<String>, ignoreCase: Boolean = true): Boolean {
     var contains = false
     for (s in strings) {
-        if (contains(s, ignoreCase = true)) {
+        if (contains(s, ignoreCase)) {
             contains = true
             break
         }

@@ -1,12 +1,11 @@
 package bitframe.server.signin
 
-import bitframe.core.signin.SignInDaodUseCase
-import bitframe.core.signin.SignInService as CoreSignInService
-import bitframe.core.signin.SignInUseCase
+import bitframe.core.signin.SignInServiceCore
+import bitframe.core.signin.SignInServiceDaod
 import bitframe.server.ServiceConfig
 
 class SignInService(
     val config: ServiceConfig
-) : CoreSignInService(), SignInUseCase by SignInDaodUseCase(config) {
+) : SignInServiceCore by SignInServiceDaod(config) {
     val parser by lazy { SignInParser(config) }
 }

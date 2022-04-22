@@ -10,6 +10,8 @@ import bitframe.core.RequestBody
 import later.Later
 import later.await
 import later.later
+import pimonitor.core.business.info.params.BusinessInfoRawParams
+import pimonitor.core.business.info.params.toValidatedParams
 import pimonitor.core.businesses.BusinessFilter
 import pimonitor.core.businesses.BusinessesServiceCore
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
@@ -44,11 +46,12 @@ abstract class BusinessesService(
     }
 
     fun delete(vararg monitorIds: String) = config.scope.later {
+        logger.info("Deleting ${monitorIds.size} business(es)")
         val rb = RequestBody.Authorized(
             session = config.getSignedInSessionTo("delete business(es)"),
             data = monitorIds
         )
-        delete(rb).await()
+        delete(rb).await().also { logger.info("Success") }
     }
 
     fun load(businessId: String): Later<MonitoredBusinessBasicInfo> = config.scope.later {
@@ -58,5 +61,14 @@ abstract class BusinessesService(
             data = businessId
         )
         load(rb).await().also { logger.info("Loaded business: $it") }
+    }
+
+    fun update(params: BusinessInfoRawParams): Later<MonitoredBusinessBasicInfo> = config.scope.later {
+        logger.info("Updating ${params.name}")
+        val rb = RequestBody.Authorized(
+            session = config.getSignedInSessionTo("update a business"),
+            data = params.toValidatedParams()
+        )
+        update(rb).await().also { logger.info("Success") }
     }
 }

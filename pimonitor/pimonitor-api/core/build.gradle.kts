@@ -24,6 +24,7 @@ kotlin {
             dependencies {
                 implementation(asoft.expect.coroutines)
                 implementation(projects.pimonitorApiPublicTest)
+                implementation(asoft.identifier.generators)
             }
         }
     }

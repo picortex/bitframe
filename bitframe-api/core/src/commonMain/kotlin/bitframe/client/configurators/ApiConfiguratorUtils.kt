@@ -10,18 +10,11 @@ fun ApiConfigurator.toApiMode(): ApiMode {
         if (l.console == true) add(ConsoleAppender())
     }
     val logger = Logger(*appenders.toTypedArray())
+    val ns = namespace ?: ApiConfigurator.DEFAULT_NAMESPACE
     return if (appId?.isNotEmpty() == true && url?.isNotEmpty() == true) {
-        ApiMode.Live(
-            namespace = namespace ?: ApiConfigurator.DEFAULT_NAMESPACE,
-            appId = appId!!,
-            url = url!!,
-            logger = logger
-        )
+        ApiMode.Live(namespace = ns, appId = appId!!, url = url!!, logger = logger)
     } else {
-        ApiMode.Mock(
-            namespace = namespace ?: ApiConfigurator.DEFAULT_NAMESPACE,
-            logger = logger
-        )
+        ApiMode.Mock(namespace = ns, logger = logger)
     }
 }
 
@@ -30,5 +23,6 @@ fun ApiConfigurator.toValidApiConfigurator(): ApiConfiguratorImpl {
     conf.appId = appId
     conf.url = url
     conf.logging = logging ?: LoggingConfiguratorImpl()
+    conf.namespace = namespace
     return conf
 }

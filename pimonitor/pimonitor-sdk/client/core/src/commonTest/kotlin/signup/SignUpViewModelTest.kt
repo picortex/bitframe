@@ -7,8 +7,8 @@ import kotlinx.datetime.Clock
 import pimonitor.client.signup.fields.BusinessFormFields
 import pimonitor.client.signup.fields.IndividualFormFields
 import pimonitor.client.signup.fields.copy
-import pimonitor.core.signup.params.BusinessSignUpParams
-import pimonitor.core.signup.params.IndividualSignUpParams
+import pimonitor.core.signup.params.SignUpBusinessParams
+import pimonitor.core.signup.params.SignUpIndividualParams
 import presenters.cases.Feedback
 import utils.PiMonitorTestScope
 import viewmodel.expect
@@ -25,7 +25,7 @@ class SignUpViewModelTest {
     @Ignore
     fun should_register_successfully() = runTest {
         val time = Clock.System.now()
-        val params = IndividualSignUpParams(
+        val params = SignUpIndividualParams(
             name = "John $time Doe",
             email = "john@doe$time.com",
             password = "john@doe.com"
@@ -52,7 +52,7 @@ class SignUpViewModelTest {
     @Test
     fun should_be_able_to_sign_up_with_with_an_individual_form() = runTest {
         val time = Clock.System.now()
-        val params = IndividualSignUpParams(
+        val params = SignUpIndividualParams(
             name = "John $time Doe",
             email = "john@email$time.com",
             password = "john@email.com"
@@ -66,7 +66,7 @@ class SignUpViewModelTest {
 
     @Test
     fun should_fail_to_submit_with_invalid_email() = runTest {
-        val params = IndividualSignUpParams(
+        val params = SignUpIndividualParams(
             name = "John Doe",
             email = "johnemail.com",
             password = "john@email.com"
@@ -83,7 +83,7 @@ class SignUpViewModelTest {
 
     @Test
     fun should_fail_to_submit_with_empty_name() = runTest {
-        val params = IndividualSignUpParams(
+        val params = SignUpIndividualParams(
             name = "",
             email = "john@email.com",
             password = "john@email.com"
@@ -94,14 +94,14 @@ class SignUpViewModelTest {
             val s = it as? State.IndividualForm
             s?.status as? Feedback.Failure
         } ?: throw AssertionError("Expected viewmodel to have error but did not")
-        expect(status.message).toBe("Failed to create your account: Field name is required and must not be blank")
-        expect(status.cause?.message).toBe("Field name is required and must not be blank")
+        expect(status.message).toBe("Failed to create your account: Field `name` is required and must not be blank")
+        expect(status.cause?.message).toBe("Field `name` is required and must not be blank")
     }
 
     @Test
     fun should_be_able_to_submit_a_business_form() = runTest {
         val time = Clock.System.now()
-        val params = BusinessSignUpParams(
+        val params = SignUpBusinessParams(
             businessName = "John Doe $time Inc",
             individualName = "John $time Doe",
             individualEmail = "john@doe$time.com",

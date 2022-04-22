@@ -62,6 +62,9 @@ open class Table<D>(
     @JsName("unSelectRowNumber")
     fun unSelect(rowNumber: Int) = unSelect(rows[rowNumber - 1])
 
+    val isEmptyTable by lazy { this is EmptyTable }
+    val asEmpty by lazy { this as EmptyTable }
+
     override val columns get() = live.value.columns
     override val rows get() = live.value.rows
     override val isEmpty get() = rows.isEmpty()

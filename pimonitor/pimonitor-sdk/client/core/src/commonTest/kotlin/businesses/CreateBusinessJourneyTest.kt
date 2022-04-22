@@ -1,20 +1,20 @@
 package businesses
 
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
 import expect.expect
 import later.await
-import pimonitor.client.businesses.dialogs.InviteToShareReportsDialog
+import pimonitor.client.invites.fields.InviteToShareFields
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
-import pimonitor.core.signup.params.BusinessSignUpParams
-import pimonitor.core.signup.params.IndividualSignUpParams
-import presenters.cases.Feedback
+import pimonitor.core.signup.params.SignUpBusinessParams
+import pimonitor.core.signup.params.SignUpIndividualParams
+import presenters.cases.Emphasis.Companion.Loading
+import presenters.cases.Emphasis.Companion.Success
 import utils.PiMonitorTestScope
 import utils.toContain
 import viewmodel.expect
 import kotlin.test.Test
 import pimonitor.client.businesses.BusinessesIntent as Intent
-import pimonitor.client.businesses.BusinessesState as State
 
 class CreateBusinessJourneyTest {
 
@@ -25,7 +25,7 @@ class CreateBusinessJourneyTest {
     @Test
     fun should_create_a_business_without_sending_an_invite_easily() = runSequence {
         step("Sign Up as a Monitor") {
-            val monitor = IndividualSignUpParams(
+            val monitor = SignUpIndividualParams(
                 name = "Jane $time Doe",
                 email = "jane@doe$time.com",
                 password = "jane"
@@ -34,7 +34,7 @@ class CreateBusinessJourneyTest {
         }
 
         step("Sign in as the registered monitor") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = "jane@doe$time.com",
                 password = "jane"
             )
@@ -48,10 +48,10 @@ class CreateBusinessJourneyTest {
                 contactEmail = "mmajapa@gmail$time.com",
                 sendInvite = false
             )
-            val state = State()
+            val state = vm.ui.value
             vm.expect(Intent.SendCreateBusinessForm(params)).toContain(
-                state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
-                state.copy(status = Feedback.Success("${params.businessName} has successfully been added. Loading all your businesses, please wait . . .")),
+                state.copy(emphasis = Loading("Adding ${params.businessName}, please wait . . .")),
+                state.copy(emphasis = Success("${params.businessName} has successfully been added. Loading all your businesses, please wait . . .")),
             )
             expect(vm.ui.value.table.rows).toBeOfSize(1)
         }
@@ -60,7 +60,7 @@ class CreateBusinessJourneyTest {
     @Test
     fun an_individual_monitor_should_create_a_business_then_send_an_invite_afterwards() = runSequence {
         step("Sign Up as a Monitor") {
-            val monitor = IndividualSignUpParams(
+            val monitor = SignUpIndividualParams(
                 name = "Jane Doe",
                 email = "jane@doe$time.com",
                 password = "jane"
@@ -69,7 +69,7 @@ class CreateBusinessJourneyTest {
         }
 
         step("Sign in as the registered monitor") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = "jane@doe$time.com",
                 password = "jane"
             )
@@ -83,24 +83,22 @@ class CreateBusinessJourneyTest {
                 contactEmail = "mmajapa@gmail$time.com",
                 sendInvite = true
             )
-            val state = State()
+            val state = vm.ui.value
             vm.expect(Intent.SendCreateBusinessForm(params)).toContain(
-                state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
-                state.copy(status = Feedback.Success("${params.businessName} has successfully been added. Preparing invite form, please wait . . .")),
+                state.copy(emphasis = Loading("Adding ${params.businessName}, please wait . . .")),
+                state.copy(emphasis = Success("${params.businessName} has successfully been added. Preparing invite form, please wait . . .")),
             )
-            val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
-            expect(dialog.fields.message.value).toBe(
+            val fields = vm.ui.value.dialog?.asForm?.fields as InviteToShareFields
+            expect(fields.message.value).toBe(
                 "Jane Doe would like to invite you to share your operational & financial reports with them through PiMonitor"
             )
-            expect(vm.ui.value.focus).toBeNonNull()
-            expect(vm.ui.value.focus?.name).toBe("PiCortex LLC")
         }
     }
 
     @Test
     fun a_corporate_monitor_should_create_a_business_then_send_an_invite_afterwards() = runSequence {
         step("Sign Up as a Monitor") {
-            val monitor = BusinessSignUpParams(
+            val monitor = SignUpBusinessParams(
                 businessName = "Jane Doe Inc",
                 individualName = "Jane Doe",
                 individualEmail = "jane@doe$time.com",
@@ -110,7 +108,7 @@ class CreateBusinessJourneyTest {
         }
 
         step("Sign in as the registered monitor") {
-            val cred = SignInCredentials(
+            val cred = SignInParams(
                 identifier = "jane@doe$time.com",
                 password = "jane"
             )
@@ -124,13 +122,13 @@ class CreateBusinessJourneyTest {
                 contactEmail = "mmajapa@gmail$time.com",
                 sendInvite = true
             )
-            val state = State()
+            val state = vm.ui.value
             vm.expect(Intent.SendCreateBusinessForm(params)).toContain(
-                state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
-                state.copy(status = Feedback.Success("${params.businessName} has successfully been added. Preparing invite form, please wait . . .")),
+                state.copy(emphasis = Loading("Adding ${params.businessName}, please wait . . .")),
+                state.copy(emphasis = Success("${params.businessName} has successfully been added. Preparing invite form, please wait . . .")),
             )
-            val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
-            expect(dialog.fields.message.value).toBe(
+            val fields = vm.ui.value.dialog?.asForm?.fields as InviteToShareFields
+            expect(fields.message.value).toBe(
                 "Jane Doe Inc would like to invite you to share your operational & financial reports with them through PiMonitor"
             )
         }

@@ -7,11 +7,10 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import pimonitor.client.businesses.BusinessesService
 import pimonitor.core.invites.InfoResults
 import presenters.cases.Feedback
 import viewmodel.ViewModel
-import pimonitor.client.business.financials.BusinessFinancialIntent as Intent
+import pimonitor.client.business.financials.BusinessFinancialsIntent as Intent
 import pimonitor.client.business.financials.BusinessFinancialsState as State
 
 class BusinessFinancialsViewModel(
@@ -33,9 +32,10 @@ class BusinessFinancialsViewModel(
             val results = service.availableReports(i.businessId).await()
             val reports = results.reports
             if (reports.isEmpty()) {
-                emit(state.copy(status = Feedback.None, availableReports = InfoResults.NotShared("Ooops, looks like ${results.business.name} hasn't shared any reports with you just yet")))
+                val info = InfoResults.NotShared(results.business, "Ooops, looks like ${results.business.name} hasn't shared any reports with you just yet")
+                emit(state.copy(status = Feedback.None, availableReports = info))
             } else {
-                emit(state.copy(status = Feedback.None, availableReports = InfoResults.Shared(reports)))
+                emit(state.copy(status = Feedback.None, availableReports = InfoResults.Shared(results.business, reports)))
             }
         }.catch {
             emit(state.copy(status = Feedback.Failure(it) {

@@ -1,6 +1,6 @@
 package integrations.sage
 
-import bitframe.core.signin.SignInCredentials
+import bitframe.core.signin.SignInParams
 import expect.expect
 import later.await
 import pimonitor.client.PiMonitorApiTest
@@ -10,7 +10,7 @@ import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.businesses.params.InviteToShareReportsParams
 import pimonitor.core.invites.Invite
 import pimonitor.core.sage.AcceptSageOneInviteParams
-import pimonitor.core.signup.params.BusinessSignUpParams
+import pimonitor.core.signup.params.SignUpBusinessParams
 import kotlin.test.Test
 
 class SageDashboardIntegrationTest {
@@ -19,7 +19,7 @@ class SageDashboardIntegrationTest {
     @Test
     fun should_capture_sage_credentials_after_sent_invite_has_been_accepted() = runSequence {
         step("If not registered, signup as business or individual") {
-            val params = BusinessSignUpParams(
+            val params = SignUpBusinessParams(
                 businessName = "PiCortex Int Ltd",
                 individualName = "Business Owner $time",
                 individualEmail = "business.owner@business$time.com",
@@ -30,7 +30,7 @@ class SageDashboardIntegrationTest {
         }
 
         step("Sign in with your registered account") {
-            val params = SignInCredentials(
+            val params = SignInParams(
                 identifier = "business.owner@business$time.com",
                 password = "business.owner@business$time.com",
             )
@@ -73,7 +73,6 @@ class SageDashboardIntegrationTest {
             expect(businesses).toBeOfSize(1)
             val business = businesses.first()
             expect(business.financialBoard).toBe(DASHBOARD_FINANCIAL.SAGE_ONE)
-            println(business.revenue)
             expect(business.revenue).toBeNonNull()
             expect(business.expenses).toBeNonNull()
             expect(business.grossProfit).toBeNonNull()
