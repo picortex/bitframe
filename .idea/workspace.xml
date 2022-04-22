@@ -5,22 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/CRUD.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Creator.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/CreatorUpdater.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Deleter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Lister.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Reader.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Updater.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-actor/core/src/commonMain/kotlin/bitframe/core/Identified.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-actor/core/src/commonMain/kotlin/bitframe/core/Identified.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-actor/core/src/commonMain/kotlin/bitframe/core/IdentifiedRaw.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-actor/core/src/commonMain/kotlin/bitframe/core/IdentifiedRaw.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonTest/kotlin/password/PasswordViewModelWithSignedInSessionTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonTest/kotlin/password/PasswordViewModelWithSignedInSessionTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jsTest/kotlin/AuthFlowInteroperabilityTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jsTest/kotlin/AuthFlowInteroperabilityTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/InfoResultSerializationTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/InfoResultSerializationTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardParserTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardParserTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexReportsResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexReportsResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/business/operational/PiCortexOperationalDashboardUserJourneyTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/business/operational/PiCortexOperationalDashboardUserJourneyTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
