@@ -10,6 +10,7 @@ import kotlin.js.JsExport
 sealed interface Dialog<out F, in P> {
     val heading: String
     val details: String
+    val cancel: SimpleAction
     val actions: List<SimpleAction>
 
     val isForm get() = this is FormDialog

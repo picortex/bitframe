@@ -6,7 +6,7 @@ import response.Status
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.mapper.Mapper
 
-fun Json.encodeFailureToString(failure: Failure): String {
+internal fun Json.encodeFailureToString(failure: Failure): String {
     val statusJson = encodeToString(Status.serializer(), failure.status)
     val errorJson = encodeToString(Error.serializer(), failure.error)
     val mapper = Mapper(this)

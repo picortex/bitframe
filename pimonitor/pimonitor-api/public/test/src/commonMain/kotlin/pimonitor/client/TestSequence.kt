@@ -20,11 +20,18 @@ class TestSequence(
         console.info("SKIPPING STEP[$steps]: $name")
     }
 
+    fun step(name: String) {
+        steps++
+        console.warn("SKIPPING STEP[$steps]: $name")
+    }
+
     @OptIn(ExperimentalCoroutinesApi::class)
     inline fun <O : Any> step(name: String, block: TestScope.() -> O): O = try {
         steps++
         console.info("RUNNING STEP[$steps]: $name")
-        scope.block()
+        val res = scope.block()
+        console.log("FINISHED STEP[$steps]: $name")
+        res
     } catch (err: Throwable) {
         val message = buildString {
             appendLine("[SEQUENCE FAILURE]")
@@ -32,8 +39,6 @@ class TestSequence(
             appendLine("CAUSE : ${err.message}")
         }
         throw Throwable(message, err)
-    } finally {
-        console.log("FINISHED STEP[$steps]: $name")
     }
 }
 

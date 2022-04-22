@@ -9,33 +9,26 @@ import datetime.Date
 import kash.Money
 import kotlinx.collections.interoperable.List
 import kotlinx.serialization.Serializable
-import pimonitor.core.utils.disbursements.Disbursement
-import pimonitor.core.business.utils.money.sum
-import presenters.numerics.Percentage
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.Disbursable
 import kotlin.js.JsExport
 
 @Serializable
 data class Investment(
     override val uid: String = unset,
-    val businessId: String,
-    val owningSpaceId: String,
-    val name: String,
+    override val businessId: String,
+    override val owningSpaceId: String,
+    override val name: String,
     val type: String,
     val source: String,
-    val amount: Money,
+    override val amount: Money,
     val date: Date,
     val details: String,
     val history: List<InvestmentHistory>,
-    val disbursements: List<Disbursement>,
+    override val disbursements: List<Disbursement>,
     override val deleted: Boolean = false
-) : Savable {
+) : Disbursable() {
     override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
-
+    override fun copy(disbursements: List<Disbursement>) = copy(uid = uid, disbursements = disbursements)
     val createdBy by lazy { history.filterIsInstance<InvestmentHistory.Created>().first().by }
-
-    val totalDisbursed by lazy { disbursements.map { it.amount }.sum(amount.currency) }
-
-    val disbursementProgressInPercentage by lazy {
-        Percentage.fromRatio(totalDisbursed.amount / amount.amount)
-    }
 }

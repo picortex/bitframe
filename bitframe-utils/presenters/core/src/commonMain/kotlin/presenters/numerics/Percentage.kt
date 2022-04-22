@@ -25,7 +25,7 @@ data class Percentage(
         val ONE_HUNDRED = Percentage(100.0)
 
         @JvmStatic
-        fun fromRatio(ratio: Number) = Percentage(ratio.toDouble() * 100)
+        fun fromRatio(ratio: Double) = Percentage(ratio * 100)
     }
 
     val asInt by lazy { asDouble.roundToInt() }

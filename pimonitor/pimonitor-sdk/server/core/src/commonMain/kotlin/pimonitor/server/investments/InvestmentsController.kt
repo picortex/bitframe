@@ -7,14 +7,19 @@ import bitframe.server.http.compulsoryBody
 import bitframe.server.http.toHttpResponse
 import kotlinx.serialization.decodeFromString
 import later.await
+import pimonitor.core.investments.Investment
+import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.filters.InvestmentFilter
 import pimonitor.core.investments.InvestmentsServiceDaod
 import pimonitor.core.investments.params.InvestmentDisbursementParams
 import pimonitor.core.investments.params.InvestmentParams
+import pimonitor.server.disbursables.DisbursablesController
 import response.response
 
 class InvestmentsController(
-    internal val service: InvestmentsServiceDaod
+    override val service: InvestmentsServiceDaod
+) : DisbursablesController<Investment, InvestmentSummary>(
+    service, Investment.serializer(), InvestmentSummary.serializer()
 ) {
     private val json get() = service.config.json
     suspend fun createInvestment(req: HttpRequest) = response {
@@ -25,25 +30,5 @@ class InvestmentsController(
     suspend fun updateInvestment(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.Authorized<Identified<InvestmentParams>>>(req.compulsoryBody())
         resolve(service.update(rb).await())
-    }.toHttpResponse()
-
-    suspend fun all(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.Authorized<InvestmentFilter>>(req.compulsoryBody())
-        resolve(service.all(rb).await())
-    }.toHttpResponse()
-
-    suspend fun createDisbursement(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.Authorized<InvestmentDisbursementParams>>(req.compulsoryBody())
-        resolve(service.disburse(rb).await())
-    }.toHttpResponse()
-
-    suspend fun updateDisbursement(req: HttpRequest) = response {
-        resolve(2)
-        TODO()
-    }.toHttpResponse()
-
-    suspend fun deleteInvestment(req: HttpRequest) = response {
-        val rb = json.decodeFromString<RequestBody.Authorized<Array<String>>>(req.compulsoryBody())
-        resolve(service.delete(rb).await())
     }.toHttpResponse()
 }

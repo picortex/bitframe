@@ -18,7 +18,13 @@ open class ConfirmDialog(
 ) : Dialog<Nothing, Nothing> {
     override val isForm = false
     override val isConfirm = true
-    
+
+    override val cancel by lazy {
+        actions.firstOrNull {
+            it.name.contentEquals("cancel", ignoreCase = true)
+        } ?: error("No cancel action has been registered to FormDialog(heading=$heading)")
+    }
+
     override val asConfirm get() = this
 
     @JsName("_ignore_fromBuildingBlock")

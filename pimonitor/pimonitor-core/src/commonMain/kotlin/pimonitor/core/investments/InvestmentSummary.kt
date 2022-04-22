@@ -3,30 +3,32 @@
 
 package pimonitor.core.investments
 
-import akkounts.utils.unset
 import bitframe.core.UserRef
 import datetime.Date
 import kash.Money
 import kotlinx.collections.interoperable.List
 import kotlinx.serialization.Serializable
-import pimonitor.core.utils.disbursements.Disbursement
-import presenters.numerics.Percentage
+import pimonitor.core.utils.disbursables.DisbursableSummary
+import pimonitor.core.utils.disbursables.disbursements.Disbursement
 import kotlin.js.JsExport
 
 @Serializable
 data class InvestmentSummary(
-    val uid: String = unset,
-    val businessId: String,
-    val businessName: String,
-    val name: String,
+    override val uid: String,
+    override val owningSpaceId: String,
+    override val businessId: String,
+    override val businessName: String,
+    override val name: String,
     val type: String,
     val source: String,
-    val amount: Money,
+    override val amount: Money,
     val date: Date,
     val details: String,
     val history: List<InvestmentHistory>,
-    val disbursements: List<Disbursement>,
+    override val disbursements: List<Disbursement>,
     val createdBy: UserRef,
-    val totalDisbursed: Money,
-    val disbursementProgressInPercentage: Percentage
-)
+    override val deleted: Boolean
+) : DisbursableSummary() {
+    override fun copy(disbursements: List<Disbursement>) = copy(uid = uid, disbursements = disbursements)
+    override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
+}

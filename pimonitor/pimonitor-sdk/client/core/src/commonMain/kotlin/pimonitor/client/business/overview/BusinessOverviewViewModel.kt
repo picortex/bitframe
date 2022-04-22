@@ -7,17 +7,18 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.PiMonitorApi
+import pimonitor.client.utils.live.update
 import pimonitor.core.business.overview.MonitoredBusinessOverview
 import pimonitor.core.business.utils.info.toValidatedParams
-import presenters.cases.State
+import presenters.cases.MissionState
 import viewmodel.ViewModel
 
 class BusinessOverviewViewModel(
     private val config: UIScopeConfig<PiMonitorApi>
-) : ViewModel<BusinessOverviewIntent, State<MonitoredBusinessOverview>>(DEFAULT_LOADING_STATE) {
+) : ViewModel<BusinessOverviewIntent, MissionState<MonitoredBusinessOverview>>(DEFAULT_LOADING_STATE) {
 
     companion object {
-        val DEFAULT_LOADING_STATE = State.Loading("Loading overview for this business, please wait. . .")
+        val DEFAULT_LOADING_STATE = MissionState.Loading("Loading overview for this business, please wait. . .")
     }
 
     private val api get() = config.service
@@ -29,13 +30,13 @@ class BusinessOverviewViewModel(
         flow {
             emit(DEFAULT_LOADING_STATE)
             val overview = api.businessOverview.load(i.params.toValidatedParams()).await()
-            emit(State.Content(overview))
+            emit(MissionState.Success(overview))
         }.catch {
-            emit(State.Failure(it) {
+            emit(MissionState.Failure(it) {
                 onRetry { post(i) }
             })
         }.collect {
-            ui.value = it
+            ui.update { it }
         }
     }
 }

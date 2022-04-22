@@ -35,13 +35,19 @@ class BusinessFinancialsServiceDaod(
         val business = load(rb)
         when (business.financialBoard) {
             DASHBOARD_FINANCIAL.NONE -> {
-                InfoResults.NotShared("${business.name} has not shared their reports with any accounting system") as InfoResults<BalanceSheet>
+                InfoResults.NotShared(
+                    business = business,
+                    message = "${business.name} has not shared their reports with any accounting system"
+                ) as InfoResults<BalanceSheet>
             }
             DASHBOARD_FINANCIAL.SAGE_ONE -> {
                 val cred = sageCredentialsDao.all(condition = SageApiCredentials::businessId isEqualTo business.uid).await().first()
                 val company = cred.toCompany(business)
                 val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
-                InfoResults.Shared(sage.offeredTo(company).reports.balanceSheet(at = today).await())
+                InfoResults.Shared(
+                    business = business,
+                    data = sage.offeredTo(company).reports.balanceSheet(at = today).await()
+                )
             }
             else -> error("Business is connected to an unknown accounting provider")
         }
@@ -65,7 +71,10 @@ class BusinessFinancialsServiceDaod(
 
         when (business.financialBoard) {
             DASHBOARD_FINANCIAL.NONE -> {
-                InfoResults.NotShared("${business.name} has not shared their reports with any accounting system") as InfoResults<IncomeStatement>
+                InfoResults.NotShared(
+                    business = business,
+                    message = "${business.name} has not shared their reports with any accounting system"
+                ) as InfoResults<IncomeStatement>
             }
             DASHBOARD_FINANCIAL.SAGE_ONE -> {
                 val cred = sageCredentialsDao.all(
@@ -74,7 +83,10 @@ class BusinessFinancialsServiceDaod(
                 val company = cred.toCompany(business)
                 val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
                 val lastMonth = today - DatePeriod(months = 1)
-                InfoResults.Shared(sage.offeredTo(company).reports.incomeStatement(start = lastMonth, end = today).await())
+                InfoResults.Shared(
+                    business = business,
+                    data = sage.offeredTo(company).reports.incomeStatement(start = lastMonth, end = today).await()
+                )
             }
             else -> error("Business is connected to an unknown accounting provider")
         }

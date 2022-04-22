@@ -3,21 +3,17 @@
 
 package pimonitor.client.business.info
 
-import pimonitor.core.business.info.params.BusinessInfoRawFormParams
+import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import viewmodel.ViewModel
 import kotlin.js.JsExport
 import pimonitor.client.business.info.BusinessInfoIntent as Intent
 
 class BusinessInfoIntents(private val viewModel: ViewModel<Intent, *>) {
-    val loadInfo = { businessId: String ->
+    val loadBusinessInfo = { businessId: String ->
         viewModel.post(Intent.LoadInfo(businessId))
     }
 
-    val showEditForm = { businessId: String ->
-        viewModel.post(Intent.ShowEditForm(businessId))
-    }
-
-    val sendEditForm = { params: BusinessInfoRawFormParams ->
-        viewModel.post(Intent.SendEditForm(params))
+    val showEditForm = { business: MonitoredBusinessBasicInfo ->
+        viewModel.post(Intent.ShowEditForm(business, null))
     }
 }

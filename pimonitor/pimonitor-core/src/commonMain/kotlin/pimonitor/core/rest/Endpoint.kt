@@ -1,5 +1,7 @@
 package pimonitor.core.rest
 
+import pimonitor.core.utils.disbursables.DisbursableEndpoint
+
 sealed class Endpoint(root: String) {
     class Client(url: String, version: String) : Endpoint("$url/api/$version")
     class Server(version: String) : Endpoint("/api/$version")
@@ -23,28 +25,11 @@ sealed class Endpoint(root: String) {
     val businessFinancialReportIncomeStatement = "$businessFinancialReports/income-statement"
     val businessFinancialReportCashFlow = "$businessFinancialReports/cash-flow"
 
-    private val businessInvestments = "$business/investments"
-    val businessInvestmentsCapture = "$businessInvestments/capture"
-    val businessInvestmentsAll = "$businessInvestments/all"
-    val businessInvestmentsDisburse = "$businessInvestments/disburse"
-
-    private val businessInterventions = "$business/interventions"
-    val businessInterventionsCreate = "$businessInterventions/create"
-    val businessInterventionsAll = "$businessInterventions/all"
-    val businessInterventionsDisburse = "$businessInterventions/disburse"
-
     // contacts
     val contactsAll = "$root/contacts/all"
 
-    // investments
-    private val investments = "$root/investments"
-    val investmentsCreate = "$investments/create"
-    val investmentsUpdate = "$investments/update"
-    val investmentsDelete = "$investments/delete"
-    val investmentsAll = "$investments/all"
-    private val investmentsDisbursements = "$investments/disbursements"
-    val investmentsDisbursementCreate = "$investmentsDisbursements/create"
-    val investmentsDisbursementUpdate = "$investmentsDisbursements/update"
+    val investments = DisbursableEndpoint("$root/investments")
+    val interventions = DisbursableEndpoint("$root/interventions")
 
     // invites
     val invitesAcceptSage = "$root/invites/accept/sage"

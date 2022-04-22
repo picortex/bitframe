@@ -1,4 +1,4 @@
-val response = """{
+val picortexResponse = """{
   "reports": [
     {
       "imageUrl": null,

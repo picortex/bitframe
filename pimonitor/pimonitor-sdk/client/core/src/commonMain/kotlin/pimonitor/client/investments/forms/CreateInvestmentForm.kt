@@ -1,6 +1,5 @@
 package pimonitor.client.investments.forms
 
-import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import presenters.forms.Form
 import presenters.forms.FormActionsBuildingBlock
@@ -9,7 +8,7 @@ import pimonitor.core.investments.params.InvestmentRawParams as Params
 
 fun CreateInvestmentForm(
     businesses: List<MonitoredBusinessSummary>,
-    business: MonitoredBusinessBasicInfo?,
+    business: MonitoredBusinessSummary?,
     params: Params? = null,
     block: FormActionsBuildingBlock<Params>
 ) = Form(

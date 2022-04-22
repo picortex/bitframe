@@ -13,7 +13,7 @@ interface InviteToShareReportsRawFormParams {
     val message: String
 }
 
-fun InviteToShareReportsRawFormParams.copy(
+fun InviteToShareReportsRawFormParams.toValidatedParams(
     businessId: String
 ): InviteToShareReportsRawParams = InviteToShareReportsParams(
     businessId = businessId,

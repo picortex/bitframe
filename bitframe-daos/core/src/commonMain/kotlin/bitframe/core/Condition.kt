@@ -11,4 +11,6 @@ open class Condition<out V>(
         Equals,
         Contains
     }
+
+    override fun toString() = "Condition($lhs is${operator.name} $rhs)"
 }

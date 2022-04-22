@@ -11,76 +11,70 @@ import later.await
 import pimonitor.client.PiMonitorApi
 import pimonitor.client.business.info.BusinessInfoIntent.*
 import pimonitor.client.business.info.forms.BusinessInfoEditForm
+import pimonitor.client.utils.live.exitDialog
+import pimonitor.client.utils.live.update
 import pimonitor.core.business.info.params.BusinessInfoRawFormParams
 import pimonitor.core.business.info.params.toValidatedParams
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
-import presenters.cases.State
+import presenters.cases.GenericState
 import presenters.modal.dialog
 import viewmodel.ViewModel
 
 class BusinessInfoViewModel(
     val config: UIScopeConfig<PiMonitorApi>
-) : ViewModel<BusinessInfoIntent, State<MonitoredBusinessBasicInfo>>(State.Loading("Fetching info . . ."), config.viewModel) {
+) : ViewModel<BusinessInfoIntent, GenericState<MonitoredBusinessBasicInfo>>(DEFAULT_LOADING_STATE, config.viewModel) {
+
+    companion object {
+        val DEFAULT_LOADING_STATE = GenericState.Loading("Loading business info, please wait. . .")
+    }
+
     val api get() = config.service
     override fun CoroutineScope.execute(i: BusinessInfoIntent): Any = when (i) {
-        is ExitDialog -> exitDialog()
         is LoadInfo -> loadInfo(i)
         is ShowEditForm -> showEditForm(i)
         is SendEditForm -> sendEditForm(i)
     }
 
-    private fun exitDialog() {
-        val content = ui.value as? State.Content
-        if (content != null) {
-            ui.value = content.copy(dialog = null)
-        }
-    }
-
     private fun CoroutineScope.sendEditForm(i: SendEditForm) = launch {
-        val state = ui.value as State.Content
         flow {
-            val content = ui.value as? State.Content ?: error("Make sure you are already viewing the info to be able to submit the form")
-            emit(State.Loading("Saving changes, please wait . . ."))
-            val params = i.params.toValidatedParams(businessId = content.value.uid)
+            emit(GenericState.Loading("Updating ${i.params.name}, please wait . . ."))
+            val params = i.params.toValidatedParams(businessId = i.business.uid)
             val updated = api.businesses.update(params).await()
-            emit(State.Content(updated))
+            emit(GenericState.Content(updated))
         }.catch {
-            emit(State.Failure(it))
-            delay(config.viewModel.recoveryTime)
-            emitForm(params = i.params, business = state.value)
-        }.collect {
-            ui.value = it
-        }
-    }
-
-    private suspend fun FlowCollector<State<MonitoredBusinessBasicInfo>>.emitForm(params: BusinessInfoRawFormParams?, business: MonitoredBusinessBasicInfo) {
-        val form = BusinessInfoEditForm(params, business) {
-            onCancel { post(ExitDialog) }
-            onSubmit("Save Changes") { post(SendEditForm(it)) }
-        }
-        emit(State.Content(value = business, dialog = dialog(form)))
-    }
-
-    private fun CoroutineScope.showEditForm(i: ShowEditForm) = launch {
-        flow {
-            val content = ui.value as? State.Content ?: error("Make sure you are already viewing the info to be able to edit it")
-            emitForm(params = null, business = content.value)
-        }.catch {
-            emit(State.Failure(it) {
-                onGoBack { post(ExitDialog) }
+            emit(GenericState.Failure(it) {
+                onCancel { post(ShowEditForm(i.business, i.params)) }
                 onRetry { post(i) }
             })
         }.collect {
-            ui.value = it
+            ui.update { it }
+        }
+    }
+
+    private fun CoroutineScope.showEditForm(i: ShowEditForm) = launch {
+        val state = ui.value
+        flow {
+            val form = BusinessInfoEditForm(i.params, i.business) {
+                onCancel { ui.exitDialog() }
+                onSubmit("Save Changes") { post(SendEditForm(i.business, it)) }
+            }
+            emit(state.copy(dialog = dialog(form)))
+        }.catch {
+            emit(GenericState.Failure(it) {
+                onGoBack { ui.exitDialog() }
+                onRetry { post(i) }
+            })
+        }.collect {
+            ui.update { it }
         }
     }
 
     private fun CoroutineScope.loadInfo(i: LoadInfo) = launch {
         flow {
-            emit(State.Loading("Loading business info, please wait . . ."))
-            emit(State.Content(api.businesses.load(i.businessId).await()))
+            emit(DEFAULT_LOADING_STATE)
+            emit(GenericState.Content(api.businesses.load(i.businessId).await()))
         }.catch {
-            emit(State.Failure(it) {
+            emit(GenericState.Failure(it) {
                 onRetry { post(i) }
             })
         }.collect {

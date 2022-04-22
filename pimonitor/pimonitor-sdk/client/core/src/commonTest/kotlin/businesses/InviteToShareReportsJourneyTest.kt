@@ -4,18 +4,19 @@ import bitframe.core.UserEmail
 import bitframe.core.signin.SignInParams
 import expect.expect
 import later.await
-import pimonitor.client.businesses.dialogs.InviteToShareReportsDialog
+import pimonitor.client.invites.fields.InviteToShareFields
 import pimonitor.client.runSequence
 import pimonitor.core.businesses.params.CreateMonitoredBusinessParams
 import pimonitor.core.signup.params.SignUpIndividualParams
-import presenters.cases.Feedback
+import presenters.cases.Emphasis
+import presenters.cases.Emphasis.Companion.Loading
+import presenters.cases.Emphasis.Companion.Success
 import presenters.table.tabulateToConsole
 import utils.PiMonitorTestScope
 import utils.toContain
 import viewmodel.expect
 import kotlin.test.Test
 import pimonitor.client.businesses.BusinessesIntent as Intent
-import pimonitor.client.businesses.BusinessesState as State
 
 class InviteToShareReportsJourneyTest {
 
@@ -49,10 +50,10 @@ class InviteToShareReportsJourneyTest {
                 contactEmail = "mmajapa@gmail$time.com",
                 sendInvite = false
             )
-            val state = State()
+            val state = vm.ui.value
             vm.expect(Intent.SendCreateBusinessForm(params)).toContain(
-                state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
-                state.copy(status = Feedback.Success("${params.businessName} has successfully been added. Loading all your businesses, please wait . . .")),
+                state.copy(emphasis = Loading("Adding ${params.businessName}, please wait . . .")),
+                state.copy(emphasis = Success("${params.businessName} has successfully been added. Loading all your businesses, please wait . . .")),
             )
             vm.ui.value.table.tabulateToConsole()
             expect(vm.ui.value.table.rows).toBeOfSize(1)
@@ -60,9 +61,9 @@ class InviteToShareReportsJourneyTest {
 
         step("Should launch an invite to share reports dialog") {
             val business = api.businesses.all().await().first()
-            vm.expect(Intent.ShowInviteToShareReportsForm(business))
-            val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
-            expect(dialog.fields.to.value).toBe(business.contacts.first { it is UserEmail }.value)
+            vm.expect(Intent.ShowInviteToShareReportsForm(business, null))
+            val fields = vm.ui.value.dialog?.asForm?.fields as InviteToShareFields
+            expect(fields.to.value).toBe(business.contacts.first { it is UserEmail }.value)
         }
     }
 
@@ -92,10 +93,10 @@ class InviteToShareReportsJourneyTest {
                 contactEmail = "mmajapa@gmail$time.com",
                 sendInvite = true
             )
-            val state = State()
+            val state = vm.ui.value
             vm.expect(Intent.SendCreateBusinessForm(params)).toContain(
-                state.copy(status = Feedback.Loading("Adding ${params.businessName}, please wait . . .")),
-                state.copy(status = Feedback.Success("${params.businessName} has successfully been added. Preparing invite form, please wait . . .")),
+                state.copy(emphasis = Loading("Adding ${params.businessName}, please wait . . .")),
+                state.copy(emphasis = Success("${params.businessName} has successfully been added. Preparing invite form, please wait . . .")),
             )
             vm.ui.value.table.tabulateToConsole()
             expect(vm.ui.value.table.rows).toBeOfSize(1)
@@ -103,14 +104,13 @@ class InviteToShareReportsJourneyTest {
 
         step("Should launch an invite to share reports dialog") {
             val business = api.businesses.all().await().first()
-            vm.expect(Intent.ShowInviteToShareReportsForm(business))
-            val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
-            expect(dialog.fields.to.value).toBe(business.contacts.first { it is UserEmail }.value)
+            vm.expect(Intent.ShowInviteToShareReportsForm(business, null))
+            val fields = vm.ui.value.dialog?.asForm?.fields as InviteToShareFields
+            expect(fields.to.value).toBe(business.contacts.first { it is UserEmail }.value)
         }
 
         step("Cancel sending invite should return to table with businesses") {
-            val dialog = vm.ui.value.dialog as InviteToShareReportsDialog
-            dialog.cancel()
+            vm.ui.value.dialog?.asForm?.cancel?.invoke()
             expect(vm.ui.value.table.rows).toBeOfSize(1)
         }
     }

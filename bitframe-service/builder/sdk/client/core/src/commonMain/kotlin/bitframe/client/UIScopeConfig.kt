@@ -33,10 +33,7 @@ interface UIScopeConfig<out S : Any> {
             transitionTime: Long = DEFAULT_TRANSITION_TIME,
             logger: Logger = DEFAULT_LOGGER,
             builder: () -> CoroutineScope = DEFAULT_SCOPE_BUILDER
-        ) = object : UIScopeConfig<S> {
-            override val service: S = service
-            override val viewModel = UIScopedViewModelConfig(recoveryTime, transitionTime, logger, builder)
-        }
+        ): UIScopeConfig<S> = UIScopeConfigImpl(service, recoveryTime, transitionTime, logger, builder)
 
         @JvmStatic
         @JvmOverloads

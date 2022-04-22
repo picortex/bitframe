@@ -4,21 +4,17 @@
 package pimonitor.client.investments.fields
 
 import kotlinx.collections.interoperable.toInteroperableList
-import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.InvestmentType
-import presenters.fields.DateInputField
-import presenters.fields.DropDownInputField
+import presenters.fields.*
 import presenters.fields.DropDownInputField.Option
-import presenters.fields.MoneyInputField
-import presenters.fields.TextInputField
 import kotlin.js.JsExport
 import pimonitor.core.investments.params.InvestmentRawParams as Params
 
 class InvestmentFields(
     businesses: List<MonitoredBusinessSummary>,
-    business: MonitoredBusinessBasicInfo?,
+    business: MonitoredBusinessSummary?,
     params: Params?,
     investment: InvestmentSummary?
 ) {
@@ -30,7 +26,7 @@ class InvestmentFields(
     )
     val businessId = DropDownInputField(
         name = Params::businessId,
-        label = "Select Business",
+        label = "Investments for",
         options = businesses.map { biz ->
             Option(label = biz.name, value = biz.uid, selected = biz.uid == business?.uid || biz.uid == investment?.businessId)
         }.toInteroperableList()
@@ -52,7 +48,7 @@ class InvestmentFields(
         name = Params::amount,
         label = "Investment Amount",
         hint = "8,000",
-        value = params?.amount ?: investment?.amount?.toFormattedString(prefix = "")
+        value = params?.amount ?: investment?.amount?.toInputValue()
     )
     val date: DateInputField = DateInputField(
         name = Params::date,
