@@ -42,9 +42,9 @@ class ContactsViewModel(
     }
 
     internal fun contactsTableOf(contacts: List<SearchResult.ContactPersonSummary>) = tableOf(contacts) {
-        selectable()
+//        selectable()
         column("Name") { it.data.name }
-        column("Position") { it.data.position }
+//        column("Position") { it.data.position }
         column("Business") { it.data.business.name }
         column("Email") { it.data.email }
     }

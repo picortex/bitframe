@@ -5,6 +5,7 @@ import datetime.Date
 import expect.expect
 import kotlinx.datetime.DatePeriod
 import later.await
+import logging.console
 import pimonitor.client.business.operations.BusinessOperationsIntent
 import pimonitor.client.runSequence
 import pimonitor.core.business.utils.info.LoadInfoParams
@@ -47,27 +48,24 @@ class PiCortexOperationalDashboardUserJourneyTest {
             api.signIn.signIn(cred).await()
         }
 
-        var result: CreateMonitoredBusinessResult? = null
-        step("Create a monitored business") {
+        val result = step("Create a monitored business") {
             val params = CreateMonitoredBusinessParams(
                 businessName = "aSoft Ltd",
                 contactName = "Anderson Lameck",
                 contactEmail = "andylamax@programmer.net",
                 sendInvite = true
             )
-            result = api.businesses.create(params).await()
+            api.businesses.create(params).await()
         }
 
-        var invite: Invite? = null
-        step("Invite ${result?.business?.name} to share reports") {
+        val invite = step("Invite ${result?.business?.name} to share reports") {
             val params = InviteToShareReportsParams(result!!.summary)
-            invite = api.invites.send(params).await()
+            api.invites.send(params).await()
         }
 
         step("Accept invite to share picortex reports params") {
-            val i = invite ?: error("Invite not is found")
             val params = AcceptPicortexInviteParams(
-                inviteId = i.uid,
+                inviteId = invite.uid,
                 subdomain = "b2b",
                 secret = "f225ela32hovtvo4s1bj466j1p"
             )
@@ -82,11 +80,12 @@ class PiCortexOperationalDashboardUserJourneyTest {
                 start = start,
                 end = end
             )
-//            vm.expect(BusinessOperationsIntent.LoadOperationalDashboard(params)).toContain(
+            vm.expect(BusinessOperationsIntent.LoadOperationalDashboard(params)).toContain(
 //                GenericState.Loading("Loading operational dashboard, please wait . . ."),
-//            )
-            val state = vm.ui.value as GenericState.Content<InfoResults.Shared<OperationalDashboard>>
-            expect(state.data.data).toBeNonNull()
+            )
+            val state = vm.ui.value
+            console.log(state.data)
+            expect(state.data).toBeNonNull()
         }
     }
 }

@@ -28,7 +28,7 @@ class LoadBusinessesJourneyTest {
         api.session.signOut()
         val state = vm.ui.value
         vm.expect(Intent.LoadBusinesses).toGoThrough(
-            state.copy(emphasis = Loading(message = "Loading your businesses, please wait . . .")),
+            state.copy(emphasis = Loading(message = "Loading businesses, please wait. . .")),
             state.copy(emphasis = Failure(message = "You must be signed in to query businesses")),
         )
     }
