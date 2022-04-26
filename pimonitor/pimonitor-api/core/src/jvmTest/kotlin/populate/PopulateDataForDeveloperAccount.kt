@@ -146,8 +146,8 @@ class PopulateDataForDeveloperAccount {
 
             val params3 = AcceptPicortexInviteParams(
                 inviteId = res2.uid,
-                subdomain = "b2bdemo",
-                secret = "89aqiclvjktp0aa4bgfqpbppf6",
+                subdomain = "ludada",
+                secret = "a8lch29mut8tp4r5kvm2vtgakc",
             )
             val res3 = api.invites.accept(params3).await()
 

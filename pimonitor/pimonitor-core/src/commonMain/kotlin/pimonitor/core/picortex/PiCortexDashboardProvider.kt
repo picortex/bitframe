@@ -136,6 +136,7 @@ class PiCortexDashboardProvider(
                 )
             )
         }
+        println(res.bodyAsText())
         parser.parseTechnicalDashboard(res.bodyAsText())
     }
 }

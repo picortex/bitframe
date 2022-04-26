@@ -1,4 +1,6 @@
 import datetime.Date
+import io.ktor.client.*
+import io.ktor.client.plugins.*
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DatePeriod
@@ -14,7 +16,14 @@ class PiCortexDashboardTest {
 
     val environment = Production
     val provider = PiCortexDashboardProvider(
-        PiCortexDashboardProviderConfig(environment = environment)
+        PiCortexDashboardProviderConfig(
+            environment = environment,
+            client = HttpClient {
+                install(HttpTimeout) {
+                    requestTimeoutMillis = 60000L
+                }
+            }
+        )
     )
 
     val stagingCredentials = PiCortexApiCredentials(
@@ -44,7 +53,7 @@ class PiCortexDashboardTest {
     val credentials
         get() = when (environment) {
             Staging -> stagingCredentials
-            Production -> productionCredentialsLudada
+            Production -> productionCredentialsZL
         }
 
     @Test
