@@ -48,7 +48,7 @@ fun main(args: Array<String>) {
         service { factory ->
             val config = ServiceConfig(
                 daoFactory = factory,
-                mailer = SmtpMailer(SmtpMailerConfig.fromProperties("sendgrid.properties"))
+                mailer = SmtpMailer(SmtpMailerConfig.fromProperties("sendgrid.properties")),
             )
             PiMonitorService(config)
         }

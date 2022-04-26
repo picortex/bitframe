@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/resources/picortex.zl.resp.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jvmTest/kotlin/populate/PopulateDataForDeveloperAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jvmTest/kotlin/populate/PopulateDataForDeveloperAccount.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/test/src/commonMain/kotlin/pimonitor/client/TestConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/test/src/commonMain/kotlin/pimonitor/client/TestConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-app/server/src/main/kotlin/pimonitor/server/main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-app/server/src/main/kotlin/pimonitor/server/main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardParser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardProvider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardProvider.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/configs/picortex.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/configs/picortex.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +162,7 @@
       <recent name="pimonitor.core.utils.disbursables" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.populate-live-remote">
+  <component name="RunManager" selected="Gradle.populate-live-local">
     <configuration name="AuthFlowInteroperabilityTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -669,7 +675,35 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="populate-live-remote" type="GradleRunConfiguration" factoryName="Gradle">
+    <configuration name="populate-live-prod" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="env">
+          <map>
+            <entry key="API_MODE" value="LIVE" />
+            <entry key="API_URL" value="http://65.21.254.230" />
+          </map>
+        </option>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-api/core" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;populate.PopulateDataForDeveloperAccount&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":pimonitor-api-core:cleanJvmTest" />
+            <option value=":pimonitor-api-core:jvmTest" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="populate-live-staging" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="env">
           <map>
@@ -736,7 +770,8 @@
       <item itemvalue="Gradle.pi-sdk-mock-jvm-test" />
       <item itemvalue="Gradle.response:jvmTest" />
       <item itemvalue="Gradle.populate-live-local" />
-      <item itemvalue="Gradle.populate-live-remote" />
+      <item itemvalue="Gradle.populate-live-staging" />
+      <item itemvalue="Gradle.populate-live-prod" />
       <item itemvalue="Gradle.AuthFlowInteroperabilityTest" />
       <item itemvalue="Gradle.InfoResultSerializationTest" />
       <item itemvalue="Gradle.PiCortexOperationalDashboardUserJourneyTest" />
@@ -746,10 +781,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.PiCortexDashboardTest" />
+        <item itemvalue="Gradle.PiCortexDashboardTest" />
+        <item itemvalue="Gradle.PiCortexDashboardTest" />
         <item itemvalue="Gradle.LoadBusinessesJourneyTest.should_fail_to_load_businesses_when_there_is_no_signed_in_user" />
         <item itemvalue="Gradle.PiCortexOperationalDashboardUserJourneyTest" />
-        <item itemvalue="Gradle.InfoResultSerializationTest" />
-        <item itemvalue="Gradle.AuthFlowInteroperabilityTest" />
       </list>
     </recent_temporary>
   </component>
