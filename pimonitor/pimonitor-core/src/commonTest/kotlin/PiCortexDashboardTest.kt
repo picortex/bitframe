@@ -12,9 +12,9 @@ import kotlin.test.Test
 
 class PiCortexDashboardTest {
 
-    val environment = Staging
+    val environment = Production
     val provider = PiCortexDashboardProvider(
-        PiCortexDashboardProviderConfig(environment = Staging)
+        PiCortexDashboardProviderConfig(environment = environment)
     )
 
     val stagingCredentials = PiCortexApiCredentials(
@@ -23,16 +23,28 @@ class PiCortexDashboardTest {
         secret = "f225ela32hovtvo4s1bj466j1p"
     )
 
-    val productionCredentials = PiCortexApiCredentials(
+    val productionCredentialsPicortex = PiCortexApiCredentials(
         businessId = "testBuz",
         subdomain = "b2bDemo",
         secret = "89aqiclvjktp0aa4bgfqpbppf6"
     )
 
+    val productionCredentialsZL = PiCortexApiCredentials(
+        businessId = "testBuz",
+        subdomain = "ziyahlanjwa",
+        secret = "fbjkfsk4vk34n05nrtr4g3r156"
+    )
+
+    val productionCredentialsLudada = PiCortexApiCredentials(
+        businessId = "testBuz",
+        subdomain = "ludada",
+        secret = "a8lch29mut8tp4r5kvm2vtgakc"
+    )
+
     val credentials
         get() = when (environment) {
             Staging -> stagingCredentials
-            Production -> productionCredentials
+            Production -> productionCredentialsLudada
         }
 
     @Test
