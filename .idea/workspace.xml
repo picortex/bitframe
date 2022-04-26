@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/resources/picortex.error.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jvmTest/kotlin/populate/PopulateDataForDeveloperAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jvmTest/kotlin/populate/PopulateDataForDeveloperAccount.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/test/src/commonMain/kotlin/pimonitor/client/TestConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/test/src/commonMain/kotlin/pimonitor/client/TestConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/configs/picortex.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/configs/picortex.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/contacts/ContactsViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/contacts/ContactsViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/business/operational/PiCortexOperationalDashboardUserJourneyTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/business/operational/PiCortexOperationalDashboardUserJourneyTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/businesses/LoadBusinessesJourneyTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/businesses/LoadBusinessesJourneyTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +156,7 @@
       <recent name="pimonitor.core.utils.disbursables" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.populate-live-local">
+  <component name="RunManager" selected="Gradle.populate-live-remote">
     <configuration name="AuthFlowInteroperabilityTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -227,19 +223,19 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="PasswordViewModelWithSignedInSessionTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PiCortexDashboardTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-core" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;password.PasswordViewModelWithSignedInSessionTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;PiCortexDashboardTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":bitframe-authentication-sdk-client-core:cleanJvmTest" />
-            <option value=":bitframe-authentication-sdk-client-core:jvmTest" />
+            <option value=":pimonitor-core:cleanJvmTest" />
+            <option value=":pimonitor-core:jvmTest" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -741,19 +737,19 @@
       <item itemvalue="Gradle.response:jvmTest" />
       <item itemvalue="Gradle.populate-live-local" />
       <item itemvalue="Gradle.populate-live-remote" />
-      <item itemvalue="Gradle.PasswordViewModelWithSignedInSessionTest" />
       <item itemvalue="Gradle.AuthFlowInteroperabilityTest" />
       <item itemvalue="Gradle.InfoResultSerializationTest" />
       <item itemvalue="Gradle.PiCortexOperationalDashboardUserJourneyTest" />
       <item itemvalue="Gradle.LoadBusinessesJourneyTest.should_fail_to_load_businesses_when_there_is_no_signed_in_user" />
+      <item itemvalue="Gradle.PiCortexDashboardTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.PiCortexDashboardTest" />
         <item itemvalue="Gradle.LoadBusinessesJourneyTest.should_fail_to_load_businesses_when_there_is_no_signed_in_user" />
         <item itemvalue="Gradle.PiCortexOperationalDashboardUserJourneyTest" />
         <item itemvalue="Gradle.InfoResultSerializationTest" />
         <item itemvalue="Gradle.AuthFlowInteroperabilityTest" />
-        <item itemvalue="Gradle.PasswordViewModelWithSignedInSessionTest" />
       </list>
     </recent_temporary>
   </component>
