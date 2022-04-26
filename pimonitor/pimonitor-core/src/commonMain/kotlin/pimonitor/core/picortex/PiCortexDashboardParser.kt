@@ -33,8 +33,9 @@ internal class PiCortexDashboardParser(val mapper: Mapper) {
     }
 
     private inline val Map<String, *>.config get() = this["config"] as Map<String, *>
+    private inline val Map<String, *>.dataClass get() = this["dataClass"] as String
     private inline val Map<String, *>.reportType get() = this["reportType"] as? String
-    private inline val Map<String, *>.description get() = this["description"] as String
+    private inline val Map<String, *>.description get() = this["description"] as? String ?: dataClass
     private inline val Map<String, *>.name get() = this["name"] as String
     private inline val Map<String, *>.chartType get() = this["chartType"] as? String
     private inline val Map<String, *>.datasets get() = this["datasets"] as? List<Map<String, *>>
