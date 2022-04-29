@@ -2,8 +2,8 @@
 
 package pimonitor.client.utils.disbursables.disbursements
 
-import bitframe.core.CreatorUpdater
-import bitframe.core.Deleter
+import bitframe.client.CreatorUpdater
+import bitframe.client.Deleter
 import bitframe.core.IdentifiedRaw
 import kotlinx.collections.interoperable.List
 import pimonitor.core.utils.disbursables.disbursements.Disbursement

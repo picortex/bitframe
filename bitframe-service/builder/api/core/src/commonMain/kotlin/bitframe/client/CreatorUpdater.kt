@@ -1,7 +1,8 @@
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package bitframe.core
+package bitframe.client
 
+import bitframe.core.IdentifiedRaw
 import kotlin.js.JsExport
 
 @JsExport

@@ -1,6 +1,6 @@
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package bitframe.core
+package bitframe.client
 
 import kotlinx.collections.interoperable.List
 import later.Later
