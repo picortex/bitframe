@@ -1,10 +1,6 @@
 package bitframe.client.configurators
 
-import bitframe.client.BitframeApi
-import bitframe.client.BitframeAppScopeConfig
 import bitframe.client.BitframeViewModelConfig
-import bitframe.client.configurators.ApiConfigurator
-import kotlin.js.JsExport
 
 fun SdkConfigurator.toViewModelConfig(mode: ApiMode) = BitframeViewModelConfig(
     recoveryTime = recoveryTime?.toLong() ?: BitframeViewModelConfig.DEFAULT_RECOVERY_TIME,

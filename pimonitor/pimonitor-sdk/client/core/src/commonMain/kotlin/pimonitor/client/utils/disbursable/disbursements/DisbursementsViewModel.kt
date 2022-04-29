@@ -22,7 +22,6 @@ import pimonitor.core.utils.disbursables.DisbursableSummary
 import pimonitor.core.utils.disbursables.disbursements.Disbursement
 import pimonitor.core.utils.disbursables.disbursements.params.toValidatedDisbursableParams
 import presenters.cases.CentralState
-import presenters.cases.Emphasis
 import presenters.cases.Emphasis.Companion.Dialog
 import presenters.cases.Emphasis.Companion.Failure
 import presenters.cases.Emphasis.Companion.Loading
@@ -70,7 +69,7 @@ class DisbursementsViewModel(
         val state = ui.value
         flow {
             emit(state.copy(emphasis = Loading("Creating a disbursement, please wait . . .")))
-            val disbursement = service.createDisbursement(i.params.toValidatedDisbursableParams(i.disbursable.uid)).await()
+            val disbursement = service.disbursements.create(i.params.toValidatedDisbursableParams(i.disbursable.uid)).await()
             emit(state.copy(emphasis = Success("${disbursement.amount.toDefaultFormat()} has successfully been disbursed")))
             val context = service.load(disbursable.uid).await()
             emit(state.copy(table = disbursementTable(context.disbursements)))
@@ -97,7 +96,7 @@ class DisbursementsViewModel(
         flow {
             emit(state.copy(emphasis = Loading("Updating disbursement, please wait . . .")))
             val params = Identified(i.disbursement.uid, i.params.toValidatedDisbursableParams(disbursable.uid))
-            val disbursement = service.updateDisbursement(params).await()
+            val disbursement = service.disbursements.update(params).await()
             emit(state.copy(emphasis = Success("${disbursement.amount.toDefaultFormat()} disbursement has been updated")))
             val context = service.load(disbursable.uid).await()
             emit(state.copy(table = disbursementTable(context.disbursements)))
@@ -130,7 +129,7 @@ class DisbursementsViewModel(
                 uid = disbursable.uid,
                 body = arrayOf(i.disbursement.uid)
             )
-            val disbursement = service.deleteDisbursements(params).await()
+            val disbursement = service.disbursements.delete(params).await()
             emit(state.copy(emphasis = Success("${disbursement.first().amount.toDefaultFormat()} disbursement has been deleted successfully")))
             val context = service.load(disbursable.uid).await()
             emit(state.copy(table = disbursementTable(context.disbursements)))
@@ -163,7 +162,7 @@ class DisbursementsViewModel(
                 uid = disbursable.uid,
                 body = i.data.map { it.data.uid }.toTypedArray()
             )
-            service.deleteDisbursements(params).await()
+            service.disbursements.delete(params).await()
             emit(state.copy(emphasis = Success("${i.data.size} disbursements have been deleted successfully")))
             val context = service.load(disbursable.uid).await()
             emit(state.copy(table = disbursementTable(context.disbursements)))

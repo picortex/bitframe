@@ -10,6 +10,8 @@ import kotlinx.collections.interoperable.List
 import later.Later
 import later.later
 import pimonitor.client.utils.disbursables.DisbursableServiceKtor
+import pimonitor.client.utils.disbursables.disbursements.DisbursementsService
+import pimonitor.client.utils.disbursables.disbursements.DisbursementsServiceKtor
 import pimonitor.client.utils.pathV1
 import pimonitor.core.interventions.Goal
 import pimonitor.core.interventions.Intervention
@@ -27,6 +29,8 @@ class InterventionsServiceKtor(
     private val json get() = config.json
     private val http get() = config.http
     private val path get() = config.pathV1
+
+    override val disbursements: DisbursementsService by lazy { DisbursementsServiceKtor(config, path.interventions.disbursements) }
 
     override fun create(rb: RequestBody.Authorized<InterventionParams>): Later<Intervention> = config.scope.later {
         val res = http.post(path.interventions.create) {

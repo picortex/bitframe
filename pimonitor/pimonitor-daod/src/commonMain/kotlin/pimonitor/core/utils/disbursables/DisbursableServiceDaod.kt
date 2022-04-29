@@ -11,6 +11,8 @@ import later.await
 import later.later
 import logging.Logger
 import pimonitor.core.utils.disbursables.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.DisbursementsServiceCore
+import pimonitor.core.utils.disbursables.disbursements.DisbursementsServiceDaod
 import pimonitor.core.utils.disbursables.disbursements.params.DisbursableDisbursementParams
 import pimonitor.core.utils.disbursables.disbursements.params.toParsedParams
 import pimonitor.core.utils.disbursables.filters.DisbursableFilter
@@ -28,39 +30,14 @@ abstract class DisbursableServiceDaod<out D : Disbursable, out DS : DisbursableS
 
     abstract val disbursableDao: Dao<D>
 
+    override val disbursements: DisbursementsServiceCore by lazy {
+        DisbursementsServiceDaod(config, disbursableDao, timezone)
+    }
+
     override fun load(rb: RequestBody.Authorized<String>) = config.scope.later {
         val log by config.logger(rb, logger)
         log.info("Loading disbursable")
         disbursableDao.load(rb.data).await().toSummary().also { log.info("Successfully loaded disbursable: ${it::class.simpleName}") }
-    }
-
-    override fun createDisbursement(rb: RequestBody.Authorized<DisbursableDisbursementParams>) = config.scope.later {
-        val disbursable = disbursableDao.load(rb.data.disbursableId).await()
-        val disbursements = disbursable.disbursements
-        val disbursement = rb.data.toParsedParams(currency).toDisbursement(rb.session, timezone, disbursements.size)
-        disbursableDao.update(disbursable.copy((disbursements + disbursement).toInteroperableList()) as D).await()
-        disbursement
-    }
-
-    override fun deleteDisbursement(rb: RequestBody.Authorized<Identified<Array<String>>>): Later<List<Disbursement>> = config.scope.later {
-        val disbursable = disbursableDao.load(rb.data.uid).await()
-        val ids = rb.data.body
-        val disbursements = disbursable.disbursements.map {
-            if (it.uid in ids) it.copy(deleted = true) else it
-        }.toInteroperableList()
-        disbursableDao.update(disbursable.copy(disbursements) as D).await()
-        disbursements.filter { it.uid in ids }.toInteroperableList()
-    }
-
-    override fun updateDisbursement(rb: RequestBody.Authorized<Identified<DisbursableDisbursementParams>>): Later<Disbursement> = config.scope.later {
-        val disbursable = disbursableDao.load(rb.data.uid).await()
-        val disbursements = disbursable.disbursements.map {
-            if (it.uid != rb.data.uid) return@map it
-            val params = rb.data.body.toParsedParams(currency)
-            it.copy(amount = params.amount, date = params.date)
-        }.toInteroperableList()
-        disbursableDao.update(disbursable.copy(disbursements) as D).await()
-        disbursements.first { it.uid in rb.data.uid }
     }
 
     override fun all(rb: RequestBody.Authorized<DisbursableFilter>): Later<List<DS>> = config.scope.later {

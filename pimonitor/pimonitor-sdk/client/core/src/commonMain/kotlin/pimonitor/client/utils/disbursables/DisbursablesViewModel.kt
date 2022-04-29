@@ -2,8 +2,6 @@ package pimonitor.client.utils.disbursables
 
 import bitframe.client.UIScopeConfig
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -55,7 +53,7 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
         val state = ui.value
         flow {
             emit(state.copy(emphasis = Loading("Sending disbursement, please wait. . .!")))
-            val disbursement = service.createDisbursement(i.params.toValidatedDisbursableParams(i.disbursable.uid)).await()
+            val disbursement = service.disbursements.create(i.params.toValidatedDisbursableParams(i.disbursable.uid)).await()
             emit(state.copy(emphasis = Success("${disbursement.amount.toFormattedString()} has been successfully disbursed to ${i.disbursable.name} disbursable. Loading the remaining disbursables, please wait. . .")))
             emit(state.copy(table = disbursablesTable(service.all(DisbursableFilter(state.context?.uid)).await())))
         }.catch {

@@ -1,14 +1,17 @@
 package pimonitor.core.utils.disbursables
 
-open class DisbursableEndpoint(root: String) {
-    val create = "$root/create"
-    val load = "$root/load"
-    val update = "$root/update"
-    val delete = "$root/delete"
-    val all = "$root/all"
+import bitframe.core.RestPath
 
-    private val disbursement = "$root/disbursements"
-    val disbursementCreate = "$disbursement/create"
-    val disbursementUpdate = "$disbursement/update"
-    val disbursementDelete = "$disbursement/delete"
+open class DisbursableEndpoint(root: String) : RestPath(root) {
+//    val create = "$root/create"
+//    val load = "$root/load"
+//    val update = "$root/update"
+//    val delete = "$root/delete"
+//    val all = "$root/all"
+
+    private val disbursementRoot = "$root/disbursements"
+    val disbursements = RestPath(disbursementRoot)
+    val disbursementCreate = "$disbursementRoot/create"
+    val disbursementUpdate = "$disbursementRoot/update"
+    val disbursementDelete = "$disbursementRoot/delete"
 }

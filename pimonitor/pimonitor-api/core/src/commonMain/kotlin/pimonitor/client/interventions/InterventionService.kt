@@ -13,6 +13,7 @@ import later.Later
 import later.await
 import later.later
 import pimonitor.client.utils.disbursables.DisbursableServiceImpl
+import pimonitor.client.utils.disbursables.disbursements.DisbursementsService
 import pimonitor.core.interventions.Intervention
 import pimonitor.core.interventions.InterventionSummary
 import pimonitor.core.interventions.InterventionsServiceCore
@@ -23,8 +24,7 @@ import kotlin.js.JsExport
 abstract class InterventionService(
     private val config: ServiceConfig
 ) : DisbursableServiceImpl<Intervention, InterventionSummary>(config), InterventionsServiceCore {
-
-    private val logger by config.logger(withSessionInfo = true)
+    protected val logger by config.logger()
 
     fun create(params: InterventionRawParams): Later<Intervention> = config.scope.later {
         logger.info("Creating intervention)")

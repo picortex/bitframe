@@ -9,6 +9,8 @@ import io.ktor.client.statement.*
 import later.Later
 import later.later
 import pimonitor.client.utils.disbursables.DisbursableServiceKtor
+import pimonitor.client.utils.disbursables.disbursements.DisbursementsService
+import pimonitor.client.utils.disbursables.disbursements.DisbursementsServiceKtor
 import pimonitor.client.utils.pathV1
 import pimonitor.core.investments.Investment
 import pimonitor.core.investments.InvestmentSummary
@@ -24,6 +26,8 @@ class InvestmentsServiceKtor(
     private val json get() = config.json
     private val http get() = config.http
     private val path get() = config.pathV1
+
+    override val disbursements: DisbursementsService by lazy { DisbursementsServiceKtor(config, path.investments.disbursements) }
 
     override fun create(rb: RequestBody.Authorized<InvestmentParams>): Later<Investment> = config.scope.later {
         val res = http.post(path.investments.create) {

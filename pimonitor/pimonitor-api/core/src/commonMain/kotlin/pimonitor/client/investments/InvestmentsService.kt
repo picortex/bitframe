@@ -12,6 +12,7 @@ import bitframe.core.toValidated
 import later.await
 import later.later
 import pimonitor.client.utils.disbursables.DisbursableServiceImpl
+import pimonitor.client.utils.disbursables.disbursements.DisbursementsService
 import pimonitor.core.investments.Investment
 import pimonitor.core.investments.InvestmentSummary
 import pimonitor.core.investments.InvestmentsServiceCore
@@ -22,7 +23,7 @@ import kotlin.js.JsExport
 abstract class InvestmentsService(
     private val config: ServiceConfig
 ) : DisbursableServiceImpl<Investment, InvestmentSummary>(config), InvestmentsServiceCore {
-    val logger by config.logger(withSessionInfo = true)
+    protected val logger by config.logger()
 
     fun create(params: InvestmentRawParams) = config.scope.later {
         logger.info("Capturing ${params.name} investment")

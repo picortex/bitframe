@@ -12,11 +12,14 @@ import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.serialization.KSerializer
 import later.Later
 import later.later
+import pimonitor.client.utils.disbursables.disbursements.DisbursementsService
+import pimonitor.client.utils.disbursables.disbursements.DisbursementsServiceKtor
 import pimonitor.core.utils.disbursables.Disbursable
 import pimonitor.core.utils.disbursables.DisbursableEndpoint
 import pimonitor.core.utils.disbursables.DisbursableServiceCore
 import pimonitor.core.utils.disbursables.DisbursableSummary
 import pimonitor.core.utils.disbursables.disbursements.Disbursement
+import pimonitor.core.utils.disbursables.disbursements.DisbursementsServiceCore
 import pimonitor.core.utils.disbursables.disbursements.params.DisbursableDisbursementParams
 import pimonitor.core.utils.disbursables.filters.DisbursableFilter
 import response.decodeResponseFromString
@@ -29,6 +32,9 @@ class DisbursableServiceKtor<out D : Disbursable, out DS : DisbursableSummary>(
 ) : DisbursableServiceCore<D, DS> {
     private val json get() = config.json
     private val http get() = config.http
+
+    override val disbursements: DisbursementsService by lazy { DisbursementsServiceKtor(config, path.disbursements) }
+
     override fun load(rb: RequestBody.Authorized<String>) = config.scope.later {
         val res = http.post(path.load) {
             setBody(json.of(rb))

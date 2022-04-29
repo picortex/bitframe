@@ -1,11 +1,11 @@
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package bitframe.client
+package bitframe.core
 
 import later.Later
 import kotlin.js.JsExport
 
 @JsExport
-interface Deleter<P, R> {
-    fun delete(params: P): Later<R>
+interface Updater<in P, out R> {
+    fun update(params: P): Later<R>
 }

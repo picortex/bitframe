@@ -29,17 +29,17 @@ open class DisbursablesController<out D : Disbursable, out DS : DisbursableSumma
 
     suspend fun createDisbursement(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.Authorized<DisbursableDisbursementParams>>(req.compulsoryBody())
-        resolve(service.createDisbursement(rb).await())
+        resolve(service.disbursements.create(rb).await())
     }.toHttpResponse()
 
     suspend fun deleteDisbursement(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.Authorized<Identified<Array<String>>>>(req.compulsoryBody())
-        resolve(service.deleteDisbursement(rb).await())
+        resolve(service.disbursements.delete(rb).await())
     }.toHttpResponse()
 
     suspend fun updateDisbursement(req: HttpRequest) = response {
         val rb = json.decodeFromString<RequestBody.Authorized<Identified<DisbursableDisbursementParams>>>(req.compulsoryBody())
-        resolve(service.updateDisbursement(rb).await())
+        resolve(service.disbursements.update(rb).await())
     }.toHttpResponse()
 
     suspend fun all(req: HttpRequest) = response {
