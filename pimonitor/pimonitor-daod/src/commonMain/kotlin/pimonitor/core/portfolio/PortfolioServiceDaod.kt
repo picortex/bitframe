@@ -28,7 +28,7 @@ open class PortfolioServiceDaod(
             contactPersonSpaceInfoDao.all(ContactPersonBusinessInfo::businessId isEqualTo it.uid).await()
         }
 
-        PortfolioData(
+        MonitoredBusinessPortfolio(
             cards = listOf(
                 ValueCard(
                     title = "Total businesses",

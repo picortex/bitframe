@@ -42,7 +42,7 @@ open class PiMonitorAppScope(
     val businessFinancials by BusinessFinancialsScope(config { api.businessFinancials })
     val businessOperations by BusinessOperationsScope(config { api.businessOperations })
     open val contacts by lazy { ContactsScope(config { api.contacts }) }
-    open val portfolio by lazy { PortfolioScope(config { api.portfolio }) }
+    val portfolio by PortfolioScope(config { api.portfolio })
     open val password by lazy { ChangePasswordScope(config { api.profile }) }
     open val search by lazy { SearchScope(config { api.search }) }
     val interventions by InterventionsScope(config())

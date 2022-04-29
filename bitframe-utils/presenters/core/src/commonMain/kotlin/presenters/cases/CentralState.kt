@@ -8,22 +8,13 @@ import presenters.table.builders.tableOf
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-data class CentralState<out C, D>(
+data class CentralState<C, D>(
     val emphasis: Emphasis = Emphasis.Loading("Please wait . . ."),
-    val context: C? = null,
     val table: Table<D> = tableOf(emptyList()) {},
+    val context: C? = null,
 ) {
     @JsName("_ignore_fromLoading")
     constructor(message: String) : this(emphasis = Emphasis.Loading(message))
-
-    @JsName("_ignore_from")
-    constructor(emphasis: Emphasis, table: Table<D> = tableOf(emptyList()) {}) : this(emphasis, null, table)
-
-    @JsName("_ignore_copyTable")
-    fun copy(table: Table<D>) = copy(emphasis = Emphasis.None, table = table)
-
-    @JsName("_ignore_copyTableAndContext")
-    fun copy(table: Table<D>, context: @UnsafeVariance C?) = copy(emphasis = Emphasis.None, table = table, context = context)
 
     val isLoading get() = emphasis.isLoading
     val asLoading get() = emphasis.asLoading

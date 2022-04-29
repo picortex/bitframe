@@ -5,5 +5,5 @@ import pimonitor.core.portfolio.PortfolioServiceDaod
 import pimonitor.core.portfolio.PortfolioServiceCore
 
 class PortfolioServiceMock(
-    override val config: ServiceConfigMock
-) : PortfolioService, PortfolioServiceCore by PortfolioServiceDaod(config)
+    private val config: ServiceConfigMock
+) : PortfolioService(config), PortfolioServiceCore by PortfolioServiceDaod(config)

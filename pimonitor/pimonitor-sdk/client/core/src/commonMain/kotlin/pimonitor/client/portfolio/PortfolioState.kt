@@ -3,14 +3,14 @@
 
 package pimonitor.client.portfolio
 
-import pimonitor.core.portfolio.PortfolioData
+import pimonitor.core.portfolio.MonitoredBusinessPortfolio
 import presenters.cases.Feedback
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 
 data class PortfolioState(
     val status: Feedback = INITIAL_LOADING_STATUS,
-    val data: PortfolioData = PortfolioData()
+    val data: MonitoredBusinessPortfolio = MonitoredBusinessPortfolio()
 ) {
     companion object {
         @JvmField

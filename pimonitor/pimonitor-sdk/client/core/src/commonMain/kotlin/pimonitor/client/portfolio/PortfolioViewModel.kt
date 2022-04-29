@@ -6,27 +6,41 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
-import presenters.cases.Feedback
+import pimonitor.client.utils.live.update
+import pimonitor.core.businesses.MonitoredBusinessBasicInfo
+import pimonitor.core.portfolio.MonitoredBusinessPortfolio
+import presenters.cases.MissionState
+import presenters.cases.copy
 import viewmodel.ViewModel
 import pimonitor.client.portfolio.PortfolioIntent as Intent
-import pimonitor.client.portfolio.PortfolioState as State
 
-class PortfolioViewModel(
+internal class PortfolioViewModel(
     private val config: UIScopeConfig<PortfolioService>
-) : ViewModel<Intent, State>(State(), config.viewModel) {
+) : ViewModel<Intent, MissionState<MonitoredBusinessBasicInfo, MonitoredBusinessPortfolio>>(
+    initialState = MissionState.Loading(DEFAULT_LOADING_MESSAGE), config = config.viewModel
+) {
     val service get() = config.service
-    override fun CoroutineScope.execute(i: Intent) = when (i) {
-        Intent.LoadPortfolioData -> loadPortfolio()
+
+    companion object {
+        private const val DEFAULT_LOADING_MESSAGE = "Loading your portfolio data, please wait . . ."
     }
 
-    private fun CoroutineScope.loadPortfolio() = launch {
+    override fun CoroutineScope.execute(i: Intent) = when (i) {
+        is Intent.LoadPortfolioData -> loadPortfolio(i)
+    }
+
+    private fun CoroutineScope.loadPortfolio(i: Intent.LoadPortfolioData) = launch {
+        val state = ui.value
         flow {
-            emit(State(status = State.INITIAL_LOADING_STATUS))
-            emit(State(status = Feedback.None, data = service.load().await()))
+            emit(state.copy(message = DEFAULT_LOADING_MESSAGE))
+            val portfolio = service.load().await()
+            emit(state.copy(context = portfolio.business, data = portfolio))
         }.catch {
-            emit(State(status = Feedback.Failure(it)))
+            emit(state.copy(it) {
+                onRetry { post(i) }
+            })
         }.collect {
-            ui.value = it
+            ui.update { it }
         }
     }
 }
