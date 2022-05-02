@@ -5,24 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/CentralStateUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/MissionStateUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioIntents.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/GenericStateUtils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/CentralState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/CentralState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/MissionState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/MissionState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/server/ktor/src/main/kotlin/bitframe/server/Application.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/server/ktor/src/main/kotlin/bitframe/server/Application.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/GenericState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/GenericState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildSrc/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/versions/ktor.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/versions/ktor.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioServiceKtor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioServiceKtor.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioServiceMock.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioServiceMock.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/portfolio/MonitoredBusinessPortfolio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/portfolio/MonitoredBusinessPortfolio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/portfolio/MonitorPortfolio.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioServiceCore.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioServiceCore.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioServiceDaod.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/PiMonitorAppScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/PiMonitorAppScope.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioScope.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioState.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/PiMonitorReactAppScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/PiMonitorReactAppScope.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/portfolio/PortfolioReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/portfolio/PortfolioViewModelTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/portfolio/PortfolioViewModelTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +72,11 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="bitframe" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="bitframe" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />

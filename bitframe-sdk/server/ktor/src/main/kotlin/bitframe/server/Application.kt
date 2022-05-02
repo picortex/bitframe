@@ -7,7 +7,7 @@ import io.ktor.server.application.*
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
 import io.ktor.server.http.content.*
-import io.ktor.server.plugins.*
+import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -34,17 +34,16 @@ open class Application<S : BitframeService>(
     fun start(port: Int = 8080) {
         runBlocking { onStart(config.service) }
         embeddedServer(CIO, port) {
-            println("Serving files from ${config.client.absolutePath}")
             install(CORS) {
-                method(HttpMethod.Options)
-                method(HttpMethod.Get)
-                method(HttpMethod.Post)
-                method(HttpMethod.Put)
-                method(HttpMethod.Delete)
-                method(HttpMethod.Patch)
-                header(HttpHeaders.AccessControlAllowHeaders)
-                header(HttpHeaders.ContentType)
-                header(HttpHeaders.AccessControlAllowOrigin)
+                allowMethod(HttpMethod.Options)
+                allowMethod(HttpMethod.Get)
+                allowMethod(HttpMethod.Post)
+                allowMethod(HttpMethod.Put)
+                allowMethod(HttpMethod.Delete)
+                allowMethod(HttpMethod.Patch)
+                allowHeader(HttpHeaders.AccessControlAllowHeaders)
+                allowHeader(HttpHeaders.ContentType)
+                allowHeader(HttpHeaders.AccessControlAllowOrigin)
                 anyHost()
             }
             routing {

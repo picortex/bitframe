@@ -1,9 +1,6 @@
 package pimonitor.core.portfolio
 
-import bitframe.core.ServiceConfigDaod
-import bitframe.core.RequestBody
-import bitframe.core.get
-import bitframe.core.isEqualTo
+import bitframe.core.*
 import kotlinx.collections.interoperable.listOf
 import later.await
 import later.later
@@ -13,13 +10,16 @@ import presenters.cards.ValueCard
 import presenters.fields.BooleanInputField
 
 open class PortfolioServiceDaod(
-    override val config: ServiceConfigDaod
+    val config: ServiceConfigDaod
 ) : PortfolioServiceCore {
 
-    val businessBasicInfoDao by lazy { config.daoFactory.get<MonitoredBusinessBasicInfo>() }
-    val contactPersonSpaceInfoDao by lazy { config.daoFactory.get<ContactPersonBusinessInfo>() }
+    val factory get() = config.daoFactory
+    val businessBasicInfoDao by lazy { factory.get<MonitoredBusinessBasicInfo>() }
+    val contactPersonSpaceInfoDao by lazy { factory.get<ContactPersonBusinessInfo>() }
+    val spacesDao by lazy { factory.get<Space>() }
 
     override fun load(rb: RequestBody.Authorized<PortfolioFilter>) = config.scope.later {
+        val space = spacesDao.load(rb.session.space.uid).await()
         val businesses = businessBasicInfoDao.all(
             MonitoredBusinessBasicInfo::owningSpaceId isEqualTo rb.session.space.uid
         ).await()
@@ -28,7 +28,8 @@ open class PortfolioServiceDaod(
             contactPersonSpaceInfoDao.all(ContactPersonBusinessInfo::businessId isEqualTo it.uid).await()
         }
 
-        MonitoredBusinessPortfolio(
+        MonitorPortfolio(
+            space = space,
             cards = listOf(
                 ValueCard(
                     title = "Total businesses",

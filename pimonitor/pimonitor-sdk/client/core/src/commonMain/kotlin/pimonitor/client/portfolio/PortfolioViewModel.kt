@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.utils.live.update
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
-import pimonitor.core.portfolio.MonitoredBusinessPortfolio
+import pimonitor.core.portfolio.MonitorPortfolio
 import presenters.cases.MissionState
 import presenters.cases.copy
 import viewmodel.ViewModel
@@ -16,7 +16,7 @@ import pimonitor.client.portfolio.PortfolioIntent as Intent
 
 internal class PortfolioViewModel(
     private val config: UIScopeConfig<PortfolioService>
-) : ViewModel<Intent, MissionState<MonitoredBusinessBasicInfo, MonitoredBusinessPortfolio>>(
+) : ViewModel<Intent, MissionState<MonitoredBusinessBasicInfo, MonitorPortfolio>>(
     initialState = MissionState.Loading(DEFAULT_LOADING_MESSAGE), config = config.viewModel
 ) {
     val service get() = config.service

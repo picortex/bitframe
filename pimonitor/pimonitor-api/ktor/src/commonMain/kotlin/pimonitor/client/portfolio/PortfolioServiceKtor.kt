@@ -7,7 +7,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import later.later
 import pimonitor.client.utils.pathV1
-import pimonitor.core.portfolio.MonitoredBusinessPortfolio
+import pimonitor.core.portfolio.MonitorPortfolio
 import pimonitor.core.portfolio.PortfolioFilter
 import response.decodeResponseFromString
 
@@ -20,6 +20,6 @@ class PortfolioServiceKtor(
         val res = client.post(config.pathV1.portfolioLoad) {
             setBody(json.of(rb))
         }
-        json.decodeResponseFromString(MonitoredBusinessPortfolio.serializer(), res.bodyAsText()).response()
+        json.decodeResponseFromString(MonitorPortfolio.serializer(), res.bodyAsText()).response()
     }
 }

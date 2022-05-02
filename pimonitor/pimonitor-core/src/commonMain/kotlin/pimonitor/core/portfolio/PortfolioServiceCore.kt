@@ -6,5 +6,5 @@ import kotlin.js.JsName
 
 interface PortfolioServiceCore {
     @JsName("_ignore_load")
-    fun load(rb: RequestBody.Authorized<PortfolioFilter>): Later<MonitoredBusinessPortfolio>
+    fun load(rb: RequestBody.Authorized<PortfolioFilter>): Later<MonitorPortfolio>
 }

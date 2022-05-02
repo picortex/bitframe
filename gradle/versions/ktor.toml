@@ -1,5 +1,5 @@
 [versions]
-ktor = "2.0.0-beta-1"
+ktor = "2.0.1"
 
 [libraries]
 client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
