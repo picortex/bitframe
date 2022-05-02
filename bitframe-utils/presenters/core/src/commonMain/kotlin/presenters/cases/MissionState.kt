@@ -13,39 +13,34 @@ import presenters.cases.Failure as FailureCase
 import presenters.cases.Loading as LoadingCase
 import presenters.cases.Success as SuccessCase
 
-sealed class MissionState<out C, out T> : Case {
+sealed class MissionState<out T> : Case {
     abstract val data: T?
-    abstract val context: C?
 
-    data class Loading<out C, out T>(
+    data class Loading<out D>(
         override val message: String,
-        override val context: C? = null,
-        override val data: T? = null,
-    ) : MissionState<C, T>(), LoadingCase
+        override val data: D? = null,
+    ) : MissionState<D>(), LoadingCase
 
-    data class Failure<out C, out T> internal constructor(
+    data class Failure<out D> internal constructor(
         override val cause: Throwable? = null,
         override val message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
-        override val context: C? = null,
-        override val data: T? = null,
+        override val data: D? = null,
         override val actions: List<SimpleAction>
-    ) : MissionState<C, T>(), FailureCase {
+    ) : MissionState<D>(), FailureCase {
         @JsName("_ignore_builder")
         internal constructor(
             cause: Throwable? = null,
             message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
-            context: C? = null,
-            data: T? = null,
+            data: D? = null,
             builder: (SimpleActionsBuilder.() -> Unit)? = null
-        ) : this(cause, message, context, data, builder?.let { SimpleActionsBuilder().apply(it).actions } ?: emptyList())
+        ) : this(cause, message, data, builder?.let { SimpleActionsBuilder().apply(it).actions } ?: emptyList())
 
         override val failure: Boolean = true
     }
 
-    data class Success<out C, out T> internal constructor(
-        override val context: C,
-        override val data: T
-    ) : MissionState<C, T>(), SuccessCase {
+    data class Success<out D> internal constructor(
+        override val data: D
+    ) : MissionState<D>(), SuccessCase {
         override val message: String = SuccessCase.DEFAULT_MESSAGE
         override val actions: List<SimpleAction> = emptyList()
     }

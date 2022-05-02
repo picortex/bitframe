@@ -55,25 +55,4 @@ class DisbursableServiceKtor<out D : Disbursable, out DS : DisbursableSummary>(
         }
         json.decodeResponseFromString(ListSerializer(serializer), res.bodyAsText()).response().toInteroperableList()
     }
-
-    override fun createDisbursement(rb: RequestBody.Authorized<DisbursableDisbursementParams>): Later<Disbursement> = config.scope.later {
-        val res = http.post(path.disbursementCreate) {
-            setBody(json.of(rb))
-        }
-        json.decodeResponseFromString(Disbursement.serializer(), res.bodyAsText()).response()
-    }
-
-    override fun deleteDisbursement(rb: RequestBody.Authorized<Identified<Array<String>>>): Later<List<Disbursement>> = config.scope.later {
-        val res = http.post(path.disbursementDelete) {
-            setBody(json.of(rb))
-        }
-        json.decodeResponseFromString(ListSerializer(Disbursement.serializer()), res.bodyAsText()).response().toInteroperableList()
-    }
-
-    override fun updateDisbursement(rb: RequestBody.Authorized<Identified<DisbursableDisbursementParams>>): Later<Disbursement> = config.scope.later {
-        val res = http.post(path.disbursementUpdate) {
-            setBody(json.of(rb))
-        }
-        json.decodeResponseFromString(Disbursement.serializer(), res.bodyAsText()).response()
-    }
 }

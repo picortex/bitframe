@@ -10,15 +10,19 @@ import pimonitor.client.PiMonitorApi
 import pimonitor.client.utils.live.update
 import pimonitor.core.business.overview.MonitoredBusinessOverview
 import pimonitor.core.business.utils.info.toValidatedParams
+import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import presenters.cases.MissionState
+import presenters.cases.copy
 import viewmodel.ViewModel
 
 class BusinessOverviewViewModel(
     private val config: UIScopeConfig<PiMonitorApi>
-) : ViewModel<BusinessOverviewIntent, MissionState<MonitoredBusinessOverview>>(DEFAULT_LOADING_STATE) {
+) : ViewModel<BusinessOverviewIntent, MissionState<MonitoredBusinessOverview>>(
+    MissionState.Loading(DEFAULT_LOADING_MESSAGE), config.viewModel
+) {
 
     companion object {
-        val DEFAULT_LOADING_STATE = MissionState.Loading("Loading overview for this business, please wait. . .")
+        private val DEFAULT_LOADING_MESSAGE = "Loading overview for this business, please wait. . ."
     }
 
     private val api get() = config.service
@@ -27,12 +31,13 @@ class BusinessOverviewViewModel(
     }
 
     private fun CoroutineScope.loadOverview(i: BusinessOverviewIntent.LoadOverview) = launch {
+        val state = ui.value
         flow {
-            emit(DEFAULT_LOADING_STATE)
+            emit(state.copy(DEFAULT_LOADING_MESSAGE))
             val overview = api.businessOverview.load(i.params.toValidatedParams()).await()
-            emit(MissionState.Success(overview))
+            emit(state.copy(data = overview))
         }.catch {
-            emit(MissionState.Failure(it) {
+            emit(state.copy(it) {
                 onRetry { post(i) }
             })
         }.collect {

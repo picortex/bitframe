@@ -7,17 +7,21 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import later.await
 import pimonitor.client.utils.live.update
+import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.dashboards.OperationalDifferenceBoard
 import pimonitor.core.invites.InfoResults
 import presenters.cases.MissionState
+import presenters.cases.copy
 import viewmodel.ViewModel
 import pimonitor.client.business.operations.BusinessOperationsIntent as Intent
 
 class BusinessOperationsViewModel(
     private val config: UIScopeConfig<BusinessOperationsService>
-) : ViewModel<Intent, MissionState<InfoResults<OperationalDifferenceBoard>>>(DEFAULT_LOADING_STATE, config.viewModel) {
+) : ViewModel<Intent, MissionState<InfoResults<OperationalDifferenceBoard>>>(
+    MissionState.Loading(DEFAULT_LOADING_MESSAGE), config.viewModel
+) {
     companion object {
-        val DEFAULT_LOADING_STATE = MissionState.Loading("Loading operational dashboard, please wait . . .")
+        private val DEFAULT_LOADING_MESSAGE = "Loading operational dashboard, please wait . . ."
     }
 
     private val service get() = config.service
@@ -27,11 +31,12 @@ class BusinessOperationsViewModel(
     }
 
     private fun CoroutineScope.loadOperationalDashboard(i: Intent.LoadOperationalDashboard) = launch {
+        val state = ui.value
         flow {
-            emit(DEFAULT_LOADING_STATE)
-            emit(MissionState.Success(service.dashboard(i.params).await()))
+            emit(state.copy(DEFAULT_LOADING_MESSAGE))
+            emit(state.copy(data = service.dashboard(i.params).await()))
         }.catch {
-            emit(MissionState.Failure(it) {
+            emit(state.copy(it) {
                 onRetry { post(i) }
             })
         }.collect {

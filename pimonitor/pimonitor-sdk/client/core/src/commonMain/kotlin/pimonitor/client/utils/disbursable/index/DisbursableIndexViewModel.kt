@@ -9,16 +9,19 @@ import later.await
 import pimonitor.client.utils.disbursables.DisbursableService
 import pimonitor.core.utils.disbursables.DisbursableSummary
 import presenters.cases.MissionState
+import presenters.cases.copy
 import presenters.intents.IndexIntent
 import viewmodel.ViewModel
 
 class DisbursableIndexViewModel<out DS : DisbursableSummary>(
     val config: UIScopeConfig<DisbursableService<*, DS>>
-) : ViewModel<IndexIntent, MissionState<@UnsafeVariance DS>>(DEFAULT_LOADING_STATE, config.viewModel) {
+) : ViewModel<IndexIntent, MissionState<@UnsafeVariance DS>>(
+    MissionState.Loading(DEFAULT_LOADING_MESSAGE), config.viewModel
+) {
     private val service get() = config.service
 
     companion object {
-        private val DEFAULT_LOADING_STATE = MissionState.Loading("Loading investment, please wait. . .")
+        private val DEFAULT_LOADING_MESSAGE = "Loading investment, please wait. . ."
     }
 
     override fun CoroutineScope.execute(i: IndexIntent): Any = when (i) {
@@ -26,12 +29,12 @@ class DisbursableIndexViewModel<out DS : DisbursableSummary>(
     }
 
     private fun CoroutineScope.loadInvestment(i: IndexIntent.Load) = launch {
+        val state = ui.value
         flow {
-            emit(DEFAULT_LOADING_STATE)
-            val disbursable = service.load(i.uid).await()
-            emit(MissionState.Success(disbursable))
+            emit(state.copy(DEFAULT_LOADING_MESSAGE))
+            emit(state.copy(service.load(i.uid).await()))
         }.catch {
-            emit(MissionState.Failure(it) {
+            emit(state.copy(it) {
                 onRetry { post(i) }
             })
         }.collect {

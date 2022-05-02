@@ -14,56 +14,51 @@ import presenters.cases.Loading as LoadingCase
 import presenters.cases.Success as SuccessCase
 import presenters.cases.Failure as FailureCase
 
-sealed class GenericState<out C, out S> : Case {
+sealed class GenericState<out S> : Case {
     abstract override val message: String
-    abstract val context: C?
     abstract val data: S?
 
-    data class Loading<out C, out S>(
+    data class Loading<out S>(
         override val message: String,
-        override val context: C? = null,
         override val data: S? = null
-    ) : GenericState<C, S>(), LoadingCase {
+    ) : GenericState<S>(), LoadingCase {
         override val loading: Boolean = true
     }
 
-    data class Failure<out C, out S>(
+    data class Failure<out S> internal constructor(
         override val cause: Throwable? = null,
         override val message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
-        override val context: C? = null,
         override val data: S? = null,
         override val actions: List<SimpleAction> = emptyList()
-    ) : GenericState<C, S>(), FailureCase {
-        constructor(
+    ) : GenericState<S>(), FailureCase {
+        internal constructor(
             cause: Throwable? = null,
             message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
-            context: C? = null,
             data: S? = null,
             builder: SimpleActionsBuilder.() -> Unit
-        ) : this(cause, message, context, data, SimpleActionsBuilder().apply(builder).actions)
+        ) : this(cause, message, data, SimpleActionsBuilder().apply(builder).actions)
 
         override val failure: Boolean = true
     }
 
-    data class Success<out C, out S>(
+    data class Success<out S> internal constructor(
         override val message: String = SuccessCase.DEFAULT_MESSAGE,
         override val actions: List<SimpleAction> = emptyList(),
-        override val context: C? = null,
         override val data: S? = null
-    ) : GenericState<C, S>(), SuccessCase {
-        constructor(
+    ) : GenericState<S>(), SuccessCase {
+        internal constructor(
             message: String = SuccessCase.DEFAULT_MESSAGE,
+            data: S? = null,
             builder: SimpleActionsBuilder.() -> Unit
-        ) : this(message, SimpleActionsBuilder().apply(builder).actions)
+        ) : this(message, SimpleActionsBuilder().apply(builder).actions, data)
 
         override val success = true
     }
 
-    data class Content<out C, out S>(
+    data class Content<out S>(
         override val data: S,
-        override val context: C,
         val dialog: Dialog<*, *>? = null
-    ) : GenericState<C, S>() {
+    ) : GenericState<S>() {
         override val message: String get() = "$data"
     }
 
@@ -83,5 +78,7 @@ sealed class GenericState<out C, out S> : Case {
 
     val asContent get() = this as Content
 
-    val contentValue get() = (this as Content).data
+    @Deprecated("In favour of data", replaceWith = ReplaceWith("data!!"))
+    val contentValue
+        get() = (this as Content).data
 }

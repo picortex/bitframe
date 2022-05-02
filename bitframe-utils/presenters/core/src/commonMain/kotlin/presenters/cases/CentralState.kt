@@ -8,7 +8,7 @@ import presenters.table.builders.tableOf
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-data class CentralState<C, D>(
+data class CentralState<out C, D>(
     val emphasis: Emphasis = Emphasis.Loading("Please wait . . ."),
     val table: Table<D> = tableOf(emptyList()) {},
     val context: C? = null,

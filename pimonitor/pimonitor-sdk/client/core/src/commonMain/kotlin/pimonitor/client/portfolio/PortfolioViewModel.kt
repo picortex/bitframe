@@ -16,7 +16,7 @@ import pimonitor.client.portfolio.PortfolioIntent as Intent
 
 internal class PortfolioViewModel(
     private val config: UIScopeConfig<PortfolioService>
-) : ViewModel<Intent, MissionState<MonitoredBusinessBasicInfo, MonitorPortfolio>>(
+) : ViewModel<Intent, MissionState<MonitorPortfolio>>(
     initialState = MissionState.Loading(DEFAULT_LOADING_MESSAGE), config = config.viewModel
 ) {
     val service get() = config.service
@@ -34,7 +34,7 @@ internal class PortfolioViewModel(
         flow {
             emit(state.copy(message = DEFAULT_LOADING_MESSAGE))
             val portfolio = service.load().await()
-            emit(state.copy(context = portfolio.business, data = portfolio))
+            emit(state.copy(data = portfolio))
         }.catch {
             emit(state.copy(it) {
                 onRetry { post(i) }
