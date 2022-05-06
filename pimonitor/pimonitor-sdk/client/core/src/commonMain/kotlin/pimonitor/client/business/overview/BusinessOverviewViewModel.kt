@@ -10,7 +10,6 @@ import pimonitor.client.PiMonitorApi
 import pimonitor.client.utils.live.update
 import pimonitor.core.business.overview.MonitoredBusinessOverview
 import pimonitor.core.business.utils.info.toValidatedParams
-import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import presenters.cases.MissionState
 import presenters.cases.copy
 import viewmodel.ViewModel

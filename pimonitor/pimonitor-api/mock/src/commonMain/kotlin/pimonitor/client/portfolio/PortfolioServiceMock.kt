@@ -1,9 +1,11 @@
 package pimonitor.client.portfolio
 
-import bitframe.client.ServiceConfigMock
-import pimonitor.core.portfolio.PortfolioServiceDaod
+import pimonitor.client.interventions.InterventionsServiceMock
+import pimonitor.client.investments.InvestmentsServiceMock
 import pimonitor.core.portfolio.PortfolioServiceCore
+import pimonitor.core.portfolio.PortfolioServiceDaod
 
 class PortfolioServiceMock(
-    private val config: ServiceConfigMock
-) : PortfolioService(config), PortfolioServiceCore by PortfolioServiceDaod(config)
+    investments: InvestmentsServiceMock,
+    interventions: InterventionsServiceMock
+) : PortfolioService(investments.config), PortfolioServiceCore by PortfolioServiceDaod(investments.config, investments, interventions)

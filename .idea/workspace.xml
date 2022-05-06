@@ -5,16 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/ConditionUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/CoroutineCollectionUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/QueryMongoUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/businesses/BusinessSummaryUseCase.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/ConditionMockUtils.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/ConditionMongoUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/ConditionMongoUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/test/kotlin/MongoDaoTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/test/kotlin/MongoDaoTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/CentralStateUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/CentralStateUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/PiMonitorApiMock.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/PiMonitorApiMock.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesServiceMock.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesServiceMock.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioServiceMock.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioServiceMock.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/businesses/BusinessesServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/businesses/BusinessesServiceDaod.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioServiceDaod.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

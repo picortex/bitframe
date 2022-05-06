@@ -28,7 +28,7 @@ class PiMonitorApiMock @JvmOverloads constructor(
     override val invites by lazy { InvitesServiceMock(config) }
     override val interventions by lazy { InterventionsServiceMock(config) }
     override val investments by lazy { InvestmentsServiceMock(config) }
-    override val portfolio by lazy { PortfolioServiceMock(config) }
+    override val portfolio by lazy { PortfolioServiceMock(investments, interventions) }
     override val search by lazy { SearchServiceMock(config) }
     override val signUp by lazy { SignUpServiceMock(config) }
 }
