@@ -4,17 +4,23 @@ import bitframe.core.*
 import kotlinx.collections.interoperable.listOf
 import later.await
 import later.later
+import pimonitor.core.businesses.BusinessesServiceDaod
 import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.contacts.ContactPersonBusinessInfo
+import pimonitor.core.interventions.Intervention
+import pimonitor.core.investments.Investment
 import presenters.cards.ValueCard
 import presenters.fields.BooleanInputField
 
 open class PortfolioServiceDaod(
-    val config: ServiceConfigDaod
+    val businessesService: BusinessesServiceDaod,
 ) : PortfolioServiceCore {
 
+    val config get() = businessesService.config
     val factory get() = config.daoFactory
     val businessBasicInfoDao by lazy { factory.get<MonitoredBusinessBasicInfo>() }
+    val interventionsDao by lazy { factory.get<Intervention>() }
+    val investmentsDao by lazy { factory.get<Investment>() }
     val contactPersonSpaceInfoDao by lazy { factory.get<ContactPersonBusinessInfo>() }
     val spacesDao by lazy { factory.get<Space>() }
 
@@ -66,7 +72,8 @@ open class PortfolioServiceDaod(
                     BooleanInputField("Add Payment Method", value = false),
                     BooleanInputField("Add Integrations", value = false)
                 )
-            )
+            ),
+            businesses = businessesService.query()
         )
     }
 }

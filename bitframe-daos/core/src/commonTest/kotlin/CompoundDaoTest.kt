@@ -1,5 +1,3 @@
-package unit
-
 import bitframe.core.MockDaoFactory
 import bitframe.core.CompoundDao
 import bitframe.core.Savable

@@ -22,6 +22,7 @@ import pimonitor.client.utils.live.removeEmphasis
 import pimonitor.client.utils.live.update
 import pimonitor.client.utils.money.toDefaultFormat
 import pimonitor.core.interventions.InterventionSummary
+import pimonitor.core.interventions.InterventionsColumns
 import pimonitor.core.utils.disbursables.filters.DisbursableFilter
 import presenters.cases.Emphasis
 import presenters.cases.Emphasis.Companion.Dialog
@@ -168,16 +169,7 @@ class InterventionsViewModel(
         multiAction("Delete All") { post(ShowDeleteManyDisbursablesDialog(it)) }
 
         selectable()
-        val dateFormat = "{DD}-{MM}-{YYYY}"
-        column("Name") { it.data.name }
-        if (ui.value.context == null) column("Business") { it.data.businessName }
-        column("Amount") { it.data.amount.toDefaultFormat() }
-        column("Disbursed") { it.data.totalDisbursed.toDefaultFormat() }
-        column("Goals") { "0/${it.data.goals.size}" }
-        column("Start") { it.data.date.format(dateFormat) }
-        column("Deadline") { it.data.deadline.format(dateFormat) }
-        column("Countdown") { (it.data.deadline - it.data.date).toString() }
-        column("Created By") { it.data.createdBy.name }
+        InterventionsColumns(showBusinessColumn = ui.value.context == null)
         actions("Actions") {
             action("Issue Disbursement") { post(ShowDisbursementForm(it.data, null)) }
             action("Add Goal") { post(ShowCreateGoalForm(it.data, null)) }

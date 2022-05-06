@@ -33,8 +33,7 @@ internal class PortfolioViewModel(
         val state = ui.value
         flow {
             emit(state.copy(message = DEFAULT_LOADING_MESSAGE))
-            val portfolio = service.load().await()
-            emit(state.copy(data = portfolio))
+            emit(state.copy(data = service.load().await()))
         }.catch {
             emit(state.copy(it) {
                 onRetry { post(i) }

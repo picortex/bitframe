@@ -19,6 +19,7 @@ import pimonitor.client.interventions.forms.CreateInterventionForm
 import pimonitor.client.investments.forms.CreateInvestmentForm
 import pimonitor.client.utils.live.removeEmphasis
 import pimonitor.client.utils.live.update
+import pimonitor.core.businesses.MonitoredBusinessColumns
 import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.toValidatedParams
@@ -29,7 +30,6 @@ import presenters.cases.Emphasis.Companion.Failure
 import presenters.cases.Emphasis.Companion.Loading
 import presenters.cases.Emphasis.Companion.Success
 import presenters.cases.Emphasis.None
-import presenters.changes.toString
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 import pimonitor.client.businesses.BusinessesIntent as Intent
@@ -284,15 +284,7 @@ class BusinessesViewModel(
         singleAction("Delete") { post(ShowDeleteSingleConfirmationDialog(it.data)) }
         multiAction("Delete All") { post(ShowDeleteMultipleConfirmationDialog(it)) }
         selectable()
-        column("Name") { it.data.name }
-        column("Operations") { it.data.operationalBoard }
-        column("Accounting") { it.data.financialBoard }
-        column("Revenue") { it.data.revenue.toString() }
-        column("Expenses") { it.data.expenses.toString() }
-        column("GP") { it.data.grossProfit.toString() }
-        // column("Velocity") { it.data.velocity.toString() }
-        // column("NCF") { it.data.netCashFlow.toString() }
-        // column("V/day") { it.data.velocity.toString() }
+        MonitoredBusinessColumns()
         actions("Actions") {
             action("Invite to share reports") { post(ShowInviteToShareReportsForm(it.data, null)) }
             action("Intervene") { post(ShowCreateInterventionForm(it.data, null)) }

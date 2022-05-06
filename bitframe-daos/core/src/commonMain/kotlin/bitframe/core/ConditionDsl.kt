@@ -4,6 +4,7 @@ import bitframe.core.Condition.Operator.*
 import kotlin.reflect.KProperty
 
 infix fun String.contains(rhs: Any) = Condition(this, Contains, rhs)
+infix fun KProperty<*>.contains(rhs: Any) = Condition(name, Contains, rhs)
 infix fun String.isEqualTo(rhs: Any) = Condition(this, Equals, rhs)
 infix fun KProperty<*>.isEqualTo(rhs: Any) = Condition(name, Equals, rhs)
 infix fun String.isLessThan(rhs: Any) = Condition(this, LessThan, rhs)

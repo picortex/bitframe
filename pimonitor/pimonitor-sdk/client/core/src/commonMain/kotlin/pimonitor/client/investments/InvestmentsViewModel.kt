@@ -18,6 +18,7 @@ import pimonitor.client.utils.live.removeEmphasis
 import pimonitor.client.utils.live.update
 import pimonitor.client.utils.money.toDefaultFormat
 import pimonitor.core.investments.InvestmentSummary
+import pimonitor.core.investments.InvestmentsColumns
 import pimonitor.core.investments.params.toIdentifiedParams
 import pimonitor.core.investments.params.toValidatedParams
 import pimonitor.core.utils.disbursables.filters.DisbursableFilter
@@ -127,14 +128,7 @@ class InvestmentsViewModel(
         singleAction("Delete Investment") { post(ShowDeleteOneDisbursableDialog(it.data)) }
         multiAction("Delete All") { post(ShowDeleteManyDisbursablesDialog(it)) }
         selectable()
-        column("Name") { it.data.name }
-        if (ui.value.context == null) column("Business") { it.data.businessName }
-        column("Source") { it.data.source }
-        column("Type") { it.data.type }
-        column("Amount") { it.data.amount.toDefaultFormat() }
-        column("Disbursed") { it.data.totalDisbursed.toDefaultFormat() }
-//        column("Progress") { "${it.data.disbursementProgressInPercentage.asInt}%" }
-        column("Created By") { it.data.createdBy.name }
+        InvestmentsColumns(showBusinessColumn = ui.value.context == null)
         actions("Actions") {
             action("Issue Disbursement") { post(ShowDisbursementForm(it.data, null)) }
             action("Edit") { post(ShowUpdateInvestmentForm(it.data, null)) }

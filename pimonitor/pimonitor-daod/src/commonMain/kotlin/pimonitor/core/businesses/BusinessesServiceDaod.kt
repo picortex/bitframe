@@ -69,7 +69,7 @@ open class BusinessesServiceDaod(
             )
         ).await()
         CreateMonitoredBusinessResult(
-            params = params, business = business, contact = cpbi, summary = summaryOf(business)
+            params = params, business = business, contact = cpbi, summary = business.toSummary()
         )
     }
 
@@ -96,8 +96,13 @@ open class BusinessesServiceDaod(
     override fun all(rb: RequestBody.Authorized<BusinessFilter>) = config.scope.later {
         val condition = MonitoredBusinessBasicInfo::owningSpaceId isEqualTo rb.session.space.uid
         monitoredBusinessesDao.all(condition).await().filter { !it.deleted }.toTypedArray().map {
-            summaryOf(it)
+            it.toSummary()
         }.toInteroperableList()
+    }
+
+    fun query(condition: Condition<*>) = config.scope.later {
+        val query = find(condition).limit(5)
+        monitoredBusinessesDao.execute(query).await()
     }
 
     override fun delete(rb: RequestBody.Authorized<Array<out String>>) = config.scope.later {
@@ -106,7 +111,9 @@ open class BusinessesServiceDaod(
         list
     }
 
-    private suspend fun summaryOf(business: MonitoredBusinessBasicInfo): MonitoredBusinessSummary {
+
+    private suspend fun MonitoredBusinessBasicInfo.toSummary(): MonitoredBusinessSummary {
+        val business = this
         val contacts = contactPersonBusinessInfoDao.all(ContactPersonBusinessInfo::businessId isEqualTo business.uid).await().flatMap {
             userContactsDao.all(UserContact::userId isEqualTo it.userId).await()
         }.toInteroperableList()

@@ -1,3 +1,5 @@
+@file:OptIn(InternalSerializationApi::class)
+
 package bitframe.core
 
 import kotlinx.collections.interoperable.List
@@ -53,6 +55,23 @@ class MockDao<D : Savable>(
         }
     }
 
+    override fun execute(query: Query): Later<List<D>> = scope.later {
+        val conditions = query.statements.filterIsInstance<Condition<*>>()
+        var results: Collection<D> = items.values
+        for (cond in conditions) {
+            results = results.filter(cond.toMockFilter(config.clazz.serializer()))
+        }
+        val statements = query.statements - conditions
+        statements.forEach { statement->
+            results = when(statement) {
+                is Condition<*> -> results
+                is LimitStatement -> results.take(statement.value)
+                is SortStatement -> TODO()
+            }
+        }
+        results.toInteroperableList()
+    }
+
     override fun delete(uid: String): Later<D> = scope.later {
         lock.lock()
         val item = load(uid).await().copySavable(uid = uid, deleted = true) as D
@@ -61,7 +80,6 @@ class MockDao<D : Savable>(
         item
     }
 
-    @OptIn(InternalSerializationApi::class)
     override fun all(condition: Condition<*>?): Later<List<D>> = scope.later {
         lock.lock()
         delay(config.simulationTime)

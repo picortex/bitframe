@@ -6,7 +6,7 @@ import kotlinx.collections.interoperable.List
 import kotlin.js.JsExport
 
 @JsExport
-interface TableLike<D> {
+interface Tabular<D> {
     val actions: List<TableAction<D>>
 
     val rows: List<Row<D>>
