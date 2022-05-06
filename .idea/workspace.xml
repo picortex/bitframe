@@ -5,39 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/LimitStatement.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Query.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/QueryBuilder.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/QueryStatement.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/SortStatement.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonTest/kotlin/QuerySyntaxTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/money/MoneyUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/MonitoredBusinessColumns.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/interventions/InterventionsColumn.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsColumns.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/ConditionUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/CoroutineCollectionUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/QueryMongoUtils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/CompoundDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/CompoundDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Condition.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Condition.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/ConditionDsl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/ConditionDsl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Dao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Dao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonTest/kotlin/acceptance/ExhaustionTest.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonTest/kotlin/integration/ExhaustionTest.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonTest/kotlin/unit/CompoundDaoTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonTest/kotlin/CompoundDaoTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/ConditionMockUtils.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonTest/kotlin/Human.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonTest/kotlin/Human.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonTest/kotlin/MockDaoTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonTest/kotlin/MockDaoTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/Column.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/Column.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/Table.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/Table.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/TableLike.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/Tabular.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/TableState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/TableState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/portfolio/MonitorPortfolio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/portfolio/MonitorPortfolio.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/businesses/BusinessesServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/businesses/BusinessesServiceDaod.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioServiceDaod.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioServiceDaod.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/InterventionsViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/InterventionsViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/ConditionMongoUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/ConditionMongoUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDao.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/test/kotlin/MongoDaoTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/test/kotlin/MongoDaoTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,51 +162,7 @@
       <recent name="pimonitor.server.disbursables" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.MockDaoTest.can_execute_a_query_with_a_limit">
-    <configuration name="EmitterApiTest.can_be_constructed_from_non_functional_languages_like_java_and_wont_run_before_collection" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/bitframe-utils/mokads" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;emiiter.EmitterApiTest.can_be_constructed_from_non_functional_languages_like_java_and_wont_run_before_collection&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":mokads:cleanJvmTest" />
-            <option value=":mokads:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="EmitterApiTest.can_catch_errors_and_recover" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/bitframe-utils/mokads" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;emiiter.EmitterApiTest.can_catch_errors_and_recover&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":mokads:cleanJvmTest" />
-            <option value=":mokads:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Gradle.MongoDaoTest.can_execute_a_query_with_a_limit">
     <configuration name="EmitterApiTest.can_map_from_one_type_to_another" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -287,6 +220,48 @@
           <list>
             <option value=":bitframe-dao-mock:cleanJvmTest" />
             <option value=":bitframe-dao-mock:jvmTest" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="MongoDaoTest.can_execute_a_query" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;MongoDaoTest.can_execute_a_query&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":bitframe-dao-mongo:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="MongoDaoTest.can_execute_a_query_with_a_limit" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;MongoDaoTest.can_execute_a_query_with_a_limit&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":bitframe-dao-mongo:test" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -795,19 +770,19 @@
       <item itemvalue="Gradle.populate-live-local" />
       <item itemvalue="Gradle.populate-live-staging" />
       <item itemvalue="Gradle.populate-live-prod" />
-      <item itemvalue="Gradle.EmitterApiTest.can_be_constructed_from_non_functional_languages_like_java_and_wont_run_before_collection" />
-      <item itemvalue="Gradle.EmitterApiTest.can_catch_errors_and_recover" />
       <item itemvalue="Gradle.EmitterApiTest.can_map_from_one_type_to_another" />
       <item itemvalue="Gradle.MockDaoTest.can_execute_a_query" />
       <item itemvalue="Gradle.MockDaoTest.can_execute_a_query_with_a_limit" />
+      <item itemvalue="Gradle.MongoDaoTest.can_execute_a_query" />
+      <item itemvalue="Gradle.MongoDaoTest.can_execute_a_query_with_a_limit" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.MongoDaoTest.can_execute_a_query_with_a_limit" />
+        <item itemvalue="Gradle.MongoDaoTest.can_execute_a_query" />
         <item itemvalue="Gradle.MockDaoTest.can_execute_a_query_with_a_limit" />
         <item itemvalue="Gradle.MockDaoTest.can_execute_a_query" />
         <item itemvalue="Gradle.MockDaoTest.can_execute_a_query" />
-        <item itemvalue="Gradle.EmitterApiTest.can_map_from_one_type_to_another" />
-        <item itemvalue="Gradle.EmitterApiTest.can_catch_errors_and_recover" />
       </list>
     </recent_temporary>
   </component>
@@ -833,17 +808,6 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDao.kt</url>
-          <line>71</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

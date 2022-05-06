@@ -59,11 +59,11 @@ class MockDao<D : Savable>(
         val conditions = query.statements.filterIsInstance<Condition<*>>()
         var results: Collection<D> = items.values
         for (cond in conditions) {
-            results = results.filter(cond.toMockFilter(config.clazz.serializer()))
+            results = results.filter(cond.asPredicate(config.clazz.serializer()))
         }
         val statements = query.statements - conditions
-        statements.forEach { statement->
-            results = when(statement) {
+        statements.forEach { statement ->
+            results = when (statement) {
                 is Condition<*> -> results
                 is LimitStatement -> results.take(statement.value)
                 is SortStatement -> TODO()
@@ -86,7 +86,7 @@ class MockDao<D : Savable>(
         if (condition == null) {
             items.values.toInteroperableList()
         } else {
-            items.values.filter(condition.toMockFilter(config.clazz.serializer())).toInteroperableList()
+            items.values.filter(condition.asPredicate(config.clazz.serializer())).toInteroperableList()
         }.also { lock.unlock() }
     }
 }
