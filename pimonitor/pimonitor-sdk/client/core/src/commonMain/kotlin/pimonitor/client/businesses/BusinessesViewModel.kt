@@ -24,12 +24,9 @@ import pimonitor.core.businesses.models.MonitoredBusinessSummary
 import pimonitor.core.businesses.params.InviteMessageParams
 import pimonitor.core.businesses.params.toValidatedParams
 import pimonitor.core.investments.params.toValidatedParams
-import presenters.cases.CentralState
-import presenters.cases.Emphasis.Companion.Dialog
-import presenters.cases.Emphasis.Companion.Failure
+import presenters.cases.*
 import presenters.cases.Emphasis.Companion.Loading
-import presenters.cases.Emphasis.Companion.Success
-import presenters.cases.Emphasis.None
+import presenters.modal.dialog
 import presenters.table.builders.tableOf
 import viewmodel.ViewModel
 import pimonitor.client.businesses.BusinessesIntent as Intent
@@ -68,15 +65,15 @@ class BusinessesViewModel(
     private fun CoroutineScope.sendInterveneForm(i: SendCreateInterventionForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Intervening ${i.monitored.name}, please wait . . .")))
+            emit(state.loading("Intervening ${i.monitored.name}, please wait . . ."))
             api.interventions.create(i.params).await()
-            emit(state.copy(emphasis = Success("Intervention completed successfully. Loading businesses, please wait . . .")))
-            emit(state.copy(table = businessesTable(api.businesses.all().await())))
+            emit(state.success("Intervention completed successfully. Loading businesses, please wait . . ."))
+            emit(state.table(businessesTable(api.businesses.all().await())))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
+            emit(state.failure(it) {
                 onGoBack { post(ShowCreateInterventionForm(i.monitored, i.params)) }
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
             ui.value = it
         }
@@ -87,33 +84,33 @@ class BusinessesViewModel(
             onCancel { ui.removeEmphasis() }
             onConfirm { post(DeleteAll(i.data.map { it.data }.toTypedArray())) }
         }
-        ui.update { copy(emphasis = Dialog(confirm)) }
+        ui.update { dialog(confirm) }
     }
 
     private fun showDeleteSingleConfirmationDialog(i: ShowDeleteSingleConfirmationDialog) {
         val state = ui.value
         val confirm = DeleteSingleDialog(i.monitored) {
-            onCancel { ui.value = state.copy(emphasis = None) }
+            onCancel { ui.value = state.withoutEmphasis() }
             onConfirm { post(Delete(i.monitored)) }
         }
-        ui.update { copy(emphasis = Dialog(confirm)) }
+        ui.update { dialog(confirm) }
     }
 
     private fun CoroutineScope.sendCaptureInvestmentForm(i: SendCreateInvestmentForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Capturing investment for ${i.monitored.name}, please wait. . .")))
+            emit(state.loading("Capturing investment for ${i.monitored.name}, please wait. . ."))
             val params = i.params.toValidatedParams()
             api.investments.create(params).await()
-            emit(state.copy(emphasis = Success("Investment captured successfuly. Loading remaining business, please wait . . .")))
-            emit(state.copy(table = businessesTable(api.businesses.all().await())))
+            emit(state.success("Investment captured successfuly. Loading remaining business, please wait . . ."))
+            emit(state.table(businessesTable(api.businesses.all().await())))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
+            emit(state.failure(it) {
                 onGoBack { post(ShowCreateInvestmentForm(i.monitored, i.params)) }
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
-            ui.value = it
+            ui.update { it }
         }
     }
 
@@ -124,10 +121,10 @@ class BusinessesViewModel(
             business = i.monitored,
             params = i.params
         ) {
-            onCancel { ui.value = state.copy(emphasis = None) }
+            onCancel { ui.value = state.withoutEmphasis() }
             onSubmit { params -> post(SendCreateInvestmentForm(i.monitored, params)) }
         }
-        ui.value = ui.value.copy(emphasis = Dialog(form))
+        ui.update { state.dialog(form) }
     }
 
     private fun showInterveneForm(i: ShowCreateInterventionForm) {
@@ -137,69 +134,69 @@ class BusinessesViewModel(
             business = i.monitored,
             params = i.params
         ) {
-            onCancel { ui.value = state.copy(emphasis = None) }
+            onCancel { ui.value = state.withoutEmphasis() }
             onSubmit("Create Intervention") { post(SendCreateInterventionForm(i.monitored, it)) }
         }
-        ui.value = ui.value.copy(emphasis = Dialog(form))
+        ui.update { state.dialog(form) }
     }
 
     private fun showCreateBusinessForm(i: ShowCreateBusinessForm) {
         val state = ui.value
         val form = CreateBusinessForm(i.params) {
-            onCancel { ui.value = state.copy(emphasis = None) }
+            onCancel { ui.value = state.withoutEmphasis() }
             onSubmit("Create Business") { params -> post(SendCreateBusinessForm(params)) }
         }
-        ui.value = ui.value.copy(emphasis = Dialog(form))
+        ui.update { state.dialog(form) }
     }
 
     private fun CoroutineScope.showInviteToShareReportsForm(i: ShowInviteToShareReportsForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Preparing invite form, please wait . . .")))
+            emit(state.loading("Preparing invite form, please wait . . ."))
             val inviteInfo = api.invites.defaultInviteMessage(InviteMessageParams(i.monitored.uid)).await()
             val form = InviteToShareReportsForm(
                 businessName = i.monitored.name,
                 contactEmail = i.monitored.contacts.filterIsInstance<UserEmail>().firstOrNull()?.value ?: error("There are no registered contact's with email in ${i.monitored.name}"),
                 message = inviteInfo.inviteMessage
             ) {
-                onCancel { ui.value = state.copy(emphasis = None) }
+                onCancel { ui.value = state.withoutEmphasis() }
                 onSubmit("Send Invite") { params -> post(SendInviteToShareReportsForm(i.monitored, params)) }
             }
-            emit(state.copy(emphasis = Dialog(form)))
+            emit(state.dialog(form))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
-                onGoBack { ui.value = state.copy(emphasis = None) }
+            emit(state.failure(it) {
+                onGoBack { ui.value = state.withoutEmphasis() }
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
-            ui.value = it
+            ui.update { it }
         }
     }
 
     private fun CoroutineScope.sendInviteToShareReportsForm(i: SendInviteToShareReportsForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Sending invite to ${i.monitored.name}, Please wait . . .")))
+            emit(state.loading("Sending invite to ${i.monitored.name}, Please wait . . ."))
             api.invites.send(i.params.toValidatedParams(i.monitored.uid)).await()
-            emit(state.copy(emphasis = Success("Invite Sent. Loading your businesses, please wait . . .")))
-            emit(state.copy(table = businessesTable(api.businesses.all().await())))
+            emit(state.success("Invite Sent. Loading your businesses, please wait . . ."))
+            emit(state.table(businessesTable(api.businesses.all().await())))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
+            emit(state.failure(it) {
                 onGoBack { post(ShowInviteToShareReportsForm(i.monitored, i.params)) }
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
-            ui.value = it
+            ui.update { it }
         }
     }
 
     private fun CoroutineScope.sendCreateBusinessForm(i: SendCreateBusinessForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Adding ${i.params.businessName}, please wait . . .")))
+            emit(state.loading("Adding ${i.params.businessName}, please wait . . ."))
             val result = api.businesses.create(i.params).await()
             if (result.params.sendInvite) {
-                emit(state.copy(emphasis = Success("${i.params.businessName} has successfully been added. Preparing invite form, please wait . . .")))
+                emit(state.success("${i.params.businessName} has successfully been added. Preparing invite form, please wait . . ."))
                 val (inviteInfo, businesses) = coroutineScope {
                     val i = api.invites.defaultInviteMessage(InviteMessageParams(result.business.uid))
                     val b = api.businesses.all()
@@ -208,54 +205,54 @@ class BusinessesViewModel(
                 val form = InviteToShareReportsForm(
                     businessName = result.params.businessName, contactEmail = result.params.contactEmail, message = inviteInfo.inviteMessage
                 ) {
-                    onCancel { ui.value = ui.value.copy(emphasis = None) }
+                    onCancel { ui.value = ui.value.withoutEmphasis() }
                     onSubmit("Send Invite") { post(SendInviteToShareReportsForm(result.summary, it)) }
                 }
-                emit(state.copy(emphasis = Dialog(form), table = businessesTable(businesses)))
+                emit(state.table(table = businessesTable(businesses), dialog = dialog(form)))
             } else {
-                emit(state.copy(emphasis = Success("${i.params.businessName} has successfully been added. Loading all your businesses, please wait . . .")))
-                emit(state.copy(table = businessesTable(api.businesses.all().await())))
+                emit(state.success("${i.params.businessName} has successfully been added. Loading all your businesses, please wait . . ."))
+                emit(state.table(table = businessesTable(api.businesses.all().await())))
             }
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
+            emit(state.failure(it) {
                 onGoBack { post(ShowCreateBusinessForm(i.params)) }
-            }))
+            })
         }.collect {
-            ui.value = it
+            ui.update { it }
         }
     }
 
     private fun CoroutineScope.deleteAll(i: DeleteAll) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Deleting ${i.data.size} businesses")))
+            emit(state.loading("Deleting ${i.data.size} businesses"))
             api.businesses.delete(*i.data.map { it.uid }.toTypedArray()).await()
-            emit(state.copy(emphasis = Success("${i.data.size} businesses deleted successfully. Loading remaining businesses, please wait . . .")))
-            emit(state.copy(table = businessesTable(api.businesses.all().await())))
+            emit(state.success("${i.data.size} businesses deleted successfully. Loading remaining businesses, please wait . . ."))
+            emit(state.table(table = businessesTable(api.businesses.all().await())))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
-                onGoBack { ui.value = state.copy(emphasis = None) }
+            emit(state.failure(it) {
+                onGoBack { ui.removeEmphasis() }
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
-            ui.value = it
+            ui.update { it }
         }
     }
 
     private fun CoroutineScope.delete(i: Delete) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Deleting ${i.monitored.name}")))
+            emit(state.loading("Deleting ${i.monitored.name}"))
             api.businesses.delete(i.monitored.uid).await()
-            emit(state.copy(emphasis = Success("Successfully delete ${i.monitored.name}. Loading remaining businesses, please wait . . .")))
-            emit(state.copy(table = businessesTable(api.businesses.all().await())))
+            emit(state.success("Successfully delete ${i.monitored.name}. Loading remaining businesses, please wait . . ."))
+            emit(state.table(table = businessesTable(api.businesses.all().await())))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
-                onGoBack { ui.value = state.copy(emphasis = None) }
+            emit(state.failure(it) {
+                onGoBack { ui.removeEmphasis() }
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
-            ui.value = it
+            ui.update { it }
         }
     }
 
@@ -263,13 +260,13 @@ class BusinessesViewModel(
         val state = ui.value
         flow {
             emit(INITIAL_LOADING_STATE)
-            emit(state.copy(table = businessesTable(api.businesses.all().await())))
+            emit(state.table(table = businessesTable(api.businesses.all().await())))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
+            emit(state.failure(it) {
                 onRetry { post(LoadBusinesses) }
-            }))
+            })
         }.collect {
-            ui.value = it
+            ui.update { it }
         }
     }
 

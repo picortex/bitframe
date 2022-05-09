@@ -8,7 +8,7 @@ import presenters.table.builders.tableOf
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-data class CentralState<out C, D>(
+class CentralState<out C, D>(
     val emphasis: Emphasis = Emphasis.Loading("Please wait . . ."),
     val table: Table<D> = tableOf(emptyList()) {},
     val context: C? = null,
@@ -29,4 +29,19 @@ data class CentralState<out C, D>(
     val asDialog get() = emphasis.asDialog
 
     val dialog get() = (emphasis as? Emphasis.Modal)?.dialog
+
+    override fun equals(other: Any?): Boolean = other is CentralState<*, *>
+            && emphasis == other.emphasis
+            && table == other.table
+            && context == other.context
+
+    override fun hashCode(): Int = emphasis.hashCode() + table.hashCode() + context.hashCode()
+
+    override fun toString() = buildString {
+        appendLine("CentralState(")
+        appendLine("\temphasis=$emphasis,")
+        appendLine("\ttable=$table,")
+        appendLine("\tcontext=$context")
+        appendLine(")")
+    }
 }

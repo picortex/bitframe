@@ -15,7 +15,7 @@ import pimonitor.core.businesses.MonitoredBusinessBasicInfo
 import pimonitor.core.utils.disbursables.DisbursableSummary
 import pimonitor.core.utils.disbursables.disbursements.params.toValidatedDisbursableParams
 import pimonitor.core.utils.disbursables.filters.DisbursableFilter
-import presenters.cases.CentralState
+import presenters.cases.*
 import presenters.cases.Emphasis.Companion.Dialog
 import presenters.cases.Emphasis.Companion.Failure
 import presenters.cases.Emphasis.Companion.Loading
@@ -46,21 +46,21 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
             onCancel { ui.value = state }
             onSubmit { params -> post(SendDisbursementForm(i.disbursable, params)) }
         }
-        ui.update { copy(emphasis = Dialog(form)) }
+        ui.update { dialog(form) }
     }
 
     private fun CoroutineScope.sendDisbursementForm(i: SendDisbursementForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Sending disbursement, please wait. . .!")))
+            emit(state.loading("Sending disbursement, please wait. . .!"))
             val disbursement = service.disbursements.create(i.params.toValidatedDisbursableParams(i.disbursable.uid)).await()
-            emit(state.copy(emphasis = Success("${disbursement.amount.toFormattedString()} has been successfully disbursed to ${i.disbursable.name} disbursable. Loading the remaining disbursables, please wait. . .")))
-            emit(state.copy(table = disbursablesTable(service.all(DisbursableFilter(state.context?.uid)).await())))
+            emit(state.success("${disbursement.amount.toFormattedString()} has been successfully disbursed to ${i.disbursable.name} disbursable. Loading the remaining disbursables, please wait. . ."))
+            emit(state.table(table = disbursablesTable(service.all(DisbursableFilter(state.context?.uid)).await())))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
+            emit(state.failure(it) {
                 onGoBack { post(ShowDisbursementForm(i.disbursable, i.params)) }
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
             ui.update { it }
         }
@@ -71,21 +71,21 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
             onCancel { ui.removeEmphasis() }
             onConfirm { post(SendDeleteOneDisbursableIntent(i.disbursable)) }
         }
-        ui.update { copy(emphasis = Dialog(confirm)) }
+        ui.update { dialog(confirm) }
     }
 
     private fun CoroutineScope.sendDeleteOneDisbursable(i: SendDeleteOneDisbursableIntent) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Deleting ${i.disbursable.name} disbursable, please wait . . .")))
+            emit(state.loading("Deleting ${i.disbursable.name} disbursable, please wait . . ."))
             service.delete(i.disbursable.uid).await()
-            emit(state.copy(emphasis = Success("Investment ${i.disbursable.name} deleted. Loading the remaining disbursables, please wait. . .")))
-            emit(state.copy(table = disbursablesTable(service.all(DisbursableFilter(state.context?.uid)).await())))
+            emit(state.success("Investment ${i.disbursable.name} deleted. Loading the remaining disbursables, please wait. . ."))
+            emit(state.table(disbursablesTable(service.all(DisbursableFilter(state.context?.uid)).await())))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
+            emit(state.failure(it) {
                 onGoBack { ui.removeEmphasis() }
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
             ui.update { it }
         }
@@ -100,21 +100,21 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
             onCancel { ui.removeEmphasis() }
             onConfirm { post(SendDeleteManyDisbursablesIntent(i.disbursables.map { it.data }.toTypedArray())) }
         }
-        ui.update { copy(emphasis = Dialog(confirm)) }
+        ui.update { dialog(confirm) }
     }
 
     private fun CoroutineScope.sendDeleteManyDisbursable(i: SendDeleteManyDisbursablesIntent) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Deleting ${i.disbursables.size} disbursables, please wait. . .")))
+            emit(state.loading("Deleting ${i.disbursables.size} disbursables, please wait. . ."))
             service.delete(*i.disbursables.map { it.uid }.toTypedArray()).await()
-            emit(state.copy(emphasis = Success("${i.disbursables.size} Items deleted")))
-            emit(state.copy(table = disbursablesTable(service.all(DisbursableFilter(state.context?.uid)).await())))
+            emit(state.success("${i.disbursables.size} Items deleted"))
+            emit(state.table(table = disbursablesTable(service.all(DisbursableFilter(state.context?.uid)).await())))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
+            emit(state.failure(it) {
                 onGoBack { ui.removeEmphasis() }
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
             ui.update { it }
         }
@@ -123,15 +123,15 @@ abstract class DisbursablesViewModel<out DS : DisbursableSummary>(
     private fun CoroutineScope.loadAllDisbursables(i: LoadAllDisbursables) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Loading context, please wait. . .")))
+            emit(state.loading("Loading context, please wait. . ."))
             val context = i.businessId?.let { api.businesses.load(it).await() }
-            emit(state.copy(emphasis = Loading("We are almost done"), context = context))
+            emit(state.loading("We are almost done", context = context))
             val table = disbursablesTable(service.all(DisbursableFilter(i.businessId)).await())
-            emit(state.copy(context = context, table = table))
+            emit(state.table(context = context, table = table))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
+            emit(ui.value.failure(it) {
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
             ui.update { it }
         }

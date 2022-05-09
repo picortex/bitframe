@@ -1,17 +1,49 @@
 package presenters.cases
 
+import presenters.actions.SimpleActionsBuilder
+import presenters.forms.Form
+import presenters.modal.Dialog
 import presenters.table.Table
-import presenters.table.builders.tableOf
-import kotlin.js.JsExport
-import kotlin.js.JsName
+import presenters.modal.dialog as Dialog
 
-fun <C, D> CentralState<C, D>.copy(table: Table<D>) = CentralState(
-    emphasis = Emphasis.None,
+fun <C, D> CentralState<C, D>.table(
+    table: Table<D>,
+    context: C? = this.context,
+    dialog: Dialog<*, *>? = null
+) = CentralState(
+    emphasis = dialog?.let { Emphasis.Modal(it) } ?: Emphasis.None,
     table = table,
     context = context
 )
 
-fun <C, D> CentralState<C, D>.copy(
-    table: Table<D>,
-    context: C?
-) = copy(emphasis = Emphasis.None, table = table, context = context)
+private fun <C, D> CentralState<C, D>.emphasis(emphasis: Emphasis, context: C?) = CentralState(
+    emphasis = emphasis,
+    table = table,
+    context = context ?: this.context
+)
+
+fun <C, D> CentralState<C, D>.loading(message: String, context: C? = null) = emphasis(
+    Emphasis.Loading(message), context
+)
+
+fun <C, D> CentralState<C, D>.success(
+    message: String,
+    builder: (SimpleActionsBuilder.() -> Unit)? = null
+) = emphasis(Emphasis.Success(message, builder), null)
+
+fun <C, D> CentralState<C, D>.failure(
+    cause: Throwable? = null,
+    builder: (SimpleActionsBuilder.() -> Unit)? = null
+) = emphasis(Emphasis.Failure(cause, builder = builder), null)
+
+fun <C, D> CentralState<C, D>.dialog(
+    dialog: Dialog<*, *>
+) = emphasis(Emphasis.Modal(dialog), null)
+
+fun <C, D> CentralState<C, D>.dialog(
+    form: Form<*, *>
+) = emphasis(Emphasis.Modal(Dialog(form)), null)
+
+fun <C, D> CentralState<C, D>.withoutEmphasis() = emphasis(
+    Emphasis.None, null
+)

@@ -24,7 +24,7 @@ import pimonitor.client.utils.money.toDefaultFormat
 import pimonitor.core.interventions.InterventionSummary
 import pimonitor.core.interventions.InterventionsColumns
 import pimonitor.core.utils.disbursables.filters.DisbursableFilter
-import presenters.cases.Emphasis
+import presenters.cases.*
 import presenters.cases.Emphasis.Companion.Dialog
 import presenters.cases.Emphasis.Companion.Failure
 import presenters.cases.Emphasis.Companion.Loading
@@ -41,15 +41,33 @@ class InterventionsViewModel(
         is SendUpdateInterventionForm -> sendUpdateInterventionForm(i)
         is ShowCreateGoalForm -> showCreateGoalForm(i)
         is SendCreateGoalForm -> sendCreateGoalForm(i)
-        is ShowUpdateGoalForm -> TODO()
-        is SendUpdateGoalForm -> TODO()
+        is ShowUpdateGoalForm -> showUpdateGoalForm(i)
+        is SendUpdateGoalForm -> sendUpdateGoalForm(i)
         else -> perform(i)
+    }
+
+    private fun sendUpdateGoalForm(i: SendUpdateGoalForm) {
+        val state = ui.value
+        ui.update {
+            failure(NotImplementedError("Goals feature is not fully implemented. Waiting for webhooks")) {
+                onGoBack { state }
+            }
+        }
+    }
+
+    private fun showUpdateGoalForm(i: ShowUpdateGoalForm) {
+        val state = ui.value
+        ui.update {
+            failure(NotImplementedError("Goals feature is not fully implemented. Waiting for webhooks")) {
+                onGoBack { state }
+            }
+        }
     }
 
     private fun CoroutineScope.showUpdateInterventionForm(i: ShowUpdateInterventionForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Preparing interventions form, please wait . . .")))
+            emit(state.loading("Preparing interventions form, please wait . . ."))
             val businesses = api.businesses.all().await()
             val business = businesses.firstOrNull { it.uid == state.context?.uid }
             val form = UpdateInterventionForm(
@@ -61,12 +79,12 @@ class InterventionsViewModel(
                 onCancel { ui.removeEmphasis() }
                 onSubmit { post(SendCreateInterventionForm(it)) }
             }
-            emit(state.copy(emphasis = Dialog(form)))
+            emit(state.dialog(form))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
+            emit(state.failure(it) {
                 onGoBack { post(ShowCreateInterventionForm(null, i.params)) }
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
             ui.update { it }
         }
@@ -75,17 +93,17 @@ class InterventionsViewModel(
     private fun CoroutineScope.sendUpdateInterventionForm(i: SendUpdateInterventionForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Updating investment, please wait. . .!")))
+            emit(state.loading("Updating investment, please wait. . .!"))
             val params = Identified(i.intervention.uid, i.params)
             val intervention = api.interventions.update(params).await()
-            emit(state.copy(emphasis = Success("Updated ${intervention.name} investment")))
+            emit(state.success("Updated ${intervention.name} investment"))
             val interventions = api.interventions.all(DisbursableFilter(state.context?.uid)).await()
-            emit(state.copy(table = disbursablesTable(interventions)))
+            emit(state.table(table = disbursablesTable(interventions)))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
+            emit(state.failure(it) {
                 onGoBack { post(ShowUpdateInterventionForm(i.intervention, i.params)) }
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
             ui.update { it }
         }
@@ -94,7 +112,7 @@ class InterventionsViewModel(
     private fun CoroutineScope.sendCreateGoalForm(i: SendCreateGoalForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Success(message = "Success. Feature is still tricky to implement")))
+            emit(state.success(message = "Success. Feature is still tricky to implement"))
             delay(config.viewModel.recoveryTime)
             emit(state)
         }.collect {
@@ -107,22 +125,22 @@ class InterventionsViewModel(
             onCancel { ui.removeEmphasis() }
             onSubmit { post(SendCreateGoalForm(i.intervention, it)) }
         }
-        ui.update { copy(emphasis = Dialog(form)) }
+        ui.update { dialog(form) }
     }
 
     private fun CoroutineScope.sendCreateInterventionForm(i: SendCreateInterventionForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Creating intervention, please wait . . .")))
+            emit(state.loading("Creating intervention, please wait . . ."))
             api.interventions.create(i.params).await()
-            emit(state.copy(emphasis = Success("Intervention Successfully Created")))
+            emit(state.success("Intervention Successfully Created"))
             val interventions = api.interventions.all(DisbursableFilter(state.context?.uid)).await()
-            emit(state.copy(table = disbursablesTable(interventions)))
+            emit(state.table(table = disbursablesTable(interventions)))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
+            emit(state.failure(it) {
                 onGoBack { ui.removeEmphasis() }
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
             ui.update { it }
         }
@@ -131,7 +149,7 @@ class InterventionsViewModel(
     private fun CoroutineScope.showCreateInterventionForm(i: ShowCreateInterventionForm) = launch {
         val state = ui.value
         flow {
-            emit(state.copy(emphasis = Loading("Preparing interventions form, please wait . . .")))
+            emit(state.loading("Preparing interventions form, please wait . . ."))
             val businesses = api.businesses.all().await()
             val business = businesses.firstOrNull { it.uid == state.context?.uid }
             val form = CreateInterventionForm(
@@ -142,12 +160,12 @@ class InterventionsViewModel(
                 onCancel { ui.removeEmphasis() }
                 onSubmit { post(SendCreateInterventionForm(it)) }
             }
-            emit(state.copy(emphasis = Dialog(form)))
+            emit(state.dialog(form))
         }.catch {
-            emit(state.copy(emphasis = Failure(it) {
+            emit(state.failure(it) {
                 onGoBack { post(ShowCreateInterventionForm(null, i.params)) }
                 onRetry { post(i) }
-            }))
+            })
         }.collect {
             ui.update { it }
         }
