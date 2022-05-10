@@ -8,9 +8,9 @@ object vers {
     object bitframe {
         private val latest = "0.10.43"
         val stagingCurrent = latest
-        val stagingPrevious = "0.10.38"
+        val stagingPrevious = "0.10.39"
 
         val productionCurrent = latest
-        val productionPrevious = "0.10.38"
+        val productionPrevious = "0.10.39"
     }
 }
