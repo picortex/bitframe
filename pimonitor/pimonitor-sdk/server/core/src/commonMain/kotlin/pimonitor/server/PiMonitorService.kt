@@ -23,7 +23,7 @@ class PiMonitorService(config: ServiceConfig) : BitframeService(config) {
     val contacts by lazy { ContactsServiceDaod(config) }
     val investments by lazy { InvestmentsServiceDaod(config) }
     val interventions by lazy { InterventionsServiceDaod(config) }
-    val portfolio by lazy { PortfolioServiceDaod(config) }
+    val portfolio by lazy { PortfolioServiceDaod(config, investments, interventions) }
     val search by lazy { SearchServiceDaod(config) }
     val invites by lazy { InvitesServiceDaod(config) }
 }
