@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTime::class)
+
 import datetime.Date
 import io.ktor.client.*
 import io.ktor.client.plugins.*
@@ -11,6 +13,9 @@ import pimonitor.core.picortex.PiCortexDashboardProviderConfig
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Production
 import pimonitor.core.picortex.PiCortexDashboardProviderConfig.Environment.Staging
 import kotlin.test.Test
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
+import kotlin.time.measureTimedValue
 
 class PiCortexDashboardTest {
 
@@ -91,5 +96,35 @@ class PiCortexDashboardTest {
             end = today
         )
         dashboard.await()
+    }
+
+    @Test
+    fun should_get_response_time() = runTest {
+        val credentials = PiCortexApiCredentials(
+            "Ziyahlanjwa Trading (Pty) Ltd",
+            "ziyahlanjwa",
+            "fbjkfsk4vk34n05nrtr4g3r156"
+        )
+        val today = Date.today()
+        val oneLastMonth = today - DatePeriod(days = 30)
+
+        val durations = mutableListOf<Duration>()
+        repeat(10) {
+            val (board, duration) = measureTimedValue {
+                val dashboard = provider.technicalDifferenceDashboardOf(
+                    credentials,
+                    start = oneLastMonth,
+                    end = today
+                )
+                dashboard.await()
+            }
+            durations.add(duration)
+
+            val avMs = durations.map { d -> d.inWholeMilliseconds }.average()
+            val avSs = durations.map { d -> d.inWholeSeconds }.average()
+            // previous: 18s
+            println("T${it + 1}: ${duration.inWholeMilliseconds}ms = ${duration.inWholeSeconds}s")
+            println("A${it + 1}: ${avMs}ms = ${avSs}s")
+        }
     }
 }

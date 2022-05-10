@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTime::class, ExperimentalTime::class)
+
 package pimonitor.core.picortex
 
 import datetime.Date
@@ -5,10 +7,13 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.http.content.*
+import io.ktor.util.date.*
+import io.ktor.utils.io.*
 import kash.Currency
 import kash.Money
 import kotlinx.collections.interoperable.toInteroperableList
-import kotlinx.datetime.DatePeriod
+import kotlinx.datetime.*
+import kotlinx.datetime.Month
 import kotlinx.serialization.mapper.Mapper
 import later.await
 import later.later
@@ -22,6 +27,7 @@ import presenters.date.DateFormatter
 import kotlin.js.JsName
 import kotlin.jvm.JvmName
 import kotlin.time.ExperimentalTime
+import kotlin.time.measureTimedValue
 
 class PiCortexDashboardProvider(
     val config: PiCortexDashboardProviderConfig = PiCortexDashboardProviderConfig()
@@ -110,8 +116,12 @@ class PiCortexDashboardProvider(
 
         val board1 = dashboard1.await()
         val board2 = dashboard2.await()
-        board2.diff(board1).also { println("Finished diffing board") }
+        board2.diff(board1)
     }
+
+    fun GMTDate.toDateTime() = LocalDateTime(year, Month.valueOf(month.name), dayOfMonth, hours, minutes, seconds, 0)
+
+    fun GMTDate.toMillis() = toDateTime().toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds()
 
     fun technicalDashboardOf(
         credentials: PiCortexApiCredentials,
@@ -128,15 +138,20 @@ class PiCortexDashboardProvider(
             "dateTo" to formatter.format(end)
         )
         val url = "https://${credentials.subdomain}.$domain/api/reporting"
-        val res = client.post(url) {
-            setBody(
-                TextContent(
-                    text = Mapper.encodeToString(params),
-                    contentType = ContentType.Application.Json
+        val (res, duration) = measureTimedValue {
+            val res = client.post(url) {
+                setBody(
+                    TextContent(
+                        text = Mapper.encodeToString(params),
+                        contentType = ContentType.Application.Json
+                    )
                 )
-            )
+            }
+            val diff = res.responseTime.toMillis() - res.requestTime.toMillis()
+            println("Server Time: ${diff}ms = ${diff / 1000}s")
+            res.bodyAsText()
         }
-        println(res.bodyAsText())
-        parser.parseTechnicalDashboard(res.bodyAsText())
+        println("Dur: ${duration.inWholeMilliseconds}ms = ${duration.inWholeSeconds}")
+        parser.parseTechnicalDashboard(res)
     }
 }

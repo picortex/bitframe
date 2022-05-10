@@ -369,7 +369,7 @@ class PopulateDataForDeveloperAccount {
             buildList {
                 repeat(noOfDisbursements) {
                     val params = DisbursableDisbursementParams(uid, (amount * 0.2).toInputValue(), Date.today().toIsoFormat())
-                    add(async { service.createDisbursement(params).await() })
+                    add(async { service.disbursements.create(params).await() })
                 }
             }.joinAll()
         }

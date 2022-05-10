@@ -9,5 +9,5 @@ class MiniScopeBuilder<W, I, S, C, V : ViewModel<I, S>> : MicroScopeBuilder<W, I
         mConstants = wrapper
     }
 
-    override fun build(): MiniScope<W, I, S, C> = MiniScope(viewModel, intents, constants)
+    override fun build(): MiniScope<W, S, C> = MiniScope(viewModel, intents, constants)
 }

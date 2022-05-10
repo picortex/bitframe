@@ -8,4 +8,4 @@ import kotlin.experimental.ExperimentalTypeInference
 
 fun <W, I, S, C, V : ViewModel<I, S>> MiniScope(
     @BuilderInference builder: MiniScopeBuilder<W, I, S, C, V>.() -> Unit
-): Lazy<MiniScope<W, I, S, C>> = lazy { MiniScopeBuilder<W, I, S, C, V>().apply(builder).build() }
+): Lazy<MiniScope<W, S, C>> = lazy { MiniScopeBuilder<W, I, S, C, V>().apply(builder).build() }

@@ -5,8 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonMain/kotlin/bitframe/client/signin/SignInIntents.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/panel/PanelIntents.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonMain/kotlin/bitframe/client/signin/SignInScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonMain/kotlin/bitframe/client/signin/SignInScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonMain/kotlin/bitframe/client/signin/SignInViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonMain/kotlin/bitframe/client/signin/SignInViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/react/src/main/kotlin/bitframe/client/signin/SignInReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/react/src/test/kotlin/SignInReactScopeInteroperabilityTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/BitframeAppScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/BitframeAppScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/panel/PanelScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/panel/PanelScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/react/src/main/kotlin/bitframe/client/BitframeReactAppScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/react/src/main/kotlin/bitframe/client/panel/PanelReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/IndexMicroScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScopeBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScopeBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScopeLazyBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScopeLazyBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScopeBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScopeBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScopeLazyBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScopeLazyBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/react/src/main/kotlin/useScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/react/src/main/kotlin/useScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/businesses/InterventionJourneyTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/businesses/InterventionJourneyTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/investments/InvestmentsServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/investments/InvestmentsServiceTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jvmTest/kotlin/populate/PopulateDataForDeveloperAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jvmTest/kotlin/populate/PopulateDataForDeveloperAccount.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardProvider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardProvider.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/PiMonitorAppScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/PiMonitorAppScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/PiMonitorReactAppScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/PiMonitorReactAppScope.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,29 +178,7 @@
       <recent name="pimonitor.server.disbursables" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.MongoDaoTest.can_execute_a_query_with_a_limit">
-    <configuration name="EmitterApiTest.can_map_from_one_type_to_another" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/bitframe-utils/mokads" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;emiiter.EmitterApiTest.can_map_from_one_type_to_another&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":mokads:cleanJvmTest" />
-            <option value=":mokads:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Gradle.PiCortexDashboardTest.should_get_response_time">
     <configuration name="MockDaoTest.can_execute_a_query" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -254,6 +256,28 @@
         <option name="taskNames">
           <list>
             <option value=":bitframe-dao-mongo:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="PiCortexDashboardTest.should_get_response_time" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-core" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;PiCortexDashboardTest.should_get_response_time&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":pimonitor-core:cleanJvmTest" />
+            <option value=":pimonitor-core:jvmTest" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -762,19 +786,19 @@
       <item itemvalue="Gradle.populate-live-local" />
       <item itemvalue="Gradle.populate-live-staging" />
       <item itemvalue="Gradle.populate-live-prod" />
-      <item itemvalue="Gradle.EmitterApiTest.can_map_from_one_type_to_another" />
       <item itemvalue="Gradle.MockDaoTest.can_execute_a_query" />
       <item itemvalue="Gradle.MockDaoTest.can_execute_a_query_with_a_limit" />
       <item itemvalue="Gradle.MongoDaoTest.can_execute_a_query" />
       <item itemvalue="Gradle.MongoDaoTest.can_execute_a_query_with_a_limit" />
+      <item itemvalue="Gradle.PiCortexDashboardTest.should_get_response_time" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.MongoDaoTest.can_execute_a_query_with_a_limit" />
-        <item itemvalue="Gradle.MongoDaoTest.can_execute_a_query" />
-        <item itemvalue="Gradle.MockDaoTest.can_execute_a_query_with_a_limit" />
-        <item itemvalue="Gradle.MockDaoTest.can_execute_a_query" />
-        <item itemvalue="Gradle.MockDaoTest.can_execute_a_query" />
+        <item itemvalue="Gradle.PiCortexDashboardTest.should_get_response_time" />
+        <item itemvalue="Gradle.PiCortexDashboardTest.should_get_response_time" />
+        <item itemvalue="Gradle.PiCortexDashboardTest.should_get_response_time" />
+        <item itemvalue="Gradle.PiCortexDashboardTest.should_get_response_time" />
+        <item itemvalue="Gradle.PiCortexDashboardTest.should_get_response_time" />
       </list>
     </recent_temporary>
   </component>

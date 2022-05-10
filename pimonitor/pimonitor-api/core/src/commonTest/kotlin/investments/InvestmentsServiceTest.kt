@@ -216,7 +216,7 @@ class InvestmentsServiceTest {
         }
 
         step("Create a disbursement") {
-            api.investments.createDisbursement(
+            api.investments.disbursements.create(
                 DisbursableDisbursementParams(
                     disbursableId = investment.uid,
                     amount = "10000",

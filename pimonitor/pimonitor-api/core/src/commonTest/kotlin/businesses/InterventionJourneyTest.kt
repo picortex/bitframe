@@ -119,7 +119,7 @@ class InterventionJourneyTest {
                 amount = 10_000.0.toString(),
                 date = Date.today().toIsoFormat()
             )
-            val disbursement = api.interventions.createDisbursement(params).await()
+            val disbursement = api.interventions.disbursements.create(params).await()
             expect(disbursement.amount.amount).toBe(1_000_000)
         }
 
