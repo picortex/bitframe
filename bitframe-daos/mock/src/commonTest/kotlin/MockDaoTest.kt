@@ -1,4 +1,7 @@
 import bitframe.core.MockDao
+import bitframe.core.contains
+import bitframe.core.find
+import bitframe.core.isEqualTo
 import expect.expect
 import expect.expectFailure
 import kotlinx.coroutines.test.runTest
@@ -6,11 +9,6 @@ import later.await
 import kotlin.test.Test
 
 class MockDaoTest {
-    @Test
-    fun creates_a_dao_easily() {
-        val dao = MockDao<Human>()
-    }
-
     @Test
     fun can_add_items_to_dao() = runTest {
         val dao = MockDao<Human>()
@@ -34,5 +32,27 @@ class MockDaoTest {
             val dao = MockDao<Human>()
             dao.load("seven").await()
         }
+    }
+
+    @Test
+    fun can_execute_a_query() = runTest {
+        val dao = MockDao<Human>()
+        repeat(10) { dao.create(Human("h$it")).await() }
+        val query = find(Human::name isEqualTo "h4").limit(5)
+        val human = dao.execute(query).await().first()
+        expect(human.name).toBe("h4")
+    }
+
+    @Test
+    fun can_execute_a_query_with_a_limit() = runTest {
+        val dao = MockDao<Human>()
+        repeat(10) { dao.create(Human("h$it")).await() }
+        val query1 = find(Human::uid contains "human").limit(5)
+        val res1 = dao.execute(query1).await()
+        expect(res1).toBeOfSize(5)
+
+        val query2 = find(Human::uid contains "human").limit(20)
+        val res2 = dao.execute(query2).await()
+        expect(res2).toBeOfSize(10)
     }
 }

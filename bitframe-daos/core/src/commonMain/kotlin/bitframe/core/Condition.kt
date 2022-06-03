@@ -4,7 +4,7 @@ open class Condition<out V>(
     val lhs: String,
     val operator: Operator = Operator.Equals,
     val rhs: V
-) {
+) : QueryStatement {
     enum class Operator {
         LessThan,
         GreaterThan,
@@ -12,5 +12,8 @@ open class Condition<out V>(
         Contains
     }
 
-    override fun toString() = "Condition($lhs is${operator.name} $rhs)"
+    override fun toString(): String {
+        val middle = if (operator == Operator.Contains) "contains" else "is${operator.name}"
+        return "Condition($lhs $middle $rhs)"
+    }
 }

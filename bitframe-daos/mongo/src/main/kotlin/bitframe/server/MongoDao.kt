@@ -1,12 +1,13 @@
+@file:OptIn(InternalSerializationApi::class)
+
 package bitframe.server
 
-import bitframe.core.Condition
-import bitframe.core.Dao
-import bitframe.core.Savable
+import bitframe.core.*
 import com.mongodb.client.model.Filters.eq
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.serialization.InternalSerializationApi
+import kotlinx.serialization.serializer
 import later.Later
 import later.await
 import later.later
@@ -48,12 +49,15 @@ class MongoDao<D : Savable>(
         }
     }
 
+    override fun execute(query: Query): Later<List<D>> = scope.later {
+        collection.execute(query).toList().toInteroperableList()
+    }
+
     override fun delete(uid: String): Later<D> = scope.later {
         val item = load(uid).await()
         update(item.copySavable(uid = uid, deleted = true) as D).await()
     }
 
-    @OptIn(InternalSerializationApi::class)
     override fun all(condition: Condition<*>?): Later<List<D>> = scope.later {
         if (condition == null) {
             collection.find().toList().toInteroperableList()

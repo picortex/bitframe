@@ -15,5 +15,5 @@ open class MicroScopeBuilder<W, I, S, V : ViewModel<I, S>> {
         mIntents = wrapper
     }
 
-    open fun build(): MicroScope<W, I, S> = MicroScope(viewModel, intents)
+    open fun build(): MicroScope<W, S> = MicroScope(viewModel, intents)
 }

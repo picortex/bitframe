@@ -1,6 +1,8 @@
 import bitframe.core.Savable
 import bitframe.core.UNSET
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Human(
     val name: String,
     override val uid: String = UNSET,

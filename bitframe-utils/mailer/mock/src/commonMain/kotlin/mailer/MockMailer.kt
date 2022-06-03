@@ -9,15 +9,17 @@ import kotlin.math.max
 class MockMailer(val config: MockMailerConfig = MockMailerConfig()) : Mailer {
     private fun AddressInfo.toDetailsString() = if (name == null) email.value else "$name <${email.value}>"
 
-    private fun StringBuilder.appendRecipients(recipients: List<AddressInfo>) = if (recipients.size == 1) {
-        val address = recipients.first().toDetailsString()
-        appendLine("To:          $address")
-    } else {
-        val first = recipients.first()
-        val rest = recipients - first
-        appendLine("To:          ${first.toDetailsString()}")
-        for (recipient in rest) {
-            appendLine("             ${recipient.toDetailsString()}")
+    private fun StringBuilder.appendRecipients(recipients: List<AddressInfo>) {
+        if (recipients.size == 1) {
+            val address = recipients.first().toDetailsString()
+            appendLine("To:          $address")
+        } else {
+            val first = recipients.first()
+            val rest = recipients - first
+            appendLine("To:          ${first.toDetailsString()}")
+            for (recipient in rest) {
+                appendLine("             ${recipient.toDetailsString()}")
+            }
         }
     }
 
@@ -64,4 +66,6 @@ class MockMailer(val config: MockMailerConfig = MockMailerConfig()) : Mailer {
     private fun StringBuilder.appendMultiLines(body: String) = body.split("\n").flatMap {
         it.chunked(config.charsPerLine)
     }.forEach { appendLine(it) }
+
+    override fun toString(): String = "MockMailer(printToConsole=${config.printToConsole})"
 }

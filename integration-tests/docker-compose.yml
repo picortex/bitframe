@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  database:
+    image: mongo:5.0.6
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 79:27017
+
+  server-app:
+    build: ../pimonitor/server/app/build/binaries
+    environment:
+      - PIMONITOR_CONFIG_DIR=/app/config
+      - PIMONITOR_CONFIG=pimonitor/ci.properties
+    depends_on:
+      - database
+    ports:
+      - 80:8080
+
+  sources:
+    build: ..
+    environment:
+      - API_MODE=live
+      - API_URL=http://server-app:8080
+    privileged: true
+    depends_on:
+      - server-app
+    volumes:
+      - $GRADLE_USER_HOME:/gradle
+      - ..:/project

@@ -6,6 +6,6 @@ import later.Later
 import kotlin.js.JsExport
 
 @JsExport
-interface Updater<P, R> {
+interface Updater<in P, out R> {
     fun update(params: P): Later<R>
 }

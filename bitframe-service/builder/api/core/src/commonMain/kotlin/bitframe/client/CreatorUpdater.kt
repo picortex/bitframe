@@ -3,8 +3,7 @@
 package bitframe.client
 
 import bitframe.core.IdentifiedRaw
-import later.Later
 import kotlin.js.JsExport
 
 @JsExport
-interface CreatorUpdater<P, R> : Creator<P, R>, Updater<IdentifiedRaw<P>, R>
+interface CreatorUpdater<in P, out R> : Creator<P, R>, Updater<IdentifiedRaw<P>, R>

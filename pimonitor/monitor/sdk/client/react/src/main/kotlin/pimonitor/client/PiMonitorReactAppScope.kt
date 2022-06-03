@@ -1,0 +1,21 @@
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
+
+package pimonitor.client
+
+import bitframe.client.BitframeAppScopeConfig
+import bitframe.client.password.ChangePasswordReactScope
+import pimonitor.client.contacts.ContactsReactScope
+import pimonitor.client.invites.InvitesReactScope
+import pimonitor.client.search.SearchReactScope
+import pimonitor.client.signup.SignUpReactScope
+
+class PiMonitorReactAppScope(
+    private val config: BitframeAppScopeConfig<MonitorApi>,
+) : PiMonitorAppScope(config) {
+    override val signUp by lazy { SignUpReactScope(config()) }
+    override val contacts by lazy { ContactsReactScope(config { api.contacts }) }
+    override val password by lazy { ChangePasswordReactScope(config { api.profile }) }
+    override val search by lazy { SearchReactScope(config { api.search }) }
+    override val integrations by lazy { InvitesReactScope(config()) }
+}

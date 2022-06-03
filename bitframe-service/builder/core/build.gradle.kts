@@ -20,6 +20,7 @@ kotlin {
                 api(kotlinx.coroutines.core)
                 api(asoft.platform.core)
                 api(asoft.logging.console)
+                api(asoft.later.core)
             }
         }
 

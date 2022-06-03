@@ -6,6 +6,6 @@ import later.Later
 import kotlin.js.JsExport
 
 @JsExport
-interface Reader<P, R> {
+interface Reader<in P, out R> {
     fun load(params: P): Later<R>
 }

@@ -3,6 +3,7 @@ package mailer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import java.io.InputStream
 import java.lang.IllegalArgumentException
 import java.util.*
 
@@ -108,9 +109,8 @@ interface SmtpMailerConfig {
             scope: CoroutineScope = DEFAULT_SCOPE
         ) = invoke(properties, scope)
 
-        fun fromProperties(path: String): SmtpMailerConfig {
-            val inputStream = ClassLoader.getSystemResourceAsStream(path) ?: error("Failed to get file $path")
-            val props = Properties().apply { load(inputStream) }
+        fun from(stream: InputStream): SmtpMailerConfig {
+            val props = Properties().apply { load(stream) }
             return invoke(props)
         }
     }

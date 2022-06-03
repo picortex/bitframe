@@ -1,6 +1,9 @@
 package bitframe.server
 
 import com.mongodb.ConnectionString
+import java.io.InputStream
+import java.lang.IllegalArgumentException
+import java.util.*
 import kotlin.reflect.KClass
 
 interface MongoConfigProperties {
@@ -18,4 +21,16 @@ interface MongoConfigProperties {
     )
 
     fun connectionString() = ConnectionString("mongodb://$username:$password@$host")
+
+    companion object {
+        fun from(stream: InputStream): MongoConfigProperties {
+            val props = Properties().apply { load(stream) }
+            return MongoDaoFactoryConfig(
+                host = props["host"].toString(),
+                username = props["username"].toString(),
+                password = props["password"].toString(),
+                database = props["database"].toString(),
+            )
+        }
+    }
 }

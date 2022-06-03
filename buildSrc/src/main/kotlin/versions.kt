@@ -1,3 +1,5 @@
+import versioning.DualVersion
+
 object vers {
     val docker = "7.1.0"
 
@@ -5,12 +7,23 @@ object vers {
 
     val npmPublish = "2.1.2"
 
-    object bitframe {
-        private val latest = "0.10.39"
-        val stagingCurrent = latest
-        val stagingPrevious = "0.10.38"
 
-        val productionCurrent = latest
-        val productionPrevious = "0.10.38"
+    object bitframe {
+        private val latest = "0.10.45"
+        val staging = DualVersion(
+            name = "staging",
+            current = latest,
+            previous = "0.10.44"
+        )
+        val stagingCurrent = staging.current.raw
+        val stagingPrevious = staging.previous.raw
+
+        val production = DualVersion(
+            name = "production",
+            current = latest,
+            previous = "0.10.44"
+        )
+        val productionCurrent = production.current.raw
+        val productionPrevious = production.previous.raw
     }
 }

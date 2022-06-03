@@ -1,0 +1,49 @@
+{
+  "response": [
+    {
+      "Name": "Opening Balance and VAT Adjustments",
+      "AccountNumber": "",
+      "Date": "2022-03-11T00:00:00",
+      "Debit": 0.0,
+      "Credit": 25000.0000,
+      "AccountTypeId": 2,
+      "AccountId": -13
+    },
+    {
+      "Name": "VAT Payable",
+      "AccountNumber": "",
+      "Date": "2022-03-11T00:00:00",
+      "Debit": 0.0,
+      "Credit": 5869.5700,
+      "AccountTypeId": 2,
+      "AccountId": -9
+    },
+    {
+      "Name": "Trade Receivables",
+      "AccountNumber": "",
+      "Date": "2022-03-11T00:00:00",
+      "Debit": 45000.0100,
+      "Credit": 0.0,
+      "AccountTypeId": 2,
+      "AccountId": -7
+    },
+    {
+      "Name": "Inventory Opening Balance",
+      "AccountNumber": "",
+      "Date": "2022-03-11T00:00:00",
+      "Debit": 25000.0000,
+      "Credit": 0.0,
+      "AccountTypeId": 2,
+      "AccountId": -6
+    },
+    {
+      "Name": "Sales",
+      "AccountNumber": "",
+      "Date": "2022-03-11T00:00:00",
+      "Debit": 0.0,
+      "Credit": 39130.4400,
+      "AccountTypeId": 2,
+      "AccountId": -1
+    }
+  ]
+}

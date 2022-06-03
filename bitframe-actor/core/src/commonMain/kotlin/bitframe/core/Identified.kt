@@ -11,5 +11,5 @@ class Identified<out T>(
     override val uid: String,
     override val body: T
 ) : IdentifiedRaw<T> {
-    fun <R : Any> map(transform: (T) -> R) = Identified(uid, transform(body))
+    fun <R> map(transform: (T) -> R) = Identified(uid, transform(body))
 }

@@ -14,7 +14,7 @@ data class TableState<D>(
     override val columns: List<Column<D>> = emptyList(),
     override val rows: List<Row<D>> = emptyList(),
     override val actions: List<TableAction<D>> = emptyList()
-) : TableLike<D> {
+) : Tabular<D> {
     override val isEmpty get() = rows.isEmpty()
     override val areAllRowsSelected get() = rows.all { it.selected }
     override val areNoRowsSelected get() = rows.all { !it.selected }

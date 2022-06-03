@@ -6,6 +6,6 @@ import later.Later
 import kotlin.js.JsExport
 
 @JsExport
-interface Deleter<P, R> {
+interface Deleter<in P, out R> {
     fun delete(params: P): Later<R>
 }

@@ -39,15 +39,15 @@ interface MockDaoConfig<D : Any> : DaoConfig<D> {
             prefix: String? = null,
             lock: Mutex = DEFAULT_LOCK,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): MockDaoConfig<D> = object : MockDaoConfig<D> {
-            override val clazz: KClass<D> = clazz
-            override val items: MutableMap<String, D> = items
-            override val simulationTime: Long = simulationTime
-            override val lock: Mutex = lock
-            override val scope: CoroutineScope = scope
-            override val namespace = namespace ?: clazz.simpleName?.lowercase() ?: DEFAULT_NAMESPACE
-            override val prefix = prefix ?: clazz.simpleName?.lowercase() ?: DEFAULT_PREFIX
-        }
+        ): MockDaoConfig<D> = MockDaoConfigImpl(
+            clazz = clazz,
+            items = items,
+            simulationTime = simulationTime,
+            lock = lock,
+            scope = scope,
+            namespace = namespace ?: clazz.simpleName?.lowercase() ?: DEFAULT_NAMESPACE,
+            prefix = prefix ?: clazz.simpleName?.lowercase() ?: DEFAULT_PREFIX,
+        )
 
         inline operator fun <reified D : Any> invoke(
             items: MutableMap<String, D> = mutableMapOf(),

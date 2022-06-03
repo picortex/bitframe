@@ -35,6 +35,10 @@ class CompoundDao<T : Any>(override val config: CompoundDaoConfig<T>) : Dao<T> {
         daos[item::class]?.delete(uid)?.await() ?: throw EntityNotFoundException(uid)
     }
 
+    override fun execute(query: Query): Later<List<T>> = scope.later {
+        daos.values.map { it.execute(query) }.flatMap { it.await() }.toInteroperableList()
+    }
+
     override fun all(condition: Condition<*>?): Later<out List<T>> = scope.later {
         daos.values.map { it.all(condition) }.flatMap { it.await() }.toInteroperableList()
     }

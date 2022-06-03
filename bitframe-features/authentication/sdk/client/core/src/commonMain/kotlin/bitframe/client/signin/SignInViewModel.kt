@@ -13,7 +13,7 @@ import later.await
 import viewmodel.ViewModel
 import bitframe.client.signin.SignInState as State
 
-class SignInViewModel(
+internal class SignInViewModel(
     private val config: UIScopeConfig<SignInService>
 ) : ViewModel<SignInIntent, State>(State.Form(SignInForm { onSubmit { } }), config.viewModel) {
 

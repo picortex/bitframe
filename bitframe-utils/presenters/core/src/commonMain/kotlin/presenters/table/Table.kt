@@ -12,7 +12,7 @@ import kotlin.js.JsName
 
 open class Table<D>(
     val live: MutableLive<TableState<D>>
-) : TableLike<D> {
+) : Tabular<D> {
     @JsName("from")
     constructor(
         columns: List<Column<D>>,

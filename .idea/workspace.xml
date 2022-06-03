@@ -4,17 +4,70 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/resources/picortex.zl.resp.json" afterDir="false" />
+    <list default="true" id="b6f96628-5b45-4342-bb7b-6c0af57b5886" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-actor/core/src/commonMain/kotlin/bitframe/core/Identified.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-actor/core/src/commonMain/kotlin/bitframe/core/Identified.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-api/core/src/commonMain/kotlin/bitframe/client/BitframeApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-api/core/src/commonMain/kotlin/bitframe/client/BitframeApi.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-api/ktor/src/commonMain/kotlin/bitframe/client/BitframeApiKtor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-api/ktor/src/commonMain/kotlin/bitframe/client/BitframeApiKtor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-api/mock/src/commonMain/kotlin/bitframe/client/ApiModeMockUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-api/mock/src/commonMain/kotlin/bitframe/client/ApiModeMockUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-api/mock/src/commonMain/kotlin/bitframe/client/BitframeApiMock.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-api/mock/src/commonMain/kotlin/bitframe/client/BitframeApiMock.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/CompoundDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/CompoundDao.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Condition.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Condition.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/ConditionDsl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/ConditionDsl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Dao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Dao.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDao.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDaoConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDaoConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDaoFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDaoFactory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonTest/kotlin/Human.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonTest/kotlin/Human.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonTest/kotlin/MockDaoTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonTest/kotlin/MockDaoTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/ConditionMongoUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/ConditionMongoUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoConfigProperties.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoConfigProperties.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDao.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDaoFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDaoFactory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDaoFactoryConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDaoFactoryConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/test/kotlin/MongoDaoTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/test/kotlin/MongoDaoTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonMain/kotlin/bitframe/client/signin/SignInScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonMain/kotlin/bitframe/client/signin/SignInScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonMain/kotlin/bitframe/client/signin/SignInViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonMain/kotlin/bitframe/client/signin/SignInViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/BitframeAppScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/BitframeAppScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/BitframeAppScopeConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/BitframeAppScopeConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/configurators/SdkConfiguratorUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/configurators/SdkConfiguratorUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/panel/PanelScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/panel/PanelScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/server/core/src/commonMain/kotlin/bitframe/server/BitframeService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/server/core/src/commonMain/kotlin/bitframe/server/BitframeService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/server/ktor/src/main/kotlin/bitframe/server/Application.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/server/ktor/src/main/kotlin/bitframe/server/Application.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/CRUD.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/CRUD.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Creator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Creator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/CreatorUpdater.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/CreatorUpdater.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Deleter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Deleter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Lister.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Lister.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Reader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Reader.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/ServiceConfigUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/ServiceConfigUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Updater.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Updater.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/core/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/core/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScopeBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScopeBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScopeLazyBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScopeLazyBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScopeBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScopeBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScopeLazyBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScopeLazyBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/react/src/main/kotlin/useScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/react/src/main/kotlin/useScope.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/mailer/mock/src/commonMain/kotlin/mailer/MockMailer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/mailer/mock/src/commonMain/kotlin/mailer/MockMailer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/mailer/smtp/src/main/kotlin/mailer/SmtpMailer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/mailer/smtp/src/main/kotlin/mailer/SmtpMailer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/mailer/smtp/src/main/kotlin/mailer/SmtpMailerConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/mailer/smtp/src/main/kotlin/mailer/SmtpMailerConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/mokads/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/mokads/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/CentralState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/CentralState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/GenericState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/GenericState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/MissionState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/MissionState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/Column.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/Column.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/Table.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/Table.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/TableState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/TableState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildSrc/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jvmTest/kotlin/populate/PopulateDataForDeveloperAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jvmTest/kotlin/populate/PopulateDataForDeveloperAccount.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/test/src/commonMain/kotlin/pimonitor/client/TestConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/test/src/commonMain/kotlin/pimonitor/client/TestConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-app/server/src/main/kotlin/pimonitor/server/main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-app/server/src/main/kotlin/pimonitor/server/main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardParser.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardProvider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardProvider.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/configs/picortex.kt" beforeDir="false" afterPath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/configs/picortex.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/versions/ktor.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/versions/ktor.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kotlin-js-store/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/kotlin-js-store/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,43 +78,10 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
-    <projectState path="$PROJECT_DIR$/bitframe-utils/mokads">
-      <ProjectState />
-    </projectState>
   </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <task path="$PROJECT_DIR$/pimonitor/pimonitor-api/core">
-          <activation />
-        </task>
-        <task path="$PROJECT_DIR$">
-          <activation />
-        </task>
-        <task path="$PROJECT_DIR$/bitframe-utils/akkounts/quickbooks">
-          <activation />
-        </task>
-        <task path="$PROJECT_DIR$/bitframe-utils/response">
-          <activation />
-        </task>
-        <task path="$PROJECT_DIR$/bitframe-utils/templater">
-          <activation />
-        </task>
-        <task path="$PROJECT_DIR$/bitframe-utils/validation">
-          <activation />
-        </task>
-        <task path="$PROJECT_DIR$/bitframe-utils/mokads">
-          <activation />
-        </task>
-        <task path="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core">
-          <activation />
-        </task>
-        <task path="$PROJECT_DIR$/bitframe-utils/akkounts/sage">
-          <activation />
-        </task>
-        <task path="$PROJECT_DIR$/pimonitor/pimonitor-core">
-          <activation />
-        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -79,737 +99,43 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
-        <option value="Kotlin Sealed Interface" />
-        <option value="Kotlin Enum" />
-        <option value="Kotlin Object" />
-        <option value="Kotlin Sealed Class" />
-        <option value="Kotlin File" />
-        <option value="Kotlin Data Class" />
         <option value="Kotlin Class" />
-        <option value="Kotlin Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesServiceKtor.kt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardTest.kt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/pimonitor/pimonitor-app/server/src/main/kotlin/pimonitor/server/main.kt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/integrations/picortex/PiCortexDashboardIntegrationTest.kt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/integrations/sage/SageDashboardIntegrationTest.kt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardProvider.kt" root0="FORCE_HIGHLIGHTING" />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
-  </component>
-  <component name="ProjectId" id="262sqq24bad5S1B3zXwYz9hTXKc" />
+  <component name="ProjectId" id="29pnOuWDmQmlLQPnTmAWEt9mxJD" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions" />
-      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server" />
-      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/forms" />
-      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client" />
-      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/fields" />
-      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/forms" />
-      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/params" />
-      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursements/params" />
-      <recent name="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursements/forms" />
-    </key>
-    <key name="CreateKotlinClassDialog.RecentsKey">
-      <recent name="pimonitor.core.utils.disbursables.filters" />
-      <recent name="pimonitor.core.business.utils.disbursements" />
-      <recent name="bitframe.client" />
-      <recent name="pimonitor.core.business.info" />
-      <recent name="pimonitor.core.business.interventions.params" />
-    </key>
-    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
-      <recent name="pimonitor.core.utils.disbursables.params" />
-      <recent name="pimonitor.client.utils.disbursables" />
-      <recent name="pimonitor.core.utils.disbursables" />
-      <recent name="pimonitor.client.businesses.fields" />
-      <recent name="pimonitor.client.business.index" />
-    </key>
-    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
-      <recent name="bitframe.client" />
-      <recent name="presenters.cases" />
-      <recent name="pimonitor.server.disbursables" />
-      <recent name="pimonitor.core.interventions" />
-      <recent name="pimonitor.core.utils.disbursables" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Gradle.populate-live-local">
-    <configuration name="AuthFlowInteroperabilityTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-api/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;AuthFlowInteroperabilityTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-api-core:cleanJsNodeTest" />
-            <option value=":pimonitor-api-core:jsNodeTest" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="InfoResultSerializationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;InfoResultSerializationTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-core:cleanJsNodeTest" />
-            <option value=":pimonitor-core:jsNodeTest" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="LoadBusinessesJourneyTest.should_fail_to_load_businesses_when_there_is_no_signed_in_user" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;businesses.LoadBusinessesJourneyTest.should_fail_to_load_businesses_when_there_is_no_signed_in_user&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-sdk-client-core:cleanJsNodeTest" />
-            <option value=":pimonitor-sdk-client-core:jsNodeTest" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="PiCortexDashboardTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;PiCortexDashboardTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-core:cleanJvmTest" />
-            <option value=":pimonitor-core:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="PiCortexOperationalDashboardUserJourneyTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;business.operational.PiCortexOperationalDashboardUserJourneyTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-sdk-client-core:cleanJsNodeTest" />
-            <option value=":pimonitor-sdk-client-core:jsNodeTest" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="SendInviteJourneyTest" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="LIVE" />
-            <entry key="API_URL" value="http://127.0.0.1:8080" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-api/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;businesses.SendInviteJourneyTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-api-core:cleanJvmTest" />
-            <option value=":pimonitor-api-core:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="mokads:jsNodeTest" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":mokads:cleanJsNodeTest" />
-            <option value=":mokads:jsNodeTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="mokads:jvmTest" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":mokads:cleanJvmTest" />
-            <option value=":mokads:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="mokads:linuxTest" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":mokads:cleanLinuxX64Test" />
-            <option value=":mokads:linuxX64Test" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="pi-api-live-local-js-browser-test" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="LIVE" />
-            <entry key="API_URL" value="http://127.0.0.1:8080" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-api-core:cleanJsBrowserTest" />
-            <option value=":pimonitor-api-core:jsBrowserTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="pi-api-live-local-jvm-test" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="LIVE" />
-            <entry key="API_URL" value="http://127.0.0.1:8080" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-api-core:cleanJvmTest" />
-            <option value=":pimonitor-api-core:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="pi-api-live-remote-jvm-test" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="LIVE" />
-            <entry key="API_URL" value="http://65.21.254.230:90" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-api-core:cleanJvmTest" />
-            <option value=":pimonitor-api-core:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="pi-api-mock-jvm-test" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="MOCK" />
-            <entry key="API_URL" value="http://127.0.0.1:8080" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-api-core:cleanJvmTest" />
-            <option value=":pimonitor-api-core:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="pi-core-js-node-test" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="MOCK" />
-            <entry key="API_URL" value="http://127.0.0.1:8080" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-core:cleanJsNodeTest" />
-            <option value=":pimonitor-core:jsNodeTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="pi-core-jvm-test" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="MOCK" />
-            <entry key="API_URL" value="http://127.0.0.1:8080" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-core:cleanJvmTest" />
-            <option value=":pimonitor-core:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="pi-sdk-live-local-jvm-test" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="LIVE" />
-            <entry key="API_URL" value="http://127.0.0.1:8080" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-sdk-client-core:cleanJvmTest" />
-            <option value=":pimonitor-sdk-client-core:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="pi-sdk-live-remote-jvm-test" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="LIVE" />
-            <entry key="API_URL" value="http://65.21.254.230:90" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-sdk-client-core:cleanJvmTest" />
-            <option value=":pimonitor-sdk-client-core:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="pi-sdk-mock-js-node-test" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="MOCK" />
-            <entry key="API_URL" value="http://127.0.0.1:8080" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-sdk-client-core:cleanJsNodeTest" />
-            <option value=":pimonitor-sdk-client-core:jsNodeTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="pi-sdk-mock-jvm-test" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="MOCK" />
-            <entry key="API_URL" value="http://127.0.0.1:8080" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-sdk-client-core:cleanJvmTest" />
-            <option value=":pimonitor-sdk-client-core:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="populate-live-local" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="LIVE" />
-            <entry key="API_URL" value="http://127.0.0.1:8080" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-api/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;populate.PopulateDataForDeveloperAccount&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-api-core:cleanJvmTest" />
-            <option value=":pimonitor-api-core:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="populate-live-prod" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="LIVE" />
-            <entry key="API_URL" value="http://65.21.254.230" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-api/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;populate.PopulateDataForDeveloperAccount&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-api-core:cleanJvmTest" />
-            <option value=":pimonitor-api-core:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="populate-live-staging" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="env">
-          <map>
-            <entry key="API_MODE" value="LIVE" />
-            <entry key="API_URL" value="http://65.21.254.230:90" />
-          </map>
-        </option>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/pimonitor/pimonitor-api/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;populate.PopulateDataForDeveloperAccount&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":pimonitor-api-core:cleanJvmTest" />
-            <option value=":pimonitor-api-core:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="response:jvmTest" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":response:cleanJvmTest" />
-            <option value=":response:jvmTest" />
-          </list>
-        </option>
-        <option name="vmOptions" value="" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Gradle.SendInviteJourneyTest" />
-      <item itemvalue="Gradle.mokads:jsNodeTest" />
-      <item itemvalue="Gradle.mokads:jvmTest" />
-      <item itemvalue="Gradle.mokads:linuxTest" />
-      <item itemvalue="Gradle.pi-api-live-local-js-browser-test" />
-      <item itemvalue="Gradle.pi-api-live-local-jvm-test" />
-      <item itemvalue="Gradle.pi-api-live-remote-jvm-test" />
-      <item itemvalue="Gradle.pi-api-mock-jvm-test" />
-      <item itemvalue="Gradle.pi-core-js-node-test" />
-      <item itemvalue="Gradle.pi-core-jvm-test" />
-      <item itemvalue="Gradle.pi-sdk-live-local-jvm-test" />
-      <item itemvalue="Gradle.pi-sdk-live-remote-jvm-test" />
-      <item itemvalue="Gradle.pi-sdk-mock-js-node-test" />
-      <item itemvalue="Gradle.pi-sdk-mock-jvm-test" />
-      <item itemvalue="Gradle.response:jvmTest" />
-      <item itemvalue="Gradle.populate-live-local" />
-      <item itemvalue="Gradle.populate-live-staging" />
-      <item itemvalue="Gradle.populate-live-prod" />
-      <item itemvalue="Gradle.AuthFlowInteroperabilityTest" />
-      <item itemvalue="Gradle.InfoResultSerializationTest" />
-      <item itemvalue="Gradle.PiCortexOperationalDashboardUserJourneyTest" />
-      <item itemvalue="Gradle.LoadBusinessesJourneyTest.should_fail_to_load_businesses_when_there_is_no_signed_in_user" />
-      <item itemvalue="Gradle.PiCortexDashboardTest" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Gradle.PiCortexDashboardTest" />
-        <item itemvalue="Gradle.PiCortexDashboardTest" />
-        <item itemvalue="Gradle.PiCortexDashboardTest" />
-        <item itemvalue="Gradle.LoadBusinessesJourneyTest.should_fail_to_load_businesses_when_there_is_no_signed_in_user" />
-        <item itemvalue="Gradle.PiCortexOperationalDashboardUserJourneyTest" />
-      </list>
-    </recent_temporary>
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/media/andylamax/Auxilliary/Binaries/Linux/java/jdk18",
+    "project.structure.last.edited": "Facets",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  }
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="492f27d4-0384-4256-bde2-0cc14f0c6796" name="Default Changelist" comment="" />
-      <created>1646633219745</created>
+      <changelist id="b6f96628-5b45-4342-bb7b-6c0af57b5886" name="Changes" comment="" />
+      <created>1653818869770</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1646633219745</updated>
+      <updated>1653818869770</updated>
     </task>
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

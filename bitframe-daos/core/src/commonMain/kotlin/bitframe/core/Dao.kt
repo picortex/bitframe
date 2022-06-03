@@ -28,6 +28,8 @@ interface Dao<out T : Any> {
         }
     }
 
+    fun execute(query: Query): Later<List<T>>
+
     fun delete(uid: String): Later<T>
 
     fun all(condition: Condition<*>? = null): Later<List<T>>

@@ -17,7 +17,7 @@ import javax.mail.util.ByteArrayDataSource
 
 class SmtpMailer(val config: SmtpMailerConfig) : Mailer {
 
-    val authenticator by lazy {
+    private val authenticator by lazy {
         object : Authenticator() {
             override fun getPasswordAuthentication(): PasswordAuthentication {
                 return PasswordAuthentication(config.user, config.password)
@@ -25,9 +25,9 @@ class SmtpMailer(val config: SmtpMailerConfig) : Mailer {
         }
     }
 
-    val session by lazy { Session.getDefaultInstance(config.toProperties(), authenticator) }
+    private val session by lazy { Session.getDefaultInstance(config.toProperties(), authenticator) }
 
-    fun AddressInfo.toInternetAddress() = if (name == null) {
+    private fun AddressInfo.toInternetAddress() = if (name == null) {
         InternetAddress(email.value)
     } else {
         InternetAddress(email.value, name)
@@ -39,7 +39,7 @@ class SmtpMailer(val config: SmtpMailerConfig) : Mailer {
             addRecipients(Message.RecipientType.TO, to.map { it.toInternetAddress() }.toTypedArray())
             val multipart = MimeMultipart("mixed");
             subject = draft.subject
-            var messageBodyPart = MimeBodyPart();
+            val messageBodyPart = MimeBodyPart();
             messageBodyPart.setContent(draft.body, "text/html");
             multipart.addBodyPart(messageBodyPart);
 
@@ -64,4 +64,6 @@ class SmtpMailer(val config: SmtpMailerConfig) : Mailer {
         Transport.send(message)
         draft.toMessage(from, to)
     }
+
+    override fun toString(): String = "SmtpMailer(host=${config.host},port=${config.port})"
 }

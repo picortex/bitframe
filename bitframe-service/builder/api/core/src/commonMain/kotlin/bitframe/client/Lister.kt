@@ -7,6 +7,6 @@ import later.Later
 import kotlin.js.JsExport
 
 @JsExport
-interface Lister<P, R> {
+interface Lister<in P, out R> {
     fun all(params: P): Later<List<R>>
 }

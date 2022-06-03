@@ -11,12 +11,13 @@ val tmp = 1
 kotlin {
     jvm { library() }
     js(IR) { library() }
-    val nativeTargets = listOf(linuxX64()) //linuxTargets(true)
+//    val nativeTargets = listOf(linuxX64()) //linuxTargets(true)
 
     sourceSets {
         val commonMain by getting {
             dependencies {
                 api(kotlinx.serialization.json)
+                api(kotlinx.coroutines.core)
             }
         }
 

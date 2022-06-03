@@ -6,6 +6,6 @@ import later.Later
 import kotlin.js.JsExport
 
 @JsExport
-interface Creator<P, R> {
+interface Creator<in P, out R> {
     fun create(params: P): Later<R>
 }

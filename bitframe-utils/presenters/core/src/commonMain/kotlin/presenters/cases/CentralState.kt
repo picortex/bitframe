@@ -8,22 +8,13 @@ import presenters.table.builders.tableOf
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-data class CentralState<out C, D>(
+class CentralState<out C, D>(
     val emphasis: Emphasis = Emphasis.Loading("Please wait . . ."),
-    val context: C? = null,
     val table: Table<D> = tableOf(emptyList()) {},
+    val context: C? = null,
 ) {
     @JsName("_ignore_fromLoading")
     constructor(message: String) : this(emphasis = Emphasis.Loading(message))
-
-    @JsName("_ignore_from")
-    constructor(emphasis: Emphasis, table: Table<D> = tableOf(emptyList()) {}) : this(emphasis, null, table)
-
-    @JsName("_ignore_copyTable")
-    fun copy(table: Table<D>) = copy(emphasis = Emphasis.None, table = table)
-
-    @JsName("_ignore_copyTableAndContext")
-    fun copy(table: Table<D>, context: @UnsafeVariance C?) = copy(emphasis = Emphasis.None, table = table, context = context)
 
     val isLoading get() = emphasis.isLoading
     val asLoading get() = emphasis.asLoading
@@ -38,4 +29,19 @@ data class CentralState<out C, D>(
     val asDialog get() = emphasis.asDialog
 
     val dialog get() = (emphasis as? Emphasis.Modal)?.dialog
+
+    override fun equals(other: Any?): Boolean = other is CentralState<*, *>
+            && emphasis == other.emphasis
+            && table == other.table
+            && context == other.context
+
+    override fun hashCode(): Int = emphasis.hashCode() + table.hashCode() + context.hashCode()
+
+    override fun toString() = buildString {
+        appendLine("CentralState(")
+        appendLine("\temphasis=$emphasis,")
+        appendLine("\ttable=$table,")
+        appendLine("\tcontext=$context")
+        appendLine(")")
+    }
 }

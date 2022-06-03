@@ -1,0 +1,1 @@
+PIMONITOR_ROOT=$(pwd)/pimonitor/server/app PIMONITOR_CONFIG="$1" ./gradlew :pimonitor-server-app:runDebug

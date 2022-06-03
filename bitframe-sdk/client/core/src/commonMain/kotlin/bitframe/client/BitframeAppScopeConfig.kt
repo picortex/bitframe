@@ -8,10 +8,6 @@ interface BitframeAppScopeConfig<A : BitframeApi> {
     val api: A
     val viewModel: BitframeViewModelConfig
 
-    // accessors
-    val bus get() = api.config.bus
-    val cache get() = api.config.cache
-
     operator fun invoke() = toConfig(api)
 
     operator fun <S : Any> invoke(
