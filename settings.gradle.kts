@@ -56,20 +56,13 @@ includeRoot(name = "response", path = "bitframe-utils/response")
 includeSubs(base = "akkounts", path = "bitframe-utils/akkounts", "core", "mock", "quickbooks")
 includeSubs(base = "akkounts-sage", path = "bitframe-utils/akkounts/sage", "core", "mock")
 
-// Bitframe Core
 includeSubs("bitframe-actor", "bitframe-actor", "core", "app", "user", "space")
 includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mongo")
 
 // Bitframe Service
 includeSubs(base = "bitframe-service-builder", path = "bitframe-service/builder", "core", "daod")
 includeSubs(base = "bitframe-service-builder-api", path = "bitframe-service/builder/api", "core", "ktor", "mock")
-includeSubs(
-    base = "bitframe-service-builder-sdk-client",
-    path = "bitframe-service/builder/sdk/client",
-    "core",
-    "mock",
-    "react"
-)
+includeSubs(base = "bitframe-service-builder-sdk-client",path = "bitframe-service/builder/sdk/client","core","mock","react")
 includeSubs(base = "bitframe-service-builder-sdk-server", path = "bitframe-service/builder/sdk/server", "core")
 
 includeSubs(base = "bitframe-service-generic", path = "bitframe-service/generic", "core", "daod")
@@ -78,17 +71,10 @@ includeSubs(base = "bitframe-service-generic-sdk-server", path = "bitframe-servi
 
 includeSubs(base = "bitframe-authentication", path = "bitframe-features/authentication", "core", "daod")
 includeSubs(base = "bitframe-authentication-api", path = "bitframe-features/authentication/api", "core", "ktor", "mock")
-includeSubs(
-    base = "bitframe-authentication-sdk-client",
-    path = "bitframe-features/authentication/sdk/client",
-    "core",
-    "react"
-)
+includeSubs(base = "bitframe-authentication-sdk-client",path = "bitframe-features/authentication/sdk/client","core")
 includeSubs(base = "bitframe-authentication-sdk-server", path = "bitframe-features/authentication/sdk/server", "core")
-
-includeSubs(base = "bitframe-dashboard", path = "bitframe-features/dashboard", "core", "picortex")
 
 includeSubs(base = "bitframe-api", "bitframe-api", "core", "ktor", "mock")
 
-includeSubs(base = "bitframe-sdk-client", path = "bitframe-sdk/client", "core", "react")
+includeSubs(base = "bitframe-sdk-client", path = "bitframe-sdk/client", "core")
 includeSubs(base = "bitframe-sdk-server", path = "bitframe-sdk/server", "core", "ktor", "test")
