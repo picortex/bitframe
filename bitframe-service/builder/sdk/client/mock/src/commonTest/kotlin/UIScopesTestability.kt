@@ -1,5 +1,4 @@
 import bitframe.client.MicroScope
-import bitframe.client.expect
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.test.runTest
 import logging.console
@@ -24,6 +23,6 @@ class UIScopesTestability {
     @Test
     fun scopes_should_be_testable() = runTest {
         val scope by TestScope()
-        scope.expect(3).toGoThrough()
+//        scope.expect(3).toGoThrough()
     }
 }

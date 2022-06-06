@@ -6,67 +6,887 @@
   <component name="ChangeListManager">
     <list default="true" id="b6f96628-5b45-4342-bb7b-6c0af57b5886" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-actor/core/src/commonMain/kotlin/bitframe/core/Identified.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-actor/core/src/commonMain/kotlin/bitframe/core/Identified.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-api/core/src/commonMain/kotlin/bitframe/client/BitframeApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-api/core/src/commonMain/kotlin/bitframe/client/BitframeApi.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-api/ktor/src/commonMain/kotlin/bitframe/client/BitframeApiKtor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-api/ktor/src/commonMain/kotlin/bitframe/client/BitframeApiKtor.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-api/mock/src/commonMain/kotlin/bitframe/client/ApiModeMockUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-api/mock/src/commonMain/kotlin/bitframe/client/ApiModeMockUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-api/mock/src/commonMain/kotlin/bitframe/client/BitframeApiMock.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-api/mock/src/commonMain/kotlin/bitframe/client/BitframeApiMock.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/CompoundDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/CompoundDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Condition.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Condition.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/ConditionDsl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/ConditionDsl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Dao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/core/src/commonMain/kotlin/bitframe/core/Dao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDaoConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDaoConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDaoFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonMain/kotlin/bitframe/core/MockDaoFactory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonTest/kotlin/Human.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonTest/kotlin/Human.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mock/src/commonTest/kotlin/MockDaoTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mock/src/commonTest/kotlin/MockDaoTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/ConditionMongoUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/ConditionMongoUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoConfigProperties.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoConfigProperties.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDaoFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDaoFactory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDaoFactoryConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/main/kotlin/bitframe/server/MongoDaoFactoryConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-daos/mongo/src/test/kotlin/MongoDaoTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-daos/mongo/src/test/kotlin/MongoDaoTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonMain/kotlin/bitframe/client/signin/SignInScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonMain/kotlin/bitframe/client/signin/SignInScope.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonMain/kotlin/bitframe/client/signin/SignInViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/core/src/commonMain/kotlin/bitframe/client/signin/SignInViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/BitframeAppScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/BitframeAppScope.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/BitframeAppScopeConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/BitframeAppScopeConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/configurators/SdkConfiguratorUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/configurators/SdkConfiguratorUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/panel/PanelScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/client/core/src/commonMain/kotlin/bitframe/client/panel/PanelScope.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-sdk/server/core/src/commonMain/kotlin/bitframe/server/BitframeService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/server/core/src/commonMain/kotlin/bitframe/server/BitframeService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-sdk/server/ktor/src/main/kotlin/bitframe/server/Application.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-sdk/server/ktor/src/main/kotlin/bitframe/server/Application.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/CRUD.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/CRUD.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Creator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Creator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/CreatorUpdater.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/CreatorUpdater.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Deleter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Deleter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Lister.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Lister.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Reader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Reader.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/ServiceConfigUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/ServiceConfigUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Updater.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/api/core/src/commonMain/kotlin/bitframe/client/Updater.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/core/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/core/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScope.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScopeBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScopeBuilder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScopeLazyBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MicroScopeLazyBuilder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScope.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScopeBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScopeBuilder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScopeLazyBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/core/src/commonMain/kotlin/bitframe/client/MiniScopeLazyBuilder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/react/src/main/kotlin/useScope.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/react/src/main/kotlin/useScope.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/mailer/mock/src/commonMain/kotlin/mailer/MockMailer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/mailer/mock/src/commonMain/kotlin/mailer/MockMailer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/mailer/smtp/src/main/kotlin/mailer/SmtpMailer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/mailer/smtp/src/main/kotlin/mailer/SmtpMailer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/mailer/smtp/src/main/kotlin/mailer/SmtpMailerConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/mailer/smtp/src/main/kotlin/mailer/SmtpMailerConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/mokads/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/mokads/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/CentralState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/CentralState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/GenericState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/GenericState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/MissionState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/cases/MissionState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/Column.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/Column.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/Table.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/Table.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/TableState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-utils/presenters/core/src/commonMain/kotlin/presenters/table/TableState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildSrc/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/versions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/versions/ktor.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/versions/ktor.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kotlin-js-store/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/kotlin-js-store/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/core/src/commonMain/kotlin/authenticator/AuthenticatorApi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/core/src/commonMain/kotlin/authenticator/AuthenticatorApiImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/core/src/commonMain/kotlin/authenticator/AuthenticatorServices.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/core/src/commonMain/kotlin/authenticator/SessionAware.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/core/src/commonMain/kotlin/authenticator/SessionAwareImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/core/src/commonMain/kotlin/authenticator/UsersService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/core/src/commonTest/kotlin/AuthenticatorApiTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/ktor/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/ktor/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/mock/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/mock/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/mock/src/commonMain/kotlin/authenticator/AuthenticatorApiMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/mock/src/commonMain/kotlin/authenticator/UsersServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/public/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/public/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/public/core/src/commonMain/kotlin/authenticator/Config.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/public/test/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/public/test/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/api/public/test/src/commonMain/kotlin/authenticator/TestConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/core/src/commonMain/kotlin/authenticator/UsersServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/daod/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/daod/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/daod/src/commonMain/kotlin/authenticator/UsersServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/sdk/client/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/sdk/client/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/sdk/client/react/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/sdk/client/react/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/sdk/server/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/sdk/server/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authenticator/server/app/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-api/core/src/commonMain/kotlin/bitframe/client/SessionAwareImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-api/core/src/commonMain/kotlin/bitframe/client/SessionAwareImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/react/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/react/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/react/src/main/kotlin/bitframe/client/password/ChangePasswordReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/react/src/main/kotlin/bitframe/client/profile/ProfileReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/react/src/main/kotlin/bitframe/client/signin/SignInReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/react/src/test/kotlin/GlobalThis.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-features/authentication/sdk/client/react/src/test/kotlin/SignInReactScopeInteroperabilityTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/react/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/react/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/react/src/main/kotlin/bitframe/client/BitframeReactAppScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-sdk/client/react/src/main/kotlin/bitframe/client/panel/PanelReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/mock/src/commonMain/kotlin/bitframe/client/MicroScopeTesters.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/mock/src/commonMain/kotlin/bitframe/client/MicroScopeTesters.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/mock/src/commonTest/kotlin/UIScopesTestability.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bitframe-service/builder/sdk/client/mock/src/commonTest/kotlin/UIScopesTestability.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration-tests/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/common/api/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/common/api/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/common/api/core/src/commonMain/kotlin/pimonitor/PiMonitorApi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/common/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/common/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/common/sdk/server/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/MonitorApi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessAddedEvent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/contacts/ContactsService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/events/EventBuilders.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/events/PiMonitorEvents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/interventions/InterventionService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/invites/InvitesService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/search/SearchService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursableService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursableServiceImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/disbursements/DisbursementsService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/disbursements/DisbursementsServiceImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/CodeBlockDetectorTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/businesses/BusinessOperationsServiceTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/businesses/BusinessOverviewJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/businesses/CaptureInvestmentJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/businesses/CreateBusinessFlowTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/businesses/DeleteBusinessFlowTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/businesses/InterventionJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/businesses/SendInviteJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/contacts/ContactsListTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/integrations/picortex/PiCortexCredentialsCaptureTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/integrations/picortex/PiCortexDashboardIntegrationTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/integrations/sage/SageDashboardIntegrationTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/investments/InvestmentsServiceTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/profile/ChangePasswordFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/search/SearchServiceTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/signup/AuthFlowTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/kotlin/signup/SignUpRequestBodySerializationTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/commonTest/resources/account_types" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/jsTest/kotlin/AuthFlowInteroperabilityTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/core/src/jvmTest/kotlin/signup/AuthFlowInteroperabilityTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/MonitorApiKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/contacts/ContactsServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/interventions/InterventionsServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/invites/InvitesServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/search/SearchServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/signup/SignUpServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/utils/ServiceConfigKtorUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursableServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/ktor/src/commonMain/kotlin/pimonitor/client/utils/disbursables/disbursements/DisbursementsServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/MonitorApiConfigMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/MonitorApiMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/config/toApiConfigMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/contacts/ContactsServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/interventions/InterventionsServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/invites/InvitesServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/search/SearchServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/signup/SignUpServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/mock/src/commonMain/kotlin/pimonitor/client/utils/disbursables/disbursements/DisbursementsServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/core/ReadMe.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/core/src/commonMain/kotlin/pimonitor/client/ApiEntrypoint.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/core/src/commonMain/kotlin/pimonitor/client/ApiModeUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/core/src/commonTest/kotlin/ApiConfiguratorTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/core/src/jsMain/kotlin/ApiEntrypoint.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/core/src/jsTest/kotlin/ApiConfiguratorJsTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/core/src/jvmMain/java/pimonitor/client/BuilderFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/core/src/jvmMain/kotlin/pimonitor/client/PiMonitorApiBuilder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/core/src/jvmTest/java/ApiInstantiationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/test/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/test/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/test/src/commonMain/kotlin/pimonitor/client/PiMonitorApiTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/test/src/commonMain/kotlin/pimonitor/client/TestConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/api/public/test/src/commonMain/kotlin/pimonitor/client/TestSequence.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/app/populator/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/app/populator/src/main/kotlin/pimonitor/CreateAndSignIn.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/app/populator/src/main/kotlin/pimonitor/DemoBusiness.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/app/populator/src/main/kotlin/pimonitor/Operator.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/app/populator/src/main/kotlin/pimonitor/PopulateFor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/app/populator/src/main/kotlin/pimonitor/RegisterThenInviteThenAcceptBusiness.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/app/populator/src/main/kotlin/pimonitor/main.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/accounting/Accounting.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/accounting/FINANCIAL_REPORTS.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/financials/BusinessFinancialsServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/info/params/BusinessInfoFormParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/info/params/BusinessInfoParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/info/params/BusinessInfoRawFormParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/info/params/BusinessInfoRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/operations/BusinessOperationsServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/overview/BalanceSheetChart.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/overview/BusinessOverviewServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/overview/MonitoredBusinessOverview.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/overview/MonitoredBusinessOverviewArithmetics.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/utils/info/LoadInfoParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/utils/info/LoadInfoParsedParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/utils/info/LoadInfoRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/business/utils/money/Total.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/Business.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/BusinessFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/BusinessesServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/DASHBOARD_FINANCIAL.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/DASHBOARD_OPERATIONAL.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/DashboardFinancial.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/DashboardOperational.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/MonitorBusinessBasicInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/MonitoredBusinessBasicInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/MonitoredBusinessBasicInfoUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/MonitoredBusinessColumns.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/MonitoredBusinessRef.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/models/MonitoredBusinessSummary.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/params/CreateMonitoredBusinessParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/params/CreateMonitoredBusinessRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/params/CreateMonitoredBusinessResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/params/InviteMessageParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/params/InviteMessageRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/params/InviteToShareReportsParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/params/InviteToShareReportsRawFormParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/params/InviteToShareReportsRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/businesses/results/AvailableReportsResults.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/contacts/ContactPersonBusinessInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/contacts/ContactsFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/contacts/ContactsServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/dashboards/DashboardProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/dashboards/OperationalDashboard.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/dashboards/OperationalDifferenceBoard.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/events/PimonitorEventTopics.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/interventions/Goal.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/interventions/Intervention.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/interventions/InterventionHistory.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/interventions/InterventionSummary.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/interventions/InterventionsColumn.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/interventions/InterventionsServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/interventions/params/CreateGoalParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/interventions/params/CreateGoalRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/interventions/params/InterventionParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/interventions/params/InterventionParsedParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/interventions/params/InterventionRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/investments/Investment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentHistory.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentSummary.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsColumns.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/investments/filters/InvestmentFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/investments/filters/InvestmentRawFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentDisbursementParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentDisbursementRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentsParsedParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/invites/InfoResults.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/invites/InfoResultsSerializer.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/invites/Invite.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/invites/InviteInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/invites/InviteStatus.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/invites/InvitesServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/invites/PreInviteInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/picortex/AcceptPicortexInviteParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/picortex/AcceptPicortexInviteRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexApiCredentials.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardParser.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardProviderImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardProviderMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexServiceConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexServiceImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/portfolio/MonitorPortfolio.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/portfolio/ProfileProgress.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/rest/Endpoint.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/sage/AcceptSageOneInviteParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/sage/AcceptSageOneInviteRawFormParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/sage/AcceptSageOneInviteRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/search/SearchParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/search/SearchRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/search/SearchResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/search/SearchServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/signup/SignUpResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/signup/SignUpServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/signup/params/SignUpBusinessParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/signup/params/SignUpBusinessRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/signup/params/SignUpIndividualParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/signup/params/SignUpIndividualRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/signup/params/SignUpRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/spaces/SPACE_SCOPE.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/spaces/SPACE_TYPE.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/users/USER_TYPE.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/Disbursable.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/DisbursableEndpoint.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/DisbursableServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/DisbursableSummary.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/Disbursement.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/DisbursementsServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/params/DisbursableDisbursementParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/params/DisbursableDisbursementRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/params/DisbursementParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/params/DisbursementParsedParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/params/DisbursementRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/filters/DisbursableFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/filters/DisbursableRawFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/params/DisbursableRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonTest/kotlin/InfoResultSerializationTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonTest/kotlin/PiCortexDashboardParserTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonTest/kotlin/PiCortexDashboardTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonTest/kotlin/PiCortexReportsResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonTest/resources/info.result.dashboard.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonTest/resources/picortex.resp.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/commonTest/resources/picortex.zl.resp.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/core/src/jvmMain/kotlin/pimonitor/core/picortex/PropertiesUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/business/financials/BusinessFinancialsServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/business/operations/BusinessOperationsServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/business/overview/BusinessOverviewServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/businesses/BusinessSummaryUseCase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/businesses/BusinessesServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/configs/MonitorConfigDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/configs/MonitorServiceConfigImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/contacts/ContactsServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/contacts/LoadContactsUseCase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/contacts/LoadContactsUseCaseImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/interventions/InterventionsServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/invites/InvitesServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/sage/SageApiCredentials.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/sage/SageApiCredentialsUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/search/SearchServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/signup/SignUpServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/utils/disbursables/DisbursableServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/daod/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/DisbursementsServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/PiMonitorAppScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/BusinessInfoIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/BusinessInfoIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/BusinessInfoScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/BusinessInfoViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/fields/BusinessInfoFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/forms/BusinessInfoEditForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesConstants.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/dialogs/DeleteManyDialog.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/dialogs/DeleteSingleDialog.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/fields/CreateBusinessFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/fields/InviteToShareReportsForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/forms/CreateBusinessForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/configurtors/PiMonitorSdkConfiguratorUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/contacts/ContactsIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/contacts/ContactsScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/contacts/ContactsState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/contacts/ContactsViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/intervention/disbursements/InvestmentDisbursementScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/InterventionsIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/InterventionsScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/InterventionsViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/fields/GoalFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/fields/InterventionFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/forms/CreateGoalForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/forms/CreateInterventionForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/forms/UpdateInterventionForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/params/GoalRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/investment/disbursements/InvestmentDisbursementScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/fields/InvestmentFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/forms/CreateInvestmentForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/forms/UpdateInvestmentForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/params/DisbursementsRawParamsUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/InvitesDialog.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/InvitesIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/InvitesScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/InvitesState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/InvitesViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/fields/InviteToShareFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/fields/SageOneAccepInviteFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/search/SearchFeedback.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/search/SearchIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/search/SearchMode.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/search/SearchScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/search/SearchState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/search/SearchViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpStateUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/fields/BusinessFormFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/fields/BusinessFormFieldsUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/fields/IndividualFormFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/fields/IndividualFormFieldsUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/date/DateUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/disbursements/DisbursementsIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/disbursements/DisbursementsIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/disbursements/DisbursementsViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/disbursements/fields/DisbursementFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/disbursements/forms/CreateDisbursementForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/disbursements/forms/UpdateDisbursementForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursablesContext.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursablesIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursablesIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursablesViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/live/MutableLiveUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/money/MoneyUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/business/financials/SageFinancialDashboardUserJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/business/operational/PiCortexOperationalDashboardUserJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/businesses/CaptureInvestmentJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/businesses/CreateBusinessJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/businesses/DeleteBusinessJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/businesses/InviteToShareReportsJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/businesses/LoadBusinessesJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/contacts/ContactsViewModelTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/investments/InvestmentsScopeTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/portfolio/PortfolioViewModelTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/search/SearchViewModelTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/signup/SignUpScopeTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/signup/SignUpViewModelTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/utils/PiMonitorMockScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/commonTest/kotlin/utils/ViewModelStateAssertionUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/jsTest/kotlin/PiMonitorAppScopeInteroperabilityTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/core/src/jsTest/kotlin/signup/SignUpScopeInteroperabilityTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/react/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/react/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/react/src/main/kotlin/ReactSdkEntrypoint.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/react/src/main/kotlin/pimonitor/client/PiMonitorReactAppScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/react/src/main/kotlin/pimonitor/client/contacts/ContactsReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/react/src/main/kotlin/pimonitor/client/invites/InvitesReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/react/src/main/kotlin/pimonitor/client/search/SearchReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/react/src/main/kotlin/pimonitor/client/signup/SignUpReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/client/react/src/test/kotlin/PiMonitorReactScopeInteroperabilityTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/MonitorService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/MonitorServiceConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/financials/BusinessFinancialsController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/financials/BusinessFinancialsModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/operations/BusinessOperationsController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/operations/BusinessOperationsModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/overview/BusinessOverviewController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/overview/BusinessOverviewModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/businesses/BusinessesController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/businesses/BusinessesModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/contacts/ContactsController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/contacts/ContactsModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/disbursables/DisbursablesController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/disbursables/DisbursablesModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/interventions/InterventionsController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/interventions/InterventionsModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/investments/InvestmentsController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/investments/InvestmentsModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/invites/InvitesController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/invites/InvitesModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/mailing/MailingService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/mailing/MailingServiceConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/portfolio/PortfolioController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/portfolio/PortfolioModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/profile/ProfileController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/profile/ProfileModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/search/SearchController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/search/SearchModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/signup/SignUpController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/signup/SignUpModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/monitor/sdk/server/core/src/commonMain/kotlin/pimonitor/server/utils/ServiceConfigDaodUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/PiMonitorApi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessAddedEvent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/contacts/ContactsService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/events/EventBuilders.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/events/PiMonitorEvents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/interventions/InterventionService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/invites/InvitesService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/picortex/PiCortexDashboardService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/sage/SageDashboardService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/search/SearchService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursableService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursableServiceImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/CodeBlockDetectorTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/businesses/BusinessOperationsServiceTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/businesses/BusinessOverviewJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/businesses/CaptureInvestmentJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/businesses/CreateBusinessFlowTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/businesses/DeleteBusinessFlowTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/businesses/InterventionJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/businesses/SendInviteJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/contacts/ContactsListTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/integrations/picortex/PiCortexCredentialsCaptureTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/integrations/picortex/PiCortexDashboardIntegrationTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/integrations/sage/SageDashboardIntegrationTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/investments/InvestmentsServiceTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/profile/ChangePasswordFlow.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/search/SearchServiceTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/signup/AuthFlowTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/kotlin/signup/SignUpRequestBodySerializationTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/commonTest/resources/account_types" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jsTest/kotlin/AuthFlowInteroperabilityTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jvmTest/kotlin/populate/PopulateDataForDeveloperAccount.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/core/src/jvmTest/kotlin/signup/AuthFlowInteroperabilityTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/PiMonitorApiKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/contacts/ContactsServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/interventions/InterventionsServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/invites/InvitesServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/search/SearchServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/signup/SignUpServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/utils/ServiceConfigKtorUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/ktor/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursableServiceKtor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/PiMonitorApiMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/contacts/ContactsServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/interventions/InterventionsServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/invites/InvitesServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/search/SearchServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/mock/src/commonMain/kotlin/pimonitor/client/signup/SignUpServiceMock.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/core/ReadMe.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/core/src/commonMain/kotlin/pimonitor/client/ApiEntrypoint.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/core/src/commonMain/kotlin/pimonitor/client/ApiModeUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/core/src/commonTest/kotlin/ApiConfiguratorTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/core/src/jsMain/kotlin/ApiEntrypoint.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/core/src/jsTest/kotlin/ApiConfiguratorJsTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/core/src/jvmMain/java/pimonitor/client/BuilderFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/core/src/jvmMain/kotlin/pimonitor/client/PiMonitorApiBuilder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/core/src/jvmTest/java/ApiInstantiationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/test/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/test/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/test/src/commonMain/kotlin/pimonitor/client/PiMonitorApiTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/test/src/commonMain/kotlin/pimonitor/client/TestConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-api/public/test/src/commonMain/kotlin/pimonitor/client/TestSequence.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-app/server/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-app/server/src/main/kotlin/pimonitor/server/main.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-app/server/src/main/resources/sendgrid.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-app/server/src/test/kotlin/core/authentication/signup/SignUpActionTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-app/server/src/test/kotlin/unit/ExhastiveTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-app/server/src/test/kotlin/unit/authentication/signup/SignUpActionUnitTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-app/server/src/test/kotlin/unit/authentication/signup/SignUpServerUnitTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/accounting/Accounting.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/accounting/FINANCIAL_REPORTS.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/financials/BusinessFinancialsServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/info/params/BusinessInfoFormParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/info/params/BusinessInfoParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/info/params/BusinessInfoRawFormParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/info/params/BusinessInfoRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/operations/BusinessOperationsServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/overview/BalanceSheetChart.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/overview/BusinessOverviewServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/overview/MonitoredBusinessOverview.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/overview/MonitoredBusinessOverviewArithmetics.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/utils/info/LoadInfoParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/utils/info/LoadInfoParsedParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/utils/info/LoadInfoRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/business/utils/money/Total.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/Business.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/BusinessFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/BusinessesServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/DASHBOARD_FINANCIAL.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/DASHBOARD_OPERATIONAL.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/DashboardFinancial.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/DashboardOperational.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/MonitorBusinessBasicInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/MonitoredBusinessBasicInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/MonitoredBusinessBasicInfoUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/MonitoredBusinessRef.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/models/MonitoredBusinessSummary.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/params/CreateMonitoredBusinessParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/params/CreateMonitoredBusinessRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/params/CreateMonitoredBusinessResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/params/InviteMessageParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/params/InviteMessageRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/params/InviteToShareReportsParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/params/InviteToShareReportsRawFormParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/params/InviteToShareReportsRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/businesses/results/AvailableReportsResults.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/contacts/ContactPersonBusinessInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/contacts/ContactsFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/contacts/ContactsServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/dashboards/DashboardProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/dashboards/OperationalDashboard.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/dashboards/OperationalDifferenceBoard.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/events/PimonitorEventTopics.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/interventions/Goal.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/interventions/Intervention.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/interventions/InterventionHistory.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/interventions/InterventionSummary.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/interventions/InterventionsServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/interventions/params/CreateGoalParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/interventions/params/CreateGoalRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/interventions/params/InterventionParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/interventions/params/InterventionParsedParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/interventions/params/InterventionRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/Investment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentHistory.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentSummary.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/filters/InvestmentFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/filters/InvestmentRawFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentDisbursementParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentDisbursementRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/investments/params/InvestmentsParsedParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/invites/InfoResults.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/invites/InfoResultsSerializer.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/invites/Invite.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/invites/InviteInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/invites/InviteStatus.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/invites/InvitesServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/invites/PreInviteInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/AcceptPicortexInviteParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/AcceptPicortexInviteRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/OldPiCortexDashboardParser.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexApiCredentials.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardParser.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardProviderConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/picortex/PiCortexDashboardServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/portfolio/ProfileProgress.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/rest/Endpoint.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/sage/AcceptSageOneInviteParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/sage/AcceptSageOneInviteRawFormParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/sage/AcceptSageOneInviteRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/sage/SageDashboardServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/search/SearchParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/search/SearchRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/search/SearchResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/search/SearchServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/signup/SignUpResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/signup/SignUpServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/signup/params/SignUpBusinessParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/signup/params/SignUpBusinessRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/signup/params/SignUpIndividualParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/signup/params/SignUpIndividualRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/signup/params/SignUpRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/spaces/SPACE_SCOPE.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/spaces/SPACE_TYPE.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/users/USER_TYPE.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/Disbursable.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/DisbursableEndpoint.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/DisbursableServiceCore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/DisbursableSummary.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/Disbursement.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/params/DisbursableDisbursementParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/params/DisbursableDisbursementRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/params/DisbursementParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/params/DisbursementParsedParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/disbursements/params/DisbursementRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/filters/DisbursableFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/filters/DisbursableRawFilter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonMain/kotlin/pimonitor/core/utils/disbursables/params/DisbursableRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/InfoResultSerializationTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardParserTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexDashboardTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/kotlin/PiCortexReportsResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/resources/picortex.resp.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-core/src/commonTest/resources/picortex.zl.resp.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/business/financials/BusinessFinancialsServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/business/operations/BusinessOperationsServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/business/overview/BusinessOverviewServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/businesses/BusinessesServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/configs/picortex.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/configs/sage.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/contacts/ContactsServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/contacts/LoadContactsUseCase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/contacts/LoadContactsUseCaseImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/interventions/InterventionsServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/investments/InvestmentsServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/invites/InvitesServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/picortex/PICORTEX_DASHBOARD.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/portfolio/PortfolioServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/sage/SageApiCredentials.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/sage/SageApiCredentialsUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/search/SearchServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/signup/SignUpServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-daod/src/commonMain/kotlin/pimonitor/core/utils/disbursables/DisbursableServiceDaod.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/PiMonitorAppScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/financials/BusinessFinancialsViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/BusinessInfoIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/BusinessInfoIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/BusinessInfoScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/BusinessInfoViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/fields/BusinessInfoFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/info/forms/BusinessInfoEditForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/operations/BusinessOperationsViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/business/overview/BusinessOverviewViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesConstants.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/BusinessesViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/dialogs/DeleteManyDialog.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/dialogs/DeleteSingleDialog.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/fields/CreateBusinessFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/fields/InviteToShareReportsForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/businesses/forms/CreateBusinessForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/configurtors/PiMonitorSdkConfiguratorUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/contacts/ContactsIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/contacts/ContactsScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/contacts/ContactsState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/contacts/ContactsViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/intervention/disbursements/InvestmentDisbursementScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/InterventionsIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/InterventionsScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/InterventionsViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/fields/GoalFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/fields/InterventionFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/forms/CreateGoalForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/forms/CreateInterventionForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/forms/UpdateInterventionForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/interventions/params/GoalRawParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investment/disbursements/InvestmentDisbursementScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/InvestmentsViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/fields/InvestmentFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/forms/CreateInvestmentForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/forms/UpdateInvestmentForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/investments/params/DisbursementsRawParamsUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/InvitesDialog.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/InvitesIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/InvitesScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/InvitesState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/InvitesViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/fields/InviteToShareFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/invites/fields/SageOneAccepInviteFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/portfolio/PortfolioViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/search/SearchFeedback.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/search/SearchIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/search/SearchMode.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/search/SearchScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/search/SearchState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/search/SearchViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpStateUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/SignUpViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/fields/BusinessFormFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/fields/BusinessFormFieldsUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/fields/IndividualFormFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/signup/fields/IndividualFormFieldsUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/date/DateUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/disbursements/DisbursementsIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/disbursements/DisbursementsIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/disbursements/DisbursementsViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/disbursements/fields/DisbursementFields.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/disbursements/forms/CreateDisbursementForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/disbursements/forms/UpdateDisbursementForm.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/index/DisbursableIndexScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursable/index/DisbursableIndexViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursablesContext.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursablesIntent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursablesIntents.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/disbursables/DisbursablesViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/live/MutableLiveUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonMain/kotlin/pimonitor/client/utils/money/MoneyUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/business/financials/SageFinancialDashboardUserJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/business/operational/PiCortexOperationalDashboardUserJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/businesses/CaptureInvestmentJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/businesses/CreateBusinessJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/businesses/DeleteBusinessJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/businesses/InviteToShareReportsJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/businesses/LoadBusinessesJourneyTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/contacts/ContactsViewModelTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/investments/InvestmentsScopeTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/portfolio/PortfolioViewModelTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/search/SearchViewModelTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/signup/SignUpScopeTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/signup/SignUpViewModelTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/utils/PiMonitorMockScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/commonTest/kotlin/utils/ViewModelStateAssertionUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/jsTest/kotlin/PiMonitorAppScopeInteroperabilityTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/core/src/jsTest/kotlin/signup/SignUpScopeInteroperabilityTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/ReactSdkEntrypoint.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/PiMonitorReactAppScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/contacts/ContactsReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/invites/InvitesReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/portfolio/PortfolioReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/search/SearchReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/main/kotlin/pimonitor/client/signup/SignUpReactScope.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/client/react/src/test/kotlin/PiMonitorReactScopeInteroperabilityTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/karma.config.d/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/PiMonitorService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/PiMonitorServiceStubUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/financials/BusinessFinancialsController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/financials/BusinessFinancialsModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/operations/BusinessOperationsController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/operations/BusinessOperationsModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/overview/BusinessOverviewController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/business/overview/BusinessOverviewModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/businesses/BusinessesController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/businesses/BusinessesModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/contacts/ContactsController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/contacts/ContactsModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/disbursables/DisbursablesController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/disbursables/DisbursablesModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/interventions/InterventionsController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/interventions/InterventionsModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/investments/InvestmentsController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/investments/InvestmentsModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/invites/InvitesController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/invites/InvitesModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/mailing/MailingService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/mailing/MailingServiceConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/portfolio/PortfolioController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/portfolio/PortfolioModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/profile/ProfileController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/profile/ProfileModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/search/SearchController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/search/SearchModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/signup/SignUpController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/signup/SignUpModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/pimonitor-sdk/server/core/src/commonMain/kotlin/pimonitor/server/utils/ServiceConfigDaodUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/mailer/sendgrid.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/mongo/dev.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/mongo/prod.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/mongo/staging.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/picortex/dev.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/picortex/prod.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/picortex/staging.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/sage/dev.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/sage/prod.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/sage/staging.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/server/ci.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/server/dev.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/server/prod.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/config/server/staging.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/src/main/kotlin/pimonitor/server/ServerConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/src/main/kotlin/pimonitor/server/ServerConfigUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/src/main/kotlin/pimonitor/server/main.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/src/test/kotlin/core/authentication/signup/SignUpActionTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/src/test/kotlin/unit/ExhastiveTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/src/test/kotlin/unit/authentication/signup/SignUpActionUnitTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pimonitor/server/app/src/test/kotlin/unit/authentication/signup/SignUpServerUnitTest.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -120,7 +940,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "last_opened_file_path": "/media/andylamax/Auxilliary/Binaries/Linux/java/jdk18",
-    "project.structure.last.edited": "Facets",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
@@ -136,6 +956,17 @@
       <updated>1653818869770</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

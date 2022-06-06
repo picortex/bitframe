@@ -1,4 +1,0 @@
-package authenticator
-
-class Config {
-}

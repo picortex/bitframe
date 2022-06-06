@@ -7,7 +7,7 @@ import kotlinx.collections.interoperable.List
 import live.Live
 
 class SessionAwareImpl(private val api: BitframeApi) : SessionAware {
-    override val live: Live<Session> get() = api.config.session
+    override val live: Live<Session> get() = api.signIn.session
     override val signedIn get() = live.value as? Session.SignedIn
     override val userSpaces: List<Space>? get() = signedIn?.spaces
     override val currentUser: User? get() = signedIn?.user
