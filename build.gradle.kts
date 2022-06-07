@@ -3,7 +3,8 @@
 //import org.hidetake.groovy.ssh.core.Service
 //import org.hidetake.groovy.ssh.operation.SftpOperations
 //import org.hidetake.groovy.ssh.session.SessionHandler
-//import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
+
 //import versioning.DualVersion
 
 @Suppress("DSL_SCOPE_VIOLATION") plugins {
@@ -27,9 +28,9 @@ allprojects {
     }
 }
 
-//val dokkaHtmlMultiModule by tasks.getting(DokkaMultiModuleTask::class) {
-//    moduleName.set("Bitframe Docs")
-//}
+val dokkaHtmlMultiModule by tasks.getting(DokkaMultiModuleTask::class) {
+    moduleName.set("Bitframe Docs")
+}
 
 //fun Service.runSessions(action: RunHandler.() -> Unit) =
 //    run(delegateClosureOf(action))
