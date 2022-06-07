@@ -24,12 +24,13 @@ allprojects {
     }
     afterEvaluate {
         group = "com.picortex"
-        version = bitframe.versions.current
+        version = bitframe.versions.current.get()
     }
 }
 
 val dokkaHtmlMultiModule by tasks.getting(DokkaMultiModuleTask::class) {
     moduleName.set("Bitframe Docs")
+    outputDirectory.set(file("reference/${bitframe.versions.current.get()}"))
 }
 
 //fun Service.runSessions(action: RunHandler.() -> Unit) =
