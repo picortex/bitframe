@@ -1,6 +1,6 @@
 import versioning.DualVersion
 
-object vers {
+object versions {
     val docker = "7.1.0"
 
     val dokka = "1.5.0"

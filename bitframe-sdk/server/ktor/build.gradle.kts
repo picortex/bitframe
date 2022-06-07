@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm")
     id("tz.co.asoft.library")
-    `picortex-publish`
+    id("picortex-publish")
 }
 
 kotlin {

@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
-    `picortex-publish`
+    id("picortex-publish")
 }
 
 kotlin {

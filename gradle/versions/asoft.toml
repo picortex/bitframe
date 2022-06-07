@@ -40,3 +40,9 @@ viewmodel-core = { module = "tz.co.asoft:viewmodel-core", version.ref = "stdlib"
 viewmodel-coroutines = { module = "tz.co.asoft:viewmodel-coroutines", version.ref = "stdlib" }
 viewmodel-react = { module = "tz.co.asoft:viewmodel-react", version.ref = "stdlib" }
 viewmodel-test-expect = { module = "tz.co.asoft:viewmodel-test-expect", version.ref = "stdlib" }
+
+foundation-plugins = { module = "tz.co.asoft:foundation-plugins", version.ref = "foundation" }
+
+[plugins]
+root-library = { id = "tz.co.asoft.library", version.ref = "foundation" }
+library = { id = "tz.co.asoft.library" }

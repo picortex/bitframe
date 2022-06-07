@@ -1,12 +1,10 @@
 pluginManagement {
-    enableFeaturePreview("VERSION_CATALOGS")
     enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
     repositories {
         mavenCentral()
         google()
         gradlePluginPortal()
     }
-
     resolutionStrategy {
         eachPlugin {
             if (requested.id.namespace == "com.android") {
@@ -24,10 +22,7 @@ pluginManagement {
     }
 }
 
-rootDir.resolve("gradle.properties").copyTo(
-    target = rootDir.resolve("buildSrc").resolve("gradle.properties"),
-    overwrite = true
-)
+includeBuild("bitframe-plugins")
 
 fun includeRoot(name: String, path: String) {
     include(":$name")
@@ -43,7 +38,7 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
 
 rootProject.name = "bitframe"
 
-// <Bitframe Utils>
+// <BitframeUtils>
 includeSubs(base = "mailer", path = "bitframe-utils/mailer", "api", "mock", "smtp")
 includeRoot("templater", "bitframe-utils/templater")
 includeSubs(base = "datetime", path = "bitframe-utils/datetime", "core")
@@ -62,7 +57,13 @@ includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mong
 // Bitframe Service
 includeSubs(base = "bitframe-service-builder", path = "bitframe-service/builder", "core", "daod")
 includeSubs(base = "bitframe-service-builder-api", path = "bitframe-service/builder/api", "core", "ktor", "mock")
-includeSubs(base = "bitframe-service-builder-sdk-client",path = "bitframe-service/builder/sdk/client","core","mock","react")
+includeSubs(
+    base = "bitframe-service-builder-sdk-client",
+    path = "bitframe-service/builder/sdk/client",
+    "core",
+    "mock",
+    "react"
+)
 includeSubs(base = "bitframe-service-builder-sdk-server", path = "bitframe-service/builder/sdk/server", "core")
 
 includeSubs(base = "bitframe-service-generic", path = "bitframe-service/generic", "core", "daod")
@@ -71,7 +72,7 @@ includeSubs(base = "bitframe-service-generic-sdk-server", path = "bitframe-servi
 
 includeSubs(base = "bitframe-authentication", path = "bitframe-features/authentication", "core", "daod")
 includeSubs(base = "bitframe-authentication-api", path = "bitframe-features/authentication/api", "core", "ktor", "mock")
-includeSubs(base = "bitframe-authentication-sdk-client",path = "bitframe-features/authentication/sdk/client","core")
+includeSubs(base = "bitframe-authentication-sdk-client", path = "bitframe-features/authentication/sdk/client", "core")
 includeSubs(base = "bitframe-authentication-sdk-server", path = "bitframe-features/authentication/sdk/server", "core")
 
 includeSubs(base = "bitframe-api", "bitframe-api", "core", "ktor", "mock")

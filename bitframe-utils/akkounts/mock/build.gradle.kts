@@ -3,7 +3,7 @@ plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
-    `picortex-publish`
+    id("picortex-publish")
 }
 
 kotlin {

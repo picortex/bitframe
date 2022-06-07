@@ -3,7 +3,7 @@ plugins {
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
-    `picortex-publish`
+    id("picortex-publish")
 }
 
 val tmp = 2
