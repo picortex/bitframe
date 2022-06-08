@@ -34,6 +34,8 @@ export DEVOPS_ROOT=/$root
 echo "Running docker-compose pull"
 docker-compose pull
 
+docker swarm init
+
 docker stack deploy -c docker-compose.yml $root-devops
 
 echo "Finished"
