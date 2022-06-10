@@ -14,7 +14,7 @@ import io.ktor.server.routing.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.mapper.Mapper
 
-open class Application<S : BitframeService>(
+open class Application<S>(
     override val config: ApplicationConfig<S>
 ) : BitframeApplication<S>(config) {
 
@@ -54,8 +54,7 @@ open class Application<S : BitframeService>(
                     default("index.html")
                 }
 
-                val allModules = modules + authenticationModule
-                for (rout in allModules.flatMap { it.actions.map { a -> a.route } }) route(rout.path, rout.method) {
+                for (rout in modules.flatMap { it.actions.map { a -> a.route } }) route(rout.path, rout.method) {
                     handle {
                         val response = rout.runHandlerCatching(mapToHttpRequest(rout, call))
                         call.respondText(response.body, contentType = ContentType.Application.Json, status = response.status)
@@ -63,7 +62,7 @@ open class Application<S : BitframeService>(
                 }
 
                 get("/api/info") {
-                    val text = (modules + authenticationModule).map { it.info() }
+                    val text = (modules).map { it.info() }
                     call.respondText(Mapper { prettyPrint = true }.encodeToString(text))
                 }
             }

@@ -2,16 +2,14 @@ package bitframe.server
 
 import java.io.File
 
-interface ApplicationConfig<out S : BitframeService> : BitframeApplicationConfig<S> {
+interface ApplicationConfig<out S> : BitframeApplicationConfig<S> {
     val client: File
 
     companion object {
-        operator fun <S : BitframeService> invoke(
+        operator fun <S> invoke(
             client: File,
             service: S,
             modules: MutableList<Module> = mutableListOf(),
-        ): ApplicationConfig<S> = object : ApplicationConfig<S>, BitframeApplicationConfig<S> by BitframeApplicationConfig(service, modules) {
-            override val client: File = client
-        }
+        ): ApplicationConfig<S> = ApplicationConfigImpl(client, service, modules)
     }
 }

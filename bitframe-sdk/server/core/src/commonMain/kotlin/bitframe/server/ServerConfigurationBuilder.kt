@@ -2,12 +2,14 @@ package bitframe.server
 
 import bitframe.core.DaoFactory
 
-interface ServerConfigurationBuilder<S : BitframeService> {
+interface ServerConfigurationBuilder<S> {
     var daoFactoryBuilder: (() -> DaoFactory)?
 
     var serviceConfigBuilder: ((DaoFactory) -> S)?
 
     var startCallback: (suspend S.() -> Unit)?
+
+    val moduleBuilders: MutableList<(S) -> Module>
 
     fun database(builder: () -> DaoFactory) {
         daoFactoryBuilder = builder
@@ -15,6 +17,10 @@ interface ServerConfigurationBuilder<S : BitframeService> {
 
     fun service(builder: (DaoFactory) -> S) {
         serviceConfigBuilder = builder
+    }
+
+    fun install(builder: (service: S) -> Module) {
+        moduleBuilders.add(builder)
     }
 
     fun onStart(block: suspend S.() -> Unit) {
@@ -26,30 +32,6 @@ interface ServerConfigurationBuilder<S : BitframeService> {
     fun buildService(): S
 
     companion object {
-        operator fun <S : BitframeService> invoke() = object : ServerConfigurationBuilder<S> {
-            override var daoFactoryBuilder: (() -> DaoFactory)? = null
-
-            override var serviceConfigBuilder: ((DaoFactory) -> S)? = null
-
-            override var startCallback: (suspend (S) -> Unit)? = null
-
-            private var daoFactory: DaoFactory? = null
-
-            private var service: S? = null
-
-            override fun buildDaoFactory(): DaoFactory {
-                val factory = daoFactory
-                if (factory != null) return factory
-                daoFactory = daoFactoryBuilder?.invoke() ?: error("Database has not been configured yet")
-                return buildDaoFactory()
-            }
-
-            override fun buildService(): S {
-                val s = service
-                if (s != null) return s
-                service = serviceConfigBuilder?.invoke(buildDaoFactory()) ?: error("Service has not been configured yet")
-                return buildService()
-            }
-        }
+        operator fun <S> invoke(): ServerConfigurationBuilder<S> = ServerConfigurationBuilderImpl()
     }
 }
