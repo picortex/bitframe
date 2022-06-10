@@ -9,7 +9,7 @@ import kotlinx.serialization.json.Json
 import live.MutableLive
 import logging.Logger
 
-interface BitframeApiKtorConfig : BitframeApiConfig, ServiceConfigKtor {
+interface BitframeApiKtorConfig : BitframeApiConfig, ServiceConfigKtor<Any> {
     companion object {
         operator fun invoke(
             appId: String,
@@ -22,6 +22,7 @@ interface BitframeApiKtorConfig : BitframeApiConfig, ServiceConfigKtor {
             json: Json = ServiceConfigKtor.DEFAULT_JSON,
             scope: CoroutineScope = ServiceConfig.DEFAULT_SCOPE
         ) = object : BitframeApiKtorConfig {
+            override val endpoint: Any = Unit
             override val session: MutableLive<Session> = session
             override val appId: String = appId
             override val cache: Cache = cache

@@ -1,5 +1,6 @@
 package bitframe.client
 
+import bitframe.core.ServiceConfigRest
 import bitframe.core.Session
 import events.EventBus
 import cache.Cache
@@ -13,10 +14,9 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-interface ServiceConfigKtor : ServiceConfig {
+interface ServiceConfigKtor<out E> : ServiceConfig, ServiceConfigRest<E> {
     val url: String
     val http: HttpClient
-    val json: Json
 
     companion object {
         @JvmField
@@ -37,35 +37,32 @@ interface ServiceConfigKtor : ServiceConfig {
         val DEFAULT_JSON = Json.Default
 
         @JvmSynthetic
-        operator fun invoke(
+        operator fun <E> invoke(
             url: String,
             appId: String,
             cache: Cache,
+            endpoint: E,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
             session: MutableLive<Session> = ServiceConfig.DEFAULT_LIVE_SESSION,
             http: HttpClient = DEFAULT_HTTP_CLIENT,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE,
-        ): ServiceConfigKtor = object : ServiceConfigKtor, ServiceConfig by ServiceConfig(appId, cache, bus, logger, session, scope) {
-            override val url: String = url
-            override val http: HttpClient = http
-            override val json: Json = json
-            override val appId: String = appId
-        }
+        ): ServiceConfigKtor<E> = ServiceConfigKtorImpl(appId, url, endpoint, cache, http, session, bus, logger, scope, json)
 
         @JvmStatic
         @JvmOverloads
-        fun create(
+        fun <E> create(
             url: String,
             appId: String,
             cache: Cache,
+            endpoint: E,
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
             session: MutableLive<Session> = ServiceConfig.DEFAULT_LIVE_SESSION,
             http: HttpClient = DEFAULT_HTTP_CLIENT,
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE,
-        ) = invoke(url, appId, cache, bus, logger, session, http, json, scope)
+        ): ServiceConfigKtor<E> = ServiceConfigKtorImpl(appId, url, endpoint, cache, http, session, bus, logger, scope, json)
     }
 }

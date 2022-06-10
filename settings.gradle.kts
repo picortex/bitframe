@@ -57,15 +57,9 @@ includeSubs("bitframe-actor", "bitframe-actor", "core", "app", "user", "space")
 includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mongo")
 
 // Bitframe Service
-includeSubs(base = "bitframe-service-builder", path = "bitframe-service/builder", "core", "daod")
+includeSubs(base = "bitframe-service-builder", path = "bitframe-service/builder", "core", "daod", "rest")
 includeSubs(base = "bitframe-service-builder-api", path = "bitframe-service/builder/api", "core", "ktor", "mock")
-includeSubs(
-    base = "bitframe-service-builder-sdk-client",
-    path = "bitframe-service/builder/sdk/client",
-    "core",
-    "mock",
-    "react"
-)
+includeSubs(base = "bitframe-service-builder-sdk-client", path = "bitframe-service/builder/sdk/client", "core", "mock", "react")
 includeSubs(base = "bitframe-service-builder-sdk-server", path = "bitframe-service/builder/sdk/server", "core")
 
 includeSubs(base = "bitframe-service-generic", path = "bitframe-service/generic", "core", "daod")

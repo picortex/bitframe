@@ -36,11 +36,7 @@ interface ServiceConfig {
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ): ServiceConfig = object : ServiceConfig {
-            override val bus = bus
-            override val logger: Logger = logger
-            override val scope = scope
-        }
+        ): ServiceConfig = ServiceConfigImpl(bus, logger, scope)
 
         @JvmOverloads
         @JvmStatic
@@ -48,6 +44,6 @@ interface ServiceConfig {
             bus: EventBus = DEFAULT_BUS,
             logger: Logger = DEFAULT_LOGGER,
             scope: CoroutineScope = DEFAULT_SCOPE
-        ) = invoke(bus, logger, scope)
+        ): ServiceConfig = ServiceConfigImpl(bus, logger, scope)
     }
 }

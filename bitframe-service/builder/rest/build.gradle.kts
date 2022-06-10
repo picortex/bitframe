@@ -13,15 +13,20 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeServiceBuilderApiCore)
-                api(projects.bitframeServiceBuilderRest)
-                api(ktor.client.core)
+                api(projects.bitframeServiceBuilderCore)
+                api(kotlinx.serialization.json)
             }
         }
 
         val commonTest by getting {
             dependencies {
                 implementation(asoft.expect.core)
+            }
+        }
+
+        val jvmMain by getting {
+            dependencies {
+                api(projects.mailerSmtp)
             }
         }
     }
