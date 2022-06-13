@@ -1,5 +1,6 @@
 package bitframe.core
 
+import bitframe.daos.config.DatabaseConfigurationMock
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.sync.Mutex
 import kotlin.jvm.JvmField
@@ -7,8 +8,8 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.reflect.KClass
 
-interface MockDaoFactoryConfig {
-    val simulationTime: Long
+interface MockDaoFactoryConfig : DatabaseConfigurationMock{
+    override val simulationTime: Long
     val lock: Mutex
     val scope: CoroutineScope
 

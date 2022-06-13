@@ -1,8 +1,10 @@
 package bitframe.server
 
-interface MongoConfigProperties {
-    val host: String
-    val username: String
-    val password: String
-    val database: String
+import biframe.daos.config.DatabaseConfigurationMongo
+
+interface MongoConfigProperties : DatabaseConfigurationMongo {
+    override val host: String
+    override val username: String
+    override val password: String
+    override val database: String
 }
