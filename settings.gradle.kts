@@ -55,6 +55,7 @@ includeSubs(base = "akkounts-sage", path = "bitframe-utils/akkounts/sage", "core
 
 includeSubs("bitframe-actor", "bitframe-actor", "core", "app", "user", "space")
 includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mongo")
+includeRoot(name = "bitframe-dao", path = "bitframe-daos/universal")
 
 // Bitframe Service
 includeSubs(base = "bitframe-service-builder", path = "bitframe-service/builder", "core", "daod", "rest")

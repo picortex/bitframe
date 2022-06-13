@@ -5,7 +5,7 @@ import bitframe.core.DaoFactory
 import bitframe.core.Savable
 import kotlin.reflect.KClass
 
-class MongoDaoFactory(
+actual class MongoDaoFactory actual constructor(
     val config: MongoDaoFactoryConfig
 ) : DaoFactory {
     private val daoContainer = mutableMapOf<KClass<*>, Dao<*>>()

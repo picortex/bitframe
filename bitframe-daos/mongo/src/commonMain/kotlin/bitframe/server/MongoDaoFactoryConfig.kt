@@ -1,6 +1,6 @@
 package bitframe.server
 
-import java.io.InputStream
+import kotlin.jvm.JvmOverloads
 
 class MongoDaoFactoryConfig @JvmOverloads constructor(
     override val host: String,
@@ -14,10 +14,4 @@ class MongoDaoFactoryConfig @JvmOverloads constructor(
         password = properties.password,
         database = properties.database,
     )
-
-    companion object {
-        fun fromProperties(stream: InputStream) = MongoDaoFactoryConfig(
-            MongoConfigProperties.from(stream)
-        )
-    }
 }

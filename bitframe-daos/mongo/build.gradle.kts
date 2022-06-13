@@ -1,16 +1,32 @@
 plugins {
-    kotlin("jvm")
+    kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
     id("picortex-publish")
 }
 
 kotlin {
-    target {
+    jvm {
         library()
+        withJava()
     }
+    js(IR) { library() }
     sourceSets {
-        val main by getting {
+        val commonMain by getting {
+            dependencies {
+                api(projects.bitframeDaoCore)
+                api(asoft.kotlinx.serialization.mapper)
+            }
+        }
+
+        val commonTest by getting {
+            dependencies {
+                implementation(projects.bitframeActorUser)
+                implementation(asoft.expect.coroutines)
+            }
+        }
+
+        val jvmMain by getting {
             dependencies {
                 api(projects.bitframeDaoCore)
                 api(kmongo.coroutines.serialization)
@@ -18,11 +34,5 @@ kotlin {
             }
         }
 
-        val test by getting {
-            dependencies {
-                implementation(projects.bitframeActorUser)
-                implementation(asoft.expect.coroutines)
-            }
-        }
     }
 }
