@@ -5,6 +5,7 @@ import events.EventBus
 import events.Subscriber
 import react.useEffectOnce
 
+@Deprecated("Prefer using useSubscriber")
 fun <D> useEventHandler(
     bus: EventBus,
     topic: String,
