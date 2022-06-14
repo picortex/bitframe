@@ -16,11 +16,14 @@ kotlin {
             dependencies {
                 api(projects.bitframeDaoMock)
                 api(projects.bitframeDaoMongo)
+                api(squareup.okio.core)
+                api(kotlinx.serialization.toml.core)
             }
         }
 
         val commonTest by getting {
             dependencies {
+                api(squareup.okio.fake)
                 implementation(asoft.expect.core)
             }
         }

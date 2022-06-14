@@ -4,4 +4,4 @@ package biframe.daos.config
 
 import bitframe.server.MongoDaoFactory
 
-inline fun DaoFactoryMongo(configuration: DatabaseConfigurationMongo) = MongoDaoFactory(configuration.toDaoFactoryMongoConfig())
+inline fun DaoFactoryMongo(configuration: DatabaseConfigurationRawMongo) = MongoDaoFactory(configuration.toDaoFactoryMongoConfig())

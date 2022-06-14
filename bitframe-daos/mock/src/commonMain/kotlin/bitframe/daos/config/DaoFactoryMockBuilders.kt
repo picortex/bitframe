@@ -4,4 +4,4 @@ package bitframe.daos.config
 
 import bitframe.core.MockDaoFactory
 
-inline fun DaoFactoryMock(configuration: DatabaseConfigurationMock) = MockDaoFactory(configuration.toDaoFactoryMockConfig())
+inline fun DaoFactoryMock(configuration: DatabaseConfigurationRawMock) = MockDaoFactory(configuration.toDaoFactoryMockConfig())

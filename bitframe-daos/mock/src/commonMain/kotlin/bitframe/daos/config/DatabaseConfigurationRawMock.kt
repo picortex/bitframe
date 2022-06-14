@@ -1,5 +1,5 @@
 package bitframe.daos.config
 
-interface DatabaseConfigurationMock {
+interface DatabaseConfigurationRawMock {
     val simulationTime: Long?
 }
