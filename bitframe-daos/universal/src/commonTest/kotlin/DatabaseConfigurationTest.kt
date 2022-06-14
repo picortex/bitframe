@@ -1,6 +1,10 @@
+import bitframe.core.MockDaoFactory
+import bitframe.daos.config.DaoFactory
 import bitframe.daos.config.DatabaseConfigurationRaw
+import bitframe.server.MongoDaoFactory
 import expect.expect
 import expect.expectFunction
+import expect.toBe
 import kotlin.test.Test
 import okio.FileSystem
 import okio.Path.Companion.toPath
@@ -66,5 +70,89 @@ class DatabaseConfigurationTest {
 
         val config = DatabaseConfigurationRaw(fs, "/app", "test")
         expect(config.username).toBe("username")
+    }
+
+    @Test
+    fun should_be_able_to_create_a_mock_instance_without_a_configured_simulation_time() {
+        fs.makeDatabaseConfigFileWith(
+            """
+            instance = "mock"
+        """.trimIndent()
+        )
+        val factory = DaoFactory(fs, "/app", "test")
+        expect(factory).toBe<MockDaoFactory>()
+    }
+
+    @Test
+    fun should_be_able_to_create_a_mock_dao_factory_instance_with_a_configured_simulation_time() {
+        fs.makeDatabaseConfigFileWith(
+            """
+            instance = "mock"
+            simulation-time = 1000
+        """.trimIndent()
+        )
+        val factory = DaoFactory(fs, "/app", "test")
+        expect(factory).toBe<MockDaoFactory>()
+    }
+
+    @Test
+    fun should_be_able_to_create_a_mongo_dao_factory_instance_without_a_database_config_value() {
+        fs.makeDatabaseConfigFileWith(
+            """
+            instance = "mongo"
+            host = "localhost:2727"
+            username = "username"
+            password = "password"
+        """.trimIndent()
+        )
+
+        val factory = DaoFactory(fs, "/app", "test")
+        expect(factory).toBe<MongoDaoFactory>()
+    }
+
+    @Test
+    fun should_be_able_to_create_a_mongo_dao_factory_instance_with_a_database_config_value() {
+        fs.makeDatabaseConfigFileWith(
+            """
+            instance = "mongo"
+            host = "localhost:2727"
+            username = "username"
+            password = "password"
+            database = "test"
+        """.trimIndent()
+        )
+
+        val factory = DaoFactory(fs, "/app", "test")
+        expect(factory).toBe<MongoDaoFactory>()
+    }
+
+    @Test
+    fun should_fail_to_create_a_mongo_dao_factory_instance_with_a_missing_important_config_value() {
+        fs.makeDatabaseConfigFileWith(
+            """
+            instance = "mongo"
+            username = "username"
+            password = "password"
+            database = "test"
+        """.trimIndent()
+        )
+
+        val err = expectFunction { DaoFactory(fs, "/app", "test") }.toFail()
+        expect(err.message).toBe("database.host for a mongo database must be provided")
+    }
+
+    @Test
+    fun should_fail_to_create_an_unsupported_dao_factory() {
+        fs.makeDatabaseConfigFileWith(
+            """
+            instance = "mysql"
+            username = "username"
+            password = "password"
+            database = "test"
+        """.trimIndent()
+        )
+
+        val err = expectFunction { DaoFactory(fs, "/app", "test") }.toFail()
+        expect(err.message).toBe("Unsupported database instance mysql")
     }
 }
