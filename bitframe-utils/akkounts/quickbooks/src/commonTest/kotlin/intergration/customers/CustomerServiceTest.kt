@@ -4,7 +4,7 @@ import akkounts.quickbooks.QuickBooksService
 import akkounts.quickbooks.customers.QuickBooksCustomerParams
 import akkounts.quickbooks.customers.QuickBooksCustomersService
 import expect.expect
-import expect.toBe
+import expect.*
 import kotlinx.datetime.Clock
 import later.await
 import intergration.TokenStorage
@@ -38,7 +38,7 @@ class CustomerServiceTest {
     fun should_fetch_customers() = runTest {
         val customers = service.all(company).await()
         println(customers)
-        expect(customers).toContainElements()
+        expectCollection(customers).toContainElements()
     }
 
     @Test
@@ -69,7 +69,7 @@ class CustomerServiceTest {
     fun should_return_an_empty_list_when_searching_a_missing_customer() = runTest {
         val now = Clock.System.now().toEpochMilliseconds()
         val customerList = service.search(company, displayName = "Invalid customer -$now").await()
-        expect(customerList).toBeEmpty()
+        expectCollection(customerList).toBeEmpty()
     }
 
     @Test

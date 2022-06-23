@@ -3,8 +3,7 @@ package intergration.vendors
 import akkounts.quickbooks.QuickBooksService
 import akkounts.quickbooks.vendors.VendorParams
 import akkounts.quickbooks.vendors.QuickBooksVendorsService
-import expect.expect
-import expect.toBe
+import expect.*
 import kotlinx.datetime.Clock
 import later.await
 import intergration.TokenStorage
@@ -38,7 +37,7 @@ class VendorsServiceTest {
     fun should_fetch_vendors() = runTest {
         val vendors = service.all(company).await()
         println(vendors)
-        expect(vendors).toContainElements()
+        expectCollection(vendors).toContainElements()
     }
 
     @Test
@@ -69,7 +68,7 @@ class VendorsServiceTest {
     fun should_return_an_empty_list_when_searching_a_missing_vendor() = runTest {
         val now = Clock.System.now().toEpochMilliseconds()
         val vendorList = service.search(company, displayName = "Invalid vendor -$now").await()
-        expect(vendorList).toBeEmpty()
+        expectCollection(vendorList).toBeEmpty()
     }
 
     @Test

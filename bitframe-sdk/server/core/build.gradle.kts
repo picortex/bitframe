@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeServiceBuilderCore)
-                api(projects.bitframeAuthenticationSdkServerCore)
+//                api(projects.bitframeAuthenticationSdkServerCore)
                 api(asoft.platform.core)
             }
         }

@@ -24,6 +24,8 @@ pluginManagement {
     }
 }
 
+val tmp = 0
+
 includeBuild("bitframe-plugins")
 
 fun includeRoot(name: String, path: String) {
@@ -67,12 +69,12 @@ includeSubs(base = "bitframe-service-generic", path = "bitframe-service/generic"
 includeSubs(base = "bitframe-service-generic-api", path = "bitframe-service/generic/api", "core", "ktor", "mock")
 includeSubs(base = "bitframe-service-generic-sdk-server", path = "bitframe-service/generic/sdk/server", "core")
 
-includeSubs(base = "bitframe-authentication", path = "bitframe-features/authentication", "core", "daod")
-includeSubs(base = "bitframe-authentication-api", path = "bitframe-features/authentication/api", "core", "ktor", "mock")
-includeSubs(base = "bitframe-authentication-sdk-client", path = "bitframe-features/authentication/sdk/client", "core")
-includeSubs(base = "bitframe-authentication-sdk-server", path = "bitframe-features/authentication/sdk/server", "core")
+//includeSubs(base = "bitframe-authentication", path = "bitframe-features/authentication", "core", "daod")
+//includeSubs(base = "bitframe-authentication-api", path = "bitframe-features/authentication/api", "core", "ktor", "mock")
+//includeSubs(base = "bitframe-authentication-sdk-client", path = "bitframe-features/authentication/sdk/client", "core")
+//includeSubs(base = "bitframe-authentication-sdk-server", path = "bitframe-features/authentication/sdk/server", "core")
 
-includeSubs(base = "bitframe-api", "bitframe-api", "core", "ktor", "mock")
+includeSubs(base = "bitframe-api", "bitframe-api", "core" /* "ktor", "mock" */)
 
 includeSubs(base = "bitframe-sdk-client", path = "bitframe-sdk/client", "core")
 includeSubs(base = "bitframe-sdk-server", path = "bitframe-sdk/server", "core", "ktor", "test")
