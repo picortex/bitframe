@@ -1,6 +1,6 @@
 package modal
 
-import expect.expect
+import expect.*
 import kotlinx.coroutines.test.runTest
 import presenters.modal.click
 import presenters.modal.confirmDialog
@@ -26,10 +26,10 @@ class DialogTest {
         }
 
         d.click("Cancel")
-        expect(clicks).toContain("cancelled")
+        expectCollection(clicks).toContain("cancelled")
 
         d.click("Delete")
-        expect(clicks).toContain("deleted")
+        expectCollection(clicks).toContain("deleted")
     }
 
     @Test

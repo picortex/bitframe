@@ -18,6 +18,8 @@ expect-coroutines = { module = "tz.co.asoft:expect-coroutines", version.ref = "f
 identifier-core = { module = "tz.co.asoft:identifier-core", version.ref = "stdlib" }
 identifier-generators = { module = "tz.co.asoft:identifier-generators", version.ref = "stdlib" }
 
+koncurrent-later-core = { module = "tz.co.asoft:koncurrent-later-core", version.ref = "foundation" }
+
 kotlinx-collections-interoperable = { module = "tz.co.asoft:kotlinx-collections-interoperable", version.ref = "foundation" }
 kotlinx-serialization-mapper = { module = "tz.co.asoft:kotlinx-serialization-mapper", version.ref = "foundation" }
 
@@ -26,6 +28,7 @@ later-ktx = { module = "tz.co.asoft:later-ktx", version.ref = "foundation" }
 
 live-core = { module = "tz.co.asoft:live-core", version.ref = "stdlib" }
 
+logging-core = { module = "tz.co.asoft:logging-core", version.ref = "foundation" }
 logging-console = { module = "tz.co.asoft:logging-console", version.ref = "foundation" }
 
 platform-core = { module = "tz.co.asoft:platform-core", version.ref = "foundation" }

@@ -1,13 +1,9 @@
 package bitframe
 
-import bitframe.server.BitframeApplication
-import bitframe.server.BitframeService
-import bitframe.server.Action
-import bitframe.server.http.HttpRoute
-import bitframe.server.Module
+import bitframe.http.HttpRoute
 
 sealed class ComponentUnderTest
-class ApplicationUnderTest<S, A : BitframeApplication<S>>(val application: A) : ComponentUnderTest()
+class ApplicationUnderTest<S, A : Application<S>>(val application: A) : ComponentUnderTest()
 class ModuleUnderTest<M : Module>(val module: M) : ComponentUnderTest()
 class RouteUnderTest(val route: HttpRoute) : ComponentUnderTest()
 class ActionUnderTest(val action: Action) : ComponentUnderTest()

@@ -1,5 +1,7 @@
 package bitframe.core
 
+import bitframe.Dao
+import bitframe.DaoFactory
 import kotlin.reflect.KClass
 
 class MockDaoFactory(

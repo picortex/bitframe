@@ -2,6 +2,7 @@
 
 package bitframe.core
 
+import bitframe.Dao
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.coroutines.delay
@@ -10,7 +11,6 @@ import kotlinx.serialization.serializer
 import later.Later
 import later.await
 import later.later
-import kotlin.reflect.KClass
 
 class MockDao<D : Savable>(
     override val config: MockDaoConfig<D>

@@ -8,6 +8,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 import kotlin.reflect.KClass
 
+@Deprecated("in favour of its quivalent in bitframe.dao")
 interface DaoConfig<D : Any> {
     val clazz: KClass<D>
     val scope: CoroutineScope

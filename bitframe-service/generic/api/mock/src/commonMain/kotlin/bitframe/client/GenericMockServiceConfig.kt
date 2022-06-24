@@ -1,6 +1,6 @@
 package bitframe.client
 
-import bitframe.core.DaoFactory
+import bitframe.DaoFactory
 import bitframe.core.Session
 import bitframe.core.ServiceConfigDaod
 import bitframe.core.GenericDaodServiceConfig

@@ -1,5 +1,6 @@
 package bitframe
 
+import bitframe.internal.ServerConfigImpl
 import kotlinx.serialization.json.Json
 
 interface ServerConfig<out E> {

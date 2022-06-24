@@ -1,6 +1,6 @@
 package bitframe.server
 
-import bitframe.core.DaoFactory
+import bitframe.DaoFactory
 import bitframe.core.ServiceConfigDaod
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
@@ -12,6 +12,7 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
+@Deprecated("In favour of bitframe.ServiceConfig")
 interface ServiceConfig : ServiceConfigDaod {
     companion object {
         @JvmField

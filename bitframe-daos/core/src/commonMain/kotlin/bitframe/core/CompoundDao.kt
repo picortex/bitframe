@@ -8,6 +8,7 @@ import later.Later
 import later.await
 import later.later
 
+@Deprecated("in favour of its quivalent in bitframe.dao")
 class CompoundDao<T : Any>(override val config: CompoundDaoConfig<T>) : Dao<T> {
 
     private val daos by lazy { config.daos }

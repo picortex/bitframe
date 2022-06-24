@@ -3,8 +3,7 @@ import bitframe.core.find
 import bitframe.core.isEqualTo
 import bitframe.server.MongoDao
 import bitframe.server.MongoDaoConfig
-import expect.expect
-import expect.expectFailure
+import expect.*
 import kotlinx.coroutines.test.runTest
 import later.await
 import kotlin.test.Ignore
@@ -55,10 +54,10 @@ class MongoDaoTest {
         repeat(10) { dao.create(Human("h$it")).await() }
         val query1 = find(Human::uid contains "human").limit(5)
         val res1 = dao.execute(query1).await()
-        expect(res1).toBeOfSize(5)
+        expectCollection(res1).toBeOfSize(5)
 
         val query2 = find(Human::uid contains "human").limit(20)
         val res2 = dao.execute(query2).await()
-        expect(res2).toBeOfSize(10)
+        expectCollection(res2).toBeOfSize(10)
     }
 }

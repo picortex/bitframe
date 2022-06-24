@@ -5,6 +5,7 @@ import response.Error
 import response.Status
 import response.responseOf
 
+@Deprecated("In favour of bitframe.http.HttpRoute")
 data class HttpRoute(
     val method: HttpMethod,
     val path: String,

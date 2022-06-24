@@ -1,5 +1,6 @@
 package bitframe
 
+import bitframe.internal.ControllerConfigImpl
 import kotlinx.serialization.json.Json
 
 interface ControllerConfig<out S> {

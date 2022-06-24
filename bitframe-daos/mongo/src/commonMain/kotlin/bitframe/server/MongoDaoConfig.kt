@@ -1,10 +1,7 @@
 package bitframe.server
 
-import bitframe.core.DaoConfig
-import kotlinx.coroutines.CoroutineScope
+import bitframe.DaoConfig
 import kotlin.jvm.JvmField
-import kotlin.jvm.JvmStatic
-import kotlin.reflect.KClass
 
 interface MongoDaoConfig<D : Any> : DaoConfig<D>, MongoConfigProperties {
     val collection: String

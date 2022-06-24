@@ -3,6 +3,7 @@ package bitframe.core
 import identifier.Email as PrimitiveEmail
 import identifier.Phone as PrimitivePhone
 
+@Deprecated("In favour of bitframe.Identifier")
 sealed class Identifier(open val primitive: Any, val value: String) {
     companion object {
         fun fromOrNull(value: String): Identifier? = try {

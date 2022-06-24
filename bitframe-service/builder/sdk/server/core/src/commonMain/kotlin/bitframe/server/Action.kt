@@ -2,6 +2,7 @@ package bitframe.server
 
 import bitframe.server.http.HttpRoute
 
+@Deprecated("In favour of bitframe.Action")
 data class Action(
     val name: String,
     val params: Map<String, Any?>,

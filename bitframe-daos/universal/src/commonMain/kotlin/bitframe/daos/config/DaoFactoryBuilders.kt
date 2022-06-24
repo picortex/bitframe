@@ -3,6 +3,7 @@
 package bitframe.daos.config
 
 import biframe.daos.config.DaoFactoryMongo
+import bitframe.DaoFactory
 import bitframe.core.*
 import kotlin.jvm.JvmName
 import okio.FileSystem

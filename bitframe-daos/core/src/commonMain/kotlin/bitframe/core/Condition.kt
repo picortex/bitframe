@@ -1,5 +1,6 @@
 package bitframe.core
 
+@Deprecated("in favour of its quivalent in bitframe.dao")
 open class Condition<out V>(
     val lhs: String,
     val operator: Operator = Operator.Equals,

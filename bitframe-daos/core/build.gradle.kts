@@ -5,6 +5,8 @@ plugins {
     id("picortex-publish")
 }
 
+val tmp = 0
+
 kotlin {
     jvm {
         library()
@@ -16,6 +18,7 @@ kotlin {
             dependencies {
                 api(projects.bitframeActorCore)
                 api(asoft.kotlinx.serialization.mapper)
+                api(asoft.koncurrent.later.core)
                 api(kotlinx.coroutines.core)
                 api(kotlinx.datetime)
                 api(asoft.later.ktx)

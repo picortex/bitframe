@@ -51,7 +51,6 @@ includeSubs(base = "presenters", path = "bitframe-utils/presenters", "core", "mo
 includeRoot(name = "properties", path = "bitframe-utils/properties")
 includeRoot(name = "validation", path = "bitframe-utils/validation")
 includeRoot(name = "response", path = "bitframe-utils/response")
-// includeRoot(name = "mokads", path = "bitframe-utils/mokads")
 includeSubs(base = "akkounts", path = "bitframe-utils/akkounts", "core", "mock", "quickbooks")
 includeSubs(base = "akkounts-sage", path = "bitframe-utils/akkounts/sage", "core", "mock")
 
@@ -62,7 +61,7 @@ includeRoot(name = "bitframe-dao", path = "bitframe-daos/universal")
 // Bitframe Service
 includeSubs(base = "bitframe-service-builder", path = "bitframe-service/builder", "core", "daod", "rest")
 includeSubs(base = "bitframe-service-builder-api", path = "bitframe-service/builder/api", "core", "ktor", "mock")
-includeSubs(base = "bitframe-service-builder-sdk-client", path = "bitframe-service/builder/sdk/client", "core", "mock", "react")
+includeSubs(base = "bitframe-service-builder-sdk-client", path = "bitframe-service/builder/sdk/client", "core", "react" /* "mock",*/)
 includeSubs(base = "bitframe-service-builder-sdk-server", path = "bitframe-service/builder/sdk/server", "core")
 
 includeSubs(base = "bitframe-service-generic", path = "bitframe-service/generic", "core", "daod")

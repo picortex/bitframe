@@ -4,6 +4,7 @@ import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlin.reflect.KProperty
 
+@Deprecated("in favour of its quivalent in bitframe.dao")
 data class Query(
     val statements: List<QueryStatement>
 ) {

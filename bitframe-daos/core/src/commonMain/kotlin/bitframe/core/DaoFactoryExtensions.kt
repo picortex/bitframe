@@ -1,6 +1,9 @@
 package bitframe.core
 
+@Deprecated("in favour of its quivalent in bitframe.dao")
 inline fun <reified D : Savable> DaoFactory.get(): Dao<D> = get(D::class)
+
+@Deprecated("in favour of its quivalent in bitframe.dao")
 
 inline fun <reified D : Savable> CompoundDao(vararg daos: Dao<D>): CompoundDao<D> {
     val config = CompoundDaoConfig(

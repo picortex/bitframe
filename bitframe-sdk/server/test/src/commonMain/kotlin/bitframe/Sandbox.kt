@@ -1,10 +1,8 @@
 package bitframe
 
-import bitframe.server.Action
-import bitframe.server.http.HttpRequest
-import bitframe.server.http.HttpResponse
-import bitframe.server.http.HttpRoute
-import bitframe.server.Module
+import bitframe.http.HttpRequest
+import bitframe.http.HttpResponse
+import bitframe.http.HttpRoute
 import io.ktor.http.*
 import io.ktor.http.HttpMethod.Companion.Get
 import io.ktor.http.HttpMethod.Companion.Post

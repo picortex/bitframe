@@ -1,9 +1,9 @@
 package unit
 
+import bitframe.Action
 import bitframe.Sandbox
-import bitframe.server.Action
-import bitframe.server.http.HttpResponse
-import bitframe.server.http.HttpRoute
+import bitframe.http.HttpResponse
+import bitframe.http.HttpRoute
 import expect.expect
 import io.ktor.http.*
 import kotlinx.coroutines.test.runTest
