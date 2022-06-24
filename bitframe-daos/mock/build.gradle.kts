@@ -16,6 +16,7 @@ kotlin {
             dependencies {
                 api(projects.bitframeDaoCore)
                 api(asoft.kotlinx.serialization.mapper)
+                api(asoft.koncurrent.primitives.mock)
             }
         }
 

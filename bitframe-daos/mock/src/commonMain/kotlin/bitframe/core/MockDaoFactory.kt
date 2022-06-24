@@ -1,9 +1,8 @@
 package bitframe.core
 
-import bitframe.Dao
-import bitframe.DaoFactory
 import kotlin.reflect.KClass
 
+@Deprecated("In favour of bitframe.MockDaoFactory")
 class MockDaoFactory(
     private val config: MockDaoFactoryConfig = MockDaoFactoryConfig()
 ) : DaoFactory {

@@ -6,6 +6,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 
+@Deprecated("In favour of bitframe.MockDaoFactoryConfig")
 interface MockDaoFactoryConfig : DatabaseConfigurationRawMock{
     override val simulationTime: Long
     val lock: Mutex

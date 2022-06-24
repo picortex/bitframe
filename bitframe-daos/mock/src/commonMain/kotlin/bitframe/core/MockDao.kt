@@ -2,7 +2,6 @@
 
 package bitframe.core
 
-import bitframe.Dao
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.coroutines.delay
@@ -12,6 +11,7 @@ import later.Later
 import later.await
 import later.later
 
+@Deprecated("In favour of its bitframe.MockDao<D>")
 class MockDao<D : Savable>(
     override val config: MockDaoConfig<D>
 ) : Dao<D> {

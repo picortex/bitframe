@@ -1,5 +1,5 @@
 package bitframe.server
 
-import bitframe.DaoFactory
+import bitframe.core.DaoFactory
 
 expect class MongoDaoFactory(config: MongoDaoFactoryConfig) : DaoFactory

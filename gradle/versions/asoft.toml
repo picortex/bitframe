@@ -18,6 +18,8 @@ expect-coroutines = { module = "tz.co.asoft:expect-coroutines", version.ref = "f
 identifier-core = { module = "tz.co.asoft:identifier-core", version.ref = "stdlib" }
 identifier-generators = { module = "tz.co.asoft:identifier-generators", version.ref = "stdlib" }
 
+koncurrent-primitives-core = { module = "tz.co.asoft:koncurrent-primitives-core", version.ref = "foundation" }
+koncurrent-primitives-mock = { module = "tz.co.asoft:koncurrent-primitives-mock", version.ref = "foundation" }
 koncurrent-later-core = { module = "tz.co.asoft:koncurrent-later-core", version.ref = "foundation" }
 
 kotlinx-collections-interoperable = { module = "tz.co.asoft:kotlinx-collections-interoperable", version.ref = "foundation" }

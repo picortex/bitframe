@@ -1,6 +1,6 @@
 package bitframe.server
 
-import bitframe.DaoConfig
+import bitframe.core.DaoConfig
 import kotlin.jvm.JvmField
 
 interface MongoDaoConfig<D : Any> : DaoConfig<D>, MongoConfigProperties {

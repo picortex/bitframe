@@ -1,16 +1,15 @@
-package bitframe.server
+package bitframe
 
-import bitframe.core.Dao
-import bitframe.core.DaoFactory
-import bitframe.core.Savable
+import bitframe.actor.Savable
+import bitframe.dao.daoConfigOf
 import kotlin.reflect.KClass
 
-actual class MongoDaoFactory actual constructor(
-    val config: MongoDaoFactoryConfig
+actual class DaoFactoryMongo actual constructor(
+    val config: DaoFactoryMongoConfig
 ) : DaoFactory {
     private val daoContainer = mutableMapOf<KClass<*>, Dao<*>>()
     override fun <D : Savable> get(clazz: KClass<D>): Dao<D> = daoContainer.getOrPut(clazz) {
-        MongoDao(config.daoConfigOf(clazz))
+        DaoMongo(config.daoConfigOf(clazz))
     } as Dao<D>
 
     override fun toString() = "MongoDaoFactory(host=${config.host})"

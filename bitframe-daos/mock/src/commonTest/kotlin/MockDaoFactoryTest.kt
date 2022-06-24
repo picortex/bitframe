@@ -1,4 +1,4 @@
-import bitframe.DaoFactory
+import bitframe.core.DaoFactory
 import bitframe.core.MockDaoFactory
 import bitframe.core.get
 import expect.expect
