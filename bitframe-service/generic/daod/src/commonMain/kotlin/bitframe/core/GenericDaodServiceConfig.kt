@@ -1,6 +1,6 @@
 package bitframe.core
 
-import bitframe.DaoFactory
+import bitframe.core.DaoFactory
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json

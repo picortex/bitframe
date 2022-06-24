@@ -1,6 +1,7 @@
 package unit
 
 import expect.expect
+import expect.expectCollection
 import templater.Parameter
 import templater.TemplateCompiler
 import kotlin.test.Ignore
@@ -27,7 +28,7 @@ class TemplateCompilerTest {
 
     @Test
     fun should_find_multiple_parameters() {
-        expect(compiler.findParameters("{{p}} {{q}}")).toBeOfSize(2)
+        expectCollection(compiler.findParameters("{{p}} {{q}}")).toBeOfSize(2)
     }
 
     @Test

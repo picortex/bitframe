@@ -1,6 +1,6 @@
 package bitframe.client
 
-import bitframe.DaoFactory
+import bitframe.core.DaoFactory
 import bitframe.core.ServiceConfigDaod
 import bitframe.core.MockDaoFactory
 import bitframe.core.Session

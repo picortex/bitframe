@@ -3,6 +3,5 @@
 package bitframe
 
 import bitframe.dao.toDaoFactoryMongoConfig
-import bitframe.server.MongoDaoFactory
 
-inline fun DaoFactoryMongo(configuration: DaoFactoryMongoConfigRaw) = MongoDaoFactory(configuration.toDaoFactoryMongoConfig())
+inline fun DaoFactoryMongo(configuration: DaoFactoryMongoConfigRaw): DaoFactoryMongo = DaoFactoryMongo(config = configuration.toDaoFactoryMongoConfig())

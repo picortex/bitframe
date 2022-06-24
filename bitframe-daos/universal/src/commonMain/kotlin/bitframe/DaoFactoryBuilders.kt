@@ -1,16 +1,13 @@
 @file:JvmName("DaoFactoryBuilder")
 
-package bitframe.daos.config
+package bitframe
 
-import biframe.daos.config.DaoFactoryMongo
-import bitframe.core.DaoFactory
-import bitframe.core.*
+import bitframe.exceptions.IllegalConfiguration
 import kotlin.jvm.JvmName
 import okio.FileSystem
 
-@Deprecated("In favour of bitframe.DaoFactory")
 @JvmName("from")
-fun DaoFactory(configuration: DatabaseConfigurationRaw): DaoFactory {
+fun DaoFactory(configuration: DaoFactoryConfigRaw): DaoFactory {
     val instance = configuration.instance?.lowercase() ?: throw IllegalConfiguration("database instance must not be null")
     return when (instance) {
         "mock" -> DaoFactoryMock(configuration)
@@ -19,10 +16,9 @@ fun DaoFactory(configuration: DatabaseConfigurationRaw): DaoFactory {
     }
 }
 
-@Deprecated("In favour of bitframe.DaoFactory")
 @JvmName("from")
 fun DaoFactory(
     fs: FileSystem,
     appDir: String?,
     appConf: String?,
-): DaoFactory = DaoFactory(DatabaseConfigurationRaw(fs, appDir, appConf))
+): DaoFactory = DaoFactory(DaoFactoryConfigRaw(fs, appDir, appConf))

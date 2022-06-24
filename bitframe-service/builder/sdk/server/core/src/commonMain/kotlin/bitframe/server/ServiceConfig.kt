@@ -1,6 +1,6 @@
 package bitframe.server
 
-import bitframe.DaoFactory
+import bitframe.core.DaoFactory
 import bitframe.core.ServiceConfigDaod
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
