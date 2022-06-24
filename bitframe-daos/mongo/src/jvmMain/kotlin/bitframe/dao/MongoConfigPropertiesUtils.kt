@@ -4,12 +4,14 @@ import bitframe.DaoFactoryMongoConfig
 import bitframe.DaoMongoConfig
 import bitframe.MongoConfigProperties
 import com.mongodb.ConnectionString
+import koncurrent.Executor
 import java.io.InputStream
 import java.util.*
 import kotlin.reflect.KClass
 
-fun <D : Any> MongoConfigProperties.daoConfigOf(clazz: KClass<D>): DaoMongoConfig<D> = MongoDaoConfig(
+fun <D : Any> MongoConfigProperties.daoConfigOf(clazz: KClass<D>, executor: Executor): DaoMongoConfig<D> = DaoMongoConfig(
     clazz = clazz,
+    executor = executor,
     host = host,
     username = username,
     password = password,

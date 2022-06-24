@@ -1,4 +1,4 @@
-import bitframe.DaoFactory
+import bitframe.core.DaoFactory
 import bitframe.core.get
 import bitframe.server.MongoDaoFactory
 import bitframe.server.MongoDaoFactoryConfig
