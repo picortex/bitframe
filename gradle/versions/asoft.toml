@@ -18,7 +18,9 @@ expect-coroutines = { module = "tz.co.asoft:expect-coroutines", version.ref = "f
 identifier-core = { module = "tz.co.asoft:identifier-core", version.ref = "stdlib" }
 identifier-generators = { module = "tz.co.asoft:identifier-generators", version.ref = "stdlib" }
 
+kuest-core = { module = "tz.co.asoft:kuest-core", version.ref = "foundation" }
 koncurrent-primitives-core = { module = "tz.co.asoft:koncurrent-primitives-core", version.ref = "foundation" }
+koncurrent-primitives-coroutines = { module = "tz.co.asoft:koncurrent-primitives-coroutines", version.ref = "foundation" }
 koncurrent-primitives-mock = { module = "tz.co.asoft:koncurrent-primitives-mock", version.ref = "foundation" }
 koncurrent-later-core = { module = "tz.co.asoft:koncurrent-later-core", version.ref = "foundation" }
 

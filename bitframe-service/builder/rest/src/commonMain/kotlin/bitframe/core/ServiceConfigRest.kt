@@ -2,6 +2,7 @@ package bitframe.core
 
 import kotlinx.serialization.json.Json
 
+@Deprecated("In favour of ApiConfigRest")
 interface ServiceConfigRest<out E> : ServiceConfig {
     val endpoint: E
     val json: Json

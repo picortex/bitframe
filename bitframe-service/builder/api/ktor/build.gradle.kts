@@ -15,6 +15,7 @@ kotlin {
             dependencies {
                 api(projects.bitframeServiceBuilderApiCore)
                 api(projects.bitframeServiceBuilderRest)
+                api(asoft.koncurrent.primitives.coroutines)
                 api(ktor.client.core)
             }
         }

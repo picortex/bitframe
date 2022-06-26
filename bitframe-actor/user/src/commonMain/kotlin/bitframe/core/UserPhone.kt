@@ -6,6 +6,7 @@ import identifier.Phone
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
+@Deprecated("In favour of the one in bitframe.actor")
 @Serializable
 data class UserPhone(
     override val value: String,

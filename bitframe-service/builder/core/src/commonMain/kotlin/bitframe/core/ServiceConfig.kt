@@ -14,6 +14,7 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
+@Deprecated("In favour of bitframe.ApiConfig")
 @JsExport
 interface ServiceConfig {
     val bus: EventBus

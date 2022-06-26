@@ -17,6 +17,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 import bitframe.core.ServiceConfig as CoreServiceConfig
 
+@Deprecated("In favour of bitframe.ApiConfig")
 @JsExport
 interface ServiceConfig : CoreServiceConfig {
     val appId: String

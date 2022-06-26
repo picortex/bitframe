@@ -9,6 +9,7 @@ import kotlinx.serialization.UseSerializers
 import kotlinx.serialization.builtins.LongAsStringSerializer
 import kotlin.js.JsExport
 
+@Deprecated("In favour of the one in bitframe.actor")
 @JsExport
 @Serializable
 data class User(
