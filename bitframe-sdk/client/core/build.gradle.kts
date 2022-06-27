@@ -13,7 +13,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeApiCore)
-                api(projects.bitframeAuthenticationSdkClientCore)
+                api(projects.bitframeServiceBuilderSdkClientCore)
+//                api(projects.bitframeAuthenticationSdkClientCore)
             }
         }
 
@@ -27,8 +28,9 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(projects.bitframeAuthenticationApiMock)
-                implementation(projects.bitframeApiMock)
+//                implementation(projects.bitframeAuthenticationApiMock)
+//                implementation(projects.bitframeApiMock)
+                implementation(projects.bitframeServiceBuilderSdkClientCore)
                 implementation(asoft.expect.coroutines)
                 implementation(asoft.viewmodel.test.expect)
             }

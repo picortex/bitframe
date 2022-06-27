@@ -2,6 +2,7 @@ package events
 
 import live.MutableLive
 import live.WatchMode
+import live.watch
 import live.mutableLiveOf
 
 class InMemoryEventBus : EventBus() {
@@ -13,7 +14,7 @@ class InMemoryEventBus : EventBus() {
         if (live == null) {
             val l = mutableLiveOf(event.data)
             dispatchers[event.topic] = l as MutableLive<Any>
-            l.watch(WatchMode.EAGERLY) { value ->
+            l.watch(WatchMode.Eagerly) { value ->
                 subscribers[event.topic]?.forEach { it.invoke(value) }
             }
         } else {

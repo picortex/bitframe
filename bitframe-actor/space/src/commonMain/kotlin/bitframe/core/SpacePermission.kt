@@ -2,6 +2,7 @@ package bitframe.core
 
 import kotlinx.serialization.Serializable
 
+@Deprecated("in favour of bitframe.SpacePermission")
 @Serializable
 data class SpacePermission(
     val name: String,

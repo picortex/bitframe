@@ -6,6 +6,7 @@ package bitframe.core
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
+@Deprecated("In favour of bitframe.actor.Identified")
 @Serializable
 class Identified<out T>(
     override val uid: String,

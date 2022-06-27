@@ -12,15 +12,16 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeAuthenticationApiCore)
+                api(asoft.logging.console)
                 api(kotlinx.serialization.json)
+                api(asoft.platform.core)
                 api(asoft.cache.mock)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(projects.bitframeApiMock)
+//                implementation(projects.bitframeApiMock)
                 implementation(asoft.expect.coroutines)
             }
         }

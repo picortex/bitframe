@@ -1,5 +1,7 @@
 package bitframe
 
+import bitframe.internal.ModuleConfigImpl
+
 interface ModuleConfig<out C, out E> {
     val controller: C
     val endpoint: E

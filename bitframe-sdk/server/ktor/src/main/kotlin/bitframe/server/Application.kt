@@ -48,7 +48,6 @@ open class Application<S>(
             }
             routing {
                 static("/") {
-                    staticRootFolder = config.client.absoluteFile
                     files(".")
                     file("main.bundle.js")
                     default("index.html")

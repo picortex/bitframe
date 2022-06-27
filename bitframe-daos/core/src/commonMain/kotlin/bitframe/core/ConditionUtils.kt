@@ -4,6 +4,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.mapper.Mapper
 
+@Deprecated("in favour of its quivalent in bitframe.dao")
 fun <T> Condition<*>.asPredicate(
     serializer: KSerializer<T>
 ) = { it: T ->

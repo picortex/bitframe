@@ -4,7 +4,7 @@ import payments.requests.*;
 import kotlinx.serialization.Serializable;
 import org.junit.jupiter.api.Test;
 
-import static expect.Builders.expect;
+import static expect.ExpectBuilders.*;
 
 public class SerializationTest {
     @Serializable

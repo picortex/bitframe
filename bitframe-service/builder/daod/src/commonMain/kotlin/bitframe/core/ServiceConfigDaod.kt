@@ -11,6 +11,7 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
+@Deprecated("In favour of bitframe.ServiceConfigDaod")
 interface ServiceConfigDaod : ServiceConfig {
     val json: Json
     val daoFactory: DaoFactory

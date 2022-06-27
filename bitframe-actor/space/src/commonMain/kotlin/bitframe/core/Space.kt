@@ -5,6 +5,7 @@ package bitframe.core
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
+@Deprecated("in favour of bitframe.Space")
 @Serializable
 data class Space(
     val name: String,

@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.collections.interoperable.List
 import kotlin.js.JsExport
 
+@Deprecated("in favour of bitframe.Session")
 sealed class Session {
     object Unknown : Session()
 

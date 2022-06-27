@@ -5,6 +5,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlin.jvm.JvmField
 import kotlin.reflect.KClass
 
+@Deprecated("In favour of bitframe.MockDaoConfig")
 interface MockDaoConfig<D : Any> : DaoConfig<D> {
     val items: MutableMap<String, D>
     val simulationTime: Long

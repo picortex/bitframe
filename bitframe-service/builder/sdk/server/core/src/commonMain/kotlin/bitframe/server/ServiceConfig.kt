@@ -12,6 +12,7 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
+@Deprecated("In favour of bitframe.ServiceConfig")
 interface ServiceConfig : ServiceConfigDaod {
     companion object {
         @JvmField

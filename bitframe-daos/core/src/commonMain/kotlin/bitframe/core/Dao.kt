@@ -6,6 +6,7 @@ import later.Later
 import later.await
 import later.later
 
+@Deprecated("in favour of its quivalent in bitframe.dao")
 interface Dao<out T : Any> {
 
     val config: DaoConfig<@UnsafeVariance T>

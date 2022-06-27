@@ -1,7 +1,5 @@
 package bitframe.server
 
-import bitframe.server.controllers.AuthenticationController
-
 open class BitframeApplication<S>(
     open val config: BitframeApplicationConfig<S>
 ) {

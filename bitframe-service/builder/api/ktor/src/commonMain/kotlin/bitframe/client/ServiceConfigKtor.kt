@@ -14,6 +14,7 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
+@Deprecated("In favour of bitframe.ApiConfigKtor")
 interface ServiceConfigKtor<out E> : ServiceConfig, ServiceConfigRest<E> {
     val url: String
     val http: HttpClient

@@ -10,8 +10,8 @@ import kotlinx.serialization.serializer
 import later.Later
 import later.await
 import later.later
-import kotlin.reflect.KClass
 
+@Deprecated("In favour of its bitframe.MockDao<D>")
 class MockDao<D : Savable>(
     override val config: MockDaoConfig<D>
 ) : Dao<D> {

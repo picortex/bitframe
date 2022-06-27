@@ -8,6 +8,7 @@ import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 
+@Deprecated("In favour of the one in bitframe.actor")
 @Serializable
 sealed class UserContact : Savable {
     abstract val verified: Boolean

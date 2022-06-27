@@ -8,6 +8,7 @@ import platform.ExecutionEnvironment
 import platform.Platform
 import kotlin.js.JsExport
 
+@Deprecated("In favour of bitframe.RequestBody")
 @Serializable
 sealed class RequestBody<out T> {
     abstract val data: T

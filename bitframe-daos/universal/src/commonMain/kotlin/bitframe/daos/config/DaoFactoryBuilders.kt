@@ -3,10 +3,12 @@
 package bitframe.daos.config
 
 import biframe.daos.config.DaoFactoryMongo
+import bitframe.core.DaoFactory
 import bitframe.core.*
 import kotlin.jvm.JvmName
 import okio.FileSystem
 
+@Deprecated("In favour of bitframe.DaoFactory")
 @JvmName("from")
 fun DaoFactory(configuration: DatabaseConfigurationRaw): DaoFactory {
     val instance = configuration.instance?.lowercase() ?: throw IllegalConfiguration("database instance must not be null")
@@ -17,6 +19,7 @@ fun DaoFactory(configuration: DatabaseConfigurationRaw): DaoFactory {
     }
 }
 
+@Deprecated("In favour of bitframe.DaoFactory")
 @JvmName("from")
 fun DaoFactory(
     fs: FileSystem,
