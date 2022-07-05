@@ -8,11 +8,11 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.reflect.KProperty
 
-data class TextInputField(
+class TextInputField(
     override val name: String,
     override val label: String = name,
     override val hint: String = label,
-    override var value: String? = null,
+    value: String? = null,
     override val isReadonly: Boolean = false,
     override val validator: (String?) -> String? = { it },
 ) : AbstractTextInputFieldRaw(name, label, hint, value, isReadonly, validator) {
@@ -25,6 +25,4 @@ data class TextInputField(
         hint: String = name.name,
         value: String? = null
     ) : this(name.name, label, hint, value)
-
-    val asteriskedLabel = label
 }

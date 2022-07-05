@@ -21,7 +21,7 @@ class FormViewModelTest {
         val age by number()
     }
 
-    fun sendToNetwork(params: TestParams) = Later<Int>(SynchronousExecutor) { resolve, reject ->
+    fun sendToNetwork(params: TestParams) = Later(SynchronousExecutor) { resolve, reject ->
         println("Sending $params to the network")
         resolve(params.name.length)
 //        reject(RuntimeException("Invalid parameters"))
