@@ -2,6 +2,7 @@ package presenters.forms.fields
 
 import presenters.fields.*
 import presenters.forms.Fields
+import kotlin.reflect.KProperty
 
 inline fun Fields.date(
     name: String? = null,
@@ -20,3 +21,12 @@ inline fun Fields.date(
         validator = validator,
     )
 }
+
+inline fun Fields.date(
+    property: KProperty<*>,
+    label: String? = property.name,
+    hint: String? = label,
+    value: String? = null,
+    isReadonly: Boolean = false,
+    noinline validator: (String?) -> String? = { it }
+) = date(property.name, label, hint, value, isReadonly, validator)

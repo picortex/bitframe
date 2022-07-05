@@ -4,6 +4,7 @@ import presenters.fields.PhoneInputField
 import presenters.fields.TextAreaField
 import presenters.fields.TextInputField
 import presenters.forms.Fields
+import kotlin.reflect.KProperty
 
 inline fun Fields.phone(
     name: String? = null,
@@ -22,3 +23,12 @@ inline fun Fields.phone(
         validator = validator,
     )
 }
+
+inline fun Fields.phone(
+    property: KProperty<*>,
+    label: String? = property.name,
+    hint: String? = label,
+    value: String? = null,
+    isReadonly: Boolean = false,
+    noinline validator: (String?) -> String? = { it }
+) = phone(property.name, label, hint, value, isReadonly, validator)

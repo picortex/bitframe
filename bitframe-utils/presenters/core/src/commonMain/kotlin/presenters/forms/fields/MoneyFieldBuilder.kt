@@ -3,6 +3,7 @@ package presenters.forms.fields
 import kash.Currency
 import presenters.fields.*
 import presenters.forms.Fields
+import kotlin.reflect.KProperty
 
 inline fun Fields.money(
     name: String? = null,
@@ -25,3 +26,14 @@ inline fun Fields.money(
         validator = validator,
     )
 }
+
+inline fun Fields.money(
+    property: KProperty<*>,
+    label: String? = property.name,
+    hint: String? = label,
+    selectCurrency: Boolean = false,
+    currency: Currency? = null,
+    value: String? = null,
+    isReadonly: Boolean = false,
+    noinline validator: (String?) -> String? = { it }
+) = money(property.name, label, hint, selectCurrency, currency, value, isReadonly, validator)

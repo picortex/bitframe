@@ -2,6 +2,7 @@ package presenters.forms.fields
 
 import presenters.fields.*
 import presenters.forms.Fields
+import kotlin.reflect.KProperty
 
 inline fun Fields.number(
     name: String? = null,
@@ -20,3 +21,12 @@ inline fun Fields.number(
         validator = validator,
     )
 }
+
+inline fun Fields.number(
+    property: KProperty<*>,
+    label: String? = property.name,
+    hint: String? = label,
+    value: String? = null,
+    isReadonly: Boolean = false,
+    noinline validator: (String?) -> String? = { it }
+) = number(property.name, label, hint, value, isReadonly, validator)

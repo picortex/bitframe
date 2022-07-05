@@ -2,6 +2,7 @@ package presenters.forms.fields
 
 import presenters.fields.TextInputField
 import presenters.forms.Fields
+import kotlin.reflect.KProperty
 
 inline fun Fields.text(
     name: String? = null,
@@ -20,3 +21,12 @@ inline fun Fields.text(
         validator = validator,
     )
 }
+
+inline fun Fields.text(
+    property: KProperty<*>,
+    label: String? = property.name,
+    hint: String? = label,
+    value: String? = null,
+    isReadonly: Boolean = false,
+    noinline validator: (String?) -> String? = { it }
+) = text(property.name, label, hint, value, isReadonly, validator)
