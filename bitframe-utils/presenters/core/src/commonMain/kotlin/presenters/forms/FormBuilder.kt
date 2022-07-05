@@ -1,15 +1,16 @@
-@file:OptIn(ExperimentalTypeInference::class)
-
 package presenters.forms
 
+import presenters.actions.GenericPendingAction
 import presenters.actions.SimpleAction
-import kotlin.experimental.ExperimentalTypeInference
+import presenters.forms.internal.FormImpl
 
-fun <F, P> Form(
+typealias FormActionsBuildingBlock<T> = FormActionsBuilder<T>.() -> GenericPendingAction<T>
+
+fun <F : Fields, P> Form(
     heading: String,
     details: String,
     fields: F,
-    @BuilderInference initializer: FormActionsBuildingBlock<P>
+    initializer: FormActionsBuildingBlock<P>
 ): Form<F, P> {
     val builtActions = FormActionsBuilder<P>().apply { initializer() }
     val cancel = builtActions.actions.firstOrNull {

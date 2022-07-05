@@ -1,18 +1,24 @@
 package bitframe.client
 
-import cache.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.serialization.json.Json
+import cache.Cache
+import cache.CacheBrowser
+import cache.CacheBrowserConfig
+import cache.CacheAsyncStorage
+import cache.CacheAsyncStorageConfig
+import cache.CacheMock
+import cache.CacheMockConfig
+import koncurrent.Executor
+import kotlinx.serialization.StringFormat
 import platform.Platform
 
-actual fun BestCache(namespace: String, json: Json, scope: CoroutineScope): Cache = when {
-    Platform.isBrowser -> BrowserCache(
-        BrowserCacheConfig(namespace = namespace, json = json, scope = scope)
+actual fun BestCache(namespace: String, codec: StringFormat, executor: Executor): Cache = when {
+    Platform.isBrowser -> CacheBrowser(
+        CacheBrowserConfig(namespace = namespace, codec = codec, executor = executor)
     )
-    Platform.isReactNative -> AsyncStorageCache(
-        AsyncStorageCacheConfig(namespace = namespace, json = json, scope = scope)
+    Platform.isReactNative -> CacheAsyncStorage(
+        CacheAsyncStorageConfig(namespace = namespace, codec = codec, executor = executor)
     )
-    else -> MockCache(
-        MockCacheConfig(namespace = namespace, scope = scope)
+    else -> CacheMock(
+        CacheMockConfig(namespace = namespace, executor = executor)
     )
 }

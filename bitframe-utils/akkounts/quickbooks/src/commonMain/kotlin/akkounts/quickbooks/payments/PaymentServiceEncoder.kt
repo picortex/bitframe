@@ -4,13 +4,13 @@ import akkounts.quickbooks.accounts.QuickBooksAccount
 
 internal object PaymentServiceEncoder {
     fun encode(params: PaymentParams, account: QuickBooksAccount) = mapOf(
-        "TotalAmt" to (params.amount.amount / 100).toDouble(),
+        "TotalAmt" to params.amount.amountAsDouble,
         "DepositToAccountRef" to mapOf(
             "value" to account.id
         ),
         "Line" to listOf(
             mapOf(
-                "Amount" to (params.amount.amount / 100).toDouble(),
+                "Amount" to params.amount.amountAsDouble,
                 "LinkedTxn" to listOf(
                     mapOf(
                         "TxnId" to params.invoice.header.ref.uid,

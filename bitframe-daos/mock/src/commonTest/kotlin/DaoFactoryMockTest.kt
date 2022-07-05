@@ -2,6 +2,8 @@ import bitframe.DaoFactory
 import bitframe.DaoFactoryMock
 import bitframe.dao.get
 import expect.expect
+import koncurrent.later.then
+import koncurrent.later.catch
 import kotlin.test.Test
 
 class DaoFactoryMockTest {

@@ -3,7 +3,7 @@ package presenters.actions
 import kotlinx.collections.interoperable.mutableListOf
 
 open class SimpleActionsBuilder {
-    internal val actions = mutableListOf<SimpleAction>()
+    val actions = mutableListOf<SimpleAction>()
     fun on(name: String, handler: () -> Unit): SimpleAction {
         val action = SimpleAction(name, handler)
         actions.add(action)

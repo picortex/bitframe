@@ -6,7 +6,7 @@ package presenters.cases
 import presenters.actions.SimpleActionsBuilder
 import presenters.forms.Form
 import presenters.modal.Dialog
-import presenters.modal.dialog
+import presenters.modal.FormDialog
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import presenters.cases.Failure as FailureCase
@@ -31,7 +31,7 @@ sealed class Emphasis {
         fun Dialog(dialog: Dialog<*, *>) = Modal(dialog)
 
         @JsName("fromForm")
-        fun Dialog(form: Form<*, *>) = Modal(dialog(form))
+        fun Dialog(form: Form<*, *>) = Modal(FormDialog(form))
     }
 
     object None : Emphasis()

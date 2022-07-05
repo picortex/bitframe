@@ -43,10 +43,10 @@ class CashFlowCompanyAUTest {
             start = LocalDate(2020, 7, 1),
             end = LocalDate(2021, 6, 10)
         ).await()
-        expect(statement.body.operating.total.amount).toBe(-2085941)
-        expect(statement.body.financing.total.amount).toBe(-539084)
-        expect(statement.body.investing.total.amount).toBe(0)
-        expect(statement.body.opening.amount).toBe(7096271)
-        expect(statement.body.closing.amount).toBe(4471246)
+        expect(statement.body.operating.total.centsAsInt).toBe(-2085941)
+        expect(statement.body.financing.total.centsAsInt).toBe(-539084)
+        expect(statement.body.investing.total.centsAsInt).toBe(0)
+        expect(statement.body.opening.centsAsInt).toBe(7096271)
+        expect(statement.body.closing.centsAsInt).toBe(4471246)
     }
 }

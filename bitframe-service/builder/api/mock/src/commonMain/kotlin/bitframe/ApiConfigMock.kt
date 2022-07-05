@@ -2,11 +2,11 @@ package bitframe
 
 import bitframe.api.ApiConfigMockImpl
 import cache.Cache
-import cache.MockCache
+import cache.CacheMock
 import events.EventBus
 import koncurrent.Executor
+import koncurrent.SynchronousExecutor
 import kotlinx.serialization.StringFormat
-import live.SynchronousExecutor
 import live.mutableLiveOf
 import logging.Logger
 import mailer.Mailer
@@ -22,10 +22,10 @@ interface ApiConfigMock : ApiConfig, ServiceConfigDaod {
         @JvmName("create")
         operator fun invoke(
             appId: String = "mock-app",
-            cache: Cache = MockCache(),
+            cache: Cache = CacheMock(),
             bus: EventBus = ApiConfig.DEFAULT_BUS,
             logger: Logger = ApiConfig.DEFAULT_LOGGER,
-            executor: Executor = SynchronousExecutor.Default,
+            executor: Executor = SynchronousExecutor,
             codec: StringFormat = ServiceConfigDaod.DEFAULT_CODEC,
             database: DaoFactory = DaoFactoryMock(),
             mailer: Mailer = MockMailer()

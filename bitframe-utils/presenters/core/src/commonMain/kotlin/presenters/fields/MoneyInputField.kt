@@ -6,18 +6,21 @@ package presenters.fields
 import kash.Currency
 import kash.Money
 import kotlinx.collections.interoperable.toInteroperableList
+import presenters.fields.internal.AbstractTextInputFieldRaw
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.reflect.KProperty
 
 data class MoneyInputField(
     override val name: String,
-    val label: String = name,
-    val hint: String = label,
+    override val label: String = name,
+    override val hint: String = label,
     val selectCurrency: Boolean = false,
     val currency: Currency? = null,
-    val value: String? = null
-) : InputField {
+    override var value: String? = null,
+    override val isReadonly: Boolean = false,
+    override val validator: (String?) -> String? = { it }
+) : AbstractTextInputFieldRaw(name, label, hint, value, isReadonly, validator) {
 
     @JsName("from_property")
     constructor(
@@ -48,7 +51,8 @@ data class MoneyInputField(
             name = "$name-value",
             label = "Value",
             hint = hint,
-            value = value
+            value = value,
+            isReadonly, validator
         )
     }
 }

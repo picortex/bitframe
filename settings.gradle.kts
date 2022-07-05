@@ -24,7 +24,7 @@ pluginManagement {
     }
 }
 
-val tmp = 2
+val tmp = 3
 
 includeBuild("bitframe-plugins")
 

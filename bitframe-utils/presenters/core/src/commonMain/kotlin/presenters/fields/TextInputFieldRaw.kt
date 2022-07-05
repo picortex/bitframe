@@ -3,9 +3,8 @@ package presenters.fields
 import kotlin.js.JsExport
 
 @JsExport
-interface TextInputRawField : InputField {
+interface TextInputFieldRaw : InputFieldWithValue<String?> {
     val label: String
     val hint: String
     val isReadonly: Boolean
-    var value: String?
 }

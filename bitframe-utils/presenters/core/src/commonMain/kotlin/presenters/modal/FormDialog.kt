@@ -1,51 +1,41 @@
 @file:JsExport
-@file:Suppress("NON_EXPORTABLE_TYPE", "EqualsOrHashCode")
+@file:Suppress("NON_EXPORTABLE_TYPE", "WRONG_EXPORTED_DECLARATION")
 
 package presenters.modal
 
-import presenters.actions.GenericAction
-import presenters.actions.SimpleAction
-import presenters.forms.FormActionsBuilder
-import kotlinx.collections.interoperable.List
-import kotlinx.collections.interoperable.listOf
+import kotlinx.collections.interoperable.iListOf
+import presenters.forms.Fields
 import presenters.forms.Form
+import presenters.forms.FormActionsBuilder
 import presenters.forms.FormActionsBuildingBlock
+import presenters.modal.internal.FormDialogImpl
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlin.jvm.JvmName
 
-open class FormDialog<out F, in P>(
-    override val heading: String,
-    override val details: String,
-    override val fields: F,
-    override val actions: List<SimpleAction>,
-    override val submit: GenericAction<P>
-) : Dialog<F, P>, Form<F, P> {
-    override val cancel by lazy {
-        actions.firstOrNull {
-            it.name.contentEquals("cancel", ignoreCase = true)
-        } ?: error("No cancel action has been registered to FormDialog(heading=$heading)")
+interface FormDialog<out F : Fields, in P> : Dialog<F, P>, Form<F, P> {
+    companion object {
+        @JsName("_ignore_constructor_1")
+        @JvmName("create")
+        operator fun <F : Fields, P> invoke(
+            heading: String,
+            details: String,
+            fields: F,
+            block: FormActionsBuildingBlock<P>
+        ): FormDialog<F, P> = FormDialogImpl(
+            heading, details, fields,
+            actions = FormActionsBuilder<P>().apply { block() }.actions,
+            submit = FormActionsBuilder<P>().apply { block() }.submitAction
+        )
+
+        @JsName("fromForm")
+        @JvmName("fromForm")
+        operator fun <F : Fields, P> invoke(form: Form<F, P>): FormDialog<F, P> = FormDialogImpl(
+            heading = form.heading,
+            details = form.details,
+            fields = form.fields,
+            actions = iListOf(form.cancel),
+            submit = form.submit,
+        )
     }
-
-    override val isForm = true
-    override val isConfirm = false
-
-    override val asForm get() = this
-
-    @JsName("_ignore_fromBuildingBlock")
-    constructor(heading: String, details: String, fields: F, block: FormActionsBuildingBlock<P>) : this(
-        heading, details, fields,
-        actions = FormActionsBuilder<P>().apply { block() }.actions,
-        submit = FormActionsBuilder<P>().apply { block() }.submitAction
-    )
-
-    @JsName("fromForm")
-    constructor(form: Form<F, P>) : this(
-        heading = form.heading,
-        details = form.details,
-        fields = form.fields,
-        actions = listOf(form.cancel),
-        submit = form.submit,
-    )
-
-    override fun equals(other: Any?): Boolean = other is FormDialog<*, *> && other.heading == heading && other::class == this::class
 }

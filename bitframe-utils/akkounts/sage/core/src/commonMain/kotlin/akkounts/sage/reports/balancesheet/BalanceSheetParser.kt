@@ -55,7 +55,7 @@ class BalanceSheetParser(val entries: List<Map<String, *>>) {
 
         if (assets.total != (equity.total + liab.total)) {
             val difference = assets.total - liab.total - equity.total
-            val details = if (difference.amount > 0) "Retained Earnings" else "Accumulated Deficit"
+            val details = if (difference.amountAsInt > 0) "Retained Earnings" else "Accumulated Deficit"
             return CategoryEntry("Equity", currency, (equity.items + StatementEntryItem(details, difference)).toInteroperableList())
         }
 

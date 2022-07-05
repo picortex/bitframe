@@ -3,8 +3,8 @@ package presenters.cases
 import presenters.actions.SimpleActionsBuilder
 import presenters.forms.Form
 import presenters.modal.Dialog
+import presenters.modal.FormDialog
 import presenters.table.Table
-import presenters.modal.dialog as Dialog
 
 fun <C, D> CentralState<C, D>.table(
     table: Table<D>,
@@ -43,7 +43,7 @@ fun <C, D> CentralState<C, D>.dialog(
 
 fun <C, D> CentralState<C, D>.dialog(
     form: Form<*, *>
-) = emphasis(Emphasis.Modal(Dialog(form)), null)
+) = emphasis(Emphasis.Modal(FormDialog(form)), null)
 
 fun <C, D> CentralState<C, D>.withoutEmphasis() = emphasis(
     Emphasis.None, null

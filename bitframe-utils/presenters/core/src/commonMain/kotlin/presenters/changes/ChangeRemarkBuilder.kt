@@ -24,23 +24,23 @@ fun changeRemarkOf(
     val diff = current - previous
 
     return when {
-        previous.amount == 0 && diff.amount < 0 -> ChangeRemark.Decrease(
+        previous.centsAsInt == 0 && diff.centsAsInt < 0 -> ChangeRemark.Decrease(
             pct = Percentage.ONE_HUNDRED,
             value = diff * -1,
             feeling = decreaseFeeling ?: ChangeRemark.Decrease.DEFAULT_FEELING
         )
-        previous.amount != 0 && diff.amount < 0 -> ChangeRemark.Decrease(
-            pct = Percentage.fromRatio(diff.amount * -1.0 / previous.amount),
+        previous.centsAsInt != 0 && diff.centsAsInt < 0 -> ChangeRemark.Decrease(
+            pct = Percentage.fromRatio(diff.centsAsInt * -1.0 / previous.centsAsInt),
             value = diff * -1,
             feeling = decreaseFeeling ?: ChangeRemark.Decrease.DEFAULT_FEELING
         )
-        previous.amount == 0 && diff.amount > 0 -> ChangeRemark.Increase(
+        previous.centsAsInt == 0 && diff.centsAsInt > 0 -> ChangeRemark.Increase(
             pct = Percentage.ONE_HUNDRED,
             value = diff,
             feeling = increaseFeeling ?: ChangeRemark.Increase.DEFAULT_FEELING
         )
-        previous.amount != 0 && diff.amount > 0 -> ChangeRemark.Increase(
-            pct = Percentage.fromRatio(diff.amount.toDouble() / previous.amount),
+        previous.centsAsInt != 0 && diff.centsAsInt > 0 -> ChangeRemark.Increase(
+            pct = Percentage.fromRatio(diff.centsAsInt.toDouble() / previous.centsAsInt),
             value = diff,
             feeling = increaseFeeling ?: ChangeRemark.Increase.DEFAULT_FEELING
         )

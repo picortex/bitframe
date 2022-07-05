@@ -37,13 +37,13 @@ class BalanceSheetCompanyAUTest {
     @Test
     fun should_get_the_correct_balance_sheet() = runTest {
         val sheet = service.reports.balanceSheet(company, LocalDate(2021, 6, 10)).await()
-        expect(sheet.body.assets.current.total.amount).toBe(7791246)
-        expect(sheet.body.assets.fixed.total.amount).toBe(235004)
-        expect(sheet.body.assets.total.amount).toBe(8026250)
+        expect(sheet.body.assets.current.total.centsAsInt).toBe(7791246)
+        expect(sheet.body.assets.fixed.total.centsAsInt).toBe(235004)
+        expect(sheet.body.assets.total.centsAsInt).toBe(8026250)
 
-        expect(sheet.body.liabilities.current.total.amount).toBe(387326)
-        expect(sheet.body.liabilities.longTerm.total.amount).toBe(4510212)
+        expect(sheet.body.liabilities.current.total.centsAsInt).toBe(387326)
+        expect(sheet.body.liabilities.longTerm.total.centsAsInt).toBe(4510212)
 
-        expect(sheet.body.equity.total.amount).toBe(3128712)
+        expect(sheet.body.equity.total.centsAsInt).toBe(3128712)
     }
 }

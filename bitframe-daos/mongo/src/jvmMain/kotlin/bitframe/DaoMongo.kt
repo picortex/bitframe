@@ -19,32 +19,32 @@ class DaoMongo<D : Savable>(val config: DaoMongoConfig<D>) : Dao<D> {
     private val database = client.getDatabase(config.database)
     private val collection = database.getCollection(config.collection, config.clazz.java)
 
-    override fun create(input: D): Later<D> = Later(config.executor) { resolve, _ ->
+    override fun create(input: D) = Later(config.executor) { resolve, _ ->
         val id = ObjectId.get()
         val output = input.copySavable("${config.prefix}-$id", deleted = false) as D
         collection.insertOne(output)
         resolve(output)
     }
 
-    override fun update(obj: D): Later<D> = Later(config.executor) { resolve, _ ->
+    override fun update(obj: D) = Later(config.executor) { resolve, _ ->
         collection.updateOne(obj::uid eq obj.uid, obj)
         resolve(obj)
     }
 
-    override fun load(uid: String): Later<D> = Later(config.executor) { resolve, reject ->
+    override fun load(uid: String) = Later(config.executor) { resolve, reject ->
         val found = collection.findOne(eq("uid", uid))
         if (found != null) resolve(found) else reject(EntityNotFoundException(uid))
     }
 
-    override fun loadOrNull(uid: String): Later<D?> = Later(config.executor) { resolve, _ ->
+    override fun loadOrNull(uid: String) = Later(config.executor) { resolve, _ ->
         resolve(collection.findOne(eq("uid", uid)))
     }
 
-    override fun execute(query: Query): Later<List<D>> = Later(config.executor) { resolve, _ ->
+    override fun execute(query: Query) = Later(config.executor) { resolve, _ ->
         resolve(collection.execute(query).toList().toInteroperableList())
     }
 
-    override fun delete(uid: String): Later<D> = Later(config.executor) { resolve, reject ->
+    override fun delete(uid: String) = Later(config.executor) { resolve, reject ->
         val found = collection.findOne(eq("uid", uid))
         if (found == null) {
             reject(EntityNotFoundException(uid))
@@ -55,7 +55,7 @@ class DaoMongo<D : Savable>(val config: DaoMongoConfig<D>) : Dao<D> {
         resolve(obj)
     }
 
-    override fun all(condition: Condition<*>?): Later<List<D>> = Later(config.executor) { resolve, _ ->
+    override fun all(condition: Condition<*>?) = Later(config.executor) { resolve, _ ->
         if (condition == null) {
             resolve(collection.find().toList().toInteroperableList())
         } else {

@@ -1,7 +1,7 @@
 package bitframe.client
 
 import cache.Cache
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.serialization.json.Json
+import koncurrent.Executor
+import kotlinx.serialization.StringFormat
 
-expect fun BestCache(namespace: String, json: Json, scope: CoroutineScope): Cache
+expect fun BestCache(namespace: String, codec: StringFormat, executor: Executor): Cache

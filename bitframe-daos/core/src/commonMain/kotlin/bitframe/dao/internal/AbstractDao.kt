@@ -1,21 +1,10 @@
 package bitframe.dao.internal
 
 import bitframe.Dao
-import koncurrent.Fulfilled
 import koncurrent.Later
-import koncurrent.Rejected
+import koncurrent.later.catch
+import koncurrent.later.then
 
 abstract class AbstractDao<out T : Any> : Dao<T> {
-    override fun loadOrNull(uid: String): Later<@UnsafeVariance T?> = Later { res, rej ->
-        try {
-            load(uid).complete {
-                when (it) {
-                    is Fulfilled -> res(it.value)
-                    is Rejected -> res(null)
-                }
-            }
-        } catch (err: Throwable) {
-            res(null)
-        }
-    }
+    override fun loadOrNull(uid: String): Later<out T?> = load(uid).then { it as? T }.catch { null }
 }

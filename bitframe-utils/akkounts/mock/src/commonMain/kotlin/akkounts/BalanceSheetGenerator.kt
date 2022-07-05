@@ -82,7 +82,7 @@ object BalanceSheetGenerator : CategoryEntryGenerator() {
         )
         val impureEquity = entryOf("Equity", currency, randomizer, equities)
         val diff = assets.total - (liabilities.total + impureEquity.total)
-        val entry = if (diff.amount >= 0) {
+        val entry = if (diff.amountAsInt >= 0) {
             StatementEntryItem("Retained Earning", diff)
         } else {
             StatementEntryItem("(Accumulated Deficiency)", diff)

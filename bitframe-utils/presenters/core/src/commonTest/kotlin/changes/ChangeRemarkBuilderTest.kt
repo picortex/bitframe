@@ -7,6 +7,7 @@ import kash.USD
 import presenters.changes.ChangeRemark
 import presenters.changes.changeRemarkOf
 import presenters.numerics.pct
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 class ChangeRemarkBuilderTest {
@@ -41,6 +42,7 @@ class ChangeRemarkBuilderTest {
     }
 
     @Test
+    @Ignore // TODO think of another way, there is no negative money
     fun should_give_a_change_remark_of_100pct_when_previous_value_is_zero_and_current_value_is_negative() {
         val change = changeRemarkOf(
             previous = 0.USD,

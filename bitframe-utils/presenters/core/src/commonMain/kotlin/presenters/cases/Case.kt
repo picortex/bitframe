@@ -8,7 +8,7 @@ import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 
 @JsExport
-sealed interface Case {
+interface Case {
     val message: String
 
     val isLoading get() = this is Loading

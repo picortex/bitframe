@@ -25,13 +25,13 @@ sealed class GenericState<out S> : Case {
         override val loading: Boolean = true
     }
 
-    data class Failure<out S> internal constructor(
+    data class Failure<out S>(
         override val cause: Throwable? = null,
         override val message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
         override val data: S? = null,
         override val actions: List<SimpleAction> = emptyList()
     ) : GenericState<S>(), FailureCase {
-        internal constructor(
+        constructor(
             cause: Throwable? = null,
             message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
             data: S? = null,
@@ -41,12 +41,12 @@ sealed class GenericState<out S> : Case {
         override val failure: Boolean = true
     }
 
-    data class Success<out S> internal constructor(
+    data class Success<out S>(
         override val message: String = SuccessCase.DEFAULT_MESSAGE,
         override val actions: List<SimpleAction> = emptyList(),
         override val data: S? = null
     ) : GenericState<S>(), SuccessCase {
-        internal constructor(
+        constructor(
             message: String = SuccessCase.DEFAULT_MESSAGE,
             data: S? = null,
             builder: SimpleActionsBuilder.() -> Unit

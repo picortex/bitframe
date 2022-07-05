@@ -1,10 +1,13 @@
 package modal
 
 import expect.*
+import koncurrent.Later
 import kotlinx.coroutines.test.runTest
+import presenters.forms.Fields
+import presenters.forms.fields.text
+import presenters.modal.ConfirmDialog
+import presenters.modal.FormDialog
 import presenters.modal.click
-import presenters.modal.confirmDialog
-import presenters.modal.formDialog
 import kotlin.test.Test
 
 class DialogTest {
@@ -12,7 +15,7 @@ class DialogTest {
     @Test
     fun should_be_able_to_create_a_dialog() {
         val clicks = mutableListOf<String>()
-        val d = confirmDialog(
+        val d = ConfirmDialog(
             heading = "Test Dialog",
             details = "This is a test dialog",
         ) {
@@ -34,14 +37,18 @@ class DialogTest {
 
     @Test
     fun should_return_failure_when_trying_to_click_an_incorrect_action() = runTest {
-        val d = formDialog(
+        class TestFields : Fields() {
+            val name by text()
+        }
+
+        val d = FormDialog(
             heading = "Test dialog",
             details = "Test details",
-            fields = "Basic"
+            fields = TestFields()
         ) {
             on("Cancel") { println("Canceled") }
             on("Delete") { }
-            onSubmit { p: Unit -> }
+            onSubmit { p: Unit -> Later.resolve(p) }
         }
 //        expectFailure {
 //            d.click("OK")

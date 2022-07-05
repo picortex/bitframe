@@ -5,7 +5,7 @@ import bitframe.core.ServiceConfigDaod
 import bitframe.core.MockDaoFactory
 import bitframe.core.Session
 import cache.Cache
-import cache.MockCache
+import cache.CacheMock
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
@@ -23,7 +23,7 @@ interface ServiceConfigMock : ServiceConfig, ServiceConfigDaod {
         val DEFAULT_APP_ID = "<mock-app>"
 
         @JvmField
-        val DEFAULT_CACHE = MockCache()
+        val DEFAULT_CACHE = CacheMock()
 
         @JvmField
         val DEFAULT_DAO_FACTORY = MockDaoFactory()

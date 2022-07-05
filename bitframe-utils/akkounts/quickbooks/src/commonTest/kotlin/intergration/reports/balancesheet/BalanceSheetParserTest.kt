@@ -28,19 +28,19 @@ class BalanceSheetParserTest {
 
     @Test
     fun should_parse_assets_correctly() {
-        expect(sheet.body.assets.current.total.amount).toBe(7791246)
-        expect(sheet.body.assets.fixed.total.amount).toBe(235004)
-        expect(sheet.body.assets.total.amount).toBe(8026250)
+        expect(sheet.body.assets.current.total.centsAsInt).toBe(7791246)
+        expect(sheet.body.assets.fixed.total.centsAsInt).toBe(235004)
+        expect(sheet.body.assets.total.centsAsInt).toBe(8026250)
     }
 
     @Test
     fun should_parse_equity_correctly() {
-        expect(sheet.body.equity.total.amount).toBe(3128712)
+        expect(sheet.body.equity.total.centsAsInt).toBe(3128712)
     }
 
     @Test
     fun should_parse_liabilities_correctly() {
-        expect(sheet.body.liabilities.current.total.amount).toBe(387326)
-        expect(sheet.body.liabilities.longTerm.total.amount).toBe(4510212)
+        expect(sheet.body.liabilities.current.total.centsAsInt).toBe(387326)
+        expect(sheet.body.liabilities.longTerm.total.centsAsInt).toBe(4510212)
     }
 }

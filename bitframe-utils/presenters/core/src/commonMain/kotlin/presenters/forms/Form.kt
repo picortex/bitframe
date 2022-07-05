@@ -2,15 +2,17 @@
 
 package presenters.forms
 
-import presenters.actions.GenericAction
+import presenters.actions.GenericPendingAction
 import presenters.actions.SimpleAction
 import kotlin.js.JsExport
 
 @JsExport
-interface Form<out F, in P> {
+interface Form<out F : Fields, in P> {
     val heading: String
     val details: String
     val fields: F
     val cancel: SimpleAction
-    val submit: GenericAction<P>
+    val submit: GenericPendingAction<P>
+
+    fun validate()
 }

@@ -13,7 +13,8 @@ import kotlin.reflect.KProperty0
 data class BooleanInputField(
     override val name: String,
     val label: String = name,
-    var value: Boolean? = null
+    var value: Boolean? = null,
+    val validator: (Boolean?) -> (Boolean?) = { it }
 ) : InputField {
     @JsName("_ignore_fromProperty")
     constructor(
