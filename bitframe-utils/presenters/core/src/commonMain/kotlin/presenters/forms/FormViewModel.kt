@@ -10,7 +10,7 @@ import kotlinx.serialization.builtins.serializer
 import viewmodel.ViewModel
 import kotlin.js.JsExport
 
-class FormViewModel<F : Form<*, P>, P>(
+open class FormViewModel<F : Form<*, P>, P>(
     val config: FormViewModelConfig<F, P>
 ) : ViewModel<FormState<F>>(config.of(FormState.Fillable(config.api))) {
     private val form get() = config.api

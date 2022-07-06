@@ -13,13 +13,13 @@ allprojects {
     }
     beforeEvaluate {
         group = "com.picortex"
-        version = bitframe.versions.current.get()
+        version = picortex.versions.bitframe.get()
     }
 }
 
 val dokkaHtmlMultiModule by tasks.getting(DokkaMultiModuleTask::class) {
     moduleName.set("Bitframe Docs")
-    outputDirectory.set(file("reference/${bitframe.versions.current.get()}"))
+    outputDirectory.set(file("reference/${picortex.versions.bitframe.get()}"))
 }
 //
 //val bitframePlugins = gradle.includedBuild("bitframe-plugins")
