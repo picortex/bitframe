@@ -7,6 +7,7 @@ stdlib = "0.2.43"
 applikation-runtime = { module = "tz.co.asoft:applikation-runtime", version.ref = "foundation" }
 
 cache-api = { module = "tz.co.asoft:cache-api", version.ref = "foundation" }
+cache-file = { module = "tz.co.asoft:cache-file", version.ref = "foundation" }
 cache-browser = { module = "tz.co.asoft:cache-browser", version.ref = "foundation" }
 cache-mock = { module = "tz.co.asoft:cache-mock", version.ref = "foundation" }
 cache-react-native = { module = "tz.co.asoft:cache-react-native", version.ref = "foundation" }
