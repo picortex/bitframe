@@ -1,4 +1,9 @@
 pluginManagement {
+    repositories {
+        mavenCentral()
+        google()
+        gradlePluginPortal()
+    }
     dependencyResolutionManagement {
         versionCatalogs {
             file("../gradle/versions").listFiles().map {
