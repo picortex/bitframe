@@ -1,8 +1,15 @@
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 
 @Suppress("DSL_SCOPE_VIOLATION") plugins {
-    alias(kotlinz.plugins.root.multiplatform) apply false
-    alias(kotlinz.plugins.root.serialization) apply false
+//    if (System.getProperty("idea.sync.active") == null) {
+        println("Idea is not syncing")
+        alias(kotlinz.plugins.root.multiplatform) apply false
+        alias(kotlinz.plugins.root.serialization) apply false
+//    } else {
+//        println("Idea is syncing")
+//        alias(kotlinz.plugins.root.multiplatform.idea) apply false
+//        alias(kotlinz.plugins.root.serialization.idea) apply false
+//    }
     alias(asoft.plugins.root.library) apply false
     alias(kotlinz.plugins.dokka)
 }

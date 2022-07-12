@@ -19,6 +19,7 @@ koncurrent-primitives-core = { module = "tz.co.asoft:koncurrent-primitives-core"
 koncurrent-primitives-coroutines = { module = "tz.co.asoft:koncurrent-primitives-coroutines", version.ref = "foundation" }
 koncurrent-primitives-mock = { module = "tz.co.asoft:koncurrent-primitives-mock", version.ref = "foundation" }
 koncurrent-later-core = { module = "tz.co.asoft:koncurrent-later-core", version.ref = "foundation" }
+koncurrent-later-test = { module = "tz.co.asoft:koncurrent-later-test", version.ref = "foundation" }
 koncurrent-later-coroutines = { module = "tz.co.asoft:koncurrent-later-coroutines", version.ref = "foundation" }
 
 expect-core = { module = "tz.co.asoft:expect-core", version.ref = "foundation" }
