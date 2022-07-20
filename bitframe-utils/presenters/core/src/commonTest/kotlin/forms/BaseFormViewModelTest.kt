@@ -11,7 +11,7 @@ import expect.expect
 import koncurrent.SynchronousExecutor
 import kotlin.test.Test
 
-class FormViewModelTest {
+class BaseFormViewModelTest {
 
     @Serializable
     data class TestParams(val name: String, val age: Int)
@@ -28,7 +28,7 @@ class FormViewModelTest {
     }
 
     var canceled = false
-    val form = Form(
+    val form = BaseForm(
         heading = "Add Test Data", details = "These are just for testing purposes", fields = TestFields()
     ) {
         onCancel {
@@ -42,7 +42,7 @@ class FormViewModelTest {
         fields.age.value = 12.toString()
     }
 
-    val config = FormViewModelConfig(
+    val config = BaseFormViewModelConfig(
         form = form,
         codec = Json { },
         serializer = TestParams.serializer()
@@ -54,8 +54,8 @@ class FormViewModelTest {
         vm.expect {
             submit()
         }.toGoThrough(
-            FormState.Submitting(form),
-            FormState.Submitted(form),
+            BaseFormState.Submitting(form),
+            BaseFormState.Submitted(form),
         )
     }
 

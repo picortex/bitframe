@@ -4,7 +4,7 @@
 package presenters.cases
 
 import presenters.actions.SimpleActionsBuilder
-import presenters.forms.Form
+import presenters.forms.BaseForm
 import presenters.modal.Dialog
 import presenters.modal.FormDialog
 import kotlin.js.JsExport
@@ -31,7 +31,7 @@ sealed class Emphasis {
         fun Dialog(dialog: Dialog<*, *>) = Modal(dialog)
 
         @JsName("fromForm")
-        fun Dialog(form: Form<*, *>) = Modal(FormDialog(form))
+        fun Dialog(form: BaseForm<*, *>) = Modal(FormDialog(form))
     }
 
     object None : Emphasis()

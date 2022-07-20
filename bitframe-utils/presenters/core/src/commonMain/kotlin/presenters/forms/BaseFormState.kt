@@ -6,14 +6,17 @@ package presenters.forms
 import presenters.cases.Failure as FailureCase
 import kotlin.js.JsExport
 
-sealed class FormState {
-    object Fillable : FormState()
-    object Submitting : FormState()
-    object Submitted : FormState()
-    data class Failure(
+sealed class BaseFormState<out F : BaseForm<*, *>> {
+    abstract val form: F
+
+    data class Fillable<out F : BaseForm<*, *>>(override val form: F) : BaseFormState<F>()
+    data class Submitting<out F : BaseForm<*, *>>(override val form: F) : BaseFormState<F>()
+    data class Submitted<out F : BaseForm<*, *>>(override val form: F) : BaseFormState<F>()
+    data class Failure<out F : BaseForm<*, *>>(
+        override val form: F,
         val cause: Throwable? = null,
         val message: String? = cause?.message ?: FailureCase.DEFAULT_MESSAGE
-    ) : FormState()
+    ) : BaseFormState<F>()
 
 
     val isFillable get() = this is Fillable

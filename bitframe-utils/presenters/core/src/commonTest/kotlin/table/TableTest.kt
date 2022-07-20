@@ -14,8 +14,8 @@ class TableTest {
         column("Cores") { "${it.data.cores} cores" }
         column("Speed") { "${it.data.clock} GHz" }
         actions("Actions") {
-            action("Edit") { println("Editing ${it.data.name}") }
-            action("Update") { println("Updating ${it.data.name}") }
+            on("Edit") { println("Editing ${it.data.name}") }
+            on("Update") { println("Updating ${it.data.name}") }
         }
     }
 

@@ -4,9 +4,16 @@ package presenters.forms
 
 import viewmodel.ViewModelConfig
 import kotlinx.serialization.serializer
+import presenters.forms.internal.FormConfigImpl
 
-inline fun <F : Form<*, P>, reified P> ViewModelConfig<*>.toFormViewModelConfig(
+inline fun <F : BaseForm<*, P>, reified P> ViewModelConfig<*>.toFormViewModelConfig(
     form: F
-): FormViewModelConfig<F, P> = FormViewModelConfig(
+): BaseFormViewModelConfig<F, P> = BaseFormViewModelConfig(
     form, serializer(), codec, executor, logger
+)
+
+inline fun <reified P> ViewModelConfig<*>.toFormConfig(
+    exitOnSubmitted: Boolean = FormConfig.DEFAULT_EXIT_ON_SUBMITTED
+): FormConfig<P> = FormConfigImpl(
+    serializer(), executor, logger, codec, exitOnSubmitted
 )

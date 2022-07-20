@@ -4,37 +4,16 @@ import expect.expect
 import koncurrent.Later
 import koncurrent.later.catch
 import koncurrent.later.then
-import presenters.forms.*
+import presenters.forms.Fields
 import presenters.forms.fields.number
 import presenters.forms.fields.text
-import viewmodel.ViewModel
-import viewmodel.ViewModelConfig
 import kotlin.test.Test
 
-class FormTest {
-
-    class PersonForm(
-        config: FormConfig<Map<String, String>>,
-        builder: FormActionsBuildingBlock<Map<String, String>>
-    ) : Form<TestFormFields, Map<String, String>>(
-        heading = "Person Form",
-        details = "Add this form to fill a person",
-        fields = TestFormFields(),
-        config, builder
-    )
+class BaseFormTest {
 
     class TestFormFields : Fields() {
         val name by text()
         val age by number()
-    }
-
-    class TestViewModel(private val config: ViewModelConfig<*>) : ViewModel<Any>(config.of(Any())) {
-        fun showForm() {
-            PersonForm(config.toFormConfig()) {
-                onCancel { println("Woyo") }
-                onSubmit { Later.resolve(5) }
-            }
-        }
     }
 
     @Test

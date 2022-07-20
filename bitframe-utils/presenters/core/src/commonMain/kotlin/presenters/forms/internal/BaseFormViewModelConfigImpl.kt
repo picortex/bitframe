@@ -4,16 +4,16 @@ import koncurrent.Executor
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.StringFormat
 import logging.Logger
-import presenters.forms.Form
-import presenters.forms.FormViewModelConfig
+import presenters.forms.BaseForm
+import presenters.forms.BaseFormViewModelConfig
 import viewmodel.ViewModelConfig
 
-class FormViewModelConfigImpl<F : Form<*, P>, P>(
+class BaseFormViewModelConfigImpl<F : BaseForm<*, P>, P>(
     override val form: F,
     override val serializer: KSerializer<P>,
     override val executor: Executor,
     override val logger: Logger,
     override val codec: StringFormat
-) : FormViewModelConfig<F, P>, ViewModelConfig<F> by ViewModelConfig(form, executor, codec, logger) {
+) : BaseFormViewModelConfig<F, P>, ViewModelConfig<F> by ViewModelConfig(form, executor, codec, logger) {
     override val api: F get() = form
 }

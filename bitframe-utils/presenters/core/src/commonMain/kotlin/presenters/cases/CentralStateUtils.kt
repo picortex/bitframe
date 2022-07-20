@@ -1,7 +1,7 @@
 package presenters.cases
 
 import presenters.actions.SimpleActionsBuilder
-import presenters.forms.Form
+import presenters.forms.BaseForm
 import presenters.modal.Dialog
 import presenters.modal.FormDialog
 import presenters.table.Table
@@ -42,7 +42,7 @@ fun <C, D> CentralState<C, D>.dialog(
 ) = emphasis(Emphasis.Modal(dialog), null)
 
 fun <C, D> CentralState<C, D>.dialog(
-    form: Form<*, *>
+    form: BaseForm<*, *>
 ) = emphasis(Emphasis.Modal(FormDialog(form)), null)
 
 fun <C, D> CentralState<C, D>.withoutEmphasis() = emphasis(

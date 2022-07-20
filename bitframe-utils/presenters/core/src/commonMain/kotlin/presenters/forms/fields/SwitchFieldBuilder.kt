@@ -1,10 +1,7 @@
 package presenters.forms.fields
 
-import presenters.fields.CheckBoxInputField
 import presenters.fields.SwitchInputField
-import presenters.fields.TextInputField
 import presenters.forms.Fields
-import kotlin.reflect.KMutableProperty
 import kotlin.reflect.KProperty
 
 inline fun Fields.switch(
