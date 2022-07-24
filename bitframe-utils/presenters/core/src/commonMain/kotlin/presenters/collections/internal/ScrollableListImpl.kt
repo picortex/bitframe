@@ -11,6 +11,6 @@ import kotlin.js.JsExport
 class ScrollableListImpl<T>(
     override val paginator: Paginator<T>,
     private val config: ViewModelConfig<*>
-) : PagedImpl<T>(paginator, config), ScrollableList<T> {
+) : PageableImpl<T>(config), ScrollableList<T> {
     override fun map(paginator: Paginator<T>) = ScrollableListImpl(paginator, config)
 }

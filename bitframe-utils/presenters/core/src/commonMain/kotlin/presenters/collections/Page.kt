@@ -32,9 +32,9 @@ interface Page<out T> {
     val capacity: Int
 
     /**
-     * The page [no] of this whole collection
+     * The page [number] of this whole collection
      */
-    val no: Int
+    val number: Int
 
     /**
      * Checks to see weather the page is empty
@@ -64,7 +64,7 @@ interface Page<out T> {
                 Row(index, it)
             }.toInteroperableList(),
             capacity = capacity,
-            no = no
+            number = no
         )
     }
 }

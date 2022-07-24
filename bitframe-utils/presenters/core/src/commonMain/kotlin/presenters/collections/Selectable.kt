@@ -3,14 +3,9 @@
 package presenters.collections
 
 import kotlin.js.JsExport
+import kotlin.js.JsName
 
 @JsExport
 interface Selectable<in T> {
-    fun selectAll()
-
-    fun unSelectAll()
-
-    fun select(item: T)
-
-    fun deselect(item: T)
+    val selector: Selector<T>
 }

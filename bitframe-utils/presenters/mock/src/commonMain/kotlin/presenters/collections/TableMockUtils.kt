@@ -30,7 +30,7 @@ fun <D> Table<D>.tabulateToString() = buildString {
     (paginator.live.value.currentPageOrNull ?: Page()).items.forEach { row ->
         columns.forEach { col ->
             when (col) {
-                is Column.Select -> append((if (row.selected) "[x]" else "[ ]") + "\t")
+                is Column.Select -> append((if (isSelected(row)) "[x]" else "[ ]") + "\t")
                 is Column.Data -> append(col.accessor(row) + "\t")
                 is Column.Action -> append(col.actions.joinToString(separator = "|") { it.name })
             }

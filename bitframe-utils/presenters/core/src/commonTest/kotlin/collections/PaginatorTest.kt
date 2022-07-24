@@ -1,9 +1,6 @@
 package collections
 
 import expect.expect
-import koncurrent.Later
-import koncurrent.MockExecutor
-import presenters.collections.Page
 import presenters.collections.Paginator
 import presenters.collections.internal.CollectionPaginator
 import presenters.collections.internal.SinglePagePaginator
@@ -24,37 +21,37 @@ class PaginatorTest {
         expect(p.currentPageOrNull).toBe(null)
 
         p.refresh()
-        expect(p.currentPageOrNull?.no).toBe(1)
+        expect(p.currentPageOrNull?.number).toBe(1)
         expect(p.currentPageOrNull?.items?.size).toBe(10)
         expect(p.currentPageOrNull?.capacity).toBe(10)
 
-        p.next()
-        expect(p.currentPageOrNull?.no).toBe(2)
+        p.loadNextPage()
+        expect(p.currentPageOrNull?.number).toBe(2)
         expect(p.currentPageOrNull?.items?.size).toBe(10)
         expect(p.currentPageOrNull?.capacity).toBe(10)
 
-        p.previous()
-        expect(p.currentPageOrNull?.no).toBe(1)
+        p.loadPreviousPage()
+        expect(p.currentPageOrNull?.number).toBe(1)
         expect(p.currentPageOrNull?.items?.size).toBe(10)
         expect(p.currentPageOrNull?.capacity).toBe(10)
 
-        p.page(2)
-        expect(p.currentPageOrNull?.no).toBe(2)
+        p.loadPage(2)
+        expect(p.currentPageOrNull?.number).toBe(2)
         expect(p.currentPageOrNull?.items?.size).toBe(10)
         expect(p.currentPageOrNull?.capacity).toBe(10)
 
-        p.next()
-        expect(p.currentPageOrNull?.no).toBe(3)
+        p.loadNextPage()
+        expect(p.currentPageOrNull?.number).toBe(3)
         expect(p.currentPageOrNull?.items?.size).toBe(5)
         expect(p.currentPageOrNull?.capacity).toBe(10)
 
-        p.first()
-        expect(p.currentPageOrNull?.no).toBe(1)
+        p.loadFirstPage()
+        expect(p.currentPageOrNull?.number).toBe(1)
         expect(p.currentPageOrNull?.items?.size).toBe(10)
         expect(p.currentPageOrNull?.capacity).toBe(10)
 
-        p.last()
-        expect(p.currentPageOrNull?.no).toBe(3)
+        p.loadLastPage()
+        expect(p.currentPageOrNull?.number).toBe(3)
         expect(p.currentPageOrNull?.items?.size).toBe(5)
         expect(p.currentPageOrNull?.capacity).toBe(10)
     }

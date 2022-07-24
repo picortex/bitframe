@@ -6,9 +6,9 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-interface Paged<out T> {
+interface Pageable<out T> {
     val paginator: Paginator<T>
 
     @JsName("mapPaginatorTo")
-    fun map(paginator: Paginator<@UnsafeVariance T>): Paged<T>
+    fun map(paginator: Paginator<@UnsafeVariance T>): Pageable<T>
 }

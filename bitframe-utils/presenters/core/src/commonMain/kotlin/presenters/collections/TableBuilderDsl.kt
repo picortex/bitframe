@@ -1,5 +1,6 @@
 package presenters.collections
 
+import presenters.collections.internal.SelectorImpl
 import presenters.collections.internal.SinglePagePaginator
 import presenters.collections.internal.TableImpl
 import viewmodel.ViewModelConfig
@@ -15,5 +16,8 @@ fun <D> tableOf(
 ): Table<D> {
     val builder = TableBuilder<D>().apply(block)
     val columns = builder.columns.toTypedArray()
-    return TableImpl(SinglePagePaginator(), TableConfigImpl(columns))
+    val paginator = SinglePagePaginator<D>()
+    val config = TableConfigImpl(columns)
+    val selector = SelectorImpl(paginator, config)
+    return TableImpl(paginator, config, selector)
 }

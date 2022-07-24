@@ -1,5 +1,5 @@
 package presenters.collections
 
-interface TableConfig<D> : PagedConfig {
+interface TableConfig<D> : PageableConfig {
     val columns: Array<Column<D>>
 }

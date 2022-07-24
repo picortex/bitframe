@@ -8,29 +8,27 @@ import kotlinx.collections.interoperable.emptyList
 import presenters.actions.SimpleAction
 import presenters.actions.SimpleActionsBuilder
 import presenters.cases.Case
-import presenters.cases.Failure
-import presenters.cases.Success
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import presenters.cases.Failure as FailureCase
 import presenters.cases.Loading as LoadingCase
 
-sealed class PagedState<out T> : Case {
-    object UnLoaded : PagedState<Nothing>()
+sealed class PageableState<out T> : Case {
+    object UnLoaded : PageableState<Nothing>()
 
     data class Loading(
         override val message: String
-    ) : PagedState<Nothing>(), LoadingCase
+    ) : PageableState<Nothing>(), LoadingCase
 
     data class LoadedPage<out T>(
         val page: Page<T>
-    ) : PagedState<T>(), Page<T> by page
+    ) : PageableState<T>(), Page<T> by page
 
     data class Failure(
         override val cause: Throwable? = null,
         override val message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
         override val actions: List<SimpleAction>
-    ) : PagedState<Nothing>(), FailureCase {
+    ) : PageableState<Nothing>(), FailureCase {
         @JsName("_ignore_builder")
         constructor(
             cause: Throwable? = null,

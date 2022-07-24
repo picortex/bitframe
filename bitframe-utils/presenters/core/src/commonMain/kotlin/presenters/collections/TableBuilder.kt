@@ -27,9 +27,9 @@ class TableBuilder<D> {
 //        actions += TableAction.MultiSelect(name, handler)
 //    }
 
-//    fun selectable(name: String = "Select") {
-//        columns += Column.Select(name)
-//    }
+    fun selectable(name: String = "Select") {
+        columns.add(Column.Select(name) as Column<D>)
+    }
 
     fun column(name: String, accessor: (Row<D>) -> String) {
         columns += Column.Data(name, accessor)

@@ -9,16 +9,16 @@ import kotlin.js.JsExport
 
 @JsExport
 interface Paginator<out T> {
-    val live: Live<PagedState<T>>
+    val live: Live<PageableState<T>>
     val currentPageOrNull get() = live.value.currentPageOrNull
     var capacity: Int
     fun setPageCapacity(cap: Int)
     fun refresh(): Later<out Page<T>>
-    fun next(): Later<out Page<T>>
-    fun previous(): Later<out Page<T>>
-    fun page(no: Int): Later<out Page<T>>
-    fun first(): Later<out Page<T>>
-    fun last(): Later<out Page<T>>
+    fun loadNextPage(): Later<out Page<T>>
+    fun loadPreviousPage(): Later<out Page<T>>
+    fun loadPage(no: Int): Later<out Page<T>>
+    fun loadFirstPage(): Later<out Page<T>>
+    fun loadLastPage(): Later<out Page<T>>
 
     companion object {
         val DEFAULT_CAPACITY = 10
