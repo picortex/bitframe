@@ -1,6 +1,11 @@
 package collections
 
 import expect.expect
+import kotlinx.collections.interoperable.iListOf
+import kotlinx.collections.interoperable.toInteroperableList
+import presenters.actions.SimpleAction
+import presenters.collections.SelectorState
+import presenters.collections.internal.ActionManagerImpl
 import presenters.collections.internal.CollectionPaginator
 import presenters.collections.internal.SelectorImpl
 import presenters.collections.tableOf
@@ -70,5 +75,31 @@ class TableTest {
         table.selectAllItemsInTheCurrentPage()
         table.tabulateToConsole()
         expect(table.isRowSelected(row = 1)).toBe(true, "Implicit selector failed to select")
+    }
+
+    @Test
+    fun should_be_able_to_retrieve_primary_actions() {
+        val paginator = CollectionPaginator(Person.List)
+        val selector = SelectorImpl(paginator, ViewModelConfig())
+        val actionManager = ActionManagerImpl(selector) { state ->
+            buildList {
+                add(SimpleAction("Add Person") { println("Adding Person") })
+                when (state) {
+                    is SelectorState.AllSelected -> add(SimpleAction("Delete All") { println("Delete All") })
+                    is SelectorState.Item -> add(SimpleAction("Delete") { println("Delete") })
+                    is SelectorState.Items -> add(SimpleAction("Delete All") { println("Delete All") })
+                    is SelectorState.NoSelected -> {}
+                    is SelectorState.Page -> add(SimpleAction("Delete All") { println("Delete All") })
+                }
+            }.toInteroperableList()
+        }
+        val table = PersonTable().map(
+            paginator = paginator
+        )
+        table.loadFirstPage()
+        table.select(1)
+        table.tabulateToConsole()
+
+        expect(table.actions).toBeOfSize(2)
     }
 }

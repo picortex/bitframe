@@ -1,5 +1,7 @@
 package presenters.collections
 
+import kotlinx.collections.interoperable.iListOf
+import presenters.collections.internal.ActionManagerImpl
 import presenters.collections.internal.SelectorImpl
 import presenters.collections.internal.SinglePagePaginator
 import presenters.collections.internal.TableImpl
@@ -19,5 +21,6 @@ fun <D> tableOf(
     val paginator = SinglePagePaginator<D>()
     val config = TableConfigImpl(columns)
     val selector = SelectorImpl(paginator, config)
-    return TableImpl(paginator, config, selector)
+    val actionManager = ActionManagerImpl(selector) { iListOf() }
+    return TableImpl(paginator, config, selector, actionManager)
 }
