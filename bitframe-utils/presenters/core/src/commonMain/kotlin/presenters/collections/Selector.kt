@@ -9,58 +9,84 @@ import kotlin.js.JsName
 
 @JsExport
 interface Selector<in T> {
+    // ---------------------------------Selections--------------------------
     fun selectAllItemsInTheCurrentPage()
 
-    fun selectAllItemsFromAllPages()
+    fun selectAllItemsInPage(page: Int)
 
-    fun unSelectAllItemsInTheCurrentPage()
-
-    fun unSelectAllFromCurrentPage()
+    fun selectAllItemsInAllPages()
 
     /**
-     * Marks the item at row Number [row]
+     * Marks the item at row Number [row], in page [page] as selected
      * If there were other rows in the selected buffer, they will all be removed
      */
-    @JsName("selectRowNumber")
-    fun select(row: Int)
+    @JsName("selectRowInPage")
+    fun select(row: Int, page: Int)
 
     /**
-     * Marks the [row] as selected
+     * Marks the item at row Number [row] in the current page
      * If there were other rows in the selected buffer, they will all be removed
      */
     @JsName("selectRow")
-    fun select(row: Row<T>)
+    fun select(row: Int)
+
+    // ---------------------------------Selection Adders --------------------------
 
     /**
-     * Returns true an instance of [row] has been selected
+     * Marks the [row] in page [page] as selected
+     * If there were other items in the selected buffer, this [row] will be appended to the buffer
      */
-    @JsName("isItemSelected")
-    fun isSelected(row: Row<T>): Boolean
+    @JsName("addSelectionOfRowInPage")
+    fun addSelection(row: Int, page: Int)
 
-    @JsName("isRowSelected")
-    fun isSelected(row: Int): Boolean
+    /**
+     * Marks the [row] as selected
+     * If there were other items in the selected buffer, this [row] will be appended to the buffer
+     */
+    @JsName("addSelectionOfRowNumber")
+    fun addSelection(row: Int)
+
+    // ---------------------------------Selection Toggles --------------------------
+
+    @JsName("toggleSelectionOfRowInPage")
+    fun toggleSelection(row: Int, page: Int)
+
+    @JsName("toggleSelectionOfRow")
+    fun toggleSelection(row: Int)
+
+    // ---------------------------------Selection Checks--------------------------
+
+    fun isPageSelectedWholly(page: Int): Boolean
+
+    fun isPageSelectedPartially(page: Int): Boolean
+
+    fun isCurrentPageSelectedWholly(): Boolean
+
+    fun isCurrentPageSelectedPartially(): Boolean
+
+    fun isRowSelected(row: Int): Boolean
 
     @JsName("isRowSelectedOnPage")
-    fun isSelected(row: Int, page: Int): Boolean
+    fun isRowSelected(row: Int, page: Int): Boolean
+
+    // ---------------------------------UnSelections--------------------------
+    fun unSelectAllItemsInAllPages()
+
+    fun unSelectAllItemsInTheCurrentPage()
+
+    fun unSelectAllItemsInPage(page: Int)
 
     /**
-     * Marks the [row] as selected
-     * If there were other items in the selected buffer, this [row] will be appended to the buffer
+     * Unselects the item from row number [row] in the current page and effectively removes it from the selected buffer
      */
-    @JsName("addRowNumberToSelection")
-    fun addItemToSelection(row: Int)
+    @JsName("unSelectRowNumber")
+    fun unSelect(row: Int)
 
     /**
-     * Marks the [row] as selected
-     * If there were other items in the selected buffer, this [row] will be appended to the buffer
+     * Unselects the item from row number [row] in page [page] and effectively removes it from the selected buffer
      */
-    @JsName("addRowToSelection")
-    fun addItemToSelection(row: Row<T>)
-
-    /**
-     * Deselects the [item] and effectively removes it from the selected buffer
-     */
-    fun deselect(item: Row<T>)
+    @JsName("unSelectItemFromPage")
+    fun unSelect(row: Int, page: Int)
 
     companion object {
         operator fun <T> invoke(

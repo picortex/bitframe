@@ -1,9 +1,6 @@
 package collections
 
 import expect.expect
-import koncurrent.SynchronousExecutor
-import live.WatchMode
-import live.watch
 import presenters.collections.internal.CollectionPaginator
 import presenters.collections.internal.SelectorImpl
 import presenters.collections.tableOf
@@ -57,7 +54,21 @@ class TableTest {
         table.select(row = 1)
         selector.select(row = 1)
         table.tabulateToConsole()
-        expect(selector.isSelected(row = 1)).toBe(true, "Explicit selector failed to select")
-        expect(table.isSelected(row = 1)).toBe(true, "Implicit selector failed to select")
+        expect(selector.isRowSelected(row = 1)).toBe(true, "Explicit selector failed to select")
+        expect(table.isRowSelected(row = 1)).toBe(true, "Implicit selector failed to select")
+    }
+
+    @Test
+    fun should_be_able_to_select_the_whole_current_page() {
+        val paginator = CollectionPaginator(Person.List)
+        val table = PersonTable().map(
+            paginator = paginator
+        )
+        table.loadFirstPage()
+        table.tabulateToConsole()
+
+        table.selectAllItemsInTheCurrentPage()
+        table.tabulateToConsole()
+        expect(table.isRowSelected(row = 1)).toBe(true, "Implicit selector failed to select")
     }
 }

@@ -3,95 +3,105 @@ package presenters.collections.internal
 import kotlinx.collections.interoperable.iListOf
 import kotlinx.collections.interoperable.toInteroperableList
 import presenters.collections.*
-import viewmodel.ViewModel
 import viewmodel.ViewModelConfig
 
 class SelectorImpl<T>(
     val paginator: Paginator<T>,
     val config: ViewModelConfig<*>,
     initial: SelectorState<T>? = null,
-) : ViewModel<SelectorState<T>>(config.of(initial ?: SelectorState.NoSelected)), Selector<T> {
+) : AbstractSelector<T>(paginator, config, initial) {
 
-    val currentLoadedPage get() = paginator.currentPageOrNull
-
-    override fun selectAllItemsInTheCurrentPage() {
-        TODO("Not yet implemented")
+    override fun selectAllRowsInPage(page: Int?) {
+        val p = page ?: return
+        ui.value = SelectorState.Page(p)
     }
 
-    override fun selectAllItemsFromAllPages() {
-        TODO("Not yet implemented")
+    override fun selectAllItemsInAllPages() {
+        ui.value = SelectorState.AllSelected()
     }
 
-    override fun unSelectAllItemsInTheCurrentPage() {
-        TODO("Not yet implemented")
+    override fun unSelectAllItemsInAllPages() {
+        ui.value = SelectorState.NoSelected
     }
 
-    override fun unSelectAllFromCurrentPage() {
-        val pageNo = currentLoadedPage?.number
+    override fun unSelectAllRowsInPage(page: Int?) {
         ui.value = when (val state = ui.value) {
-            SelectorState.NoSelected -> SelectorState.NoSelected
-            is SelectorState.Single -> if (state.page == pageNo) SelectorState.NoSelected else state
-            is SelectorState.Many -> SelectorState.Many(
-                items = state.items.filter { pageNo == it.page }.toInteroperableList()
+            is SelectorState.NoSelected -> SelectorState.NoSelected
+            is SelectorState.Item -> if (state.page == page) SelectorState.NoSelected else state
+            is SelectorState.Items -> SelectorState.Items(
+                items = state.items.filter { page != it.page }.toInteroperableList()
             )
+
+            is SelectorState.Page -> if (state.number == page) SelectorState.NoSelected else state
+            is SelectorState.AllSelected -> SelectorState.NoSelected
         }
     }
 
-    override fun deselect(item: Row<T>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun addItemToSelection(row: Int) {
-        val r = currentLoadedPage?.items?.firstOrNull { row == it.number } ?: return
-        addItemToSelection(r)
-    }
-
-    override fun addItemToSelection(row: Row<T>) {
-        val pageNo = currentLoadedPage?.number ?: return
-        ui.value = when (val state = ui.value) {
-            is SelectorState.NoSelected -> SelectorState.Single(row, pageNo)
-            is SelectorState.Single -> SelectorState.Many(
-                items = iListOf(state, SelectorState.Single(row, pageNo))
-            )
-
-            is SelectorState.Many -> SelectorState.Many(
-                items = (state.items.toMutableList() + SelectorState.Single(row, pageNo)).toInteroperableList()
-            )
-        }
-    }
-
-    override fun select(row: Row<T>) {
-        val pageNo = currentLoadedPage?.number ?: return
-        ui.value = SelectorState.Single(row, pageNo)
-    }
-
-    override fun select(row: Int) {
-        val r = currentLoadedPage?.items?.firstOrNull { row == it.number } ?: return
-        select(r)
-    }
-
-    fun isSelected(row: Row<T>, page: Int): Boolean = when (val state = ui.value) {
+    override fun isPageSelectedButPartially(page: Int?): Boolean = when (val state = ui.value) {
         is SelectorState.NoSelected -> false
-        is SelectorState.Single -> state.number == row.number && state.page == page
-        is SelectorState.Many -> state.items.any { it.number == row.number && it.page == page }
+        is SelectorState.Item -> false
+        is SelectorState.Items -> state.items.any { it.page == page }
+        is SelectorState.Page -> state.number == page
+        is SelectorState.AllSelected -> true
     }
 
-    override fun isSelected(row: Row<T>): Boolean {
-        val page = currentLoadedPage?.number ?: return false
-        return isSelected(row, page)
+    override fun isPageSelectedWithNoExceptions(page: Int?): Boolean = when (val state = ui.value) {
+        is SelectorState.NoSelected -> false
+        is SelectorState.Item -> false
+        is SelectorState.Items -> false
+        is SelectorState.Page -> state.number == page && state.exceptions.isEmpty()
+        is SelectorState.AllSelected -> true
+    }
+
+    override fun unSelectRowFromPage(row: Int, page: Int?) {
+        ui.value = when (val state = ui.value) {
+            is SelectorState.NoSelected -> SelectorState.NoSelected
+            is SelectorState.Item -> if (state.page == page && state.number == row) SelectorState.NoSelected else state
+            is SelectorState.Items -> SelectorState.Items(
+                items = state.items.filter { it.page != page && it.number != row }.toInteroperableList()
+            )
+
+            is SelectorState.Page -> if (state.number == page) state.copy(
+                exceptions = (state.exceptions.toMutableList() + row).toInteroperableList()
+            ) else state
+
+            is SelectorState.AllSelected -> state.copy(
+                exceptions = (state.exceptions.toMutableList() + row).toInteroperableList()
+            )
+        }
+    }
+
+    override fun addRowSelection(row: Int, page: Int?) {
+        val pageNo = page ?: return
+        ui.value = when (val state = ui.value) {
+            is SelectorState.NoSelected -> SelectorState.Item(row, pageNo)
+            is SelectorState.Item -> SelectorState.Items(
+                items = iListOf(state, SelectorState.Item(row, pageNo))
+            )
+
+            is SelectorState.Items -> SelectorState.Items(
+                items = (state.items.toMutableList() + SelectorState.Item(row, pageNo)).toInteroperableList()
+            )
+
+            is SelectorState.Page -> SelectorState.Item(row, pageNo)
+            is SelectorState.AllSelected -> SelectorState.Item(row, pageNo)
+        }
+    }
+
+    override fun selectRow(row: Int, page: Int?) {
+        val p = page ?: return
+        ui.value = SelectorState.Item(row, p)
     }
 
     fun map(paginator: Paginator<T>): SelectorImpl<T> = SelectorImpl(
         paginator, config, ui.value
     )
 
-    override fun isSelected(row: Int): Boolean {
-        val page = currentLoadedPage?.number ?: return false
-        return isSelected(row, page)
-    }
-
-    override fun isSelected(row: Int, page: Int): Boolean {
-        val r = currentLoadedPage?.items?.firstOrNull { row == it.number } ?: return false
-        return isSelected(r)
+    override fun isRowItemSelected(row: Int, page: Int?) = when (val state = ui.value) {
+        is SelectorState.NoSelected -> false
+        is SelectorState.Item -> state.number == row && state.page == page
+        is SelectorState.Items -> state.items.any { it.number == row && it.page == page }
+        is SelectorState.Page -> state.number == page
+        is SelectorState.AllSelected -> true
     }
 }
