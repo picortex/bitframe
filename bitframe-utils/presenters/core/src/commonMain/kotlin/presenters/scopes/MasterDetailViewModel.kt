@@ -18,4 +18,12 @@ abstract class MasterDetailViewModel<T>(config: ViewModelConfig<*>) : BaseViewMo
     fun switchViewTo(v: View) {
         view.value = v
     }
+
+    fun switchToListView() {
+        view.value = View.ListView
+    }
+
+    fun switchToTableView() {
+        view.value = View.TableView
+    }
 }

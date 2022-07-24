@@ -25,7 +25,7 @@ class DialogTest {
             on("Delete") {
                 clicks.add("deleted")
             }
-            onConfirm { }
+            onConfirm { Later.resolve(Unit) }
         }
 
         d.click("Cancel")

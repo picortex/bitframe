@@ -31,6 +31,7 @@ kotlin {
                 implementation(kotlinx.serialization.json)
                 implementation(asoft.viewmodel.test.expect)
                 implementation(projects.presentersMock)
+                implementation(asoft.koncurrent.primitives.mock)
             }
         }
     }
