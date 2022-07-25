@@ -1,5 +1,8 @@
 package presenters.collections
 
-interface ScrollableList<out T> : Pageable<T> {
+interface ScrollableList<T> :
+    Pageable<T>, Paginator<T>,
+    Selectable<T>, Selector<T>,
+    Actionable, ActionManager {
     override fun map(paginator: Paginator<@UnsafeVariance T>): ScrollableList<T>
 }
