@@ -2,18 +2,43 @@ package presenters.collections.internal
 
 import kotlinx.collections.interoperable.iListOf
 import kotlinx.collections.interoperable.toInteroperableList
-import presenters.collections.*
+import presenters.collections.Paginator
+import presenters.collections.Selected
+import presenters.collections.SelectorState
 import viewmodel.ViewModelConfig
 
 class SelectorImpl<T>(
-    val paginator: Paginator<T>,
-    val config: ViewModelConfig<*>,
-    initial: SelectorState<T>? = null,
-) : AbstractSelector<T>(paginator, config, initial) {
+    private val paginator: Paginator<T>,
+    config: ViewModelConfig<*>,
+) : AbstractSelector<T>(paginator, config) {
+
+    override val selected: Selected<T>
+        get() = when (val state = ui.value) {
+            is SelectorState.AllSelected -> Selected.Global(
+                exceptions = state.exceptions.loadedFromPaginatorMemory()
+            )
+
+            is SelectorState.Item -> Selected.Item(
+                paginator.readPageFromMemory(state.page, paginator.capacity).items.first { row -> row.number == state.number }.item
+            )
+
+            is SelectorState.Items -> Selected.Items(
+                values = state.items.loadedFromPaginatorMemory()
+            )
+
+            is SelectorState.NoSelected -> Selected.None
+        }
+
+    private fun List<SelectorState.Item>.loadedFromPaginatorMemory() = map { item ->
+        paginator.readPageFromMemory(item.page, paginator.capacity).items.first { row -> row.number == item.number }.item
+    }.toInteroperableList()
 
     override fun selectAllRowsInPage(page: Int?) {
         val p = page ?: return
-        ui.value = SelectorState.Page(p)
+        val rows = paginator.readPageFromMemory(p, paginator.capacity)
+        ui.value = SelectorState.Items(
+            items = rows.items.map { SelectorState.Item(it.number, p) }.toInteroperableList()
+        )
     }
 
     override fun selectAllItemsInAllPages() {
@@ -32,25 +57,30 @@ class SelectorImpl<T>(
                 items = state.items.filter { page != it.page }.toInteroperableList()
             )
 
-            is SelectorState.Page -> if (state.number == page) SelectorState.NoSelected else state
             is SelectorState.AllSelected -> SelectorState.NoSelected
         }
     }
 
     override fun isPageSelectedButPartially(page: Int?): Boolean = when (val state = ui.value) {
         is SelectorState.NoSelected -> false
-        is SelectorState.Item -> false
+        is SelectorState.Item -> state.page == page
         is SelectorState.Items -> state.items.any { it.page == page }
-        is SelectorState.Page -> state.number == page
         is SelectorState.AllSelected -> true
     }
 
-    override fun isPageSelectedWithNoExceptions(page: Int?): Boolean = when (val state = ui.value) {
-        is SelectorState.NoSelected -> false
-        is SelectorState.Item -> false
-        is SelectorState.Items -> false
-        is SelectorState.Page -> state.number == page && state.exceptions.isEmpty()
-        is SelectorState.AllSelected -> true
+    override fun isPageSelectedWithNoExceptions(page: Int?): Boolean {
+        val p = page ?: return false
+        return when (val state = ui.value) {
+            is SelectorState.NoSelected -> false
+            is SelectorState.Item -> false
+            is SelectorState.Items -> {
+                paginator.readPageFromMemory(p, paginator.capacity).items.map { row ->
+                    state.items.find { it.page == p && it.number == row.number } != null
+                }.all { it }
+            }
+
+            is SelectorState.AllSelected -> true
+        }
     }
 
     override fun unSelectRowFromPage(row: Int, page: Int?) {
@@ -61,13 +91,9 @@ class SelectorImpl<T>(
                 items = state.items.filter { it.page != page && it.number != row }.toInteroperableList()
             )
 
-            is SelectorState.Page -> if (state.number == page) state.copy(
-                exceptions = (state.exceptions.toMutableList() + row).toInteroperableList()
+            is SelectorState.AllSelected -> if (page != null) state.copy(
+                exceptions = (state.exceptions.toMutableList() + SelectorState.Item(row, page)).toInteroperableList()
             ) else state
-
-            is SelectorState.AllSelected -> state.copy(
-                exceptions = (state.exceptions.toMutableList() + row).toInteroperableList()
-            )
         }
     }
 
@@ -83,7 +109,6 @@ class SelectorImpl<T>(
                 items = (state.items.toMutableList() + SelectorState.Item(row, pageNo)).toInteroperableList()
             )
 
-            is SelectorState.Page -> SelectorState.Item(row, pageNo)
             is SelectorState.AllSelected -> SelectorState.Item(row, pageNo)
         }
     }
@@ -93,15 +118,10 @@ class SelectorImpl<T>(
         ui.value = SelectorState.Item(row, p)
     }
 
-    fun map(paginator: Paginator<T>): SelectorImpl<T> = SelectorImpl(
-        paginator, config, ui.value
-    )
-
     override fun isRowItemSelected(row: Int, page: Int?) = when (val state = ui.value) {
         is SelectorState.NoSelected -> false
         is SelectorState.Item -> state.number == row && state.page == page
         is SelectorState.Items -> state.items.any { it.number == row && it.page == page }
-        is SelectorState.Page -> state.number == page
         is SelectorState.AllSelected -> true
     }
 }

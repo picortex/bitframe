@@ -1,15 +1,13 @@
 package presenters.collections
 
-import kotlinx.collections.interoperable.iListOf
-import presenters.collections.internal.*
+import presenters.collections.internal.ScrollableListImpl
 import viewmodel.ViewModelConfig
 import kotlin.jvm.JvmSynthetic
 
 @JvmSynthetic
-fun <D> scrollableListOf(): ScrollableList<D> {
-    val paginator = SinglePagePaginator<D>()
-    val config = ViewModelConfig()
-    val selector = SelectorImpl(paginator, config)
-    val actionManager = ActionManagerImpl(selector) { iListOf() }
-    return ScrollableListImpl(paginator, config, selector, actionManager)
-}
+fun <T> scrollableListOf(
+    paginator: Paginator<T>,
+    selector: Selector<T>,
+    actionManager: ActionManager,
+    config: ViewModelConfig<*>
+): ScrollableList<T> = ScrollableListImpl(paginator, selector, actionManager, config)

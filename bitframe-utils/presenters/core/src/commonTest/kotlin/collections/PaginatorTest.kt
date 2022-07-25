@@ -2,8 +2,8 @@ package collections
 
 import expect.expect
 import presenters.collections.Paginator
-import presenters.collections.internal.CollectionPaginator
-import presenters.collections.internal.SinglePagePaginator
+import presenters.collections.CollectionPaginator
+import presenters.collections.SinglePagePaginator
 import kotlin.test.Test
 
 class PaginatorTest {

@@ -12,6 +12,9 @@ interface Paginator<out T> {
     val live: Live<PageableState<T>>
     val currentPageOrNull get() = live.value.currentPageOrNull
     var capacity: Int
+    fun readPageFromMemory(page: Int, cap: Int): Page<T>
+    fun readPageFromMemoryOrNull(page: Int, cap: Int): Page<T>?
+    fun writePageToMemory(page: Page<@UnsafeVariance T>): Page<T>?
     fun setPageCapacity(cap: Int)
     fun refresh(): Later<out Page<T>>
     fun loadNextPage(): Later<out Page<T>>
@@ -26,6 +29,6 @@ interface Paginator<out T> {
         operator fun <T> invoke(
             capacity: Int = DEFAULT_CAPACITY,
             onPage: (no: Int, capacity: Int) -> Later<out Page<T>>
-        ): Paginator<T> = PaginatorImpl(capacity, onPage)
+        ): Paginator<T> = PaginatorImpl(capacity = capacity, onPage = onPage)
     }
 }

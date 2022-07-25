@@ -7,24 +7,19 @@ import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.iListOf
 import kotlin.js.JsExport
 
-sealed class SelectorState<out T> {
-    object NoSelected : SelectorState<Nothing>()
+sealed class SelectorState {
+    object NoSelected : SelectorState()
 
-    data class Item<out T>(
+    data class Item(
         val number: Int,
         val page: Int
-    ) : SelectorState<T>()
+    ) : SelectorState()
 
-    data class Items<out T>(
-        val items: List<Item<T>>
-    ) : SelectorState<T>()
-
-    data class Page(
-        val number: Int,
-        val exceptions: List<Int> = iListOf()
-    ) : SelectorState<Nothing>()
+    data class Items(
+        val items: List<Item>
+    ) : SelectorState()
 
     data class AllSelected(
-        val exceptions: List<Int> = iListOf()
-    ) : SelectorState<Nothing>()
+        val exceptions: List<Item> = iListOf()
+    ) : SelectorState()
 }

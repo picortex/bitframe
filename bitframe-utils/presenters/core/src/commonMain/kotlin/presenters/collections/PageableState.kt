@@ -14,27 +14,34 @@ import presenters.cases.Failure as FailureCase
 import presenters.cases.Loading as LoadingCase
 
 sealed class PageableState<out T> : Case {
-    object UnLoaded : PageableState<Nothing>()
+    abstract val page: Page<T>?
 
-    data class Loading(
-        override val message: String
-    ) : PageableState<Nothing>(), LoadingCase
+    data class UnLoaded<out T>(
+        override val page: Page<T>? = null
+    ) : PageableState<T>()
+
+    data class Loading<out T>(
+        override val message: String,
+        override val page: Page<T>? = null
+    ) : PageableState<T>(), LoadingCase
 
     data class LoadedPage<out T>(
-        val page: Page<T>
+        override val page: Page<T>
     ) : PageableState<T>(), Page<T> by page
 
-    data class Failure(
+    data class Failure<out T>(
         override val cause: Throwable? = null,
         override val message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
+        override val page: Page<T>? = null,
         override val actions: List<SimpleAction>
-    ) : PageableState<Nothing>(), FailureCase {
+    ) : PageableState<T>(), FailureCase {
         @JsName("_ignore_builder")
         constructor(
             cause: Throwable? = null,
             message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
+            page: Page<T>? = null,
             builder: (SimpleActionsBuilder.() -> Unit)? = null
-        ) : this(cause, message, builder?.let { SimpleActionsBuilder().apply(it).actions } ?: emptyList())
+        ) : this(cause, message, page, builder?.let { SimpleActionsBuilder().apply(it).actions } ?: emptyList())
 
         override val failure: Boolean = true
     }

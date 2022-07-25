@@ -6,9 +6,8 @@ import viewmodel.ViewModelConfig
 
 abstract class AbstractSelector<T>(
     private val paginator: Paginator<T>,
-    config: ViewModelConfig<*>,
-    initial: SelectorState<T>? = null,
-) : ViewModel<SelectorState<T>>(config.of(initial ?: SelectorState.NoSelected)), Selector<T> {
+    config: ViewModelConfig<*>
+) : ViewModel<SelectorState>(config.of(SelectorState.NoSelected)), Selector<T> {
 
     protected val currentLoadedPage get() = paginator.currentPageOrNull
 
@@ -30,9 +29,9 @@ abstract class AbstractSelector<T>(
 
     abstract fun addRowSelection(row: Int, page: Int?)
 
-    override fun unSelect(row: Int) = unSelectRowFromPage(row, currentLoadedPage?.number)
+    override fun unSelectRowInCurrentPage(row: Int) = unSelectRowFromPage(row, currentLoadedPage?.number)
 
-    override fun unSelect(row: Int, page: Int) = unSelectRowFromPage(row, page)
+    override fun unSelectRowInPage(row: Int, page: Int) = unSelectRowFromPage(row, page)
 
     override fun unSelectAllItemsInTheCurrentPage() = unSelectAllRowsInPage(currentLoadedPage?.number)
 
@@ -42,9 +41,9 @@ abstract class AbstractSelector<T>(
 
     abstract fun unSelectRowFromPage(row: Int, page: Int?)
 
-    override fun isRowSelected(row: Int) = isRowItemSelected(row, currentLoadedPage?.number)
+    override fun isRowSelectedOnCurrentPage(row: Int) = isRowItemSelected(row, currentLoadedPage?.number)
 
-    override fun isRowSelected(row: Int, page: Int) = isRowItemSelected(row, page)
+    override fun isRowSelectedOnPage(row: Int, page: Int) = isRowItemSelected(row, page)
 
     override fun isPageSelectedWholly(page: Int): Boolean = isPageSelectedWithNoExceptions(page)
 
@@ -60,9 +59,19 @@ abstract class AbstractSelector<T>(
 
     abstract fun isRowItemSelected(row: Int, page: Int?): Boolean
 
-    override fun toggleSelection(row: Int) = toggleRowSelection(row, currentLoadedPage?.number)
+    override fun toggleSelectionOfRowInCurrentPage(row: Int) = toggleRowSelection(row, currentLoadedPage?.number)
 
-    override fun toggleSelection(row: Int, page: Int) = toggleRowSelection(row, page)
+    override fun toggleSelectionOfRowInPage(row: Int, page: Int) = toggleRowSelection(row, page)
 
     private fun toggleRowSelection(row: Int, page: Int?) = if (isRowItemSelected(row, page)) unSelectRowFromPage(row, page) else select(row)
+
+    override fun toggleSelectionOfCurrentPage() = toggleSelectionOfANullablePage(currentLoadedPage?.number)
+
+    override fun toggleSelectionOfPage(page: Int) = toggleSelectionOfANullablePage(page)
+
+    private fun toggleSelectionOfANullablePage(page: Int?) = if (isPageSelectedWithNoExceptions(page)) {
+        unSelectAllRowsInPage(page)
+    } else {
+        selectAllRowsInPage(page)
+    }
 }

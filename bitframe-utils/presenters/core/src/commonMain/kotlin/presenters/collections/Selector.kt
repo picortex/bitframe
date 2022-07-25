@@ -6,6 +6,8 @@ import presenters.collections.internal.SelectorImpl
 import viewmodel.ViewModelConfig
 import kotlin.js.JsExport
 import kotlin.js.JsName
+import kotlin.jvm.JvmName
+import kotlin.jvm.JvmStatic
 
 @JsExport
 interface Selector<in T> {
@@ -48,11 +50,13 @@ interface Selector<in T> {
 
     // ---------------------------------Selection Toggles --------------------------
 
-    @JsName("toggleSelectionOfRowInPage")
-    fun toggleSelection(row: Int, page: Int)
+    fun toggleSelectionOfRowInPage(row: Int, page: Int)
 
-    @JsName("toggleSelectionOfRow")
-    fun toggleSelection(row: Int)
+    fun toggleSelectionOfRowInCurrentPage(row: Int)
+
+    fun toggleSelectionOfPage(page: Int)
+
+    fun toggleSelectionOfCurrentPage()
 
     // ---------------------------------Selection Checks--------------------------
 
@@ -64,10 +68,9 @@ interface Selector<in T> {
 
     fun isCurrentPageSelectedPartially(): Boolean
 
-    fun isRowSelected(row: Int): Boolean
+    fun isRowSelectedOnCurrentPage(row: Int): Boolean
 
-    @JsName("isRowSelectedOnPage")
-    fun isRowSelected(row: Int, page: Int): Boolean
+    fun isRowSelectedOnPage(row: Int, page: Int): Boolean
 
     // ---------------------------------UnSelections--------------------------
     fun unSelectAllItemsInAllPages()
@@ -79,16 +82,19 @@ interface Selector<in T> {
     /**
      * Unselects the item from row number [row] in the current page and effectively removes it from the selected buffer
      */
-    @JsName("unSelectRowNumber")
-    fun unSelect(row: Int)
+    fun unSelectRowInCurrentPage(row: Int)
 
     /**
      * Unselects the item from row number [row] in page [page] and effectively removes it from the selected buffer
      */
-    @JsName("unSelectItemFromPage")
-    fun unSelect(row: Int, page: Int)
+    fun unSelectRowInPage(row: Int, page: Int)
+
+    // ---------------------------------SelectionGetters--------------------------
+    val selected: Selected<@UnsafeVariance T>
 
     companion object {
+        @JvmStatic
+        @JvmName("create")
         operator fun <T> invoke(
             paginator: Paginator<T>,
             config: ViewModelConfig<*> = ViewModelConfig()

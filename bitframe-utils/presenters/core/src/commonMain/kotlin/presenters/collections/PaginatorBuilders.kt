@@ -1,15 +1,14 @@
 @file:Suppress("FunctionName", "NOTHING_TO_INLINE")
 
-package presenters.collections.internal
+package presenters.collections
 
 import koncurrent.Later
 import koncurrent.SynchronousExecutor
-import presenters.collections.Page
-import presenters.collections.Paginator
+import presenters.collections.internal.PaginatorImpl
 
 inline fun <T> SinglePagePaginator(
     currentPage: Page<T> = Page()
-): Paginator<T> = PaginatorImpl(currentPage.capacity) { _, _ ->
+): Paginator<T> = PaginatorImpl(capacity = currentPage.capacity) { _, _ ->
     Later.resolve(currentPage)
 }
 

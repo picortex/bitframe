@@ -5,5 +5,4 @@ interface Table<T> :
     Selectable<T>, Selector<T>,
     Actionable, ActionManager {
     val columns: Array<Column<T>>
-    override fun map(paginator: Paginator<T>): Table<T>
 }

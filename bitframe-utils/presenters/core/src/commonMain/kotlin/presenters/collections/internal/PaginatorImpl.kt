@@ -13,9 +13,17 @@ import viewmodel.ViewModelConfig
 
 class PaginatorImpl<out T>(
     override var capacity: Int,
+    internal val ram: PageableRamInMemory<@UnsafeVariance T> = PageableRamInMemory(),
     private val onPage: (no: Int, capacity: Int) -> Later<out Page<T>>
-) : ViewModel<PageableState<T>>(ViewModelConfig().of(PageableState.UnLoaded)), Paginator<T> {
+) : ViewModel<PageableState<T>>(ViewModelConfig().of(PageableState.UnLoaded(ram.readOrNull(1, capacity)))), Paginator<T> {
+
     override val live: Live<PageableState<T>> get() = ui
+
+    override fun readPageFromMemory(page: Int, cap: Int): Page<T> = ram.read(page, capacity)
+
+    override fun readPageFromMemoryOrNull(page: Int, cap: Int): Page<T>? = ram.readOrNull(page, capacity)
+
+    override fun writePageToMemory(page: Page<@UnsafeVariance T>): Page<T> = ram.write(page)
 
     override fun setPageCapacity(cap: Int) {
         capacity = cap
@@ -44,10 +52,18 @@ class PaginatorImpl<out T>(
         is PageableState.UnLoaded -> loadPage(1)
     }
 
-    override fun loadPage(no: Int): Later<out Page<T>> = onPage(no, capacity).finally {
-        when (it) {
-            is Fulfilled -> ui.value = PageableState.LoadedPage(it.value)
-            is Rejected -> ui.value = PageableState.Failure(it.cause)
+    override fun loadPage(no: Int): Later<out Page<T>> {
+        val memorizedPage = ram.readOrNull(no, capacity)
+        ui.value = PageableState.Loading("Loading", memorizedPage)
+        return onPage(no, capacity).finally {
+            when (it) {
+                is Fulfilled -> {
+                    ram.write(it.value)
+                    ui.value = PageableState.LoadedPage(it.value)
+                }
+
+                is Rejected -> ui.value = PageableState.Failure(it.cause, page = memorizedPage)
+            }
         }
     }
 
