@@ -7,15 +7,15 @@ import koncurrent.later.finally
 import live.Live
 import presenters.collections.Page
 import presenters.collections.PageableState
-import presenters.collections.Paginator
+import presenters.collections.PaginationManager
 import viewmodel.ViewModel
 import viewmodel.ViewModelConfig
 
-class PaginatorImpl<out T>(
+class PaginationManagerImpl<out T>(
     override var capacity: Int,
     internal val ram: PageableRamInMemory<@UnsafeVariance T> = PageableRamInMemory(),
     private val onPage: (no: Int, capacity: Int) -> Later<out Page<T>>
-) : ViewModel<PageableState<T>>(ViewModelConfig().of(PageableState.UnLoaded(ram.readOrNull(1, capacity)))), Paginator<T> {
+) : ViewModel<PageableState<T>>(ViewModelConfig().of(PageableState.UnLoaded(ram.readOrNull(1, capacity)))), PaginationManager<T> {
 
     override val live: Live<PageableState<T>> get() = ui
 

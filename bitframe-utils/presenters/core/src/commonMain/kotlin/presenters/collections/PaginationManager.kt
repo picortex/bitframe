@@ -4,11 +4,11 @@ package presenters.collections
 
 import koncurrent.Later
 import live.Live
-import presenters.collections.internal.PaginatorImpl
+import presenters.collections.internal.PaginationManagerImpl
 import kotlin.js.JsExport
 
 @JsExport
-interface Paginator<out T> {
+interface PaginationManager<out T> {
     val live: Live<PageableState<T>>
     val currentPageOrNull get() = live.value.currentPageOrNull
     var capacity: Int
@@ -29,6 +29,6 @@ interface Paginator<out T> {
         operator fun <T> invoke(
             capacity: Int = DEFAULT_CAPACITY,
             onPage: (no: Int, capacity: Int) -> Later<out Page<T>>
-        ): Paginator<T> = PaginatorImpl(capacity = capacity, onPage = onPage)
+        ): PaginationManager<T> = PaginationManagerImpl(capacity = capacity, onPage = onPage)
     }
 }

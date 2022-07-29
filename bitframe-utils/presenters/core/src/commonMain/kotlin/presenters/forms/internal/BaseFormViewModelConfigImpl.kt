@@ -14,6 +14,4 @@ class BaseFormViewModelConfigImpl<F : BaseForm<*, P>, P>(
     override val executor: Executor,
     override val logger: Logger,
     override val codec: StringFormat
-) : BaseFormViewModelConfig<F, P>, ViewModelConfig<F> by ViewModelConfig(form, executor, codec, logger) {
-    override val api: F get() = form
-}
+) : BaseFormViewModelConfig<F, P>, ViewModelConfig by ViewModelConfig(executor, logger)

@@ -38,6 +38,7 @@ class DaoMock<D : Savable>(val config: DaoMockConfig<D>) : Dao<D> {
         if (item != null) resolve(item) else resolve(null)
     }
 
+    @OptIn(InternalSerializationApi::class)
     override fun execute(query: Query) = Later(config.executor) { resolve, reject ->
         val conditions = query.statements.filterIsInstance<Condition<*>>()
         var results: Collection<D> = items.values

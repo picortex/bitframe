@@ -16,7 +16,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.datetimeCore)
-                api(kotlinx.serialization.core)
+                api(kotlinx.serialization.json)
                 api(asoft.viewmodel.core)
                 api(asoft.koncurrent.later.core)
                 api(asoft.kash.core)
@@ -29,7 +29,7 @@ kotlin {
             dependencies {
                 implementation(asoft.expect.coroutines)
                 implementation(kotlinx.serialization.json)
-                implementation(asoft.viewmodel.test.expect)
+                implementation(asoft.viewmodel.test)
                 implementation(projects.presentersMock)
                 implementation(asoft.koncurrent.primitives.mock)
             }

@@ -6,26 +6,22 @@ plugins {
 }
 
 kotlin {
-    jvm {
-        library()
-        withJava()
-    }
+    jvm { library() }
     js(IR) { library() }
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeDaoMock)
-                api(projects.bitframeDaoMongo)
-                api(projects.bitframeDaoFile)
+                api(projects.bitframeDaoCore)
+                api(kotlinx.serialization.json)
+                api(asoft.koncurrent.primitives.mock)
                 api(squareup.okio.core)
-                api(kotlinx.serialization.toml.core)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                api(squareup.okio.fake)
-                implementation(asoft.expect.core)
+                implementation(squareup.okio.fake)
+                implementation(asoft.expect.coroutines)
             }
         }
     }

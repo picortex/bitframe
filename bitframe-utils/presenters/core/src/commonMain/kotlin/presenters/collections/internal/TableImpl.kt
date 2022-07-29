@@ -3,18 +3,19 @@
 
 package presenters.collections.internal
 
+import kotlinx.collections.interoperable.List
 import presenters.collections.*
 import viewmodel.ViewModelConfig
 import kotlin.js.JsExport
 
 open class TableImpl<T>(
-    override val paginator: Paginator<T>,
-    override val selector: Selector<T>,
-    override val actionManager: ActionManager,
-    override val columns: Array<Column<T>>,
-    config: ViewModelConfig<*>
+    override val paginator: PaginationManager<T>,
+    override val selector: SelectionManager<T>,
+    override val actionsManager: ActionsManager<T>,
+    override val columns: List<Column<T>>,
+    config: ViewModelConfig
 ) : PageableImpl<T>(config), Table<T>,
-    Paginator<T> by paginator,
-    Selector<T> by selector,
-    ActionManager by actionManager {
+    PaginationManager<T> by paginator,
+    SelectionManager<T> by selector,
+    ActionsManager<T> by actionsManager {
 }

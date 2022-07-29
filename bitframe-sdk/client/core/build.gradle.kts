@@ -32,7 +32,7 @@ kotlin {
 //                implementation(projects.bitframeApiMock)
                 implementation(projects.bitframeServiceBuilderSdkClientCore)
                 implementation(asoft.expect.coroutines)
-                implementation(asoft.viewmodel.test.expect)
+                implementation(asoft.viewmodel.test)
             }
         }
     }

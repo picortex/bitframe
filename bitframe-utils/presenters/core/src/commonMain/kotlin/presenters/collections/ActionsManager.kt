@@ -3,11 +3,12 @@
 package presenters.collections
 
 import kotlinx.collections.interoperable.List
-import presenters.actions.GenericPendingAction
 import presenters.actions.SimpleAction
 import kotlin.js.JsExport
 
 @JsExport
-interface ActionManager {
+interface ActionsManager<in T> {
     val actions: List<SimpleAction>
+
+    fun actionsOf(item: T): List<SimpleAction>
 }

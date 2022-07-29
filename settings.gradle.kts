@@ -24,7 +24,7 @@ pluginManagement {
     }
 }
 
-val tmp = 3
+val tmp = 4
 
 includeBuild("bitframe-plugins")
 
@@ -55,7 +55,7 @@ includeSubs(base = "akkounts", path = "bitframe-utils/akkounts", "core", "mock",
 includeSubs(base = "akkounts-sage", path = "bitframe-utils/akkounts/sage", "core", "mock")
 
 includeSubs("bitframe-actor", "bitframe-actor", "core", "app", "user", "space")
-includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mongo")
+includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mongo", "file")
 includeRoot(name = "bitframe-dao", path = "bitframe-daos/universal")
 
 // Bitframe Service

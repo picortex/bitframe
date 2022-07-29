@@ -13,8 +13,8 @@ import kotlin.js.JsExport
 
 open class FormViewModel<F : BaseForm<*, P>, P>(
     val config: BaseFormViewModelConfig<F, P>
-) : ViewModel<BaseFormState<F>>(config.of(BaseFormState.Fillable(config.api))) {
-    private val form get() = config.api
+) : ViewModel<BaseFormState<F>>(config.of(BaseFormState.Fillable(config.form))) {
+    private val form get() = config.form
     private val codec get() = config.codec
 
     fun cancel() {

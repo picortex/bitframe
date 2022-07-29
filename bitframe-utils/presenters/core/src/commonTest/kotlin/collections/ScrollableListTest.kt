@@ -4,7 +4,6 @@ import expect.expect
 import koncurrent.SynchronousExecutor
 import presenters.collections.*
 import presenters.collections.CollectionPaginator
-import presenters.collections.internal.SelectorImpl
 import viewmodel.ViewModelConfig
 import kotlin.test.Test
 
@@ -15,7 +14,7 @@ class ScrollableListTest {
 
         val config = ViewModelConfig(executor = SynchronousExecutor)
         val paginator = CollectionPaginator(Person.List)
-        val selector = Selector(paginator, config)
+        val selector = SelectionManager(paginator, config)
         val actions = actionsOf(selector) {}
 
         val list = scrollableListOf(paginator, selector, actions, config)
@@ -33,7 +32,7 @@ class ScrollableListTest {
     fun should_be_able_to_select_table_items() {
         val config = ViewModelConfig(executor = SynchronousExecutor)
         val paginator = CollectionPaginator(Person.List)
-        val selector = Selector(paginator, config)
+        val selector = SelectionManager(paginator, config)
         val actions = actionsOf(selector) {}
 
         val list = scrollableListOf(paginator, selector, actions, config)
@@ -50,7 +49,7 @@ class ScrollableListTest {
     fun should_be_able_to_select_the_whole_current_page() {
         val config = ViewModelConfig(executor = SynchronousExecutor)
         val paginator = CollectionPaginator(Person.List)
-        val selector = Selector(paginator, config)
+        val selector = SelectionManager(paginator, config)
         val actions = actionsOf(selector) {}
 
         val list = scrollableListOf(paginator, selector, actions, config)
@@ -65,7 +64,7 @@ class ScrollableListTest {
     fun should_be_able_to_retrieve_primary_actions() {
         val config = ViewModelConfig(executor = SynchronousExecutor)
         val paginator = CollectionPaginator(Person.List)
-        val selector = Selector(paginator, config)
+        val selector = SelectionManager(paginator, config)
         val actions = actionsOf(selector) {
             primary {
                 on("Create Person") { println("Creating Person") }

@@ -4,22 +4,22 @@ package presenters.collections
 
 import koncurrent.Later
 import koncurrent.SynchronousExecutor
-import presenters.collections.internal.PaginatorImpl
+import presenters.collections.internal.PaginationManagerImpl
 
 inline fun <T> SinglePagePaginator(
     currentPage: Page<T> = Page()
-): Paginator<T> = PaginatorImpl(capacity = currentPage.capacity) { _, _ ->
+): PaginationManager<T> = PaginationManagerImpl(capacity = currentPage.capacity) { _, _ ->
     Later.resolve(currentPage)
 }
 
 inline fun <T> SinglePagePaginator(
     items: Collection<T>
-): Paginator<T> = SinglePagePaginator(Page(items))
+): PaginationManager<T> = SinglePagePaginator(Page(items))
 
 fun <T> CollectionPaginator(
     collection: Collection<T>,
-    capacity: Int = Paginator.DEFAULT_CAPACITY,
-): Paginator<T> = Paginator(capacity) { no, cap ->
+    capacity: Int = PaginationManager.DEFAULT_CAPACITY,
+): PaginationManager<T> = PaginationManager(capacity) { no, cap ->
     Later(SynchronousExecutor) { resolve, reject ->
         try {
             val chunked = collection.chunked(cap)

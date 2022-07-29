@@ -19,7 +19,7 @@ class TableTest {
     fun can_be_assigned_a_paginator() {
         val config = ViewModelConfig(executor = SynchronousExecutor)
         val paginator = CollectionPaginator(Person.List)
-        val selector = Selector(paginator, config)
+        val selector = SelectionManager(paginator, config)
         val action = actionsOf(selector) {}
         val table = tableOf(paginator, selector, action, PersonTableColumns().toTypedArray(), config)
         table.tabulateToConsole()
@@ -39,7 +39,7 @@ class TableTest {
     fun should_be_able_to_select_table_items() {
         val config = ViewModelConfig(executor = SynchronousExecutor)
         val paginator = CollectionPaginator(Person.List)
-        val selector = Selector(paginator, config)
+        val selector = SelectionManager(paginator, config)
         val action = actionsOf(selector) {}
         val table = tableOf(paginator, selector, action, PersonTableColumns().toTypedArray(), config)
         table.loadFirstPage()
@@ -57,7 +57,7 @@ class TableTest {
     fun should_be_able_to_select_the_whole_current_page() {
         val config = ViewModelConfig(executor = SynchronousExecutor)
         val paginator = CollectionPaginator(Person.List)
-        val selector = Selector(paginator, config)
+        val selector = SelectionManager(paginator, config)
         val action = actionsOf(selector) {}
         val table = tableOf(paginator, selector, action, PersonTableColumns().toTypedArray(), config)
 
@@ -73,7 +73,7 @@ class TableTest {
     fun should_be_able_to_retrieve_primary_actions() {
         val config = ViewModelConfig(executor = SynchronousExecutor)
         val paginator = CollectionPaginator(Person.List)
-        val selector = Selector(paginator, config)
+        val selector = SelectionManager(paginator, config)
         val actions = actionsOf(selector) {
             primary {
                 on("Create Person") { println("Just create da nigga") }

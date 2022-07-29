@@ -30,7 +30,7 @@ kotlin {
             dependencies {
                 implementation(projects.bitframeServiceBuilderApiCore)
                 implementation(asoft.expect.coroutines)
-                implementation(asoft.viewmodel.test.expect)
+                implementation(asoft.viewmodel.test)
             }
         }
     }

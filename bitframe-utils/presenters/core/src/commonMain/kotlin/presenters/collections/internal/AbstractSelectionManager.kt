@@ -4,10 +4,10 @@ import presenters.collections.*
 import viewmodel.ViewModel
 import viewmodel.ViewModelConfig
 
-abstract class AbstractSelector<T>(
-    private val paginator: Paginator<T>,
-    config: ViewModelConfig<*>
-) : ViewModel<SelectorState>(config.of(SelectorState.NoSelected)), Selector<T> {
+abstract class AbstractSelectionManager<T>(
+    private val paginator: PaginationManager<T>,
+    config: ViewModelConfig
+) : ViewModel<SelectorState>(config.of(SelectorState.NoSelected)), SelectionManager<T> {
 
     protected val currentLoadedPage get() = paginator.currentPageOrNull
 

@@ -6,5 +6,5 @@ import kotlin.js.JsExport
 
 @JsExport
 interface Selectable<in T> {
-    val selector: Selector<T>
+    val selector: SelectionManager<T>
 }

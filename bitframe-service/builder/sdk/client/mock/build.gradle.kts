@@ -13,7 +13,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeServiceBuilderSdkClientCore)
-                api(asoft.viewmodel.test.expect)
+                api(asoft.viewmodel.test)
             }
         }
     }

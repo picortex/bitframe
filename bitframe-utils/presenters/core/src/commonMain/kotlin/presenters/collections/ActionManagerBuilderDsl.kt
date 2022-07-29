@@ -1,8 +1,8 @@
 package presenters.collections
 
-import presenters.collections.internal.ActionManagerImpl
+import presenters.collections.internal.ActionsManagerImpl
 
 fun <T> actionsOf(
-    selector: Selector<T>,
+    selector: SelectionManager<T>,
     builder: ActionManagerBuilder<T>.() -> Unit
-): ActionManager = ActionManagerImpl(selector, ActionManagerBuilder<T>().apply(builder))
+): ActionsManager<T> = ActionsManagerImpl(selector, ActionManagerBuilder<T>().apply(builder))

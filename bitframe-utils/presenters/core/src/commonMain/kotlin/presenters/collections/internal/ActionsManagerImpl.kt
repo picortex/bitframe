@@ -1,16 +1,15 @@
 package presenters.collections.internal
 
 import kotlinx.collections.interoperable.List
-import kotlinx.collections.interoperable.toInteroperableList
 import presenters.actions.SimpleAction
-import presenters.collections.ActionManager
+import presenters.collections.ActionsManager
 import presenters.collections.ActionManagerBuilder
-import presenters.collections.Selector
-import presenters.collections.SelectorState
+import presenters.collections.SelectionManager
 
-class ActionManagerImpl<T>(
-    private val selector: Selector<T>,
+class ActionsManagerImpl<T>(
+    private val selector: SelectionManager<T>,
     private val builder: ActionManagerBuilder<T>
-) : ActionManager {
+) : ActionsManager<T> {
     override val actions: List<SimpleAction> get() = builder.buildActions(selector.selected)
+    override fun actionsOf(item: T): List<SimpleAction> = builder.buildSingleSelectActions(item)
 }

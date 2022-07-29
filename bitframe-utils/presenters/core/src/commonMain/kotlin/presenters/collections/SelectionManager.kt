@@ -2,7 +2,7 @@
 
 package presenters.collections
 
-import presenters.collections.internal.SelectorImpl
+import presenters.collections.internal.SelectionManagerImpl
 import viewmodel.ViewModelConfig
 import kotlin.js.JsExport
 import kotlin.js.JsName
@@ -10,7 +10,7 @@ import kotlin.jvm.JvmName
 import kotlin.jvm.JvmStatic
 
 @JsExport
-interface Selector<in T> {
+interface SelectionManager<in T> {
     // ---------------------------------Selections--------------------------
     fun selectAllItemsInTheCurrentPage()
 
@@ -96,8 +96,8 @@ interface Selector<in T> {
         @JvmStatic
         @JvmName("create")
         operator fun <T> invoke(
-            paginator: Paginator<T>,
-            config: ViewModelConfig<*> = ViewModelConfig()
-        ): Selector<T> = SelectorImpl(paginator, config)
+            paginator: PaginationManager<T>,
+            config: ViewModelConfig = ViewModelConfig()
+        ): SelectionManager<T> = SelectionManagerImpl(paginator, config)
     }
 }

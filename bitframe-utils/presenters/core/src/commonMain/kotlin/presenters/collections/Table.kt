@@ -1,8 +1,12 @@
 package presenters.collections
 
+import kotlinx.collections.interoperable.List
+import kotlin.js.JsExport
+
+@JsExport
 interface Table<T> :
-    Pageable<T>, Paginator<T>,
-    Selectable<T>, Selector<T>,
-    Actionable, ActionManager {
-    val columns: Array<Column<T>>
+    Pageable<T>, PaginationManager<T>,
+    Selectable<T>, SelectionManager<T>,
+    Actionable<T>, ActionsManager<T> {
+    val columns: List<Column<T>>
 }

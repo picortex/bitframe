@@ -2,15 +2,15 @@ package presenters.collections.internal
 
 import kotlinx.collections.interoperable.iListOf
 import kotlinx.collections.interoperable.toInteroperableList
-import presenters.collections.Paginator
+import presenters.collections.PaginationManager
 import presenters.collections.Selected
 import presenters.collections.SelectorState
 import viewmodel.ViewModelConfig
 
-class SelectorImpl<T>(
-    private val paginator: Paginator<T>,
-    config: ViewModelConfig<*>,
-) : AbstractSelector<T>(paginator, config) {
+class SelectionManagerImpl<T>(
+    private val paginator: PaginationManager<T>,
+    config: ViewModelConfig,
+) : AbstractSelectionManager<T>(paginator, config) {
 
     override val selected: Selected<T>
         get() = when (val state = ui.value) {

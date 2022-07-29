@@ -21,4 +21,17 @@ sealed class Selected<out T> {
     data class Global<out T>(
         val exceptions: List<T>
     ) : Selected<T>()
+
+    val isNone get() = this is None
+    val asNone get() = this as None
+
+    val isItem get() = this is Item
+    val asItem get() = this as Item
+
+    val isItems get() = this is Items
+    val asItems get() = this as Items
+
+    val isGlobal get() = this is Global
+    val asGlobal get() = this as Global
+
 }

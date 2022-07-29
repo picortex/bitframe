@@ -3,6 +3,6 @@ package presenters.collections
 import kotlin.js.JsExport
 
 @JsExport
-interface Actionable {
-    val actionManager: ActionManager
+interface Actionable<in T> {
+    val actionsManager: ActionsManager<T>
 }

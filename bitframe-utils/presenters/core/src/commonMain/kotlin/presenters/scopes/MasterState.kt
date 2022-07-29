@@ -7,7 +7,8 @@ import kotlinx.collections.interoperable.List
 import presenters.actions.SimpleAction
 import presenters.actions.SimpleActionsBuilder
 import presenters.cases.Case
-import presenters.table.Table
+import presenters.collections.ScrollableList
+import presenters.collections.Table
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import presenters.cases.Failure as FailureCase
@@ -19,8 +20,9 @@ sealed class MasterState<out D> : Case {
     ) : MasterState<Nothing>(), LoadingCase
 
     data class Loaded<out D>(
-        val list: List<D>,
-        val table: Table<@UnsafeVariance D>
+        val items: List<D>,
+        val list: ScrollableList<out D>,
+        val table: Table<out D>
     ) : MasterState<D>() {
         override val message: String = "Loaded"
     }

@@ -1,7 +1,7 @@
 package collections
 
 import expect.expect
-import presenters.collections.Paginator
+import presenters.collections.PaginationManager
 import presenters.collections.CollectionPaginator
 import presenters.collections.SinglePagePaginator
 import kotlin.test.Test
@@ -9,7 +9,7 @@ import kotlin.test.Test
 class PaginatorTest {
     @Test
     fun single_page_paginator_should_always_return_the_same_list() {
-        val p: Paginator<Person> = SinglePagePaginator(List(5) { Person("Andy $it", age = 12 + it) })
+        val p: PaginationManager<Person> = SinglePagePaginator(List(5) { Person("Andy $it", age = 12 + it) })
         expect(p.currentPageOrNull).toBe(null)
         p.refresh()
         expect(p.currentPageOrNull?.capacity).toBe(5)
@@ -17,7 +17,7 @@ class PaginatorTest {
 
     @Test
     fun paginator_should_be_able_to_paginate_through_different_pages() {
-        val p: Paginator<Person> = CollectionPaginator(Person.List)
+        val p: PaginationManager<Person> = CollectionPaginator(Person.List)
         expect(p.currentPageOrNull).toBe(null)
 
         p.refresh()

@@ -1,6 +1,5 @@
 [versions]
 kotlin = "1.7.10"
-ideaKotlin = "1.6.10"
 dokka = "1.7.0"
 
 [libraries]
@@ -13,6 +12,3 @@ serialization = { id = "org.jetbrains.kotlin.plugin.serialization" }
 
 root-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 root-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-
-root-multiplatform-idea = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "ideaKotlin" }
-root-serialization-idea = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "ideaKotlin" }

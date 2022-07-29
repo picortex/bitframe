@@ -3,11 +3,6 @@
 
 package presenters.collections
 
-import kotlinx.collections.interoperable.List
-import kotlinx.collections.interoperable.emptyList
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
-import presenters.actions.GenericAction
 import kotlin.js.JsExport
 
 sealed class Column<in D> {
@@ -22,8 +17,17 @@ sealed class Column<in D> {
         val accessor: (Row<D>) -> String = { "" }
     ) : Column<D>()
 
-    data class Action<in D>(
-        override val name: String,
-        val actions: List<GenericAction<D>> = emptyList()
-    ) : Column<D>()
+    data class Action(
+        override val name: String
+    ) : Column<Nothing>()
+
+    val isSelect get() = this is Select
+    val asSelect get() = this as Select
+
+    val isData get() = this is Data
+    val asData get() = this as Data
+
+    val isAction get() = this is Action
+    val asAction get() = this as Action
+
 }
