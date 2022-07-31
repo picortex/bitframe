@@ -1,4 +1,3 @@
-import bitframe.Dao
 import bitframe.DaoFile
 import bitframe.DaoFileConfig
 import bitframe.dao.contains
@@ -6,65 +5,66 @@ import bitframe.dao.exceptions.EntityNotFoundException
 import bitframe.dao.find
 import bitframe.dao.isEqualTo
 import expect.*
-import koncurrent.Rejected
+import koncurrent.Later
+import koncurrent.LaterTestResult
 import koncurrent.SynchronousExecutor
-import koncurrent.later.finally
-import koncurrent.later.then
+import koncurrent.later.*
+import okio.Path.Companion.toPath
 import okio.fakefilesystem.FakeFileSystem
 import kotlin.test.Test
 
 class DaoFileTest {
 
-    val dao: Dao<Person> = DaoFile(
-        config = DaoFileConfig(FakeFileSystem(), SynchronousExecutor)
+    private val fs = FakeFileSystem()
+    private val dir = "/tmp/dao/file/person".toPath()
+
+    private val dao = DaoFile(
+        config = DaoFileConfig<Person>(fs, dir, SynchronousExecutor)
     )
 
     @Test
-    fun can_add_items_to_dao() {
-        dao.create(Person(name = "peter")).then { pete ->
-            expect(pete.name).toBe("peter")
-            expect(pete.uid).toBe("Person-1")
-        }
-    }
+    fun can_add_items_to_dao() = dao.create(Person(name = "peter")).then { pete ->
+        expect(pete.name).toBe("peter")
+        expect(pete.uid).toBe("1")
+    }.test()
 
     @Test
-    fun can_load_an_already_saved_data() {
-        dao.create(Person(name = "peter")).then { pete ->
-            val uid = pete.uid
-            dao.load(uid).then { peter ->
-                expect(pete).toBe(peter)
-            }
-        }
-    }
+    fun can_load_an_already_saved_data() = dao.create(Person(name = "peter")).flatten { pete ->
+        val uid = pete.uid
+        dao.load(uid)
+    }.then { peter ->
+        expect(peter.name).toBe("peter")
+    }.test()
 
     @Test
-    fun loading_an_id_that_is_not_available_throws() {
-        dao.load("seven").finally {
-            val state = expect(it).toBe<Rejected>()
-            expect(state.cause).toBe<EntityNotFoundException>()
-        }
-    }
+    fun loading_an_id_that_is_not_available_throws() = dao.load("seven").catch { err ->
+        expect(err).toBe<EntityNotFoundException>()
+    }.test()
 
     @Test
-    fun can_execute_a_query() {
+    fun can_execute_a_query(): LaterTestResult {
         repeat(10) { dao.create(Person("h$it")) }
         val query = find(Person::name isEqualTo "h4").limit(5)
-        dao.execute(query).then { people ->
+        return dao.execute(query).then { people ->
             expect(people.first().name).toBe("h4")
-        }
+        }.test()
     }
 
     @Test
-    fun can_execute_a_query_with_a_limit() {
-        repeat(10) { dao.create(Person("h$it")) }
-        val query1 = find(Person::uid contains "Person").limit(5)
-        dao.execute(query1).then { people ->
-            expectCollection(people).toBeOfSize(5)
+    fun can_execute_a_query_with_a_limit(): LaterTestResult {
+        val creators = buildList {
+            repeat(10) { add(dao.create(Person("Person $it"))) }
         }
-
-        val query2 = find(Person::uid contains "Person").limit(20)
-        dao.execute(query2).then { people ->
-            expectCollection(people).toBeOfSize(10)
-        }
+        return Later.all(*creators.toTypedArray()).flatten {
+            val query = find(Person::name contains "Person").limit(5)
+            dao.execute(query)
+        }.then { people ->
+            expect(collection = people).toBeOfSize(5)
+        }.flatten {
+            val query = find(Person::name contains "Person").limit(20)
+            dao.execute(query)
+        }.then { people ->
+            expect(collection = people).toBeOfSize(10)
+        }.test()
     }
 }

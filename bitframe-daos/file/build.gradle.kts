@@ -21,6 +21,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(squareup.okio.fake)
+                implementation(asoft.koncurrent.later.test)
                 implementation(asoft.expect.coroutines)
             }
         }

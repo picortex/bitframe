@@ -5,6 +5,7 @@ import bitframe.dao.get
 import expect.expect
 import koncurrent.SynchronousExecutor
 import koncurrent.later.then
+import okio.Path.Companion.toPath
 import okio.fakefilesystem.FakeFileSystem
 import kotlin.test.Test
 
@@ -12,6 +13,7 @@ class DaoFactoryFileTest {
     private val factory: DaoFactory = DaoFactoryFile(
         config = DaoFactoryFileConfig(
             fs = FakeFileSystem(),
+            db = "".toPath(),
             executor = SynchronousExecutor
         )
     )

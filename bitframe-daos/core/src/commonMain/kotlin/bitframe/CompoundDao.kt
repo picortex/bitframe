@@ -1,5 +1,6 @@
 package bitframe
 
+import bitframe.actor.Savable
 import bitframe.dao.Condition
 import bitframe.dao.Query
 import bitframe.dao.exceptions.EntityNotFoundException
@@ -12,7 +13,7 @@ import koncurrent.later.then
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 
-class CompoundDao<out T : Any>(val config: CompoundDaoConfig<T>) : AbstractDao<T>() {
+class CompoundDao<out T : Savable>(val config: CompoundDaoConfig<T>) : AbstractDao<T>() {
 
     private val daos by lazy { config.daos }
 

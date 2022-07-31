@@ -5,7 +5,6 @@ package bitframe
 import bitframe.actor.Savable
 import bitframe.dao.*
 import bitframe.dao.exceptions.EntityNotFoundException
-import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.serializer
