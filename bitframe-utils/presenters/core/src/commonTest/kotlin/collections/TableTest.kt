@@ -21,7 +21,7 @@ class TableTest {
         val paginator = CollectionPaginator(Person.List)
         val selector = SelectionManager(paginator, config)
         val action = actionsOf(selector) {}
-        val table = tableOf(paginator, selector, action, PersonTableColumns().toTypedArray(), config)
+        val table = tableOf(paginator, selector, action, PersonTableColumns(), config)
         table.tabulateToConsole()
         expect(table.currentPageOrNull?.number).toBe(null)
 
@@ -41,7 +41,7 @@ class TableTest {
         val paginator = CollectionPaginator(Person.List)
         val selector = SelectionManager(paginator, config)
         val action = actionsOf(selector) {}
-        val table = tableOf(paginator, selector, action, PersonTableColumns().toTypedArray(), config)
+        val table = tableOf(paginator, selector, action, PersonTableColumns(), config)
         table.loadFirstPage()
         table.tabulateToConsole()
 
@@ -59,7 +59,7 @@ class TableTest {
         val paginator = CollectionPaginator(Person.List)
         val selector = SelectionManager(paginator, config)
         val action = actionsOf(selector) {}
-        val table = tableOf(paginator, selector, action, PersonTableColumns().toTypedArray(), config)
+        val table = tableOf(paginator, selector, action, PersonTableColumns(), config)
 
         table.loadFirstPage()
         table.tabulateToConsole()
@@ -83,7 +83,7 @@ class TableTest {
                 on("View ${it.name}") { println("Now viewing ${it.name}") }
             }
         }
-        val table = tableOf(paginator, selector, actions, PersonTableColumns().toTypedArray(), config)
+        val table = tableOf(paginator, selector, actions, PersonTableColumns(), config)
 
         table.loadFirstPage()
 

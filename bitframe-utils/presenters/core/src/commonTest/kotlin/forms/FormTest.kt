@@ -28,7 +28,7 @@ class FormTest {
         val age by number()
     }
 
-    class TestViewModel(private val config: ViewModelConfig<*>) : ViewModel<Any>(config.of(Any())) {
+    class TestViewModel(private val config: ViewModelConfig) : ViewModel<Any>(config.of(Any())) {
         fun showForm() {
             PersonForm(config.toFormConfig()) {
                 onCancel { println("Woyo") }

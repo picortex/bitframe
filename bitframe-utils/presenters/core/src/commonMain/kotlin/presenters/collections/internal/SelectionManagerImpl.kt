@@ -2,6 +2,7 @@ package presenters.collections.internal
 
 import kotlinx.collections.interoperable.iListOf
 import kotlinx.collections.interoperable.toInteroperableList
+import live.MutableLive
 import presenters.collections.PaginationManager
 import presenters.collections.Selected
 import presenters.collections.SelectorState
@@ -11,6 +12,8 @@ class SelectionManagerImpl<T>(
     private val paginator: PaginationManager<T>,
     config: ViewModelConfig,
 ) : AbstractSelectionManager<T>(paginator, config) {
+
+    override val state: MutableLive<SelectorState> get() = ui
 
     override val selected: Selected<T>
         get() = when (val state = ui.value) {

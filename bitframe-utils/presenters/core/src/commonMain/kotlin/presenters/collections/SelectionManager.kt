@@ -2,6 +2,7 @@
 
 package presenters.collections
 
+import live.MutableLive
 import presenters.collections.internal.SelectionManagerImpl
 import viewmodel.ViewModelConfig
 import kotlin.js.JsExport
@@ -91,6 +92,8 @@ interface SelectionManager<in T> {
 
     // ---------------------------------SelectionGetters--------------------------
     val selected: Selected<@UnsafeVariance T>
+
+    val state: MutableLive<SelectorState>
 
     companion object {
         @JvmStatic

@@ -11,12 +11,10 @@ import kotlin.js.JsExport
 
 abstract class MasterDetailViewModel<T>(config: ViewModelConfig) : BaseViewModel(config) {
 
-//    val data: MutableLive<MasterState<T>> = mutableLiveOf(MasterState.Loading("Loading, please wait . . ."))
-
     val view: MutableLive<View> = mutableLiveOf(View.ListView)
 
-    fun switchViewTo(v: View) {
-        view.value = v
+    fun switchToRecentView() {
+
     }
 
     fun switchToListView() {
