@@ -29,7 +29,7 @@ kotlin {
             dependencies {
                 implementation(asoft.expect.coroutines)
                 implementation(kotlinx.serialization.json)
-                implementation(asoft.viewmodel.test)
+                implementation(asoft.live.test)
                 implementation(projects.presentersMock)
                 implementation(asoft.koncurrent.primitives.mock)
             }

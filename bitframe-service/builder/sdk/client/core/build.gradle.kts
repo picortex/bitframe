@@ -14,7 +14,6 @@ kotlin {
             dependencies {
                 api(projects.bitframeServiceBuilderApiCore)
                 api(projects.presentersCore)
-                api(asoft.viewmodel.coroutines)
             }
         }
 
@@ -30,7 +29,7 @@ kotlin {
             dependencies {
                 implementation(projects.bitframeServiceBuilderApiCore)
                 implementation(asoft.expect.coroutines)
-                implementation(asoft.viewmodel.test)
+                implementation(asoft.live.test)
             }
         }
     }

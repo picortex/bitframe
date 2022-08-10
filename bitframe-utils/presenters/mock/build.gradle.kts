@@ -16,6 +16,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.presentersCore)
+                api(asoft.live.test)
             }
         }
 

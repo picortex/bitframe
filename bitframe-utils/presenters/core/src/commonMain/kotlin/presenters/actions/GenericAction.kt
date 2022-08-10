@@ -1,16 +1,18 @@
 @file:JsExport
-@file:Suppress("NON_EXPORTABLE_TYPE")
+@file:Suppress("WRONG_EXPORTED_DECLARATION")
 
 package presenters.actions
 
+import presenters.actions.internal.MutableGenericActionImpl
 import kotlin.js.JsExport
 
-open class GenericAction<in T>(
-    override val name: String,
-    override val handler: (T) -> Unit
-) : Action {
-    operator fun invoke(arg: T) = handler(arg)
-    override fun hashCode() = name.hashCode()
-    override fun toString() = "GenericAction($name)"
-    override fun equals(other: Any?) = other is GenericAction<*> && other.name == name
+interface GenericAction<in T> : Action<(T) -> Unit> {
+    operator fun invoke(arg: T)
+
+    companion object {
+        operator fun <T> invoke(
+            name: String,
+            handler: (T) -> Unit
+        ): GenericAction<T> = MutableGenericActionImpl(name, handler)
+    }
 }

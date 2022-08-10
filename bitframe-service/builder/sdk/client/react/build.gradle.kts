@@ -12,7 +12,7 @@ kotlin {
         val main by getting {
             dependencies {
                 api(projects.bitframeServiceBuilderSdkClientCore)
-                api(asoft.viewmodel.react)
+                api(asoft.live.react)
             }
         }
     }

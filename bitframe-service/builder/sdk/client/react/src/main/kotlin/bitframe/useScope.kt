@@ -3,10 +3,10 @@
 
 package bitframe
 
+import live.watchAsState
 import viewmodel.ViewModel
-import viewmodel.asState
 
 fun <V : ViewModel<S>, S> useScope(viewModel: V): Scope<V, S> = Scope(
     intents = viewModel,
-    state = viewModel.asState()
+    state = viewModel.ui.watchAsState()
 )

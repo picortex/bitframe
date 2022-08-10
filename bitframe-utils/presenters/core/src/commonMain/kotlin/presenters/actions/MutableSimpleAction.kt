@@ -7,8 +7,8 @@ import kotlin.js.JsExport
 import kotlin.jvm.JvmName
 
 @JsExport
-interface SimpleAction : Action<() -> Unit> {
-    operator fun invoke()
+interface MutableSimpleAction : SimpleAction, MutableAction<() -> Unit> {
+    override var handler: () -> Unit
 
     companion object {
         @JvmName("create")

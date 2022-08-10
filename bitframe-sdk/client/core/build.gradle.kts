@@ -28,11 +28,9 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-//                implementation(projects.bitframeAuthenticationApiMock)
-//                implementation(projects.bitframeApiMock)
                 implementation(projects.bitframeServiceBuilderSdkClientCore)
                 implementation(asoft.expect.coroutines)
-                implementation(asoft.viewmodel.test)
+                implementation(asoft.live.test)
             }
         }
     }

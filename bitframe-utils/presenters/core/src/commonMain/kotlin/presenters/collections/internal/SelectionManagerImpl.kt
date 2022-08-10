@@ -56,9 +56,14 @@ class SelectionManagerImpl<T>(
         ui.value = when (val state = ui.value) {
             is SelectorState.NoSelected -> SelectorState.NoSelected
             is SelectorState.Item -> if (state.page == page) SelectorState.NoSelected else state
-            is SelectorState.Items -> SelectorState.Items(
-                items = state.items.filter { page != it.page }.toInteroperableList()
-            )
+            is SelectorState.Items -> {
+                val items = state.items.filter { it.page != page }.toInteroperableList()
+                when {
+                    items.size > 1 -> SelectorState.Items(items)
+                    items.size == 1 -> items.first()
+                    else -> SelectorState.NoSelected
+                }
+            }
 
             is SelectorState.AllSelected -> SelectorState.NoSelected
         }
@@ -90,9 +95,14 @@ class SelectionManagerImpl<T>(
         ui.value = when (val state = ui.value) {
             is SelectorState.NoSelected -> SelectorState.NoSelected
             is SelectorState.Item -> if (state.page == page && state.number == row) SelectorState.NoSelected else state
-            is SelectorState.Items -> SelectorState.Items(
-                items = state.items.filter { it.page != page && it.number != row }.toInteroperableList()
-            )
+            is SelectorState.Items -> {
+                val items = state.items.filter { it.page != page && it.number != row }.toInteroperableList()
+                when {
+                    items.size > 1 -> SelectorState.Items(items)
+                    items.size == 1 -> items.first()
+                    else -> SelectorState.NoSelected
+                }
+            }
 
             is SelectorState.AllSelected -> if (page != null) state.copy(
                 exceptions = (state.exceptions.toMutableList() + SelectorState.Item(row, page)).toInteroperableList()

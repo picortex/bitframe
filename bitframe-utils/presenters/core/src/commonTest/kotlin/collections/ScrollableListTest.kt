@@ -3,7 +3,11 @@ package collections
 import expect.expect
 import koncurrent.SynchronousExecutor
 import presenters.collections.*
+import live.*
+import live.expect
 import presenters.collections.CollectionPaginator
+import presenters.collections.PageableState.LoadedPage
+import presenters.collections.PageableState.Loading
 import viewmodel.ViewModelConfig
 import kotlin.test.Test
 
@@ -22,6 +26,8 @@ class ScrollableListTest {
         expect(list.currentPageOrNull?.number).toBe(null)
 
         list.refresh()
+        val (loading) = expect(paginator.live).toHaveGoneThrough2<Loading<*>, LoadedPage<*>>()
+        expect(loading.message).toBe("Loading")
 
         list.loadNextPage()
 

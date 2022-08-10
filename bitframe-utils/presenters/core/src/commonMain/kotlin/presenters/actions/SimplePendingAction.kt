@@ -9,7 +9,7 @@ import kotlin.js.JsExport
 open class SimplePendingAction(
     override val name: String,
     override val handler: () -> Later<out Unit>
-) : Action {
+) : Action<() -> Later<out Unit>> {
     operator fun invoke() = handler()
     override fun hashCode() = name.hashCode()
     override fun toString() = "SimplePendingAction($name)"

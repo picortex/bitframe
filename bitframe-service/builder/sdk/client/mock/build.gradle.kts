@@ -13,7 +13,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeServiceBuilderSdkClientCore)
-                api(asoft.viewmodel.test)
+                api(asoft.live.test)
             }
         }
     }

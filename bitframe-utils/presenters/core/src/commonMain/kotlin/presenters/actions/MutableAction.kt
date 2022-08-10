@@ -5,7 +5,7 @@ package presenters.actions
 import kotlin.js.JsExport
 
 @JsExport
-interface Action<out H> {
-    val name: String
-    val handler: H
+interface MutableAction<H> : Action<H> {
+    override var handler: H
+    fun setHandler(h: H)
 }
