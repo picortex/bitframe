@@ -1,0 +1,21 @@
+@file:JsExport
+
+package presenters.confirmations
+
+import kotlin.js.JsExport
+
+sealed class ConfirmationState {
+    object Pending : ConfirmationState()
+    object Executing : ConfirmationState()
+    sealed class Executed : ConfirmationState() {
+        object Successfully : ConfirmationState()
+        object Exceptionally : ConfirmationState()
+    }
+
+    val isPending get() = this is Pending
+    val isExecuting get() = this is Executing
+    val isExecuted get() = this is Executed
+
+    val executedSuccessfully get() = this is Executed.Successfully
+    val executedExceptionally get() = this is Executed.Exceptionally
+}

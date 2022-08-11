@@ -7,7 +7,7 @@ internal class MutableGenericActionImpl<T>(
     override val name: String,
     override var handler: (T) -> Unit
 ) : MutableGenericAction<T> {
-    override fun setHandler(h: (T) -> Unit) {
+    override fun onInvoked(h: (T) -> Unit) {
         handler = h
     }
 

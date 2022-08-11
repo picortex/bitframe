@@ -7,7 +7,7 @@ internal class MutableSimpleActionImpl(
     override val name: String,
     override var handler: () -> Unit
 ) : MutableSimpleAction {
-    override fun setHandler(h: () -> Unit) {
+    override fun onInvoked(h: () -> Unit) {
         handler = h
     }
 

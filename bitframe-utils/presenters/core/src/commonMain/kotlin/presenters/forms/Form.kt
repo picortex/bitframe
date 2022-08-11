@@ -60,12 +60,16 @@ open class Form<out F : Fields, in P>(
     fun submit() {
         try {
             ui.value = FormState.Submitting
+            log("Before validation")
             validate()
+            log("after validation")
             if (fields.areNotValid) error("Some values are invalid")
+            log("Before before encoding")
             val encoded = codec.encodeToString(
                 serializer = MapSerializer(String.serializer(), String.serializer()),
                 value = fields.values as Map<String, String>
             )
+            log("After encoding/Before decoding")
             submit.invoke(codec.decodeFromString(config.serializer, encoded)).finally {
                 val (state, action) = when (it) {
                     is Fulfilled -> FormState.Submitted to afterSubmitAction
@@ -75,6 +79,7 @@ open class Form<out F : Fields, in P>(
                 action?.invoke(fields)
                 if (config.exitOnSubmitted) cancel()
             }
+            log("After invoking send")
         } catch (err: Throwable) {
             ui.value = FormState.Failure(err)
             failureAction?.invoke(fields)

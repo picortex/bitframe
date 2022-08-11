@@ -8,9 +8,8 @@ import presenters.actions.internal.MutableGenericPendingActionImpl
 import kotlin.js.JsExport
 import kotlin.jvm.JvmName
 
-interface MutableGenericPendingAction<T> : GenericPendingAction<T> {
+interface MutableGenericPendingAction<T> : GenericPendingAction<T>, MutableAction<(T) -> Later<out Any?>> {
     override var handler: (T) -> Later<out Any?>
-    fun setHandler(h: (T) -> Later<out Any>)
 
     companion object {
         @JvmName("create")

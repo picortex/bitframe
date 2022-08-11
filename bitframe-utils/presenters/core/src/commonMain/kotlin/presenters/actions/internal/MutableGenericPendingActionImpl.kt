@@ -1,17 +1,14 @@
 package presenters.actions.internal
 
 import koncurrent.Later
-import presenters.actions.Action
-import presenters.actions.GenericPendingAction
 import presenters.actions.MutableGenericPendingAction
-import kotlin.js.JsExport
 
 @PublishedApi
 internal class MutableGenericPendingActionImpl<T>(
     override val name: String,
     override var handler: (T) -> Later<out Any?>
 ) : MutableGenericPendingAction<T> {
-    override fun setHandler(h: (T) -> Later<out Any>) {
+    override fun onInvoked(h: (T) -> Later<out Any?>) {
         handler = h
     }
 
