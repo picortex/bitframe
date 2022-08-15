@@ -13,7 +13,7 @@ data class UserEmail(
     override val verified: Boolean = false,
     override val uid: String = UNSET,
     override val deleted: Boolean = false,
-) : UserContact() {
+) : Comm() {
     init {
         // validate the email
         Email(value)

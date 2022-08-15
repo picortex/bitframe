@@ -9,7 +9,11 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 
 @Serializable
-sealed class UserContact : Savable {
+/**
+ * A class representing a way of communicating
+ *  currently supports email addresses and phone numbers
+ */
+sealed class Comm : Savable {
     abstract val verified: Boolean
     abstract val userId: String
     abstract val value: String
@@ -23,7 +27,7 @@ sealed class UserContact : Savable {
             verified: Boolean = false,
             uid: String = UNSET,
             deleted: Boolean = false,
-        ): UserContact = when (val id = Identifier.from(value)) {
+        ): Comm = when (val id = Identifier.from(value)) {
             is Identifier.Phone -> UserPhone(
                 value = id.value, userId, verified, whatsapp = false, uid, deleted
             )
