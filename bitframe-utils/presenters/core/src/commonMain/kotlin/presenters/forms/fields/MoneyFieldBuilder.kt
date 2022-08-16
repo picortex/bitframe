@@ -12,7 +12,8 @@ inline fun Fields.money(
     selectCurrency: Boolean = false,
     currency: Currency? = null,
     value: String? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (String?) -> String? = { it }
 ) = getOrCreate { property ->
     MoneyInputField(
@@ -23,6 +24,7 @@ inline fun Fields.money(
         currency = currency,
         value = value,
         isReadonly = isReadonly,
+        isRequired = isRequired,
         validator = validator,
     )
 }
@@ -34,6 +36,7 @@ inline fun Fields.money(
     selectCurrency: Boolean = false,
     currency: Currency? = null,
     value: String? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (String?) -> String? = { it }
-) = money(property.name, label, hint, selectCurrency, currency, value, isReadonly, validator)
+) = money(property.name, label, hint, selectCurrency, currency, value, isReadonly, isRequired, validator)

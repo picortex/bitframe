@@ -1,5 +1,6 @@
 package presenters.forms.fields
 
+import presenters.fields.InputFieldWithValue
 import presenters.fields.TextAreaField
 import presenters.fields.TextInputField
 import presenters.forms.Fields
@@ -10,7 +11,8 @@ inline fun Fields.textArea(
     label: String? = name,
     hint: String? = label,
     value: String? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (String?) -> String? = { it }
 ) = getOrCreate { property ->
     TextAreaField(
@@ -19,6 +21,7 @@ inline fun Fields.textArea(
         hint = hint ?: property.name,
         value = value,
         isReadonly = isReadonly,
+        isRequired = isRequired,
         validator = validator,
     )
 }
@@ -28,6 +31,7 @@ inline fun Fields.textArea(
     label: String? = property.name,
     hint: String? = label,
     value: String? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (String?) -> String? = { it }
-) = textArea(property.name, label, hint, value, isReadonly, validator)
+) = textArea(property.name, label, hint, value, isReadonly, isRequired, validator)

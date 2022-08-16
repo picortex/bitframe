@@ -1,4 +1,4 @@
-@file:Suppress("NON_EXPORTABLE_TYPE")
+@file:Suppress("NON_EXPORTABLE_TYPE", "WRONG_EXPORTED_DECLARATION")
 
 package presenters.fields
 
@@ -9,8 +9,14 @@ import kotlin.js.JsExport
 interface InputFieldWithValue<T> : InputField {
     val label: String
     val isReadonly: Boolean
+    val isRequired: Boolean
     var value: T
     val feedback: Live<InputFieldFeedback>
     val validator: (T) -> T
     fun validate()
+
+    companion object {
+        val DEFAULT_IS_READONLY = false
+        val DEFAULT_IS_REQUIRED = false
+    }
 }

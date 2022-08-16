@@ -1,6 +1,7 @@
 package presenters.forms.fields
 
 import presenters.fields.CheckBoxInputField
+import presenters.fields.InputFieldWithValue
 import presenters.fields.TextInputField
 import presenters.forms.Fields
 import kotlin.reflect.KMutableProperty
@@ -10,7 +11,8 @@ inline fun Fields.checkBox(
     name: String? = null,
     label: String? = name,
     value: Boolean? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (Boolean?) -> Boolean? = { it }
 ) = getOrCreate { property ->
     CheckBoxInputField(
@@ -18,6 +20,7 @@ inline fun Fields.checkBox(
         label = label ?: property.name,
         value = value,
         isReadonly = isReadonly,
+        isRequired = isRequired,
         validator = validator,
     )
 }
@@ -26,6 +29,7 @@ inline fun Fields.checkBox(
     property: KProperty<*>,
     label: String? = property.name,
     value: Boolean? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (Boolean?) -> Boolean? = { it }
-) = checkBox(property.name, label, value, isReadonly, validator)
+) = checkBox(property.name, label, value, isReadonly, isRequired, validator)

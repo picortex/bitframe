@@ -22,9 +22,13 @@ open class Fields(internal val cache: MutableMap<KProperty<*>, InputField> = mut
     @JsName("_ignore_are_not_valid")
     val areNotValid get() = valueFields.any { it.feedback.value is InputFieldFeedback.Error }
 
-    internal val values
-        get() = valueFields.associate {
+    internal val valuesInJson
+        get() = valueFields.filterNot {
+            it.value == null && !it.isRequired
+        }.associate {
             it.name to it.value
+        }.map { (key, value) -> key to value }.joinToString(prefix = "{", postfix = "}") { (key, value) ->
+            """"$key": ${if (value != null) """"$value"""" else null}"""
         }
 
     private val valueFields get() = cache.values.filterIsInstance<InputFieldWithValue<*>>()

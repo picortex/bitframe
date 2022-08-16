@@ -1,9 +1,6 @@
 package presenters.forms.fields
 
-import presenters.fields.PasswordInputField
-import presenters.fields.PhoneInputField
-import presenters.fields.TextAreaField
-import presenters.fields.TextInputField
+import presenters.fields.*
 import presenters.forms.Fields
 import kotlin.reflect.KProperty
 
@@ -12,7 +9,8 @@ inline fun Fields.password(
     label: String? = name,
     hint: String? = label,
     value: String? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (String?) -> String? = { it }
 ) = getOrCreate { property ->
     PasswordInputField(
@@ -21,6 +19,7 @@ inline fun Fields.password(
         hint = hint ?: property.name,
         value = value,
         isReadonly = isReadonly,
+        isRequired = isRequired,
         validator = validator,
     )
 }
@@ -30,6 +29,7 @@ inline fun Fields.password(
     label: String? = property.name,
     hint: String? = label,
     value: String? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (String?) -> String? = { it }
-) = password(property.name, label, hint, value, isReadonly, validator)
+) = password(property.name, label, hint, value, isReadonly, isRequired, validator)

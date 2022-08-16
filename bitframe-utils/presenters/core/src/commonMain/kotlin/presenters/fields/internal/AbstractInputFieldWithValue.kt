@@ -6,13 +6,16 @@ package presenters.fields.internal
 import live.mutableLiveOf
 import presenters.fields.InputFieldFeedback
 import presenters.fields.InputFieldWithValue
+import presenters.fields.InputFieldWithValue.Companion.DEFAULT_IS_READONLY
+import presenters.fields.InputFieldWithValue.Companion.DEFAULT_IS_REQUIRED
 import kotlin.js.JsExport
 
 abstract class AbstractInputFieldWithValue<T>(
     override val name: String,
     override val label: String = name,
     value: T,
-    override val isReadonly: Boolean = false,
+    override val isReadonly: Boolean = DEFAULT_IS_READONLY,
+    override val isRequired: Boolean = DEFAULT_IS_REQUIRED,
     override val validator: (T) -> T = { it }
 ) : InputFieldWithValue<T> {
     override val feedback = mutableLiveOf<InputFieldFeedback>(InputFieldFeedback.Empty)
@@ -32,7 +35,7 @@ abstract class AbstractInputFieldWithValue<T>(
         }
     }
 
-    val asteriskedLabel get() = "*$label"
+    val asteriskedLabel get() = labelWithAsterisks
 
-    val labelWithAsterisks get() = "*$label"
+    val labelWithAsterisks get() = (if (isRequired) "*" else "") + label
 }

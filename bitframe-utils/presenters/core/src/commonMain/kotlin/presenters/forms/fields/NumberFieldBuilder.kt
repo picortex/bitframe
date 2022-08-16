@@ -9,7 +9,8 @@ inline fun Fields.number(
     label: String? = name,
     hint: String? = label,
     value: String? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (String?) -> String? = { it }
 ) = getOrCreate { property ->
     NumberInputField(
@@ -18,6 +19,7 @@ inline fun Fields.number(
         hint = hint ?: property.name,
         value = value,
         isReadonly = isReadonly,
+        isRequired = isRequired,
         validator = validator,
     )
 }
@@ -27,6 +29,7 @@ inline fun Fields.number(
     label: String? = property.name,
     hint: String? = label,
     value: String? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (String?) -> String? = { it }
-) = number(property.name, label, hint, value, isReadonly, validator)
+) = number(property.name, label, hint, value, isReadonly, isRequired, validator)

@@ -1,5 +1,6 @@
 package presenters.forms.fields
 
+import presenters.fields.InputFieldWithValue
 import presenters.fields.PhoneInputField
 import presenters.fields.TextAreaField
 import presenters.fields.TextInputField
@@ -11,7 +12,8 @@ inline fun Fields.phone(
     label: String? = name,
     hint: String? = label,
     value: String? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (String?) -> String? = { it }
 ) = getOrCreate { property ->
     PhoneInputField(
@@ -20,6 +22,7 @@ inline fun Fields.phone(
         hint = hint ?: property.name,
         value = value,
         isReadonly = isReadonly,
+        isRequired = isRequired,
         validator = validator,
     )
 }
@@ -29,6 +32,7 @@ inline fun Fields.phone(
     label: String? = property.name,
     hint: String? = label,
     value: String? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (String?) -> String? = { it }
-) = phone(property.name, label, hint, value, isReadonly, validator)
+) = phone(property.name, label, hint, value, isReadonly, isRequired, validator)

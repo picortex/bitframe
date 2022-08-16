@@ -13,16 +13,18 @@ class TextInputField(
     override val label: String = name,
     override val hint: String = label,
     value: String? = null,
-    override val isReadonly: Boolean = false,
-    override val validator: (String?) -> String? = { it },
-) : AbstractTextInputFieldRaw(name, label, hint, value, isReadonly, validator) {
-
-    @JsName("_ignore_fromProperty")
-    @Deprecated("Consider using the deligates on your form fields")
+    override val isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    override val isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
+    override val validator: (String?) -> String? = { it }
+) : AbstractTextInputFieldRaw(name, label, hint, value, isReadonly, isRequired, validator) {
+    @JsName("_ignore_fromPropery")
     constructor(
         name: KProperty<*>,
         label: String = name.name,
-        hint: String = name.name,
-        value: String? = null
-    ) : this(name.name, label, hint, value)
+        hint: String = label,
+        value: String? = null,
+        isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+        isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
+        validator: (String?) -> String? = { it }
+    ) : this(name.name, label, hint, value, isReadonly, isRequired, validator)
 }

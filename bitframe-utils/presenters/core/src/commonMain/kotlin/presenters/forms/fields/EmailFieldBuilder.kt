@@ -9,7 +9,8 @@ inline fun Fields.email(
     label: String? = name,
     hint: String? = label,
     value: String? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (String?) -> String? = { it }
 ) = getOrCreate { property ->
     EmailInputField(
@@ -26,6 +27,7 @@ inline fun Fields.email(
     property: KProperty<*>,
     label: String? = property.name, hint: String? = label,
     value: String? = null,
-    isReadonly: Boolean = false,
+    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     noinline validator: (String?) -> String? = { it }
-) = email(property.name, label, hint, value, isReadonly, validator)
+) = email(property.name, label, hint, value, isReadonly, isRequired, validator)

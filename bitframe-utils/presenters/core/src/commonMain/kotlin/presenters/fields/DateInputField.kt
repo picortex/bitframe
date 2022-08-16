@@ -13,6 +13,7 @@ data class DateInputField(
     override val label: String = name,
     override val hint: String = label,
     override var value: String? = null,
-    override val isReadonly: Boolean = false,
+    override val isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
+    override val isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     override val validator: (String?) -> String?
-) : AbstractTextInputFieldRaw(name, label, hint, value, isReadonly, validator)
+) : AbstractTextInputFieldRaw(name, label, hint, value, isReadonly, isRequired,validator)

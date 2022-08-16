@@ -1,5 +1,4 @@
-@file:JsExport
-@file:Suppress("NON_EXPORTABLE_TYPE")
+@file:JsExport @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package presenters.forms
 
@@ -65,12 +64,10 @@ open class Form<out F : Fields, in P>(
             log("after validation")
             if (fields.areNotValid) error("Some values are invalid")
             log("Before before encoding")
-            val encoded = codec.encodeToString(
-                serializer = MapSerializer(String.serializer(), String.serializer()),
-                value = fields.values as Map<String, String>
-            )
+            val values = fields.valuesInJson
             log("After encoding/Before decoding")
-            submit.invoke(codec.decodeFromString(config.serializer, encoded)).finally {
+            log(values)
+            submit.invoke(codec.decodeFromString(config.serializer, values)).finally {
                 val (state, action) = when (it) {
                     is Fulfilled -> FormState.Submitted to afterSubmitAction
                     is Rejected -> FormState.Failure(it.cause) to failureAction
