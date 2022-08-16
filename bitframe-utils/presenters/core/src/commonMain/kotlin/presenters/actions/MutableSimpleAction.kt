@@ -14,6 +14,6 @@ interface MutableSimpleAction : SimpleAction, MutableAction<() -> Unit> {
         @JvmName("create")
         inline operator fun invoke(
             name: String, noinline handler: () -> Unit
-        ): SimpleAction = MutableSimpleActionImpl(name, handler)
+        ): MutableSimpleAction = MutableSimpleActionImpl(name, handler)
     }
 }

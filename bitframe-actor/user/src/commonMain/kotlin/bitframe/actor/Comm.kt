@@ -8,11 +8,12 @@ import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 
-@Serializable
+
 /**
  * A class representing a way of communicating
  *  currently supports email addresses and phone numbers
  */
+@Serializable
 sealed class Comm : Savable {
     abstract val verified: Boolean
     abstract val userId: String
@@ -31,6 +32,7 @@ sealed class Comm : Savable {
             is Identifier.Phone -> UserPhone(
                 value = id.value, userId, verified, whatsapp = false, uid, deleted
             )
+
             is Identifier.Email -> UserEmail(
                 value = id.value, userId, verified, uid, deleted
             )

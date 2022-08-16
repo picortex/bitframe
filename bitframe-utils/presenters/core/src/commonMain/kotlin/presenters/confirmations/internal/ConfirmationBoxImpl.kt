@@ -12,10 +12,13 @@ class ConfirmationBoxImpl(
     private val config: ScopeConfig<*>,
 ) : ViewModel<ConfirmationState>(config.of(ConfirmationState.Pending)), ConfirmationBox {
 
-    override val cancelAction: MutableSimpleAction
-        get() = TODO("Not yet implemented")
+    override val cancelAction = MutableSimpleAction(
+        name = "Cacnel",
+        handler = { logger.warn("Cancel hasn't been handled yet") }
+    )
 
     override fun confirm() {
+        ui.value = ConfirmationState.Executing
         TODO("Not yet implemented")
     }
 }
