@@ -11,13 +11,13 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.reflect.KProperty
 
-data class MoneyInputField(
+class MoneyInputField(
     override val name: String,
     override val label: String = name,
     override val hint: String = label,
     val selectCurrency: Boolean = false,
     val currency: Currency? = null,
-    override var value: String? = null,
+    value: String? = null,
     override val isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
     override val isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     override val validator: (String?) -> String? = { it }
@@ -40,6 +40,7 @@ data class MoneyInputField(
         DropDownInputField(
             name = "$name-currency",
             label = "Currency",
+            isReadonly = !selectCurrency,
             options = Currency.values.map {
                 DropDownInputField.Option(
                     label = it.name,

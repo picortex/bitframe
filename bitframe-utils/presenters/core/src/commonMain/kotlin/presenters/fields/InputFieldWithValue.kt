@@ -11,7 +11,7 @@ interface InputFieldWithValue<T> : InputField {
     val isReadonly: Boolean
     val isRequired: Boolean
     var value: T
-    val feedback: Live<InputFieldFeedback>
+    val feedback: Live<InputFieldState>
     val validator: (T) -> T
     fun validate()
 

@@ -41,8 +41,6 @@ abstract class CollectionsViewModel<T>(private val config: AppScopeConfig<*>) : 
         }
     }
 
-    protected fun keyOf(id: String) = "${this::class.simpleName}$id".lowercase()
-
     fun switchToListView() = switchTo(View.ListView)
 
     fun switchToTableView() = switchTo(View.TableView)

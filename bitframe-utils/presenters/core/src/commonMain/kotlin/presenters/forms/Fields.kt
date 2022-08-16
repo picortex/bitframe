@@ -5,7 +5,7 @@ package presenters.forms
 
 import kotlinx.collections.interoperable.toInteroperableList
 import presenters.fields.InputField
-import presenters.fields.InputFieldFeedback
+import presenters.fields.InputFieldState
 import presenters.fields.InputFieldWithValue
 import kotlin.js.JsExport
 import kotlin.js.JsName
@@ -17,10 +17,10 @@ open class Fields(internal val cache: MutableMap<KProperty<*>, InputField> = mut
     val all get() = cache.values.toInteroperableList()
 
     @JsName("_ignore_are_valid")
-    val areValid get() = valueFields.all { it.feedback.value !is InputFieldFeedback.Error }
+    val areValid get() = valueFields.all { it.feedback.value !is InputFieldState.Error }
 
     @JsName("_ignore_are_not_valid")
-    val areNotValid get() = valueFields.any { it.feedback.value is InputFieldFeedback.Error }
+    val areNotValid get() = valueFields.any { it.feedback.value is InputFieldState.Error }
 
     internal val valuesInJson
         get() = valueFields.filterNot {

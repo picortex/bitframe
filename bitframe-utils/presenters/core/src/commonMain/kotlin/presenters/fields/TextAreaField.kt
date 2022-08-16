@@ -8,11 +8,11 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.reflect.KProperty
 
-data class TextAreaField(
+class TextAreaField(
     override val name: String,
     override val label: String = name,
     override val hint: String = label,
-    override var value: String? = null,
+    value: String? = null,
     override val isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
     override val isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
     override val validator: (String?) -> String? = { it }

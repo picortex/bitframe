@@ -4,7 +4,7 @@
 package presenters.fields.internal
 
 import live.mutableLiveOf
-import presenters.fields.InputFieldFeedback
+import presenters.fields.InputFieldState
 import presenters.fields.InputFieldWithValue
 import presenters.fields.InputFieldWithValue.Companion.DEFAULT_IS_READONLY
 import presenters.fields.InputFieldWithValue.Companion.DEFAULT_IS_REQUIRED
@@ -18,20 +18,20 @@ abstract class AbstractInputFieldWithValue<T>(
     override val isRequired: Boolean = DEFAULT_IS_REQUIRED,
     override val validator: (T) -> T = { it }
 ) : InputFieldWithValue<T> {
-    override val feedback = mutableLiveOf<InputFieldFeedback>(InputFieldFeedback.Empty)
+    override val feedback = mutableLiveOf<InputFieldState>(InputFieldState.Empty)
 
     override var value: T = value
         set(value) {
-            if (feedback.value != InputFieldFeedback.Empty) feedback.value = InputFieldFeedback.Empty
+            if (feedback.value != InputFieldState.Empty) feedback.value = InputFieldState.Empty
             field = value
         }
 
     override fun validate() {
         try {
             validator(value)
-            feedback.value = InputFieldFeedback.Valid
+            feedback.value = InputFieldState.Valid
         } catch (err: Throwable) {
-            feedback.value = InputFieldFeedback.Error(err.message ?: "Invalid input $value for field $name")
+            feedback.value = InputFieldState.Error(err.message ?: "Invalid input $value for field $name")
         }
     }
 

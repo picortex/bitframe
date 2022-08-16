@@ -4,18 +4,18 @@ package presenters.fields
 
 import kotlin.js.JsExport
 
-sealed class InputFieldFeedback {
-    object Empty : InputFieldFeedback() {
+sealed class InputFieldState {
+    object Empty : InputFieldState() {
         override fun toString() = "Empty"
     }
 
-    object Valid : InputFieldFeedback() {
+    object Valid : InputFieldState() {
         override fun toString() = "Valid"
     }
 
-    data class Warning(val message: String) : InputFieldFeedback()
-    data class Info(val message: String) : InputFieldFeedback()
-    data class Error(val message: String) : InputFieldFeedback()
+    data class Warning(val message: String) : InputFieldState()
+    data class Info(val message: String) : InputFieldState()
+    data class Error(val message: String) : InputFieldState()
 
     val isEmpty get() = this is Empty
     val isValid get() = this is Valid
