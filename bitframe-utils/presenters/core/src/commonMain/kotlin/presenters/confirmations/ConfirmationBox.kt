@@ -3,6 +3,7 @@
 
 package presenters.confirmations
 
+import koncurrent.Later
 import presenters.actions.MutableSimpleAction
 import kotlin.js.JsExport
 
@@ -11,5 +12,5 @@ interface ConfirmationBox {
     val details: String
 
     val cancelAction: MutableSimpleAction
-    fun confirm()
+    fun confirm(): Later<Unit>
 }

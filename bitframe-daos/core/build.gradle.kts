@@ -18,10 +18,9 @@ kotlin {
             dependencies {
                 api(projects.bitframeActorCore)
                 api(asoft.kotlinx.serialization.mapper)
-                api(asoft.koncurrent.later.core)
+                api(asoft.koncurrent.later.coroutines)
                 api(kotlinx.coroutines.core)
                 api(kotlinx.datetime)
-                api(asoft.later.ktx)
             }
         }
 

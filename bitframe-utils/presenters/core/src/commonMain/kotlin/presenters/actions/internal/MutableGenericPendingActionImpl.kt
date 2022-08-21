@@ -6,9 +6,9 @@ import presenters.actions.MutableGenericPendingAction
 @PublishedApi
 internal class MutableGenericPendingActionImpl<T>(
     override val name: String,
-    override var handler: (T) -> Later<out Any?>
+    override var handler: (T) -> Later<Any?>
 ) : MutableGenericPendingAction<T> {
-    override fun onInvoked(h: (T) -> Later<out Any?>) {
+    override fun onInvoked(h: (T) -> Later<Any?>) {
         handler = h
     }
 

@@ -2,7 +2,7 @@
 
 package bitframe.core
 
-import later.Later
+import koncurrent.Later
 import kotlin.js.JsExport
 import kotlin.js.JsName
 

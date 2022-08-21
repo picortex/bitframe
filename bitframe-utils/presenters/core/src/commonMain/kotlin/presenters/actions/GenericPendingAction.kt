@@ -8,14 +8,14 @@ import presenters.actions.internal.MutableGenericPendingActionImpl
 import kotlin.js.JsExport
 import kotlin.jvm.JvmName
 
-interface GenericPendingAction<in T> : Action<(T) -> Later<out Any?>> {
-    operator fun invoke(arg: T): Later<out Any?>
+interface GenericPendingAction<in T> : Action<(T) -> Later<Any?>> {
+    operator fun invoke(arg: T): Later<Any?>
 
     companion object {
         @JvmName("create")
         operator fun <T> invoke(
             name: String,
-            handler: (T) -> Later<out Any?>
+            handler: (T) -> Later<Any?>
         ): GenericPendingAction<T> = MutableGenericPendingActionImpl(name, handler)
     }
 }

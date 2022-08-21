@@ -13,7 +13,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(asoft.later.ktx)
+                api(asoft.koncurrent.later.coroutines)
                 api(asoft.identifier.core)
                 api(kotlinx.serialization.core)
             }

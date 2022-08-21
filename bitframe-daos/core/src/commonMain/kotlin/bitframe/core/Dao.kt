@@ -1,10 +1,10 @@
 package bitframe.core
 
 import bitframe.core.exceptions.EntityNotFoundException
+import koncurrent.Later
+import koncurrent.later
+import koncurrent.later.await
 import kotlinx.collections.interoperable.List
-import later.Later
-import later.await
-import later.later
 
 @Deprecated("in favour of its quivalent in bitframe.dao")
 interface Dao<out T : Any> {

@@ -2,14 +2,14 @@
 
 package bitframe.core
 
+import koncurrent.Later
+import koncurrent.later
+import koncurrent.later.await
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 import kotlinx.coroutines.delay
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.serializer
-import later.Later
-import later.await
-import later.later
 
 @Deprecated("In favour of its bitframe.MockDao<D>")
 class MockDao<D : Savable>(

@@ -1,5 +1,6 @@
 package presenters.confirmations.internal
 
+import koncurrent.Later
 import presenters.actions.MutableSimpleAction
 import presenters.confirmations.ConfirmationBox
 import presenters.confirmations.ConfirmationState
@@ -13,11 +14,11 @@ class ConfirmationBoxImpl(
 ) : ViewModel<ConfirmationState>(config.of(ConfirmationState.Pending)), ConfirmationBox {
 
     override val cancelAction = MutableSimpleAction(
-        name = "Cacnel",
+        name = "Cancel",
         handler = { logger.warn("Cancel hasn't been handled yet") }
     )
 
-    override fun confirm() {
+    override fun confirm(): Later<Unit> {
         ui.value = ConfirmationState.Executing
         TODO("Not yet implemented")
     }

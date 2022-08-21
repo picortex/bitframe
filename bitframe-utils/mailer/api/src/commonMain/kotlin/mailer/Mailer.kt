@@ -1,10 +1,9 @@
 package mailer
 
 import identifier.Email
+import koncurrent.Later
 import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.listOf
-import kotlinx.collections.interoperable.toInteroperableList
-import later.Later
 
 /**
  * An interface to be used to send emails

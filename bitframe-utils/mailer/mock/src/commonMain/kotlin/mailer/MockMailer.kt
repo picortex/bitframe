@@ -1,9 +1,9 @@
 package mailer
 
+import koncurrent.Later
+import koncurrent.later
 import kotlinx.collections.interoperable.List
 import kotlinx.coroutines.delay
-import later.Later
-import later.later
 import kotlin.math.max
 
 class MockMailer(val config: MockMailerConfig = MockMailerConfig()) : Mailer {

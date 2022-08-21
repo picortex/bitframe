@@ -2,8 +2,8 @@
 
 package bitframe.client
 
+import koncurrent.Later
 import kotlinx.collections.interoperable.List
-import later.Later
 import kotlin.js.JsExport
 
 @JsExport

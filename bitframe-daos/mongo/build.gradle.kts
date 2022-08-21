@@ -31,7 +31,7 @@ kotlin {
                 api(projects.bitframeDaoCore)
                 api(kmongo.core.serialization)
                 api(kmongo.coroutines.serialization)
-                api(asoft.later.ktx)
+                api(asoft.koncurrent.later.core)
             }
         }
 

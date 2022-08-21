@@ -2,7 +2,7 @@
 
 package bitframe.client
 
-import later.Later
+import koncurrent.Later
 import kotlin.js.JsExport
 
 @JsExport

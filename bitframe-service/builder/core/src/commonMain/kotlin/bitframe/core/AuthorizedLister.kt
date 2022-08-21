@@ -2,8 +2,8 @@
 
 package bitframe.core
 
+import koncurrent.Later
 import kotlinx.collections.interoperable.List
-import later.Later
 import kotlin.js.JsExport
 import kotlin.js.JsName
 

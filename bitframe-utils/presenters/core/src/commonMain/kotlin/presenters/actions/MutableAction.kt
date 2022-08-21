@@ -1,5 +1,3 @@
-@file:Suppress("NON_EXPORTABLE_TYPE")
-
 package presenters.actions
 
 import kotlin.js.JsExport

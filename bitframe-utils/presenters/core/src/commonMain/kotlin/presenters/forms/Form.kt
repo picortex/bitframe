@@ -3,6 +3,7 @@
 package presenters.forms
 
 import koncurrent.Fulfilled
+import koncurrent.Later
 import koncurrent.Rejected
 import koncurrent.later.finally
 import kotlinx.serialization.builtins.MapSerializer
@@ -56,30 +57,24 @@ open class Form<out F : Fields, in P>(
     }
 
     @JsName("send")
-    fun submit() {
-        try {
-            ui.value = FormState.Submitting
-            log("Before validation")
-            validate()
-            log("after validation")
-            if (fields.areNotValid) error("Some values are invalid")
-            log("Before before encoding")
-            val values = fields.valuesInJson
-            log("After encoding/Before decoding")
-            log(values)
-            submit.invoke(codec.decodeFromString(config.serializer, values)).finally {
-                val (state, action) = when (it) {
-                    is Fulfilled -> FormState.Submitted to afterSubmitAction
-                    is Rejected -> FormState.Failure(it.cause) to failureAction
-                }
-                ui.value = state
-                action?.invoke(fields)
-                if (config.exitOnSubmitted) cancel()
+    fun submit() = try {
+        ui.value = FormState.Submitting
+        log("Before validation")
+        validate()
+        if (fields.areNotValid) error("Some values are invalid")
+        val values = fields.valuesInJson
+        submit.invoke(codec.decodeFromString(config.serializer, values)).finally {
+            val (state, action) = when (it) {
+                is Fulfilled -> FormState.Submitted to afterSubmitAction
+                is Rejected -> FormState.Failure(it.cause) to failureAction
             }
-            log("After invoking send")
-        } catch (err: Throwable) {
-            ui.value = FormState.Failure(err)
-            failureAction?.invoke(fields)
+            ui.value = state
+            action?.invoke(fields)
+            if (config.exitOnSubmitted) cancel()
         }
+    } catch (err: Throwable) {
+        ui.value = FormState.Failure(err)
+        failureAction?.invoke(fields)
+        Later.reject(err, config.executor)
     }
 }
