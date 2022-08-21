@@ -10,10 +10,10 @@ import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
 
-fun <S : Any> MockUIScopeConfig(
-    service: S,
-    recoveryTime: Long = 0L,
-    transitionTime: Long = 0L,
-    logger: Logger = UIScopeConfig.DEFAULT_LOGGER,
-    builder: () -> CoroutineScope = { CoroutineScope(SupervisorJob() + Dispatchers.Default) }
-) = UIScopeConfig(service, recoveryTime, transitionTime, logger, builder)
+//fun <S : Any> MockUIScopeConfig(
+//    service: S,
+//    recoveryTime: Long = 0L,
+//    transitionTime: Long = 0L,
+//    logger: Logger = UIScopeConfig.DEFAULT_LOGGER,
+//    builder: () -> CoroutineScope = { CoroutineScope(SupervisorJob() + Dispatchers.Default) }
+//) = UIScopeConfig(service, recoveryTime, transitionTime, logger, builder)

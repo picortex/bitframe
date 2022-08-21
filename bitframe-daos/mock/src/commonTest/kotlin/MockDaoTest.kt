@@ -4,7 +4,7 @@ import bitframe.core.find
 import bitframe.core.isEqualTo
 import expect.*
 import kotlinx.coroutines.test.runTest
-import later.await
+import koncurrent.later.await
 import kotlin.test.Test
 
 class MockDaoTest {

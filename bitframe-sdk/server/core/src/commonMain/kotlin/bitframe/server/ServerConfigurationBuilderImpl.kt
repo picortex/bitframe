@@ -1,6 +1,7 @@
 package bitframe.server
 
 import bitframe.DaoFactory
+import bitframe.Module
 
 internal class ServerConfigurationBuilderImpl<S> : ServerConfigurationBuilder<S> {
     override var daoFactoryBuilder: (() -> DaoFactory)? = null

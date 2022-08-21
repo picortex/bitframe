@@ -1,5 +1,6 @@
 package bitframe.server
 
+import bitframe.Module
 import kotlinx.collections.interoperable.mutableListOf
 
 interface BitframeApplicationConfig<out S> {

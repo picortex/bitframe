@@ -2,7 +2,7 @@ import expect.expect
 import identifier.Email
 import kotlinx.collections.interoperable.listOf
 import kotlinx.coroutines.test.runTest
-import later.await
+import koncurrent.later.await
 import mailer.*
 import kotlin.test.Ignore
 import kotlin.test.Test

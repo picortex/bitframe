@@ -4,7 +4,7 @@ import bitframe.server.MongoDaoFactory
 import bitframe.server.MongoDaoFactoryConfig
 import expect.expect
 import kotlinx.coroutines.test.runTest
-import later.await
+import koncurrent.later.await
 import kotlin.test.Ignore
 import kotlin.test.Test
 

@@ -1,5 +1,7 @@
 package bitframe.server
 
+import bitframe.Module
+
 open class BitframeApplication<S>(
     open val config: BitframeApplicationConfig<S>
 ) {

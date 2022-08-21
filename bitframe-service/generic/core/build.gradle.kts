@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeServiceBuilderCore)
-                api(asoft.later.ktx)
+                api(asoft.koncurrent.later.coroutines)
             }
         }
 

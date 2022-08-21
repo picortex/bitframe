@@ -1,12 +1,9 @@
 package mailer
 
+import koncurrent.Later
+import koncurrent.later
 import kotlinx.collections.interoperable.List
-import later.Later
-import later.later
-import java.nio.file.Files
-import java.nio.file.Paths
 import javax.activation.DataHandler
-import javax.activation.DataSource
 import javax.activation.FileDataSource
 import javax.mail.*
 import javax.mail.internet.InternetAddress

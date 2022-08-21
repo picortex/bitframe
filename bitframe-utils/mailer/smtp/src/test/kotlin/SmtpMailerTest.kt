@@ -5,7 +5,7 @@ import identifier.Email
 import kotlinx.collections.interoperable.listOf
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import later.await
+import koncurrent.later.await
 import mailer.*
 import java.io.InputStream
 import java.util.*

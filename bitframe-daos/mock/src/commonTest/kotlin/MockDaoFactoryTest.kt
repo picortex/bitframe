@@ -3,7 +3,7 @@ import bitframe.core.MockDaoFactory
 import bitframe.core.get
 import expect.expect
 import kotlinx.coroutines.test.runTest
-import later.await
+import koncurrent.later.await
 import kotlin.test.Test
 
 class MockDaoFactoryTest {
