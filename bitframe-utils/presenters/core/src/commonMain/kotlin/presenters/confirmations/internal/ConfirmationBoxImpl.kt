@@ -33,7 +33,7 @@ internal class ConfirmationBoxImpl(
 
     private val confirmAction = actions.submitAction
 
-    override fun confirm(): Later<Unit> = try {
+    override fun confirm(): Later<Any?> = try {
         ui.value = ConfirmationState.Executing
         confirmAction()
     } catch (err: Throwable) {

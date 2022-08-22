@@ -13,17 +13,14 @@ interface GenericAction<in T> : Action<(T) -> Later<Any?>> {
     operator fun invoke(arg: T): Later<Any?>
 
     companion object {
-        @JvmName("create")
-        inline operator fun <T> invoke(
+        fun <T> ofLater(
             name: String,
-            noinline handler: (T) -> Later<Any?>
+            handler: (T) -> Later<Any?>
         ): GenericAction<T> = MutableGenericActionImpl(name, handler)
 
-        @JvmName("create")
-        @JsName("createLater")
-        inline operator fun <T> invoke(
+        operator fun <T> invoke(
             name: String,
-            noinline handler: (T) -> Any?
+            handler: (T) -> Unit
         ): GenericAction<T> = MutableGenericActionImpl(name) { res ->
             Later.resolve(res).then { handler(it) }
         }

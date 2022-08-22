@@ -18,7 +18,8 @@ interface ConfirmationBox {
     val ui: Live<ConfirmationState>
 
     val cancelAction: MutableSimpleAction
-    fun confirm(): Later<Unit>
+
+    fun confirm(): Later<Any?>
 
     companion object {
         operator fun invoke(
