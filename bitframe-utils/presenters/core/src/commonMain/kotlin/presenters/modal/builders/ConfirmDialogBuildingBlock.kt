@@ -1,5 +1,5 @@
 package presenters.modal.builders
 
-import presenters.actions.SimplePendingAction
+import presenters.actions.SimpleAction
 
-typealias ConfirmDialogBuildingBlock = ConfirmDialogActionsBuilder.() -> SimplePendingAction
+typealias ConfirmDialogBuildingBlock = ConfirmDialogActionsBuilder.() -> SimpleAction

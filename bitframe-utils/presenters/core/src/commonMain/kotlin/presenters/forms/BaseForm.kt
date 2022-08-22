@@ -2,7 +2,7 @@
 
 package presenters.forms
 
-import presenters.actions.GenericPendingAction
+import presenters.actions.GenericAction
 import presenters.actions.SimpleAction
 import kotlin.js.JsExport
 import kotlin.js.JsName
@@ -13,7 +13,7 @@ interface BaseForm<out F : Fields, in P> {
     val details: String
     val fields: F
     val cancel: SimpleAction
-    val submit: GenericPendingAction<P>
+    val submit: GenericAction<P>
 
     fun validate()
 }

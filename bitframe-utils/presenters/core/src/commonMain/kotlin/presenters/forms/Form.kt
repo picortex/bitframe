@@ -8,7 +8,7 @@ import koncurrent.Rejected
 import koncurrent.later.finally
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
-import presenters.actions.GenericPendingAction
+import presenters.actions.GenericAction
 import presenters.actions.SimpleAction
 import viewmodel.ViewModel
 import kotlin.js.JsExport
@@ -28,7 +28,7 @@ open class Form<out F : Fields, in P>(
         it.name.contentEquals("Cancel", ignoreCase = true)
     } ?: SimpleAction("Cancel") {}
 
-    override val submit: GenericPendingAction<P> = builtActions.submitAction
+    override val submit: GenericAction<P> = builtActions.submitAction
 
     private val codec get() = config.codec
 
