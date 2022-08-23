@@ -5,7 +5,7 @@ import presenters.fields.internal.NumberBasedValueField
 import presenters.forms.Fields
 import kotlin.reflect.KProperty
 
-inline fun Fields.number(
+inline fun Fields.double(
     name: String? = null,
     label: String? = name,
     hint: String? = label,
@@ -31,7 +31,7 @@ inline fun Fields.number(
     )
 }
 
-inline fun Fields.number(
+inline fun Fields.double(
     property: KProperty<*>,
     label: String? = property.name,
     hint: String? = label,
@@ -42,4 +42,4 @@ inline fun Fields.number(
     min: Double? = NumberBasedValueField.DEFAULT_MIN,
     step: Double = DoubleInputField.DEFAULT_STEP,
     noinline validator: ((Double?) -> Unit)? = ValuedField.DEFAULT_VALIDATOR
-) = number(property.name, label, hint, value, isReadonly, isRequired, max, min, step, validator)
+) = double(property.name, label, hint, value, isReadonly, isRequired, max, min, step, validator)
