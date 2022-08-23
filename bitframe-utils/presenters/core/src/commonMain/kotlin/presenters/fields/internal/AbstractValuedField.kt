@@ -15,7 +15,6 @@ import kotlin.js.JsExport
 abstract class AbstractValuedField<T : Any>(
     override val name: String,
     override val label: String = name.replaceFirstChar { it.uppercase() },
-    open val hint: String = label,
     override val defaultValue: T? = DEFAULT_VALUE,
     override val isReadonly: Boolean = DEFAULT_IS_READONLY,
     override val isRequired: Boolean = DEFAULT_IS_REQUIRED,
