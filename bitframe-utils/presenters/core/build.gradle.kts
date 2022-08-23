@@ -19,6 +19,7 @@ kotlin {
                 api(kotlinx.serialization.json)
                 api(asoft.viewmodel.core)
                 api(asoft.koncurrent.later.core)
+                api(asoft.identifier.core)
                 api(asoft.kash.core)
                 api(asoft.kotlinx.collections.interoperable)
                 api(kotlinx.datetime)
@@ -28,7 +29,6 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(asoft.expect.coroutines)
-                implementation(kotlinx.serialization.json)
                 implementation(asoft.koncurrent.later.coroutines)
                 implementation(asoft.live.test)
                 implementation(projects.presentersMock)
