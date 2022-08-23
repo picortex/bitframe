@@ -3,6 +3,7 @@ package presenters.forms.fields
 import presenters.fields.CheckBoxInputField
 import presenters.fields.InputFieldWithValue
 import presenters.fields.TextInputField
+import presenters.fields.ValuedField
 import presenters.forms.Fields
 import kotlin.reflect.KMutableProperty
 import kotlin.reflect.KProperty
@@ -10,15 +11,15 @@ import kotlin.reflect.KProperty
 inline fun Fields.checkBox(
     name: String? = null,
     label: String? = name,
-    value: Boolean? = null,
-    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
-    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
-    noinline validator: (Boolean?) -> Boolean? = { it }
+    value: Boolean? = ValuedField.DEFAULT_VALUE,
+    isReadonly: Boolean = ValuedField.DEFAULT_IS_READONLY,
+    isRequired: Boolean = ValuedField.DEFAULT_IS_REQUIRED,
+    noinline validator: ((Boolean?) -> Unit)? = ValuedField.DEFAULT_VALIDATOR
 ) = getOrCreate { property ->
     CheckBoxInputField(
         name = name ?: property.name,
         label = label ?: property.name,
-        value = value,
+        defaultValue = value,
         isReadonly = isReadonly,
         isRequired = isRequired,
         validator = validator,
@@ -28,8 +29,8 @@ inline fun Fields.checkBox(
 inline fun Fields.checkBox(
     property: KProperty<*>,
     label: String? = property.name,
-    value: Boolean? = null,
-    isReadonly: Boolean = InputFieldWithValue.DEFAULT_IS_READONLY,
-    isRequired: Boolean = InputFieldWithValue.DEFAULT_IS_REQUIRED,
-    noinline validator: (Boolean?) -> Boolean? = { it }
+    value: Boolean? = ValuedField.DEFAULT_VALUE,
+    isReadonly: Boolean = ValuedField.DEFAULT_IS_READONLY,
+    isRequired: Boolean = ValuedField.DEFAULT_IS_REQUIRED,
+    noinline validator: ((Boolean?) -> Unit)? = ValuedField.DEFAULT_VALIDATOR
 ) = checkBox(property.name, label, value, isReadonly, isRequired, validator)
