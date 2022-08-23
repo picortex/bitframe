@@ -11,11 +11,15 @@ import kotlin.jvm.JvmName
 
 interface MutableGenericAction<T> : GenericAction<T>, MutableAction<(T) -> Later<Any?>> {
     override var handler: (T) -> Later<Any?>
+
+    fun onInvoked(h: (T) -> Unit)
+
     companion object {
         fun <T> ofLater(
             name: String,
             handler: (T) -> Later<Any?>
         ): MutableGenericAction<T> = MutableGenericActionImpl(name, handler)
+
         operator fun <T> invoke(
             name: String,
             handler: (T) -> Any?

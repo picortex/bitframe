@@ -23,9 +23,7 @@ open class Fields(internal val cache: MutableMap<KProperty<*>, InputField> = mut
     val areNotValid get() = valueFields.any { it.feedback.value is InputFieldState.Error }
 
     internal val valuesInJson
-        get() = valueFields.filterNot {
-            it.value == null && !it.isRequired
-        }.associate {
+        get() = valuesToBeSubmitted.associate {
             it.name to it.value
         }.map { (key, value) -> key to value }.joinToString(prefix = "{", postfix = "}") { (key, value) ->
             """"$key": ${if (value != null) """"$value"""" else null}"""
@@ -33,7 +31,12 @@ open class Fields(internal val cache: MutableMap<KProperty<*>, InputField> = mut
 
     private val valueFields get() = cache.values.filterIsInstance<InputFieldWithValue<*>>()
 
+    private val valuesToBeSubmitted
+        get() = valueFields.filterNot {
+            it.value == null && !it.isRequired
+        }
+
     fun validate() {
-        valueFields.forEach { it.validate() }
+        valuesToBeSubmitted.forEach { it.validate() }
     }
 }

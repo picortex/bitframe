@@ -31,11 +31,11 @@ abstract class AbstractInputFieldWithValue<T>(
             validator(value)
             feedback.value = InputFieldState.Valid
         } catch (err: Throwable) {
-            feedback.value = InputFieldState.Error(err.message ?: "Invalid input $value for field $name")
+            feedback.value = InputFieldState.Error(err.message ?: "Invalid input $value for field $label")
         }
     }
 
     val asteriskedLabel get() = labelWithAsterisks
 
-    val labelWithAsterisks get() = (if (isRequired) "*" else "") + label
+    val labelWithAsterisks get() = (if (isRequired) "*" else "") + label.replaceFirstChar { it.uppercase() }
 }

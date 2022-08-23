@@ -12,6 +12,8 @@ import kotlin.jvm.JvmName
 interface MutableSimpleAction : SimpleAction, MutableAction<() -> Later<Any?>> {
     override var handler: () -> Later<Any?>
 
+    fun onInvoked(h: () -> Unit)
+
     companion object {
         fun ofLater(
             name: String,
