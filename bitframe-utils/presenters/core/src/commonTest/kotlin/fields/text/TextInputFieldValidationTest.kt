@@ -95,4 +95,18 @@ class TextInputFieldValidationTest {
         expect(exp.message).toBe("Test is required")
         expect(name.value).toBe("")
     }
+
+    @Test
+    fun should_add_custom_validation_to_the_mix() = runTest {
+        val name = TextInputField(
+            name = "test", label = "Test", isRequired = true,
+            validator = { if (it == "Anderson") throw IllegalArgumentException("Bad name Anderson") }
+        )
+        name.value = "Anderson"
+        val exp = expectFailure {
+            name.validate()
+        }
+        expect(exp.message).toBe("Bad name Anderson")
+        expect(name.value).toBe("Anderson")
+    }
 }

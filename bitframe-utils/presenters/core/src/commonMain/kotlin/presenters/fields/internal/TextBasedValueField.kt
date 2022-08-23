@@ -17,7 +17,7 @@ abstract class TextBasedValueField(
     override val isRequired: Boolean = DEFAULT_IS_REQUIRED,
     open val maxLength: Int? = DEFAULT_MAX_LENGTH,
     open val minLength: Int? = DEFAULT_MIN_LENGTH,
-    override val validator: ((String) -> Unit)? = DEFAULT_VALIDATOR
+    override val validator: ((String?) -> Unit)? = DEFAULT_VALIDATOR
 ) : AbstractValuedField<String>(name, label, hint, defaultValue, isReadonly, isRequired, validator) {
     companion object {
         val DEFAULT_MAX_LENGTH: Int? = null
@@ -36,5 +36,6 @@ abstract class TextBasedValueField(
         if (min != null && value != null && value.length < min) {
             throw IllegalArgumentException("${label.replaceFirstChar { it.uppercase() }} should not contain less than $min characters")
         }
+        validator?.invoke(value)
     }
 }

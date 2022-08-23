@@ -33,7 +33,7 @@ abstract class AbstractInputFieldWithValue<T>(
             validator(value)
             feedback.value = InputFieldState.Valid
         } catch (err: Throwable) {
-            feedback.value = InputFieldState.Error(err.message ?: "Invalid input $value for field $label")
+            feedback.value = InputFieldState.Error(err.message ?: "Invalid input $value for field $label", err)
         }
     }
 

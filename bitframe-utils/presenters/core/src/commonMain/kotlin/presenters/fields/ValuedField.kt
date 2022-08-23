@@ -12,7 +12,7 @@ interface ValuedField<T : Any> : InputField {
     val defaultValue: T?
     val value: T?
     val feedback: Live<InputFieldState>
-    val validator: ((T) -> Unit)?
+    val validator: ((T?) -> Unit)?
     fun validate(value: T? = this.value)
     fun validateWithFeedback(value: T? = this.value)
 
