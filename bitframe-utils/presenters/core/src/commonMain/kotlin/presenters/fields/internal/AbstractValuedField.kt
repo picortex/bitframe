@@ -29,18 +29,27 @@ abstract class AbstractValuedField<T : Any>(
             field = value
         }
 
-    protected fun update(value: T?) {
-        if (feedback.value != InputFieldState.Empty) {
-            feedback.value = InputFieldState.Empty
+    private fun update(value: T?) {
+        try {
+            validate(value)
+            if (feedback.value != InputFieldState.Empty) {
+                feedback.value = InputFieldState.Empty
+            }
+        } catch (err: Throwable) {
+            feedback.value = InputFieldState.Warning(err.message ?: "", err)
         }
     }
 
-    override fun validate() {
+    abstract override fun validate(value: T?)
+
+    override fun validateWithFeedback(value: T?) {
         try {
-//            validator?.invoke(value)
-            feedback.value = InputFieldState.Valid
+            validate(value)
+            if (feedback.value != InputFieldState.Empty) {
+                feedback.value = InputFieldState.Empty
+            }
         } catch (err: Throwable) {
-            feedback.value = InputFieldState.Error(err.message ?: "Invalid input $value for field $label")
+            feedback.value = InputFieldState.Error(err.message ?: "", err)
         }
     }
 }

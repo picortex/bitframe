@@ -24,17 +24,16 @@ abstract class TextBasedValueField(
         val DEFAULT_MIN_LENGTH: Int? = null
     }
 
-    override fun validate() {
-        val text = value
-        if (isRequired && text == null) {
+    override fun validate(value: String?) {
+        if (isRequired && value.isNullOrBlank()) {
             throw IllegalArgumentException("${label.replaceFirstChar { it.uppercase() }} is required")
         }
         val max = maxLength
-        if (max != null && text != null && text.length > max) {
+        if (max != null && value != null && value.length > max) {
             throw IllegalArgumentException("${label.replaceFirstChar { it.uppercase() }} should not contain more than $max characters")
         }
         val min = minLength
-        if (min != null && text != null && text.length < min) {
+        if (min != null && value != null && value.length < min) {
             throw IllegalArgumentException("${label.replaceFirstChar { it.uppercase() }} should not contain less than $min characters")
         }
     }

@@ -13,9 +13,9 @@ sealed class InputFieldState {
         override fun toString() = "Valid"
     }
 
-    data class Warning(val message: String) : InputFieldState()
+    data class Warning(val message: String, val cause: Throwable) : InputFieldState()
     data class Info(val message: String) : InputFieldState()
-    data class Error(val message: String) : InputFieldState()
+    data class Error(val message: String, val cause: Throwable) : InputFieldState()
 
     val isEmpty get() = this is Empty
     val isValid get() = this is Valid

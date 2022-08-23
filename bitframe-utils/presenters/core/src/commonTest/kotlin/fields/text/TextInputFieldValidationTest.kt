@@ -1,4 +1,4 @@
-package fields
+package fields.text
 
 import expect.expect
 import expect.expectFailure
@@ -6,7 +6,7 @@ import kotlinx.coroutines.test.runTest
 import presenters.fields.TextInputField
 import kotlin.test.Test
 
-class TextInputFieldTest {
+class TextInputFieldValidationTest {
 
     @Test
     fun should_pass_validation_if_it_the_field_is_not_required_and_input_has_not_been_set() {
@@ -83,5 +83,16 @@ class TextInputFieldTest {
         name.value = "Anderson"
         name.validate()
         expect(name.value).toBe("Anderson")
+    }
+
+    @Test
+    fun should_fail_validation_if_input_is_required_and_provided_value_is_blank() = runTest {
+        val name = TextInputField(name = "test", label = "Test", isRequired = true)
+        name.value = ""
+        val exp = expectFailure {
+            name.validate()
+        }
+        expect(exp.message).toBe("Test is required")
+        expect(name.value).toBe("")
     }
 }
