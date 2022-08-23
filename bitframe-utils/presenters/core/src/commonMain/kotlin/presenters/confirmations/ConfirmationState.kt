@@ -13,6 +13,7 @@ sealed class ConfirmationState {
     }
 
     override fun toString() = this::class.simpleName ?: "Unknown"
+
     val isPending get() = this is Pending
     val isExecuting get() = this is Executing
     val isExecuted get() = this is Executed

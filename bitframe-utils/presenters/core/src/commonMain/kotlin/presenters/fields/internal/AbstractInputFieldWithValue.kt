@@ -22,7 +22,9 @@ abstract class AbstractInputFieldWithValue<T>(
 
     override var value: T = value
         set(value) {
-            if (feedback.value != InputFieldState.Empty) feedback.value = InputFieldState.Empty
+            if (feedback.value != InputFieldState.Empty) {
+                feedback.value = InputFieldState.Empty
+            }
             field = value
         }
 

@@ -17,10 +17,10 @@ open class Fields(internal val cache: MutableMap<KProperty<*>, InputField> = mut
     val all get() = cache.values.toInteroperableList()
 
     @JsName("_ignore_are_valid")
-    val areValid get() = valueFields.all { it.feedback.value !is InputFieldState.Error }
+    val areValid get() = valuesToBeSubmitted.all { it.feedback.value !is InputFieldState.Error }
 
     @JsName("_ignore_are_not_valid")
-    val areNotValid get() = valueFields.any { it.feedback.value is InputFieldState.Error }
+    val areNotValid get() = valuesToBeSubmitted.any { it.feedback.value is InputFieldState.Error }
 
     internal val valuesInJson
         get() = valuesToBeSubmitted.associate {

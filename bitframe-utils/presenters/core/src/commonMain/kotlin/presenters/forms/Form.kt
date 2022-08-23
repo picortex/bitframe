@@ -5,6 +5,7 @@ package presenters.forms
 import koncurrent.Fulfilled
 import koncurrent.Later
 import koncurrent.Rejected
+import koncurrent.later.catch
 import koncurrent.later.finally
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
@@ -59,10 +60,12 @@ open class Form<out F : Fields, in P>(
     @JsName("send")
     fun submit() = try {
         ui.value = FormState.Submitting
-        log("Before validation")
         validate()
-        if (fields.areNotValid) error("Some values are invalid")
         val values = fields.valuesInJson
+        logger.obj(values)
+        log("After printing values")
+        if (fields.areNotValid) throw IllegalArgumentException("Some values are invalid")
+        log("Before invoke")
         submit.invoke(codec.decodeFromString(config.serializer, values)).finally {
             val (state, action) = when (it) {
                 is Fulfilled -> FormState.Submitted to afterSubmitAction
@@ -77,4 +80,31 @@ open class Form<out F : Fields, in P>(
         failureAction?.invoke(fields)
         Later.reject(err, config.executor)
     }
+//
+//    @JsName("send")
+//    fun submit() = Later.resolve(Unit, executor).then {
+//        ui.value = FormState.Submitting
+//        log("Before validation")
+//        validate()
+//        log("After validation")
+//        if (fields.areNotValid) throw IllegalArgumentException("Some values are invalid")
+//        log("Json values")
+//        val values = fields.valuesInJson
+//        logger.obj(values)
+//        values
+//    }.andThen { values ->
+//        submit.invoke(codec.decodeFromString(config.serializer, values)).finally {
+//            val (state, action) = when (it) {
+//                is Fulfilled -> FormState.Submitted to afterSubmitAction
+//                is Rejected -> FormState.Failure(it.cause) to failureAction
+//            }
+//            ui.value = state
+//            action?.invoke(fields)
+//            if (config.exitOnSubmitted) cancel()
+//        }
+//    }.catch { err ->
+//        ui.value = FormState.Failure(err)
+//        failureAction?.invoke(fields)
+//        Later.reject(err, config.executor)
+//    }
 }

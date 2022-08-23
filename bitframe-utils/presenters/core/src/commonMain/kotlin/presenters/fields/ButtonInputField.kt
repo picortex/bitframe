@@ -4,6 +4,6 @@ import kotlin.js.JsExport
 
 @JsExport
 data class ButtonInputField(
-    val text: String,
-    override val name: String = text
+    override val label: String,
+    override val name: String = label
 ) : InputField

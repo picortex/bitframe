@@ -6,16 +6,23 @@ import live.Live
 import kotlin.js.JsExport
 
 @JsExport
-interface InputFieldWithValue<T> : InputField {
+interface ValuedField<T : Any> : InputField {
     val isReadonly: Boolean
     val isRequired: Boolean
-    var value: T
+    val defaultValue: T?
+    val value: T?
     val feedback: Live<InputFieldState>
-    val validator: (T) -> T
+    val validator: ((T) -> Unit)?
     fun validate()
+
+    val asteriskedLabel get() = labelWithAsterisks
+
+    val labelWithAsterisks get() = (if (isRequired) "*" else "") + label.replaceFirstChar { it.uppercase() }
 
     companion object {
         val DEFAULT_IS_READONLY = false
         val DEFAULT_IS_REQUIRED = false
+        val DEFAULT_VALIDATOR: Nothing? = null
+        val DEFAULT_VALUE: Nothing? = null
     }
 }
