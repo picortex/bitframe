@@ -11,7 +11,8 @@ import presenters.collections.PaginationManager
 import viewmodel.ViewModel
 import viewmodel.ViewModelConfig
 
-class PaginationManagerImpl<out T>(
+@PublishedApi
+internal class PaginationManagerImpl<out T>(
     override var capacity: Int,
     internal val ram: PageableRamInMemory<@UnsafeVariance T> = PageableRamInMemory(),
     private val onPage: (no: Int, capacity: Int) -> Later<out Page<T>>

@@ -8,11 +8,13 @@ import presenters.forms.fields.text
 import presenters.modal.ConfirmDialog
 import presenters.modal.FormDialog
 import presenters.modal.click
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 class DialogTest {
 
     @Test
+    @Ignore
     fun should_be_able_to_create_a_dialog() {
         val clicks = mutableListOf<String>()
         val d = ConfirmDialog(

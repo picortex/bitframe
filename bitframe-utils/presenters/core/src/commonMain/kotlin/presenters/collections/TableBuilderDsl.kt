@@ -25,5 +25,5 @@ fun <T> simpleTableOf(
     val selector = SelectionManager(paginator, config)
     val actions = actionsOf(selector) {}
     val cols = columnsOf(builder)
-    return tableOf(paginator, selector, actions, cols)
+    return TableImpl(paginator, selector, actions, cols, config)
 }
