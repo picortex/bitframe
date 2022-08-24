@@ -13,3 +13,17 @@ fun <T> tableOf(
     columns: List<Column<T>>,
     config: ViewModelConfig = ViewModelConfig()
 ): Table<T> = TableImpl(paginator, selector, actionsManager, columns, config)
+
+@JvmSynthetic
+fun <T> simpleTableOf(
+    items: Collection<T>,
+    config: ViewModelConfig = ViewModelConfig(),
+    builder: ColumnsBuilder<T>.() -> Unit
+): Table<T> {
+    val paginator = SinglePagePaginator(items)
+    paginator.loadFirstPage()
+    val selector = SelectionManager(paginator, config)
+    val actions = actionsOf(selector) {}
+    val cols = columnsOf(builder)
+    return tableOf(paginator, selector, actions, cols)
+}

@@ -8,6 +8,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.reflect.KProperty
 
+@Deprecated("In favour of [Integer,Long,Double]InputField")
 class NumberInputField(
     override val name: String,
     override val label: String = name,

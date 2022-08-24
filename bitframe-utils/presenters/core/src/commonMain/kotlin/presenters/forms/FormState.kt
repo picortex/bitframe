@@ -7,6 +7,7 @@ import kotlin.js.JsExport
 
 sealed class FormState {
     object Fillable : FormState()
+    object Validating : FormState()
     object Submitting : FormState()
     object Submitted : FormState()
     data class Failure(
@@ -16,12 +17,12 @@ sealed class FormState {
 
 
     val isFillable get() = this is Fillable
+    val isValidating get() = this is Validating
     val isSubmitting get() = this is Submitting
     val isSubmitted get() = this is Submitted
     val isFailure get() = this is Failure
 
-    val asFillable get() = this as Fillable
-    val asSubmitting get() = this as Submitting
-    val asSubmitted get() = this as Submitted
     val asFailure get() = this as Failure
+
+    override fun toString(): String = this::class.simpleName ?: "Unknown"
 }

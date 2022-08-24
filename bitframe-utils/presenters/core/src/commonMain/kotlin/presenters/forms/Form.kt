@@ -11,6 +11,8 @@ import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import presenters.actions.GenericAction
 import presenters.actions.SimpleAction
+import presenters.collections.*
+import presenters.fields.ValuedField
 import viewmodel.ViewModel
 import kotlin.js.JsExport
 import kotlin.js.JsName
@@ -49,23 +51,36 @@ open class Form<out F : Fields, in P>(
     private var afterSubmitAction: ((F) -> Unit)? = null
     private var failureAction: ((F) -> Unit)? = null
 
+    @Deprecated("in favour of submit().then()")
     fun onSubmitted(handler: (F) -> Unit) {
         afterSubmitAction = handler
     }
 
+    @Deprecated("in favour of submit().catch()")
     fun onFailure(handler: (F) -> Unit) {
         failureAction = handler
     }
 
     @JsName("send")
     fun submit() = try {
-        ui.value = FormState.Submitting
+        ui.value = FormState.Validating
         validate()
+        val invalids = fields.allInvalid
+        if (invalids.isNotEmpty()) {
+            val message = simpleTableOf(invalids) {
+                column("Field") { it.item.label }
+                column("Value") { it.item.value.toString() }
+                column("Required") { it.item.isRequired.toString() }
+                column("Reason") { it.item.feedback.value.asError.message }
+            }.tabulateToString()
+            logger.error(message)
+            val invalidFields = IllegalArgumentException(message)
+            val size = invalids.size
+            val terminator = "input" + if (size > 1) "s" else ""
+            throw IllegalArgumentException("You have $size invalid $terminator", invalidFields)
+        }
+        ui.value = FormState.Submitting
         val values = fields.valuesInJson
-        logger.obj(values)
-        log("After printing values")
-        if (fields.areNotValid) throw IllegalArgumentException("Some values are invalid")
-        log("Before invoke")
         submit.invoke(codec.decodeFromString(config.serializer, values)).finally {
             val (state, action) = when (it) {
                 is Fulfilled -> FormState.Submitted to afterSubmitAction
@@ -80,31 +95,4 @@ open class Form<out F : Fields, in P>(
         failureAction?.invoke(fields)
         Later.reject(err, config.executor)
     }
-//
-//    @JsName("send")
-//    fun submit() = Later.resolve(Unit, executor).then {
-//        ui.value = FormState.Submitting
-//        log("Before validation")
-//        validate()
-//        log("After validation")
-//        if (fields.areNotValid) throw IllegalArgumentException("Some values are invalid")
-//        log("Json values")
-//        val values = fields.valuesInJson
-//        logger.obj(values)
-//        values
-//    }.andThen { values ->
-//        submit.invoke(codec.decodeFromString(config.serializer, values)).finally {
-//            val (state, action) = when (it) {
-//                is Fulfilled -> FormState.Submitted to afterSubmitAction
-//                is Rejected -> FormState.Failure(it.cause) to failureAction
-//            }
-//            ui.value = state
-//            action?.invoke(fields)
-//            if (config.exitOnSubmitted) cancel()
-//        }
-//    }.catch { err ->
-//        ui.value = FormState.Failure(err)
-//        failureAction?.invoke(fields)
-//        Later.reject(err, config.executor)
-//    }
 }
