@@ -70,7 +70,6 @@ open class Form<out F : Fields, in P>(
             val message = simpleTableOf(invalids) {
                 column("Field") { it.item.label }
                 column("Value") { it.item.value.toString() }
-                column("Required") { it.item.isRequired.toString() }
                 column("Reason") { it.item.feedback.value.asError.message }
             }.tabulateToString()
             logger.error(message)

@@ -3,16 +3,12 @@
 
 package presenters.forms
 
-import kotlinx.collections.interoperable.toInteroperableList
 import presenters.fields.InputField
 import presenters.fields.InputFieldState
-import presenters.fields.InputFieldWithValue
 import presenters.fields.ValuedField
 import kotlin.js.JsExport
-import kotlin.js.JsName
-import kotlin.reflect.KProperty
 
-open class Fields(internal val cache: MutableMap<KProperty<*>, InputField> = mutableMapOf()) {
+open class Fields(internal val cache: MutableMap<String, InputField> = mutableMapOf()) {
 
 //    @JsName("_ignore_all")
 //    val all get() = cache.values.toInteroperableList()
