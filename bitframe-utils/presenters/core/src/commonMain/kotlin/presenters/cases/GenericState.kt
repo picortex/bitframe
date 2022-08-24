@@ -14,10 +14,12 @@ import presenters.cases.Loading as LoadingCase
 import presenters.cases.Success as SuccessCase
 import presenters.cases.Failure as FailureCase
 
+@Deprecated("Uses old dialog api")
 sealed class GenericState<out S> : Case {
     abstract override val message: String
     abstract val data: S?
 
+    @Deprecated("Uses old dialog api")
     data class Loading<out S>(
         override val message: String,
         override val data: S? = null
@@ -25,6 +27,7 @@ sealed class GenericState<out S> : Case {
         override val loading: Boolean = true
     }
 
+    @Deprecated("Uses old dialog api")
     data class Failure<out S>(
         override val cause: Throwable? = null,
         override val message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
@@ -41,6 +44,7 @@ sealed class GenericState<out S> : Case {
         override val failure: Boolean = true
     }
 
+    @Deprecated("Uses old dialog api")
     data class Success<out S>(
         override val message: String = SuccessCase.DEFAULT_MESSAGE,
         override val actions: List<SimpleAction> = emptyList(),
@@ -55,6 +59,7 @@ sealed class GenericState<out S> : Case {
         override val success = true
     }
 
+    @Deprecated("Uses old dialog api")
     data class Content<out S>(
         override val data: S,
         val dialog: Dialog<*, *>? = null

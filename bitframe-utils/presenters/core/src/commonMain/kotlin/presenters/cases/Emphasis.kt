@@ -12,30 +12,41 @@ import kotlin.js.JsName
 import presenters.cases.Failure as FailureCase
 import presenters.cases.Success as SuccessCase
 
+@Deprecated("Coz it is using old dialog API")
 sealed class Emphasis {
     companion object {
+        @Deprecated("Coz it is using old dialog API")
         fun Loading(message: String) = Status(Feedback.Loading(message))
 
+        @Deprecated("Coz it is using old dialog API")
         fun Success(
             message: String = SuccessCase.DEFAULT_MESSAGE,
             builder: (SimpleActionsBuilder.() -> Unit)? = null
         ) = Status(Feedback.Success(message, builder))
 
+        @Deprecated("Coz it is using old dialog API")
         fun Failure(
             cause: Throwable? = null,
             message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
             builder: (SimpleActionsBuilder.() -> Unit)? = null
         ) = Status(Feedback.Failure(cause, message, builder))
 
+        @Deprecated("Coz it is using old dialog API")
         @JsName("fromDialog")
         fun Dialog(dialog: Dialog<*, *>) = Modal(dialog)
 
+        @Deprecated("Coz it is using old dialog API")
         @JsName("fromForm")
         fun Dialog(form: BaseForm<*, *>) = Modal(FormDialog(form))
     }
 
+    @Deprecated("Coz it is using old dialog API")
     object None : Emphasis()
+
+    @Deprecated("Coz it is using old dialog API")
     data class Status(val feedback: Case) : Emphasis()
+
+    @Deprecated("Coz it is using old dialog API")
     data class Modal(val dialog: Dialog<*, *>) : Emphasis()
 
     val isStatus get() = this is Status

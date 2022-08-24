@@ -12,15 +12,18 @@ import presenters.cases.Loading as LoadingCase
 import presenters.cases.Success as SuccessCase
 import presenters.cases.Failure as FailureCase
 
+@Deprecated("In favour of presenters.states")
 sealed class Feedback : Case {
     abstract override val message: String
 
+    @Deprecated("In favour of presenters.states")
     class Loading(
         override val message: String
     ) : Feedback(), LoadingCase {
         override val loading: Boolean = true
     }
 
+    @Deprecated("In favour of presenters.states")
     class Failure(
         override val cause: Throwable? = null,
         override val message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
@@ -35,6 +38,7 @@ sealed class Feedback : Case {
         override val failure: Boolean = true
     }
 
+    @Deprecated("In favour of presenters.states")
     class Success(
         override val message: String = SuccessCase.DEFAULT_MESSAGE,
         override val actions: List<SimpleAction>
@@ -47,6 +51,7 @@ sealed class Feedback : Case {
         override val success = true
     }
 
+    @Deprecated("In favour of presenters.states")
     object None : Feedback() {
         override val message get() = "No Feedback"
         override fun toString(): String = message

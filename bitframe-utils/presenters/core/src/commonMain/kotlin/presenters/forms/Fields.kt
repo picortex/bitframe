@@ -10,9 +10,8 @@ import kotlin.js.JsExport
 
 open class Fields(internal val cache: MutableMap<String, InputField> = mutableMapOf()) {
 
-//    @JsName("_ignore_all")
-//    val all get() = cache.values.toInteroperableList()
-//
+    internal val all get() = cache.values
+
 //    @JsName("_ignore_are_valid")
 //    val areValid get() = valuesToBeSubmitted.all { it.feedback.value !is InputFieldState.Error }
 //
@@ -37,5 +36,12 @@ open class Fields(internal val cache: MutableMap<String, InputField> = mutableMa
 
     fun validate() {
         valuesToBeSubmitted.forEach { it.validateWithFeedback() }
+    }
+
+    fun clearAll() {
+        valueFields.forEach {
+            it.value = null
+            it.feedback.value = InputFieldState.Empty
+        }
     }
 }

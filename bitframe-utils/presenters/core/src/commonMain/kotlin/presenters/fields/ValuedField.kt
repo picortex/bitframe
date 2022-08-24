@@ -3,6 +3,7 @@
 package presenters.fields
 
 import live.Live
+import live.MutableLive
 import kotlin.js.JsExport
 
 @JsExport
@@ -10,8 +11,8 @@ interface ValuedField<T : Any> : InputField {
     val isReadonly: Boolean
     val isRequired: Boolean
     val defaultValue: T?
-    val value: T?
-    val feedback: Live<InputFieldState>
+    var value: T?
+    val feedback: MutableLive<InputFieldState>
     val validator: ((T?) -> Unit)?
     fun validate(value: T? = this.value)
     fun validateWithFeedback(value: T? = this.value)

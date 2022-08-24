@@ -4,6 +4,7 @@ package presenters.confirmations
 
 import kotlin.js.JsExport
 
+// Make it use lazy state
 sealed class ConfirmationState {
     object Pending : ConfirmationState()
     object Executing : ConfirmationState()

@@ -48,18 +48,7 @@ open class Form<out F : Fields, in P>(
 
     override fun validate() = fields.validate()
 
-    private var afterSubmitAction: ((F) -> Unit)? = null
-    private var failureAction: ((F) -> Unit)? = null
-
-    @Deprecated("in favour of submit().then()")
-    fun onSubmitted(handler: (F) -> Unit) {
-        afterSubmitAction = handler
-    }
-
-    @Deprecated("in favour of submit().catch()")
-    fun onFailure(handler: (F) -> Unit) {
-        failureAction = handler
-    }
+    fun clear() = fields.clearAll()
 
     @JsName("send")
     fun submit() = try {
@@ -81,17 +70,14 @@ open class Form<out F : Fields, in P>(
         ui.value = FormState.Submitting
         val values = fields.valuesInJson
         submit.invoke(codec.decodeFromString(config.serializer, values)).finally {
-            val (state, action) = when (it) {
-                is Fulfilled -> FormState.Submitted to afterSubmitAction
-                is Rejected -> FormState.Failure(it.cause) to failureAction
+            ui.value = when (it) {
+                is Fulfilled -> FormState.Submitted
+                is Rejected -> FormState.Failure(it.cause)
             }
-            ui.value = state
-            action?.invoke(fields)
             if (config.exitOnSubmitted) cancel()
         }
     } catch (err: Throwable) {
         ui.value = FormState.Failure(err)
-        failureAction?.invoke(fields)
         Later.reject(err, config.executor)
     }
 }

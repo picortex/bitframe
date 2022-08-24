@@ -13,14 +13,17 @@ import presenters.cases.Failure as FailureCase
 import presenters.cases.Loading as LoadingCase
 import presenters.cases.Success as SuccessCase
 
+@Deprecated("In favour of presenters.states")
 sealed class MissionState<out T> : Case {
     abstract val data: T?
 
+    @Deprecated("In favour of presenters.states")
     data class Loading<out D>(
         override val message: String,
         override val data: D? = null,
     ) : MissionState<D>(), LoadingCase
 
+    @Deprecated("In favour of presenters.states")
     data class Failure<out D>(
         override val cause: Throwable? = null,
         override val message: String = cause?.message ?: FailureCase.DEFAULT_MESSAGE,
@@ -38,6 +41,7 @@ sealed class MissionState<out T> : Case {
         override val failure: Boolean = true
     }
 
+    @Deprecated("In favour of presenters.states")
     data class Success<out D>(
         override val data: D
     ) : MissionState<D>(), SuccessCase {
