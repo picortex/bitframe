@@ -4,14 +4,13 @@ package presenters.modal.internal
 
 import presenters.actions.SimpleAction
 import kotlinx.collections.interoperable.List
-import presenters.actions.SimplePendingAction
 import presenters.modal.ConfirmDialog
 
 open class ConfirmDialogImpl(
     override val heading: String,
     override val details: String,
     override val actions: List<SimpleAction>,
-    override val confirm: SimplePendingAction
+    override val confirm: SimpleAction
 ) : ConfirmDialog {
     override val isForm = false
     override val isConfirm = true

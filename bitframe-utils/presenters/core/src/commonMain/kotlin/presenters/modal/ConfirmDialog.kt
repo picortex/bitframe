@@ -5,14 +5,14 @@ package presenters.modal
 
 import presenters.modal.builders.ConfirmDialogActionsBuilder
 import presenters.modal.builders.ConfirmDialogBuildingBlock
-import presenters.actions.SimplePendingAction
+import presenters.actions.SimpleAction
 import presenters.modal.internal.ConfirmDialogImpl
 import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.jvm.JvmName
 
 interface ConfirmDialog : Dialog<Nothing, Nothing> {
-    val confirm: SimplePendingAction
+    val confirm: SimpleAction
 
     companion object {
         @JsName("create")

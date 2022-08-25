@@ -3,6 +3,7 @@ package collections
 import expect.expect
 import koncurrent.SynchronousExecutor
 import presenters.collections.*
+import presenters.collections.tabulateToConsole
 import viewmodel.ViewModelConfig
 import kotlin.test.Test
 

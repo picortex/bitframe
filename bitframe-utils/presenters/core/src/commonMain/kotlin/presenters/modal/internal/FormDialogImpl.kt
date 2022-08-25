@@ -5,7 +5,7 @@ package presenters.modal.internal
 
 import presenters.actions.SimpleAction
 import kotlinx.collections.interoperable.List
-import presenters.actions.GenericPendingAction
+import presenters.actions.GenericAction
 import presenters.forms.Fields
 import presenters.modal.FormDialog
 import kotlin.js.JsExport
@@ -15,7 +15,7 @@ open class FormDialogImpl<out F : Fields, in P>(
     override val details: String,
     override val fields: F,
     override val actions: List<SimpleAction>,
-    override val submit: GenericPendingAction<P>
+    override val submit: GenericAction<P>
 ) : FormDialog<F, P> {
     override val cancel by lazy {
         actions.firstOrNull {

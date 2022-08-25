@@ -5,20 +5,22 @@ import koncurrent.later.catch
 import presenters.actions.ActionsBuilder
 import presenters.actions.MutableSimpleAction
 import presenters.actions.SimpleActionsBuilder
+import presenters.confirmations.ConfirmActionsBuilder
 import presenters.confirmations.ConfirmationBox
 import presenters.confirmations.ConfirmationState
 import presenters.forms.FormActionsBuilder
 import viewmodel.ScopeConfig
 import viewmodel.ViewModel
 
-class ConfirmationBoxImpl(
+@PublishedApi
+internal class ConfirmationBoxImpl(
     override val heading: String,
     override val details: String,
-    private val config: ScopeConfig<*>,
-    private val actionsBuilder: FormActionsBuilder<Any?>.() -> Unit
+    config: ScopeConfig<*>,
+    actionsBuilder: ConfirmActionsBuilder.() -> Unit
 ) : ViewModel<ConfirmationState>(config.of(ConfirmationState.Pending)), ConfirmationBox {
 
-    private val actions = FormActionsBuilder<Any?>().apply(actionsBuilder)
+    private val actions = ConfirmActionsBuilder().apply(actionsBuilder)
 
     override val cancelAction = MutableSimpleAction(
         name = "Cancel",
@@ -31,12 +33,15 @@ class ConfirmationBoxImpl(
 
     private val confirmAction = actions.submitAction
 
-    override fun confirm(): Later<Unit> {
+    override fun confirm(): Later<Any?> = try {
         ui.value = ConfirmationState.Executing
-        return confirmAction(Unit).then {
-            ui.value = ConfirmationState.Executed.Successfully
-        }.catch {
-            ui.value = ConfirmationState.Executed.Exceptionally
-        }
+        confirmAction()
+    } catch (err: Throwable) {
+        Later.reject(err)
+    }.then {
+        ui.value = ConfirmationState.Executed.Successfully
+    }.catch {
+        ui.value = ConfirmationState.Executed.Exceptionally
+        throw it
     }
 }

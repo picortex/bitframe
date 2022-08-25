@@ -1,10 +1,10 @@
 package presenters.forms
 
-import presenters.actions.GenericPendingAction
+import presenters.actions.GenericAction
 import presenters.actions.SimpleAction
 import presenters.forms.internal.BaseFormImpl
 
-typealias FormActionsBuildingBlock<T> = FormActionsBuilder<T>.() -> GenericPendingAction<T>
+typealias FormActionsBuildingBlock<T> = FormActionsBuilder<T>.() -> GenericAction<T>
 
 fun <F : Fields, P> BaseForm(
     heading: String,

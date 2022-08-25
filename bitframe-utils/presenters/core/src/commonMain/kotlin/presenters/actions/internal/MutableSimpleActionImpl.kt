@@ -1,14 +1,15 @@
 package presenters.actions.internal
 
+import koncurrent.Later
 import presenters.actions.MutableSimpleAction
 
 @PublishedApi
 internal class MutableSimpleActionImpl(
     override val name: String,
-    override var handler: () -> Unit
+    override var handler: () -> Later<Any?>
 ) : MutableSimpleAction {
     override fun onInvoked(h: () -> Unit) {
-        handler = h
+        handler = { Later.resolve(h()) }
     }
 
     override fun invoke() = handler()

@@ -11,7 +11,7 @@ import kotlin.reflect.KProperty
 
 data class DropDownInputField(
     override val name: String,
-    val label: String = name,
+    override val label: String = name,
     val isReadonly: Boolean = false,
     val options: List<Option>
 ) : InputField {

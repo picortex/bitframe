@@ -1,4 +1,4 @@
-package table
+package collections
 
 data class Processor(val name: String, val cores: Int, val clock: Double)
 

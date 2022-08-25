@@ -1,6 +1,6 @@
 package presenters.forms.internal
 
-import presenters.actions.GenericPendingAction
+import presenters.actions.GenericAction
 import presenters.actions.SimpleAction
 import presenters.forms.Fields
 import presenters.forms.BaseForm
@@ -10,7 +10,7 @@ class BaseFormImpl<F : Fields, P>(
     override val details: String,
     override val fields: F,
     override val cancel: SimpleAction,
-    override val submit: GenericPendingAction<P>
+    override val submit: GenericAction<P>
 ) : BaseForm<F, P> {
 
     override fun validate() = fields.validate()

@@ -7,7 +7,6 @@ import kotlin.js.JsExport
 
 @JsExport
 interface InputFieldWithValue<T> : InputField {
-    val label: String
     val isReadonly: Boolean
     val isRequired: Boolean
     var value: T

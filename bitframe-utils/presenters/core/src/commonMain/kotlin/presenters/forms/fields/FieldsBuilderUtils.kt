@@ -8,7 +8,7 @@ import kotlin.reflect.KProperty
 fun <T : InputField> Fields.getOrCreate(
     builder: (property: KProperty<*>) -> T
 ) = ReadOnlyProperty<Fields, T> { _, property ->
-    (cache[property] as? T) ?: run {
-        builder(property).also { cache[property] = it }
+    (cache[property.name] as? T) ?: run {
+        builder(property).also { cache[property.name] = it }
     }
 }
