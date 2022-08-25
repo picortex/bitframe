@@ -41,12 +41,10 @@ class DoubleInputField(
 
     override var stringValue: String
         get() = value.toString()
-        set(v) {
-            value = try {
-                v.toDouble()
-            } catch (err: Throwable) {
-                null
-            }
+        set(v) = try {
+            value = v.toDouble()
+        } finally {
+
         }
 
     override fun increment(step: Double?) {

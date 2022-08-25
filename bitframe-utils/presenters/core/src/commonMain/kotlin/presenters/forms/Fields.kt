@@ -39,9 +39,6 @@ open class Fields(internal val cache: MutableMap<String, InputField> = mutableMa
     }
 
     fun clearAll() {
-        valueFields.forEach {
-            it.value = null
-            it.feedback.value = InputFieldState.Empty
-        }
+        valueFields.forEach { it.clear() }
     }
 }

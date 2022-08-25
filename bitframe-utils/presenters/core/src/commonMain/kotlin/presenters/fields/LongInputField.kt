@@ -1,5 +1,4 @@
-@file:JsExport
-@file:Suppress("NON_EXPORTABLE_TYPE")
+@file:JsExport @file:Suppress("NON_EXPORTABLE_TYPE")
 
 package presenters.fields
 
@@ -41,12 +40,10 @@ class LongInputField(
 
     override var stringValue: String
         get() = value.toString()
-        set(v) {
-            value = try {
-                v.toLong()
-            } catch (err: Throwable) {
-                null
-            }
+        set(v) = try {
+            value = v.toLong()
+        } finally {
+
         }
 
     val valueAsDouble get() = this.value?.toDouble()

@@ -48,7 +48,10 @@ open class Form<out F : Fields, in P>(
 
     override fun validate() = fields.validate()
 
-    fun clear() = fields.clearAll()
+    fun clear() {
+        fields.clearAll()
+        ui.value = FormState.Fillable
+    }
 
     @JsName("send")
     fun submit() = try {

@@ -41,12 +41,10 @@ class IntegerInputField(
 
     override var stringValue: String
         get() = value.toString()
-        set(v) {
-            value = try {
-                v.toInt()
-            } catch (err: Throwable) {
-                null
-            }
+        set(v) = try {
+            value = v.toInt()
+        } finally {
+
         }
 
     override fun increment(step: Int?) {

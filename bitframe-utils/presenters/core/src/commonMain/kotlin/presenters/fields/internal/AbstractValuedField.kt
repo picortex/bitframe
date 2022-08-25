@@ -10,6 +10,7 @@ import presenters.fields.ValuedField.Companion.DEFAULT_IS_READONLY
 import presenters.fields.ValuedField.Companion.DEFAULT_IS_REQUIRED
 import presenters.fields.ValuedField.Companion.DEFAULT_VALIDATOR
 import presenters.fields.ValuedField.Companion.DEFAULT_VALUE
+import presenters.states.Feedback
 import kotlin.js.JsExport
 
 abstract class AbstractValuedField<T : Any>(
@@ -37,6 +38,11 @@ abstract class AbstractValuedField<T : Any>(
         } catch (err: Throwable) {
             feedback.value = InputFieldState.Warning(err.message ?: "", err)
         }
+    }
+
+    override fun clear() {
+        value = null
+        feedback.value = InputFieldState.Empty
     }
 
     abstract override fun validate(value: T?)

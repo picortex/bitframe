@@ -11,11 +11,13 @@ interface ValuedField<T : Any> : InputField {
     val isReadonly: Boolean
     val isRequired: Boolean
     val defaultValue: T?
-    var value: T?
+    val value: T?
     val feedback: MutableLive<InputFieldState>
     val validator: ((T?) -> Unit)?
     fun validate(value: T? = this.value)
     fun validateWithFeedback(value: T? = this.value)
+
+    fun clear()
 
     val asteriskedLabel get() = labelWithAsterisks
 

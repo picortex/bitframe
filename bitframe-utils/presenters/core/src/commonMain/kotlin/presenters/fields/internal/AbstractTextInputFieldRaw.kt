@@ -8,6 +8,7 @@ import presenters.fields.InputFieldWithValue.Companion.DEFAULT_IS_REQUIRED
 import presenters.fields.TextInputFieldRaw
 import kotlin.js.JsExport
 
+@Deprecated("In favour of TextBasedInputField")
 abstract class AbstractTextInputFieldRaw(
     override val name: String,
     override val label: String = name,

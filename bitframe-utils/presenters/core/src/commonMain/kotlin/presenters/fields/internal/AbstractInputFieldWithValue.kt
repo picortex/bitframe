@@ -10,6 +10,7 @@ import presenters.fields.InputFieldWithValue.Companion.DEFAULT_IS_READONLY
 import presenters.fields.InputFieldWithValue.Companion.DEFAULT_IS_REQUIRED
 import kotlin.js.JsExport
 
+@Deprecated("In favour of AbstractValuedField")
 abstract class AbstractInputFieldWithValue<T>(
     override val name: String,
     override val label: String = name,
