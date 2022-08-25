@@ -5,22 +5,22 @@ package bitframe.actor
 import kotlin.js.JsExport
 
 @JsExport
-interface IdentifiedRaw<out T> {
-    val uid: String
+interface IdentifiedRaw<out I, out T> {
+    val uid: I
     val body: T
 }
 
-inline fun <T, R> IdentifiedRaw<T>.map(transform: (T) -> R): IdentifiedRaw<R> = Identified(
+inline fun <I, T, R> IdentifiedRaw<I, T>.map(transform: (T) -> R): IdentifiedRaw<I, R> = Identified(
     uid = uid,
     body = transform(body)
 )
 
-fun <T> IdentifiedRaw<T>.toValidated() = Identified(
+fun <I, T> IdentifiedRaw<I, T>.toValidated() = Identified(
     uid = uid,
     body = body
 )
 
-inline fun <T, S> IdentifiedRaw<T>.toValidated(transform: (T) -> S) = Identified(
+inline fun <I, T, S> IdentifiedRaw<I, T>.toValidated(transform: (T) -> S) = Identified(
     uid = uid,
     body = transform(body)
 )
