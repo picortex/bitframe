@@ -23,9 +23,23 @@ abstract class AbstractSelectionManager<T>(
 
     abstract fun selectRow(row: Int, page: Int?)
 
+    private fun findRowNumber(obj: T): Int? {
+        return paginator.currentPageOrNull?.items?.find { it.item == obj }?.number
+    }
+
+    override fun select(obj: T) {
+        val rowNumber = findRowNumber(obj)
+        if (rowNumber != null) select(rowNumber)
+    }
+
     override fun addSelection(row: Int) = addRowSelection(row, currentLoadedPage?.number)
 
     override fun addSelection(row: Int, page: Int) = addRowSelection(row, page)
+
+    override fun addSelection(obj: T) {
+        val rowNumber = findRowNumber(obj)
+        if (rowNumber != null) addSelection(rowNumber)
+    }
 
     abstract fun addRowSelection(row: Int, page: Int?)
 

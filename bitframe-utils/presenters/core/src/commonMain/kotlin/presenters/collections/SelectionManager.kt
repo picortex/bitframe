@@ -33,6 +33,8 @@ interface SelectionManager<in T> {
     @JsName("selectRow")
     fun select(row: Int)
 
+    fun select(obj: T)
+
     // ---------------------------------Selection Adders --------------------------
 
     /**
@@ -48,6 +50,9 @@ interface SelectionManager<in T> {
      */
     @JsName("addSelectionOfRowNumber")
     fun addSelection(row: Int)
+
+    @JsName("addSelectionOf")
+    fun addSelection(obj: T)
 
     // ---------------------------------Selection Toggles --------------------------
 

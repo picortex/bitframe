@@ -8,7 +8,11 @@ import kotlin.js.JsExport
 sealed class FormState {
     object Fillable : FormState()
     object Validating : FormState()
-    object Submitting : FormState()
+
+    data class Submitting(val json: String) : FormState() {
+        override fun toString(): String = "Submitting $json"
+    }
+
     object Submitted : FormState()
     data class Failure(
         val cause: Throwable? = null,

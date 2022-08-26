@@ -5,6 +5,7 @@ package presenters.forms
 import koncurrent.Fulfilled
 import koncurrent.Later
 import koncurrent.Rejected
+import koncurrent.later.catch
 import koncurrent.later.finally
 import presenters.actions.GenericAction
 import presenters.actions.SimpleAction
@@ -66,14 +67,15 @@ open class Form<out F : Fields, in P>(
             val terminator = "input" + if (size > 1) "s" else ""
             throw IllegalArgumentException("You have $size invalid $terminator", invalidFields)
         }
-        ui.value = FormState.Submitting
         val values = fields.valuesInJson
-        submit.invoke(codec.decodeFromString(config.serializer, values)).finally {
-            ui.value = when (it) {
-                is Fulfilled -> FormState.Submitted
-                is Rejected -> FormState.Failure(it.cause)
-            }
+        ui.value = FormState.Submitting(values)
+        submit.invoke(codec.decodeFromString(config.serializer, values)).then {
+            ui.value = FormState.Submitted
             if (config.exitOnSubmitted) cancel()
+            it
+        }.catch {
+            ui.value = FormState.Failure(it)
+            throw it
         }
     } catch (err: Throwable) {
         ui.value = FormState.Failure(err)

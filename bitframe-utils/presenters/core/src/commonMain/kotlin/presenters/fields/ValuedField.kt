@@ -10,12 +10,9 @@ interface ValuedField : InputField {
     val isReadonly: Boolean
     val isRequired: Boolean
     val feedback: Live<InputFieldState>
-
     fun clear()
-
     val asteriskedLabel get() = labelWithAsterisks
-
-    val labelWithAsterisks get() = (if (isRequired) "*" else "") + label.replaceFirstChar { it.uppercase() }
+    val labelWithAsterisks get() = label.replaceFirstChar { it.uppercase() } + if (isRequired) "*" else ""
 
     companion object {
         val DEFAULT_IS_READONLY = false
