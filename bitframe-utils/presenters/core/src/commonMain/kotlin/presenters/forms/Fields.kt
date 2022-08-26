@@ -5,7 +5,7 @@ package presenters.forms
 
 import presenters.fields.InputField
 import presenters.fields.InputFieldState
-import presenters.fields.ValuedField
+import presenters.fields.SingleValuedField
 import kotlin.js.JsExport
 
 open class Fields(internal val cache: MutableMap<String, InputField> = mutableMapOf()) {
@@ -27,7 +27,7 @@ open class Fields(internal val cache: MutableMap<String, InputField> = mutableMa
 
     internal val allInvalid get() = valuesToBeSubmitted.filter { it.feedback.value is InputFieldState.Error }
 
-    private val valueFields get() = cache.values.filterIsInstance<ValuedField<*>>()
+    private val valueFields get() = cache.values.filterIsInstance<SingleValuedField<*>>()
 
     private val valuesToBeSubmitted
         get() = valueFields.filterNot {

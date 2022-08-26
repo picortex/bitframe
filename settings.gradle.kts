@@ -42,6 +42,8 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
 
 rootProject.name = "bitframe"
 
+includeSubs("krono", "../krono", "api")
+
 // <BitframeUtils>
 includeSubs(base = "mailer", path = "bitframe-utils/mailer", "api", "mock", "smtp")
 includeRoot("templater", "bitframe-utils/templater")

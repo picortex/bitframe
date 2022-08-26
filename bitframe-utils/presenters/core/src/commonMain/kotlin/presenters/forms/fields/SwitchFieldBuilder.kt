@@ -1,6 +1,7 @@
 package presenters.forms.fields
 
 import presenters.fields.SwitchInputField
+import presenters.fields.SingleValuedField
 import presenters.fields.ValuedField
 import presenters.forms.Fields
 import kotlin.reflect.KProperty

@@ -5,22 +5,21 @@ package presenters.fields.internal
 
 import live.mutableLiveOf
 import presenters.fields.InputFieldState
-import presenters.fields.ValuedField
+import presenters.fields.SingleValuedField
 import presenters.fields.ValuedField.Companion.DEFAULT_IS_READONLY
 import presenters.fields.ValuedField.Companion.DEFAULT_IS_REQUIRED
 import presenters.fields.ValuedField.Companion.DEFAULT_VALIDATOR
-import presenters.fields.ValuedField.Companion.DEFAULT_VALUE
-import presenters.states.Feedback
+import presenters.fields.SingleValuedField.Companion.DEFAULT_VALUE
 import kotlin.js.JsExport
 
-abstract class AbstractValuedField<T : Any>(
+abstract class AbstractSingleValuedField<T : Any>(
     override val name: String,
     override val label: String = name.replaceFirstChar { it.uppercase() },
     override val defaultValue: T? = DEFAULT_VALUE,
     override val isReadonly: Boolean = DEFAULT_IS_READONLY,
     override val isRequired: Boolean = DEFAULT_IS_REQUIRED,
     override val validator: ((T?) -> Unit)? = DEFAULT_VALIDATOR
-) : ValuedField<T> {
+) : SingleValuedField<T> {
     override val feedback = mutableLiveOf<InputFieldState>(InputFieldState.Empty)
 
     override var value: T? = null

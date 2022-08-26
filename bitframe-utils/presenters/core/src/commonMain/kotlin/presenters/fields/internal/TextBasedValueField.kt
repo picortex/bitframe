@@ -5,7 +5,7 @@ package presenters.fields.internal
 import presenters.fields.InputFieldWithValue.Companion.DEFAULT_IS_READONLY
 import presenters.fields.InputFieldWithValue.Companion.DEFAULT_IS_REQUIRED
 import presenters.fields.ValuedField.Companion.DEFAULT_VALIDATOR
-import presenters.fields.ValuedField.Companion.DEFAULT_VALUE
+import presenters.fields.SingleValuedField.Companion.DEFAULT_VALUE
 import kotlin.js.JsExport
 
 abstract class TextBasedValueField(
@@ -18,7 +18,7 @@ abstract class TextBasedValueField(
     open val maxLength: Int? = DEFAULT_MAX_LENGTH,
     open val minLength: Int? = DEFAULT_MIN_LENGTH,
     override val validator: ((String?) -> Unit)? = DEFAULT_VALIDATOR
-) : AbstractValuedField<String>(name, label, defaultValue, isReadonly, isRequired, validator) {
+) : AbstractSingleValuedField<String>(name, label, defaultValue, isReadonly, isRequired, validator) {
     companion object {
         val DEFAULT_MAX_LENGTH: Int? = null
         val DEFAULT_MIN_LENGTH: Int? = null

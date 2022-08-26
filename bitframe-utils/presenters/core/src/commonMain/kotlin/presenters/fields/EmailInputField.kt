@@ -3,8 +3,6 @@
 package presenters.fields
 
 import identifier.Email
-import identifier.Phone
-import presenters.fields.internal.AbstractTextInputFieldRaw
 import presenters.fields.internal.TextBasedValueField
 import kotlin.js.JsExport
 import kotlin.js.JsName

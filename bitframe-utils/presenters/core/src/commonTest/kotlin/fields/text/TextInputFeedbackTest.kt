@@ -21,11 +21,11 @@ class TextInputFeedbackTest {
         field.value = "Anders"
         val (w1, w2, _, w4, w5) = expect(field.feedback).toHaveGoneThrough5<Warning, Warning, Empty, Warning, Warning>()
         listOf(w1, w2).forEach {
-            expect(it.message).toBe("Test should not contain less than 3 characters")
+            expect(it.message).toBe("Test must have more than 3 characters")
         }
 
         listOf(w4, w5).forEach {
-            expect(it.message).toBe("Test should not contain more than 4 characters")
+            expect(it.message).toBe("Test must have less than 4 characters")
         }
     }
 }

@@ -6,15 +6,10 @@ import live.Live
 import kotlin.js.JsExport
 
 @JsExport
-interface ValuedField<T : Any> : InputField {
+interface ValuedField : InputField {
     val isReadonly: Boolean
     val isRequired: Boolean
-    val defaultValue: T?
-    val value: T?
     val feedback: Live<InputFieldState>
-    val validator: ((T?) -> Unit)?
-    fun validate(value: T? = this.value)
-    fun validateWithFeedback(value: T? = this.value)
 
     fun clear()
 

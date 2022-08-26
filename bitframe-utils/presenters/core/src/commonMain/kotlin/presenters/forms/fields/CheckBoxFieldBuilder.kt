@@ -1,11 +1,9 @@
 package presenters.forms.fields
 
 import presenters.fields.CheckBoxInputField
-import presenters.fields.InputFieldWithValue
-import presenters.fields.TextInputField
+import presenters.fields.SingleValuedField
 import presenters.fields.ValuedField
 import presenters.forms.Fields
-import kotlin.reflect.KMutableProperty
 import kotlin.reflect.KProperty
 
 inline fun Fields.checkBox(

@@ -11,7 +11,7 @@ import kotlin.reflect.KProperty
 class CheckBoxInputField(
     override val name: String,
     override val label: String = name,
-    override val defaultValue: Boolean? = null,
+    override val defaultValue: Boolean? = ValuedField.DEFAULT_VALUE,
     override val isReadonly: Boolean = ValuedField.DEFAULT_IS_READONLY,
     override val isRequired: Boolean = ValuedField.DEFAULT_IS_REQUIRED,
     override val validator: ((Boolean?) -> Unit)? = ValuedField.DEFAULT_VALIDATOR
@@ -20,7 +20,7 @@ class CheckBoxInputField(
     constructor(
         name: KProperty<*>,
         label: String = name.name,
-        defaultValue: Boolean? = null,
+        defaultValue: Boolean? = ValuedField.DEFAULT_VALUE,
         isReadonly: Boolean = ValuedField.DEFAULT_IS_READONLY,
         isRequired: Boolean = ValuedField.DEFAULT_IS_REQUIRED,
         validator: ((Boolean?) -> Unit)? = ValuedField.DEFAULT_VALIDATOR

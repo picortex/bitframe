@@ -5,6 +5,7 @@ package presenters.fields.internal
 
 import presenters.fields.InputFieldWithValue.Companion.DEFAULT_IS_READONLY
 import presenters.fields.InputFieldWithValue.Companion.DEFAULT_IS_REQUIRED
+import presenters.fields.SingleValuedField
 import presenters.fields.ValuedField
 import kotlin.js.JsExport
 
@@ -15,7 +16,7 @@ abstract class BooleanBasedInputField(
     override val isReadonly: Boolean = DEFAULT_IS_READONLY,
     override val isRequired: Boolean = DEFAULT_IS_REQUIRED,
     override val validator: ((Boolean?) -> Unit)? = ValuedField.DEFAULT_VALIDATOR
-) : AbstractValuedField<Boolean>(name, label, defaultValue, isReadonly, isRequired, validator) {
+) : AbstractSingleValuedField<Boolean>(name, label, defaultValue, isReadonly, isRequired, validator) {
     companion object {
         val DEFAULT_MAX_LENGTH: Int? = null
         val DEFAULT_MIN_LENGTH: Int? = null

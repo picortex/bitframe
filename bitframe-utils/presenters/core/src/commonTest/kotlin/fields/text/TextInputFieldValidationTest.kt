@@ -48,7 +48,7 @@ class TextInputFieldValidationTest {
         val exp = expectFailure {
             name.validate()
         }
-        expect(exp.message).toBe("Test should not contain less than 20 characters")
+        expect(exp.message).toBe("Test must have more than 20 characters")
     }
 
     @Test
@@ -74,7 +74,7 @@ class TextInputFieldValidationTest {
         val exp = expectFailure {
             name.validate()
         }
-        expect(exp.message).toBe("Test should not contain less than 30 characters")
+        expect(exp.message).toBe("Test must have more than 30 characters")
     }
 
     @Test

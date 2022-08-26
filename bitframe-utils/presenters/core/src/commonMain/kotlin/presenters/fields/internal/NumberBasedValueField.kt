@@ -5,7 +5,7 @@ package presenters.fields.internal
 import presenters.fields.InputFieldWithValue.Companion.DEFAULT_IS_READONLY
 import presenters.fields.InputFieldWithValue.Companion.DEFAULT_IS_REQUIRED
 import presenters.fields.ValuedField.Companion.DEFAULT_VALIDATOR
-import presenters.fields.ValuedField.Companion.DEFAULT_VALUE
+import presenters.fields.SingleValuedField.Companion.DEFAULT_VALUE
 import kotlin.js.JsExport
 
 abstract class NumberBasedValueField<N : Number>(
@@ -19,7 +19,7 @@ abstract class NumberBasedValueField<N : Number>(
     open val min: N? = DEFAULT_MIN,
     open val step: N? = DEFAULT_STEP,
     override val validator: ((N?) -> Unit)? = DEFAULT_VALIDATOR
-) : AbstractValuedField<N>(name, label, defaultValue, isReadonly, isRequired, validator) {
+) : AbstractSingleValuedField<N>(name, label, defaultValue, isReadonly, isRequired, validator) {
     companion object {
         val DEFAULT_STEP: Nothing? = null
         val DEFAULT_MAX: Nothing? = null
