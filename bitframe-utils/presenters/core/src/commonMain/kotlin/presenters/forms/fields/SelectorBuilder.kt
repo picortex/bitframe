@@ -1,7 +1,6 @@
 package presenters.forms.fields
 
 import presenters.fields.DropDownInputField
-import presenters.fields.TextInputField
 import presenters.forms.Fields
 import kotlin.reflect.KProperty
 
@@ -18,7 +17,7 @@ inline fun Fields.selector(
 }
 
 inline fun Fields.selector(
-    property: KProperty<*>,
-    label: String? = property.name,
+    name: KProperty<*>,
+    label: String? = name.name,
     vararg options: DropDownInputField.Option,
-) = selector(property.name, label, *options)
+) = selector(name.name, label, *options)

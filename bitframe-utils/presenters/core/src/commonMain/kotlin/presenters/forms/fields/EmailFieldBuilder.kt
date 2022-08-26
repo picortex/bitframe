@@ -30,8 +30,8 @@ inline fun Fields.email(
 }
 
 inline fun Fields.email(
-    property: KProperty<*>,
-    label: String? = property.name,
+    name: KProperty<*>,
+    label: String? = name.name,
     hint: String? = label,
     value: String? = ValuedField.DEFAULT_VALUE,
     isReadonly: Boolean = ValuedField.DEFAULT_IS_READONLY,
@@ -39,4 +39,4 @@ inline fun Fields.email(
     maxLength: Int? = TextBasedValueField.DEFAULT_MAX_LENGTH,
     minLength: Int? = TextBasedValueField.DEFAULT_MIN_LENGTH,
     noinline validator: ((String?) -> Unit)? = ValuedField.DEFAULT_VALIDATOR
-) = email(property.name, label, hint, value, isReadonly, isRequired, maxLength, minLength, validator)
+) = email(name.name, label, hint, value, isReadonly, isRequired, maxLength, minLength, validator)

@@ -15,7 +15,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.datetimeCore)
+                api(projects.kronoApi)
                 api(kotlinx.serialization.json)
                 api(asoft.viewmodel.core)
                 api(asoft.koncurrent.later.core)

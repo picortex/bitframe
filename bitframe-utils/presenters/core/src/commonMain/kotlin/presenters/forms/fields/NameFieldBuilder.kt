@@ -34,8 +34,8 @@ inline fun Fields.name(
 }
 
 inline fun Fields.name(
-    property: KProperty<*>,
-    label: String? = property.name,
+    name: KProperty<*>,
+    label: String? = name.name,
     hint: String? = label,
     value: String? = ValuedField.DEFAULT_VALUE,
     isReadonly: Boolean = ValuedField.DEFAULT_IS_READONLY,
@@ -43,4 +43,4 @@ inline fun Fields.name(
     maxLength: Int? = TextBasedValueField.DEFAULT_MAX_LENGTH,
     minLength: Int? = DEFAULT_MIN_LENGTH,
     noinline validator: ((String?) -> Unit)? = ValuedField.DEFAULT_VALIDATOR
-) = name(property.name, label, hint, value, isReadonly, isRequired, maxLength, minLength, validator)
+) = this.name(name.name, label, hint, value, isReadonly, isRequired, maxLength, minLength, validator)

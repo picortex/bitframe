@@ -30,11 +30,11 @@ abstract class TextBasedValueField(
         }
         val max = maxLength
         if (max != null && value != null && value.length > max) {
-            throw IllegalArgumentException("${label.replaceFirstChar { it.uppercase() }} should not contain more than $max characters")
+            throw IllegalArgumentException("${label.replaceFirstChar { it.uppercase() }} must have less than $max characters")
         }
         val min = minLength
         if (min != null && value != null && value.length < min) {
-            throw IllegalArgumentException("${label.replaceFirstChar { it.uppercase() }} should not contain less than $min characters")
+            throw IllegalArgumentException("${label.replaceFirstChar { it.uppercase() }} must have more than $min characters")
         }
         validator?.invoke(value)
     }

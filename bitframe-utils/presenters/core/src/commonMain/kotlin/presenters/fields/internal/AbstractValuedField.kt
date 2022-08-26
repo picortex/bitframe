@@ -24,6 +24,7 @@ abstract class AbstractValuedField<T : Any>(
     override val feedback = mutableLiveOf<InputFieldState>(InputFieldState.Empty)
 
     override var value: T? = null
+        get() = field ?: defaultValue
         set(value) {
             update(value)
             field = value

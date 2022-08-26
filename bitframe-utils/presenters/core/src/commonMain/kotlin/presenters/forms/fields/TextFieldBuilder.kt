@@ -31,8 +31,8 @@ inline fun Fields.text(
 }
 
 inline fun Fields.text(
-    property: KProperty<*>,
-    label: String? = property.name,
+    name: KProperty<*>,
+    label: String? = name.name,
     hint: String? = label,
     value: String? = ValuedField.DEFAULT_VALUE,
     isReadonly: Boolean = ValuedField.DEFAULT_IS_READONLY,
@@ -40,4 +40,4 @@ inline fun Fields.text(
     maxLength: Int? = TextBasedValueField.DEFAULT_MAX_LENGTH,
     minLength: Int? = TextBasedValueField.DEFAULT_MIN_LENGTH,
     noinline validator: ((String?) -> Unit)? = ValuedField.DEFAULT_VALIDATOR
-) = text(property.name, label, hint, value, isReadonly, isRequired, maxLength, minLength, validator)
+) = text(name.name, label, hint, value, isReadonly, isRequired, maxLength, minLength, validator)
