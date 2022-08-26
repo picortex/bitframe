@@ -28,7 +28,7 @@ abstract class AbstractRangeValuedField<T : Comparable<T>>(
         get() {
             val s = start
             val e = end
-            return if (s != null && e != null) Range(s, e) else defaultValue
+            return if (s != null && e != null && s <= e) Range(s, e) else defaultValue
         }
         set(value) {
             start = value?.start
@@ -49,7 +49,7 @@ abstract class AbstractRangeValuedField<T : Comparable<T>>(
             field = value
         }
 
-    private fun update(start: T?, end: T?) {
+    protected fun update(start: T?, end: T?) {
         try {
             validate(start, end)
             if (feedback.value != InputFieldState.Empty) {
@@ -68,7 +68,7 @@ abstract class AbstractRangeValuedField<T : Comparable<T>>(
 
     override fun validate(value: Range<T>?) = validate(value?.start, value?.end)
 
-    private fun validate(start: T?, end: T?) {
+    protected fun validate(start: T?, end: T?) {
         val tag = label.replaceFirstChar { it.uppercase() }
         if (isRequired && start == null) {
             throw IllegalArgumentException("$tag start value is required")

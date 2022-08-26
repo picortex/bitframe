@@ -7,7 +7,7 @@ import presenters.fields.DateInputField
 import presenters.fields.InputFieldState
 import kotlin.test.Test
 
-class DateInputValidation {
+class DateInputValidationTest {
     @Test
     fun should_have_null_value_on_an_invalid_iso() {
         val dob = DateInputField("dob", "Date of Birth")
