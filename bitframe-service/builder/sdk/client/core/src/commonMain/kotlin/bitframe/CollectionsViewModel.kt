@@ -5,7 +5,6 @@ package bitframe
 import cache.load
 import cache.save
 import koncurrent.later.catch
-import koncurrent.later.then
 import live.MutableLive
 import live.mutableLiveOf
 import presenters.collections.ActionsManager
@@ -33,8 +32,10 @@ abstract class CollectionsViewModel<T>(private val config: AppScopeConfig<*>) : 
         private val DEFAULT_VIEW = View.ListView
     }
 
+    private val preferedView get() = "${this::class.simpleName?.replace("ViewModel", "")}.$PREFERRED_VIEW"
+
     fun switchToLatestSelectedView() {
-        cache.load<View>(keyOf(PREFERRED_VIEW)).then {
+        cache.load<View>(preferedView).then {
             view.value = it
         }.catch {
             view.value = DEFAULT_VIEW
@@ -45,7 +46,7 @@ abstract class CollectionsViewModel<T>(private val config: AppScopeConfig<*>) : 
 
     fun switchToTableView() = switchTo(View.TableView)
 
-    private fun switchTo(v: View) = cache.save(keyOf(PREFERRED_VIEW), v).then {
+    private fun switchTo(v: View) = cache.save(preferedView, v).then {
         view.value = it
     }
 }

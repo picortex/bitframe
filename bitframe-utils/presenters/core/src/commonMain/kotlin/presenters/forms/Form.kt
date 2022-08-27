@@ -2,11 +2,8 @@
 
 package presenters.forms
 
-import koncurrent.Fulfilled
 import koncurrent.Later
-import koncurrent.Rejected
 import koncurrent.later.catch
-import koncurrent.later.finally
 import presenters.actions.GenericAction
 import presenters.actions.SimpleAction
 import presenters.collections.*
