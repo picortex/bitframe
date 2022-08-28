@@ -48,7 +48,6 @@ includeSubs(base = "presenters", path = "../presenters", "core", "mock")
 // <BitframeUtils>
 includeSubs(base = "mailer", path = "bitframe-utils/mailer", "api", "mock", "smtp")
 includeRoot("templater", "bitframe-utils/templater")
-// includeSubs(base = "datetime", path = "bitframe-utils/datetime", "core")
 includeSubs(base = "events", path = "bitframe-utils/events", "core", "inmemory", "react")
 includeRoot(name = "properties", path = "bitframe-utils/properties")
 includeRoot(name = "validation", path = "bitframe-utils/validation")
