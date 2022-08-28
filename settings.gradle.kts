@@ -43,13 +43,13 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
 rootProject.name = "bitframe"
 
 includeSubs("krono", "../krono", "api")
+includeSubs(base = "presenters", path = "../presenters", "core", "mock")
 
 // <BitframeUtils>
 includeSubs(base = "mailer", path = "bitframe-utils/mailer", "api", "mock", "smtp")
 includeRoot("templater", "bitframe-utils/templater")
 // includeSubs(base = "datetime", path = "bitframe-utils/datetime", "core")
 includeSubs(base = "events", path = "bitframe-utils/events", "core", "inmemory", "react")
-includeSubs(base = "presenters", path = "bitframe-utils/presenters", "core", "mock")
 includeRoot(name = "properties", path = "bitframe-utils/properties")
 includeRoot(name = "validation", path = "bitframe-utils/validation")
 includeRoot(name = "response", path = "bitframe-utils/response")
@@ -62,7 +62,7 @@ includeRoot(name = "bitframe-dao", path = "bitframe-daos/universal")
 
 // Bitframe Service
 includeSubs(base = "bitframe-service-builder", path = "bitframe-service/builder", "core", "daod", "rest")
-includeSubs(base = "bitframe-service-builder-api", path = "bitframe-service/builder/api", "core", "kuest", "ktor", "mock")
+includeSubs(base = "bitframe-service-builder-api", path = "bitframe-service/builder/api", "core", "ktor", "mock")
 includeSubs(base = "bitframe-service-builder-sdk-client", path = "bitframe-service/builder/sdk/client", "core", "react" /* "mock",*/)
 includeSubs(base = "bitframe-service-builder-sdk-server", path = "bitframe-service/builder/sdk/server", "core")
 
