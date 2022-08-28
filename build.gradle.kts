@@ -1,72 +1,38 @@
-import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
-
 @Suppress("DSL_SCOPE_VIOLATION") plugins {
-//    if (System.getProperty("idea.sync.active") == null) {
-        println("Idea is not syncing")
-        alias(kotlinz.plugins.root.multiplatform) apply false
-        alias(kotlinz.plugins.root.serialization) apply false
-//    } else {
-//        println("Idea is syncing")
-//        alias(kotlinz.plugins.root.multiplatform.idea) apply false
-//        alias(kotlinz.plugins.root.serialization.idea) apply false
-//    }
+    alias(kotlinz.plugins.root.multiplatform) apply false
+    alias(kotlinz.plugins.root.serialization) apply false
     alias(asoft.plugins.root.library) apply false
+    alias(petuska.plugins.root.npm.publish) apply false
+    alias(bmuschko.plugins.root.docker) apply false
     alias(kotlinz.plugins.dokka)
 }
-
+val tmp = 0
 allprojects {
-    repositories {
-        publicRepos()
-    }
     beforeEvaluate {
+        repositories {
+            publicRepos()
+            maven {
+                name = "piCortex"
+                url = uri("http://${picortex.versions.server.ip.get()}:1050/repository/internal/")
+                isAllowInsecureProtocol = true
+                credentials {
+                    username = "admin"
+                    password = "admin@123"
+                }
+            }
+            mavenLocal()
+        }
         group = "com.picortex"
-        version = picortex.versions.bitframe.get()
+        version = picortex.versions.picortex.get()
+    }
+
+    afterEvaluate {
+        afterEvaluate {
+            tasks.configureEach {
+                if (name.endsWith("MainKotlinMetadata")) {
+                    enabled = false
+                }
+            }
+        }
     }
 }
-
-val dokkaHtmlMultiModule by tasks.getting(DokkaMultiModuleTask::class) {
-    moduleName.set("Bitframe Docs")
-    outputDirectory.set(file("reference/${picortex.versions.bitframe.get()}"))
-}
-//
-//val bitframePlugins = gradle.includedBuild("bitframe-plugins")
-//
-//
-//val publishRelevantsToPicortex by tasks.creating {
-//    doFirst {
-//        println("publishing libraries and plugins to picortex")
-//    }
-//    dependsOn(
-//        bitframePlugins.task(":publishPicortexPublishPluginMarkerMavenPublicationToPiCortexRepository"),
-//        bitframePlugins.task(":publishDockerComposePluginMarkerMavenPublicationToPiCortexRepository"),
-//    )
-//
-//    subprojects {
-//        val task = tasks.findByName("publishAllPublicationsToPiCortexRepository")
-//        if (task != null) dependsOn(task)
-//    }
-//
-//    doLast {
-//        println("Finished publishing to picortex")
-//    }
-//}
-//
-//val publishRelevantsToMavenLocal by tasks.creating {
-//    doFirst {
-//        println("publishing libraries and plugins to maven local")
-//    }
-//
-//    dependsOn(
-//        bitframePlugins.task(":publishPicortexPublishPluginMarkerMavenPublicationToMavenLocal"),
-//        bitframePlugins.task(":publishDockerComposePluginMarkerMavenPublicationToMavenLocal")
-//    )
-//
-//    subprojects {
-//        val task = tasks.findByName("publishToMavenLocal")
-//        if (task != null) dependsOn(task)
-//    }
-//
-//    doLast {
-//        println("Finished publishing to maven local")
-//    }
-//}

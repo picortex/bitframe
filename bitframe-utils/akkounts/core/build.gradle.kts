@@ -24,7 +24,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.datetimeCore)
+//                api(projects.datetimeCore)
                 api(asoft.koncurrent.later.coroutines)
                 api(asoft.payments.requests.core)
             }
