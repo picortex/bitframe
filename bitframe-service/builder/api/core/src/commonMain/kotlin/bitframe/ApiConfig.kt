@@ -1,3 +1,4 @@
+@file:JsExport
 @file:Suppress("WRONG_EXPORTED_DECLARATION", "NON_EXPORTABLE_TYPE")
 
 package bitframe
@@ -13,7 +14,6 @@ import logging.Logger
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 
-@JsExport
 interface ApiConfig {
     val appId: String
     val session: MutableLive<Session>

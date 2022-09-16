@@ -12,9 +12,10 @@ import presenters.collections.PaginationManager
 import presenters.collections.SelectionManager
 import presenters.scopes.View
 import viewmodel.BaseViewModel
+import viewmodel.ScopeConfig
 import kotlin.js.JsExport
 
-abstract class CollectionsViewModel<T>(private val config: AppScopeConfig<*>) : BaseViewModel(config) {
+abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : BaseViewModel(config) {
 
     abstract val paginator: PaginationManager<T>
 
