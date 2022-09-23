@@ -7,9 +7,7 @@ import cache.save
 import koncurrent.later.catch
 import live.MutableLive
 import live.mutableLiveOf
-import presenters.collections.ActionsManager
-import presenters.collections.PaginationManager
-import presenters.collections.SelectionManager
+import presenters.collections.*
 import presenters.scopes.View
 import viewmodel.BaseViewModel
 import viewmodel.ScopeConfig
@@ -22,6 +20,10 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
     abstract val selector: SelectionManager<T>
 
     abstract val actions: ActionsManager<T>
+
+    abstract val list: ScrollableList<T>
+
+    abstract val table: Table<T>
 
     val view: MutableLive<View> = mutableLiveOf(View.ListView)
 
