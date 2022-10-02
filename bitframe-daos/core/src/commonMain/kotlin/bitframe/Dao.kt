@@ -7,21 +7,21 @@ import kotlinx.collections.interoperable.List
 import koncurrent.Later
 
 interface Dao<out T : Any> {
-    fun create(input: @UnsafeVariance T): Later<out T>
+    fun create(input: @UnsafeVariance T): Later<T>
 
-    fun update(obj: @UnsafeVariance T): Later<out T>
+    fun update(obj: @UnsafeVariance T): Later<T>
 
     /**
      * Loads an entity by its uid and returns it
      * @throws [EntityNotFoundException] when the object is not found
      */
-    fun load(uid: String): Later<out T>
+    fun load(uid: String): Later<T>
 
-    fun loadOrNull(uid: String): Later<out T?>
+    fun loadOrNull(uid: String): Later<T?>
 
-    fun execute(query: Query): Later<out List<T>>
+    fun execute(query: Query): Later<List<T>>
 
-    fun delete(uid: String): Later<out T>
+    fun delete(uid: String): Later<T>
 
-    fun all(condition: Condition<*>? = null): Later<out List<T>>
+    fun all(condition: Condition<*>? = null): Later<List<T>>
 }
