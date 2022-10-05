@@ -52,8 +52,6 @@ includeSubs(base = "events", path = "bitframe-utils/events", "core", "inmemory",
 includeRoot(name = "properties", path = "bitframe-utils/properties")
 includeRoot(name = "validation", path = "bitframe-utils/validation")
 includeRoot(name = "response", path = "bitframe-utils/response")
-// includeSubs(base = "akkounts", path = "bitframe-utils/akkounts", "core", "mock", "quickbooks")
-// includeSubs(base = "akkounts-sage", path = "bitframe-utils/akkounts/sage", "core", "mock")
 
 includeSubs("bitframe-actor", "bitframe-actor", "core", "app", "user", "space")
 includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mongo", "file")
@@ -65,10 +63,5 @@ includeSubs(base = "bitframe-service-builder-api", path = "bitframe-service/buil
 includeSubs(base = "bitframe-service-builder-sdk-client", path = "bitframe-service/builder/sdk/client", "core", "react" /* "mock",*/)
 includeSubs(base = "bitframe-service-builder-sdk-server", path = "bitframe-service/builder/sdk/server", "core")
 
-//includeSubs(base = "bitframe-service-generic", path = "bitframe-service/generic", "core", "daod")
-//includeSubs(base = "bitframe-service-generic-api", path = "bitframe-service/generic/api", "core", "ktor", "mock")
-//includeSubs(base = "bitframe-service-generic-sdk-server", path = "bitframe-service/generic/sdk/server", "core")
-
 includeSubs(base = "bitframe-api", "bitframe-api", "core" /* "ktor", "mock" */)
-
 includeSubs(base = "bitframe-sdk-server", path = "sdk/server", "core", "ktor", "test")
