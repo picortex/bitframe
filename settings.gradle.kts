@@ -40,7 +40,17 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
     }
 }
 
-rootProject.name = "bitframe"
+rootProject.name = "asoft"
+
+includeSubs("identifier", "../identifier", "core")
+
+includeSubs("functions", "../functions", "core")
+includeSubs("expect", "../expect", "core", "coroutines")
+includeSubs("koncurrent-primitives", "../koncurrent/primitives", "core", "coroutines", "mock")
+includeSubs("koncurrent-later", "../koncurrent/later", "core", "coroutines", "test")
+
+// submodules
+includeSubs("live", "../live", "core", "coroutines", "react", "test", "compose")
 
 includeSubs("krono", "../krono", "api")
 includeSubs(base = "presenters", path = "../presenters", "actions", "core", "mock")
@@ -53,9 +63,9 @@ includeRoot(name = "properties", path = "bitframe-utils/properties")
 includeRoot(name = "validation", path = "bitframe-utils/validation")
 includeRoot(name = "response", path = "bitframe-utils/response")
 
-includeSubs("bitframe-actor", "bitframe-actor", "core", "app", "user", "space")
-includeSubs(base = "bitframe-dao", path = "bitframe-daos", "core", "mock", "mongo", "file")
-includeRoot(name = "bitframe-dao", path = "bitframe-daos/universal")
+includeSubs("bitframe-actor", "actors", "core", "app", "user", "space")
+includeSubs(base = "bitframe-dao", path = "daos", "core", "mock", "mongo", "file")
+includeRoot(name = "bitframe-dao", path = "daos/universal")
 
 // Bitframe Service
 includeSubs(base = "bitframe-service-builder", path = "bitframe-service/builder", "core", "daod", "rest")
