@@ -44,9 +44,9 @@ rootProject.name = "bitframe"
 
 includeSubs("krono", "../krono", "api")
 includeSubs(base = "presenters", path = "../presenters", "actions", "core", "mock")
+includeSubs(base = "mailer", "../mailer", "api", "mock", "smtp")
 
 // <BitframeUtils>
-includeSubs(base = "mailer", path = "bitframe-utils/mailer", "api", "mock", "smtp")
 includeRoot("templater", "bitframe-utils/templater")
 includeSubs(base = "events", path = "bitframe-utils/events", "core", "inmemory", "react")
 includeRoot(name = "properties", path = "bitframe-utils/properties")
