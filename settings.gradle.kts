@@ -70,7 +70,7 @@ includeRoot("templater", path = "utils/templater")
 includeRoot(name = "properties", path = "utils/properties")
 includeRoot(name = "validation", path = "utils/validation")
 
-includeSubs("bitframe-actor", "actors", "core", "app", "user", "space")
+includeSubs(base = "bitframe-actor", path = "actors", "core", "app", "user", "space")
 includeSubs(base = "bitframe-dao", path = "daos", "core", "mock", "mongo", "file")
 includeRoot(name = "bitframe-dao", path = "daos/universal")
 
