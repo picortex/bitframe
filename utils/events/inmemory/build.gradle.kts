@@ -13,15 +13,13 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeActorCore)
-                api(projects.kronoApi)
+                api(projects.eventsCore)
             }
         }
 
         val commonTest by getting {
             dependencies {
-//                implementation(asoft.expect.core)
-                implementation(projects.expectCore)
+                implementation(projects.expectCoroutines)
             }
         }
     }

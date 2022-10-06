@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("plugin.serialization")
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
     id("picortex-publish")
@@ -13,17 +12,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(kotlinx.serialization.core)
-                api(asoft.kotlinx.collections.interoperable)
-//                api(asoft.identifier.core)
-                api(projects.identifierCore)
-            }
-        }
-
-        val commonTest by getting {
-            dependencies {
-//                implementation(asoft.expect.core)
-                implementation(projects.expectCore)
+                api(projects.bitframeServiceBuilderApiCore)
+                api(projects.presentersCore)
             }
         }
 
@@ -33,6 +23,14 @@ kotlin {
 
         val jvmMain by getting {
             dependsOn(nonJsMain)
+        }
+
+        val commonTest by getting {
+            dependencies {
+                implementation(projects.bitframeServiceBuilderApiCore)
+                implementation(projects.expectCoroutines)
+                implementation(projects.liveTest)
+            }
         }
     }
 }

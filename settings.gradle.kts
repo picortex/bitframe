@@ -48,30 +48,37 @@ includeSubs("functions", "../functions", "core")
 includeSubs("expect", "../expect", "core", "coroutines")
 includeSubs("koncurrent-primitives", "../koncurrent/primitives", "core", "coroutines", "mock")
 includeSubs("koncurrent-later", "../koncurrent/later", "core", "coroutines", "test")
+includeSubs("cache", "../cache", "api", "browser", "file", "mock", "react-native", "test")
+includeSubs("response", "../response", "core")
 
-// submodules
+includeSubs("formatter", "../formatter", "core")
+
 includeSubs("live", "../live", "core", "coroutines", "react", "test", "compose")
 
+includeSubs("viewmodel", "../viewmodel", "core")
+includeBuild("../kash/kash-generator")
+
+includeSubs("kash", "../kash", "currency", "money")
 includeSubs("krono", "../krono", "api")
 includeSubs(base = "presenters", path = "../presenters", "actions", "core", "mock")
-includeSubs(base = "mailer", "../mailer", "api", "mock", "smtp")
 
+includeSubs(base = "mailer", "../mailer", "api", "mock", "smtp")
+// submodules
 // <BitframeUtils>
-includeRoot("templater", "bitframe-utils/templater")
-includeSubs(base = "events", path = "bitframe-utils/events", "core", "inmemory", "react")
-includeRoot(name = "properties", path = "bitframe-utils/properties")
-includeRoot(name = "validation", path = "bitframe-utils/validation")
-includeRoot(name = "response", path = "bitframe-utils/response")
+includeRoot("templater", path = "utils/templater")
+includeSubs(base = "events", path = "utils/events", "core", "inmemory", "react")
+includeRoot(name = "properties", path = "utils/properties")
+includeRoot(name = "validation", path = "utils/validation")
 
 includeSubs("bitframe-actor", "actors", "core", "app", "user", "space")
 includeSubs(base = "bitframe-dao", path = "daos", "core", "mock", "mongo", "file")
 includeRoot(name = "bitframe-dao", path = "daos/universal")
 
 // Bitframe Service
-includeSubs(base = "bitframe-service-builder", path = "bitframe-service/builder", "core", "daod", "rest")
-includeSubs(base = "bitframe-service-builder-api", path = "bitframe-service/builder/api", "core", "ktor", "mock")
-includeSubs(base = "bitframe-service-builder-sdk-client", path = "bitframe-service/builder/sdk/client", "core", "react" /* "mock",*/)
-includeSubs(base = "bitframe-service-builder-sdk-server", path = "bitframe-service/builder/sdk/server", "core")
+includeSubs(base = "bitframe-service-builder", path = "service/builder", "core", "daod", "rest")
+includeSubs(base = "bitframe-service-builder-api", path = "service/builder/api", "core", "ktor", "mock")
+includeSubs(base = "bitframe-service-builder-sdk-client", path = "service/builder/sdk/client", "core", "react" /* "mock",*/)
+includeSubs(base = "bitframe-service-builder-sdk-server", path = "service/builder/sdk/server", "core")
 
-includeSubs(base = "bitframe-api", "bitframe-api", "core" /* "ktor", "mock" */)
+includeSubs(base = "bitframe-api", "api", "core" /* "ktor", "mock" */)
 includeSubs(base = "bitframe-sdk-server", path = "sdk/server", "core", "ktor", "test")

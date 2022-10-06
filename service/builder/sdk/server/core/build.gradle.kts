@@ -13,26 +13,16 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(kotlinx.serialization.core)
-                api(asoft.kotlinx.collections.interoperable)
-//                api(asoft.identifier.core)
-                api(projects.identifierCore)
+                api(projects.bitframeServiceBuilderDaod)
+                api(projects.responseCore)
+                api(ktor.http)
             }
         }
 
         val commonTest by getting {
             dependencies {
-//                implementation(asoft.expect.core)
                 implementation(projects.expectCore)
             }
-        }
-
-        val nonJsMain by creating {
-            dependsOn(commonMain)
-        }
-
-        val jvmMain by getting {
-            dependsOn(nonJsMain)
         }
     }
 }

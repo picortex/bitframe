@@ -11,17 +11,9 @@ kotlin {
     js(IR) { library() }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                api(projects.bitframeActorCore)
-                api(projects.kronoApi)
-            }
-        }
-
         val commonTest by getting {
             dependencies {
-//                implementation(asoft.expect.core)
-                implementation(projects.expectCore)
+                implementation(projects.expectCoroutines)
             }
         }
     }
