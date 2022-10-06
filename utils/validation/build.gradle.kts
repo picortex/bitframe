@@ -10,3 +10,8 @@ kotlin {
     jvm { library() }
     js(IR) { library() }
 }
+
+aSoftOSSLibrary(
+    version = asoft.versions.root.get(),
+    description = "A kotlin multiplatform library"
+)
