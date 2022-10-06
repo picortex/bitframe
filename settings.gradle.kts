@@ -60,13 +60,13 @@ includeBuild("../kash/kash-generator")
 
 includeSubs("kash", "../kash", "currency", "money")
 includeSubs("krono", "../krono", "api")
-includeSubs(base = "presenters", path = "../presenters", "actions", "core", "mock")
+includeSubs(base = "events", path = "../events", "core", "inmemory", "react")
 
+includeSubs(base = "presenters", path = "../presenters", "actions", "core", "mock")
 includeSubs(base = "mailer", "../mailer", "api", "mock", "smtp")
 // submodules
 // <BitframeUtils>
 includeRoot("templater", path = "utils/templater")
-includeSubs(base = "events", path = "utils/events", "core", "inmemory", "react")
 includeRoot(name = "properties", path = "utils/properties")
 includeRoot(name = "validation", path = "utils/validation")
 
