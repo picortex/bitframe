@@ -4,6 +4,7 @@ plugins {
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
     id("picortex-publish")
+    signing
 }
 
 kotlin {

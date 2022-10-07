@@ -3,6 +3,7 @@ plugins {
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
     id("picortex-publish")
+    signing
 }
 
 kotlin {
