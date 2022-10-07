@@ -26,7 +26,7 @@ pluginManagement {
 
 val tmp = 4
 
-includeBuild("bitframe-plugins")
+//includeBuild("bitframe-plugins")
 
 fun includeRoot(name: String, path: String) {
     include(":$name")
