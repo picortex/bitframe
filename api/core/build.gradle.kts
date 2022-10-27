@@ -38,8 +38,8 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                api(projects.cacheReactNative)
-                api(projects.cacheBrowser)
+//                api(projects.cacheReactNative)
+//                api(projects.cacheBrowser)
             }
         }
     }
