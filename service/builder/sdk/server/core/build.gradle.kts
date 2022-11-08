@@ -3,7 +3,6 @@ plugins {
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
-//    id("picortex-publish")
     signing
 }
 
@@ -29,6 +28,5 @@ kotlin {
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.root.get(),
-    description = "A kotlin multiplatform library"
+    version = asoft.versions.root.get(), description = "A kotlin multiplatform library"
 )
