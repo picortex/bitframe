@@ -1,6 +1,9 @@
 package bitframe.http
 
-import io.ktor.http.*
+import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
+import koncurrent.Later
+import koncurrent.later.await
 import response.Error
 import response.Status
 import response.responseOf
@@ -8,7 +11,7 @@ import response.responseOf
 data class HttpRoute(
     val method: HttpMethod,
     val path: String,
-    val handler: suspend (HttpRequest) -> HttpResponse
+    val handler: (HttpRequest) -> Later<HttpResponse>
 ) {
     fun info() = mapOf(
         "method" to method.value,
@@ -16,7 +19,7 @@ data class HttpRoute(
     )
 
     suspend fun runHandlerCatching(request: HttpRequest): HttpResponse = try {
-        handler(request)
+        handler(request).await()
     } catch (cause: Throwable) {
         cause.printStackTrace()
         println("Err (In HttpRoute: $this): ${cause.message}")

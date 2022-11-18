@@ -8,6 +8,7 @@ import kotlinx.serialization.json.Json
 import logging.Logger
 import mailer.Mailer
 import kotlin.jvm.JvmField
+import kotlin.jvm.JvmName
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.JvmSynthetic
@@ -29,7 +30,8 @@ interface ServiceConfig : ServiceConfigDaod {
         @JvmField
         val DEFAULT_JSON = ServiceConfigDaod.DEFAULT_JSON
 
-        @JvmSynthetic
+        @JvmOverloads
+        @JvmName("create")
         operator fun invoke(
             daoFactory: DaoFactory,
             bus: EventBus = DEFAULT_BUS,
@@ -38,16 +40,5 @@ interface ServiceConfig : ServiceConfigDaod {
             json: Json = DEFAULT_JSON,
             scope: CoroutineScope = DEFAULT_SCOPE
         ): ServiceConfig = object : ServiceConfig, ServiceConfigDaod by ServiceConfigDaod(daoFactory, bus, logger, mailer, json, scope) {}
-
-        @JvmOverloads
-        @JvmStatic
-        fun create(
-            daoFactory: DaoFactory,
-            bus: EventBus = DEFAULT_BUS,
-            logger: Logger = DEFAULT_LOGGER,
-            mailer: Mailer = DEFAULT_MAILER,
-            json: Json = DEFAULT_JSON,
-            scope: CoroutineScope = DEFAULT_SCOPE
-        ) = invoke(daoFactory, bus, logger, mailer, json, scope)
     }
 }
