@@ -1,10 +1,12 @@
 package bitframe.internal
 
 import bitframe.ServerConfig
+import koncurrent.Executor
 import kotlinx.serialization.StringFormat
-import kotlinx.serialization.json.Json
 
-class ServerConfigImpl<out E>(
+class ServerConfigImpl<out S, out E>(
     override val codec: StringFormat,
-    override val endpoint: E
-) : ServerConfig<E>
+    override val service: S,
+    override val endpoint: E,
+    override val executor: Executor
+) : ServerConfig<S, E>

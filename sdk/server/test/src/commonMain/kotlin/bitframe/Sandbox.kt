@@ -19,9 +19,9 @@ open class Sandbox(val component: ComponentUnderTest) {
 
     private val routes = when (component) {
         is ApplicationUnderTest<*, *> -> component.application.modules.flatMap {
-            it.actions.map { a -> a.route }
+            it.actions.mapEndpoint { a -> a.route }
         }
-        is ModuleUnderTest<*> -> component.module.actions.map { it.route }
+        is ModuleUnderTest<*> -> component.module.actions.mapEndpoint { it.route }
         is ActionUnderTest -> listOf(component.action.route)
         is RouteUnderTest -> listOf(component.route)
     }
