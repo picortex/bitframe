@@ -15,6 +15,8 @@ kotlin {
             dependencies {
                 api(projects.bitframeServiceBuilderDaod)
                 api(projects.responseCore)
+                api(squareup.okio.core)
+                api(kotlinx.serialization.yaml) // Because we need to read configurations in yaml
                 api(ktor.http)
             }
         }
