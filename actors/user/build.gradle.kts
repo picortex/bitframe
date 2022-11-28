@@ -15,7 +15,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeActorCore)
-                api(projects.kronoApi)
+                api(projects.kronoKotlinx)
             }
         }
 

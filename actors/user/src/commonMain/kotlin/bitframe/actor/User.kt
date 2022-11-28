@@ -3,10 +3,13 @@
 
 package bitframe.actor
 
-import kotlinx.datetime.Clock
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import kotlinx.serialization.builtins.LongAsStringSerializer
+import krono.LocalDateTime
+import krono.Now
+import krono.TimeZones
+import krono.Today
 import kotlin.js.JsExport
 
 @JsExport
@@ -16,8 +19,8 @@ data class User(
     val tag: String = name,
     val photoUrl: String? = null,
     val status: Status = Status.SignedOut,
-    val registeredOn: Long = Clock.System.now().toEpochMilliseconds(),
-    val lastSeen: Long = Clock.System.now().toEpochMilliseconds(),
+    val registeredOn: LocalDateTime = Now(TimeZones.UTC),
+    val lastSeen: LocalDateTime = Now(TimeZones.UTC),
     override val uid: String = UNSET,
     override val deleted: Boolean = false
 ) : Savable {
