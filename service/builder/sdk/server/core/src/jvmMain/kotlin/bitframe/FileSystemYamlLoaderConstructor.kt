@@ -19,15 +19,17 @@ inline fun <reified C : ServerConfiguration> FileSystemYmlLoader(
 @PublishedApi
 internal val MISSING_ENV_CONFIG = IllegalConfiguration(
     """
-    Missing Config environment variable.
-    FIX TIP: Launch the application with CONFIG environment variable
+    [  ERROR  ] Missing Config environment variable.
+    [ FIX TIP ] Launch the application with CONFIG environment variable
+    [  NOTES  ] CONFIG value should reside inside APP_ROOT/config directory
 """.trimIndent()
 )
 
 @PublishedApi
 internal val MISSING_ENV_APP_ROOT = IllegalConfiguration(
     """
-    Missing APP_ROOT environment variable.
-    FIX TIP: Launch the application with APP_ROOT environment variable
+    [  ERROR  ] Missing APP_ROOT environment variable.
+    [ FIX TIP ] Launch the application with APP_ROOT environment variable
+    [  NOTES  ] APP_ROOT is where the application will be accessing the FileSystem from
 """.trimIndent()
 )

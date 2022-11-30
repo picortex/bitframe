@@ -22,6 +22,7 @@ class FileSystemYmlLoader<C : ServerConfiguration>(
     } ?: throw FileNotFoundException("Missing config file at $appRoot/config/$config.yml")
 
     override fun load(): C {
+        println("Loading configuration at $configPath")
         val loadedConfig = fs.read(configPath) {
             readUtf8()
         }
