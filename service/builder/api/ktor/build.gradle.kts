@@ -28,10 +28,15 @@ kotlin {
                 implementation(projects.expectCore)
             }
         }
+
+        val jvmMain by getting {
+            dependencies {
+                implementation(ktor.client.cio)
+            }
+        }
     }
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.root.get(),
-    description = "A kotlin multiplatform library"
+    version = asoft.versions.root.get(), description = "A kotlin multiplatform library"
 )
