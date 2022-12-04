@@ -6,8 +6,8 @@ package bitframe.actor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import kotlinx.serialization.builtins.LongAsStringSerializer
-import krono.Instant
 import krono.Now
+import krono.Instant
 import kotlin.js.JsExport
 
 @JsExport
