@@ -18,13 +18,5 @@ data class HttpRoute(
         "path" to path
     )
 
-    suspend fun runHandlerCatching(request: HttpRequest): HttpResponse = try {
-        handler(request).await()
-    } catch (cause: Throwable) {
-        cause.printStackTrace()
-        println("Err (In HttpRoute: $this): ${cause.message}")
-        responseOf(Status(HttpStatusCode.InternalServerError), cause, cause.message).toHttpResponse<Error>()
-    }
-
     override fun toString() = "${method.value} $path"
 }

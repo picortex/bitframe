@@ -18,11 +18,16 @@ open class ApplicationKtor<S>(
     override val config: ApplicationConfig<S>
 ) : Application<S>(config) {
 
-    suspend fun mapToHttpRequest(route: HttpRoute, call: ApplicationCall) = HttpRequest(method = route.method, path = route.path, headers = call.request.headers.entries().associate { (k, v) ->
-        k to v.joinToString(",")
-    }, queryParameters = call.parameters.entries().associate { (k, v) ->
-        k to (v.firstOrNull() ?: "")
-    }, body = call.receiveText()
+    suspend fun mapToHttpRequest(route: HttpRoute, call: ApplicationCall) = HttpRequest(
+        method = route.method,
+        path = route.path,
+        headers = call.request.headers.entries().associate { (k, v) ->
+            k to v.joinToString(",")
+        },
+        queryParameters = call.parameters.entries().associate { (k, v) ->
+            k to (v.firstOrNull() ?: "")
+        },
+        body = call.receiveText()
     )
 
     @JvmOverloads
@@ -50,7 +55,9 @@ open class ApplicationKtor<S>(
 
                 for (rout in modules.flatMap { it.actions.map { a -> a.route } }) route(rout.path, rout.method) {
                     handle {
+                        println("Reached at ${rout.method} ${rout.path}")
                         val response = rout.runHandlerCatching(mapToHttpRequest(rout, call))
+                        println("Reached at ")
                         call.respondText(response.body, contentType = ContentType.Application.Json, status = response.status)
                     }
                 }

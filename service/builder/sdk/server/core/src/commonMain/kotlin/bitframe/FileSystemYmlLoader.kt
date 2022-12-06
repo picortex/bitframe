@@ -11,7 +11,8 @@ class FileSystemYmlLoader<C : ServerConfiguration>(
     val fs: FileSystem,
     val appRoot: String,
     val config: String,
-    val serializer: KSerializer<C>
+    val serializer: KSerializer<C>,
+    val yaml: Yaml,
 ) : ConfigLoader<C> {
     private val appRootPath = appRoot.toPath().takeIf {
         fs.exists(it)
@@ -26,6 +27,6 @@ class FileSystemYmlLoader<C : ServerConfiguration>(
         val loadedConfig = fs.read(configPath) {
             readUtf8()
         }
-        return Yaml.decodeFromString(serializer, loadedConfig)
+        return yaml.decodeFromString(serializer, loadedConfig)
     }
 }
