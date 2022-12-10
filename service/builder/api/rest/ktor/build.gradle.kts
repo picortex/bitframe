@@ -3,7 +3,6 @@ plugins {
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
-//    id("picortex-publish")
     signing
 }
 
@@ -14,12 +13,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeServiceBuilderApiCore)
-                api(projects.bitframeServiceBuilderRest)
-
-                api(projects.koncurrentPrimitivesCoroutines)
-
-                api(ktor.client.core)
+                api(projects.bitframeServiceBuilderApiRestCore)
             }
         }
 
@@ -28,15 +22,10 @@ kotlin {
                 implementation(projects.expectCore)
             }
         }
-
-        val jvmMain by getting {
-            dependencies {
-                implementation(ktor.client.cio)
-            }
-        }
     }
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.root.get(), description = "A kotlin multiplatform library"
+    version = asoft.versions.root.get(),
+    description = "A kotlin multiplatform library"
 )
