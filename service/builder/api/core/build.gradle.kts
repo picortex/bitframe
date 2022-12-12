@@ -14,7 +14,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.cacheApi)
+                api(projects.cacheMock) // because we need a default ApiConfigDefault.cache
                 api(projects.bitframeServiceBuilderCore)
             }
         }
