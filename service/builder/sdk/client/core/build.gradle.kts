@@ -2,7 +2,6 @@ plugins {
     kotlin("multiplatform")
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
-//    id("picortex-publish")
     signing
 }
 
@@ -15,15 +14,8 @@ kotlin {
             dependencies {
                 api(projects.bitframeServiceBuilderApiCore)
                 api(projects.presentersCollectionsCore)
+                api(projects.presentersInputsCore)
             }
-        }
-
-        val nonJsMain by creating {
-            dependsOn(commonMain)
-        }
-
-        val jvmMain by getting {
-            dependsOn(nonJsMain)
         }
 
         val commonTest by getting {
