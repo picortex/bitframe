@@ -10,17 +10,14 @@ import logging.Logger
 
 val API_CONFIG_REST_DEFAULT: ApiConfigRest<Any, Any> = ApiConfigRestImpl
 
-@PublishedApi
-internal val DEFAULT = API_CONFIG_REST_DEFAULT
-
 inline fun <E, H> ApiConfigRest(
-    appId: String = DEFAULT.appId,
-    session: MutableLive<Session> = DEFAULT.session,
-    cache: Cache = DEFAULT.cache,
-    bus: EventBus = DEFAULT.bus,
-    logger: Logger = DEFAULT.logger,
-    executor: Executor = DEFAULT.executor,
+    appId: String = API_CONFIG_REST_DEFAULT.appId,
+    session: MutableLive<Session> = API_CONFIG_REST_DEFAULT.session,
+    cache: Cache = API_CONFIG_REST_DEFAULT.cache,
+    bus: EventBus = API_CONFIG_REST_DEFAULT.bus,
+    logger: Logger = API_CONFIG_REST_DEFAULT.logger,
+    executor: Executor = API_CONFIG_REST_DEFAULT.executor,
     endpoint: E,
-    codec: StringFormat = DEFAULT.codec,
+    codec: StringFormat = API_CONFIG_REST_DEFAULT.codec,
     http: H,
 ): ApiConfigRest<E, H> = ApiConfigRestImpl(appId, session, cache, bus, logger, executor, endpoint, codec, http)

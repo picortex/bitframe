@@ -11,17 +11,14 @@ import logging.Logger
 
 val API_CONFIG_REST_KTOR_DEFAULT: ApiConfigRestKtor<Any> = ApiConfigRestKtorImpl
 
-@PublishedApi
-internal val DEFAULT = API_CONFIG_REST_KTOR_DEFAULT
-
 inline fun <E> ApiConfigRestKtor(
-    appId: String = DEFAULT.appId,
-    session: MutableLive<Session> = DEFAULT.session,
-    cache: Cache = DEFAULT.cache,
-    bus: EventBus = DEFAULT.bus,
-    logger: Logger = DEFAULT.logger,
-    executor: CoroutineExecutor = DEFAULT.executor,
-    http: HttpClient = DEFAULT.http,
+    appId: String = API_CONFIG_REST_KTOR_DEFAULT.appId,
+    session: MutableLive<Session> = API_CONFIG_REST_KTOR_DEFAULT.session,
+    cache: Cache = API_CONFIG_REST_KTOR_DEFAULT.cache,
+    bus: EventBus = API_CONFIG_REST_KTOR_DEFAULT.bus,
+    logger: Logger = API_CONFIG_REST_KTOR_DEFAULT.logger,
+    executor: CoroutineExecutor = API_CONFIG_REST_KTOR_DEFAULT.executor,
+    http: HttpClient = API_CONFIG_REST_KTOR_DEFAULT.http,
     endpoint: E,
-    codec: StringFormat = DEFAULT.codec,
+    codec: StringFormat = API_CONFIG_REST_KTOR_DEFAULT.codec,
 ): ApiConfigRestKtor<E> = ApiConfigRestKtorImpl(appId, session, cache, bus, logger, executor, http, endpoint, codec)

@@ -10,14 +10,12 @@ import kotlin.jvm.*
 
 val SERVICE_CONFIG_DAO_DEFAULT: ServiceConfigDaod = ServiceConfigDaodImpl
 
-private val DEFAULT = SERVICE_CONFIG_DAO_DEFAULT
-
 @JvmOverloads
 fun ServiceConfigDaod(
-    database: DaoFactory = DEFAULT.database,
-    bus: EventBus = DEFAULT.bus,
-    logger: Logger = DEFAULT.logger,
-    mailer: Mailer = DEFAULT.mailer,
-    codec: StringFormat = DEFAULT.codec,
-    executor: Executor = DEFAULT.executor
+    database: DaoFactory = SERVICE_CONFIG_DAO_DEFAULT.database,
+    bus: EventBus = SERVICE_CONFIG_DAO_DEFAULT.bus,
+    logger: Logger = SERVICE_CONFIG_DAO_DEFAULT.logger,
+    mailer: Mailer = SERVICE_CONFIG_DAO_DEFAULT.mailer,
+    codec: StringFormat = SERVICE_CONFIG_DAO_DEFAULT.codec,
+    executor: Executor = SERVICE_CONFIG_DAO_DEFAULT.executor
 ): ServiceConfigDaod = ServiceConfigDaodImpl(bus, logger, codec, database, mailer, executor)
