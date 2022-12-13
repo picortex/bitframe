@@ -1,7 +1,6 @@
 package bitframe.internal
 
 import bitframe.API_CONFIG_REST_DEFAULT
-import bitframe.ApiConfigRest
 import bitframe.ApiConfigRestKtor
 import bitframe.Session
 import cache.Cache
