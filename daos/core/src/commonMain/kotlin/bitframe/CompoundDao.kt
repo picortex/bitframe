@@ -6,11 +6,8 @@ import bitframe.dao.Query
 import bitframe.dao.exceptions.EntityNotFoundException
 import bitframe.dao.exceptions.MissingDaoException
 import bitframe.dao.internal.AbstractDao
-import koncurrent.*
+import koncurrent.Later
 import koncurrent.later.filterFulfilledValues
-import koncurrent.later.flatten
-import koncurrent.later.then
-import kotlinx.collections.interoperable.List
 import kotlinx.collections.interoperable.toInteroperableList
 
 class CompoundDao<out T : Savable>(val config: CompoundDaoConfig<T>) : AbstractDao<T>() {
@@ -39,7 +36,7 @@ class CompoundDao<out T : Savable>(val config: CompoundDaoConfig<T>) : AbstractD
         delete(uid)
     }.then {
         it.filterFulfilledValues().firstOrNull() ?: throw EntityNotFoundException(uid)
-    }.flatten {
+    }.andThen {
         daos[it::class]?.delete(uid) ?: Later.reject(MissingDaoException(it::class, this))
     }
 
