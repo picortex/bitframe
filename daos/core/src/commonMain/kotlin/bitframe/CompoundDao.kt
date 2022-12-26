@@ -7,7 +7,7 @@ import bitframe.dao.exceptions.EntityNotFoundException
 import bitframe.dao.exceptions.MissingDaoException
 import bitframe.dao.internal.AbstractDao
 import koncurrent.Later
-import koncurrent.later.filterFulfilledValues
+import koncurrent.later.filterSuccessValues
 import kotlinx.collections.interoperable.toInteroperableList
 
 class CompoundDao<out T : Savable>(val config: CompoundDaoConfig<T>) : AbstractDao<T>() {
@@ -29,13 +29,13 @@ class CompoundDao<out T : Savable>(val config: CompoundDaoConfig<T>) : AbstractD
     override fun load(uid: String): Later<out T> = inAllDaos {
         load(uid)
     }.then {
-        it.filterFulfilledValues().first()
+        it.filterSuccessValues().first()
     }
 
     override fun delete(uid: String): Later<out T> = inAllDaos {
         delete(uid)
     }.then {
-        it.filterFulfilledValues().firstOrNull() ?: throw EntityNotFoundException(uid)
+        it.filterSuccessValues().firstOrNull() ?: throw EntityNotFoundException(uid)
     }.andThen {
         daos[it::class]?.delete(uid) ?: Later.reject(MissingDaoException(it::class, this))
     }
@@ -43,12 +43,12 @@ class CompoundDao<out T : Savable>(val config: CompoundDaoConfig<T>) : AbstractD
     override fun execute(query: Query) = inAllDaos {
         execute(query)
     }.then { list ->
-        list.filterFulfilledValues().flatten().toInteroperableList()
+        list.filterSuccessValues().flatten().toInteroperableList()
     }
 
     override fun all(condition: Condition<*>?) = inAllDaos {
         all(condition)
     }.then { list ->
-        list.filterFulfilledValues().flatten().toInteroperableList()
+        list.filterSuccessValues().flatten().toInteroperableList()
     }
 }
