@@ -15,15 +15,12 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(kotlinx.serialization.core)
-                api(asoft.kotlinx.collections.interoperable)
-//                api(asoft.identifier.core)
                 api(projects.identifierCore)
             }
         }
 
         val commonTest by getting {
             dependencies {
-//                implementation(asoft.expect.core)
                 implementation(projects.expectCore)
             }
         }

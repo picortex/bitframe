@@ -5,7 +5,6 @@ package bitframe
 import cache.load
 import cache.save
 import koncurrent.Later
-import koncurrent.later.catch
 import kotlinx.serialization.KSerializer
 import live.MutableLive
 import live.mutableLiveOf
@@ -34,10 +33,10 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
 
     abstract val serializer: KSerializer<T>
 
-    private val preferedView get() = "${this::class.simpleName?.replace("ViewModel", "")}.$PREFERRED_VIEW"
+    private val preferredView get() = "${this::class.simpleName?.replace("ViewModel", "")}.$PREFERRED_VIEW"
 
     fun switchToLatestSelectedView() {
-        cache.load<View>(preferedView).then {
+        cache.load<View>(preferredView).then {
             view.value = it
         }.catch {
             view.value = DEFAULT_VIEW
@@ -48,7 +47,7 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
 
     fun switchToTableView() = switchTo(View.TableView)
 
-    private fun switchTo(v: View) = cache.save(preferedView, v).then {
+    private fun switchTo(v: View) = cache.save(preferredView, v).then {
         view.value = it
     }
 
