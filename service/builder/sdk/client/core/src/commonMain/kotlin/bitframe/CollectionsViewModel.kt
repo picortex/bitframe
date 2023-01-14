@@ -1,4 +1,5 @@
-@file:JsExport @file:Suppress("NON_EXPORTABLE_TYPE")
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package bitframe
 
@@ -17,7 +18,7 @@ import kotlin.js.JsExport
 
 abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : BaseViewModel(config) {
 
-    val view: MutableLive<View> = mutableLiveOf(View.ListView)
+    val view: MutableLive<View> = mutableLiveOf(DEFAULT_VIEW)
 
     val cache = config.cache
 
@@ -33,7 +34,7 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
 
     abstract val serializer: KSerializer<T>
 
-    private val preferredView get() = "${this::class.simpleName?.replace("ViewModel", "")}.$PREFERRED_VIEW"
+    private val preferredView = "${this::class.simpleName?.replace("ViewModel", "")}.$PREFERRED_VIEW"
 
     fun switchToLatestSelectedView() {
         cache.load<View>(preferredView).then {
@@ -54,7 +55,7 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
     val searchBox = TextInputField(name = "search-box")
 
     fun search(): Later<Any> {
-        paginator.wipeMemory()
+        paginator.clearPages()
         return paginator.loadFirstPage()
     }
 
