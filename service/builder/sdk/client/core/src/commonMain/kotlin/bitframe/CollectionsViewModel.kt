@@ -5,6 +5,8 @@ package bitframe
 
 import cache.load
 import cache.save
+import kollections.List
+import kollections.iEmptyList
 import koncurrent.Later
 import kotlinx.serialization.KSerializer
 import live.MutableLive
@@ -22,17 +24,25 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
 
     val cache = config.cache
 
-    abstract val paginator: PaginationManager<T>
+    protected abstract val loader: (no: Int, capacity: Int) -> Later<Array<out T>>
 
-    abstract val selector: SelectionManager<T>
+    protected abstract val serializer: KSerializer<T>
 
-    abstract val actions: ActionsManager<T>
+    open val actions: ActionsManager<T> = actionsOf()
 
-    abstract val list: ScrollableList<T>
+    open val columns: List<Column<T>> = iEmptyList()
 
-    abstract val table: Table<T>
+    val paginator: PaginationManager<T> by lazy {
+        PaginationManager { no, capacity ->
+            loader(no, capacity).then { Page(it.toList(), capacity, no) }
+        }
+    }
 
-    abstract val serializer: KSerializer<T>
+    val selector: SelectionManager<T> by lazy { SelectionManager(paginator) }
+
+    val list: ScrollableList<T> by lazy { scrollableListOf(paginator, selector, actions) }
+
+    val table: Table<T> by lazy { tableOf(paginator, selector, actions, columns) }
 
     private val preferredView = "${this::class.simpleName?.replace("ViewModel", "")}.$PREFERRED_VIEW"
 
@@ -58,6 +68,8 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
         paginator.clearPages()
         return paginator.loadFirstPage()
     }
+
+    fun unselect(item: T? = null): Later<Unit?> = cache.remove(CacheKeys.SELECTED_ITEM)
 
     fun select(item: T): Later<T> {
         selector.select(item)
