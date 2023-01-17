@@ -48,6 +48,15 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
 
     private val preferredView = "${this::class.simpleName?.replace("ViewModel", "")}.$PREFERRED_VIEW"
 
+    fun initialize() {
+        switchToLatestSelectedView()
+        paginator.loadFirstPage()
+    }
+
+    open fun deInitialize() {
+        paginator.clearPages()
+    }
+
     fun switchToLatestSelectedView() {
         cache.load<View>(preferredView).then {
             view.value = it
