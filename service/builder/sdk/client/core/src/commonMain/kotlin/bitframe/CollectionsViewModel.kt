@@ -24,7 +24,7 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
 
     val cache = config.cache
 
-    protected abstract val loader: (no: Int, capacity: Int) -> Later<Array<out T>>
+    protected abstract val loader: (no: Int, capacity: Int) -> Later<Collection<T>>
 
     protected abstract val serializer: KSerializer<T>
 
@@ -32,9 +32,11 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
 
     open val columns: List<Column<T>> = iEmptyList()
 
+    protected fun columnsOf(block: ColumnsBuilder<T>.() -> Unit) = columnsOf<T>(block)
+
     val paginator: PaginationManager<T> by lazy {
         PaginationManager { no, capacity ->
-            loader(no, capacity).then { Page(it.toList(), capacity, no) }
+            loader(no, capacity).then { Page(it, capacity, no) }
         }
     }
 
