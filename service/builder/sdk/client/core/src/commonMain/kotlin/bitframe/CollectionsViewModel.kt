@@ -5,13 +5,21 @@ package bitframe
 
 import cache.load
 import cache.save
-import kollections.List
-import kollections.iEmptyList
 import koncurrent.Later
 import kotlinx.serialization.KSerializer
 import live.MutableLive
 import live.mutableLiveOf
-import presenters.collections.*
+import presenters.collections.ActionsManager
+import presenters.collections.ColumnsManager
+import presenters.collections.Page
+import presenters.collections.PaginationManager
+import presenters.collections.ScrollableList
+import presenters.collections.SelectionManager
+import presenters.collections.Table
+import presenters.collections.actionsOf
+import presenters.collections.columnsOf
+import presenters.collections.scrollableListOf
+import presenters.collections.tableOf
 import presenters.fields.TextInputField
 import presenters.scopes.View
 import viewmodel.BaseViewModel
@@ -30,9 +38,7 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
 
     open val actions: ActionsManager<T> = actionsOf()
 
-    open val columns: List<Column<T>> = iEmptyList()
-
-    protected fun columnsOf(block: ColumnsBuilder<T>.() -> Unit) = columnsOf<T>(block)
+    open val columns: ColumnsManager<T> = columnsOf()
 
     val paginator: PaginationManager<T> by lazy {
         PaginationManager { no, capacity ->
@@ -53,8 +59,8 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
         paginator.loadFirstPage()
     }
 
-    open fun deInitialize() {
-        paginator.clearPages()
+    open fun deInitialize(clearPages: Boolean = false) {
+        if (clearPages) paginator.clearPages()
     }
 
     fun switchToLatestSelectedView() {
