@@ -20,7 +20,8 @@ import presenters.collections.actionsOf
 import presenters.collections.columnsOf
 import presenters.collections.scrollableListOf
 import presenters.collections.tableOf
-import presenters.fields.TextInputField
+import presenters.TextInputField
+import presenters.collections.ColumnsBuilder
 import presenters.scopes.View
 import viewmodel.BaseViewModel
 import viewmodel.ScopeConfig
@@ -39,6 +40,8 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
     open val actions: ActionsManager<T> = actionsOf()
 
     open val columns: ColumnsManager<T> = columnsOf()
+
+    protected inline fun columnsOf(noinline builder: ColumnsBuilder<T>.() -> Unit) = columnsOf<T>(builder)
 
     val paginator: PaginationManager<T> by lazy {
         PaginationManager { no, capacity ->
