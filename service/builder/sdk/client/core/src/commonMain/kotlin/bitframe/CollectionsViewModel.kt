@@ -27,7 +27,7 @@ import viewmodel.BaseViewModel
 import viewmodel.ScopeConfig
 import kotlin.js.JsExport
 
-abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : BaseViewModel(config) {
+abstract class CollectionsViewModel<T>(private val config: ScopeConfig<Any?>) : BaseViewModel(config) {
 
     val view: MutableLive<View> = mutableLiveOf(DEFAULT_VIEW)
 
@@ -41,7 +41,7 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<*>) : Bas
 
     open val columns: ColumnsManager<T> = columnsOf()
 
-    protected inline fun columnsOf(noinline builder: ColumnsBuilder<T>.() -> Unit) = columnsOf<T>(builder)
+    protected inline fun columnsOf(noinline builder: ColumnsBuilder<T>.() -> Unit) = columnsOf(emptyList(), builder)
 
     val paginator: PaginationManager<T> by lazy {
         PaginationManager { no, capacity ->

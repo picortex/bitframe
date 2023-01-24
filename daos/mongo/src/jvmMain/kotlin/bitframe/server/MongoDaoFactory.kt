@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
 actual class MongoDaoFactory actual constructor(
     val config: MongoDaoFactoryConfig
 ) : DaoFactory {
-    private val daoContainer = mutableMapOf<KClass<*>, Dao<*>>()
+    private val daoContainer = mutableMapOf<KClass<Any?>, Dao<Any?>>()
     override fun <D : Savable> get(clazz: KClass<D>): Dao<D> = daoContainer.getOrPut(clazz) {
         MongoDao(config.daoConfigOf(clazz))
     } as Dao<D>

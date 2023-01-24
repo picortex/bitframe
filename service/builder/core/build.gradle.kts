@@ -23,8 +23,8 @@ kotlin {
                 api(projects.koncurrentLaterCore)
 
                 api(kotlinx.coroutines.core)
-                api(asoft.platform.core)
-                api(asoft.logging.console)
+                api(projects.habitatCore)
+                api(projects.lexiConsole)
             }
         }
 

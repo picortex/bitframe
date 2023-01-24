@@ -11,7 +11,7 @@ internal fun <T : Any> MongoCollection<T>.execute(query: Query): List<T> {
     var result = find(query.toMongoFilter())
     query.statements.forEach { statement ->
         result = when (statement) {
-            is Condition<*> -> result
+            is Condition<Any?> -> result
             is LimitStatement -> result.limit(statement.value)
             is SortStatement -> result.sort(eq(statement.property))
         }

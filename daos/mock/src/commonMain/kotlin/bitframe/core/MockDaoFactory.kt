@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 class MockDaoFactory(
     private val config: MockDaoFactoryConfig = MockDaoFactoryConfig()
 ) : DaoFactory {
-    private val container = mutableMapOf<KClass<*>, Dao<*>>()
+    private val container = mutableMapOf<KClass<out Any>, Dao<Savable>>()
     override fun <D : Savable> get(clazz: KClass<D>): Dao<D> = container.getOrPut(clazz) {
         val cfg = MockDaoConfig(
             clazz = clazz,

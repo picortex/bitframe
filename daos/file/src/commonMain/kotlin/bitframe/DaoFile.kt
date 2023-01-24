@@ -6,10 +6,8 @@ import bitframe.dao.exceptions.EntityNotFoundException
 import bitframe.dao.internal.AbstractDao
 import koncurrent.Later
 import koncurrent.later
-import koncurrent.later.flatten
-import koncurrent.later.then
-import kotlinx.collections.interoperable.List
-import kotlinx.collections.interoperable.toInteroperableList
+import kollections.List
+import kollections.toIList
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.serializer
 import okio.Path
@@ -55,7 +53,7 @@ class DaoFile<out T : Savable>(val config: DaoFileConfig<@UnsafeVariance T>) : A
     }
 
     override fun execute(query: Query): Later<out List<T>> = Later(config.executor) { resolve, reject ->
-        val conditions = query.statements.filterIsInstance<Condition<*>>()
+        val conditions = query.statements.filterIsInstance<Condition<Any?>>()
         var results: Collection<T> = readAllObjectsFromDir()
         for (cond in conditions) {
             val filtered = results.filter(cond.asPredicate(config.clazz.serializer()))
@@ -64,21 +62,21 @@ class DaoFile<out T : Savable>(val config: DaoFileConfig<@UnsafeVariance T>) : A
         val statements = query.statements - conditions
         statements.forEach { statement ->
             results = when (statement) {
-                is Condition<*> -> results
+                is Condition<Any?> -> results
                 is LimitStatement -> results.take(statement.value)
                 is SortStatement -> TODO()
             }
         }
-        resolve(results.toInteroperableList())
+        resolve(results.toIList())
     }
 
 
-    override fun all(condition: Condition<*>?): Later<out List<T>> = Later(config.executor) { resolve, _ ->
+    override fun all(condition: Condition<Any?>?): Later<out List<T>> = Later(config.executor) { resolve, _ ->
         val items = readAllObjectsFromDir()
         if (condition == null) {
-            resolve(items.toInteroperableList())
+            resolve(items.toIList())
         } else {
-            resolve(items.filter(condition.asPredicate(config.clazz.serializer())).toInteroperableList())
+            resolve(items.filter(condition.asPredicate(config.clazz.serializer())).toIList())
         }
     }
 }

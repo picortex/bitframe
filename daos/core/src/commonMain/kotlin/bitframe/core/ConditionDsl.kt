@@ -7,13 +7,13 @@ import kotlin.reflect.KProperty
 infix fun String.contains(rhs: Any) = Condition(this, Contains, rhs)
 
 @Deprecated("in favour of its quivalent in bitframe.dao")
-infix fun KProperty<*>.contains(rhs: Any) = Condition(name, Contains, rhs)
+infix fun KProperty<Any?>.contains(rhs: Any) = Condition(name, Contains, rhs)
 
 @Deprecated("in favour of its quivalent in bitframe.dao")
 infix fun String.isEqualTo(rhs: Any) = Condition(this, Equals, rhs)
 
 @Deprecated("in favour of its quivalent in bitframe.dao")
-infix fun KProperty<*>.isEqualTo(rhs: Any) = Condition(name, Equals, rhs)
+infix fun KProperty<Any?>.isEqualTo(rhs: Any) = Condition(name, Equals, rhs)
 
 @Deprecated("in favour of its quivalent in bitframe.dao")
 infix fun String.isLessThan(rhs: Any) = Condition(this, LessThan, rhs)

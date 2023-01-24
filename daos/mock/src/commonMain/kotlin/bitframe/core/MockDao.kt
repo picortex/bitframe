@@ -1,12 +1,12 @@
-@file:OptIn(InternalSerializationApi::class)
+@file:OptIn(InternalSerializationApi::class, InternalSerializationApi::class, InternalSerializationApi::class)
 
 package bitframe.core
 
 import koncurrent.Later
 import koncurrent.later
 import koncurrent.later.await
-import kotlinx.collections.interoperable.List
-import kotlinx.collections.interoperable.toInteroperableList
+import kollections.List
+import kollections.toIList
 import kotlinx.coroutines.delay
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.serializer
@@ -54,7 +54,7 @@ class MockDao<D : Savable>(
     }
 
     override fun execute(query: Query): Later<List<D>> = scope.later {
-        val conditions = query.statements.filterIsInstance<Condition<*>>()
+        val conditions = query.statements.filterIsInstance<Condition<Any?>>()
         var results: Collection<D> = items.values
         for (cond in conditions) {
             results = results.filter(cond.asPredicate(config.clazz.serializer()))
@@ -62,12 +62,12 @@ class MockDao<D : Savable>(
         val statements = query.statements - conditions
         statements.forEach { statement ->
             results = when (statement) {
-                is Condition<*> -> results
+                is Condition<Any?> -> results
                 is LimitStatement -> results.take(statement.value)
                 is SortStatement -> TODO()
             }
         }
-        results.toInteroperableList()
+        results.toIList()
     }
 
     override fun delete(uid: String): Later<D> = scope.later {
@@ -78,13 +78,13 @@ class MockDao<D : Savable>(
         item
     }
 
-    override fun all(condition: Condition<*>?): Later<List<D>> = scope.later {
+    override fun all(condition: Condition<Any?>?): Later<List<D>> = scope.later {
         lock.lock()
         delay(config.simulationTime)
         if (condition == null) {
-            items.values.toInteroperableList()
+            items.values.toIList()
         } else {
-            items.values.filter(condition.asPredicate(config.clazz.serializer())).toInteroperableList()
+            items.values.filter(condition.asPredicate(config.clazz.serializer())).toIList()
         }.also { lock.unlock() }
     }
 }

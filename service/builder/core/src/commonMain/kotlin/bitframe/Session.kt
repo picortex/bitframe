@@ -7,7 +7,7 @@ import bitframe.actor.App
 import bitframe.actor.Space
 import bitframe.actor.User
 import kotlinx.serialization.Serializable
-import kotlinx.collections.interoperable.List
+import kollections.List
 import kotlin.js.JsExport
 
 sealed class Session {

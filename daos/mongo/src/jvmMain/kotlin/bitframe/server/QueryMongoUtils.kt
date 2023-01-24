@@ -6,6 +6,6 @@ import com.mongodb.client.model.Filters
 import org.bson.conversions.Bson
 
 fun Query.toMongoFilter(): Bson {
-    val conditions = statements.filterIsInstance<Condition<*>>()
+    val conditions = statements.filterIsInstance<Condition<Any?>>()
     return Filters.and(conditions.map { it.toMongoFilter() })
 }

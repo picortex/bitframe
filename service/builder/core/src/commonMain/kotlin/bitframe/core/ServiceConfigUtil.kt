@@ -7,7 +7,7 @@ fun ServiceConfig.logger(): ReadOnlyProperty<Any, Logger> = ReadOnlyProperty { t
     logger.with("source" to thisRef::class.simpleName)
 }
 
-fun ServiceConfig.logger(rb: RequestBody<*>, l: Logger = logger): ReadOnlyProperty<Any?, Logger> = ReadOnlyProperty { thisRef, _ ->
+fun ServiceConfig.logger(rb: RequestBody<Any?>, l: Logger = logger): ReadOnlyProperty<Any?, Logger> = ReadOnlyProperty { thisRef, _ ->
     val map = buildMap {
         val appId = when (rb) {
             is RequestBody.Authorized -> {

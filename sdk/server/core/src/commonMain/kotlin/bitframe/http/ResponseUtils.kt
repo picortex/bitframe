@@ -1,21 +1,21 @@
 package bitframe.http
 
-import response.Response
-import response.encodeResponseToString
 import io.ktor.http.*
-import kotlinx.collections.interoperable.List
-import kotlinx.collections.interoperable.serializers.ListSerializer
+import kollections.List
+import kollections.serializers.ListSerializer
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import response.Response
+import response.encodeResponseToString
 import kotlin.jvm.JvmName
 
 @PublishedApi
 internal val json = Json { encodeDefaults = true }
 
-inline fun <reified D> Response<D, *>.toHttpResponse() = toHttpResponse(serializer())
+inline fun <reified D> Response<D, Any?>.toHttpResponse() = toHttpResponse(serializer())
 
-fun <D> Response<D, *>.toHttpResponse(
+fun <D> Response<D, Any?>.toHttpResponse(
     serializer: KSerializer<D>
 ): HttpResponse = HttpResponse(
     status = HttpStatusCode(status.code, status.message),
@@ -23,10 +23,10 @@ fun <D> Response<D, *>.toHttpResponse(
 )
 
 @JvmName("ListResponse")
-inline fun <reified D> Response<List<D>, *>.toHttpResponse() = toHttpResponse(ListSerializer(serializer()))
+inline fun <reified D> Response<List<D>, Any?>.toHttpResponse() = toHttpResponse(ListSerializer(serializer()))
 
 @JvmName("ListResponse")
-fun <D> Response<List<D>, *>.toHttpResponse(
+fun <D> Response<List<D>, Any?>.toHttpResponse(
     serializer: KSerializer<List<D>>
 ): HttpResponse = HttpResponse(
     status = HttpStatusCode(status.code, status.message),

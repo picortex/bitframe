@@ -15,9 +15,9 @@ kotlin {
             dependencies {
                 api(projects.cacheMock)
 
-                api(asoft.logging.console)
+                api(projects.lexiConsole)
                 api(kotlinx.serialization.json)
-                api(asoft.platform.core)
+                api(projects.habitatCore)
             }
         }
 

@@ -5,8 +5,9 @@ import bitframe.core.exceptions.MissingDaoException
 import koncurrent.Later
 import koncurrent.later
 import koncurrent.later.await
-import kotlinx.collections.interoperable.List
-import kotlinx.collections.interoperable.toInteroperableList
+import kollections.List
+import kollections.toIList
+
 @Deprecated("in favour of its quivalent in bitframe.dao")
 class CompoundDao<T : Any>(override val config: CompoundDaoConfig<T>) : Dao<T> {
 
@@ -36,10 +37,10 @@ class CompoundDao<T : Any>(override val config: CompoundDaoConfig<T>) : Dao<T> {
     }
 
     override fun execute(query: Query): Later<List<T>> = scope.later {
-        daos.values.map { it.execute(query) }.flatMap { it.await() }.toInteroperableList()
+        daos.values.map { it.execute(query) }.flatMap { it.await() }.toIList()
     }
 
-    override fun all(condition: Condition<*>?): Later<List<T>> = scope.later {
-        daos.values.map { it.all(condition) }.flatMap { it.await() }.toInteroperableList()
+    override fun all(condition: Condition<Any?>?): Later<List<T>> = scope.later {
+        daos.values.map { it.all(condition) }.flatMap { it.await() }.toIList()
     }
 }

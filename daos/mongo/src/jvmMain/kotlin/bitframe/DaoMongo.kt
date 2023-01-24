@@ -6,12 +6,13 @@ import bitframe.dao.Query
 import bitframe.dao.connectionString
 import bitframe.dao.exceptions.EntityNotFoundException
 import com.mongodb.client.model.Filters.eq
-import kotlinx.collections.interoperable.List
-import kotlinx.collections.interoperable.toInteroperableList
+import kollections.toIList
 import koncurrent.Later
 import org.bson.types.ObjectId
+import org.litote.kmongo.KMongo
 import org.litote.kmongo.eq
-import org.litote.kmongo.*
+import org.litote.kmongo.findOne
+import org.litote.kmongo.updateOne
 
 class DaoMongo<D : Savable>(val config: DaoMongoConfig<D>) : Dao<D> {
 
@@ -41,7 +42,7 @@ class DaoMongo<D : Savable>(val config: DaoMongoConfig<D>) : Dao<D> {
     }
 
     override fun execute(query: Query) = Later(config.executor) { resolve, _ ->
-        resolve(collection.execute(query).toList().toInteroperableList())
+        resolve(collection.execute(query).toList().toIList())
     }
 
     override fun delete(uid: String) = Later(config.executor) { resolve, reject ->
@@ -55,11 +56,11 @@ class DaoMongo<D : Savable>(val config: DaoMongoConfig<D>) : Dao<D> {
         resolve(obj)
     }
 
-    override fun all(condition: Condition<*>?) = Later(config.executor) { resolve, _ ->
+    override fun all(condition: Condition<Any?>?) = Later(config.executor) { resolve, _ ->
         if (condition == null) {
-            resolve(collection.find().toList().toInteroperableList())
+            resolve(collection.find().toList().toIList())
         } else {
-            resolve(collection.find(condition.toMongoFilter()).toList().toInteroperableList())
+            resolve(collection.find(condition.toMongoFilter()).toList().toIList())
         }
     }
 }

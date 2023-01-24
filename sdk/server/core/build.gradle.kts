@@ -15,7 +15,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeServiceBuilderSdkServerCore)
-                api(asoft.platform.core)
+                api(projects.habitatCore)
             }
         }
 

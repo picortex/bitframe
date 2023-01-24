@@ -12,7 +12,7 @@ internal fun <T : Any> CoroutineCollection<T>.execute(query: Query): CoroutineFi
     var publisher = find(query.toMongoFilter())
     query.statements.forEach { statement ->
         publisher = when (statement) {
-            is Condition<*> -> publisher
+            is Condition<Any?> -> publisher
             is LimitStatement -> publisher.limit(statement.value)
             is SortStatement -> publisher.sort(eq(statement.property))
         }

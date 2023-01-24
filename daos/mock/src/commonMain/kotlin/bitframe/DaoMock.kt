@@ -5,7 +5,7 @@ package bitframe
 import bitframe.actor.Savable
 import bitframe.dao.*
 import bitframe.dao.exceptions.EntityNotFoundException
-import kotlinx.collections.interoperable.toInteroperableList
+import kollections.toIList
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.serializer
 import koncurrent.Later
@@ -39,7 +39,7 @@ class DaoMock<D : Savable>(val config: DaoMockConfig<D>) : Dao<D> {
 
     @OptIn(InternalSerializationApi::class)
     override fun execute(query: Query) = Later(config.executor) { resolve, reject ->
-        val conditions = query.statements.filterIsInstance<Condition<*>>()
+        val conditions = query.statements.filterIsInstance<Condition<Any?>>()
         var results: Collection<D> = items.values
         for (cond in conditions) {
             results = results.filter(cond.asPredicate(config.clazz.serializer()))
@@ -47,12 +47,12 @@ class DaoMock<D : Savable>(val config: DaoMockConfig<D>) : Dao<D> {
         val statements = query.statements - conditions
         statements.forEach { statement ->
             results = when (statement) {
-                is Condition<*> -> results
+                is Condition<Any?> -> results
                 is LimitStatement -> results.take(statement.value)
                 is SortStatement -> TODO()
             }
         }
-        resolve(results.toInteroperableList())
+        resolve(results.toIList())
     }
 
     override fun delete(uid: String) = load(uid).then {
@@ -61,11 +61,11 @@ class DaoMock<D : Savable>(val config: DaoMockConfig<D>) : Dao<D> {
         item
     }
 
-    override fun all(condition: Condition<*>?) = Later(config.executor) { resolve, _ ->
+    override fun all(condition: Condition<Any?>?) = Later(config.executor) { resolve, _ ->
         if (condition == null) {
-            resolve(items.values.toInteroperableList())
+            resolve(items.values.toIList())
         } else {
-            resolve(items.values.filter(condition.asPredicate(config.clazz.serializer())).toInteroperableList())
+            resolve(items.values.filter(condition.asPredicate(config.clazz.serializer())).toIList())
         }
     }
 }

@@ -57,7 +57,7 @@ class MongoDao<D : Savable>(
         update(item.copySavable(uid = uid, deleted = true) as D).await()
     }
 
-    override fun all(condition: Condition<*>?): Later<List<D>> = scope.later {
+    override fun all(condition: Condition<Any?>?): Later<List<D>> = scope.later {
         if (condition == null) {
             collection.find().toList().toInteroperableList()
         } else {

@@ -1,7 +1,7 @@
 package bitframe.dao
 
-import kotlinx.collections.interoperable.listOf
+import kollections.iListOf
 
-fun <V> find(condition: Condition<V>) = Query(listOf(condition))
+fun <V> find(condition: Condition<V>) = Query(iListOf(condition))
 
-fun <V> filter(condition: Condition<V>) = Query(listOf(condition))
+fun <V> filter(condition: Condition<V>) = Query(iListOf(condition))

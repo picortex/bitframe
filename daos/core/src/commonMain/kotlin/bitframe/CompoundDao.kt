@@ -10,7 +10,7 @@ import koncurrent.Later
 import koncurrent.FailedLater
 import koncurrent.Laters
 import koncurrent.later.filterSuccessValues
-import kotlinx.collections.interoperable.toInteroperableList
+import kollections.toIList
 
 class CompoundDao<T : Savable>(val config: CompoundDaoConfig<T>) : AbstractDao<T>() {
 
@@ -45,12 +45,12 @@ class CompoundDao<T : Savable>(val config: CompoundDaoConfig<T>) : AbstractDao<T
     override fun execute(query: Query) = inAllDaos {
         execute(query)
     }.then { list ->
-        list.filterSuccessValues().flatten().toInteroperableList()
+        list.filterSuccessValues().flatten().toIList()
     }
 
-    override fun all(condition: Condition<*>?) = inAllDaos {
+    override fun all(condition: Condition<Any?>?) = inAllDaos {
         all(condition)
     }.then { list ->
-        list.filterSuccessValues().flatten().toInteroperableList()
+        list.filterSuccessValues().flatten().toIList()
     }
 }

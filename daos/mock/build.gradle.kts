@@ -16,7 +16,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeDaoCore)
-                api(asoft.kotlinx.serialization.mapper)
+//                api(asoft.kotlinx.serialization.mapper)
 //                api(asoft.koncurrent.primitives.mock)
                 api(projects.koncurrentPrimitivesMock)
             }

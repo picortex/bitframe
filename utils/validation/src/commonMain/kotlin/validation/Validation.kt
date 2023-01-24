@@ -28,5 +28,5 @@ sealed interface Validation<out T> {
         is Invalid -> null
     }
 
-    operator fun getValue(thisRef: Nothing?, property: KProperty<*>): T = getOrThrow()
+    operator fun getValue(thisRef: Nothing?, property: KProperty<Any?>): T = getOrThrow()
 }

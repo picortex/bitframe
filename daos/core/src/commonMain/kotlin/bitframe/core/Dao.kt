@@ -4,7 +4,7 @@ import bitframe.core.exceptions.EntityNotFoundException
 import koncurrent.Later
 import koncurrent.later
 import koncurrent.later.await
-import kotlinx.collections.interoperable.List
+import kollections.List
 
 @Deprecated("in favour of its quivalent in bitframe.dao")
 interface Dao<out T : Any> {
@@ -33,5 +33,5 @@ interface Dao<out T : Any> {
 
     fun delete(uid: String): Later<T>
 
-    fun all(condition: Condition<*>? = null): Later<List<T>>
+    fun all(condition: Condition<Any?>? = null): Later<List<T>>
 }

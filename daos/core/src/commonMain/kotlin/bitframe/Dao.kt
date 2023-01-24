@@ -3,7 +3,7 @@ package bitframe
 import bitframe.dao.Condition
 import bitframe.dao.Query
 import bitframe.dao.exceptions.EntityNotFoundException
-import kotlinx.collections.interoperable.List
+import kollections.List
 import koncurrent.Later
 
 interface Dao<out T : Any> {
@@ -23,5 +23,5 @@ interface Dao<out T : Any> {
 
     fun delete(uid: String): Later<T>
 
-    fun all(condition: Condition<*>? = null): Later<List<T>>
+    fun all(condition: Condition<Any?>? = null): Later<List<T>>
 }
