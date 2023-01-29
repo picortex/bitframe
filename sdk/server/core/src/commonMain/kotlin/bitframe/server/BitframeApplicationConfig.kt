@@ -1,14 +1,15 @@
 package bitframe.server
 
 import bitframe.Module
-import kotlinx.collections.interoperable.mutableListOf
+import kollections.MutableList
+import kollections.iMutableListOf
 
 interface BitframeApplicationConfig<out S> {
     val service: S
     val modules: MutableList<Module>
 
     companion object {
-        fun defaultModules() = mutableListOf<Module>()
+        fun defaultModules() = iMutableListOf<Module>()
 
         operator fun <S> invoke(
             service: S,

@@ -1,15 +1,12 @@
-@file:OptIn(InternalSerializationApi::class)
-
 package bitframe.server
 
 import bitframe.core.*
 import com.mongodb.client.model.Filters.eq
-import kotlinx.collections.interoperable.List
-import kotlinx.collections.interoperable.toInteroperableList
-import kotlinx.serialization.InternalSerializationApi
+import kollections.List
+import kollections.toIList
 import koncurrent.Later
-import koncurrent.later.await
 import koncurrent.later
+import koncurrent.later.await
 import org.bson.types.ObjectId
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.eq
@@ -49,7 +46,7 @@ class MongoDao<D : Savable>(
     }
 
     override fun execute(query: Query): Later<List<D>> = scope.later {
-        collection.execute(query).toList().toInteroperableList()
+        collection.execute(query).toList().toIList()
     }
 
     override fun delete(uid: String): Later<D> = scope.later {
@@ -59,9 +56,9 @@ class MongoDao<D : Savable>(
 
     override fun all(condition: Condition<Any?>?): Later<List<D>> = scope.later {
         if (condition == null) {
-            collection.find().toList().toInteroperableList()
+            collection.find().toList().toIList()
         } else {
-            collection.find(condition.toMongoFilter()).toList().toInteroperableList()
+            collection.find(condition.toMongoFilter()).toList().toIList()
         }
     }
 }
