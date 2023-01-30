@@ -2,17 +2,27 @@ package bitframe
 
 import bitframe.http.HttpRequest
 import bitframe.http.HttpRoute
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.cio.*
-import io.ktor.server.engine.*
-import io.ktor.server.http.content.*
-import io.ktor.server.plugins.cors.routing.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpMethod
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.application.call
+import io.ktor.server.application.install
+import io.ktor.server.cio.CIO
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.http.content.default
+import io.ktor.server.http.content.file
+import io.ktor.server.http.content.files
+import io.ktor.server.http.content.static
+import io.ktor.server.plugins.cors.routing.CORS
+import io.ktor.server.request.receiveText
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.get
+import io.ktor.server.routing.route
+import io.ktor.server.routing.routing
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.mapper.Mapper
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 open class ApplicationKtor<S>(
     override val config: ApplicationConfig<S>
@@ -55,16 +65,15 @@ open class ApplicationKtor<S>(
 
                 for (rout in modules.flatMap { it.actions.map { a -> a.route } }) route(rout.path, rout.method) {
                     handle {
-                        println("Reached at ${rout.method} ${rout.path}")
                         val response = rout.runHandlerCatching(mapToHttpRequest(rout, call))
-                        println("Reached at ")
                         call.respondText(response.body, contentType = ContentType.Application.Json, status = response.status)
                     }
                 }
 
                 get("/api/info") {
-                    val text = (modules).map { it.info() }
-                    call.respondText(Mapper { prettyPrint = true }.encodeToString(text))
+                    val info = (modules).map { it.info() }
+                    val codec = Json { prettyPrint = true }
+                    call.respondText(codec.encodeToString(info.toJsonElement()))
                 }
             }
         }.start(wait = true)
