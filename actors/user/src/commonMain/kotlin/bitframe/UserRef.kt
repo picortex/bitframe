@@ -1,6 +1,6 @@
 @file:JsExport
 
-package bitframe.actor
+package bitframe
 
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport

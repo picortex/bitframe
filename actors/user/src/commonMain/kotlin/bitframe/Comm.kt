@@ -1,8 +1,11 @@
 @file:JsExport
 @file:Suppress("WRONG_EXPORTED_DECLARATION")
 
-package bitframe.actor
+package bitframe
 
+import bitframe.actor.Identifier
+import bitframe.actor.Savable
+import bitframe.actor.UNSET
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads

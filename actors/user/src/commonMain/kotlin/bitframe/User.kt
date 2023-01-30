@@ -1,8 +1,10 @@
 @file:UseSerializers(LongAsStringSerializer::class)
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package bitframe.actor
+package bitframe
 
+import bitframe.actor.Savable
+import bitframe.actor.UNSET
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import kotlinx.serialization.builtins.LongAsStringSerializer

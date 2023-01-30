@@ -1,3 +1,3 @@
-package bitframe.actor
+package bitframe
 
 typealias UserType = String

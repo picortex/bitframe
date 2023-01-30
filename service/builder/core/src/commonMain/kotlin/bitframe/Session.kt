@@ -5,7 +5,6 @@ package bitframe
 
 import bitframe.actor.App
 import bitframe.actor.Space
-import bitframe.actor.User
 import kotlinx.serialization.Serializable
 import kollections.List
 import kotlin.js.JsExport

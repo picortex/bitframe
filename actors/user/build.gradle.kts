@@ -3,7 +3,6 @@ plugins {
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
-//    id("picortex-publish")
     signing
 }
 
@@ -15,13 +14,16 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeActorCore)
+                api(projects.geoCore)
+                api(projects.kroneckerCore)
+                api(projects.koncurrentLaterCore)
+                api(projects.kollectionsInteroperable)
                 api(projects.kronoKotlinx)
             }
         }
 
         val commonTest by getting {
             dependencies {
-//                implementation(asoft.expect.core)
                 implementation(projects.expectCore)
             }
         }
