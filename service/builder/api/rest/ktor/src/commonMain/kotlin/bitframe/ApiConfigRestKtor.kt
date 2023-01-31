@@ -1,6 +1,6 @@
 package bitframe
 
-import io.ktor.client.*
+import io.ktor.client.HttpClient
 import koncurrent.CoroutineExecutor
 import kotlinx.coroutines.CoroutineScope
 
