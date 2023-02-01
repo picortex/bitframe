@@ -5,6 +5,7 @@ package bitframe
 
 import geo.GeoLocation
 import kollections.iListOf
+import kollections.List
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 

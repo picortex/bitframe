@@ -6,6 +6,7 @@ package bitframe
 import bitframe.actor.UNSET
 import geo.GeoLocation
 import kollections.iListOf
+import kollections.List
 import kollections.toIList
 import krono.LocalDate
 import kotlinx.serialization.Serializable

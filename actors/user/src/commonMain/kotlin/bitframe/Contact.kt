@@ -6,6 +6,7 @@ package bitframe
 import kotlin.js.JsExport
 import kollections.iListOf
 import kollections.toIList
+import kollections.List
 import kotlinx.serialization.Serializable
 
 @Serializable
