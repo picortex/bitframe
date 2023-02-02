@@ -6,6 +6,7 @@ package bitframe
 import cache.load
 import cache.save
 import koncurrent.Later
+import koncurrent.later.finally
 import kotlinx.serialization.KSerializer
 import live.MutableLive
 import live.mutableLiveOf
@@ -66,12 +67,8 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<Any?>) : 
         if (clearPages) paginator.clearPages()
     }
 
-    fun switchToLatestSelectedView() {
-        cache.load<View>(preferredView).then {
-            view.value = it
-        }.catch {
-            view.value = DEFAULT_VIEW
-        }
+    fun switchToLatestSelectedView() = cache.load<View>(preferredView).finally {
+        view.value = it.data ?: DEFAULT_VIEW
     }
 
     fun switchToListView() = switchTo(View.ListView)

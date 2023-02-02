@@ -32,7 +32,7 @@ private inline fun Individual.toCorporate() = Corporate(
 private inline fun Corporate.toIndividual() = Individual(
     uid = uid,
     name = name,
-    comms = headQuarters.contacts.firstOrNull()?.comms ?: iListOf()
+    comms = primaryContact?.comms ?: iListOf()
 )
 
 val Corporate.primaryContact get() = headQuarters.contacts.firstOrNull()
