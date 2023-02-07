@@ -27,8 +27,11 @@ import presenters.scopes.View
 import viewmodel.BaseViewModel
 import viewmodel.ScopeConfig
 import kotlin.js.JsExport
+import kotlin.js.JsName
 
-abstract class CollectionsViewModel<T>(private val config: ScopeConfig<Any?>) : BaseViewModel(config) {
+abstract class CollectionsViewModel<T>(private val config: CollectionScopeConfig<T, Any?>) : BaseViewModel(config) {
+    @JsName("_ignore_constructor")
+    constructor(config: ScopeConfig<Any?>) : this(config.collection())
 
     val view: MutableLive<View> = mutableLiveOf(DEFAULT_VIEW)
 
@@ -37,10 +40,6 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<Any?>) : 
     protected abstract val loader: (no: Int, capacity: Int) -> Later<Collection<T>>
 
     protected abstract val serializer: KSerializer<T>
-
-    open val actions: ActionsManager<T> = actionsOf()
-
-    open val columns: ColumnsManager<T> = columnsOf()
 
     protected inline fun columnsOf(noinline builder: ColumnsBuilder<T>.() -> Unit) = columnsOf(emptyList(), builder)
 
@@ -51,6 +50,10 @@ abstract class CollectionsViewModel<T>(private val config: ScopeConfig<Any?>) : 
     }
 
     val selector: SelectionManager<T> by lazy { SelectionManager(paginator) }
+
+    open val actions: ActionsManager<T> by lazy { actionsOf(selector, config.actions) }
+
+    open val columns: ColumnsManager<T> by lazy { columnsOf(emptyList(), config.columns) }
 
     val list: ScrollableList<T> by lazy { scrollableListOf(paginator, selector, actions) }
 
