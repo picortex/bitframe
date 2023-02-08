@@ -6,6 +6,7 @@ package bitframe
 import bitframe.actor.UNSET
 import kollections.iListOf
 import krono.LocalDate
+import kollections.List
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
