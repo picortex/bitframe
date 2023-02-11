@@ -22,7 +22,7 @@ class DaoMongo<D : Savable>(val config: DaoMongoConfig<D>) : Dao<D> {
 
     override fun create(input: D) = Later(config.executor) { resolve, _ ->
         val id = ObjectId.get()
-        val output = input.copySavable("${config.prefix}-$id", deleted = false) as D
+        val output = input.copy("${config.prefix}-$id", deleted = false) as D
         collection.insertOne(output)
         resolve(output)
     }
@@ -51,7 +51,7 @@ class DaoMongo<D : Savable>(val config: DaoMongoConfig<D>) : Dao<D> {
             reject(EntityNotFoundException(uid))
             return@Later
         }
-        val obj = found.copySavable(uid = uid, deleted = true) as D
+        val obj = found.copy(uid = uid, deleted = true) as D
         collection.updateOne(obj::uid eq obj.uid, obj)
         resolve(obj)
     }

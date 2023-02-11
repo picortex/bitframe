@@ -14,6 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeActorCore)
+                api(projects.identifierComm)
                 api(projects.geoCore)
                 api(projects.kroneckerCore)
                 api(projects.koncurrentLaterCore)

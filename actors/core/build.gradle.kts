@@ -3,7 +3,6 @@ plugins {
     kotlin("plugin.serialization")
     id("tz.co.asoft.library")
     id("org.jetbrains.dokka")
-//    id("picortex-publish")
     signing
 }
 
@@ -16,6 +15,7 @@ kotlin {
             dependencies {
                 api(kotlinx.serialization.core)
                 api(projects.identifierCore)
+                api(projects.identifierComm)
             }
         }
 

@@ -36,13 +36,13 @@ class DaoFile<out T : Savable>(val config: DaoFileConfig<@UnsafeVariance T>) : A
     override fun create(input: @UnsafeVariance T): Later<out T> = config.executor.later {
         val size = fs.list(folder()).size
         val uid = size + 1
-        val output = input.copySavable(uid = "$uid", false) as T
+        val output = input.copy(uid = "$uid", false) as T
         writeObjectToFile(output, dir / "$uid.json")
     }
 
     override fun update(obj: @UnsafeVariance T): Later<out T> = config.executor.later {
         val uid = obj.uid
-        val output = obj.copySavable(uid = uid, deleted = obj.deleted) as T
+        val output = obj.copy(uid = uid, deleted = obj.deleted) as T
         writeObjectToFile(output, dir / "$uid.json")
     }
 

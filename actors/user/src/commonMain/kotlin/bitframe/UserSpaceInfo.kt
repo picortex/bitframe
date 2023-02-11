@@ -15,5 +15,5 @@ data class UserSpaceInfo(
     override val uid: String = UNSET,
     override val deleted: Boolean = false
 ) : Savable {
-    override fun copySavable(uid: String, deleted: Boolean): Savable = copy(uid = uid, deleted = deleted)
+    override fun copy(uid: String, deleted: Boolean): Savable = copy(uid = uid, deleted = deleted)
 }

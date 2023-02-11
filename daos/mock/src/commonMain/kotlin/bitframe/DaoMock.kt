@@ -9,7 +9,6 @@ import kollections.toIList
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.serializer
 import koncurrent.Later
-import koncurrent.later.then
 
 class DaoMock<D : Savable>(val config: DaoMockConfig<D>) : Dao<D> {
 
@@ -17,7 +16,7 @@ class DaoMock<D : Savable>(val config: DaoMockConfig<D>) : Dao<D> {
 
     override fun create(input: D) = Later(config.executor) { resolve, _ ->
         val nextId = "${config.prefix}-${items.size + 1}"
-        val output = input.copySavable(uid = nextId, deleted = false) as D
+        val output = input.copy(uid = nextId, deleted = false) as D
         items[nextId] = output
         resolve(output)
     }
@@ -56,7 +55,7 @@ class DaoMock<D : Savable>(val config: DaoMockConfig<D>) : Dao<D> {
     }
 
     override fun delete(uid: String) = load(uid).then {
-        val item = it.copySavable(uid, deleted = true) as D
+        val item = it.copy(uid, deleted = true) as D
         items[uid] = it
         item
     }

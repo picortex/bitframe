@@ -36,7 +36,7 @@ data class User(
         object SignedOut : Status()
     }
 
-    override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
+    override fun copy(uid: String, deleted: Boolean) = copy(uid = uid, name = name, deleted = deleted)
 
     fun ref() = UserRef(
         uid = uid,

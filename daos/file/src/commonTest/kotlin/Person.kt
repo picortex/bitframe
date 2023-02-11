@@ -8,5 +8,5 @@ data class Person(
     override val uid: String = UNSET,
     override val deleted: Boolean = false
 ) : Savable {
-    override fun copySavable(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
+    override fun copy(uid: String, deleted: Boolean) = copy(uid = uid, deleted = deleted)
 }
