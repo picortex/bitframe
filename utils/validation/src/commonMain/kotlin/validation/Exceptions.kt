@@ -1,14 +1,17 @@
 @file:JsExport
-@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package validation
 
 import kotlin.js.JsExport
+import kotlin.js.JsName
 
 open class ValidationException(
     override val message: String?,
     override val cause: Throwable?
-) : IllegalArgumentException(message, cause)
+) : IllegalArgumentException(message, cause) {
+    @JsName("withMessage")
+    constructor(message: String?) : this(message, null)
+}
 
 open class BlankFieldException(
     val fieldName: String,
