@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @Serializable
-class Identified<out I, out T>(
+data class Identified<out I, out T>(
     override val uid: I,
     override val body: T
 ) : IdentifiedRaw<I, T> {
