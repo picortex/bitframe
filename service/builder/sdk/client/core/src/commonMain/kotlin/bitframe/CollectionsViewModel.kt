@@ -89,7 +89,10 @@ abstract class CollectionsViewModel<T>(private val config: CollectionScopeConfig
         return paginator.loadFirstPage()
     }
 
-    fun unselect(item: T? = null): Later<Unit?> = cache.remove(CacheKeys.SELECTED_ITEM)
+    fun unselect(item: T? = null) {
+        selector.unSelectAllItemsInAllPages()
+        cache.remove(CacheKeys.SELECTED_ITEM)
+    }
 
     fun select(item: T): Later<T> {
         selector.select(item)
