@@ -84,19 +84,22 @@ abstract class CollectionsViewModel<T>(private val config: CollectionScopeConfig
 
     val searchBox = TextInputField(name = "search-box")
 
-    fun search(): Later<Any> {
+    fun search(): Later<Page<T>> {
         paginator.clearPages()
         return paginator.loadFirstPage()
     }
 
     fun unselect(item: T? = null) {
-        selector.unSelectAllItemsInAllPages()
         cache.remove(CacheKeys.SELECTED_ITEM)
+        selector.unSelect(item ?: return)
     }
 
     fun select(item: T): Later<T> {
         selector.select(item)
-        return cache.save(CacheKeys.SELECTED_ITEM, item, serializer)
+        return cache.save(CacheKeys.SELECTED_ITEM, item, serializer).catch {
+            logger.error("Failed to cache $item", it)
+            item
+        }
     }
 
     private companion object {
