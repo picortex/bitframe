@@ -18,14 +18,14 @@ kotlin {
                 api(projects.bitframeDaoCore)
 //                api(asoft.kotlinx.serialization.mapper)
 //                api(asoft.koncurrent.primitives.mock)
-                api(projects.koncurrentPrimitivesMock)
+                api(projects.koncurrentExecutorsMock)
             }
         }
 
         val commonTest by getting {
             dependencies {
-//                implementation(asoft.expect.coroutines)
-                implementation(projects.expectCoroutines)
+//                implementation(projects.kommanderCoroutines)
+                implementation(projects.kommanderCoroutines)
             }
         }
     }

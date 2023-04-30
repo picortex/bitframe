@@ -15,7 +15,7 @@ kotlin {
                 api(projects.bitframeDaoCore)
                 api(kotlinx.serialization.json)
                 api(squareup.okio.core)
-                api(projects.koncurrentPrimitivesMock)
+                api(projects.koncurrentExecutorsMock)
             }
         }
 
@@ -23,7 +23,7 @@ kotlin {
             dependencies {
                 implementation(squareup.okio.fake)
                 implementation(projects.koncurrentLaterTest)
-                implementation(projects.expectCoroutines)
+                implementation(projects.kommanderCoroutines)
             }
         }
     }

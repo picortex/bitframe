@@ -29,8 +29,8 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(projects.bitframeDaoMock)
-//                implementation(asoft.expect.core)
-                implementation(projects.expectCore)
+//                implementation(projects.kommanderCore)
+                implementation(projects.kommanderCore)
             }
         }
     }

@@ -13,7 +13,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.cacheMock)
+                api(projects.keepMock)
 
                 api(projects.lexiConsole)
                 api(kotlinx.serialization.json)
@@ -24,7 +24,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
 //                implementation(projects.bitframeApiMock)
-                implementation(projects.expectCoroutines)
+                implementation(projects.kommanderCoroutines)
             }
         }
 
@@ -38,8 +38,8 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-//                api(projects.cacheReactNative)
-//                api(projects.cacheBrowser)
+//                api(projects.keepReactNative)
+//                api(projects.keepBrowser)
             }
         }
     }

@@ -14,14 +14,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.cacheMock) // because we need a default ApiConfigDefault.cache
+                api(projects.keepMock) // because we need a default ApiConfigDefault.cache
                 api(projects.bitframeServiceBuilderCore)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(projects.expectCore)
+                implementation(projects.kommanderCore)
             }
         }
     }

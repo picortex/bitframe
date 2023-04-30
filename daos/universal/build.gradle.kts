@@ -26,7 +26,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(squareup.okio.fake)
-                implementation(projects.expectCore)
+                implementation(projects.kommanderCore)
             }
         }
     }

@@ -18,13 +18,13 @@ kotlin {
                 api(projects.bitframeServiceBuilderDaod)
                 api(projects.bitframeDaoMock)
 
-                api(projects.cacheMock)
+                api(projects.keepMock)
             }
         }
 
         val commonTest by getting {
             dependencies {
-                implementation(projects.expectCore)
+                implementation(projects.kommanderCore)
             }
         }
     }

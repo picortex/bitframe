@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeSdkServerCore)
-                api(projects.expectCoroutines)
+                api(projects.kommanderCoroutines)
 
                 api(kotlinx.serialization.json)
             }

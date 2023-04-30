@@ -30,8 +30,8 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(projects.expectCore)
-//                implementation(asoft.expect.core)
+                implementation(projects.kommanderCore)
+//                implementation(projects.kommanderCore)
             }
         }
 

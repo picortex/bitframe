@@ -23,8 +23,8 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(projects.bitframeActorUser)
-                implementation(projects.expectCoroutines)
-//                implementation(asoft.expect.coroutines)
+                implementation(projects.kommanderCoroutines)
+//                implementation(projects.kommanderCoroutines)
             }
         }
 

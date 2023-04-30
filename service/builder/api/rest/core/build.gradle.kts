@@ -16,7 +16,7 @@ kotlin {
                 api(projects.bitframeServiceBuilderApiCore)
                 api(projects.bitframeServiceBuilderRest)
 
-                api(projects.koncurrentPrimitivesCoroutines)
+                api(projects.koncurrentExecutorsCoroutines)
 
                 api(ktor.client.core)
             }
@@ -24,7 +24,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                implementation(projects.expectCore)
+                implementation(projects.kommanderCore)
             }
         }
 
