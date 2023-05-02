@@ -13,6 +13,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.bitframeServiceBuilderApiCore)
+                api(projects.symphonyTable)
+                api(projects.symphonyList)
                 // api(projects.symphonyCollectionsCore)
                 // api(projects.symphonyInputsCore)
             }
