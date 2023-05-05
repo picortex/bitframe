@@ -14,7 +14,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.bitframeServiceBuilderSdkServerCore)
+                // api(projects.bitframeServiceBuilderSdkServerCore)
                 api(projects.habitatCore)
             }
         }
