@@ -7,7 +7,7 @@ import events.EventBus
 import io.ktor.client.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
-import live.MutableLive
+import cinematic.MutableLive
 import logging.Logger
 
 class ServiceConfigKtorImpl<out E>(

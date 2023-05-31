@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.serialization.StringFormat
-import live.MutableLive
+import cinematic.MutableLive
 import logging.Logger
 
 @PublishedApi
