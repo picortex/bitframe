@@ -8,8 +8,8 @@ import events.EventBus
 import events.InMemoryEventBus
 import koncurrent.Executor
 import koncurrent.Executors
-import live.MutableLive
-import live.mutableLiveOf
+import cinematic.MutableLive
+import cinematic.mutableLiveOf
 import logging.ConsoleAppender
 import logging.Logger
 

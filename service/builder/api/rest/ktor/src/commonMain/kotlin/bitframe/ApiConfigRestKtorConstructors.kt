@@ -6,7 +6,7 @@ import events.EventBus
 import io.ktor.client.*
 import koncurrent.CoroutineExecutor
 import kotlinx.serialization.StringFormat
-import live.MutableLive
+import cinematic.MutableLive
 import logging.Logger
 
 val API_CONFIG_REST_KTOR_DEFAULT: ApiConfigRestKtor<Any> = ApiConfigRestKtorImpl
