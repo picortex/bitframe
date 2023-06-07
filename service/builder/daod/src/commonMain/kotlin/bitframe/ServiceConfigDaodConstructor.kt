@@ -4,7 +4,7 @@ import bitframe.internal.ServiceConfigDaodImpl
 import events.EventBus
 import koncurrent.Executor
 import kotlinx.serialization.StringFormat
-import logging.Logger
+import lexi.Logger
 import mailer.Mailer
 import kotlin.jvm.*
 

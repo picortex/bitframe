@@ -1,12 +1,12 @@
 package bitframe
 
 import bitframe.internal.ApiConfigMockImpl
-import cache.Cache
+import keep.Cache
 import events.EventBus
 import koncurrent.Executor
 import kotlinx.serialization.StringFormat
 import cinematic.MutableLive
-import logging.Logger
+import lexi.Logger
 import mailer.Mailer
 
 val API_CONFIG_MOCK_DEFAULT: ApiConfigMock = ApiConfigMockImpl

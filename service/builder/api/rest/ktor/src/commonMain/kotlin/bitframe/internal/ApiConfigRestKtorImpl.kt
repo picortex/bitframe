@@ -3,7 +3,7 @@ package bitframe.internal
 import bitframe.API_CONFIG_REST_DEFAULT
 import bitframe.ApiConfigRestKtor
 import bitframe.Session
-import cache.Cache
+import keep.Cache
 import events.EventBus
 import io.ktor.client.*
 import koncurrent.CoroutineExecutor
@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.serialization.StringFormat
 import cinematic.MutableLive
-import logging.Logger
+import lexi.Logger
 
 @PublishedApi
 internal class ApiConfigRestKtorImpl<E>(

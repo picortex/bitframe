@@ -2,7 +2,7 @@ package bitframe.core
 
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
-import logging.Logger
+import lexi.Logger
 
 class ServiceConfigImpl(
     override val bus: EventBus = ServiceConfig.DEFAULT_BUS,

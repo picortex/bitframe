@@ -9,8 +9,8 @@ import koncurrent.Executor
 import koncurrent.Executors
 import kotlinx.serialization.StringFormat
 import kotlinx.serialization.json.Json
-import logging.ConsoleAppender
-import logging.Logger
+import lexi.ConsoleAppender
+import lexi.Logger
 import mailer.Mailer
 import mailer.MockMailer
 

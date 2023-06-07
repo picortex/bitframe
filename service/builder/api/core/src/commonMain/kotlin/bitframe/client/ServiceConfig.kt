@@ -4,12 +4,12 @@ package bitframe.client
 
 import bitframe.core.Session
 import bitframe.core.Session.Unknown
-import cache.Cache
+import keep.Cache
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
 import cinematic.MutableLive
 import cinematic.mutableLiveOf
-import logging.Logger
+import lexi.Logger
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads

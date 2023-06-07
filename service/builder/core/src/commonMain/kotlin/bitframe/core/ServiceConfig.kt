@@ -6,8 +6,8 @@ import events.EventBus
 import events.InMemoryEventBus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
-import logging.ConsoleAppender
-import logging.Logger
+import lexi.ConsoleAppender
+import lexi.Logger
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads

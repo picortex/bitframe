@@ -2,7 +2,7 @@ package bitframe.api
 
 import bitframe.ApiConfig
 import bitframe.Session
-import logging.Logger
+import lexi.Logger
 import kotlin.properties.ReadOnlyProperty
 
 fun ApiConfig.getSignedInSessionTo(action: String) = session.value as? Session.SignedIn ?: error("You must be signed in to $action")

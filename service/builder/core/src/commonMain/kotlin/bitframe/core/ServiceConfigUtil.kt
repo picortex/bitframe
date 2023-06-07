@@ -1,6 +1,6 @@
 package bitframe.core
 
-import logging.Logger
+import lexi.Logger
 import kotlin.properties.ReadOnlyProperty
 
 fun ServiceConfig.logger(): ReadOnlyProperty<Any, Logger> = ReadOnlyProperty { thisRef, _ ->

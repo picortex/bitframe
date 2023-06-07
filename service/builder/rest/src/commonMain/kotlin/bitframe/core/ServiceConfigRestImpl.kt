@@ -3,7 +3,7 @@ package bitframe.core
 import events.EventBus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
-import logging.Logger
+import lexi.Logger
 
 @Deprecated("")
 class ServiceConfigRestImpl<out E>(

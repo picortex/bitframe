@@ -1,13 +1,13 @@
 package bitframe
 
 import bitframe.internal.ApiConfigRestKtorImpl
-import cache.Cache
+import keep.Cache
 import events.EventBus
 import io.ktor.client.*
 import koncurrent.CoroutineExecutor
 import kotlinx.serialization.StringFormat
 import cinematic.MutableLive
-import logging.Logger
+import lexi.Logger
 
 val API_CONFIG_REST_KTOR_DEFAULT: ApiConfigRestKtor<Any> = ApiConfigRestKtorImpl
 

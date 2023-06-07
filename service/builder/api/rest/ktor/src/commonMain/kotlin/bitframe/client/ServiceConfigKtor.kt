@@ -3,12 +3,12 @@ package bitframe.client
 import bitframe.core.ServiceConfigRest
 import bitframe.core.Session
 import events.EventBus
-import cache.Cache
+import keep.Cache
 import io.ktor.client.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
 import cinematic.MutableLive
-import logging.Logger
+import lexi.Logger
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic

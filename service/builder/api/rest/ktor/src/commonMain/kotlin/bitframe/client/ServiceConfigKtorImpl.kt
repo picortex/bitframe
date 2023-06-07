@@ -2,13 +2,13 @@ package bitframe.client
 
 import bitframe.core.ServiceConfigRest
 import bitframe.core.Session
-import cache.Cache
+import keep.Cache
 import events.EventBus
 import io.ktor.client.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.json.Json
 import cinematic.MutableLive
-import logging.Logger
+import lexi.Logger
 
 class ServiceConfigKtorImpl<out E>(
     override val appId: String,

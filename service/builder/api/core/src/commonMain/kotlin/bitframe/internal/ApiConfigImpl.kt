@@ -2,16 +2,16 @@ package bitframe.internal
 
 import bitframe.ApiConfig
 import bitframe.Session
-import cache.Cache
-import cache.CacheMock
+import keep.Cache
+import keep.CacheMock
 import events.EventBus
 import events.InMemoryEventBus
 import koncurrent.Executor
 import koncurrent.Executors
 import cinematic.MutableLive
 import cinematic.mutableLiveOf
-import logging.ConsoleAppender
-import logging.Logger
+import lexi.ConsoleAppender
+import lexi.Logger
 
 @PublishedApi
 internal class ApiConfigImpl private constructor(

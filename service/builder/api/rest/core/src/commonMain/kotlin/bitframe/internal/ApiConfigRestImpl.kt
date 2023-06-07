@@ -3,13 +3,13 @@ package bitframe.internal
 import bitframe.API_CONFIG_DEFAULT
 import bitframe.ApiConfigRest
 import bitframe.Session
-import cache.Cache
+import keep.Cache
 import events.EventBus
 import koncurrent.Executor
 import kotlinx.serialization.StringFormat
 import kotlinx.serialization.json.Json
 import cinematic.MutableLive
-import logging.Logger
+import lexi.Logger
 
 @PublishedApi
 internal class ApiConfigRestImpl<out E, out H>(
