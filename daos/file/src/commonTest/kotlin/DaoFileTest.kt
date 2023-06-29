@@ -5,6 +5,7 @@ import bitframe.dao.exceptions.EntityNotFoundException
 import bitframe.dao.find
 import bitframe.dao.isEqualTo
 import expect.*
+import kommander.expect
 import koncurrent.Later
 import koncurrent.LaterTestResult
 import koncurrent.SynchronousExecutor

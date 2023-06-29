@@ -2,6 +2,7 @@ import bitframe.core.DaoFactory
 import bitframe.core.MockDaoFactory
 import bitframe.core.get
 import expect.expect
+import kommander.expect
 import kotlinx.coroutines.test.runTest
 import koncurrent.later.await
 import kotlin.test.Test
@@ -19,6 +20,6 @@ class MockDaoFactoryTest {
     fun gets_the_correct_prefix_of_id_for_a_class() = runTest {
         val dao = factory.get<Human>()
         val pete = dao.create(Human(name = "Peter")).await()
-        expect(pete.uid).toBe("human-1")
+        expect<String>(pete.uid).toBe("human-1")
     }
 }

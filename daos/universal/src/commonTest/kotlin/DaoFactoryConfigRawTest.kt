@@ -5,6 +5,7 @@ import bitframe.DaoFactoryMongo
 import expect.expect
 import expect.expectFunction
 import expect.toBe
+import kommander.expect
 import kotlin.test.Test
 import okio.FileSystem
 import okio.Path.Companion.toPath
@@ -35,7 +36,7 @@ class DaoFactoryConfigRawTest {
             DaoFactoryConfigRaw(fs, null, null)
         }.toFail()
 
-        expect(appDirError.message).toBe("APP_DIR is null, please make sure environment variable APP_DIR is set")
+        expect<String?>(appDirError.message).toBe("APP_DIR is null, please make sure environment variable APP_DIR is set")
 
         val appConfError = expectFunction {
             DaoFactoryConfigRaw(fs, "/app", null)

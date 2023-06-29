@@ -3,6 +3,7 @@ import bitframe.core.get
 import bitframe.server.MongoDaoFactory
 import bitframe.server.MongoDaoFactoryConfig
 import expect.expect
+import kommander.expect
 import kotlinx.coroutines.test.runTest
 import koncurrent.later.await
 import kotlin.test.Ignore
@@ -30,6 +31,6 @@ class MongoDaoFactoryTest {
     fun gets_the_correct_prefix_of_id_for_a_class() = runTest {
         val dao = factory.get<Human>()
         val pete = dao.create(Human(name = "Peter")).await()
-        expect(pete.uid).toBeNonNull()
+        expect<String>(pete.uid).toBeNonNull()
     }
 }

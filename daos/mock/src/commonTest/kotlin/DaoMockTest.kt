@@ -4,6 +4,7 @@ import bitframe.dao.exceptions.EntityNotFoundException
 import bitframe.dao.find
 import bitframe.dao.isEqualTo
 import expect.*
+import kommander.expect
 import koncurrent.Rejected
 import koncurrent.later.then
 import kotlin.test.Test

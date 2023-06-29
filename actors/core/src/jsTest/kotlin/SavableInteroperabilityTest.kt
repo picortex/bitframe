@@ -1,4 +1,5 @@
 import expect.expect
+import kommander.expect
 import kotlin.test.Test
 
 class SavableInteroperabilityTest {
@@ -16,7 +17,7 @@ class SavableInteroperabilityTest {
     @Test
     fun should_get_id_from_savable() {
         val uid: String = person.uid
-        expect(uid).toBe("test-id")
+        expect<String>(uid).toBe("test-id")
     }
 
     @Test

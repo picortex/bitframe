@@ -3,6 +3,7 @@ import bitframe.core.contains
 import bitframe.core.find
 import bitframe.core.isEqualTo
 import expect.*
+import kommander.expect
 import kotlinx.coroutines.test.runTest
 import koncurrent.later.await
 import kotlin.test.Test

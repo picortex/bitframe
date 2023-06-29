@@ -3,6 +3,7 @@ import bitframe.DaoFactoryFile
 import bitframe.DaoFactoryFileConfig
 import bitframe.dao.get
 import expect.expect
+import kommander.expect
 import koncurrent.SynchronousExecutor
 import koncurrent.later.then
 import okio.Path.Companion.toPath
@@ -28,7 +29,7 @@ class DaoFactoryFileTest {
     fun gets_the_correct_prefix_of_id_for_a_class() {
         val dao = factory.get<Person>()
         dao.create(Person(name = "Peter")).then { pete ->
-            expect(pete.uid).toBe("Person-1")
+            expect<String>(pete.uid).toBe("Person-1")
         }
     }
 }
