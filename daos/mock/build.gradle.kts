@@ -9,7 +9,6 @@ plugins {
 kotlin {
     jvm {
         library()
-        withJava()
     }
     js(IR) { library() }
     sourceSets {

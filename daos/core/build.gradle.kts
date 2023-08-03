@@ -11,7 +11,6 @@ val tmp = 0
 kotlin {
     jvm {
         library()
-        withJava()
     }
     js(IR) { library() }
     sourceSets {
